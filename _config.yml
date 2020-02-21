@@ -297,6 +297,7 @@ defaults:
       comments: true # true
       share: true
       related: true
+      toc_ads: true
       sidebar:
         nav: "sidebar"
   - scope:
@@ -309,6 +310,7 @@ defaults:
       comments: false # true
       share: false # true
       related: false # true
+      toc_ads: true
       sidebar:
         nav: "sidebar"
   - scope:

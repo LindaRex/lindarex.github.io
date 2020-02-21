@@ -1,0 +1,21 @@
+language: ruby
+rvm:
+- 2.3.3
+
+script: bundle install && bundle exec jekyll build
+
+exclude: [vendor]
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $LINDAREX_GITHUB_TOKEN
+  keep_history: true
+  local-dir: ./_site
+  target-branch: master
+  on:
+    branch: sources
+
+branches:
+  only:
+  - sources

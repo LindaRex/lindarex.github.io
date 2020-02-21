@@ -1,0 +1,46 @@
+# main links
+main:
+  - title: "Posts"
+    url: /year-archive/
+  - title: "Categories"
+    url: /categories/
+  - title: "Tags"
+    url: /tags/
+  - title: "About"
+    url: /about/
+
+sidebar:
+  - title: "OPEN SOURCE SOFTWARE"
+    children:
+      - title: "JENKINS"
+        url: /categories/jenkins/
+      - title: "SONARQUBE"
+        url: /categories/sonarqube/
+      - title: "SCM MANAGER"
+        url: /categories/scm-manager/
+      - title: "POSTGRESQL"
+        url: /categories/postgresql/
+  - title: "CLOUD FOUNDRY"
+    children:
+      - title: "BOSH"
+        url: /categories/bosh/
+  #     - title: "CFAR"
+  #       url: /categories/cfar/
+  - title: "CLOUD COMPUTING"
+    children:
+      - title: "AWS"
+        url: /categories/aws/
+  #     - title: "GCP"
+  #       url: /categories/gcp/
+  #     - title: "AZURE"
+  #       url: /categories/azure/
+  - title: "INTERESTED"
+    children:
+      - title: "UBUNTU"
+        url: /categories/ubuntu/
+      - title: "CONCEPTS"
+        url: /categories/concepts/
+      - title: "VMWARE WORKSTATION"
+        url: /categories/vmware-workstation/
+      # - title: "WEB PUBLISHING"
+      #   url: /categories/web-publishing/

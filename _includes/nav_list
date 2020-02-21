@@ -45,6 +45,8 @@
     {% endfor %}
   </ul>
   <!-- LINDAREX :: GOOGLE ADSENSE :: LEFT-SIDEBAR :: BIGIN -->
+  <div class="left__sidebar">
   {% include google-adsense-left-sidebar.html %}
+  </div>
   <!-- LINDAREX :: GOOGLE ADSENSE :: LEFT-SIDEBAR :: END -->
 </nav>

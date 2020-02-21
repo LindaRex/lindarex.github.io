@@ -1,0 +1,724 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.18.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- LINDAREX :: JEKYLL SEO TAG :: BIGIN -->
+<!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>VMware Workstation의 가상 네트워크(Virtual Network) 알아보기 | LindaRex</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="VMware Workstation의 가상 네트워크(Virtual Network) 알아보기" />
+<meta name="author" content="LindaRex" />
+<meta property="og:locale" content="ko_KR" />
+<meta name="description" content="VMware Workstation은 가상 머신(VM, Virtual Machine)을 생성하고 가상 네트워크(Virtual Network)를 구성할 수 있습니다. 이 포스트에서는 VMware Workstation의 Virtual Network에 대해 소개합니다." />
+<meta property="og:description" content="VMware Workstation은 가상 머신(VM, Virtual Machine)을 생성하고 가상 네트워크(Virtual Network)를 구성할 수 있습니다. 이 포스트에서는 VMware Workstation의 Virtual Network에 대해 소개합니다." />
+<link rel="canonical" href="https://lindarex.github.io/vmware-workstation/vmware-workstation-virtual-network/" />
+<meta property="og:url" content="https://lindarex.github.io/vmware-workstation/vmware-workstation-virtual-network/" />
+<meta property="og:site_name" content="LindaRex" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-02-12T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="VMware Workstation의 가상 네트워크(Virtual Network) 알아보기" />
+<meta name="twitter:site" content="@" />
+<meta name="twitter:creator" content="@LindaRex" />
+<meta name="google-site-verification" content="t6VkmqsI15sIx3P1-gh3NYputZtjhDZOTkxhwDaa4Ik" />
+<script type="application/ld+json">
+{"description":"VMware Workstation은 가상 머신(VM, Virtual Machine)을 생성하고 가상 네트워크(Virtual Network)를 구성할 수 있습니다. 이 포스트에서는 VMware Workstation의 Virtual Network에 대해 소개합니다.","author":{"@type":"Person","name":"LindaRex"},"@type":"BlogPosting","url":"https://lindarex.github.io/vmware-workstation/vmware-workstation-virtual-network/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"LindaRex"},"headline":"VMware Workstation의 가상 네트워크(Virtual Network) 알아보기","dateModified":"2020-02-12T00:00:00+09:00","datePublished":"2020-02-12T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/vmware-workstation/vmware-workstation-virtual-network/"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<!-- LINDAREX :: JEKYLL SEO TAG :: END -->
+
+<!-- LINDAREX :: NAVER SITE VERIFICATION :: BIGIN -->
+<meta name="naver-site-verification" content="190d9b8e0a63058b72f2031ce67825da7b9038f5">
+<!-- LINDAREX :: NAVER SITE VERIFICATION :: END -->
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="LindaRex Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- LINDAREX :: FAVICON :: BIGIN -->
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico">
+<!-- LINDAREX :: FAVICON :: END -->
+
+<!-- LINDAREX :: FEED :: BIGIN -->
+<!-- <link rel="alternate" type="application/rss+xml" href="https://lindarex.github.io/feed.xml" title="LindaRex Feed"> -->
+<!-- LINDAREX :: FEED :: END -->
+
+<!-- LINDAREX :: GOOGLE ANALYTICS :: BIGIN -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-157973560-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-157973560-1');
+</script>
+<!-- LINDAREX :: GOOGLE ANALYTICS :: END -->
+
+<!-- LINDAREX :: NAVER ANALYTICS :: BIGIN -->
+<!-- Naver Analytics -->
+<script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
+<script type="text/javascript">
+if(!wcs_add) var wcs_add = {};
+wcs_add["wa"] = "42df78a7dfd6f0";
+wcs_do();
+</script>
+<!-- LINDAREX :: NAVER ANALYTICS :: END -->
+
+<!-- LINDAREX :: GOOGLE ADSENSE :: BIGIN -->
+<script data-ad-client="ca-pub-8367174639781348" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- LINDAREX :: GOOGLE ADSENSE :: END -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/LindaRex_LOGO.jpg" alt="LindaRex logo"></a>
+        
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/year-archive/" >Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/" >Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/" >Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/" >About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">OPEN SOURCE SOFTWARE</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/jenkins/" class="">JENKINS</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/sonarqube/" class="">SONARQUBE</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/scm-manager/" class="">SCM MANAGER</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/postgresql/" class="">POSTGRESQL</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">CLOUD FOUNDRY</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/bosh/" class="">BOSH</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">CLOUD COMPUTING</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/aws/" class="">AWS</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">INTERESTED</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/ubuntu/" class="">UBUNTU</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/concepts/" class="">CONCEPTS</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/vmware-workstation/" class="">VMWARE WORKSTATION</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+    
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="VMware Workstation의 가상 네트워크(Virtual Network) 알아보기">
+    <meta itemprop="description" content="VMware Workstation은 가상 머신(VM, Virtual Machine)을 생성하고 가상 네트워크(Virtual Network)를 구성할 수 있습니다. 이 포스트에서는 VMware Workstation의 Virtual Network에 대해 소개합니다.">
+    <meta itemprop="datePublished" content="2020-02-12T00:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">VMware Workstation의 가상 네트워크(Virtual Network) 알아보기
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>VMware Workstation은 가상 머신(VM, Virtual Machine)을 생성하고 가상 네트워크(Virtual Network)를 구성할 수 있습니다. <br />
+이 포스트에서는 VMware Workstation의 Virtual Network에 대해 소개합니다.</p>
+
+<h2 id="선행조건prerequisite">선행조건(PREREQUISITE)</h2>
+<ul>
+  <li>VMware Workstation이 설치되어 있어야 합니다.</li>
+</ul>
+
+<h2 id="테스트-환경test-environment">테스트 환경(TEST ENVIRONMENT)</h2>
+<ul>
+  <li>VMware® Workstation 15 Pro (15.5.1 build-15018445)</li>
+</ul>
+
+<h2 id="요약summary">요약(SUMMARY)</h2>
+<ol>
+  <li>Bridged Networking</li>
+  <li>NAT Networking</li>
+  <li>Host-Only Networking</li>
+</ol>
+
+<p><img src="/assets/images/2020-02-12-vmware-workstation-virtual-network/lindarex_vmware-workstation-networking-configurations.png" alt="lindarex_vmware-workstation-networking-configurations" /></p>
+
+<h2 id="내용contents">내용(CONTENTS)</h2>
+<h3 id="1-bridged-networking">1. Bridged Networking</h3>
+<ul>
+  <li>Bridged Networking은 호스트(Host) 시스템의 네트워크 어댑터를 사용하여 VM을 Network에 연결합니다.</li>
+  <li>Bridged Networking을 적용한 VM은 물리적 시스템으로 인식되고, 공유기는 개별적으로 IP를 할당합니다.</li>
+  <li>공유기를 통해 외부 통신을 합니다.</li>
+  <li>동일한 네트워크에 있다는 전제하에, Bridged Networking을 적용한 VM은 Host 시스템을 비롯해 동일 네트워크 내의 다른 시스템에도 엑세스가 가능합니다.</li>
+  <li>VMware Workstation 설치 시 Bridged Network(VMnet0)가 설정됩니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-12-vmware-workstation-virtual-network/lindarex_vmware-workstation-networking-bridged.png" alt="lindarex_vmware-workstation-networking-bridged" /></p>
+
+<blockquote>
+  <p>출처 :: <a href="https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-BAFA66C3-81F0-4FCA-84C4-D9F7D258A60A.html" target="_blank">https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-BAFA66C3-81F0-4FCA-84C4-D9F7D258A60A.html</a></p>
+</blockquote>
+
+<h3 id="2-nat-networking">2. NAT Networking</h3>
+<ul>
+  <li>NAT(Network Address Translation) Networking을 적용한 VM은 외부 네트워크 통신을 위한 IP를 할당받지 않습니다.</li>
+  <li>Host 시스템에 별도의 개인 Network가 설정되고, NAT Networking을 적용한 VM은 가상 DHCP 서버로부터 내부 Network 대역을 할당받습니다.</li>
+  <li>Host 시스템을 통해 외부 통신을 합니다.</li>
+  <li>NAT Network는 하나만 존재합니다.</li>
+  <li>VMware Workstation 설치 시 NAT Network(VMnet8)가 설정됩니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-12-vmware-workstation-virtual-network/lindarex_vmware-workstation-networking-nat.png" alt="lindarex_vmware-workstation-networking-nat" /></p>
+
+<blockquote>
+  <p>출처 :: <a href="https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-89311E3D-CCA9-4ECC-AF5C-C52BE6A89A95.html" target="_blank">https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-89311E3D-CCA9-4ECC-AF5C-C52BE6A89A95.html</a></p>
+</blockquote>
+
+<h3 id="3-host-only-networking">3. Host-Only Networking</h3>
+<ul>
+  <li>Host-Only Networking을 적용한 VM은 기본적으로 외부 통신, Host 시스템과 통신이 불가능합니다.</li>
+  <li>Host-Only Networking을 적용한 VM은 VMware Workstation에서 생성한 VM만 통신이 가능합니다.</li>
+  <li>VMware Workstation 설치 시 Host-Only Network(VMnet1)가 설정됩니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-12-vmware-workstation-virtual-network/lindarex_vmware-workstation-networking-host-only.png" alt="lindarex_vmware-workstation-networking-host-only" /></p>
+
+<blockquote>
+  <p>출처 :: <a href="https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-93BDF7F1-D2E4-42CE-80EA-4E305337D2FC.html" target="_blank">https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-93BDF7F1-D2E4-42CE-80EA-4E305337D2FC.html</a></p>
+</blockquote>
+
+<h2 id="마무리conclusion">마무리(CONCLUSION)</h2>
+<p>VMware Workstation의 Virtual Network에 대해 알아봤습니다. <br />
+다음 포스트에서는 VMware Workstation의 Virtual Network를 설정하는 방법을 소개하겠습니다.</p>
+
+<h2 id="참고references">참고(REFERENCES)</h2>
+<ul>
+  <li><a href="https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-D9B0A52D-38A2-45D7-A9EB-987ACE77F93C.html" target="_blank">https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-D9B0A52D-38A2-45D7-A9EB-987ACE77F93C.html</a></li>
+</ul>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/bridged" class="page__taxonomy-item" rel="tag">bridged</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/host-only" class="page__taxonomy-item" rel="tag">host-only</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/nat" class="page__taxonomy-item" rel="tag">nat</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/virtual-network" class="page__taxonomy-item" rel="tag">virtual network</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/vmware-workstation" class="page__taxonomy-item" rel="tag">vmware workstation</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/vmware-workstation" class="page__taxonomy-item" rel="tag">vmware-workstation</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-02-12T00:00:00+09:00">February 12, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=VMware+Workstation%EC%9D%98+%EA%B0%80%EC%83%81+%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC%28Virtual+Network%29+%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0%20https%3A%2F%2Flindarex.github.io%2Fvmware-workstation%2Fvmware-workstation-virtual-network%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flindarex.github.io%2Fvmware-workstation%2Fvmware-workstation-virtual-network%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flindarex.github.io%2Fvmware-workstation%2Fvmware-workstation-virtual-network%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/ubuntu/ubuntu-1804-installation/" class="pagination--pager" title="우분투(Ubuntu) 18.04 설치하기
+">Previous</a>
+    
+    
+      <a href="/jenkins/ubuntu-jenkins-installation/" class="pagination--pager" title="우분투(Ubuntu) 환경에 패키지로 젠킨스(Jenkins) 설치하기
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Leave a comment</h4>
+      <section id="disqus_thread"></section>
+    
+</div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/aws/github-jekyll-travis-setting/" rel="permalink">우분투(Ubuntu) 환경에 AWS CLI 설치하기
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">AWS CLI(명령줄 인터페이스, command line interface)는 AWS 서비스를 관리하는 통합 도구입니다. 
+Python 2.6.5 이상이 필요하며, pip을 사용하여 AWS CLI를 설치합니다. 
+이 포스트에서는 우분투(이하 Ubuntu) 환경에서 AWS를 사용하기...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/bosh/ubuntu-bosh-director-installation/" rel="permalink">AWS EC2 우분투(Ubuntu) 환경에 BOSH director 설치하기
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Cloud Foundry BOSH는 소규모 및 대규모 클라우드 애플리케이션의 배포와 라이프 사이클 관리, release engineering을 통합하는 오픈소스 소프트웨어 프로젝트입니다. 
+BOSH는 수백 개의 가상머신(Virtual Machine, 이하 VM)에 애플리케이션을 프...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/aws/ubuntu-aws-cli-installation/" rel="permalink">우분투(Ubuntu) 환경에 AWS CLI 설치하기
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">AWS CLI(명령줄 인터페이스, command line interface)는 AWS 서비스를 관리하는 통합 도구입니다. 
+Python 2.6.5 이상이 필요하며, pip을 사용하여 AWS CLI를 설치합니다. 
+이 포스트에서는 우분투(이하 Ubuntu) 환경에서 AWS를 사용하기...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/scm-manager/ubuntu-scm-manager-installation/" rel="permalink">우분투(Ubuntu) 환경에 SCM Manager 설치하기
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">SCM Manager는 사설 버전관리 레파지토리(Private source code and version control repository)로 BSD 라이선스가 적용된 오픈소스 소프트웨어입니다. 
+SCM Manager는 Git과 Mercurial, Subversion을 지원하고, ...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://github.com/lindarex/lindarex.github.io" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 LindaRex. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+    <!-- LINDAREX :: BACK TO TOP :: BEGIN -->
+    <aside class="sidebar__top">
+      <a href="#site-nav"> <i class="fas fa-angle-double-up fa-2x"></i></a>
+    </aside>
+    <!-- LINDAREX :: BACK TO TOP :: END -->
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://lindarex.github.io/vmware-workstation/vmware-workstation-virtual-network/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/vmware-workstation/vmware-workstation-virtual-network"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://lindarex-github-io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

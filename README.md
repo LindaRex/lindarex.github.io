@@ -1,1 +1,0 @@
-# lindarex.github.io

@@ -1,0 +1,773 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.18.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- LINDAREX :: JEKYLL SEO TAG :: BIGIN -->
+<!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>우분투(Ubuntu) 환경에 패키지로 젠킨스(Jenkins) 설치하기 | LindaRex</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="우분투(Ubuntu) 환경에 패키지로 젠킨스(Jenkins) 설치하기" />
+<meta name="author" content="LindaRex" />
+<meta property="og:locale" content="ko_KR" />
+<meta name="description" content="젠킨스(이하 Jenkins)는 MIT license로 오픈소스 소프트웨어이며, 소프트웨어 개발 시 지속적 통합(CI, Continuous Integration) 서비스를 제공하는 자동화 서버입니다. Jenkins는 모든 프로젝트의 빌드, 배포 및 자동화를 지원하며, 수백 개의 플러그인을 제공합니다. 이 포스트에서는 우분투(이하 Ubuntu) 환경에서 패키지로 Jenkins를 설치하는 방법을 소개합니다." />
+<meta property="og:description" content="젠킨스(이하 Jenkins)는 MIT license로 오픈소스 소프트웨어이며, 소프트웨어 개발 시 지속적 통합(CI, Continuous Integration) 서비스를 제공하는 자동화 서버입니다. Jenkins는 모든 프로젝트의 빌드, 배포 및 자동화를 지원하며, 수백 개의 플러그인을 제공합니다. 이 포스트에서는 우분투(이하 Ubuntu) 환경에서 패키지로 Jenkins를 설치하는 방법을 소개합니다." />
+<link rel="canonical" href="https://lindarex.github.io/jenkins/ubuntu-jenkins-installation/" />
+<meta property="og:url" content="https://lindarex.github.io/jenkins/ubuntu-jenkins-installation/" />
+<meta property="og:site_name" content="LindaRex" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-02-13T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="우분투(Ubuntu) 환경에 패키지로 젠킨스(Jenkins) 설치하기" />
+<meta name="twitter:site" content="@" />
+<meta name="twitter:creator" content="@LindaRex" />
+<meta name="google-site-verification" content="t6VkmqsI15sIx3P1-gh3NYputZtjhDZOTkxhwDaa4Ik" />
+<script type="application/ld+json">
+{"description":"젠킨스(이하 Jenkins)는 MIT license로 오픈소스 소프트웨어이며, 소프트웨어 개발 시 지속적 통합(CI, Continuous Integration) 서비스를 제공하는 자동화 서버입니다. Jenkins는 모든 프로젝트의 빌드, 배포 및 자동화를 지원하며, 수백 개의 플러그인을 제공합니다. 이 포스트에서는 우분투(이하 Ubuntu) 환경에서 패키지로 Jenkins를 설치하는 방법을 소개합니다.","author":{"@type":"Person","name":"LindaRex"},"@type":"BlogPosting","url":"https://lindarex.github.io/jenkins/ubuntu-jenkins-installation/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"LindaRex"},"headline":"우분투(Ubuntu) 환경에 패키지로 젠킨스(Jenkins) 설치하기","dateModified":"2020-02-13T00:00:00+09:00","datePublished":"2020-02-13T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/jenkins/ubuntu-jenkins-installation/"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<!-- LINDAREX :: JEKYLL SEO TAG :: END -->
+
+<!-- LINDAREX :: NAVER SITE VERIFICATION :: BIGIN -->
+<meta name="naver-site-verification" content="190d9b8e0a63058b72f2031ce67825da7b9038f5">
+<!-- LINDAREX :: NAVER SITE VERIFICATION :: END -->
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="LindaRex Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- LINDAREX :: FAVICON :: BIGIN -->
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico">
+<!-- LINDAREX :: FAVICON :: END -->
+
+<!-- LINDAREX :: FEED :: BIGIN -->
+<!-- <link rel="alternate" type="application/rss+xml" href="https://lindarex.github.io/feed.xml" title="LindaRex Feed"> -->
+<!-- LINDAREX :: FEED :: END -->
+
+<!-- LINDAREX :: GOOGLE ANALYTICS :: BIGIN -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-157973560-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-157973560-1');
+</script>
+<!-- LINDAREX :: GOOGLE ANALYTICS :: END -->
+
+<!-- LINDAREX :: NAVER ANALYTICS :: BIGIN -->
+<!-- Naver Analytics -->
+<script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
+<script type="text/javascript">
+if(!wcs_add) var wcs_add = {};
+wcs_add["wa"] = "42df78a7dfd6f0";
+wcs_do();
+</script>
+<!-- LINDAREX :: NAVER ANALYTICS :: END -->
+
+<!-- LINDAREX :: GOOGLE ADSENSE :: BIGIN -->
+<script data-ad-client="ca-pub-8367174639781348" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- LINDAREX :: GOOGLE ADSENSE :: END -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/LindaRex_LOGO.jpg" alt="LindaRex logo"></a>
+        
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/year-archive/" >Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/" >Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/" >Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/" >About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">OPEN SOURCE SOFTWARE</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/jenkins/" class="">JENKINS</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/sonarqube/" class="">SONARQUBE</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/scm-manager/" class="">SCM MANAGER</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/postgresql/" class="">POSTGRESQL</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">CLOUD FOUNDRY</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/bosh/" class="">BOSH</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">CLOUD COMPUTING</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/aws/" class="">AWS</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">INTERESTED</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/ubuntu/" class="">UBUNTU</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/concepts/" class="">CONCEPTS</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/vmware-workstation/" class="">VMWARE WORKSTATION</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+    
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="우분투(Ubuntu) 환경에 패키지로 젠킨스(Jenkins) 설치하기">
+    <meta itemprop="description" content="젠킨스(이하 Jenkins)는 MIT license로 오픈소스 소프트웨어이며, 소프트웨어 개발 시 지속적 통합(CI, Continuous Integration) 서비스를 제공하는 자동화 서버입니다. Jenkins는 모든 프로젝트의 빌드, 배포 및 자동화를 지원하며, 수백 개의 플러그인을 제공합니다. 이 포스트에서는 우분투(이하 Ubuntu) 환경에서 패키지로 Jenkins를 설치하는 방법을 소개합니다.">
+    <meta itemprop="datePublished" content="2020-02-13T00:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">우분투(Ubuntu) 환경에 패키지로 젠킨스(Jenkins) 설치하기
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>젠킨스(이하 Jenkins)는 MIT license로 오픈소스 소프트웨어이며, 소프트웨어 개발 시 지속적 통합(CI, Continuous Integration) 서비스를 제공하는 자동화 서버입니다. <br />
+Jenkins는 모든 프로젝트의 빌드, 배포 및 자동화를 지원하며, 수백 개의 플러그인을 제공합니다. <br />
+이 포스트에서는 우분투(이하 Ubuntu) 환경에서 패키지로 Jenkins를 설치하는 방법을 소개합니다.</p>
+
+<h2 id="선행조건prerequisite">선행조건(PREREQUISITE)</h2>
+<ul>
+  <li>Ubuntu 환경에 Java가 설치되어 있어야 합니다.
+    <ul>
+      <li>Jenkins 버전에 따른 필요 Java 버전
+        <ul>
+          <li>2.164 (2019-02) and newer: Java 8 or Java 11</li>
+          <li>2.54 (2017-04) and newer: Java 8</li>
+          <li>1.612 (2015-05) and newer: Java 7</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>방화벽 설정이 필요합니다.</li>
+</ul>
+
+<blockquote>
+  <p>Java 설치 방법은 <a href="https://lindarex.github.io/ubuntu/ubuntu-openjdk-installation/" target="_blank">우분투(Ubuntu) 환경에 OpenJDK(Java) 설치하기</a> 포스트를 참고하시기 바랍니다.</p>
+</blockquote>
+
+<blockquote>
+  <p>Java 버전에 대한 자세한 정보는 <a href="https://jenkins.io/doc/administration/requirements/java/" target="_blank">https://jenkins.io/doc/administration/requirements/java/</a>를 확인해 주시기 바랍니다.</p>
+</blockquote>
+
+<blockquote>
+  <p>방화벽 설정 방법은 <a href="https://lindarex.github.io/ubuntu/ubuntu-firewalld-installation/" target="_blank">우분투(Ubuntu) 환경에 방화벽(Firewalld) 설치 및 설정하기</a> 포스트를 참고하시기 바랍니다.</p>
+</blockquote>
+
+<h2 id="테스트-환경test-environment">테스트 환경(TEST ENVIRONMENT)</h2>
+<ul>
+  <li>VMware® Workstation 15 Pro (15.5.1 build-15018445)</li>
+  <li>Ubuntu 16.04.4 LTS (Xenial Xerus)</li>
+  <li>JENKINS 2.121.1</li>
+  <li>OpenJDK 1.8.0_171</li>
+</ul>
+
+<h2 id="요약summary">요약(SUMMARY)</h2>
+<ol>
+  <li>Jenkins Debian packages repository 설정</li>
+  <li>apt 명령어로 Jenkins 설치</li>
+  <li>(선택사항) Java 경로 설정 및 Jenkins의 기본 포트 변경</li>
+  <li>systemctl 명령어로 Jenkins 실행</li>
+  <li>웹브라우저로 Jenkins 접속</li>
+</ol>
+
+<h2 id="내용contents">내용(CONTENTS)</h2>
+<h3 id="1-jenkins-debian-packages-repository-key-추가">1. Jenkins Debian packages repository key 추가</h3>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>wget <span class="nt">-q</span> <span class="nt">-O</span> - https://pkg.jenkins.io/debian/jenkins-ci.org.key | <span class="nb">sudo </span>apt-key add -
+</code></pre></div></div>
+
+<h3 id="2-jenkins-debian-packages-repository-추가">2. Jenkins Debian packages repository 추가</h3>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>sh <span class="nt">-c</span> <span class="s1">'echo deb https://pkg.jenkins.io/debian-stable binary/ &gt; /etc/apt/sources.list.d/jenkins.list'</span>  
+</code></pre></div></div>
+
+<h3 id="3-apt-install-명령어로-jenkins-설치">3. apt install 명령어로 Jenkins 설치</h3>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>apt update <span class="nt">-y</span> <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>apt <span class="nb">install </span>jenkins <span class="nt">-y</span>  
+</code></pre></div></div>
+
+<h3 id="4-선택사항-java-경로-설정">4. (선택사항) Java 경로 설정</h3>
+<h4 id="41-설치된-java-경로-확인">4.1. 설치된 Java 경로 확인</h4>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>which java
+/usr/bin/java
+</code></pre></div></div>
+
+<h4 id="42-java-경로-추가">4.2. Java 경로 추가</h4>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/init.d/jenkins
+<span class="nt">--------------------------------------------------------------------------------</span>
+<span class="nv">PATH</span><span class="o">=</span><span class="s2">"/bin:/usr/bin:/sbin:/usr/sbin:/usr/bin/java"</span> 
+<span class="nt">--------------------------------------------------------------------------------</span>
+</code></pre></div></div>
+
+<h3 id="5-선택사항-기본-포트-변경">5. (선택사항) 기본 포트 변경</h3>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/default/jenkins  
+<span class="nt">--------------------------------------------------------------------------------</span>
+<span class="nv">JENKINS_PORT</span><span class="o">=</span><span class="s2">"8080"</span>  
+<span class="nv">JENKINS_AJP_PORT</span><span class="o">=</span><span class="s2">"9091"</span>  
+<span class="nv">JENKINS_USER</span><span class="o">=</span><span class="s2">"root"</span>  
+<span class="nt">--------------------------------------------------------------------------------</span>
+</code></pre></div></div>
+
+<h3 id="6-systemctl-명령어로-jenkins-서비스-관리">6. systemctl 명령어로 Jenkins 서비스 관리</h3>
+<h4 id="61-jenkins-서비스-설정-반영">6.1. Jenkins 서비스 설정 반영</h4>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl daemon-reload
+</code></pre></div></div>
+
+<h4 id="62-jenkins-서비스-시작">6.2. Jenkins 서비스 시작</h4>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl start jenkins.service
+</code></pre></div></div>
+
+<h4 id="63-jenkins-서비스-중지">6.3. Jenkins 서비스 중지</h4>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl stop jenkins.service
+</code></pre></div></div>
+
+<h4 id="64-jenkins-서비스-재시작">6.4. Jenkins 서비스 재시작</h4>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl restart jenkins.service
+</code></pre></div></div>
+
+<h4 id="65-jenkins-서비스-설정-재적용">6.5. Jenkins 서비스 설정 재적용</h4>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl reload jenkins.service
+</code></pre></div></div>
+
+<h4 id="66-jenkins-서비스-상태-조회">6.6. Jenkins 서비스 상태 조회</h4>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl status jenkins.service
+</code></pre></div></div>
+
+<h4 id="67-jenkins-서비스-활성화부팅-시-자동-시작">6.7. Jenkins 서비스 활성화(부팅 시 자동 시작)</h4>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl <span class="nb">enable </span>jenkins.service
+</code></pre></div></div>
+
+<h4 id="68-jenkins-서비스-비활성화">6.8. Jenkins 서비스 비활성화</h4>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl disable jenkins.service
+</code></pre></div></div>
+
+<h4 id="69-jenkins-서비스-및-관련-프로세스-모두-중지">6.9. Jenkins 서비스 및 관련 프로세스 모두 중지</h4>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl <span class="nb">kill </span>jenkins.service
+</code></pre></div></div>
+
+<h3 id="7-웹브라우저로-jenkins-접속">7. 웹브라우저로 Jenkins 접속</h3>
+<ul>
+  <li>http://[MY-IP]:8080</li>
+</ul>
+
+<h2 id="마무리conclusion">마무리(CONCLUSION)</h2>
+<p>Ubuntu 환경에 패키지로 Jenkins 설치를 완료했습니다. <br />
+Jenkins 초기 설정은 <a href="https://lindarex.github.io/jenkins/jenkins-initial-setting/" target="_blank">Jenkins 초기 설정하기</a> 포스트를 참고하시기 바랍니다. <br />
+다음 포스트에서는 Ubuntu 환경에서 war 파일을 내려받아 java 명령어로 Jenkins를 실행하는 방법을 소개하겠습니다.</p>
+
+<h2 id="참고references">참고(REFERENCES)</h2>
+<ul>
+  <li><a href="https://jenkins.io/" target="_blank">https://jenkins.io/</a></li>
+  <li><a href="http://pkg.jenkins-ci.org/debian-stable/" target="_blank">http://pkg.jenkins-ci.org/debian-stable/</a></li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/jenkins" class="page__taxonomy-item" rel="tag">jenkins</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/ubuntu" class="page__taxonomy-item" rel="tag">ubuntu</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/jenkins" class="page__taxonomy-item" rel="tag">jenkins</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-02-13T00:00:00+09:00">February 13, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%EC%9A%B0%EB%B6%84%ED%88%AC%28Ubuntu%29+%ED%99%98%EA%B2%BD%EC%97%90+%ED%8C%A8%ED%82%A4%EC%A7%80%EB%A1%9C+%EC%A0%A0%ED%82%A8%EC%8A%A4%28Jenkins%29+%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0%20https%3A%2F%2Flindarex.github.io%2Fjenkins%2Fubuntu-jenkins-installation%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flindarex.github.io%2Fjenkins%2Fubuntu-jenkins-installation%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flindarex.github.io%2Fjenkins%2Fubuntu-jenkins-installation%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/vmware-workstation/vmware-workstation-virtual-network/" class="pagination--pager" title="VMware Workstation의 가상 네트워크(Virtual Network) 알아보기
+">Previous</a>
+    
+    
+      <a href="/jenkins/jenkins-initial-setting/" class="pagination--pager" title="젠킨스(Jenkins) 초기 설정하기
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Leave a comment</h4>
+      <section id="disqus_thread"></section>
+    
+</div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/aws/github-jekyll-travis-setting/" rel="permalink">우분투(Ubuntu) 환경에 AWS CLI 설치하기
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">AWS CLI(명령줄 인터페이스, command line interface)는 AWS 서비스를 관리하는 통합 도구입니다. 
+Python 2.6.5 이상이 필요하며, pip을 사용하여 AWS CLI를 설치합니다. 
+이 포스트에서는 우분투(이하 Ubuntu) 환경에서 AWS를 사용하기...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/bosh/ubuntu-bosh-director-installation/" rel="permalink">AWS EC2 우분투(Ubuntu) 환경에 BOSH director 설치하기
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Cloud Foundry BOSH는 소규모 및 대규모 클라우드 애플리케이션의 배포와 라이프 사이클 관리, release engineering을 통합하는 오픈소스 소프트웨어 프로젝트입니다. 
+BOSH는 수백 개의 가상머신(Virtual Machine, 이하 VM)에 애플리케이션을 프...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/aws/ubuntu-aws-cli-installation/" rel="permalink">우분투(Ubuntu) 환경에 AWS CLI 설치하기
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">AWS CLI(명령줄 인터페이스, command line interface)는 AWS 서비스를 관리하는 통합 도구입니다. 
+Python 2.6.5 이상이 필요하며, pip을 사용하여 AWS CLI를 설치합니다. 
+이 포스트에서는 우분투(이하 Ubuntu) 환경에서 AWS를 사용하기...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/scm-manager/ubuntu-scm-manager-installation/" rel="permalink">우분투(Ubuntu) 환경에 SCM Manager 설치하기
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">SCM Manager는 사설 버전관리 레파지토리(Private source code and version control repository)로 BSD 라이선스가 적용된 오픈소스 소프트웨어입니다. 
+SCM Manager는 Git과 Mercurial, Subversion을 지원하고, ...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://github.com/lindarex/lindarex.github.io" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 LindaRex. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+    <!-- LINDAREX :: BACK TO TOP :: BEGIN -->
+    <aside class="sidebar__top">
+      <a href="#site-nav"> <i class="fas fa-angle-double-up fa-2x"></i></a>
+    </aside>
+    <!-- LINDAREX :: BACK TO TOP :: END -->
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://lindarex.github.io/jenkins/ubuntu-jenkins-installation/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/jenkins/ubuntu-jenkins-installation"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://lindarex-github-io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

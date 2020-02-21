@@ -53,7 +53,7 @@
 <lastmod>2020-02-20T00:00:00+09:00</lastmod>
 </url>
 <url>
-<loc>https://lindarex.github.io/aws/github-jekyll-travis-setting/</loc>
+<loc>https://lindarex.github.io/travis-ci/travis-github-pages-jekyll-setting/</loc>
 <lastmod>2020-02-21T00:00:00+09:00</lastmod>
 </url>
 <url>
@@ -184,6 +184,15 @@
 <loc>https://lindarex.github.io/tags/ec2/</loc>
 </url>
 <url>
+<loc>https://lindarex.github.io/tags/travis-ci/</loc>
+</url>
+<url>
+<loc>https://lindarex.github.io/tags/github-pages/</loc>
+</url>
+<url>
+<loc>https://lindarex.github.io/tags/jekyll/</loc>
+</url>
+<url>
 <loc>https://lindarex.github.io/categories/ubuntu/</loc>
 </url>
 <url>
@@ -209,6 +218,9 @@
 </url>
 <url>
 <loc>https://lindarex.github.io/categories/bosh/</loc>
+</url>
+<url>
+<loc>https://lindarex.github.io/categories/travis-ci/</loc>
 </url>
 <url>
 <loc>https://lindarex.github.io/page2/</loc>

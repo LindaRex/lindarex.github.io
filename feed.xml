@@ -6,77 +6,208 @@
     <description>오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 LindaRex(린다렉스)의 블로그입니다</description>
     <link>https://lindarex.github.io/</link>
     <atom:link href="https://lindarex.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 21 Feb 2020 15:42:46 +0900</pubDate>
-    <lastBuildDate>Fri, 21 Feb 2020 15:42:46 +0900</lastBuildDate>
+    <pubDate>Fri, 21 Feb 2020 17:27:26 +0900</pubDate>
+    <lastBuildDate>Fri, 21 Feb 2020 17:27:26 +0900</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
-        <title>우분투(Ubuntu) 환경에 AWS CLI 설치하기</title>
-        <description>&lt;p&gt;AWS CLI(명령줄 인터페이스, command line interface)는 AWS 서비스를 관리하는 통합 도구입니다. &lt;br /&gt;
-Python 2.6.5 이상이 필요하며, pip을 사용하여 AWS CLI를 설치합니다. &lt;br /&gt;
-이 포스트에서는 우분투(이하 Ubuntu) 환경에서 AWS를 사용하기 위한 AWS CLI를 설치하는 방법을 소개합니다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;pip은 파이썬(Python)으로 작성된 패키지 소프트웨어를 설치 및 관리하는 패키지 관리 시스템입니다.&lt;/p&gt;
-&lt;/blockquote&gt;
+        <title>Travis CI로 Jekyll 블로그를 GitHub Pages에 자동 배포하기</title>
+        <description>&lt;p&gt;이 포스트에서는 Travis CI(이하 travis)를 이용해 Jekyll 블로그(이하 jekyll)를 GitHub Pages(이하 github)에 자동 배포하는 방법을 소개합니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;선행조건prerequisite&quot;&gt;선행조건(PREREQUISITE)&lt;/h2&gt;
 &lt;ul&gt;
-  &lt;li&gt;Ubuntu 환경이 필요합니다.&lt;/li&gt;
+  &lt;li&gt;GitHub 계정이 필요합니다.&lt;/li&gt;
+  &lt;li&gt;GitHub Pages의 브랜치(이하 branch)는 빌드(이하 build) 후 배포되는 master branch, jekyll code를 올릴 sources branch로 구성합니다.&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Ubuntu 설치 방법은 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1604-installation/&quot; target=&quot;_blank&quot;&gt;VMware workstation에 Ubuntu 16.04 설치하기&lt;/a&gt; 또는 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1804-installation/&quot; target=&quot;_blank&quot;&gt;VMware workstation에 Ubuntu 18.04 설치하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
-&lt;/blockquote&gt;
 
 &lt;h2 id=&quot;테스트-환경test-environment&quot;&gt;테스트 환경(TEST ENVIRONMENT)&lt;/h2&gt;
 &lt;ul&gt;
-  &lt;li&gt;VMware® Workstation 15 Pro (15.5.1 build-15018445)&lt;/li&gt;
-  &lt;li&gt;Ubuntu 18.04.3 LTS (Bionic Beaver) Server (64-bit)&lt;/li&gt;
-  &lt;li&gt;aws-cli v1.16.261&lt;/li&gt;
-  &lt;li&gt;Python v2.7.17&lt;/li&gt;
+  &lt;li&gt;Chrome v80.0.3987.116(공식 빌드) (64비트)&lt;/li&gt;
+  &lt;li&gt;Firefox Browser v74.0b5 (64-비트)&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;요약summary&quot;&gt;요약(SUMMARY)&lt;/h2&gt;
 &lt;ol&gt;
-  &lt;li&gt;apt 명령어로 pip 설치&lt;/li&gt;
-  &lt;li&gt;pip 명령어로 AWS CLI 설치&lt;/li&gt;
+  &lt;li&gt;GitHub Personal access token 생성&lt;/li&gt;
+  &lt;li&gt;Travis CI 설정&lt;/li&gt;
+  &lt;li&gt;travis.yml 파일 작성&lt;/li&gt;
+  &lt;li&gt;배포 확인&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h2 id=&quot;내용contents&quot;&gt;내용(CONTENTS)&lt;/h2&gt;
-&lt;h3 id=&quot;1-apt-명령어로-pip-설치하기&quot;&gt;1. apt 명령어로 pip 설치하기&lt;/h3&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;python-setuptools python-pip &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;2-pip-명령어로-aws-cli-설치하기&quot;&gt;2. pip 명령어로 AWS CLI 설치하기&lt;/h3&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pip &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;awscli
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
+&lt;h3 id=&quot;1-github-personal-access-token이하-token-생성&quot;&gt;1. GitHub Personal access token(이하 token) 생성&lt;/h3&gt;
 &lt;blockquote&gt;
-  &lt;p&gt;AWS CLI 설치 후 세션 재접속이 필요합니다.&lt;/p&gt;
+  &lt;p&gt;&lt;a href=&quot;https://github.com/&quot; target=&quot;_blank&quot;&gt;https://github.com/&lt;/a&gt;에 접속합니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
+&lt;ul&gt;
+  &lt;li&gt;우측 상단의 Profile 아이콘을 선택하여 ‘Settings’ 페이지로 이동합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-001.png&quot; alt=&quot;lindarex-travis-github-pages-jekyll-setting-001&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;좌측 중간에 Personal access tokens 메뉴를 클릭합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-002.png&quot; alt=&quot;lindarex-travis-github-pages-jekyll-setting-002&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;GitHub 계정의 비밀번호를 입력합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-003.png&quot; alt=&quot;lindarex-travis-github-pages-jekyll-setting-003&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;token 이름을 입력하고, token으로 접근 가능한 Scope(repo 전체)를 체크하고, 화면 하단의 ‘Generate token’을 클릭합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-004.png&quot; alt=&quot;lindarex-travis-github-pages-jekyll-setting-004&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-004-1.png&quot; alt=&quot;lindarex-travis-github-pages-jekyll-setting-004-1&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;생성된 token 값은 travis 설정에 필요하기 때문에 메모해 둡니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-005.png&quot; alt=&quot;lindarex-travis-github-pages-jekyll-setting-005&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;2-travis-ci-설정&quot;&gt;2. Travis CI 설정&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;https://github.com/apps/travis-ci&quot; target=&quot;_blank&quot;&gt;https://github.com/apps/travis-ci&lt;/a&gt;에 접속합니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;우측 상단의 ‘Install’을 클릭합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-006.png&quot; alt=&quot;lindarex-travis-github-pages-jekyll-setting-006&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;‘Only select repositories’ 영역의 ‘Select repositories’를 클릭하여 travis를 연결할 레파지토리(이하 repository를 선택하고 ‘Install’을 클릭합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-007.png&quot; alt=&quot;lindarex-travis-github-pages-jekyll-setting-007&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;travis가 GitHub repository에 접근할 수 있도록 권한 부여에 승인합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-008.png&quot; alt=&quot;lindarex-travis-github-pages-jekyll-setting-008&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-009.png&quot; alt=&quot;lindarex-travis-github-pages-jekyll-setting-009&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://travis-ci.com/&quot; target=&quot;_blank&quot;&gt;https://travis-ci.com/&lt;/a&gt;으로 이동하여 승인이 진행됩니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-010.png&quot; alt=&quot;lindarex-travis-github-pages-jekyll-setting-010&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;우측 하단의 ‘Settings’를 클릭합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-011.png&quot; alt=&quot;lindarex-travis-github-pages-jekyll-setting-011&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;‘Environment Variables’ 영역에서 아래와 같이 입력하고 ‘Add’를 클릭합니다.
+    &lt;ul&gt;
+      &lt;li&gt;Name :: LINDAREX_GITHUB_TOKEN&lt;/li&gt;
+      &lt;li&gt;Value :: 메모해 두었던 token&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;위 Name은 임의로 입력해도 무관합니다. 단, 이후 travis 설정과 동일해야 합니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-013.png&quot; alt=&quot;lindarex-travis-github-pages-jekyll-setting-013&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;3-travisyml-파일-작성&quot;&gt;3. travis.yml 파일 작성&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;실제 생성하는 파일명은 ‘.travis.yml’입니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;아래와 같이 ‘.travis.yml’ 파일을 작성하여 jekyll 최상위 디렉터리(index.html 파일이 있는 경로)에 저장합니다.&lt;/li&gt;
+  &lt;li&gt;travis 설정 시 Environment Variable에 입력한 name과 아래 github_token 값이 동일해야 합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;ss&quot;&gt;language: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ruby&lt;/span&gt;
+&lt;span class=&quot;ss&quot;&gt;rvm:
+&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;2.3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;
+
+&lt;span class=&quot;ss&quot;&gt;script: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bundle&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bundle&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;exec&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;jekyll&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;
+
+&lt;span class=&quot;ss&quot;&gt;exclude: &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vendor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;ss&quot;&gt;deploy:
+  provider: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pages&lt;/span&gt;
+  &lt;span class=&quot;ss&quot;&gt;skip_cleanup: &lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;
+  &lt;span class=&quot;ss&quot;&gt;github_token: &lt;/span&gt;&lt;span class=&quot;vg&quot;&gt;$LINDAREX_GITHUB_TOKEN&lt;/span&gt;
+  &lt;span class=&quot;ss&quot;&gt;keep_history: &lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;local&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;dir: &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_site&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;branch: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;master&lt;/span&gt;
+  &lt;span class=&quot;ss&quot;&gt;on:
+    branch: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sources&lt;/span&gt;
+
+&lt;span class=&quot;ss&quot;&gt;branches:
+  only:
+  &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sources&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;4-배포-확인&quot;&gt;4. 배포 확인&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;설정 완료 후, &lt;a href=&quot;https://travis-ci.com/&quot; target=&quot;_blank&quot;&gt;travis 첫 페이지&lt;/a&gt;으로 이동합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-014.png&quot; alt=&quot;lindarex-travis-github-pages-jekyll-setting-014&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;로컬의 sources branch를 원격 저장소로 Push 하면, travis에서 build하여 master branch로 자동 배포됩니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-015.png&quot; alt=&quot;lindarex-travis-github-pages-jekyll-setting-015&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;build 중입니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-016.png&quot; alt=&quot;lindarex-travis-github-pages-jekyll-setting-016&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;정상 배포되었습니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-017.png&quot; alt=&quot;lindarex-travis-github-pages-jekyll-setting-017&quot; /&gt;&lt;/p&gt;
+
 &lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
-&lt;p&gt;Ubuntu 환경에 AWS CLI 설치를 완료했습니다. &lt;br /&gt;
-다음 포스트에서는 AWS S3 사용 방법을 소개하겠습니다.&lt;/p&gt;
+&lt;p&gt;travis로 jekyll을 github에 자동 배포하는 방법을 완료했습니다. &lt;br /&gt;
+다음 포스트에서는 travis로 다른 언어를 배포하는 방법을 소개하겠습니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;
 &lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/ko/cli/&quot; target=&quot;_blank&quot;&gt;https://aws.amazon.com/ko/cli/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://travis-ci.com/&quot; target=&quot;_blank&quot;&gt;https://travis-ci.com/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
 </description>
         <pubDate>Fri, 21 Feb 2020 00:00:00 +0900</pubDate>
-        <link>https://lindarex.github.io/aws/github-jekyll-travis-setting/</link>
-        <guid isPermaLink="true">https://lindarex.github.io/aws/github-jekyll-travis-setting/</guid>
+        <link>https://lindarex.github.io/travis-ci/travis-github-pages-jekyll-setting/</link>
+        <guid isPermaLink="true">https://lindarex.github.io/travis-ci/travis-github-pages-jekyll-setting/</guid>
         
-        <category>aws</category>
+        <category>travis ci</category>
         
-        <category>cli</category>
+        <category>github pages</category>
         
-        <category>ubuntu</category>
+        <category>jekyll</category>
         
         
-        <category>aws</category>
+        <category>travis-ci</category>
         
       </item>
     

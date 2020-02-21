@@ -36,16 +36,19 @@ layout: default
       <section class="page__content" itemprop="text">
         {% if page.toc or page.toc_ads %}
           <aside class="sidebar__right {% if page.toc_sticky %}sticky{% endif %}">
+          {% if page.toc %}
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-{{ page.toc_icon | default: 'file-alt' }}"></i> {{ page.toc_label | default: site.data.ui-text[site.locale].toc_label | default: "On this page" }}</h4></header>
               {% include toc.html sanitize=true html=content h_min=1 h_max=6 class="toc__menu" %}
             </nav>
-            <!-- LINDAREX :: GOOGLE ADSENSE SIDE :: BIGIN -->
+          {% endif %}
+          <!-- LINDAREX :: GOOGLE ADSENSE :: SIDEBAR :: BIGIN -->
+          {% if page.toc_ads %}
             <nav class="toc-custom">
-              {% if page.toc_ads %}
-              {% include google-adsense-sidebar.html %}
-              {% endif %}
-            <!-- LINDAREX :: GOOGLE ADSENSE SIDE :: END -->
+            {% include google-adsense-sidebar.html %}
+            </nav>
+          {% endif %}
+          <!-- LINDAREX :: GOOGLE ADSENSE :: SIDEBAR :: END -->
           </aside>
         {% endif %}
         {{ content }}

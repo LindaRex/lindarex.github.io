@@ -29,20 +29,20 @@
       </div>
     {% endif %}
 
-    <!-- LINDAREX :: GOOGLE ADSENSE :: FOOTER :: BIGIN -->
-    {% include google-adsense-sidebar.html %}
-    <!-- LINDAREX :: GOOGLE ADSENSE :: FOOTER :: END -->
     <div id="footer" class="page__footer">
       <footer>
+        <!-- LINDAREX :: GOOGLE ADSENSE :: FOOTER :: BIGIN -->
+        {% include google-adsense-footer.html %}
+        <!-- LINDAREX :: GOOGLE ADSENSE :: FOOTER :: END -->
         {% include footer/custom.html %}
         {% include_cached footer.html %}
       </footer>
     </div>
-    <!-- LINDAREX :: BACK TO TOP BUTTON :: BEGIN -->
+    <!-- LINDAREX :: BACK TO TOP :: BEGIN -->
     <aside class="sidebar__top">
       <a href="#site-nav"> <i class="fas fa-angle-double-up fa-2x"></i></a>
     </aside>
-    <!-- LINDAREX :: BACK TO TOP BUTTON :: END -->
+    <!-- LINDAREX :: BACK TO TOP :: END -->
 
     {% include scripts.html %}
 

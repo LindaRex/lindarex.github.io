@@ -42,13 +42,13 @@ layout: default
               {% include toc.html sanitize=true html=content h_min=1 h_max=6 class="toc__menu" %}
             </nav>
           {% endif %}
-          <!-- LINDAREX :: GOOGLE ADSENSE :: SIDEBAR :: BIGIN -->
+          <!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: BIGIN -->
           {% if page.toc_ads %}
             <nav class="toc-custom">
-            {% include google-adsense-sidebar.html %}
+            {% include google-adsense-right-sidebar.html %}
             </nav>
           {% endif %}
-          <!-- LINDAREX :: GOOGLE ADSENSE :: SIDEBAR :: END -->
+          <!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: END -->
           </aside>
         {% endif %}
         {{ content }}

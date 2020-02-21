@@ -42,5 +42,5 @@ sidebar:
         url: /categories/concepts/
       - title: "VMWARE WORKSTATION"
         url: /categories/vmware-workstation/
-      # - title: "WEB PUBLISHING"
-      #   url: /categories/web-publishing/
+      - title: "TRAVIS CI"
+        url: /categories/travis-ci/

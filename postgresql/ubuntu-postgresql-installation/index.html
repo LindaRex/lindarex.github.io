@@ -336,6 +336,60 @@ wcs_do();
 
       <section class="page__content" itemprop="text">
         
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#선행조건prerequisite">선행조건(PREREQUISITE)</a></li>
+  <li><a href="#테스트-환경test-environment">테스트 환경(TEST ENVIRONMENT)</a></li>
+  <li><a href="#요약summary">요약(SUMMARY)</a></li>
+  <li><a href="#내용contents">내용(CONTENTS)</a>
+    <ul>
+      <li><a href="#1-postgresql-debian-packages-repository-추가">1. PostgreSQL Debian packages repository 추가</a></li>
+      <li><a href="#2-postgresql-debian-packages-repository-key-추가">2. PostgreSQL Debian packages repository key 추가</a></li>
+      <li><a href="#3-apt-install-명령어로-postgresql-설치">3. apt install 명령어로 PostgreSQL 설치</a></li>
+      <li><a href="#4-postgresql-설정">4. PostgreSQL 설정</a></li>
+      <li><a href="#41-pgdata-디렉터리-생성">4.1. PGDATA 디렉터리 생성</a></li>
+      <li><a href="#42-pgdata-디렉터리-경로-추가">4.2. PGDATA 디렉터리 경로 추가</a></li>
+      <li><a href="#43-database-초기화">4.3. Database 초기화</a></li>
+      <li><a href="#44-postgresql-설정-수정">4.4. PostgreSQL 설정 수정</a></li>
+      <li><a href="#5-systemctl-명령어로-postgresql-서비스-관리">5. systemctl 명령어로 PostgreSQL 서비스 관리</a></li>
+      <li><a href="#51-postgresql-서비스-설정-반영">5.1. PostgreSQL 서비스 설정 반영</a></li>
+      <li><a href="#52-postgresql-서비스-시작">5.2. PostgreSQL 서비스 시작</a></li>
+      <li><a href="#53-postgresql-서비스-중지">5.3. PostgreSQL 서비스 중지</a></li>
+      <li><a href="#54-postgresql-서비스-재시작">5.4. PostgreSQL 서비스 재시작</a></li>
+      <li><a href="#55-postgresql-서비스-설정-재적용">5.5. PostgreSQL 서비스 설정 재적용</a></li>
+      <li><a href="#56-postgresql-서비스-상태-조회">5.6. PostgreSQL 서비스 상태 조회</a></li>
+      <li><a href="#57-postgresql-서비스-활성화부팅-시-자동-시작">5.7. PostgreSQL 서비스 활성화(부팅 시 자동 시작)</a></li>
+      <li><a href="#58-postgresql-서비스-비활성화">5.8. PostgreSQL 서비스 비활성화</a></li>
+      <li><a href="#59-postgresql-서비스-및-관련-프로세스-모두-중지">5.9. PostgreSQL 서비스 및 관련 프로세스 모두 중지</a></li>
+    </ul>
+  </li>
+  <li><a href="#마무리conclusion">마무리(CONCLUSION)</a></li>
+  <li><a href="#참고references">참고(REFERENCES)</a></li>
+</ul>
+
+            </nav>
+            <!-- LINDAREX :: GOOGLE ADSENSE SIDE :: BIGIN -->
+            <nav class="toc-custom">
+              
+              <!-- LINDAREX :: GOOGLE ADSENSE SIDE :: 2020-02-21-ad-side :: BIGIN -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 2020-02-21-ad-side -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8367174639781348"
+     data-ad-slot="5781712397"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<!-- LINDAREX :: GOOGLE ADSENSE SIDE :: 2020-02-21-ad-side :: END -->
+              
+            <!-- LINDAREX :: GOOGLE ADSENSE SIDE :: END -->
+          </aside>
+        
         <p>PostgreSQL은 BSD 또는 MIT 라이선스와 유사한 PostgreSQL 라이선스로 오픈소스 소프트웨어로 배포됩니다. <br />
 PostgreSQL은 확장 가능성 및 표준 준수를 강조하는 객체-관계형 데이터베이스 관리 시스템(ORDBMS, object-relational database management system)으로, 트랜잭션과 ACID(Atomicity, Consistency, Isolation, Durability)를 지원합니다. <br />
 macOS 서버의 경우 PostgreSQL이 기본 데이터베이스이며, MS Windows와 리눅스에서도 이용할 수 있습니다. <br />

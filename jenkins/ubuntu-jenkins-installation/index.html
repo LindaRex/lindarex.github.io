@@ -336,6 +336,66 @@ wcs_do();
 
       <section class="page__content" itemprop="text">
         
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#선행조건prerequisite">선행조건(PREREQUISITE)</a></li>
+  <li><a href="#테스트-환경test-environment">테스트 환경(TEST ENVIRONMENT)</a></li>
+  <li><a href="#요약summary">요약(SUMMARY)</a></li>
+  <li><a href="#내용contents">내용(CONTENTS)</a>
+    <ul>
+      <li><a href="#1-jenkins-debian-packages-repository-key-추가">1. Jenkins Debian packages repository key 추가</a></li>
+      <li><a href="#2-jenkins-debian-packages-repository-추가">2. Jenkins Debian packages repository 추가</a></li>
+      <li><a href="#3-apt-install-명령어로-jenkins-설치">3. apt install 명령어로 Jenkins 설치</a></li>
+      <li><a href="#4-선택사항-java-경로-설정">4. (선택사항) Java 경로 설정</a>
+        <ul>
+          <li><a href="#41-설치된-java-경로-확인">4.1. 설치된 Java 경로 확인</a></li>
+          <li><a href="#42-java-경로-추가">4.2. Java 경로 추가</a></li>
+        </ul>
+      </li>
+      <li><a href="#5-선택사항-기본-포트-변경">5. (선택사항) 기본 포트 변경</a></li>
+      <li><a href="#6-systemctl-명령어로-jenkins-서비스-관리">6. systemctl 명령어로 Jenkins 서비스 관리</a>
+        <ul>
+          <li><a href="#61-jenkins-서비스-설정-반영">6.1. Jenkins 서비스 설정 반영</a></li>
+          <li><a href="#62-jenkins-서비스-시작">6.2. Jenkins 서비스 시작</a></li>
+          <li><a href="#63-jenkins-서비스-중지">6.3. Jenkins 서비스 중지</a></li>
+          <li><a href="#64-jenkins-서비스-재시작">6.4. Jenkins 서비스 재시작</a></li>
+          <li><a href="#65-jenkins-서비스-설정-재적용">6.5. Jenkins 서비스 설정 재적용</a></li>
+          <li><a href="#66-jenkins-서비스-상태-조회">6.6. Jenkins 서비스 상태 조회</a></li>
+          <li><a href="#67-jenkins-서비스-활성화부팅-시-자동-시작">6.7. Jenkins 서비스 활성화(부팅 시 자동 시작)</a></li>
+          <li><a href="#68-jenkins-서비스-비활성화">6.8. Jenkins 서비스 비활성화</a></li>
+          <li><a href="#69-jenkins-서비스-및-관련-프로세스-모두-중지">6.9. Jenkins 서비스 및 관련 프로세스 모두 중지</a></li>
+        </ul>
+      </li>
+      <li><a href="#7-웹브라우저로-jenkins-접속">7. 웹브라우저로 Jenkins 접속</a></li>
+    </ul>
+  </li>
+  <li><a href="#마무리conclusion">마무리(CONCLUSION)</a></li>
+  <li><a href="#참고references">참고(REFERENCES)</a></li>
+</ul>
+
+            </nav>
+            <!-- LINDAREX :: GOOGLE ADSENSE SIDE :: BIGIN -->
+            <nav class="toc-custom">
+              
+              <!-- LINDAREX :: GOOGLE ADSENSE SIDE :: 2020-02-21-ad-side :: BIGIN -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 2020-02-21-ad-side -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8367174639781348"
+     data-ad-slot="5781712397"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<!-- LINDAREX :: GOOGLE ADSENSE SIDE :: 2020-02-21-ad-side :: END -->
+              
+            <!-- LINDAREX :: GOOGLE ADSENSE SIDE :: END -->
+          </aside>
+        
         <p>젠킨스(이하 Jenkins)는 MIT license로 오픈소스 소프트웨어이며, 소프트웨어 개발 시 지속적 통합(CI, Continuous Integration) 서비스를 제공하는 자동화 서버입니다. <br />
 Jenkins는 모든 프로젝트의 빌드, 배포 및 자동화를 지원하며, 수백 개의 플러그인을 제공합니다. <br />
 이 포스트에서는 우분투(이하 Ubuntu) 환경에서 패키지로 Jenkins를 설치하는 방법을 소개합니다.</p>

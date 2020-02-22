@@ -35,12 +35,12 @@ Python 2.6.5 이상이 필요하며, pip을 사용하여 AWS CLI를 설치합니
 
 
 ## 내용(CONTENTS)
-### 1. apt 명령어로 pip 설치하기
+### 1. apt 명령어로 pip 설치
 ```shell
 $ sudo apt install python-setuptools python-pip -y
 ```
 
-### 2. pip 명령어로 AWS CLI 설치하기
+### 2. pip 명령어로 AWS CLI 설치
 ```shell
 $ pip install awscli
 ```

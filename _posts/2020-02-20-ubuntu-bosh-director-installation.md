@@ -71,7 +71,7 @@ $ mkdir -p ${LINDAREX_BOSH_WORKSPACE}
 ### 1. BOSH CLI 설치하기
 - BOSH CLI는 v1 버전과 v2 버전이 존재하며, 이 포스트에서는 v2 버전을 기준으로 설명합니다.
 
-#### 1.1. 종속 패키지 설치하기
+#### 1.1. 종속 패키지 설치
 - 자신이 사용하는 Ubuntu 버전에 따라 아래 명령어로 종속 패키지(Package dependencies)를 설치합니다.
 
 > Ubuntu 18.04 (Bionic)
@@ -146,7 +146,7 @@ cf version 6.49.0+d0dfa93bb.2020-01-07
 - UAA는 사용자 계정 및 인증 서버(User Account and Authentication server)입니다.
 - UAA는 CFAR과 BOSH에 각각 존재하며 CF UAA CLI를 통해 모두 사용할 수 있습니다.
 
-#### 3.1. Rubygems으로 CF UAA CLI 설치하기
+#### 3.1. Rubygems으로 CF UAA CLI 설치
 ```shell
 $ sudo gem install cf-uaac
 ```
@@ -157,7 +157,7 @@ $ uaac -v
 UAA client 4.2.0
 ```
 
-### 4. Credhub CLI 설치하기
+### 4. Credhub CLI 설치
 - CredHub는 비밀번호, 인증서(certificates), 인증 기관(certificate authorities), ssh 키, rsa 키와 같은 credentials 정보를 관리합니다. 
 
 #### 4.1. Credhub CLI 파일 내려받기
@@ -165,7 +165,7 @@ UAA client 4.2.0
 $ wget -P ${LINDAREX_BOSH_WORKSPACE} https://github.com/cloudfoundry-incubator/credhub-cli/releases/download/2.6.2/credhub-linux-2.6.2.tgz
 ```
 
-#### 4.2. 내려받은 파일 압축 해제하기
+#### 4.2. 내려받은 파일 압축 해제
 ```shell
 $ tar zxf ${LINDAREX_BOSH_WORKSPACE}/credhub-linux-2.6.2.tgz -C ${LINDAREX_BOSH_WORKSPACE}
 ```

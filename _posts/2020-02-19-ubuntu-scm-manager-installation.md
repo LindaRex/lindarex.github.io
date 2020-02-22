@@ -47,7 +47,7 @@ $ mkdir -p ${LINDAREX_WORKSPACE}
 $ wget -P ${LINDAREX_WORKSPACE} https://maven.scm-manager.org/nexus/content/repositories/releases/sonia/scm//scm-server/1.60/scm-server-1.60-app.tar.gz
 ```
 
-### 2. 내려받은 파일 압축 해제하기
+### 2. 내려받은 파일 압축 해제
 ```shell
 $ tar zxf ${LINDAREX_WORKSPACE}/scm-server-1.60-app.tar.gz -C ${LINDAREX_WORKSPACE}
 ```

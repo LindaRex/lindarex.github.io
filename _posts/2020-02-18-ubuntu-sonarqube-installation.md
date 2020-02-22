@@ -50,12 +50,12 @@ $ mkdir -p ${LINDAREX_WORKSPACE}
 $ wget -P ${LINDAREX_WORKSPACE} https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.9.1.zip
 ```
 
-### 2. 내려받은 파일을 압축 해제합니다.
+### 2. 내려받은 파일 압축 해제
 ```shell
 $ unzip -q ${LINDAREX_WORKSPACE}/sonarqube-7.9.1.zip -d ${LINDAREX_WORKSPACE}
 ```
 
-### 3. Symbolic link를 설정합니다.
+### 3. Symbolic link 설정
 ```shell
 $ ln -s ${LINDAREX_WORKSPACE}/sonarqube-7.9.1 ${LINDAREX_WORKSPACE}/sonarqube
 ```

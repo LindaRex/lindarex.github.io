@@ -264,6 +264,14 @@ wcs_do();
 
             <li><a href="/categories/aws/" class="">AWS</a></li>
           
+            
+            
+
+            
+            
+
+            <li><a href="/categories/azure/" class="">AZURE</a></li>
+          
         </ul>
         
       </li>
@@ -420,11 +428,11 @@ SonarQube는 LGPL(Lesser GNU General Public License) 라이선스로 오픈소�
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>wget <span class="nt">-P</span> <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span> https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.9.1.zip
 </code></pre></div></div>
 
-<h3 id="2-내려받은-파일을-압축-해제합니다">2. 내려받은 파일을 압축 해제합니다.</h3>
+<h3 id="2-내려받은-파일-압축-해제">2. 내려받은 파일 압축 해제</h3>
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>unzip <span class="nt">-q</span> <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/sonarqube-7.9.1.zip <span class="nt">-d</span> <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>
 </code></pre></div></div>
 
-<h3 id="3-symbolic-link를-설정합니다">3. Symbolic link를 설정합니다.</h3>
+<h3 id="3-symbolic-link-설정">3. Symbolic link 설정</h3>
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ln</span> <span class="nt">-s</span> <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/sonarqube-7.9.1 <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/sonarqube
 </code></pre></div></div>
 
@@ -683,6 +691,34 @@ wrapper.java.command<span class="o">=</span>/home/rex/workspace/tool/java11/bin/
     
     <h2 class="archive__item-title" itemprop="headline">
       
+        <a href="/azure/ubuntu-azure-cli-installation/" rel="permalink">우분투(Ubuntu) 환경에 패키지로 Azure CLI 설치하기
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Azure CLI(명령줄 인터페이스, command line interface, 이하 azure cli)는 Microsoft Azure(이하 azure)에 리소스를 만들고 관리할 수  도구입니다. 
+모든 azure 서비스에서 사용할 수 있으며, azure를 빠르게 사용할 수 있도록...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
         <a href="/travis-ci/travis-github-pages-jekyll-setting/" rel="permalink">Travis CI로 Jekyll 블로그를 GitHub Pages에 자동 배포하기
 </a>
       
@@ -748,34 +784,6 @@ BOSH는 수백 개의 가상머신(Virtual Machine, 이하 VM)에 애플리케�
     <p class="archive__item-excerpt" itemprop="description">AWS CLI(명령줄 인터페이스, command line interface)는 AWS 서비스를 관리하는 통합 도구입니다. 
 Python 2.6.5 이상이 필요하며, pip을 사용하여 AWS CLI를 설치합니다. 
 이 포스트에서는 우분투(이하 Ubuntu) 환경에서 AWS를 사용하기...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src=
-          
-            "/assets/images/LindaRex_LOGO.jpg"
-          
-          alt="">
-      </div>
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/scm-manager/ubuntu-scm-manager-installation/" rel="permalink">우분투(Ubuntu) 환경에 SCM Manager 설치하기
-</a>
-      
-    </h2>
-    
-    <p class="archive__item-excerpt" itemprop="description">SCM Manager는 사설 버전관리 레파지토리(Private source code and version control repository)로 BSD 라이선스가 적용된 오픈소스 소프트웨어입니다. 
-SCM Manager는 Git과 Mercurial, Subversion을 지원하고, ...</p>
   </article>
 </div>
 

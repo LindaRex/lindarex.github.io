@@ -30,10 +30,10 @@ sidebar:
     children:
       - title: "AWS"
         url: /categories/aws/
+      - title: "AZURE"
+        url: /categories/azure/
   #     - title: "GCP"
   #       url: /categories/gcp/
-  #     - title: "AZURE"
-  #       url: /categories/azure/
   - title: "INTERESTED"
     children:
       - title: "UBUNTU"

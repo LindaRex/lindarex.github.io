@@ -9,7 +9,7 @@ tags:
 ---
 
 
-이 포스트에서는 Travis CI(이하 travis)를 이용해 Jekyll 블로그(이하 jekyll)를 GitHub Pages(이하 github)에 자동 배포하는 방법을 소개합니다.
+이 포스트에서는 Travis CI(이하 travis)를 이용해 Jekyll 블로그(이하 jekyll)를 GitHub Pages에 자동 배포하는 방법을 소개합니다.
 
 
 ## 선행조건(PREREQUISITE)
@@ -31,7 +31,7 @@ tags:
 
 ## 내용(CONTENTS)
 ### 1. GitHub Personal access token(이하 token) 생성
-> [https://github.com/](https://github.com/){: target="_blank"}에 접속합니다.
+> [https://github.com/](https://github.com/){: target="\_blank"}에 접속합니다.
 
 - 우측 상단의 Profile 아이콘을 선택하여 'Settings' 페이지로 이동합니다.
 
@@ -57,7 +57,7 @@ tags:
 
 ### 2. Travis CI 설정
 
-> [https://github.com/apps/travis-ci](https://github.com/apps/travis-ci){: target="_blank"}에 접속합니다.
+> [https://github.com/apps/travis-ci](https://github.com/apps/travis-ci){: target="\_blank"}에 접속합니다.
 
 - 우측 상단의 'Install'을 클릭합니다.
 
@@ -73,7 +73,7 @@ tags:
 
 ![lindarex-travis-github-pages-jekyll-setting-009]
 
-- [https://travis-ci.com/](https://travis-ci.com/){: target="_blank"}으로 이동하여 승인이 진행됩니다.
+- [https://travis-ci.com/](https://travis-ci.com/){: target="\_blank"}으로 이동하여 승인이 진행됩니다.
 
 ![lindarex-travis-github-pages-jekyll-setting-010]
 
@@ -122,7 +122,7 @@ branches:
 ```
 
 ### 4. 배포 확인
-- 설정 완료 후, [travis 첫 페이지](https://travis-ci.com/){: target="_blank"}으로 이동합니다.
+- 설정 완료 후, [travis 첫 페이지](https://travis-ci.com/){: target="\_blank"}으로 이동합니다.
 
 ![lindarex-travis-github-pages-jekyll-setting-014]
 
@@ -140,12 +140,12 @@ branches:
 
 
 ## 마무리(CONCLUSION)
-travis로 jekyll을 github에 자동 배포하는 방법을 완료했습니다. <br />
+travis로 jekyll을 GitHub Pages에 자동 배포하는 방법을 완료했습니다. <br />
 다음 포스트에서는 travis로 다른 언어를 배포하는 방법을 소개하겠습니다.
 
 
 ## 참고(REFERENCES)
-- [https://travis-ci.com/](https://travis-ci.com/){: target="_blank"}
+- [https://travis-ci.com/](https://travis-ci.com/){: target="\_blank"}
 
 
 [lindarex-travis-github-pages-jekyll-setting-001]:/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-001.png

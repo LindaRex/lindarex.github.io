@@ -16,8 +16,12 @@ SonarQube는 LGPL(Lesser GNU General Public License) 라이선스로 오픈소�
 
 ## 선행조건(PREREQUISITE)
 - Ubuntu 환경에 PostgreSQL이 설치되어 있어야 합니다.
+- 방화벽 설정이 필요합니다.
+    + TCP 9000 포트가 개방되어 있어야 합니다.
 
-> PostgreSQL 설치 방법은 [우분투(Ubuntu) 환경에 PostgreSQL 설치하기](https://lindarex.github.io/ubuntu/ubuntu-postgresql-installation/){: target="_blank"} 포스트를 참고하시기 바랍니다.
+> PostgreSQL 설치 방법은 [우분투(Ubuntu) 환경에 PostgreSQL 설치하기](https://lindarex.github.io/postgresql/ubuntu-postgresql-installation/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
+
+> 방화벽 설정 방법은 [우분투(Ubuntu) 환경에 방화벽(Firewalld) 설치 및 설정하기](https://lindarex.github.io/ubuntu/ubuntu-firewalld-installation/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
 
 
 ## 테스트 환경(TEST ENVIRONMENT)
@@ -155,7 +159,7 @@ sudo sysctl -w vm.max_map_count=262144
 - file descriptors :: 65536 이상
 - threads :: 4096 이상
 
-> SonarQube 설치 시 필요 요구사항에 대한 자세한 정보는 [https://docs.sonarqube.org/latest/requirements/requirements/](https://docs.sonarqube.org/latest/requirements/requirements/){: target="_blank"}를 확인해 주시기 바랍니다.
+> SonarQube 설치 시 필요 요구사항에 대한 자세한 정보는 [https://docs.sonarqube.org/latest/requirements/requirements/](https://docs.sonarqube.org/latest/requirements/requirements/){: target="\_blank"}를 확인해 주시기 바랍니다.
 
 > 수정 내역 적용을 위해 아래 명령어를 입력합니다.
 ```shell
@@ -193,6 +197,6 @@ Ubuntu 환경에 SonarQube 설치를 완료했습니다. <br />
 
 
 ## 참고(REFERENCES)
-- [https://www.sonarqube.org/](https://www.sonarqube.org/){: target="_blank"}
-- [https://docs.sonarqube.org/latest/](https://docs.sonarqube.org/latest/){: target="_blank"}
-- [http://www.sonarqube.org/downloads/](http://www.sonarqube.org/downloads/){: target="_blank"}
+- [https://www.sonarqube.org/](https://www.sonarqube.org/){: target="\_blank"}
+- [https://docs.sonarqube.org/latest/](https://docs.sonarqube.org/latest/){: target="\_blank"}
+- [http://www.sonarqube.org/downloads/](http://www.sonarqube.org/downloads/){: target="\_blank"}

@@ -9,7 +9,7 @@ tags:
 ---
 
 
-AWS CLI(명령줄 인터페이스, command line interface)는 AWS 서비스를 관리하는 통합 도구입니다. <br />
+AWS CLI(command line interface, 명령줄 인터페이스)는 AWS 서비스를 관리하는 통합 도구입니다. <br />
 Python 2.6.5 이상이 필요하며, pip을 사용하여 AWS CLI를 설치합니다. <br />
 이 포스트에서는 우분투(이하 Ubuntu) 환경에서 AWS를 사용하기 위한 AWS CLI를 설치하는 방법을 소개합니다.
 
@@ -19,13 +19,13 @@ Python 2.6.5 이상이 필요하며, pip을 사용하여 AWS CLI를 설치합니
 ## 선행조건(PREREQUISITE)
 - Ubuntu 환경이 필요합니다.
 
-> Ubuntu 설치 방법은 [VMware workstation에 Ubuntu 16.04 설치하기](https://lindarex.github.io/ubuntu/ubuntu-1604-installation/){: target="_blank"} 또는 [VMware workstation에 Ubuntu 18.04 설치하기](https://lindarex.github.io/ubuntu/ubuntu-1804-installation/){: target="_blank"} 포스트를 참고하시기 바랍니다.
+> Ubuntu 설치 방법은 [VMware workstation에 Ubuntu 16.04 설치하기](https://lindarex.github.io/ubuntu/ubuntu-1604-installation/){: target="\_blank"} 또는 [VMware workstation에 Ubuntu 18.04 설치하기](https://lindarex.github.io/ubuntu/ubuntu-1804-installation/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
 
 
 ## 테스트 환경(TEST ENVIRONMENT)
 - VMware® Workstation 15 Pro (15.5.1 build-15018445)
 - Ubuntu 18.04.3 LTS (Bionic Beaver) Server (64-bit)
-- AWS cli v1.16.261
+- AWS CLI v1.16.261
 - Python v2.7.17
 
 
@@ -50,8 +50,8 @@ $ pip install awscli
 
 ## 마무리(CONCLUSION)
 Ubuntu 환경에 AWS CLI 설치를 완료했습니다. <br />
-다음 포스트에서는 AWS S3 사용 방법을 소개하겠습니다.
+다음 포스트에서는 AWS CLI를 이용한 AWS S3 사용 방법을 소개하겠습니다.
 
 
 ## 참고(REFERENCES)
-- [https://aws.amazon.com/ko/cli/](https://aws.amazon.com/ko/cli/){: target="_blank"}
+- [https://aws.amazon.com/ko/cli/](https://aws.amazon.com/ko/cli/){: target="\_blank"}

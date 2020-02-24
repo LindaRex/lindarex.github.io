@@ -21,7 +21,7 @@ Java 애플리케이션 구축을 위해서는 JDK(Java Development Kit)가 필�
 - Oracle JDK는 Oracle이 인수한 Sun Microsystems 플러그인을 제공하지만, OpenJDK는 제공하지 않습니다.
 - Oracle JDK는 OpenJDK 보다 CPU 사용량과 메모리 사용량이 적고, 응답시간이 높습니다. 
 
-> Oracle JDK와 OpenJDK의 벤치마킹 결과는 [Comparing JDK 8 performance](https://technology.amis.nl/2018/11/23/comparing-jvm-performance-zulu-openjdk-openjdk-oracle-jdk-graalvm-ce/){: target="_blank"} 페이지를 참고하시기 바랍니다.
+> Oracle JDK와 OpenJDK의 벤치마킹 결과는 [Comparing JDK 8 performance](https://technology.amis.nl/2018/11/23/comparing-jvm-performance-zulu-openjdk-openjdk-oracle-jdk-graalvm-ce/){: target="\_blank"} 페이지를 참고하시기 바랍니다.
 
 
 ## 마무리(CONCLUSION)
@@ -32,7 +32,7 @@ JDK 유료화에 따라 개인 사용자를 비롯해 기업 사용자는 OpenJD
 
 
 ## 참고(REFERENCES)
-- [https://engineering.linecorp.com/ko/blog/line-open-jdk/](https://engineering.linecorp.com/ko/blog/line-open-jdk/){: target="_blank"}
-- [https://c10106.tistory.com/4075](https://c10106.tistory.com/4075){: target="_blank"}
-- [https://jsonobject.tistory.com/395](https://jsonobject.tistory.com/395){: target="_blank"}
+- [https://engineering.linecorp.com/ko/blog/line-open-jdk/](https://engineering.linecorp.com/ko/blog/line-open-jdk/){: target="\_blank"}
+- [https://c10106.tistory.com/4075](https://c10106.tistory.com/4075){: target="\_blank"}
+- [https://jsonobject.tistory.com/395](https://jsonobject.tistory.com/395){: target="\_blank"}
 

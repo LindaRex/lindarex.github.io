@@ -9,8 +9,8 @@ tags:
 ---
 
 
-우분투(Ubuntu) 18.04 LTS(Long Term Support)는 Ubuntu 16.04 LTS와 비교해 새로운 기능과 개선 사항으로 많은 변화가 있으며, 릴리스의 코드 이름은 'Bionic Beaver'입니다.
-이 포스트에서는 VMware Workstation에 Ubuntu 18.04를 설치하는 방법을 소개합니다.
+우분투(Ubuntu) 18.04 LTS(Long Term Support)는 Ubuntu 16.04 LTS와 비교해 새로운 기능과 개선 사항으로 많은 변화가 있으며, 릴리스의 코드 이름은 'Bionic Beaver'입니다. <br />
+이 포스트에서는 VMware Workstation에 Ubuntu 18.04 LTS를 설치하는 방법을 소개합니다.
 
 
 ## 선행조건(PREREQUISITE)
@@ -21,7 +21,7 @@ tags:
 - VMware® Workstation 15 Pro (15.5.1 build-15018445)
 - Ubuntu 18.04.3 LTS (Bionic Beaver) Server (64-bit)
 
-> Ubuntu 18.04 Server 설치 시 필요한 시스템 요구사항은 [https://help.ubuntu.com/lts/serverguide/preparing-to-install.html](https://help.ubuntu.com/lts/serverguide/preparing-to-install.html){: target="_blank"}를 확인해 주시기 바랍니다.
+> Ubuntu 18.04 Server 설치 시 필요한 시스템 요구사항은 [https://help.ubuntu.com/lts/serverguide/preparing-to-install.html](https://help.ubuntu.com/lts/serverguide/preparing-to-install.html){: target="\_blank"}를 확인해 주시기 바랍니다.
 
 
 ## 요약(SUMMARY)
@@ -33,7 +33,7 @@ tags:
 
 ## 내용(CONTENTS)
 ### 1. Ubuntu 18.04.3 Server ISO 파일 내려받기
-- 웹브라우저로 [Ubuntu Releases 페이지](http://mirror.kakao.com/ubuntu-releases/){: target="_blank"}를 엽니다.
+- 웹브라우저로 [Ubuntu Releases 페이지](http://mirror.kakao.com/ubuntu-releases/){: target="\_blank"}를 엽니다.
 
 ![lindarex-ubuntu-1804-installation-001]
 
@@ -43,7 +43,7 @@ tags:
 
 - Server install image 영역의 '64-bit PC (AMD64) server install image'를 클릭하여 ISO 파일을 내려받습니다.
 
-> [http://mirror.kakao.com/ubuntu-releases/18.04.3/ubuntu-18.04.3-live-server-amd64.iso](http://mirror.kakao.com/ubuntu-releases/18.04.3/ubuntu-18.04.3-live-server-amd64.iso){: target="_blank"}를 통해 바로 내려받을 수 있습니다. <br />
+> [http://mirror.kakao.com/ubuntu-releases/18.04.3/ubuntu-18.04.3-live-server-amd64.iso](http://mirror.kakao.com/ubuntu-releases/18.04.3/ubuntu-18.04.3-live-server-amd64.iso){: target="\_blank"}를 통해 바로 내려받을 수 있습니다. <br />
 > ubuntu-18.04.3-live-server-amd64.iso 파일 사이즈는 약 868 MB입니다.
 
 ![lindarex-ubuntu-1804-installation-003]
@@ -74,7 +74,7 @@ tags:
 
 - Virtual machine name을 입력하고, Location에 vmdk 파일이 저장될 경로를 입력하거나 'Browse..'를 클릭해 위치를 선택하고 'Next'를 클릭합니다.
 
-> VMDK란 Virtual Machine Disk의 약자이며, 자세한 정보는 [https://en.wikipedia.org/wiki/VMDK](https://en.wikipedia.org/wiki/VMDK){: target="_blank"}를 참고하시기 바랍니다.
+> VMDK란 Virtual Machine Disk의 약자이며, 자세한 정보는 [https://en.wikipedia.org/wiki/VMDK](https://en.wikipedia.org/wiki/VMDK){: target="\_blank"}를 참고하시기 바랍니다.
 
 ![lindarex-ubuntu-1804-installation-009]
 
@@ -90,7 +90,7 @@ tags:
 
 - 'Use network address translation (NAT)'를 선택하고 'Next'를 클릭합니다.
 
-> Network type에 대한 자세한 정보는 [VMware Workstation의 가상 네트워크(Virtual Network) 알아보기](https://lindarex.github.io/vmware-workstation/vmware-workstation-virtual-network/){: target="_blank"} 포스트를 참고하시기 바랍니다.
+> Network type에 대한 자세한 정보는 [VMware Workstation의 가상 네트워크(Virtual Network) 알아보기](https://lindarex.github.io/vmware-workstation/vmware-workstation-virtual-network/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
 
 
 ![lindarex-ubuntu-1804-installation-012]
@@ -167,7 +167,7 @@ tags:
 - Network를 설정합니다.
 
 > VMware Workstation에 Ubuntu를 설치할 경우, 자동으로 DHCP(Dynamic Host Configuration Protocol)로 설정됩니다. <br />
-> DHCP에 대한 자세한 정보는 [https://ko.wikipedia.org/wiki/동적_호스트_구성_프로토콜](https://ko.wikipedia.org/wiki/%EB%8F%99%EC%A0%81_%ED%98%B8%EC%8A%A4%ED%8A%B8_%EA%B5%AC%EC%84%B1_%ED%94%84%EB%A1%9C%ED%86%A0%EC%BD%9C){: target="_blank"}를 참고하시기 바랍니다.
+> DHCP에 대한 자세한 정보는 [https://ko.wikipedia.org/wiki/동적_호스트_구성_프로토콜](https://ko.wikipedia.org/wiki/%EB%8F%99%EC%A0%81_%ED%98%B8%EC%8A%A4%ED%8A%B8_%EA%B5%AC%EC%84%B1_%ED%94%84%EB%A1%9C%ED%86%A0%EC%BD%9C){: target="\_blank"}를 참고하시기 바랍니다.
 
 ![lindarex-ubuntu-1804-installation-032]
 
@@ -263,10 +263,10 @@ VMware Workstation에 Ubuntu 18.04.3 LTS (Bionic Beaver) Server 설치를 완료
 
 
 ## 참고(REFERENCES)
-- [https://ubuntu.com/](https://ubuntu.com/){: target="_blank"}
-- [http://mirror.kakao.com/ubuntu-releases/](http://mirror.kakao.com/ubuntu-releases/){: target="_blank"}
-- [https://ubuntu.com/tutorials/tutorial-install-ubuntu-server#1-overview](https://ubuntu.com/tutorials/tutorial-install-ubuntu-server#1-overview){: target="_blank"}
-- [https://ko.wikipedia.org/wiki/우분투_(운영_체제)](https://ko.wikipedia.org/wiki/%EC%9A%B0%EB%B6%84%ED%88%AC_(%EC%9A%B4%EC%98%81_%EC%B2%B4%EC%A0%9C)){: target="_blank"}
+- [https://ubuntu.com/](https://ubuntu.com/){: target="\_blank"}
+- [http://mirror.kakao.com/ubuntu-releases/](http://mirror.kakao.com/ubuntu-releases/){: target="\_blank"}
+- [https://ubuntu.com/tutorials/tutorial-install-ubuntu-server#1-overview](https://ubuntu.com/tutorials/tutorial-install-ubuntu-server#1-overview){: target="\_blank"}
+- [https://ko.wikipedia.org/wiki/우분투_(운영_체제)](https://ko.wikipedia.org/wiki/%EC%9A%B0%EB%B6%84%ED%88%AC_(%EC%9A%B4%EC%98%81_%EC%B2%B4%EC%A0%9C)){: target="\_blank"}
 
 
 

@@ -16,8 +16,12 @@ macOS 서버의 경우 PostgreSQL이 기본 데이터베이스이며, MS Windows
 
 ## 선행조건(PREREQUISITE)
 - Ubuntu 환경에 Java가 설치되어 있어야 합니다.
+- 방화벽 설정이 필요합니다.
+    + TCP 5432 포트가 개방되어 있어야 합니다.
 
-> Java 설치 방법은 [우분투(Ubuntu) 환경에 OpenJDK(Java) 설치하기](https://lindarex.github.io/ubuntu/ubuntu-openjdk-installation/){: target="_blank"} 포스트를 참고하시기 바랍니다.
+> Java 설치 방법은 [우분투(Ubuntu) 환경에 OpenJDK(Java) 설치하기](https://lindarex.github.io/ubuntu/ubuntu-openjdk-installation/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
+
+> 방화벽 설정 방법은 [우분투(Ubuntu) 환경에 방화벽(Firewalld) 설치 및 설정하기](https://lindarex.github.io/ubuntu/ubuntu-firewalld-installation/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
 
 
 ## 테스트 환경(TEST ENVIRONMENT)
@@ -69,7 +73,7 @@ export PGDATA=${LINDAREX_WORKSPACE}/pgsql/data
 --------------------------------------------------------------------------------
 ```
 
-> 위 workspace 디렉터리 경로는 사용자 계정에 따라 다릅니다.
+> 위 workspace(LINDAREX_WORKSPACE) 디렉터리 경로는 사용자 계정에 따라 다릅니다.
 
 > 수정 내역 적용을 위해 아래 명령어를 입력합니다.
 ```shell
@@ -84,7 +88,7 @@ $ /usr/lib/postgresql/11/bin/initdb
 ```
 
 #### 4.4. PostgreSQL 설정 수정
-- 아래 명령어는 외부 접속이 가능하게 합니다.
+- 아래 설정으로 외부 접속이 가능하게 합니다.
 
 ```shell
 $ sudo vi /etc/postgresql/11/main/postgresql.conf
@@ -93,7 +97,7 @@ listen_addresses = '*'
 --------------------------------------------------------------------------------
 ```
 
-- 아래 명령어는 모든 사용자(비밀번호 사용)가 접속이 가능하게 합니다.
+- 아래 설정으로 모든 사용자(비밀번호 사용)가 접속이 가능하게 합니다.
 
 ```shell
 $ sudo vi /etc/postgresql/11/main/pg_hba.conf
@@ -156,7 +160,7 @@ Ubuntu 환경에 패키지로 PostgreSQL 설치를 완료했습니다. <br />
 
 
 ## 참고(REFERENCES)
-- [https://www.postgresql.org/](https://www.postgresql.org/){: target="_blank"}
-- [https://www.postgresql.org/download/linux/ubuntu/](https://www.postgresql.org/download/linux/ubuntu/){: target="_blank"}
-- [https://ko.wikipedia.org/wiki/PostgreSQL](https://ko.wikipedia.org/wiki/PostgreSQL){: target="_blank"}
-- [https://d2.naver.com/helloworld/227936](https://d2.naver.com/helloworld/227936){: target="_blank"}
+- [https://www.postgresql.org/](https://www.postgresql.org/){: target="\_blank"}
+- [https://www.postgresql.org/download/linux/ubuntu/](https://www.postgresql.org/download/linux/ubuntu/){: target="\_blank"}
+- [https://ko.wikipedia.org/wiki/PostgreSQL](https://ko.wikipedia.org/wiki/PostgreSQL){: target="\_blank"}
+- [https://d2.naver.com/helloworld/227936](https://d2.naver.com/helloworld/227936){: target="\_blank"}

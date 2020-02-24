@@ -23,16 +23,16 @@ ELK Stack은 Elasticsearch, Logstash, Kibana의 연동으로 텍스트, 숫자, 
 ## 선행조건(PREREQUISITE)
 - Ubuntu 환경에 Java가 설치되어 있어야 합니다.
 - 방화벽 설정이 필요합니다.
-    + TCP 9200 포트, TCP 5601 포트가 열려 있어야 합니다.
+    + TCP 9200 포트, TCP 5601 포트가 개방되어 있어야 합니다.
 
-> Java 설치 방법은 [우분투(Ubuntu) 환경에 OpenJDK(Java) 설치하기](https://lindarex.github.io/ubuntu/ubuntu-openjdk-installation/){: target="_blank"} 포스트를 참고하시기 바랍니다.
+> Java 설치 방법은 [우분투(Ubuntu) 환경에 OpenJDK(Java) 설치하기](https://lindarex.github.io/ubuntu/ubuntu-openjdk-installation/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
 
-> 방화벽 설정 방법은 [우분투(Ubuntu) 환경에 방화벽(Firewalld) 설치 및 설정하기](https://lindarex.github.io/ubuntu/ubuntu-firewalld-installation/){: target="_blank"} 포스트를 참고하시기 바랍니다.
+> 방화벽 설정 방법은 [우분투(Ubuntu) 환경에 방화벽(Firewalld) 설치 및 설정하기](https://lindarex.github.io/ubuntu/ubuntu-firewalld-installation/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
 
 
 ## 테스트 환경(TEST ENVIRONMENT)
 - VMware® Workstation 15 Pro (15.5.1 build-15018445)
-- Ubuntu 16.04.6 LTS (Xenial Xerus)
+- Ubuntu 16.04.6 LTS (Xenial Xerus) Server (64-bit)
 - Elasticsearch 7.2.0
 - Logstash 7.2.0
 - Kibana 7.2.0
@@ -44,7 +44,8 @@ ELK Stack은 Elasticsearch, Logstash, Kibana의 연동으로 텍스트, 숫자, 
 1. Elasticsearch 설치
 2. Logstash 설치
 3. Kibana 설치
-4. 웹브라우저로 Kibana 접속
+4. Filebeat 설치
+5. 웹브라우저로 Kibana 접속
 
 
 ## 내용(CONTENTS)
@@ -328,7 +329,7 @@ $ sudo systemctl kill kibana.service
 ```
 
 ### 4. Filebeat 설치
-- Filebeat는 경량 로그 수집기로, SSH 터미널의 사용이 불가능한 상황(로그를 생성하는 서버나 가상 시스템, 컨테이너가 수백, 수천 개에 이르는 경우)에 로그와 파일을 경량화된 방식으로 전달하고 중앙 집중화하여 작업을 보다 간편하게 만들어 주는 역할을 합니다.
+- Filebeat는 경량 로그 수집기로, SSH 터미널의 사용이 불가능한 상황(로그를 생성하는 서버나 가상 시스템, 컨테이너가 수백\~수천 개에 이르는 경우)에 로그와 파일을 경량화된 방식으로 전달하고 중앙 집중화하여 작업을 보다 간편하게 만들어 주는 역할을 합니다.
 
 #### 4.1. apt install 명령어로 Filebeat 설치
 ```shell
@@ -430,5 +431,5 @@ Ubuntu 환경에 패키지로 elk 설치를 완료했습니다. <br />
 
 
 ## 참고(REFERENCES)
-- [https://www.elastic.co/kr/](https://www.elastic.co/kr/){: target="_blank"}
-- [https://ko.wikipedia.org/wiki/일래스틱서치](https://ko.wikipedia.org/wiki/%EC%9D%BC%EB%9E%98%EC%8A%A4%ED%8B%B1%EC%84%9C%EC%B9%98){: target="_blank"}
+- [https://www.elastic.co/kr/](https://www.elastic.co/kr/){: target="\_blank"}
+- [https://ko.wikipedia.org/wiki/일래스틱서치](https://ko.wikipedia.org/wiki/%EC%9D%BC%EB%9E%98%EC%8A%A4%ED%8B%B1%EC%84%9C%EC%B9%98){: target="\_blank"}

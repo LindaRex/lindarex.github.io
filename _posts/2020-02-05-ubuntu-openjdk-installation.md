@@ -15,18 +15,18 @@ JDK는 2개로 나뉘는데, 하나는 BCL(Oracle Binary Code License) 라이선
 이 포스트에서는 우분투(이하 Ubuntu) 환경에서 패키지로 OpenJDK를 설치하는 방법을 소개합니다.
 
 
-> Oracle JDK와 OpenJDK에 대한 자세한 정보는 [Oracle JDK와 OpenJDK의 차이점](https://lindarex.github.io/concepts/difference-between-oraclejdk-openjdk/){: target="_blank"} 포스트를 참고하시기 바랍니다.
+> Oracle JDK와 OpenJDK에 대한 자세한 정보는 [Oracle JDK와 OpenJDK의 차이점](https://lindarex.github.io/concepts/difference-between-oraclejdk-openjdk/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
 
 
 ## 선행조건(PREREQUISITE)
 - Ubuntu 환경이 필요합니다.
 
-> Ubuntu 설치 방법은 [VMware workstation에 Ubuntu 16.04 설치하기](https://lindarex.github.io/ubuntu/ubuntu-1604-installation/){: target="_blank"} 또는 [VMware workstation에 Ubuntu 18.04 설치하기](https://lindarex.github.io/ubuntu/ubuntu-1804-installation/){: target="_blank"} 포스트를 참고하시기 바랍니다.
+> Ubuntu 설치 방법은 [VMware workstation에 Ubuntu 16.04 설치하기](https://lindarex.github.io/ubuntu/ubuntu-1604-installation/){: target="\_blank"} 또는 [VMware workstation에 Ubuntu 18.04 설치하기](https://lindarex.github.io/ubuntu/ubuntu-1804-installation/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
 
 
 ## 테스트 환경(TEST ENVIRONMENT)
 - VMware® Workstation 15 Pro (15.5.1 build-15018445)
-- Ubuntu 16.04.4 LTS (Xenial Xerus)
+- Ubuntu 16.04.4 LTS (Xenial Xerus) Server (64-bit)
 - OpenJDK 1.8.0_222
 
 
@@ -118,6 +118,6 @@ Java는 플랫폼에 독립적이고 수많은 개발자와 레퍼런스를 보�
 
 
 ## 참고(REFERENCES)
-- [https://openjdk.java.net/](https://openjdk.java.net/){: target="_blank"}
-- [https://ko.wikipedia.org/wiki/OpenJDK](https://ko.wikipedia.org/wiki/OpenJDK){: target="_blank"}
-- [https://namu.wiki/w/Java](https://namu.wiki/w/Java){: target="_blank"}
+- [https://openjdk.java.net/](https://openjdk.java.net/){: target="\_blank"}
+- [https://ko.wikipedia.org/wiki/OpenJDK](https://ko.wikipedia.org/wiki/OpenJDK){: target="\_blank"}
+- [https://namu.wiki/w/Java](https://namu.wiki/w/Java){: target="\_blank"}

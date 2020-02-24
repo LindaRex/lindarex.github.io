@@ -11,10 +11,10 @@ tags:
 
 
 Cloud Foundry BOSH는 소규모 및 대규모 클라우드 애플리케이션의 배포와 라이프 사이클 관리, release engineering을 통합하는 오픈소스 소프트웨어 프로젝트입니다. 
-BOSH는 수백 개의 가상머신(Virtual Machine, 이하 VM)에 애플리케이션을 프로비저닝(이하 provisioning)하고 배포할 수 있으며, 모니터링과 오류 복구, 애플리케이션 업데이트를 수행합니다. <br />
-BOSH는 Cloud Foundry PaaS(CFAR) 배포를 위해 개발되었지만, 거의 모든 다른 소프트웨어를 배포하는 데에도 사용할 수 있습니다. 예를 들면, Hadoop 또는 Jenkins 등의 오픈소스 소프트웨어를 BOSH release로 작성하여 사용할 수 있으며 대규모 분산 시스템에 적합합니다. <br />
+BOSH는 수백 개의 가상머신(Virtual Machine, 이하 VM)에 애플리케이션을 프로비저닝(Provisioning)하고 배포할 수 있으며, 모니터링과 오류 복구, 애플리케이션 업데이트를 수행합니다. <br />
+BOSH는 Cloud Foundry PaaS(CFAR) 배포를 위해 개발되었지만, 거의 모든 소프트웨어를 배포하는 데에도 사용할 수 있습니다. 예를 들면, Hadoop 또는 Jenkins 등의 오픈소스 소프트웨어를 BOSH release로 작성하여 배포할 수 있으며 대규모 분산 시스템에 적합합니다. <br />
 또한 BOSH는 Amazon Web Services EC2, Google Cloud Platform, Microsoft Azure, OpenStack, VMware vSphere 및 Alibaba Cloud와 같은 다양한 IaaS(Infrastructure as a Service) provider를 지원하며, Apache CloudStack, VirtualBox 등의 IaaS provider 지원을 위해 CPI(Cloud Provider Interface)를 제공합니다. <br />
-이 포스트에서는 AWS 우분투(이하 Ubuntu) 환경에서 BOSH 사용을 위한 BOSH director를 설치하는 방법을 소개합니다.
+이 포스트에서는 AWS EC2 우분투(이하 Ubuntu) 환경에서 BOSH 사용을 위한 BOSH director를 설치하는 방법을 소개합니다.
 
 > CFAR에 대해서는 본문의 [CF CLI 설치](#2-%EC%84%A0%ED%83%9D%EC%82%AC%ED%95%AD-cf-cli-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0)에서 설명합니다.
 
@@ -36,7 +36,7 @@ BOSH는 Cloud Foundry PaaS(CFAR) 배포를 위해 개발되었지만, 거의 모
 
 > Provisioning이란 사용자의 요구에 맞게 시스템 자원을 할당, 배치, 배포해 두었다가 필요 시 시스템을 즉시 사용할 수 있는 상태로 미리 준비해 두는 것을 의미합니다.
 
-> Provisioning에 대한 자세한 정보는 [https://ko.wikipedia.org/wiki/프로비저닝](https://ko.wikipedia.org/wiki/%ED%94%84%EB%A1%9C%EB%B9%84%EC%A0%80%EB%8B%9D){: target="_blank"}, [https://en.wikipedia.org/wiki/Provisioning_(telecommunications)](https://en.wikipedia.org/wiki/Provisioning_(telecommunications)){: target="_blank"}를 확인해 주시기 바랍니다.
+> Provisioning에 대한 자세한 정보는 [https://ko.wikipedia.org/wiki/프로비저닝](https://ko.wikipedia.org/wiki/%ED%94%84%EB%A1%9C%EB%B9%84%EC%A0%80%EB%8B%9D){: target="\_blank"}, [https://en.wikipedia.org/wiki/Provisioning_(telecommunications)](https://en.wikipedia.org/wiki/Provisioning_(telecommunications)){: target="\_blank"}를 확인해 주시기 바랍니다.
 
 
 ## 테스트 환경(TEST ENVIRONMENT)
@@ -511,15 +511,15 @@ credentials: []
 
 
 ## 마무리(CONCLUSION)
-AWS Ubuntu 환경에 BOSH director 설치를 완료했습니다. <br />
-BOSH director 설치는 CFAR 및 CFCR 등 BOSH release 배포를 위한 기반 작업이며, BOSH director 설치를 위해서는 적지 않은 IaaS 설정이 필요합니다. <br />
+AWS EC2 Ubuntu 환경에 BOSH director 설치를 완료했습니다. <br />
+BOSH director 설치는 CFAR 및 CFCR 등 BOSH release 배포를 위한 기반 작업이며, 설치 진행을 위해서는 적지 않은 IaaS 설정이 필요합니다. <br />
 다음 포스트에서는 BOSH director 설치를 위한 AWS 환경 설정과 AWS EC2 Inception VM 생성 방법, BOSH components에 대한 설명과 BOSH release 작성 방법을 소개하겠습니다.
 
 
 ## 참고(REFERENCES)
-- [https://bosh.io/docs/cli-v2-install/](https://bosh.io/docs/cli-v2-install/){: target="_blank"}
-- [https://github.com/cloudfoundry/bosh-cli/releases](https://github.com/cloudfoundry/bosh-cli/releases){: target="_blank"}
-- [https://docs.cloudfoundry.org/cf-cli/install-go-cli.html](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html){: target="_blank"}
-- [https://github.com/cloudfoundry/cf-uaac](https://github.com/cloudfoundry/cf-uaac){: target="_blank"}
-- [https://github.com/cloudfoundry-incubator/credhub-cli](https://github.com/cloudfoundry-incubator/credhub-cli){: target="_blank"}
+- [https://bosh.io/docs/cli-v2-install/](https://bosh.io/docs/cli-v2-install/){: target="\_blank"}
+- [https://github.com/cloudfoundry/bosh-cli/releases](https://github.com/cloudfoundry/bosh-cli/releases){: target="\_blank"}
+- [https://docs.cloudfoundry.org/cf-cli/install-go-cli.html](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html){: target="\_blank"}
+- [https://github.com/cloudfoundry/cf-uaac](https://github.com/cloudfoundry/cf-uaac){: target="\_blank"}
+- [https://github.com/cloudfoundry-incubator/credhub-cli](https://github.com/cloudfoundry-incubator/credhub-cli){: target="\_blank"}
 

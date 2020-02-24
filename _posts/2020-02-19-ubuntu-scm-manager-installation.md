@@ -10,13 +10,17 @@ tags:
 
 SCM Manager는 사설 버전관리 레파지토리(Private source code and version control repository)로 BSD 라이선스가 적용된 오픈소스 소프트웨어입니다. <br />
 SCM Manager는 Git과 Mercurial, Subversion을 지원하고, 다양한 플러그인과 RESTFul API를 제공합니다. <br />
-SCM Manager는 크게 Standalone 방식(tar, RPM, DEB package)과 WebApp(war) 방식을 제공하는데, 이 포스트에서는 우분투(이하 Ubuntu) 환경에서 Standalone 방식으로 SCM Manager를 설치하는 방법을 소개합니다.
+SCM Manager 설치는 Standalone 방식(tar, RPM, DEB package)과 WebApp(war) 방식을 제공하는데, 이 포스트에서는 우분투(이하 Ubuntu) 환경에서 Standalone 방식으로 SCM Manager를 설치하는 방법을 소개합니다.
 
 
 ## 선행조건(PREREQUISITE)
 - Ubuntu 환경에 Java가 설치되어 있어야 합니다.
+- 방화벽 설정이 필요합니다.
+    + TCP 8080 포트가 개방되어 있어야 합니다.
 
-> Java 설치 방법은 [우분투(Ubuntu) 환경에 OpenJDK(Java) 설치하기](https://lindarex.github.io/ubuntu/ubuntu-openjdk-installation/){: target="_blank"} 포스트를 참고하시기 바랍니다.
+> Java 설치 방법은 [우분투(Ubuntu) 환경에 OpenJDK(Java) 설치하기](https://lindarex.github.io/ubuntu/ubuntu-openjdk-installation/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
+
+> 방화벽 설정 방법은 [우분투(Ubuntu) 환경에 방화벽(Firewalld) 설치 및 설정하기](https://lindarex.github.io/ubuntu/ubuntu-firewalld-installation/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
 
 
 ## 테스트 환경(TEST ENVIRONMENT)
@@ -79,4 +83,4 @@ Ubuntu 환경에 Standalone 방식으로 SCM Manager 설치를 완료했습니�
 
 
 ## 참고(REFERENCES)
-- [https://www.scm-manager.org/download/](https://www.scm-manager.org/download/){: target="_blank"}
+- [https://www.scm-manager.org/download/](https://www.scm-manager.org/download/){: target="\_blank"}

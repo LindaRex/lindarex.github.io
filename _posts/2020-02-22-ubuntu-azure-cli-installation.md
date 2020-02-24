@@ -9,7 +9,7 @@ tags:
 ---
 
 
-Azure CLI(명령줄 인터페이스, command line interface, 이하 azure cli)는 Microsoft Azure(이하 azure)에 리소스를 만들고 관리할 수  도구입니다. <br />
+Azure CLI(command line interface, 명령줄 인터페이스, 이하 azure cli)는 Microsoft Azure(이하 azure)에 리소스를 만들고 관리할 수 도구입니다. <br />
 모든 azure 서비스에서 사용할 수 있으며, azure를 빠르게 사용할 수 있도록 자동화에 초점을 두고 있습니다. <br />
 이 포스트에서는 우분투(이하 Ubuntu) 환경에서 패키지로 azure cli를 설치하는 방법을 소개합니다.
 
@@ -17,7 +17,7 @@ Azure CLI(명령줄 인터페이스, command line interface, 이하 azure cli)�
 ## 선행조건(PREREQUISITE)
 - Ubuntu 환경이 필요합니다.
 
-> Ubuntu 설치 방법은 [VMware workstation에 Ubuntu 16.04 설치하기](https://lindarex.github.io/ubuntu/ubuntu-1604-installation/){: target="_blank"} 또는 [VMware workstation에 Ubuntu 18.04 설치하기](https://lindarex.github.io/ubuntu/ubuntu-1804-installation/){: target="_blank"} 포스트를 참고하시기 바랍니다.
+> Ubuntu 설치 방법은 [VMware workstation에 Ubuntu 16.04 설치하기](https://lindarex.github.io/ubuntu/ubuntu-1604-installation/){: target="\_blank"} 또는 [VMware workstation에 Ubuntu 18.04 설치하기](https://lindarex.github.io/ubuntu/ubuntu-1804-installation/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
 
 
 ## 테스트 환경(TEST ENVIRONMENT)
@@ -101,4 +101,4 @@ Ubuntu 환경에 패키지로 azure cli 설치를 완료했습니다. <br />
 
 
 ## 참고(REFERENCES)
-- [https://docs.microsoft.com/ko-kr/cli/azure/?view=azure-cli-latest](https://docs.microsoft.com/ko-kr/cli/azure/?view=azure-cli-latest){: target="_blank"}
+- [https://docs.microsoft.com/ko-kr/cli/azure/?view=azure-cli-latest](https://docs.microsoft.com/ko-kr/cli/azure/?view=azure-cli-latest){: target="\_blank"}

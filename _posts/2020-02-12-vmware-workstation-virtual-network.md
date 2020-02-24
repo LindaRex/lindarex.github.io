@@ -11,7 +11,7 @@ tags:
 ---
 
 
-VMware Workstation은 가상 머신(VM, Virtual Machine)을 생성하고 가상 네트워크(Virtual Network)를 구성할 수 있습니다. <br />
+VMware Workstation은 가상 머신(Virtual Machine, 이하 VM)을 생성하고 가상 네트워크(Virtual Network)를 구성할 수 있습니다. <br />
 이 포스트에서는 VMware Workstation의 Virtual Network에 대해 소개합니다.
 
 
@@ -41,7 +41,7 @@ VMware Workstation은 가상 머신(VM, Virtual Machine)을 생성하고 가상 
 
 ![lindarex_vmware-workstation-networking-bridged]
 
-> 출처 :: [https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-BAFA66C3-81F0-4FCA-84C4-D9F7D258A60A.html](https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-BAFA66C3-81F0-4FCA-84C4-D9F7D258A60A.html){: target="_blank"}
+> 출처 :: [https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-BAFA66C3-81F0-4FCA-84C4-D9F7D258A60A.html](https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-BAFA66C3-81F0-4FCA-84C4-D9F7D258A60A.html){: target="\_blank"}
 
 
 ### 2. NAT Networking
@@ -53,7 +53,7 @@ VMware Workstation은 가상 머신(VM, Virtual Machine)을 생성하고 가상 
 
 ![lindarex_vmware-workstation-networking-nat]
 
-> 출처 :: [https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-89311E3D-CCA9-4ECC-AF5C-C52BE6A89A95.html](https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-89311E3D-CCA9-4ECC-AF5C-C52BE6A89A95.html){: target="_blank"}
+> 출처 :: [https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-89311E3D-CCA9-4ECC-AF5C-C52BE6A89A95.html](https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-89311E3D-CCA9-4ECC-AF5C-C52BE6A89A95.html){: target="\_blank"}
 
 ### 3. Host-Only Networking
 - Host-Only Networking을 적용한 VM은 기본적으로 외부 통신, Host 시스템과 통신이 불가능합니다.
@@ -62,7 +62,7 @@ VMware Workstation은 가상 머신(VM, Virtual Machine)을 생성하고 가상 
 
 ![lindarex_vmware-workstation-networking-host-only]
 
-> 출처 :: [https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-93BDF7F1-D2E4-42CE-80EA-4E305337D2FC.html](https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-93BDF7F1-D2E4-42CE-80EA-4E305337D2FC.html){: target="_blank"}
+> 출처 :: [https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-93BDF7F1-D2E4-42CE-80EA-4E305337D2FC.html](https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-93BDF7F1-D2E4-42CE-80EA-4E305337D2FC.html){: target="\_blank"}
 
 
 ## 마무리(CONCLUSION)
@@ -71,7 +71,7 @@ VMware Workstation의 Virtual Network에 대해 알아봤습니다. <br />
 
 
 ## 참고(REFERENCES)
-- [https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-D9B0A52D-38A2-45D7-A9EB-987ACE77F93C.html](https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-D9B0A52D-38A2-45D7-A9EB-987ACE77F93C.html){: target="_blank"}
+- [https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-D9B0A52D-38A2-45D7-A9EB-987ACE77F93C.html](https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-D9B0A52D-38A2-45D7-A9EB-987ACE77F93C.html){: target="\_blank"}
 
 
 [lindarex_vmware-workstation-networking-bridged]:/assets/images/2020-02-12-vmware-workstation-virtual-network/lindarex_vmware-workstation-networking-bridged.png

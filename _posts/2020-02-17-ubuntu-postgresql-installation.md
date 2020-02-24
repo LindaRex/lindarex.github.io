@@ -28,19 +28,19 @@ macOS 서버의 경우 PostgreSQL이 기본 데이터베이스이며, MS Windows
 
 
 ## 요약(SUMMARY)
-1. PostgreSQL Debian packages repository 설정
+1. PostgreSQL debian packages repository 설정
 2. apt 명령어로 PostgreSQL 설치
 3. PostgreSQL 설정
 4. systemctl 명령어로 PostgreSQL 실행
 
 
 ## 내용(CONTENTS)
-### 1. PostgreSQL Debian packages repository 추가
+### 1. PostgreSQL debian packages repository 추가
 ```shell
 $ sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
 ```
 
-### 2. PostgreSQL Debian packages repository key 추가
+### 2. PostgreSQL debian packages repository key 추가
 ```shell
 $ sudo wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | sudo apt-key add -
 ```
@@ -54,13 +54,13 @@ $ sudo apt update -y && sudo apt install postgresql postgresql-contrib -y
 
 > 일반 사용자 계정으로 진행합니다.
 
-### 4.1. PGDATA 디렉터리 생성
+#### 4.1. PGDATA 디렉터리 생성
 ```shell
 $ export LINDAREX_WORKSPACE=${HOME}/workspace
 $ mkdir -p ${LINDAREX_WORKSPACE}/pgsql/data
 ```
 
-### 4.2. PGDATA 디렉터리 경로 추가
+#### 4.2. PGDATA 디렉터리 경로 추가
 ```shell
 $ sudo vi /etc/profile
 --------------------------------------------------------------------------------
@@ -76,14 +76,14 @@ export PGDATA=${LINDAREX_WORKSPACE}/pgsql/data
 $ source /etc/profile
 ```
 
-### 4.3. Database 초기화
+#### 4.3. Database 초기화
 - 아래 명령어로 Database 초기화를 실행합니다.
 
 ```shell
 $ /usr/lib/postgresql/11/bin/initdb
 ```
 
-### 4.4. PostgreSQL 설정 수정
+#### 4.4. PostgreSQL 설정 수정
 - 아래 명령어는 외부 접속이 가능하게 합니다.
 
 ```shell
@@ -104,47 +104,47 @@ host    all             all             0.0.0.0/0               password
 ```
 
 ### 5. systemctl 명령어로 PostgreSQL 서비스 관리
-### 5.1. PostgreSQL 서비스 설정 반영
+#### 5.1. PostgreSQL 서비스 설정 반영
 ```shell
 $ sudo systemctl daemon-reload
 ```
 
-### 5.2. PostgreSQL 서비스 시작
+#### 5.2. PostgreSQL 서비스 시작
 ```shell
 $ sudo systemctl start postgresql.service
 ```
 
-### 5.3. PostgreSQL 서비스 중지
+#### 5.3. PostgreSQL 서비스 중지
 ```shell
 $ sudo systemctl stop postgresql.service
 ```
 
-### 5.4. PostgreSQL 서비스 재시작
+#### 5.4. PostgreSQL 서비스 재시작
 ```shell
 $ sudo systemctl restart postgresql.service
 ```
 
-### 5.5. PostgreSQL 서비스 설정 재적용
+#### 5.5. PostgreSQL 서비스 설정 재적용
 ```shell
 $ sudo systemctl reload postgresql.service
 ```
 
-### 5.6. PostgreSQL 서비스 상태 조회
+#### 5.6. PostgreSQL 서비스 상태 조회
 ```shell
 $ sudo systemctl status postgresql.service
 ```
 
-### 5.7. PostgreSQL 서비스 활성화(부팅 시 자동 시작)
+#### 5.7. PostgreSQL 서비스 활성화(부팅 시 자동 시작)
 ```shell
 $ sudo systemctl enable postgresql.service
 ```
 
-### 5.8. PostgreSQL 서비스 비활성화
+#### 5.8. PostgreSQL 서비스 비활성화
 ```shell
 $ sudo systemctl disable postgresql.service
 ```
 
-### 5.9. PostgreSQL 서비스 및 관련 프로세스 모두 중지
+#### 5.9. PostgreSQL 서비스 및 관련 프로세스 모두 중지
 ```shell
 $ sudo systemctl kill postgresql.service
 ```

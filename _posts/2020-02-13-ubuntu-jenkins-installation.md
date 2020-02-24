@@ -31,12 +31,12 @@ Jenkins는 모든 프로젝트의 빌드, 배포 및 자동화를 지원하며, 
 ## 테스트 환경(TEST ENVIRONMENT)
 - VMware® Workstation 15 Pro (15.5.1 build-15018445)
 - Ubuntu 16.04.4 LTS (Xenial Xerus)
-- JENKINS 2.121.1
+- Jenkins 2.121.1
 - OpenJDK 1.8.0_171
 
 
 ## 요약(SUMMARY)
-1. Jenkins Debian packages repository 설정
+1. Jenkins debian packages repository 설정
 2. apt 명령어로 Jenkins 설치
 3. (선택사항) Java 경로 설정 및 Jenkins의 기본 포트 변경
 4. systemctl 명령어로 Jenkins 실행
@@ -44,12 +44,12 @@ Jenkins는 모든 프로젝트의 빌드, 배포 및 자동화를 지원하며, 
 
 
 ## 내용(CONTENTS)
-### 1. Jenkins Debian packages repository key 추가
+### 1. Jenkins debian packages repository key 추가
 ```shell
 $ sudo wget -q -O - https://pkg.jenkins.io/debian/jenkins-ci.org.key | sudo apt-key add -
 ```
 
-### 2. Jenkins Debian packages repository 추가
+### 2. Jenkins debian packages repository 추가
 ```shell
 $ sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'  
 ```

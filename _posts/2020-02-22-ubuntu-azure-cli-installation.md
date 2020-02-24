@@ -31,6 +31,7 @@ Azure CLI(명령줄 인터페이스, command line interface, 이하 azure cli)�
 3. azure cli 로그인
 4. (선택사항) apt 명령어로 azure cli 삭제
 
+
 ## 내용(CONTENTS)
 ### 1. 종속 패키지 설치
 

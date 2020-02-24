@@ -16,6 +16,7 @@ tags:
 - GitHub 계정이 필요합니다.
 - GitHub Pages의 브랜치(이하 branch)는 빌드(이하 build) 후 배포되는 master branch, jekyll code를 올릴 sources branch로 구성합니다.
 
+
 ## 테스트 환경(TEST ENVIRONMENT)
 - Chrome v80.0.3987.116(공식 빌드) (64비트)
 - Firefox Browser v74.0b5 (64-비트)
@@ -121,7 +122,6 @@ branches:
 ```
 
 ### 4. 배포 확인
-
 - 설정 완료 후, [travis 첫 페이지](https://travis-ci.com/){: target="_blank"}으로 이동합니다.
 
 ![lindarex-travis-github-pages-jekyll-setting-014]

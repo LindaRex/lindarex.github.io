@@ -25,7 +25,7 @@ Python 2.6.5 이상이 필요하며, pip을 사용하여 AWS CLI를 설치합니
 ## 테스트 환경(TEST ENVIRONMENT)
 - VMware® Workstation 15 Pro (15.5.1 build-15018445)
 - Ubuntu 18.04.3 LTS (Bionic Beaver) Server (64-bit)
-- aws-cli v1.16.261
+- AWS cli v1.16.261
 - Python v2.7.17
 
 

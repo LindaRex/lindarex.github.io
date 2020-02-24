@@ -6,9 +6,260 @@
     <description>오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 LindaRex(린다렉스)의 블로그입니다</description>
     <link>https://lindarex.github.io/</link>
     <atom:link href="https://lindarex.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 24 Feb 2020 15:07:27 +0900</pubDate>
-    <lastBuildDate>Mon, 24 Feb 2020 15:07:27 +0900</lastBuildDate>
+    <pubDate>Mon, 24 Feb 2020 17:28:41 +0900</pubDate>
+    <lastBuildDate>Mon, 24 Feb 2020 17:28:41 +0900</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
+    
+      <item>
+        <title>우분투(Ubuntu) 환경에 방화벽(UFW) 설정하기</title>
+        <description>&lt;p&gt;방화벽(UFW, Uncomplicated Firewall, 이하 ufw)은 데비안(이하 debian) 계열 및 다양한 리눅스(이하 linux) 환경에서 작동되고, GPL(GNU General Public License) 라이선스가 적용되며 파이썬(Python)으로 개발되었습니다. &lt;br /&gt;
+사용하기 쉬운 CLI(command line interface, 명령줄 인터페이스)를 사용하고 프로그램 구성에는 iptables를 사용하는 netfilter 방화벽을 관리하는 프로그램입니다. &lt;br /&gt;
+ufw는 기본적으로 Ubuntu 18.04 LTS 이후 버전에서 사용할 수 있습니다. &lt;br /&gt;
+이 포스트에서는 Ubuntu 환경에서 ufw를 설정하는 방법을 소개합니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;선행조건prerequisite&quot;&gt;선행조건(PREREQUISITE)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Ubuntu 환경이 필요합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Ubuntu 설치 방법은 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1604-installation/&quot; target=&quot;\_blank&quot;&gt;VMware workstation에 Ubuntu 16.04 설치하기&lt;/a&gt; 또는 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1804-installation/&quot; target=&quot;\_blank&quot;&gt;VMware workstation에 Ubuntu 18.04 설치하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;테스트-환경test-environment&quot;&gt;테스트 환경(TEST ENVIRONMENT)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;VMware® Workstation 15 Pro (15.5.1 build-15018445)&lt;/li&gt;
+  &lt;li&gt;Ubuntu 18.04.3 LTS (Bionic Beaver) Server (64-bit)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;요약summary&quot;&gt;요약(SUMMARY)&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;ufw 활성화 또는 비활성화&lt;/li&gt;
+  &lt;li&gt;ufw 기본 정책(이하 default rules) 조회&lt;/li&gt;
+  &lt;li&gt;ufw default rules 허용 또는 차단&lt;/li&gt;
+  &lt;li&gt;ufw rule 허용 또는 차단&lt;/li&gt;
+  &lt;li&gt;ufw rule 삭제&lt;/li&gt;
+  &lt;li&gt;Service 명으로 ufw rule 허용 또는 차단&lt;/li&gt;
+  &lt;li&gt;IP 주소(이하 IP address)로 ufw rule 허용 또는 차단&lt;/li&gt;
+  &lt;li&gt;ufw ping(icmp) 허용 또는 차단&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;내용contents&quot;&gt;내용(CONTENTS)&lt;/h2&gt;
+&lt;h3 id=&quot;1-ufw-활성화-또는-비활성화&quot;&gt;1. ufw 활성화 또는 비활성화&lt;/h3&gt;
+&lt;h4 id=&quot;11-ufw-활성화&quot;&gt;1.1. ufw 활성화&lt;/h4&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;ufw &lt;span class=&quot;nb&quot;&gt;enable&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;ufw은 기본적으로 비활성화되어 있습니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;12-ufw-비활성화&quot;&gt;1.2. ufw 비활성화&lt;/h4&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;ufw disable
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;2-ufw-상태-조회&quot;&gt;2. ufw 상태 조회&lt;/h3&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;ufw status verbose
+Status: inactive
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;3-ufw-default-rules-조회&quot;&gt;3. ufw default rules 조회&lt;/h3&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;ufw show raw
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;아래 경로의 하위 파일을 조회하여 확인할 수 있습니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo cat&lt;/span&gt; /etc/ufw/user.rules
+&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;filter
+:ufw-user-input - &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;0:0]
+:ufw-user-output - &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;0:0]
+:ufw-user-forward - &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;0:0]
+:ufw-before-logging-input - &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;0:0]
+:ufw-before-logging-output - &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;0:0]
+:ufw-before-logging-forward - &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;0:0]
+:ufw-user-logging-input - &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;0:0]
+:ufw-user-logging-output - &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;0:0]
+:ufw-user-logging-forward - &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;0:0]
+:ufw-after-logging-input - &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;0:0]
+:ufw-after-logging-output - &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;0:0]
+:ufw-after-logging-forward - &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;0:0]
+:ufw-logging-deny - &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;0:0]
+:ufw-logging-allow - &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;0:0]
+:ufw-user-limit - &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;0:0]
+:ufw-user-limit-accept - &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;0:0]
+&lt;span class=&quot;c&quot;&gt;### RULES ###&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;### END RULES ###&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;### LOGGING ###&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt; ufw-after-logging-input &lt;span class=&quot;nt&quot;&gt;-j&lt;/span&gt; LOG &lt;span class=&quot;nt&quot;&gt;--log-prefix&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;[UFW BLOCK] &quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; limit &lt;span class=&quot;nt&quot;&gt;--limit&lt;/span&gt; 3/min &lt;span class=&quot;nt&quot;&gt;--limit-burst&lt;/span&gt; 10
+&lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt; ufw-after-logging-forward &lt;span class=&quot;nt&quot;&gt;-j&lt;/span&gt; LOG &lt;span class=&quot;nt&quot;&gt;--log-prefix&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;[UFW BLOCK] &quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; limit &lt;span class=&quot;nt&quot;&gt;--limit&lt;/span&gt; 3/min &lt;span class=&quot;nt&quot;&gt;--limit-burst&lt;/span&gt; 10
+&lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt; ufw-logging-deny &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; conntrack &lt;span class=&quot;nt&quot;&gt;--ctstate&lt;/span&gt; INVALID &lt;span class=&quot;nt&quot;&gt;-j&lt;/span&gt; RETURN &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; limit &lt;span class=&quot;nt&quot;&gt;--limit&lt;/span&gt; 3/min &lt;span class=&quot;nt&quot;&gt;--limit-burst&lt;/span&gt; 10
+&lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt; ufw-logging-deny &lt;span class=&quot;nt&quot;&gt;-j&lt;/span&gt; LOG &lt;span class=&quot;nt&quot;&gt;--log-prefix&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;[UFW BLOCK] &quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; limit &lt;span class=&quot;nt&quot;&gt;--limit&lt;/span&gt; 3/min &lt;span class=&quot;nt&quot;&gt;--limit-burst&lt;/span&gt; 10
+&lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt; ufw-logging-allow &lt;span class=&quot;nt&quot;&gt;-j&lt;/span&gt; LOG &lt;span class=&quot;nt&quot;&gt;--log-prefix&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;[UFW ALLOW] &quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; limit &lt;span class=&quot;nt&quot;&gt;--limit&lt;/span&gt; 3/min &lt;span class=&quot;nt&quot;&gt;--limit-burst&lt;/span&gt; 10
+&lt;span class=&quot;c&quot;&gt;### END LOGGING ###&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;### RATE LIMITING ###&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt; ufw-user-limit &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; limit &lt;span class=&quot;nt&quot;&gt;--limit&lt;/span&gt; 3/minute &lt;span class=&quot;nt&quot;&gt;-j&lt;/span&gt; LOG &lt;span class=&quot;nt&quot;&gt;--log-prefix&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;[UFW LIMIT BLOCK] &quot;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt; ufw-user-limit &lt;span class=&quot;nt&quot;&gt;-j&lt;/span&gt; REJECT
+&lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt; ufw-user-limit-accept &lt;span class=&quot;nt&quot;&gt;-j&lt;/span&gt; ACCEPT
+&lt;span class=&quot;c&quot;&gt;### END RATE LIMITING ###&lt;/span&gt;
+COMMIT
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;4-ufw-default-rules-허용-또는-차단&quot;&gt;4. ufw default rules 허용 또는 차단&lt;/h3&gt;
+&lt;h4 id=&quot;41-ufw-default-rules-허용&quot;&gt;4.1. ufw default rules 허용&lt;/h4&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;ufw default allow
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;42-ufw-default-rules-차단&quot;&gt;4.2. ufw default rules 차단&lt;/h4&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;ufw default deny
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;5-ufw-rule-허용-또는-차단&quot;&gt;5. ufw rule 허용 또는 차단&lt;/h3&gt;
+&lt;h4 id=&quot;51-tcp-8080-포트이하-port-허용&quot;&gt;5.1. TCP 8080 포트(이하 port) 허용&lt;/h4&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;ufw allow 8080/tcp
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;52-tcp-8080-port-차단&quot;&gt;5.2. TCP 8080 port 차단&lt;/h4&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;ufw deny 8080/tcp
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;53-udp-22-port-허용&quot;&gt;5.3. UDP 22 port 허용&lt;/h4&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;ufw allow 22/udp
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;54-udp-22-port-차단&quot;&gt;5.4. UDP 22 port 차단&lt;/h4&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;ufw deny 22/udp
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;55-tcpudp-53-port-허용&quot;&gt;5.5. TCP/UDP 53 port 허용&lt;/h4&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;ufw allow 53
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;56-tcpudp-53-port-차단&quot;&gt;5.6. TCP/UDP 53 port 차단&lt;/h4&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;ufw deny 53
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;53 port는 DNS 사용 port입니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;6-ufw-rule-삭제&quot;&gt;6. ufw rule 삭제&lt;/h3&gt;
+&lt;h4 id=&quot;61-tcp-8080-port-차단-rule-삭제&quot;&gt;6.1. TCP 8080 port 차단 rule 삭제&lt;/h4&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;ufw delete deny 8080/tcp
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;62-udp-22-port-차단-rule-삭제&quot;&gt;6.2. UDP 22 port 차단 rule 삭제&lt;/h4&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;ufw delete deny 22/udp
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;63-tcpudp-53-port-차단-rule-삭제&quot;&gt;6.3. TCP/UDP 53 port 차단 rule 삭제&lt;/h4&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;ufw delete deny 53
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;7-service-명으로-ufw-rule-허용-또는-차단&quot;&gt;7. Service 명으로 ufw rule 허용 또는 차단&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;아래 명령어로 Service 목록을 조회할 수 있습니다.&lt;/p&gt;
+  &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; /etc/services
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;71-ssh-service-허용&quot;&gt;7.1. SSH service 허용&lt;/h4&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;ufw allow ssh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;72-ssh-service-차단&quot;&gt;7.2. SSH service 차단&lt;/h4&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;ufw deny ssh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;8-ip-address로-ufw-rule-허용-또는-차단&quot;&gt;8. IP address로 ufw rule 허용 또는 차단&lt;/h3&gt;
+&lt;h4 id=&quot;81-ip-address-허용&quot;&gt;8.1. IP address 허용&lt;/h4&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;ufw allow from 192.168.10.20
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;82-ip-address-차단&quot;&gt;8.2. IP address 차단&lt;/h4&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;ufw deny from 192.168.10.20
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;83-ip-address-subnetnet-mask-허용&quot;&gt;8.3. IP address subnet(net mask) 허용&lt;/h4&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;ufw allow from 192.168.10.0/24
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;84-ip-address-subnetnet-mask-차단&quot;&gt;8.4. IP address subnet(net mask) 차단&lt;/h4&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;ufw deny from 192.168.10.0/24
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;85-ip-address와-port-허용&quot;&gt;8.5. IP address와 port 허용&lt;/h4&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;ufw allow from 192.168.10.20 to any port 22
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;86-ip-address와-port-차단&quot;&gt;8.6. IP address와 port 차단&lt;/h4&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;ufw deny from 192.168.10.20 to any port 22
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;87-ip-address와-port-protocol-허용&quot;&gt;8.7. IP address와 port, protocol 허용&lt;/h4&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;ufw allow from 192.168.10.20 to any port 22 proto tcp
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;88-ip-address와-port-protocol-차단&quot;&gt;8.8. IP address와 port, protocol 차단&lt;/h4&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;ufw deny from 192.168.10.20 to any port 22 proto tcp
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;9-ufw-pingicmp-허용-또는-차단&quot;&gt;9. ufw ping(icmp) 허용 또는 차단&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;ufw는 기본적으로 ping 요청을 허용합니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;91-ufw-pingicmp-허용&quot;&gt;9.1. ufw ping(icmp) 허용&lt;/h4&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;vi /etc/ufw/before.rules
+...
+&lt;span class=&quot;c&quot;&gt;# ok icmp codes&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt; ufw-before-input &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; icmp &lt;span class=&quot;nt&quot;&gt;--icmp-type&lt;/span&gt; destination-unreachable &lt;span class=&quot;nt&quot;&gt;-j&lt;/span&gt; ACCEPT
+&lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt; ufw-before-input &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; icmp &lt;span class=&quot;nt&quot;&gt;--icmp-type&lt;/span&gt; source-quench &lt;span class=&quot;nt&quot;&gt;-j&lt;/span&gt; ACCEPT
+&lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt; ufw-before-input &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; icmp &lt;span class=&quot;nt&quot;&gt;--icmp-type&lt;/span&gt; time-exceeded &lt;span class=&quot;nt&quot;&gt;-j&lt;/span&gt; ACCEPT
+&lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt; ufw-before-input &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; icmp &lt;span class=&quot;nt&quot;&gt;--icmp-type&lt;/span&gt; parameter-problem &lt;span class=&quot;nt&quot;&gt;-j&lt;/span&gt; ACCEPT
+&lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt; ufw-before-input &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; icmp &lt;span class=&quot;nt&quot;&gt;--icmp-type&lt;/span&gt; echo-request &lt;span class=&quot;nt&quot;&gt;-j&lt;/span&gt; ACCEPT
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;91-ufw-pingicmp-차단&quot;&gt;9.1. ufw ping(icmp) 차단&lt;/h4&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;...
+&lt;span class=&quot;c&quot;&gt;# ok icmp codes&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt; ufw-before-input &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; icmp &lt;span class=&quot;nt&quot;&gt;--icmp-type&lt;/span&gt; destination-unreachable &lt;span class=&quot;nt&quot;&gt;-j&lt;/span&gt; DROP
+&lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt; ufw-before-input &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; icmp &lt;span class=&quot;nt&quot;&gt;--icmp-type&lt;/span&gt; source-quench &lt;span class=&quot;nt&quot;&gt;-j&lt;/span&gt; DROP
+&lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt; ufw-before-input &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; icmp &lt;span class=&quot;nt&quot;&gt;--icmp-type&lt;/span&gt; time-exceeded &lt;span class=&quot;nt&quot;&gt;-j&lt;/span&gt; DROP
+&lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt; ufw-before-input &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; icmp &lt;span class=&quot;nt&quot;&gt;--icmp-type&lt;/span&gt; parameter-problem &lt;span class=&quot;nt&quot;&gt;-j&lt;/span&gt; DROP
+&lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt; ufw-before-input &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; icmp &lt;span class=&quot;nt&quot;&gt;--icmp-type&lt;/span&gt; echo-request &lt;span class=&quot;nt&quot;&gt;-j&lt;/span&gt; DROP
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
+&lt;p&gt;Ubuntu 환경에 ufw 설정을 완료했습니다. &lt;br /&gt;
+다음 포스트에서는 Iptables 방화벽 특징과 설정 방법을 소개하겠습니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://help.ubuntu.com/community/UFW&quot; target=&quot;\_blank&quot;&gt;https://help.ubuntu.com/community/UFW&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://manpages.ubuntu.com/manpages/bionic/en/man8/ufw.8.html&quot; target=&quot;\_blank&quot;&gt;http://manpages.ubuntu.com/manpages/bionic/en/man8/ufw.8.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 24 Feb 2020 00:00:00 +0900</pubDate>
+        <link>https://lindarex.github.io/ubuntu/ubuntu-ufw-setting/</link>
+        <guid isPermaLink="true">https://lindarex.github.io/ubuntu/ubuntu-ufw-setting/</guid>
+        
+        <category>ufw</category>
+        
+        <category>ubuntu</category>
+        
+        
+        <category>ubuntu</category>
+        
+      </item>
     
       <item>
         <title>우분투(Ubuntu) 환경에 패키지로 Elastic Stack 설치하기</title>
@@ -3159,7 +3410,7 @@ public
 &lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
 &lt;p&gt;Ubuntu 환경에 패키지로 firewalld 설치 및 설정을 완료했습니다. &lt;br /&gt;
 firewalld는 CentOS 7부터 이전의 Iptables를 대체해 새롭게 선보인 패킷 필터링 방화벽 프로그램입니다. &lt;br /&gt;
-이 포스트에서는 다루지 않은 Iptables, UFW 등의 방화벽 특징과 설정 방법은 다음 포스트에서 소개하겠습니다.&lt;/p&gt;
+다음 포스트에서는 Iptables, UFW 등의 방화벽 특징과 설정 방법을 소개하겠습니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;
 &lt;ul&gt;

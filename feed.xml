@@ -6,8 +6,8 @@
     <description>오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 LindaRex(린다렉스)의 블로그입니다</description>
     <link>https://lindarex.github.io/</link>
     <atom:link href="https://lindarex.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 22 Feb 2020 20:57:02 +0900</pubDate>
-    <lastBuildDate>Sat, 22 Feb 2020 20:57:02 +0900</lastBuildDate>
+    <pubDate>Mon, 24 Feb 2020 09:20:09 +0900</pubDate>
+    <lastBuildDate>Mon, 24 Feb 2020 09:20:09 +0900</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
@@ -69,7 +69,7 @@
 
 &lt;h3 id=&quot;5-azure-로그인&quot;&gt;5. azure 로그인&lt;/h3&gt;
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;az login
-To sign &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;, use a web browser to open the page https://microsoft.com/devicelogin and enter the code HGCW3YCF2 to authenticate.
+To sign &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;, use a web browser to open the page https://microsoft.com/devicelogin and enter the code HGCW1YCF3 to authenticate.
 
 
 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
@@ -77,16 +77,20 @@ To sign &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;, use a web browser to op
     &lt;span class=&quot;s2&quot;&gt;&quot;cloudName&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;AzureCloud&quot;&lt;/span&gt;,
     &lt;span class=&quot;s2&quot;&gt;&quot;id&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;cd85e66d-8955-67b9-cdb5-cb6b706eb6b9&quot;&lt;/span&gt;,
     &lt;span class=&quot;s2&quot;&gt;&quot;isDefault&quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;,
-    &lt;span class=&quot;s2&quot;&gt;&quot;name&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Microsoft Azure-OpenPaaS&quot;&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&quot;name&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Microsoft Azure-LindaRex&quot;&lt;/span&gt;,
     &lt;span class=&quot;s2&quot;&gt;&quot;state&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Enabled&quot;&lt;/span&gt;,
     &lt;span class=&quot;s2&quot;&gt;&quot;tenantId&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;2a755963-e627-665a-b039-ba6576750ae1&quot;&lt;/span&gt;,
     &lt;span class=&quot;s2&quot;&gt;&quot;user&quot;&lt;/span&gt;: &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;s2&quot;&gt;&quot;name&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;lindarex@DOMANIN.COM&quot;&lt;/span&gt;,
+      &lt;span class=&quot;s2&quot;&gt;&quot;name&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;lindarex@lindarex.github.io&quot;&lt;/span&gt;,
       &lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;user&quot;&lt;/span&gt;
     &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
   &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;위 로그인 결과는 잘못된 값이므로 참고만 하시기를 바랍니다.&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;h3 id=&quot;6-선택사항-azure-cli-삭제&quot;&gt;6. (선택사항) azure cli 삭제&lt;/h3&gt;
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt remove azure-cli &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;

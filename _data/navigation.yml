@@ -20,6 +20,8 @@ sidebar:
         url: /categories/scm-manager/
       - title: "POSTGRESQL"
         url: /categories/postgresql/
+      - title: "ELASTIC STACK"
+        url: /categories/elastic-stack/
   - title: "CLOUD FOUNDRY"
     children:
       - title: "BOSH"

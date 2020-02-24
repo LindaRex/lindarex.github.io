@@ -64,7 +64,7 @@ $ sudo apt install azure-cli -y
 ### 5. azure 로그인
 ```shell
 $ az login
-To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code HGCW3YCF2 to authenticate.
+To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code HGCW1YCF3 to authenticate.
 
 
 [
@@ -72,16 +72,18 @@ To sign in, use a web browser to open the page https://microsoft.com/devicelogin
     "cloudName": "AzureCloud",
     "id": "cd85e66d-8955-67b9-cdb5-cb6b706eb6b9",
     "isDefault": true,
-    "name": "Microsoft Azure-OpenPaaS",
+    "name": "Microsoft Azure-LindaRex",
     "state": "Enabled",
     "tenantId": "2a755963-e627-665a-b039-ba6576750ae1",
     "user": {
-      "name": "lindarex@DOMANIN.COM",
+      "name": "lindarex@lindarex.github.io",
       "type": "user"
     }
   }
 ]
 ```
+
+> 위 로그인 결과는 잘못된 값이므로 참고만 하시기를 바랍니다.
 
 ### 6. (선택사항) azure cli 삭제
 ```shell

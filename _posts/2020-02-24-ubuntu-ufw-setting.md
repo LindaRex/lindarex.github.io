@@ -237,8 +237,9 @@ $ sudo vi /etc/ufw/before.rules
 ...
 ```
 
-#### 9.1. ufw ping(icmp) 차단
+#### 9.2. ufw ping(icmp) 차단
 ```shell
+$ sudo vi /etc/ufw/before.rules
 ...
 # ok icmp codes
 -A ufw-before-input -p icmp --icmp-type destination-unreachable -j DROP
@@ -248,6 +249,8 @@ $ sudo vi /etc/ufw/before.rules
 -A ufw-before-input -p icmp --icmp-type echo-request -j DROP
 ...
 ```
+
+> 'ACCEPT'를 'DROP'으로 변경합니다.
 
 
 ## 마무리(CONCLUSION)

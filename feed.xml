@@ -6,9 +6,423 @@
     <description>오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 LindaRex(린다렉스)의 블로그입니다</description>
     <link>https://lindarex.github.io/</link>
     <atom:link href="https://lindarex.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 24 Feb 2020 09:20:09 +0900</pubDate>
-    <lastBuildDate>Mon, 24 Feb 2020 09:20:09 +0900</lastBuildDate>
+    <pubDate>Mon, 24 Feb 2020 13:24:20 +0900</pubDate>
+    <lastBuildDate>Mon, 24 Feb 2020 13:24:20 +0900</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
+    
+      <item>
+        <title>우분투(Ubuntu) 환경에 패키지로 Elastic Stack 설치하기</title>
+        <description>&lt;p&gt;Elastic Stack을 소개하기에 앞서 ELK Stack을 먼저 소개하겠습니다. &lt;br /&gt;
+ELK Stack은 Elasticsearch, Logstash, Kibana의 연동으로 텍스트, 숫자, 위치 기반 정보, 정형 및 비정형 데이터 등 모든 유형의 데이터를 수집 및 변환하고 분석하여 시각화하는 오픈소스 소프트웨어입니다. &lt;br /&gt;
+2015년에 ELK Stack에 경량의 단일 목적 데이터 수집기 제품군(Beats)을 도입하면서 Elastic Stack(이하 elk)으로 명칭이 변경되었습니다. &lt;br /&gt;
+즉, ELK Stack에 Beats가 추가되어 Elastic Stack으로 통합되었습니다. &lt;br /&gt;
+이 포스트에서는 우분투(이하 Ubuntu) 환경에서 패키지로 elk를 설치하는 방법을 소개합니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;선행조건prerequisite&quot;&gt;선행조건(PREREQUISITE)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Ubuntu 환경에 Java가 설치되어 있어야 합니다.&lt;/li&gt;
+  &lt;li&gt;방화벽 설정이 필요합니다.
+    &lt;ul&gt;
+      &lt;li&gt;TCP 9200 포트, TCP 5601 포트가 열려 있어야 합니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Java 설치 방법은 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-openjdk-installation/&quot; target=&quot;_blank&quot;&gt;우분투(Ubuntu) 환경에 OpenJDK(Java) 설치하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;방화벽 설정 방법은 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-firewalld-installation/&quot; target=&quot;_blank&quot;&gt;우분투(Ubuntu) 환경에 방화벽(Firewalld) 설치 및 설정하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;테스트-환경test-environment&quot;&gt;테스트 환경(TEST ENVIRONMENT)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;VMware® Workstation 15 Pro (15.5.1 build-15018445)&lt;/li&gt;
+  &lt;li&gt;Ubuntu 16.04.6 LTS (Xenial Xerus)&lt;/li&gt;
+  &lt;li&gt;Elasticsearch 7.2.0&lt;/li&gt;
+  &lt;li&gt;Logstash 7.2.0&lt;/li&gt;
+  &lt;li&gt;Kibana 7.2.0&lt;/li&gt;
+  &lt;li&gt;Filebeat 7.2.0&lt;/li&gt;
+  &lt;li&gt;OpenJDK 1.8.0_212&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;요약summary&quot;&gt;요약(SUMMARY)&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;Elasticsearch 설치&lt;/li&gt;
+  &lt;li&gt;Logstash 설치&lt;/li&gt;
+  &lt;li&gt;Kibana 설치&lt;/li&gt;
+  &lt;li&gt;웹브라우저로 Kibana 접속&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;내용contents&quot;&gt;내용(CONTENTS)&lt;/h2&gt;
+&lt;h3 id=&quot;1-elasticsearch-설치&quot;&gt;1. Elasticsearch 설치&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Elasticsearch는 Apache Lucene으로 구축된 JSON 기반의 분산형 오픈소스 RESTful 검색 분석 엔진이며, Logstash를 통해 수신된 데이터를 저장소에 저장하는 역할을 담당합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;11-elasticsearch-debian-packages-repository-추가&quot;&gt;1.1. Elasticsearch debian packages repository 추가&lt;/h4&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;deb https://artifacts.elastic.co/packages/7.x/apt stable main&quot;&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;sudo tee&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; /etc/apt/sources.list.d/elastic-7.x.list
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;12-elasticsearch-debian-packages-repository-key-추가&quot;&gt;1.2. Elasticsearch debian packages repository key 추가&lt;/h4&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;wget &lt;span class=&quot;nt&quot;&gt;-qO&lt;/span&gt; - https://artifacts.elastic.co/GPG-KEY-elasticsearch | &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-key add -
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;13-apt-install-명령어로-elasticsearch-설치&quot;&gt;1.3. apt install 명령어로 Elasticsearch 설치&lt;/h4&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt update &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;elasticsearch &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;14-systemctl-명령어로-elasticsearch-서비스-관리&quot;&gt;1.4. systemctl 명령어로 Elasticsearch 서비스 관리&lt;/h4&gt;
+&lt;h5 id=&quot;141-elasticsearch-서비스-설정-반영&quot;&gt;1.4.1. Elasticsearch 서비스 설정 반영&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl daemon-reload
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;142-elasticsearch-서비스-시작&quot;&gt;1.4.2. Elasticsearch 서비스 시작&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl start elasticsearch.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;143-elasticsearch-서비스-중지&quot;&gt;1.4.3. Elasticsearch 서비스 중지&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl stop elasticsearch.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;144-elasticsearch-서비스-재시작&quot;&gt;1.4.4. Elasticsearch 서비스 재시작&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl restart elasticsearch.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;145-elasticsearch-서비스-설정-재적용&quot;&gt;1.4.5. Elasticsearch 서비스 설정 재적용&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl reload elasticsearch.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;146-elasticsearch-서비스-상태-조회&quot;&gt;1.4.6. Elasticsearch 서비스 상태 조회&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl status elasticsearch.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;147-elasticsearch-서비스-활성화부팅-시-자동-시작&quot;&gt;1.4.7. Elasticsearch 서비스 활성화(부팅 시 자동 시작)&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;elasticsearch.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;148-elasticsearch-서비스-비활성화&quot;&gt;1.4.8. Elasticsearch 서비스 비활성화&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl disable elasticsearch.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;149-elasticsearch-서비스-및-관련-프로세스-모두-중지&quot;&gt;1.4.9. Elasticsearch 서비스 및 관련 프로세스 모두 중지&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl &lt;span class=&quot;nb&quot;&gt;kill &lt;/span&gt;elasticsearch.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;15-curl-명령어로-elasticsearch-서비스-확인&quot;&gt;1.5. curl 명령어로 Elasticsearch 서비스 확인&lt;/h4&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; GET http://localhost:9200
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;s2&quot;&gt;&quot;name&quot;&lt;/span&gt; : &lt;span class=&quot;s2&quot;&gt;&quot;lindarex-elk&quot;&lt;/span&gt;,
+  &lt;span class=&quot;s2&quot;&gt;&quot;cluster_name&quot;&lt;/span&gt; : &lt;span class=&quot;s2&quot;&gt;&quot;elasticsearch&quot;&lt;/span&gt;,
+  &lt;span class=&quot;s2&quot;&gt;&quot;cluster_uuid&quot;&lt;/span&gt; : &lt;span class=&quot;s2&quot;&gt;&quot;RXW_zgPsS9mWiB5CDi2aCQ&quot;&lt;/span&gt;,
+  &lt;span class=&quot;s2&quot;&gt;&quot;version&quot;&lt;/span&gt; : &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;number&quot;&lt;/span&gt; : &lt;span class=&quot;s2&quot;&gt;&quot;7.2.0&quot;&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&quot;build_flavor&quot;&lt;/span&gt; : &lt;span class=&quot;s2&quot;&gt;&quot;default&quot;&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&quot;build_type&quot;&lt;/span&gt; : &lt;span class=&quot;s2&quot;&gt;&quot;deb&quot;&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&quot;build_hash&quot;&lt;/span&gt; : &lt;span class=&quot;s2&quot;&gt;&quot;508c38a&quot;&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&quot;build_date&quot;&lt;/span&gt; : &lt;span class=&quot;s2&quot;&gt;&quot;2020-02-20T15:54:18.811730Z&quot;&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&quot;build_snapshot&quot;&lt;/span&gt; : &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&quot;lucene_version&quot;&lt;/span&gt; : &lt;span class=&quot;s2&quot;&gt;&quot;8.0.0&quot;&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&quot;minimum_wire_compatibility_version&quot;&lt;/span&gt; : &lt;span class=&quot;s2&quot;&gt;&quot;6.8.0&quot;&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&quot;minimum_index_compatibility_version&quot;&lt;/span&gt; : &lt;span class=&quot;s2&quot;&gt;&quot;6.0.0-beta1&quot;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;,
+  &lt;span class=&quot;s2&quot;&gt;&quot;tagline&quot;&lt;/span&gt; : &lt;span class=&quot;s2&quot;&gt;&quot;You Know, for Search&quot;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;2-logstash-설치&quot;&gt;2. Logstash 설치&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Logstash는 서버 사이드 데이터 처리 파이프라인으로, 여러 다양한 소스에서 동시에 데이터를 수집 및 변환하여 Elasticsearch와 같은 stash 보관소로 전송합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;21-선택사항-ssl-certificate-생성&quot;&gt;2.1. (선택사항) SSL certificate 생성&lt;/h4&gt;
+&lt;h5 id=&quot;211-hostname-or-fqdn-설정&quot;&gt;2.1.1. Hostname or FQDN 설정&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /etc/ssl/
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;openssl req &lt;span class=&quot;nt&quot;&gt;-x509&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-nodes&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-newkey&lt;/span&gt; rsa:2048 &lt;span class=&quot;nt&quot;&gt;-days&lt;/span&gt; 365 &lt;span class=&quot;nt&quot;&gt;-keyout&lt;/span&gt; logstash-forwarder.key &lt;span class=&quot;nt&quot;&gt;-out&lt;/span&gt; logstash-forwarder.crt &lt;span class=&quot;nt&quot;&gt;-subj&lt;/span&gt; /CN&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;server.lindarex.local
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;212-ip-address-설정&quot;&gt;2.1.2. IP Address 설정&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;vi /etc/ssl/openssl.cnf
+&lt;span class=&quot;nt&quot;&gt;--------------------------------------------------------------------------------&lt;/span&gt;
+...
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; v3_ca &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+subjectAltName &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; IP:192.168.10.20
+...
+&lt;span class=&quot;nt&quot;&gt;--------------------------------------------------------------------------------&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /etc/ssl/
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;openssl req &lt;span class=&quot;nt&quot;&gt;-x509&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-days&lt;/span&gt; 365 &lt;span class=&quot;nt&quot;&gt;-batch&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-nodes&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-newkey&lt;/span&gt; rsa:2048 &lt;span class=&quot;nt&quot;&gt;-keyout&lt;/span&gt; logstash-forwarder.key &lt;span class=&quot;nt&quot;&gt;-out&lt;/span&gt; logstash-forwarder.crt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;213-ssl-변환&quot;&gt;2.1.3. SSL 변환&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /etc/ssl/
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;openssl pkcs8 &lt;span class=&quot;nt&quot;&gt;-in&lt;/span&gt; logstash-forwarder.key  &lt;span class=&quot;nt&quot;&gt;-topk8&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-nocrypt&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-out&lt;/span&gt; logstash-forwarder.key.pem
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo chmod &lt;/span&gt;644 /etc/ssl/logstash-forwarder.key.pem
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;22-apt-install-명령어로-logstash-설치&quot;&gt;2.2. apt install 명령어로 Logstash 설치&lt;/h4&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;logstash &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;23-logstash-구성&quot;&gt;2.3. Logstash 구성&lt;/h4&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;vi /etc/logstash/conf.d/logstash.conf
+&lt;span class=&quot;nt&quot;&gt;--------------------------------------------------------------------------------&lt;/span&gt;
+input &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+ beats &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+   port &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; 5044
+   
+   &lt;span class=&quot;c&quot;&gt;# Set to False if you do not SSL // (선택사항) SSL 미사용 시에 'false' 설정&lt;/span&gt;
+   ssl &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;
+  
+   &lt;span class=&quot;c&quot;&gt;# Delete below lines if no SSL is used  // (선택사항) SSL 미사용 시에 아래 설정 삭제&lt;/span&gt;
+   ssl_certificate &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;/etc/ssl/logstash-forwarder.crt&quot;&lt;/span&gt;
+   ssl_key &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;/etc/ssl/logstash-forwarder.key.pem&quot;&lt;/span&gt;
+   &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+filter &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;syslog&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    grok &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+      match &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;message&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;%{SYSLOGLINE}&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nb&quot;&gt;date&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+match &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;timestamp&quot;&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&quot;MMM  d HH:mm:ss&quot;&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&quot;MMM dd HH:mm:ss&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+output &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+ elasticsearch &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  hosts &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; localhost
+    index &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;%{[@metadata][beat]}-%{+YYYY.MM.dd}&quot;&lt;/span&gt;
+       &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+stdout &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    codec &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; rubydebug
+       &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;--------------------------------------------------------------------------------&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;24-systemctl-명령어로-logstash-서비스-관리&quot;&gt;2.4. systemctl 명령어로 Logstash 서비스 관리&lt;/h4&gt;
+&lt;h5 id=&quot;241-logstash-서비스-설정-반영&quot;&gt;2.4.1. Logstash 서비스 설정 반영&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl daemon-reload
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;242-logstash-서비스-시작&quot;&gt;2.4.2. Logstash 서비스 시작&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl start logstash.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;243-logstash-서비스-중지&quot;&gt;2.4.3. Logstash 서비스 중지&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl stop logstash.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;244-logstash-서비스-재시작&quot;&gt;2.4.4. Logstash 서비스 재시작&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl restart logstash.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;245-logstash-서비스-설정-재적용&quot;&gt;2.4.5. Logstash 서비스 설정 재적용&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl reload logstash.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;246-logstash-서비스-상태-조회&quot;&gt;2.4.6. Logstash 서비스 상태 조회&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl status logstash.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;247-logstash-서비스-활성화부팅-시-자동-시작&quot;&gt;2.4.7. Logstash 서비스 활성화(부팅 시 자동 시작)&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;logstash.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;248-logstash-서비스-비활성화&quot;&gt;2.4.8. Logstash 서비스 비활성화&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl disable logstash.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;249-logstash-서비스-및-관련-프로세스-모두-중지&quot;&gt;2.4.9. Logstash 서비스 및 관련 프로세스 모두 중지&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl &lt;span class=&quot;nb&quot;&gt;kill &lt;/span&gt;logstash.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;3-kibana-설치&quot;&gt;3. Kibana 설치&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Kibana는 프런트 엔드 애플리케이션으로, Elasticsearch에서 인덱스 된 데이터 검색 및 다양한 차트와 그래프를 제공하고, 실시간으로 데이터를 분석하여 시각화를 담당합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;31-apt-install-명령어로-kibana-설치&quot;&gt;3.1. apt install 명령어로 Kibana 설치&lt;/h4&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;kibana &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;32-kibana-구성&quot;&gt;3.2. Kibana 구성&lt;/h4&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;vi /etc/kibana/kibana.yml
+&lt;span class=&quot;nt&quot;&gt;--------------------------------------------------------------------------------&lt;/span&gt;
+...
+&lt;span class=&quot;c&quot;&gt;#server.host: &quot;localhost&quot;&lt;/span&gt;
+server.host: &lt;span class=&quot;s2&quot;&gt;&quot;192.168.10.20&quot;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#elasticsearch.hosts: [&quot;http://localhost:9200&quot;]&lt;/span&gt;
+elasticsearch.hosts: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;http://localhost:9200&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+...
+&lt;span class=&quot;nt&quot;&gt;--------------------------------------------------------------------------------&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;33-systemctl-명령어로-kibana-서비스-관리&quot;&gt;3.3. systemctl 명령어로 Kibana 서비스 관리&lt;/h4&gt;
+&lt;h5 id=&quot;331-kibana-서비스-설정-반영&quot;&gt;3.3.1. Kibana 서비스 설정 반영&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl daemon-reload
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;332-kibana-서비스-시작&quot;&gt;3.3.2. Kibana 서비스 시작&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl start kibana.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;333-kibana-서비스-중지&quot;&gt;3.3.3. Kibana 서비스 중지&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl stop kibana.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;334-kibana-서비스-재시작&quot;&gt;3.3.4. Kibana 서비스 재시작&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl restart kibana.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;335-kibana-서비스-설정-재적용&quot;&gt;3.3.5. Kibana 서비스 설정 재적용&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl reload kibana.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;336-kibana-서비스-상태-조회&quot;&gt;3.3.6. Kibana 서비스 상태 조회&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl status kibana.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;337-kibana-서비스-활성화부팅-시-자동-시작&quot;&gt;3.3.7. Kibana 서비스 활성화(부팅 시 자동 시작)&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;kibana.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;338-kibana-서비스-비활성화&quot;&gt;3.3.8. Kibana 서비스 비활성화&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl disable kibana.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;339-kibana-서비스-및-관련-프로세스-모두-중지&quot;&gt;3.3.9. Kibana 서비스 및 관련 프로세스 모두 중지&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl &lt;span class=&quot;nb&quot;&gt;kill &lt;/span&gt;kibana.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;4-filebeat-설치&quot;&gt;4. Filebeat 설치&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Filebeat는 경량 로그 수집기로, SSH 터미널의 사용이 불가능한 상황(로그를 생성하는 서버나 가상 시스템, 컨테이너가 수백, 수천 개에 이르는 경우)에 로그와 파일을 경량화된 방식으로 전달하고 중앙 집중화하여 작업을 보다 간편하게 만들어 주는 역할을 합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;41-apt-install-명령어로-filebeat-설치&quot;&gt;4.1. apt install 명령어로 Filebeat 설치&lt;/h4&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;filebeat &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;42-filebeat-구성&quot;&gt;4.2. Filebeat 구성&lt;/h4&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;vi /etc/filebeat/filebeat.yml
+&lt;span class=&quot;nt&quot;&gt;--------------------------------------------------------------------------------&lt;/span&gt;
+...
+- &lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;: log
+
+  &lt;span class=&quot;c&quot;&gt;# Change to true to enable this input configuration.&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;#enabled: false&lt;/span&gt;
+  enabled: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;
+
+  &lt;span class=&quot;c&quot;&gt;# Paths that should be crawled and fetched. Glob based paths.&lt;/span&gt;
+  paths:
+    &lt;span class=&quot;c&quot;&gt;#- /var/log/*.log&lt;/span&gt;
+    - /var/log/syslog
+...
+&lt;span class=&quot;c&quot;&gt;#-------------------------- Elasticsearch output ------------------------------&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#output.elasticsearch:&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;# Array of hosts to connect to.&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;#hosts: [&quot;localhost:9200&quot;]&lt;/span&gt;
+
+  &lt;span class=&quot;c&quot;&gt;# Optional protocol and basic auth credentials.&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;#protocol: &quot;https&quot;&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;#username: &quot;elastic&quot;&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;#password: &quot;changeme&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;#----------------------------- Logstash output --------------------------------&lt;/span&gt;
+output.logstash:
+
+  &lt;span class=&quot;c&quot;&gt;#hosts: [&quot;localhost:5044&quot;]&lt;/span&gt;
+  hosts: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;192.168.10.20:5044&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+    
+  &lt;span class=&quot;c&quot;&gt;# Comment out this line if you are not using SSL on Logstash server&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;#ssl.certificate_authorities: [&quot;/etc/pki/root/ca.pem&quot;]&lt;/span&gt;
+  ssl.certificate_authorities: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/etc/ssl/logstash-forwarder.crt&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+...
+&lt;span class=&quot;nt&quot;&gt;--------------------------------------------------------------------------------&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;43-systemctl-명령어로-filebeat-서비스-관리&quot;&gt;4.3. systemctl 명령어로 Filebeat 서비스 관리&lt;/h4&gt;
+&lt;h5 id=&quot;431-filebeat-서비스-설정-반영&quot;&gt;4.3.1. Filebeat 서비스 설정 반영&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl daemon-reload
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;432-filebeat-서비스-시작&quot;&gt;4.3.2. Filebeat 서비스 시작&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl start filebeat.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;433-filebeat-서비스-중지&quot;&gt;4.3.3. Filebeat 서비스 중지&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl stop filebeat.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;434-filebeat-서비스-재시작&quot;&gt;4.3.4. Filebeat 서비스 재시작&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl restart filebeat.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;435-filebeat-서비스-설정-재적용&quot;&gt;4.3.5. Filebeat 서비스 설정 재적용&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl reload filebeat.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;436-filebeat-서비스-상태-조회&quot;&gt;4.3.6. Filebeat 서비스 상태 조회&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl status filebeat.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;437-filebeat-서비스-활성화부팅-시-자동-시작&quot;&gt;4.3.7. Filebeat 서비스 활성화(부팅 시 자동 시작)&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;filebeat.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;438-filebeat-서비스-비활성화&quot;&gt;4.3.8. Filebeat 서비스 비활성화&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl disable filebeat.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;439-filebeat-서비스-및-관련-프로세스-모두-중지&quot;&gt;4.3.9. Filebeat 서비스 및 관련 프로세스 모두 중지&lt;/h5&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl &lt;span class=&quot;nb&quot;&gt;kill &lt;/span&gt;filebeat.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;5-웹브라우저로-jenkins-접속&quot;&gt;5. 웹브라우저로 Jenkins 접속&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;http://[MY-IP]:5601&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
+&lt;p&gt;Ubuntu 환경에 패키지로 elk 설치를 완료했습니다. &lt;br /&gt;
+다음 포스트에서는 elk 사용 방법을 소개하겠습니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.elastic.co/kr/&quot; target=&quot;_blank&quot;&gt;https://www.elastic.co/kr/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ko.wikipedia.org/wiki/%EC%9D%BC%EB%9E%98%EC%8A%A4%ED%8B%B1%EC%84%9C%EC%B9%98&quot; target=&quot;_blank&quot;&gt;https://ko.wikipedia.org/wiki/일래스틱서치&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 24 Feb 2020 00:00:00 +0900</pubDate>
+        <link>https://lindarex.github.io/elastic-stack/ubuntu-elastic-stack-installation/</link>
+        <guid isPermaLink="true">https://lindarex.github.io/elastic-stack/ubuntu-elastic-stack-installation/</guid>
+        
+        <category>elastic stack</category>
+        
+        <category>elk stack</category>
+        
+        <category>elasticsearch</category>
+        
+        <category>logstash</category>
+        
+        <category>kibana</category>
+        
+        <category>filebeat</category>
+        
+        <category>ubuntu</category>
+        
+        
+        <category>elastic-stack</category>
+        
+      </item>
     
       <item>
         <title>우분투(Ubuntu) 환경에 패키지로 Azure CLI 설치하기</title>
@@ -274,7 +688,6 @@ To sign &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;, use a web browser to op
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;4-배포-확인&quot;&gt;4. 배포 확인&lt;/h3&gt;
-
 &lt;ul&gt;
   &lt;li&gt;설정 완료 후, &lt;a href=&quot;https://travis-ci.com/&quot; target=&quot;_blank&quot;&gt;travis 첫 페이지&lt;/a&gt;으로 이동합니다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -890,7 +1303,7 @@ Python 2.6.5 이상이 필요하며, pip을 사용하여 AWS CLI를 설치합니
 &lt;ul&gt;
   &lt;li&gt;VMware® Workstation 15 Pro (15.5.1 build-15018445)&lt;/li&gt;
   &lt;li&gt;Ubuntu 18.04.3 LTS (Bionic Beaver) Server (64-bit)&lt;/li&gt;
-  &lt;li&gt;aws-cli v1.16.261&lt;/li&gt;
+  &lt;li&gt;AWS cli v1.16.261&lt;/li&gt;
   &lt;li&gt;Python v2.7.17&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -1263,18 +1676,18 @@ macOS 서버의 경우 PostgreSQL이 기본 데이터베이스이며, MS Windows
 
 &lt;h2 id=&quot;요약summary&quot;&gt;요약(SUMMARY)&lt;/h2&gt;
 &lt;ol&gt;
-  &lt;li&gt;PostgreSQL Debian packages repository 설정&lt;/li&gt;
+  &lt;li&gt;PostgreSQL debian packages repository 설정&lt;/li&gt;
   &lt;li&gt;apt 명령어로 PostgreSQL 설치&lt;/li&gt;
   &lt;li&gt;PostgreSQL 설정&lt;/li&gt;
   &lt;li&gt;systemctl 명령어로 PostgreSQL 실행&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h2 id=&quot;내용contents&quot;&gt;내용(CONTENTS)&lt;/h2&gt;
-&lt;h3 id=&quot;1-postgresql-debian-packages-repository-추가&quot;&gt;1. PostgreSQL Debian packages repository 추가&lt;/h3&gt;
+&lt;h3 id=&quot;1-postgresql-debian-packages-repository-추가&quot;&gt;1. PostgreSQL debian packages repository 추가&lt;/h3&gt;
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;sh &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'echo &quot;deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main&quot; &amp;gt; /etc/apt/sources.list.d/pgdg.list'&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;2-postgresql-debian-packages-repository-key-추가&quot;&gt;2. PostgreSQL Debian packages repository key 추가&lt;/h3&gt;
+&lt;h3 id=&quot;2-postgresql-debian-packages-repository-key-추가&quot;&gt;2. PostgreSQL debian packages repository key 추가&lt;/h3&gt;
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;wget &lt;span class=&quot;nt&quot;&gt;-q&lt;/span&gt; https://www.postgresql.org/media/keys/ACCC4CF8.asc &lt;span class=&quot;nt&quot;&gt;-O&lt;/span&gt; - | &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-key add -
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -1288,12 +1701,12 @@ macOS 서버의 경우 PostgreSQL이 기본 데이터베이스이며, MS Windows
   &lt;p&gt;일반 사용자 계정으로 진행합니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h3 id=&quot;41-pgdata-디렉터리-생성&quot;&gt;4.1. PGDATA 디렉터리 생성&lt;/h3&gt;
+&lt;h4 id=&quot;41-pgdata-디렉터리-생성&quot;&gt;4.1. PGDATA 디렉터리 생성&lt;/h4&gt;
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;LINDAREX_WORKSPACE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;HOME&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;/workspace
 &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;LINDAREX_WORKSPACE&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;/pgsql/data
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;42-pgdata-디렉터리-경로-추가&quot;&gt;4.2. PGDATA 디렉터리 경로 추가&lt;/h3&gt;
+&lt;h4 id=&quot;42-pgdata-디렉터리-경로-추가&quot;&gt;4.2. PGDATA 디렉터리 경로 추가&lt;/h4&gt;
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;vi /etc/profile
 &lt;span class=&quot;nt&quot;&gt;--------------------------------------------------------------------------------&lt;/span&gt;
 &lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;LINDAREX_WORKSPACE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/home/ubuntu/workspace
@@ -1311,7 +1724,7 @@ macOS 서버의 경우 PostgreSQL이 기본 데이터베이스이며, MS Windows
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
 &lt;/blockquote&gt;
 
-&lt;h3 id=&quot;43-database-초기화&quot;&gt;4.3. Database 초기화&lt;/h3&gt;
+&lt;h4 id=&quot;43-database-초기화&quot;&gt;4.3. Database 초기화&lt;/h4&gt;
 &lt;ul&gt;
   &lt;li&gt;아래 명령어로 Database 초기화를 실행합니다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -1319,7 +1732,7 @@ macOS 서버의 경우 PostgreSQL이 기본 데이터베이스이며, MS Windows
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;/usr/lib/postgresql/11/bin/initdb
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;44-postgresql-설정-수정&quot;&gt;4.4. PostgreSQL 설정 수정&lt;/h3&gt;
+&lt;h4 id=&quot;44-postgresql-설정-수정&quot;&gt;4.4. PostgreSQL 설정 수정&lt;/h4&gt;
 &lt;ul&gt;
   &lt;li&gt;아래 명령어는 외부 접속이 가능하게 합니다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -1342,39 +1755,39 @@ host    all             all             0.0.0.0/0               password
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;5-systemctl-명령어로-postgresql-서비스-관리&quot;&gt;5. systemctl 명령어로 PostgreSQL 서비스 관리&lt;/h3&gt;
-&lt;h3 id=&quot;51-postgresql-서비스-설정-반영&quot;&gt;5.1. PostgreSQL 서비스 설정 반영&lt;/h3&gt;
+&lt;h4 id=&quot;51-postgresql-서비스-설정-반영&quot;&gt;5.1. PostgreSQL 서비스 설정 반영&lt;/h4&gt;
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl daemon-reload
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;52-postgresql-서비스-시작&quot;&gt;5.2. PostgreSQL 서비스 시작&lt;/h3&gt;
+&lt;h4 id=&quot;52-postgresql-서비스-시작&quot;&gt;5.2. PostgreSQL 서비스 시작&lt;/h4&gt;
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl start postgresql.service
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;53-postgresql-서비스-중지&quot;&gt;5.3. PostgreSQL 서비스 중지&lt;/h3&gt;
+&lt;h4 id=&quot;53-postgresql-서비스-중지&quot;&gt;5.3. PostgreSQL 서비스 중지&lt;/h4&gt;
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl stop postgresql.service
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;54-postgresql-서비스-재시작&quot;&gt;5.4. PostgreSQL 서비스 재시작&lt;/h3&gt;
+&lt;h4 id=&quot;54-postgresql-서비스-재시작&quot;&gt;5.4. PostgreSQL 서비스 재시작&lt;/h4&gt;
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl restart postgresql.service
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;55-postgresql-서비스-설정-재적용&quot;&gt;5.5. PostgreSQL 서비스 설정 재적용&lt;/h3&gt;
+&lt;h4 id=&quot;55-postgresql-서비스-설정-재적용&quot;&gt;5.5. PostgreSQL 서비스 설정 재적용&lt;/h4&gt;
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl reload postgresql.service
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;56-postgresql-서비스-상태-조회&quot;&gt;5.6. PostgreSQL 서비스 상태 조회&lt;/h3&gt;
+&lt;h4 id=&quot;56-postgresql-서비스-상태-조회&quot;&gt;5.6. PostgreSQL 서비스 상태 조회&lt;/h4&gt;
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl status postgresql.service
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;57-postgresql-서비스-활성화부팅-시-자동-시작&quot;&gt;5.7. PostgreSQL 서비스 활성화(부팅 시 자동 시작)&lt;/h3&gt;
+&lt;h4 id=&quot;57-postgresql-서비스-활성화부팅-시-자동-시작&quot;&gt;5.7. PostgreSQL 서비스 활성화(부팅 시 자동 시작)&lt;/h4&gt;
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;postgresql.service
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;58-postgresql-서비스-비활성화&quot;&gt;5.8. PostgreSQL 서비스 비활성화&lt;/h3&gt;
+&lt;h4 id=&quot;58-postgresql-서비스-비활성화&quot;&gt;5.8. PostgreSQL 서비스 비활성화&lt;/h4&gt;
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl disable postgresql.service
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;59-postgresql-서비스-및-관련-프로세스-모두-중지&quot;&gt;5.9. PostgreSQL 서비스 및 관련 프로세스 모두 중지&lt;/h3&gt;
+&lt;h4 id=&quot;59-postgresql-서비스-및-관련-프로세스-모두-중지&quot;&gt;5.9. PostgreSQL 서비스 및 관련 프로세스 모두 중지&lt;/h4&gt;
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl &lt;span class=&quot;nb&quot;&gt;kill &lt;/span&gt;postgresql.service
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -1577,13 +1990,13 @@ Jenkins는 모든 프로젝트의 빌드, 배포 및 자동화를 지원하며, 
 &lt;ul&gt;
   &lt;li&gt;VMware® Workstation 15 Pro (15.5.1 build-15018445)&lt;/li&gt;
   &lt;li&gt;Ubuntu 16.04.4 LTS (Xenial Xerus)&lt;/li&gt;
-  &lt;li&gt;JENKINS 2.121.1&lt;/li&gt;
+  &lt;li&gt;Jenkins 2.121.1&lt;/li&gt;
   &lt;li&gt;OpenJDK 1.8.0_171&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;요약summary&quot;&gt;요약(SUMMARY)&lt;/h2&gt;
 &lt;ol&gt;
-  &lt;li&gt;Jenkins Debian packages repository 설정&lt;/li&gt;
+  &lt;li&gt;Jenkins debian packages repository 설정&lt;/li&gt;
   &lt;li&gt;apt 명령어로 Jenkins 설치&lt;/li&gt;
   &lt;li&gt;(선택사항) Java 경로 설정 및 Jenkins의 기본 포트 변경&lt;/li&gt;
   &lt;li&gt;systemctl 명령어로 Jenkins 실행&lt;/li&gt;
@@ -1591,11 +2004,11 @@ Jenkins는 모든 프로젝트의 빌드, 배포 및 자동화를 지원하며, 
 &lt;/ol&gt;
 
 &lt;h2 id=&quot;내용contents&quot;&gt;내용(CONTENTS)&lt;/h2&gt;
-&lt;h3 id=&quot;1-jenkins-debian-packages-repository-key-추가&quot;&gt;1. Jenkins Debian packages repository key 추가&lt;/h3&gt;
+&lt;h3 id=&quot;1-jenkins-debian-packages-repository-key-추가&quot;&gt;1. Jenkins debian packages repository key 추가&lt;/h3&gt;
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;wget &lt;span class=&quot;nt&quot;&gt;-q&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-O&lt;/span&gt; - https://pkg.jenkins.io/debian/jenkins-ci.org.key | &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-key add -
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;2-jenkins-debian-packages-repository-추가&quot;&gt;2. Jenkins Debian packages repository 추가&lt;/h3&gt;
+&lt;h3 id=&quot;2-jenkins-debian-packages-repository-추가&quot;&gt;2. Jenkins debian packages repository 추가&lt;/h3&gt;
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;sh &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'echo deb https://pkg.jenkins.io/debian-stable binary/ &amp;gt; /etc/apt/sources.list.d/jenkins.list'&lt;/span&gt;  
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 

@@ -224,6 +224,14 @@ wcs_do();
 
             <li><a href="/categories/postgresql/" class="">POSTGRESQL</a></li>
           
+            
+            
+
+            
+            
+
+            <li><a href="/categories/elastic-stack/" class="">ELASTIC STACK</a></li>
+          
         </ul>
         
       </li>
@@ -406,18 +414,18 @@ macOS 서버의 경우 PostgreSQL이 기본 데이터베이스이며, MS Windows
 
 <h2 id="요약summary">요약(SUMMARY)</h2>
 <ol>
-  <li>PostgreSQL Debian packages repository 설정</li>
+  <li>PostgreSQL debian packages repository 설정</li>
   <li>apt 명령어로 PostgreSQL 설치</li>
   <li>PostgreSQL 설정</li>
   <li>systemctl 명령어로 PostgreSQL 실행</li>
 </ol>
 
 <h2 id="내용contents">내용(CONTENTS)</h2>
-<h3 id="1-postgresql-debian-packages-repository-추가">1. PostgreSQL Debian packages repository 추가</h3>
+<h3 id="1-postgresql-debian-packages-repository-추가">1. PostgreSQL debian packages repository 추가</h3>
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>sh <span class="nt">-c</span> <span class="s1">'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" &gt; /etc/apt/sources.list.d/pgdg.list'</span>
 </code></pre></div></div>
 
-<h3 id="2-postgresql-debian-packages-repository-key-추가">2. PostgreSQL Debian packages repository key 추가</h3>
+<h3 id="2-postgresql-debian-packages-repository-key-추가">2. PostgreSQL debian packages repository key 추가</h3>
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>wget <span class="nt">-q</span> https://www.postgresql.org/media/keys/ACCC4CF8.asc <span class="nt">-O</span> - | <span class="nb">sudo </span>apt-key add -
 </code></pre></div></div>
 
@@ -431,12 +439,12 @@ macOS 서버의 경우 PostgreSQL이 기본 데이터베이스이며, MS Windows
   <p>일반 사용자 계정으로 진행합니다.</p>
 </blockquote>
 
-<h3 id="41-pgdata-디렉터리-생성">4.1. PGDATA 디렉터리 생성</h3>
+<h4 id="41-pgdata-디렉터리-생성">4.1. PGDATA 디렉터리 생성</h4>
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">export </span><span class="nv">LINDAREX_WORKSPACE</span><span class="o">=</span><span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/workspace
 <span class="nv">$ </span><span class="nb">mkdir</span> <span class="nt">-p</span> <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/pgsql/data
 </code></pre></div></div>
 
-<h3 id="42-pgdata-디렉터리-경로-추가">4.2. PGDATA 디렉터리 경로 추가</h3>
+<h4 id="42-pgdata-디렉터리-경로-추가">4.2. PGDATA 디렉터리 경로 추가</h4>
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/profile
 <span class="nt">--------------------------------------------------------------------------------</span>
 <span class="nb">export </span><span class="nv">LINDAREX_WORKSPACE</span><span class="o">=</span>/home/ubuntu/workspace
@@ -454,7 +462,7 @@ macOS 서버의 경우 PostgreSQL이 기본 데이터베이스이며, MS Windows
 </code></pre></div>  </div>
 </blockquote>
 
-<h3 id="43-database-초기화">4.3. Database 초기화</h3>
+<h4 id="43-database-초기화">4.3. Database 초기화</h4>
 <ul>
   <li>아래 명령어로 Database 초기화를 실행합니다.</li>
 </ul>
@@ -462,7 +470,7 @@ macOS 서버의 경우 PostgreSQL이 기본 데이터베이스이며, MS Windows
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>/usr/lib/postgresql/11/bin/initdb
 </code></pre></div></div>
 
-<h3 id="44-postgresql-설정-수정">4.4. PostgreSQL 설정 수정</h3>
+<h4 id="44-postgresql-설정-수정">4.4. PostgreSQL 설정 수정</h4>
 <ul>
   <li>아래 명령어는 외부 접속이 가능하게 합니다.</li>
 </ul>
@@ -485,39 +493,39 @@ host    all             all             0.0.0.0/0               password
 </code></pre></div></div>
 
 <h3 id="5-systemctl-명령어로-postgresql-서비스-관리">5. systemctl 명령어로 PostgreSQL 서비스 관리</h3>
-<h3 id="51-postgresql-서비스-설정-반영">5.1. PostgreSQL 서비스 설정 반영</h3>
+<h4 id="51-postgresql-서비스-설정-반영">5.1. PostgreSQL 서비스 설정 반영</h4>
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl daemon-reload
 </code></pre></div></div>
 
-<h3 id="52-postgresql-서비스-시작">5.2. PostgreSQL 서비스 시작</h3>
+<h4 id="52-postgresql-서비스-시작">5.2. PostgreSQL 서비스 시작</h4>
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl start postgresql.service
 </code></pre></div></div>
 
-<h3 id="53-postgresql-서비스-중지">5.3. PostgreSQL 서비스 중지</h3>
+<h4 id="53-postgresql-서비스-중지">5.3. PostgreSQL 서비스 중지</h4>
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl stop postgresql.service
 </code></pre></div></div>
 
-<h3 id="54-postgresql-서비스-재시작">5.4. PostgreSQL 서비스 재시작</h3>
+<h4 id="54-postgresql-서비스-재시작">5.4. PostgreSQL 서비스 재시작</h4>
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl restart postgresql.service
 </code></pre></div></div>
 
-<h3 id="55-postgresql-서비스-설정-재적용">5.5. PostgreSQL 서비스 설정 재적용</h3>
+<h4 id="55-postgresql-서비스-설정-재적용">5.5. PostgreSQL 서비스 설정 재적용</h4>
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl reload postgresql.service
 </code></pre></div></div>
 
-<h3 id="56-postgresql-서비스-상태-조회">5.6. PostgreSQL 서비스 상태 조회</h3>
+<h4 id="56-postgresql-서비스-상태-조회">5.6. PostgreSQL 서비스 상태 조회</h4>
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl status postgresql.service
 </code></pre></div></div>
 
-<h3 id="57-postgresql-서비스-활성화부팅-시-자동-시작">5.7. PostgreSQL 서비스 활성화(부팅 시 자동 시작)</h3>
+<h4 id="57-postgresql-서비스-활성화부팅-시-자동-시작">5.7. PostgreSQL 서비스 활성화(부팅 시 자동 시작)</h4>
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl <span class="nb">enable </span>postgresql.service
 </code></pre></div></div>
 
-<h3 id="58-postgresql-서비스-비활성화">5.8. PostgreSQL 서비스 비활성화</h3>
+<h4 id="58-postgresql-서비스-비활성화">5.8. PostgreSQL 서비스 비활성화</h4>
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl disable postgresql.service
 </code></pre></div></div>
 
-<h3 id="59-postgresql-서비스-및-관련-프로세스-모두-중지">5.9. PostgreSQL 서비스 및 관련 프로세스 모두 중지</h3>
+<h4 id="59-postgresql-서비스-및-관련-프로세스-모두-중지">5.9. PostgreSQL 서비스 및 관련 프로세스 모두 중지</h4>
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl <span class="nb">kill </span>postgresql.service
 </code></pre></div></div>
 
@@ -650,6 +658,34 @@ host    all             all             0.0.0.0/0               password
     
     <h2 class="archive__item-title" itemprop="headline">
       
+        <a href="/elastic-stack/ubuntu-elastic-stack-installation/" rel="permalink">우분투(Ubuntu) 환경에 패키지로 Elastic Stack 설치하기
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Elastic Stack을 소개하기에 앞서 ELK Stack을 먼저 소개하겠습니다. 
+ELK Stack은 Elasticsearch, Logstash, Kibana의 연동으로 텍스트, 숫자, 위치 기반 정보, 정형 및 비정형 데이터 등 모든 유형의 데이터를 수집 및 변환하고 분석하여...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
         <a href="/azure/ubuntu-azure-cli-installation/" rel="permalink">우분투(Ubuntu) 환경에 패키지로 Azure CLI 설치하기
 </a>
       
@@ -714,35 +750,6 @@ host    all             all             0.0.0.0/0               password
     
     <p class="archive__item-excerpt" itemprop="description">Cloud Foundry BOSH는 소규모 및 대규모 클라우드 애플리케이션의 배포와 라이프 사이클 관리, release engineering을 통합하는 오픈소스 소프트웨어 프로젝트입니다. 
 BOSH는 수백 개의 가상머신(Virtual Machine, 이하 VM)에 애플리케이션을 프...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src=
-          
-            "/assets/images/LindaRex_LOGO.jpg"
-          
-          alt="">
-      </div>
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/aws/ubuntu-aws-cli-installation/" rel="permalink">우분투(Ubuntu) 환경에 AWS CLI 설치하기
-</a>
-      
-    </h2>
-    
-    <p class="archive__item-excerpt" itemprop="description">AWS CLI(명령줄 인터페이스, command line interface)는 AWS 서비스를 관리하는 통합 도구입니다. 
-Python 2.6.5 이상이 필요하며, pip을 사용하여 AWS CLI를 설치합니다. 
-이 포스트에서는 우분투(이하 Ubuntu) 환경에서 AWS를 사용하기...</p>
   </article>
 </div>
 

@@ -224,6 +224,14 @@ wcs_do();
 
             <li><a href="/categories/postgresql/" class="">POSTGRESQL</a></li>
           
+            
+            
+
+            
+            
+
+            <li><a href="/categories/elastic-stack/" class="">ELASTIC STACK</a></li>
+          
         </ul>
         
       </li>
@@ -418,13 +426,13 @@ Jenkins는 모든 프로젝트의 빌드, 배포 및 자동화를 지원하며, 
 <ul>
   <li>VMware® Workstation 15 Pro (15.5.1 build-15018445)</li>
   <li>Ubuntu 16.04.4 LTS (Xenial Xerus)</li>
-  <li>JENKINS 2.121.1</li>
+  <li>Jenkins 2.121.1</li>
   <li>OpenJDK 1.8.0_171</li>
 </ul>
 
 <h2 id="요약summary">요약(SUMMARY)</h2>
 <ol>
-  <li>Jenkins Debian packages repository 설정</li>
+  <li>Jenkins debian packages repository 설정</li>
   <li>apt 명령어로 Jenkins 설치</li>
   <li>(선택사항) Java 경로 설정 및 Jenkins의 기본 포트 변경</li>
   <li>systemctl 명령어로 Jenkins 실행</li>
@@ -432,11 +440,11 @@ Jenkins는 모든 프로젝트의 빌드, 배포 및 자동화를 지원하며, 
 </ol>
 
 <h2 id="내용contents">내용(CONTENTS)</h2>
-<h3 id="1-jenkins-debian-packages-repository-key-추가">1. Jenkins Debian packages repository key 추가</h3>
+<h3 id="1-jenkins-debian-packages-repository-key-추가">1. Jenkins debian packages repository key 추가</h3>
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>wget <span class="nt">-q</span> <span class="nt">-O</span> - https://pkg.jenkins.io/debian/jenkins-ci.org.key | <span class="nb">sudo </span>apt-key add -
 </code></pre></div></div>
 
-<h3 id="2-jenkins-debian-packages-repository-추가">2. Jenkins Debian packages repository 추가</h3>
+<h3 id="2-jenkins-debian-packages-repository-추가">2. Jenkins debian packages repository 추가</h3>
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>sh <span class="nt">-c</span> <span class="s1">'echo deb https://pkg.jenkins.io/debian-stable binary/ &gt; /etc/apt/sources.list.d/jenkins.list'</span>  
 </code></pre></div></div>
 
@@ -636,6 +644,34 @@ Jenkins 초기 설정은 <a href="https://lindarex.github.io/jenkins/jenkins-ini
     
     <h2 class="archive__item-title" itemprop="headline">
       
+        <a href="/elastic-stack/ubuntu-elastic-stack-installation/" rel="permalink">우분투(Ubuntu) 환경에 패키지로 Elastic Stack 설치하기
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Elastic Stack을 소개하기에 앞서 ELK Stack을 먼저 소개하겠습니다. 
+ELK Stack은 Elasticsearch, Logstash, Kibana의 연동으로 텍스트, 숫자, 위치 기반 정보, 정형 및 비정형 데이터 등 모든 유형의 데이터를 수집 및 변환하고 분석하여...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
         <a href="/azure/ubuntu-azure-cli-installation/" rel="permalink">우분투(Ubuntu) 환경에 패키지로 Azure CLI 설치하기
 </a>
       
@@ -700,35 +736,6 @@ Jenkins 초기 설정은 <a href="https://lindarex.github.io/jenkins/jenkins-ini
     
     <p class="archive__item-excerpt" itemprop="description">Cloud Foundry BOSH는 소규모 및 대규모 클라우드 애플리케이션의 배포와 라이프 사이클 관리, release engineering을 통합하는 오픈소스 소프트웨어 프로젝트입니다. 
 BOSH는 수백 개의 가상머신(Virtual Machine, 이하 VM)에 애플리케이션을 프...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src=
-          
-            "/assets/images/LindaRex_LOGO.jpg"
-          
-          alt="">
-      </div>
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/aws/ubuntu-aws-cli-installation/" rel="permalink">우분투(Ubuntu) 환경에 AWS CLI 설치하기
-</a>
-      
-    </h2>
-    
-    <p class="archive__item-excerpt" itemprop="description">AWS CLI(명령줄 인터페이스, command line interface)는 AWS 서비스를 관리하는 통합 도구입니다. 
-Python 2.6.5 이상이 필요하며, pip을 사용하여 AWS CLI를 설치합니다. 
-이 포스트에서는 우분투(이하 Ubuntu) 환경에서 AWS를 사용하기...</p>
   </article>
 </div>
 

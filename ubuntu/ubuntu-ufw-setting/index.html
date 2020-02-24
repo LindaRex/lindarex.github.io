@@ -605,8 +605,9 @@ COMMIT
 ...
 </code></pre></div></div>
 
-<h4 id="91-ufw-pingicmp-차단">9.1. ufw ping(icmp) 차단</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+<h4 id="92-ufw-pingicmp-차단">9.2. ufw ping(icmp) 차단</h4>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/ufw/before.rules
+...
 <span class="c"># ok icmp codes</span>
 <span class="nt">-A</span> ufw-before-input <span class="nt">-p</span> icmp <span class="nt">--icmp-type</span> destination-unreachable <span class="nt">-j</span> DROP
 <span class="nt">-A</span> ufw-before-input <span class="nt">-p</span> icmp <span class="nt">--icmp-type</span> source-quench <span class="nt">-j</span> DROP
@@ -615,6 +616,10 @@ COMMIT
 <span class="nt">-A</span> ufw-before-input <span class="nt">-p</span> icmp <span class="nt">--icmp-type</span> echo-request <span class="nt">-j</span> DROP
 ...
 </code></pre></div></div>
+
+<blockquote>
+  <p>‘ACCEPT’를 ‘DROP’으로 변경합니다.</p>
+</blockquote>
 
 <h2 id="마무리conclusion">마무리(CONCLUSION)</h2>
 <p>Ubuntu 환경에 ufw 설정을 완료했습니다. <br />

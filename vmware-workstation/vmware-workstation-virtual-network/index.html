@@ -16,8 +16,8 @@
 <meta property="og:title" content="VMware Workstation의 가상 네트워크(Virtual Network) 알아보기" />
 <meta name="author" content="LindaRex" />
 <meta property="og:locale" content="ko_KR" />
-<meta name="description" content="VMware Workstation은 가상 머신(VM, Virtual Machine)을 생성하고 가상 네트워크(Virtual Network)를 구성할 수 있습니다. 이 포스트에서는 VMware Workstation의 Virtual Network에 대해 소개합니다." />
-<meta property="og:description" content="VMware Workstation은 가상 머신(VM, Virtual Machine)을 생성하고 가상 네트워크(Virtual Network)를 구성할 수 있습니다. 이 포스트에서는 VMware Workstation의 Virtual Network에 대해 소개합니다." />
+<meta name="description" content="VMware Workstation은 가상 머신(Virtual Machine, 이하 VM)을 생성하고 가상 네트워크(Virtual Network)를 구성할 수 있습니다. 이 포스트에서는 VMware Workstation의 Virtual Network에 대해 소개합니다." />
+<meta property="og:description" content="VMware Workstation은 가상 머신(Virtual Machine, 이하 VM)을 생성하고 가상 네트워크(Virtual Network)를 구성할 수 있습니다. 이 포스트에서는 VMware Workstation의 Virtual Network에 대해 소개합니다." />
 <link rel="canonical" href="https://lindarex.github.io/vmware-workstation/vmware-workstation-virtual-network/" />
 <meta property="og:url" content="https://lindarex.github.io/vmware-workstation/vmware-workstation-virtual-network/" />
 <meta property="og:site_name" content="LindaRex" />
@@ -29,7 +29,7 @@
 <meta name="twitter:creator" content="@LindaRex" />
 <meta name="google-site-verification" content="t6VkmqsI15sIx3P1-gh3NYputZtjhDZOTkxhwDaa4Ik" />
 <script type="application/ld+json">
-{"description":"VMware Workstation은 가상 머신(VM, Virtual Machine)을 생성하고 가상 네트워크(Virtual Network)를 구성할 수 있습니다. 이 포스트에서는 VMware Workstation의 Virtual Network에 대해 소개합니다.","author":{"@type":"Person","name":"LindaRex"},"@type":"BlogPosting","url":"https://lindarex.github.io/vmware-workstation/vmware-workstation-virtual-network/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"LindaRex"},"headline":"VMware Workstation의 가상 네트워크(Virtual Network) 알아보기","dateModified":"2020-02-12T00:00:00+09:00","datePublished":"2020-02-12T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/vmware-workstation/vmware-workstation-virtual-network/"},"@context":"https://schema.org"}</script>
+{"description":"VMware Workstation은 가상 머신(Virtual Machine, 이하 VM)을 생성하고 가상 네트워크(Virtual Network)를 구성할 수 있습니다. 이 포스트에서는 VMware Workstation의 Virtual Network에 대해 소개합니다.","author":{"@type":"Person","name":"LindaRex"},"@type":"BlogPosting","url":"https://lindarex.github.io/vmware-workstation/vmware-workstation-virtual-network/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"LindaRex"},"headline":"VMware Workstation의 가상 네트워크(Virtual Network) 알아보기","dateModified":"2020-02-12T00:00:00+09:00","datePublished":"2020-02-12T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/vmware-workstation/vmware-workstation-virtual-network/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <!-- LINDAREX :: JEKYLL SEO TAG :: END -->
@@ -351,7 +351,7 @@ wcs_do();
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="VMware Workstation의 가상 네트워크(Virtual Network) 알아보기">
-    <meta itemprop="description" content="VMware Workstation은 가상 머신(VM, Virtual Machine)을 생성하고 가상 네트워크(Virtual Network)를 구성할 수 있습니다. 이 포스트에서는 VMware Workstation의 Virtual Network에 대해 소개합니다.">
+    <meta itemprop="description" content="VMware Workstation은 가상 머신(Virtual Machine, 이하 VM)을 생성하고 가상 네트워크(Virtual Network)를 구성할 수 있습니다. 이 포스트에서는 VMware Workstation의 Virtual Network에 대해 소개합니다.">
     <meta itemprop="datePublished" content="2020-02-12T00:00:00+09:00">
     
 
@@ -390,7 +390,7 @@ wcs_do();
           <!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: END -->
           </aside>
         
-        <p>VMware Workstation은 가상 머신(VM, Virtual Machine)을 생성하고 가상 네트워크(Virtual Network)를 구성할 수 있습니다. <br />
+        <p>VMware Workstation은 가상 머신(Virtual Machine, 이하 VM)을 생성하고 가상 네트워크(Virtual Network)를 구성할 수 있습니다. <br />
 이 포스트에서는 VMware Workstation의 Virtual Network에 대해 소개합니다.</p>
 
 <h2 id="선행조건prerequisite">선행조건(PREREQUISITE)</h2>
@@ -425,7 +425,7 @@ wcs_do();
 <p><img src="/assets/images/2020-02-12-vmware-workstation-virtual-network/lindarex_vmware-workstation-networking-bridged.png" alt="lindarex_vmware-workstation-networking-bridged" /></p>
 
 <blockquote>
-  <p>출처 :: <a href="https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-BAFA66C3-81F0-4FCA-84C4-D9F7D258A60A.html" target="_blank">https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-BAFA66C3-81F0-4FCA-84C4-D9F7D258A60A.html</a></p>
+  <p>출처 :: <a href="https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-BAFA66C3-81F0-4FCA-84C4-D9F7D258A60A.html" target="\_blank">https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-BAFA66C3-81F0-4FCA-84C4-D9F7D258A60A.html</a></p>
 </blockquote>
 
 <h3 id="2-nat-networking">2. NAT Networking</h3>
@@ -440,7 +440,7 @@ wcs_do();
 <p><img src="/assets/images/2020-02-12-vmware-workstation-virtual-network/lindarex_vmware-workstation-networking-nat.png" alt="lindarex_vmware-workstation-networking-nat" /></p>
 
 <blockquote>
-  <p>출처 :: <a href="https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-89311E3D-CCA9-4ECC-AF5C-C52BE6A89A95.html" target="_blank">https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-89311E3D-CCA9-4ECC-AF5C-C52BE6A89A95.html</a></p>
+  <p>출처 :: <a href="https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-89311E3D-CCA9-4ECC-AF5C-C52BE6A89A95.html" target="\_blank">https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-89311E3D-CCA9-4ECC-AF5C-C52BE6A89A95.html</a></p>
 </blockquote>
 
 <h3 id="3-host-only-networking">3. Host-Only Networking</h3>
@@ -453,7 +453,7 @@ wcs_do();
 <p><img src="/assets/images/2020-02-12-vmware-workstation-virtual-network/lindarex_vmware-workstation-networking-host-only.png" alt="lindarex_vmware-workstation-networking-host-only" /></p>
 
 <blockquote>
-  <p>출처 :: <a href="https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-93BDF7F1-D2E4-42CE-80EA-4E305337D2FC.html" target="_blank">https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-93BDF7F1-D2E4-42CE-80EA-4E305337D2FC.html</a></p>
+  <p>출처 :: <a href="https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-93BDF7F1-D2E4-42CE-80EA-4E305337D2FC.html" target="\_blank">https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-93BDF7F1-D2E4-42CE-80EA-4E305337D2FC.html</a></p>
 </blockquote>
 
 <h2 id="마무리conclusion">마무리(CONCLUSION)</h2>
@@ -462,7 +462,7 @@ wcs_do();
 
 <h2 id="참고references">참고(REFERENCES)</h2>
 <ul>
-  <li><a href="https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-D9B0A52D-38A2-45D7-A9EB-987ACE77F93C.html" target="_blank">https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-D9B0A52D-38A2-45D7-A9EB-987ACE77F93C.html</a></li>
+  <li><a href="https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-D9B0A52D-38A2-45D7-A9EB-987ACE77F93C.html" target="\_blank">https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-D9B0A52D-38A2-45D7-A9EB-987ACE77F93C.html</a></li>
 </ul>
 
 
@@ -628,8 +628,8 @@ ELK Stack은 Elasticsearch, Logstash, Kibana의 연동으로 텍스트, 숫자, 
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">Azure CLI(명령줄 인터페이스, command line interface, 이하 azure cli)는 Microsoft Azure(이하 azure)에 리소스를 만들고 관리할 수  도구입니다. 
-모든 azure 서비스에서 사용할 수 있으며, azure를 빠르게 사용할 수 있도록...</p>
+    <p class="archive__item-excerpt" itemprop="description">Azure CLI(command line interface, 명령줄 인터페이스, 이하 azure cli)는 Microsoft Azure(이하 azure)에 리소스를 만들고 관리할 수 도구입니다. 
+모든 azure 서비스에서 사용할 수 있으며, azure를 빠르게 사용할 수 있도록 ...</p>
   </article>
 </div>
 
@@ -656,7 +656,7 @@ ELK Stack은 Elasticsearch, Logstash, Kibana의 연동으로 텍스트, 숫자, 
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">이 포스트에서는 Travis CI(이하 travis)를 이용해 Jekyll 블로그(이하 jekyll)를 GitHub Pages(이하 github)에 자동 배포하는 방법을 소개합니다.
+    <p class="archive__item-excerpt" itemprop="description">이 포스트에서는 Travis CI(이하 travis)를 이용해 Jekyll 블로그(이하 jekyll)를 GitHub Pages에 자동 배포하는 방법을 소개합니다.
 
 </p>
   </article>

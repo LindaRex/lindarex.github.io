@@ -401,23 +401,23 @@ ELK Stack은 Elasticsearch, Logstash, Kibana의 연동으로 텍스트, 숫자, 
   <li>Ubuntu 환경에 Java가 설치되어 있어야 합니다.</li>
   <li>방화벽 설정이 필요합니다.
     <ul>
-      <li>TCP 9200 포트, TCP 5601 포트가 열려 있어야 합니다.</li>
+      <li>TCP 9200 포트, TCP 5601 포트가 개방되어 있어야 합니다.</li>
     </ul>
   </li>
 </ul>
 
 <blockquote>
-  <p>Java 설치 방법은 <a href="https://lindarex.github.io/ubuntu/ubuntu-openjdk-installation/" target="_blank">우분투(Ubuntu) 환경에 OpenJDK(Java) 설치하기</a> 포스트를 참고하시기 바랍니다.</p>
+  <p>Java 설치 방법은 <a href="https://lindarex.github.io/ubuntu/ubuntu-openjdk-installation/" target="\_blank">우분투(Ubuntu) 환경에 OpenJDK(Java) 설치하기</a> 포스트를 참고하시기 바랍니다.</p>
 </blockquote>
 
 <blockquote>
-  <p>방화벽 설정 방법은 <a href="https://lindarex.github.io/ubuntu/ubuntu-firewalld-installation/" target="_blank">우분투(Ubuntu) 환경에 방화벽(Firewalld) 설치 및 설정하기</a> 포스트를 참고하시기 바랍니다.</p>
+  <p>방화벽 설정 방법은 <a href="https://lindarex.github.io/ubuntu/ubuntu-firewalld-installation/" target="\_blank">우분투(Ubuntu) 환경에 방화벽(Firewalld) 설치 및 설정하기</a> 포스트를 참고하시기 바랍니다.</p>
 </blockquote>
 
 <h2 id="테스트-환경test-environment">테스트 환경(TEST ENVIRONMENT)</h2>
 <ul>
   <li>VMware® Workstation 15 Pro (15.5.1 build-15018445)</li>
-  <li>Ubuntu 16.04.6 LTS (Xenial Xerus)</li>
+  <li>Ubuntu 16.04.6 LTS (Xenial Xerus) Server (64-bit)</li>
   <li>Elasticsearch 7.2.0</li>
   <li>Logstash 7.2.0</li>
   <li>Kibana 7.2.0</li>
@@ -430,6 +430,7 @@ ELK Stack은 Elasticsearch, Logstash, Kibana의 연동으로 텍스트, 숫자, 
   <li>Elasticsearch 설치</li>
   <li>Logstash 설치</li>
   <li>Kibana 설치</li>
+  <li>Filebeat 설치</li>
   <li>웹브라우저로 Kibana 접속</li>
 </ol>
 
@@ -682,7 +683,7 @@ elasticsearch.hosts: <span class="o">[</span><span class="s2">"http://localhost:
 
 <h3 id="4-filebeat-설치">4. Filebeat 설치</h3>
 <ul>
-  <li>Filebeat는 경량 로그 수집기로, SSH 터미널의 사용이 불가능한 상황(로그를 생성하는 서버나 가상 시스템, 컨테이너가 수백, 수천 개에 이르는 경우)에 로그와 파일을 경량화된 방식으로 전달하고 중앙 집중화하여 작업을 보다 간편하게 만들어 주는 역할을 합니다.</li>
+  <li>Filebeat는 경량 로그 수집기로, SSH 터미널의 사용이 불가능한 상황(로그를 생성하는 서버나 가상 시스템, 컨테이너가 수백~수천 개에 이르는 경우)에 로그와 파일을 경량화된 방식으로 전달하고 중앙 집중화하여 작업을 보다 간편하게 만들어 주는 역할을 합니다.</li>
 </ul>
 
 <h4 id="41-apt-install-명령어로-filebeat-설치">4.1. apt install 명령어로 Filebeat 설치</h4>
@@ -775,8 +776,8 @@ output.logstash:
 
 <h2 id="참고references">참고(REFERENCES)</h2>
 <ul>
-  <li><a href="https://www.elastic.co/kr/" target="_blank">https://www.elastic.co/kr/</a></li>
-  <li><a href="https://ko.wikipedia.org/wiki/%EC%9D%BC%EB%9E%98%EC%8A%A4%ED%8B%B1%EC%84%9C%EC%B9%98" target="_blank">https://ko.wikipedia.org/wiki/일래스틱서치</a></li>
+  <li><a href="https://www.elastic.co/kr/" target="\_blank">https://www.elastic.co/kr/</a></li>
+  <li><a href="https://ko.wikipedia.org/wiki/%EC%9D%BC%EB%9E%98%EC%8A%A4%ED%8B%B1%EC%84%9C%EC%B9%98" target="\_blank">https://ko.wikipedia.org/wiki/일래스틱서치</a></li>
 </ul>
 
         
@@ -920,8 +921,8 @@ output.logstash:
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">Azure CLI(명령줄 인터페이스, command line interface, 이하 azure cli)는 Microsoft Azure(이하 azure)에 리소스를 만들고 관리할 수  도구입니다. 
-모든 azure 서비스에서 사용할 수 있으며, azure를 빠르게 사용할 수 있도록...</p>
+    <p class="archive__item-excerpt" itemprop="description">Azure CLI(command line interface, 명령줄 인터페이스, 이하 azure cli)는 Microsoft Azure(이하 azure)에 리소스를 만들고 관리할 수 도구입니다. 
+모든 azure 서비스에서 사용할 수 있으며, azure를 빠르게 사용할 수 있도록 ...</p>
   </article>
 </div>
 
@@ -948,7 +949,7 @@ output.logstash:
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">이 포스트에서는 Travis CI(이하 travis)를 이용해 Jekyll 블로그(이하 jekyll)를 GitHub Pages(이하 github)에 자동 배포하는 방법을 소개합니다.
+    <p class="archive__item-excerpt" itemprop="description">이 포스트에서는 Travis CI(이하 travis)를 이용해 Jekyll 블로그(이하 jekyll)를 GitHub Pages에 자동 배포하는 방법을 소개합니다.
 
 </p>
   </article>
@@ -1005,7 +1006,7 @@ BOSH는 수백 개의 가상머신(Virtual Machine, 이하 VM)에 애플리케�
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">AWS CLI(명령줄 인터페이스, command line interface)는 AWS 서비스를 관리하는 통합 도구입니다. 
+    <p class="archive__item-excerpt" itemprop="description">AWS CLI(command line interface, 명령줄 인터페이스)는 AWS 서비스를 관리하는 통합 도구입니다. 
 Python 2.6.5 이상이 필요하며, pip을 사용하여 AWS CLI를 설치합니다. 
 이 포스트에서는 우분투(이하 Ubuntu) 환경에서 AWS를 사용하기...</p>
   </article>

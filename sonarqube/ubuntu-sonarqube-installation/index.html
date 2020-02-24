@@ -398,10 +398,19 @@ SonarQube는 LGPL(Lesser GNU General Public License) 라이선스로 오픈소�
 <h2 id="선행조건prerequisite">선행조건(PREREQUISITE)</h2>
 <ul>
   <li>Ubuntu 환경에 PostgreSQL이 설치되어 있어야 합니다.</li>
+  <li>방화벽 설정이 필요합니다.
+    <ul>
+      <li>TCP 9000 포트가 개방되어 있어야 합니다.</li>
+    </ul>
+  </li>
 </ul>
 
 <blockquote>
-  <p>PostgreSQL 설치 방법은 <a href="https://lindarex.github.io/ubuntu/ubuntu-postgresql-installation/" target="_blank">우분투(Ubuntu) 환경에 PostgreSQL 설치하기</a> 포스트를 참고하시기 바랍니다.</p>
+  <p>PostgreSQL 설치 방법은 <a href="https://lindarex.github.io/postgresql/ubuntu-postgresql-installation/" target="\_blank">우분투(Ubuntu) 환경에 PostgreSQL 설치하기</a> 포스트를 참고하시기 바랍니다.</p>
+</blockquote>
+
+<blockquote>
+  <p>방화벽 설정 방법은 <a href="https://lindarex.github.io/ubuntu/ubuntu-firewalld-installation/" target="\_blank">우분투(Ubuntu) 환경에 방화벽(Firewalld) 설치 및 설정하기</a> 포스트를 참고하시기 바랍니다.</p>
 </blockquote>
 
 <h2 id="테스트-환경test-environment">테스트 환경(TEST ENVIRONMENT)</h2>
@@ -540,7 +549,7 @@ wrapper.java.command<span class="o">=</span>/home/rex/workspace/tool/java11/bin/
 </blockquote>
 
 <blockquote>
-  <p>SonarQube 설치 시 필요 요구사항에 대한 자세한 정보는 <a href="https://docs.sonarqube.org/latest/requirements/requirements/" target="_blank">https://docs.sonarqube.org/latest/requirements/requirements/</a>를 확인해 주시기 바랍니다.</p>
+  <p>SonarQube 설치 시 필요 요구사항에 대한 자세한 정보는 <a href="https://docs.sonarqube.org/latest/requirements/requirements/" target="\_blank">https://docs.sonarqube.org/latest/requirements/requirements/</a>를 확인해 주시기 바랍니다.</p>
 </blockquote>
 
 <blockquote>
@@ -577,9 +586,9 @@ wrapper.java.command<span class="o">=</span>/home/rex/workspace/tool/java11/bin/
 
 <h2 id="참고references">참고(REFERENCES)</h2>
 <ul>
-  <li><a href="https://www.sonarqube.org/" target="_blank">https://www.sonarqube.org/</a></li>
-  <li><a href="https://docs.sonarqube.org/latest/" target="_blank">https://docs.sonarqube.org/latest/</a></li>
-  <li><a href="http://www.sonarqube.org/downloads/" target="_blank">http://www.sonarqube.org/downloads/</a></li>
+  <li><a href="https://www.sonarqube.org/" target="\_blank">https://www.sonarqube.org/</a></li>
+  <li><a href="https://docs.sonarqube.org/latest/" target="\_blank">https://docs.sonarqube.org/latest/</a></li>
+  <li><a href="http://www.sonarqube.org/downloads/" target="\_blank">http://www.sonarqube.org/downloads/</a></li>
 </ul>
 
         
@@ -732,8 +741,8 @@ ELK Stack은 Elasticsearch, Logstash, Kibana의 연동으로 텍스트, 숫자, 
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">Azure CLI(명령줄 인터페이스, command line interface, 이하 azure cli)는 Microsoft Azure(이하 azure)에 리소스를 만들고 관리할 수  도구입니다. 
-모든 azure 서비스에서 사용할 수 있으며, azure를 빠르게 사용할 수 있도록...</p>
+    <p class="archive__item-excerpt" itemprop="description">Azure CLI(command line interface, 명령줄 인터페이스, 이하 azure cli)는 Microsoft Azure(이하 azure)에 리소스를 만들고 관리할 수 도구입니다. 
+모든 azure 서비스에서 사용할 수 있으며, azure를 빠르게 사용할 수 있도록 ...</p>
   </article>
 </div>
 
@@ -760,7 +769,7 @@ ELK Stack은 Elasticsearch, Logstash, Kibana의 연동으로 텍스트, 숫자, 
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">이 포스트에서는 Travis CI(이하 travis)를 이용해 Jekyll 블로그(이하 jekyll)를 GitHub Pages(이하 github)에 자동 배포하는 방법을 소개합니다.
+    <p class="archive__item-excerpt" itemprop="description">이 포스트에서는 Travis CI(이하 travis)를 이용해 Jekyll 블로그(이하 jekyll)를 GitHub Pages에 자동 배포하는 방법을 소개합니다.
 
 </p>
   </article>

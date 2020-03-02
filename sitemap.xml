@@ -69,6 +69,10 @@
 <lastmod>2020-02-24T00:00:00+09:00</lastmod>
 </url>
 <url>
+<loc>https://lindarex.github.io/cfar/cfar-introduction/</loc>
+<lastmod>2020-02-25T00:00:00+09:00</lastmod>
+</url>
+<url>
 <loc>https://lindarex.github.io/about/</loc>
 </url>
 <url>
@@ -229,6 +233,15 @@
 <loc>https://lindarex.github.io/tags/ufw/</loc>
 </url>
 <url>
+<loc>https://lindarex.github.io/tags/cloud-foundry/</loc>
+</url>
+<url>
+<loc>https://lindarex.github.io/tags/cfar/</loc>
+</url>
+<url>
+<loc>https://lindarex.github.io/tags/paas/</loc>
+</url>
+<url>
 <loc>https://lindarex.github.io/categories/ubuntu/</loc>
 </url>
 <url>
@@ -263,6 +276,9 @@
 </url>
 <url>
 <loc>https://lindarex.github.io/categories/elastic-stack/</loc>
+</url>
+<url>
+<loc>https://lindarex.github.io/categories/cfar/</loc>
 </url>
 <url>
 <loc>https://lindarex.github.io/page2/</loc>

@@ -116,7 +116,7 @@ Succeeded
 - CF CLI는 CFAR 명령어를 사용하기 위한 설치입니다.
 - CFAR은 BOSH로 배포하며, 다음 포스트에서 소개하겠습니다.
 
-> CFAR은 CFCR(cloud foundry container runtime)이 생기기 전까지 CF(cloud foundry)로 불렸었고, CFCR도 Cloud Foundry incubator project 초반에는 kubo로 불렸습니다.
+> CFAR은 CFCR(cloud foundry container runtime)이 생기기 전까지 CF(cloud foundry)로 불렸었고, CFCR도 Cloud Foundry Foundation incubating project 초반에는 kubo로 불렸습니다.
 
 > 최근 컨테이너 플랫폼(Container platform)의 성장과 함께 Cloud Foundry도 kubernetes를 이용한 container runtime을 제공하면서, application runtime인 CF를 CFAR로, container runtime인 kubo를 CFCR로 명칭을 변경했습니다.
 

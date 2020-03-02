@@ -26,8 +26,8 @@ sidebar:
     children:
       - title: "BOSH"
         url: /categories/bosh/
-  #     - title: "CFAR"
-  #       url: /categories/cfar/
+      - title: "CFAR"
+        url: /categories/cfar/
   - title: "CLOUD COMPUTING"
     children:
       - title: "AWS"

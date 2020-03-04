@@ -34,6 +34,7 @@ ufw는 기본적으로 Ubuntu 18.04 LTS 이후 버전에서 사용할 수 있습
 6. Service 명으로 ufw rule 허용 또는 차단
 7. IP 주소(이하 IP address)로 ufw rule 허용 또는 차단
 8. ufw ping(icmp) 허용 또는 차단
+9. (선택사항) apt 명령어로 ufw 삭제
 
 
 ## 내용(CONTENTS)
@@ -251,6 +252,20 @@ $ sudo vi /etc/ufw/before.rules
 ```
 
 > 'ACCEPT'를 'DROP'으로 변경합니다.
+
+### 10. (선택사항) apt 명령어로 ufw 삭제
+- 설정 파일을 유지하며 ufw를 삭제합니다.
+
+```shell
+$ sudo apt remove ufw
+$ sudo apt remove --auto-remove ufw
+```
+
+- 설정 파일과 함께 ufw를 삭제합니다. (단, 사용자 홈 디렉터리의 설정 파일은 유지됩니다.)
+```shell
+$ sudo apt purge ufw
+$ sudo apt purge --auto-remove ufw
+```
 
 
 ## 마무리(CONCLUSION)

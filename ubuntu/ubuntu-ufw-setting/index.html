@@ -428,6 +428,7 @@ ufw는 기본적으로 Ubuntu 18.04 LTS 이후 버전에서 사용할 수 있습
   <li>Service 명으로 ufw rule 허용 또는 차단</li>
   <li>IP 주소(이하 IP address)로 ufw rule 허용 또는 차단</li>
   <li>ufw ping(icmp) 허용 또는 차단</li>
+  <li>(선택사항) apt 명령어로 ufw 삭제</li>
 </ol>
 
 <h2 id="내용contents">내용(CONTENTS)</h2>
@@ -628,6 +629,23 @@ COMMIT
 <blockquote>
   <p>‘ACCEPT’를 ‘DROP’으로 변경합니다.</p>
 </blockquote>
+
+<h3 id="10-선택사항-apt-명령어로-ufw-삭제">10. (선택사항) apt 명령어로 ufw 삭제</h3>
+<ul>
+  <li>설정 파일을 유지하며 ufw를 삭제합니다.</li>
+</ul>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>apt remove ufw
+<span class="nv">$ </span><span class="nb">sudo </span>apt remove <span class="nt">--auto-remove</span> ufw
+</code></pre></div></div>
+
+<ul>
+  <li>설정 파일과 함께 ufw를 삭제합니다. (단, 사용자 홈 디렉터리의 설정 파일은 유지됩니다.)
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>apt purge ufw
+<span class="nv">$ </span><span class="nb">sudo </span>apt purge <span class="nt">--auto-remove</span> ufw
+</code></pre></div>    </div>
+  </li>
+</ul>
 
 <h2 id="마무리conclusion">마무리(CONCLUSION)</h2>
 <p>Ubuntu 환경에 ufw 설정을 완료했습니다. <br />

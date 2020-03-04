@@ -6,8 +6,8 @@
     <description>오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 LindaRex(린다렉스)의 블로그입니다</description>
     <link>https://lindarex.github.io/</link>
     <atom:link href="https://lindarex.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 02 Mar 2020 18:32:17 +0900</pubDate>
-    <lastBuildDate>Mon, 02 Mar 2020 18:32:17 +0900</lastBuildDate>
+    <pubDate>Wed, 04 Mar 2020 09:46:21 +0900</pubDate>
+    <lastBuildDate>Wed, 04 Mar 2020 09:46:21 +0900</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
@@ -381,6 +381,7 @@ ufw는 기본적으로 Ubuntu 18.04 LTS 이후 버전에서 사용할 수 있습
   &lt;li&gt;Service 명으로 ufw rule 허용 또는 차단&lt;/li&gt;
   &lt;li&gt;IP 주소(이하 IP address)로 ufw rule 허용 또는 차단&lt;/li&gt;
   &lt;li&gt;ufw ping(icmp) 허용 또는 차단&lt;/li&gt;
+  &lt;li&gt;(선택사항) apt 명령어로 ufw 삭제&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h2 id=&quot;내용contents&quot;&gt;내용(CONTENTS)&lt;/h2&gt;
@@ -581,6 +582,23 @@ COMMIT
 &lt;blockquote&gt;
   &lt;p&gt;‘ACCEPT’를 ‘DROP’으로 변경합니다.&lt;/p&gt;
 &lt;/blockquote&gt;
+
+&lt;h3 id=&quot;10-선택사항-apt-명령어로-ufw-삭제&quot;&gt;10. (선택사항) apt 명령어로 ufw 삭제&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;설정 파일을 유지하며 ufw를 삭제합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt remove ufw
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt remove &lt;span class=&quot;nt&quot;&gt;--auto-remove&lt;/span&gt; ufw
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;설정 파일과 함께 ufw를 삭제합니다. (단, 사용자 홈 디렉터리의 설정 파일은 유지됩니다.)
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt purge ufw
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt purge &lt;span class=&quot;nt&quot;&gt;--auto-remove&lt;/span&gt; ufw
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
 &lt;p&gt;Ubuntu 환경에 ufw 설정을 완료했습니다. &lt;br /&gt;

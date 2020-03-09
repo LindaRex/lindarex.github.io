@@ -449,27 +449,27 @@ linux 시스템(이하 system)에서 iptables는 /usr/sbin/iptables에 설치되
 </blockquote>
 
 <h4 id="11-iptables-확인">1.1. iptables 확인</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># which iptables</span>
-/sbin/iptables
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>which iptables
+<span class="go">/sbin/iptables
+</span></code></pre></div></div>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables -V</span>
-iptables v1.6.1
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="nt">-V</span>
+<span class="go">iptables v1.6.1
+</span></code></pre></div></div>
 
 <h4 id="12-iptables-초기화">1.2. iptables 초기화</h4>
 <ul>
   <li>모든 chain에 설정된 모든 rule을 제거합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables -F</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="nt">-F</span>
 </code></pre></div></div>
 
 <ul>
   <li>기본 chain을 제외한 나머지 모든 chain에 설정된 모든 rule을 제거합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables -X</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="nt">-X</span>
 </code></pre></div></div>
 
 <h3 id="2-iptables-조회">2. iptables 조회</h3>
@@ -481,16 +481,16 @@ iptables v1.6.1
   <li>기본 조회입니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables -L</span>
-chain INPUT <span class="o">(</span>policy ACCEPT<span class="o">)</span>
-target     prot opt <span class="nb">source               </span>destination
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="nt">-L</span>
+<span class="go">chain INPUT (policy ACCEPT)
+target     prot opt source               destination
 
-chain FORWARD <span class="o">(</span>policy ACCEPT<span class="o">)</span>
-target     prot opt <span class="nb">source               </span>destination
+chain FORWARD (policy ACCEPT)
+target     prot opt source               destination
 
-chain OUTPUT <span class="o">(</span>policy ACCEPT<span class="o">)</span>
-target     prot opt <span class="nb">source               </span>destination
-</code></pre></div></div>
+chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination
+</span></code></pre></div></div>
 
 <ul>
   <li>아래는 조회에 사용되는 ‘-L’ command의 옵션 목록입니다.
@@ -504,81 +504,81 @@ target     prot opt <span class="nb">source               </span>destination
   <li>상세 조회입니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables -L -v</span>
-Chain INPUT <span class="o">(</span>policy ACCEPT 10 packets, 676 bytes<span class="o">)</span>
- pkts bytes target     prot opt <span class="k">in     </span>out     <span class="nb">source               </span>destination
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="nt">-L</span> <span class="nt">-v</span>
+<span class="go">Chain INPUT (policy ACCEPT 10 packets, 676 bytes)
+ pkts bytes target     prot opt in     out     source               destination
 
-Chain FORWARD <span class="o">(</span>policy ACCEPT 0 packets, 0 bytes<span class="o">)</span>
- pkts bytes target     prot opt <span class="k">in     </span>out     <span class="nb">source               </span>destination
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
 
-Chain OUTPUT <span class="o">(</span>policy ACCEPT 5 packets, 812 bytes<span class="o">)</span>
- pkts bytes target     prot opt <span class="k">in     </span>out     <span class="nb">source               </span>destination
-</code></pre></div></div>
+Chain OUTPUT (policy ACCEPT 5 packets, 812 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+</span></code></pre></div></div>
 
 <ul>
   <li>IP address와 port number로 표시하여 조회합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables -L -n</span>
-Chain INPUT <span class="o">(</span>policy ACCEPT<span class="o">)</span>
-target     prot opt <span class="nb">source               </span>destination
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="nt">-L</span> <span class="nt">-n</span>
+<span class="go">Chain INPUT (policy ACCEPT)
+target     prot opt source               destination
 
-Chain FORWARD <span class="o">(</span>policy ACCEPT<span class="o">)</span>
-target     prot opt <span class="nb">source               </span>destination
+Chain FORWARD (policy ACCEPT)
+target     prot opt source               destination
 
-Chain OUTPUT <span class="o">(</span>policy ACCEPT<span class="o">)</span>
-target     prot opt <span class="nb">source               </span>destination
-</code></pre></div></div>
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination
+</span></code></pre></div></div>
 
 <ul>
   <li>정확한 값으로 확장하여 조회합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables -L -x</span>
-Chain INPUT <span class="o">(</span>policy ACCEPT<span class="o">)</span>
-target     prot opt <span class="nb">source               </span>destination
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="nt">-L</span> <span class="nt">-x</span>
+<span class="go">Chain INPUT (policy ACCEPT)
+target     prot opt source               destination
 
-Chain FORWARD <span class="o">(</span>policy ACCEPT<span class="o">)</span>
-target     prot opt <span class="nb">source               </span>destination
+Chain FORWARD (policy ACCEPT)
+target     prot opt source               destination
 
-Chain OUTPUT <span class="o">(</span>policy ACCEPT<span class="o">)</span>
-target     prot opt <span class="nb">source               </span>destination
-</code></pre></div></div>
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination
+</span></code></pre></div></div>
 
 <ul>
   <li>rule의 시작 부분에 숫자를 추가하여 조회합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables -L --line-numbers</span>
-Chain INPUT <span class="o">(</span>policy ACCEPT<span class="o">)</span>
-num  target     prot opt <span class="nb">source               </span>destination
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="nt">-L</span> <span class="nt">--line-numbers</span>
+<span class="go">Chain INPUT (policy ACCEPT)
+num  target     prot opt source               destination
 
-Chain FORWARD <span class="o">(</span>policy ACCEPT<span class="o">)</span>
-num  target     prot opt <span class="nb">source               </span>destination
+Chain FORWARD (policy ACCEPT)
+num  target     prot opt source               destination
 
-Chain OUTPUT <span class="o">(</span>policy ACCEPT<span class="o">)</span>
-num  target     prot opt <span class="nb">source               </span>destination
-</code></pre></div></div>
+Chain OUTPUT (policy ACCEPT)
+num  target     prot opt source               destination
+</span></code></pre></div></div>
 
 <ul>
   <li>전체 rule을 출력합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables -S</span>
-<span class="nt">-P</span> INPUT ACCEPT
-<span class="nt">-P</span> FORWARD ACCEPT
-<span class="nt">-P</span> OUTPUT ACCEPT
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="nt">-S</span>
+<span class="go">-P INPUT ACCEPT
+-P FORWARD ACCEPT
+-P OUTPUT ACCEPT
+</span></code></pre></div></div>
 
 <ul>
   <li>전체 rule을 상세하게 출력합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables -S -v</span>
-<span class="nt">-P</span> INPUT ACCEPT <span class="nt">-c</span> 117 8240
-<span class="nt">-P</span> FORWARD ACCEPT <span class="nt">-c</span> 0 0
-<span class="nt">-P</span> OUTPUT ACCEPT <span class="nt">-c</span> 103 13208
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="nt">-S</span> <span class="nt">-v</span>
+<span class="go">-P INPUT ACCEPT -c 117 8240
+-P FORWARD ACCEPT -c 0 0
+-P OUTPUT ACCEPT -c 103 13208
+</span></code></pre></div></div>
 
 <blockquote>
   <p>‘-L’과 ‘-S’ 옵션의 차이점은 설명으로는 조회와 출력이 차이지만, 산출 형식(output format)이 다릅니다. ‘-L’ 옵션은 reference, 즉 참조용이지만, ‘-S’ 옵션은 reusable output, 즉 재사용을 위한 출력입니다. ‘-S’ 옵션은 iptables-save 방식으로 생성되어 iptables-apply 및 iptables-restore에 다시 사용할 수 있습니다.</p>
@@ -708,21 +708,21 @@ num  target     prot opt <span class="nb">source               </span>destinatio
   <li>‘-A’ 또는 ‘–append’ command를 사용합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables [table] -A chain rule-specification</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="o">[</span>table] <span class="nt">-A</span> chain rule-specification
 </code></pre></div></div>
 
 <ul>
   <li>상세히 설명하면 아래와 같습니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables [-t TABLE-NAME] -A chain -m MATCH-NAME [match-options] -j TARGET-NAME [target-options]</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="o">[</span><span class="nt">-t</span> TABLE-NAME] <span class="nt">-A</span> chain <span class="nt">-m</span> MATCH-NAME <span class="o">[</span>match-options] <span class="nt">-j</span> TARGET-NAME <span class="o">[</span>target-options]
 </code></pre></div></div>
 
 <ul>
   <li>예제 :: INPUT chain의 localhost 접속 허용 rule을 추가합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables -A INPUT -i lo -j ACCEPT</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="nt">-A</span> INPUT <span class="nt">-i</span> lo <span class="nt">-j</span> ACCEPT
 </code></pre></div></div>
 
 <h4 id="42-rule-확인">4.2. rule 확인</h4>
@@ -730,21 +730,21 @@ num  target     prot opt <span class="nb">source               </span>destinatio
   <li>‘-C’ 또는 ‘–check’ command를 사용합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables [table] -C chain rule-specification</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="o">[</span>table] <span class="nt">-C</span> chain rule-specification
 </code></pre></div></div>
 
 <ul>
   <li>상세히 설명하면 아래와 같습니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables [-t TABLE-NAME] -C chain -m MATCH-NAME [match-options] -j TARGET-NAME [target-options]</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="o">[</span><span class="nt">-t</span> TABLE-NAME] <span class="nt">-C</span> chain <span class="nt">-m</span> MATCH-NAME <span class="o">[</span>match-options] <span class="nt">-j</span> TARGET-NAME <span class="o">[</span>target-options]
 </code></pre></div></div>
 
 <ul>
   <li>예제 :: INPUT chain의 tcp 8080 포트(이하 port) 접속 허용 rule을 확인합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables -C INPUT -p tcp --dport 8080 -j ACCEPT</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="nt">-C</span> INPUT <span class="nt">-p</span> tcp <span class="nt">--dport</span> 8080 <span class="nt">-j</span> ACCEPT
 </code></pre></div></div>
 
 <h4 id="43-rule-삭제">4.3. rule 삭제</h4>
@@ -752,21 +752,21 @@ num  target     prot opt <span class="nb">source               </span>destinatio
   <li>‘-D’ 또는 ‘–delete’ command를 사용합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables [table] -D chain rule-specification</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="o">[</span>table] <span class="nt">-D</span> chain rule-specification
 </code></pre></div></div>
 
 <ul>
   <li>상세히 설명하면 아래와 같습니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables [-t TABLE-NAME] -D chain -m MATCH-NAME [match-options] -j TARGET-NAME [target-options]</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="o">[</span><span class="nt">-t</span> TABLE-NAME] <span class="nt">-D</span> chain <span class="nt">-m</span> MATCH-NAME <span class="o">[</span>match-options] <span class="nt">-j</span> TARGET-NAME <span class="o">[</span>target-options]
 </code></pre></div></div>
 
 <ul>
   <li>예제 :: INPUT chain의 tcp 22 port 접속 차단 rule을 삭제합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables -D INPUT -p tcp -m tcp --dport 22 -j REJECT</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="nt">-D</span> INPUT <span class="nt">-p</span> tcp <span class="nt">-m</span> tcp <span class="nt">--dport</span> 22 <span class="nt">-j</span> REJECT
 </code></pre></div></div>
 
 <h4 id="44-rule-number로-rule-삭제">4.4. rule number로 rule 삭제</h4>
@@ -774,21 +774,21 @@ num  target     prot opt <span class="nb">source               </span>destinatio
   <li>‘-D’ 또는 ‘–delete’ command를 사용합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables [table] -D chain rule-number</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="o">[</span>table] <span class="nt">-D</span> chain rule-number
 </code></pre></div></div>
 
 <ul>
   <li>상세히 설명하면 아래와 같습니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables [-t TABLE-NAME] -D chain rule-number</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="o">[</span><span class="nt">-t</span> TABLE-NAME] <span class="nt">-D</span> chain rule-number
 </code></pre></div></div>
 
 <ul>
   <li>예제 :: FORWARD chain의 rule number 1번 rule을 삭제합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables -D FORWARD 1</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="nt">-D</span> FORWARD 1
 </code></pre></div></div>
 
 <h4 id="45-rule-삽입">4.5. rule 삽입</h4>
@@ -796,21 +796,21 @@ num  target     prot opt <span class="nb">source               </span>destinatio
   <li>‘-I’ 또는 ‘–insert’ command를 사용합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables [table] -I [rule-number] rule-specification</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="o">[</span>table] <span class="nt">-I</span> <span class="o">[</span>rule-number] rule-specification
 </code></pre></div></div>
 
 <ul>
   <li>상세히 설명하면 아래와 같습니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables [-t TABLE-NAME] -I chain [rule-number] -m MATCH-NAME [match-options] -j TARGET-NAME [target-options]</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="o">[</span><span class="nt">-t</span> TABLE-NAME] <span class="nt">-I</span> chain <span class="o">[</span>rule-number] <span class="nt">-m</span> MATCH-NAME <span class="o">[</span>match-options] <span class="nt">-j</span> TARGET-NAME <span class="o">[</span>target-options]
 </code></pre></div></div>
 
 <ul>
   <li>예제 :: INPUT chain의 rule number 1번에 udp 53 port 접속 차단 rule을 삽입합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables -I INPUT 1 -p udp --dport 53 -j DROP</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="nt">-I</span> INPUT 1 <span class="nt">-p</span> udp <span class="nt">--dport</span> 53 <span class="nt">-j</span> DROP
 </code></pre></div></div>
 
 <h4 id="46-rule-교체">4.6. rule 교체</h4>
@@ -818,21 +818,21 @@ num  target     prot opt <span class="nb">source               </span>destinatio
   <li>‘-R’ 또는 ‘–replace’ command를 사용합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables [table] -R rule-number rule-specification</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="o">[</span>table] <span class="nt">-R</span> rule-number rule-specification
 </code></pre></div></div>
 
 <ul>
   <li>상세히 설명하면 아래와 같습니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables [-t TABLE-NAME] -R chain rule-number -m MATCH-NAME [match-options] -j TARGET-NAME [target-options]</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="o">[</span><span class="nt">-t</span> TABLE-NAME] <span class="nt">-R</span> chain rule-number <span class="nt">-m</span> MATCH-NAME <span class="o">[</span>match-options] <span class="nt">-j</span> TARGET-NAME <span class="o">[</span>target-options]
 </code></pre></div></div>
 
 <ul>
   <li>예제 :: INPUT chain의 rule number 1번에 출발지 network ‘10.0.1.0/24’ 대역의 tcp 8080 port 접속 허용 rule을 교체합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables -R INPUT 1 -p tcp -s 10.0.1.0/24 --dport 8080 -j ACCEPT</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="nt">-R</span> INPUT 1 <span class="nt">-p</span> tcp <span class="nt">-s</span> 10.0.1.0/24 <span class="nt">--dport</span> 8080 <span class="nt">-j</span> ACCEPT
 </code></pre></div></div>
 
 <h4 id="47-rule-조회">4.7. rule 조회</h4>
@@ -840,28 +840,28 @@ num  target     prot opt <span class="nb">source               </span>destinatio
   <li>‘-L’ 또는 ‘–list’ command를 사용합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables [table] -L [chain [rule-number]] [options]</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="o">[</span>table] <span class="nt">-L</span> <span class="o">[</span>chain <span class="o">[</span>rule-number]] <span class="o">[</span>options]
 </code></pre></div></div>
 
 <ul>
   <li>상세히 설명하면 아래와 같습니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables [-t TABLE-NAME] -L [chain [rule-number]] [options]</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="o">[</span><span class="nt">-t</span> TABLE-NAME] <span class="nt">-L</span> <span class="o">[</span>chain <span class="o">[</span>rule-number]] <span class="o">[</span>options]
 </code></pre></div></div>
 
 <ul>
   <li>예제 :: 모든 rule을 service 이름으로 조회합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables -L</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="nt">-L</span>
 </code></pre></div></div>
 
 <ul>
   <li>예제 :: 모든 rule을 port number로 조회합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables -L -n</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="nt">-L</span> <span class="nt">-n</span>
 </code></pre></div></div>
 
 <h4 id="48-rule-모두-삭제">4.8. rule 모두 삭제</h4>
@@ -869,28 +869,28 @@ num  target     prot opt <span class="nb">source               </span>destinatio
   <li>‘-F’ 또는 ‘–flush’ command를 사용합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables [table] -F [chain [rule-number]] [options]</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="o">[</span>table] <span class="nt">-F</span> <span class="o">[</span>chain <span class="o">[</span>rule-number]] <span class="o">[</span>options]
 </code></pre></div></div>
 
 <ul>
   <li>상세히 설명하면 아래와 같습니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables [-t TABLE-NAME] -F [chain [rule-number]] [options]</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="o">[</span><span class="nt">-t</span> TABLE-NAME] <span class="nt">-F</span> <span class="o">[</span>chain <span class="o">[</span>rule-number]] <span class="o">[</span>options]
 </code></pre></div></div>
 
 <ul>
   <li>예제 :: 모든 chain의 rule을 삭제합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables -F</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="nt">-F</span>
 </code></pre></div></div>
 
 <ul>
   <li>예제 :: FORWARD chain의 모든 rule을 삭제합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables -F FORWARD</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="nt">-F</span> FORWARD
 </code></pre></div></div>
 
 <h4 id="49-rule-출력">4.9. rule 출력</h4>
@@ -898,21 +898,21 @@ num  target     prot opt <span class="nb">source               </span>destinatio
   <li>‘-S’ 또는 ‘–list-rules’ command를 사용합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables [table] -S [chain [rule-number]]</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="o">[</span>table] <span class="nt">-S</span> <span class="o">[</span>chain <span class="o">[</span>rule-number]]
 </code></pre></div></div>
 
 <ul>
   <li>상세히 설명하면 아래와 같습니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables [-t TABLE-NAME] -S [chain [rule-number]]</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="o">[</span><span class="nt">-t</span> TABLE-NAME] <span class="nt">-S</span> <span class="o">[</span>chain <span class="o">[</span>rule-number]]
 </code></pre></div></div>
 
 <ul>
   <li>예제 :: OUTPUT chain의 rule number 1번 rule을 출력합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables -S OUTPUT 1</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="nt">-S</span> OUTPUT 1
 </code></pre></div></div>
 
 <h4 id="410-사용자-정의-chain-생성">4.10. 사용자 정의 chain 생성</h4>
@@ -920,21 +920,21 @@ num  target     prot opt <span class="nb">source               </span>destinatio
   <li>‘-N’ 또는 ‘–new’ command를 사용합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables [table] -N chain</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="o">[</span>table] <span class="nt">-N</span> chain
 </code></pre></div></div>
 
 <ul>
   <li>상세히 설명하면 아래와 같습니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables [-t TABLE-NAME] -N chain</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="o">[</span><span class="nt">-t</span> TABLE-NAME] <span class="nt">-N</span> chain
 </code></pre></div></div>
 
 <ul>
   <li>예제 :: ‘lindarex-chain-income’이라는 이름의 사용자 정의 chain을 생성합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables -N lindarex-chain-income</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="nt">-N</span> lindarex-chain-income
 </code></pre></div></div>
 
 <h4 id="411-사용자-정의-chain-이름-변경">4.11. 사용자 정의 chain 이름 변경</h4>
@@ -942,21 +942,21 @@ num  target     prot opt <span class="nb">source               </span>destinatio
   <li>‘-E’ 또는 ‘–rename-chain’ command를 사용합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables [table] -E old-chain-name new-chain-name</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="o">[</span>table] <span class="nt">-E</span> old-chain-name new-chain-name
 </code></pre></div></div>
 
 <ul>
   <li>상세히 설명하면 아래와 같습니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables [-t TABLE-NAME] -E old-chain-name new-chain-name</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="o">[</span><span class="nt">-t</span> TABLE-NAME] <span class="nt">-E</span> old-chain-name new-chain-name
 </code></pre></div></div>
 
 <ul>
   <li>예제 :: 생성한 ‘lindarex-chain-income’이라는 이름의 사용자 정의 chain의 이름을 ‘lindarex-chain-income-new’로 변경합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables -E lindarex-chain-income lindarex-chain-income-new</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="nt">-E</span> lindarex-chain-income lindarex-chain-income-new
 </code></pre></div></div>
 
 <h4 id="412-사용자-정의-chain-삭제">4.12. 사용자 정의 chain 삭제</h4>
@@ -964,21 +964,21 @@ num  target     prot opt <span class="nb">source               </span>destinatio
   <li>‘-X’ 또는 ‘–delete-chain’ command를 사용합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables [table] -X [chain]</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="o">[</span>table] <span class="nt">-X</span> <span class="o">[</span>chain]
 </code></pre></div></div>
 
 <ul>
   <li>상세히 설명하면 아래와 같습니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables [-t TABLE-NAME] -X [chain]</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="o">[</span><span class="nt">-t</span> TABLE-NAME] <span class="nt">-X</span> <span class="o">[</span>chain]
 </code></pre></div></div>
 
 <ul>
   <li>예제 :: 생성한 ‘lindarex-chain-income-new’라는 이름의 사용자 정의 chain을 삭제합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables -X lindarex-chain-income-new</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="nt">-X</span> lindarex-chain-income-new
 </code></pre></div></div>
 
 <h4 id="413-built-in-chain의-policy-target-설정">4.13. built-in chain의 policy target 설정</h4>
@@ -986,21 +986,21 @@ num  target     prot opt <span class="nb">source               </span>destinatio
   <li>‘-P’ 또는 ‘–policy’ command를 사용합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables [table] -P chain target</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="o">[</span>table] <span class="nt">-P</span> chain target
 </code></pre></div></div>
 
 <ul>
   <li>상세히 설명하면 아래와 같습니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables [-t TABLE-NAME] -P chain -j TARGET-NAME [target-options]</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="o">[</span><span class="nt">-t</span> TABLE-NAME] <span class="nt">-P</span> chain <span class="nt">-j</span> TARGET-NAME <span class="o">[</span>target-options]
 </code></pre></div></div>
 
 <ul>
   <li>예제 :: OUTPUT chain의 policy를 DROP으로 설정합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables -P FORWARD DROP</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="nt">-P</span> FORWARD DROP
 </code></pre></div></div>
 
 <h4 id="414-packet과-byte-counters를-0으로-설정">4.14. packet과 byte counters를 0으로 설정</h4>
@@ -1008,21 +1008,21 @@ num  target     prot opt <span class="nb">source               </span>destinatio
   <li>‘-Z’ 또는 ‘–zero’ command를 사용합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables [table] -Z [chain [rule-number]] [options]</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="o">[</span>table] <span class="nt">-Z</span> <span class="o">[</span>chain <span class="o">[</span>rule-number]] <span class="o">[</span>options]
 </code></pre></div></div>
 
 <ul>
   <li>상세히 설명하면 아래와 같습니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables [-t TABLE-NAME] -Z [chain [rule-number]] [options]</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="o">[</span><span class="nt">-t</span> TABLE-NAME] <span class="nt">-Z</span> <span class="o">[</span>chain <span class="o">[</span>rule-number]] <span class="o">[</span>options]
 </code></pre></div></div>
 
 <ul>
   <li>예제 :: FORWARD chain의 모든 rule의 counters를 0으로 설정합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># iptables -Z FORWARD</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>iptables <span class="nt">-Z</span> FORWARD
 </code></pre></div></div>
 
 <h2 id="마무리conclusion">마무리(CONCLUSION)</h2>

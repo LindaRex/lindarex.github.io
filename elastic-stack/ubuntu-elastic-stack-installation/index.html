@@ -449,74 +449,74 @@ ELK Stack은 Elasticsearch, Logstash, Kibana의 연동으로 텍스트, 숫자, 
 </ul>
 
 <h4 id="11-elasticsearch-debian-packages-repository-추가">1.1. Elasticsearch debian packages repository 추가</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">echo</span> <span class="s2">"deb https://artifacts.elastic.co/packages/7.x/apt stable main"</span> | <span class="nb">sudo tee</span> <span class="nt">-a</span> /etc/apt/sources.list.d/elastic-7.x.list
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">echo</span> <span class="s2">"deb https://artifacts.elastic.co/packages/7.x/apt stable main"</span> | <span class="nb">sudo tee</span> <span class="nt">-a</span> /etc/apt/sources.list.d/elastic-7.x.list
 </code></pre></div></div>
 
 <h4 id="12-elasticsearch-debian-packages-repository-key-추가">1.2. Elasticsearch debian packages repository key 추가</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>wget <span class="nt">-qO</span> - https://artifacts.elastic.co/GPG-KEY-elasticsearch | <span class="nb">sudo </span>apt-key add -
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>wget <span class="nt">-qO</span> - https://artifacts.elastic.co/GPG-KEY-elasticsearch | <span class="nb">sudo </span>apt-key add -
 </code></pre></div></div>
 
 <h4 id="13-apt-install-명령어로-elasticsearch-설치">1.3. apt install 명령어로 Elasticsearch 설치</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>apt update <span class="nt">-y</span> <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>apt <span class="nb">install </span>elasticsearch <span class="nt">-y</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt update <span class="nt">-y</span> <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>apt <span class="nb">install </span>elasticsearch <span class="nt">-y</span>
 </code></pre></div></div>
 
 <h4 id="14-systemctl-명령어로-elasticsearch-서비스-관리">1.4. systemctl 명령어로 Elasticsearch 서비스 관리</h4>
 <h5 id="141-elasticsearch-서비스-설정-반영">1.4.1. Elasticsearch 서비스 설정 반영</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl daemon-reload
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl daemon-reload
 </code></pre></div></div>
 
 <h5 id="142-elasticsearch-서비스-시작">1.4.2. Elasticsearch 서비스 시작</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl start elasticsearch.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl start elasticsearch.service
 </code></pre></div></div>
 
 <h5 id="143-elasticsearch-서비스-중지">1.4.3. Elasticsearch 서비스 중지</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl stop elasticsearch.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl stop elasticsearch.service
 </code></pre></div></div>
 
 <h5 id="144-elasticsearch-서비스-재시작">1.4.4. Elasticsearch 서비스 재시작</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl restart elasticsearch.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl restart elasticsearch.service
 </code></pre></div></div>
 
 <h5 id="145-elasticsearch-서비스-설정-재적용">1.4.5. Elasticsearch 서비스 설정 재적용</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl reload elasticsearch.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl reload elasticsearch.service
 </code></pre></div></div>
 
 <h5 id="146-elasticsearch-서비스-상태-조회">1.4.6. Elasticsearch 서비스 상태 조회</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl status elasticsearch.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl status elasticsearch.service
 </code></pre></div></div>
 
 <h5 id="147-elasticsearch-서비스-활성화부팅-시-자동-시작">1.4.7. Elasticsearch 서비스 활성화(부팅 시 자동 시작)</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl <span class="nb">enable </span>elasticsearch.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl <span class="nb">enable </span>elasticsearch.service
 </code></pre></div></div>
 
 <h5 id="148-elasticsearch-서비스-비활성화">1.4.8. Elasticsearch 서비스 비활성화</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl disable elasticsearch.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl disable elasticsearch.service
 </code></pre></div></div>
 
 <h5 id="149-elasticsearch-서비스-및-관련-프로세스-모두-중지">1.4.9. Elasticsearch 서비스 및 관련 프로세스 모두 중지</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl <span class="nb">kill </span>elasticsearch.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl <span class="nb">kill </span>elasticsearch.service
 </code></pre></div></div>
 
 <h4 id="15-curl-명령어로-elasticsearch-서비스-확인">1.5. curl 명령어로 Elasticsearch 서비스 확인</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">-X</span> GET http://localhost:9200
-<span class="o">{</span>
-  <span class="s2">"name"</span> : <span class="s2">"lindarex-elk"</span>,
-  <span class="s2">"cluster_name"</span> : <span class="s2">"elasticsearch"</span>,
-  <span class="s2">"cluster_uuid"</span> : <span class="s2">"RXW_zgPsS9mWiB5CDi2aCQ"</span>,
-  <span class="s2">"version"</span> : <span class="o">{</span>
-    <span class="s2">"number"</span> : <span class="s2">"7.2.0"</span>,
-    <span class="s2">"build_flavor"</span> : <span class="s2">"default"</span>,
-    <span class="s2">"build_type"</span> : <span class="s2">"deb"</span>,
-    <span class="s2">"build_hash"</span> : <span class="s2">"508c38a"</span>,
-    <span class="s2">"build_date"</span> : <span class="s2">"2020-02-20T15:54:18.811730Z"</span>,
-    <span class="s2">"build_snapshot"</span> : <span class="nb">false</span>,
-    <span class="s2">"lucene_version"</span> : <span class="s2">"8.0.0"</span>,
-    <span class="s2">"minimum_wire_compatibility_version"</span> : <span class="s2">"6.8.0"</span>,
-    <span class="s2">"minimum_index_compatibility_version"</span> : <span class="s2">"6.0.0-beta1"</span>
-  <span class="o">}</span>,
-  <span class="s2">"tagline"</span> : <span class="s2">"You Know, for Search"</span>
-<span class="o">}</span>
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl <span class="nt">-X</span> GET http://localhost:9200
+<span class="go">{
+  "name" : "lindarex-elk",
+  "cluster_name" : "elasticsearch",
+  "cluster_uuid" : "RXW_zgPsS9mWiB5CDi2aCQ",
+  "version" : {
+    "number" : "7.2.0",
+    "build_flavor" : "default",
+    "build_type" : "deb",
+    "build_hash" : "508c38a",
+    "build_date" : "2020-02-20T15:54:18.811730Z",
+    "build_snapshot" : false,
+    "lucene_version" : "8.0.0",
+    "minimum_wire_compatibility_version" : "6.8.0",
+    "minimum_index_compatibility_version" : "6.0.0-beta1"
+  },
+  "tagline" : "You Know, for Search"
+}
+</span></code></pre></div></div>
 
 <h3 id="2-logstash-설치">2. Logstash 설치</h3>
 <ul>
@@ -525,13 +525,15 @@ ELK Stack은 Elasticsearch, Logstash, Kibana의 연동으로 텍스트, 숫자, 
 
 <h4 id="21-선택사항-ssl-certificate-생성">2.1. (선택사항) SSL certificate 생성</h4>
 <h5 id="211-hostname-or-fqdn-설정">2.1.1. Hostname or FQDN 설정</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> /etc/ssl/
-<span class="nv">$ </span><span class="nb">sudo </span>openssl req <span class="nt">-x509</span> <span class="nt">-nodes</span> <span class="nt">-newkey</span> rsa:2048 <span class="nt">-days</span> 365 <span class="nt">-keyout</span> logstash-forwarder.key <span class="nt">-out</span> logstash-forwarder.crt <span class="nt">-subj</span> /CN<span class="o">=</span>server.lindarex.local
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cd</span> /etc/ssl/
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>openssl req <span class="nt">-x509</span> <span class="nt">-nodes</span> <span class="nt">-newkey</span> rsa:2048 <span class="nt">-days</span> 365 <span class="nt">-keyout</span> logstash-forwarder.key <span class="nt">-out</span> logstash-forwarder.crt <span class="nt">-subj</span> /CN<span class="o">=</span>server.lindarex.local
 </code></pre></div></div>
 
 <h5 id="212-ip-address-설정">2.1.2. IP Address 설정</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/ssl/openssl.cnf
-<span class="nt">--------------------------------------------------------------------------------</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>vi /etc/ssl/openssl.cnf
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">--------------------------------------------------------------------------------</span>
 ...
 <span class="o">[</span> v3_ca <span class="o">]</span>
 subjectAltName <span class="o">=</span> IP:192.168.10.20
@@ -539,23 +541,25 @@ subjectAltName <span class="o">=</span> IP:192.168.10.20
 <span class="nt">--------------------------------------------------------------------------------</span>
 </code></pre></div></div>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> /etc/ssl/
-<span class="nv">$ </span><span class="nb">sudo </span>openssl req <span class="nt">-x509</span> <span class="nt">-days</span> 365 <span class="nt">-batch</span> <span class="nt">-nodes</span> <span class="nt">-newkey</span> rsa:2048 <span class="nt">-keyout</span> logstash-forwarder.key <span class="nt">-out</span> logstash-forwarder.crt
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cd</span> /etc/ssl/
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>openssl req <span class="nt">-x509</span> <span class="nt">-days</span> 365 <span class="nt">-batch</span> <span class="nt">-nodes</span> <span class="nt">-newkey</span> rsa:2048 <span class="nt">-keyout</span> logstash-forwarder.key <span class="nt">-out</span> logstash-forwarder.crt
 </code></pre></div></div>
 
 <h5 id="213-ssl-변환">2.1.3. SSL 변환</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> /etc/ssl/
-<span class="nv">$ </span><span class="nb">sudo </span>openssl pkcs8 <span class="nt">-in</span> logstash-forwarder.key  <span class="nt">-topk8</span> <span class="nt">-nocrypt</span> <span class="nt">-out</span> logstash-forwarder.key.pem
-<span class="nv">$ </span><span class="nb">sudo chmod </span>644 /etc/ssl/logstash-forwarder.key.pem
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cd</span> /etc/ssl/
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>openssl pkcs8 <span class="nt">-in</span> logstash-forwarder.key  <span class="nt">-topk8</span> <span class="nt">-nocrypt</span> <span class="nt">-out</span> logstash-forwarder.key.pem
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo chmod </span>644 /etc/ssl/logstash-forwarder.key.pem
 </code></pre></div></div>
 
 <h4 id="22-apt-install-명령어로-logstash-설치">2.2. apt install 명령어로 Logstash 설치</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>apt <span class="nb">install </span>logstash <span class="nt">-y</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt <span class="nb">install </span>logstash <span class="nt">-y</span>
 </code></pre></div></div>
 
 <h4 id="23-logstash-구성">2.3. Logstash 구성</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/logstash/conf.d/logstash.conf
-<span class="nt">--------------------------------------------------------------------------------</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>vi /etc/logstash/conf.d/logstash.conf
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">--------------------------------------------------------------------------------</span>
 input <span class="o">{</span>
  beats <span class="o">{</span>
    port <span class="o">=&gt;</span> 5044
@@ -596,39 +600,39 @@ stdout <span class="o">{</span>
 
 <h4 id="24-systemctl-명령어로-logstash-서비스-관리">2.4. systemctl 명령어로 Logstash 서비스 관리</h4>
 <h5 id="241-logstash-서비스-설정-반영">2.4.1. Logstash 서비스 설정 반영</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl daemon-reload
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl daemon-reload
 </code></pre></div></div>
 
 <h5 id="242-logstash-서비스-시작">2.4.2. Logstash 서비스 시작</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl start logstash.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl start logstash.service
 </code></pre></div></div>
 
 <h5 id="243-logstash-서비스-중지">2.4.3. Logstash 서비스 중지</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl stop logstash.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl stop logstash.service
 </code></pre></div></div>
 
 <h5 id="244-logstash-서비스-재시작">2.4.4. Logstash 서비스 재시작</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl restart logstash.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl restart logstash.service
 </code></pre></div></div>
 
 <h5 id="245-logstash-서비스-설정-재적용">2.4.5. Logstash 서비스 설정 재적용</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl reload logstash.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl reload logstash.service
 </code></pre></div></div>
 
 <h5 id="246-logstash-서비스-상태-조회">2.4.6. Logstash 서비스 상태 조회</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl status logstash.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl status logstash.service
 </code></pre></div></div>
 
 <h5 id="247-logstash-서비스-활성화부팅-시-자동-시작">2.4.7. Logstash 서비스 활성화(부팅 시 자동 시작)</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl <span class="nb">enable </span>logstash.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl <span class="nb">enable </span>logstash.service
 </code></pre></div></div>
 
 <h5 id="248-logstash-서비스-비활성화">2.4.8. Logstash 서비스 비활성화</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl disable logstash.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl disable logstash.service
 </code></pre></div></div>
 
 <h5 id="249-logstash-서비스-및-관련-프로세스-모두-중지">2.4.9. Logstash 서비스 및 관련 프로세스 모두 중지</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl <span class="nb">kill </span>logstash.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl <span class="nb">kill </span>logstash.service
 </code></pre></div></div>
 
 <h3 id="3-kibana-설치">3. Kibana 설치</h3>
@@ -637,12 +641,14 @@ stdout <span class="o">{</span>
 </ul>
 
 <h4 id="31-apt-install-명령어로-kibana-설치">3.1. apt install 명령어로 Kibana 설치</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>apt <span class="nb">install </span>kibana <span class="nt">-y</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt <span class="nb">install </span>kibana <span class="nt">-y</span>
 </code></pre></div></div>
 
 <h4 id="32-kibana-구성">3.2. Kibana 구성</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/kibana/kibana.yml
-<span class="nt">--------------------------------------------------------------------------------</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>vi /etc/kibana/kibana.yml
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">--------------------------------------------------------------------------------</span>
 ...
 <span class="c">#server.host: "localhost"</span>
 server.host: <span class="s2">"192.168.10.20"</span>
@@ -654,39 +660,39 @@ elasticsearch.hosts: <span class="o">[</span><span class="s2">"http://localhost:
 
 <h4 id="33-systemctl-명령어로-kibana-서비스-관리">3.3. systemctl 명령어로 Kibana 서비스 관리</h4>
 <h5 id="331-kibana-서비스-설정-반영">3.3.1. Kibana 서비스 설정 반영</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl daemon-reload
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl daemon-reload
 </code></pre></div></div>
 
 <h5 id="332-kibana-서비스-시작">3.3.2. Kibana 서비스 시작</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl start kibana.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl start kibana.service
 </code></pre></div></div>
 
 <h5 id="333-kibana-서비스-중지">3.3.3. Kibana 서비스 중지</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl stop kibana.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl stop kibana.service
 </code></pre></div></div>
 
 <h5 id="334-kibana-서비스-재시작">3.3.4. Kibana 서비스 재시작</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl restart kibana.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl restart kibana.service
 </code></pre></div></div>
 
 <h5 id="335-kibana-서비스-설정-재적용">3.3.5. Kibana 서비스 설정 재적용</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl reload kibana.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl reload kibana.service
 </code></pre></div></div>
 
 <h5 id="336-kibana-서비스-상태-조회">3.3.6. Kibana 서비스 상태 조회</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl status kibana.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl status kibana.service
 </code></pre></div></div>
 
 <h5 id="337-kibana-서비스-활성화부팅-시-자동-시작">3.3.7. Kibana 서비스 활성화(부팅 시 자동 시작)</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl <span class="nb">enable </span>kibana.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl <span class="nb">enable </span>kibana.service
 </code></pre></div></div>
 
 <h5 id="338-kibana-서비스-비활성화">3.3.8. Kibana 서비스 비활성화</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl disable kibana.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl disable kibana.service
 </code></pre></div></div>
 
 <h5 id="339-kibana-서비스-및-관련-프로세스-모두-중지">3.3.9. Kibana 서비스 및 관련 프로세스 모두 중지</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl <span class="nb">kill </span>kibana.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl <span class="nb">kill </span>kibana.service
 </code></pre></div></div>
 
 <h3 id="4-filebeat-설치">4. Filebeat 설치</h3>
@@ -695,12 +701,14 @@ elasticsearch.hosts: <span class="o">[</span><span class="s2">"http://localhost:
 </ul>
 
 <h4 id="41-apt-install-명령어로-filebeat-설치">4.1. apt install 명령어로 Filebeat 설치</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>apt <span class="nb">install </span>filebeat <span class="nt">-y</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt <span class="nb">install </span>filebeat <span class="nt">-y</span>
 </code></pre></div></div>
 
 <h4 id="42-filebeat-구성">4.2. Filebeat 구성</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/filebeat/filebeat.yml
-<span class="nt">--------------------------------------------------------------------------------</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>vi /etc/filebeat/filebeat.yml
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">--------------------------------------------------------------------------------</span>
 ...
 - <span class="nb">type</span>: log
 
@@ -738,39 +746,39 @@ output.logstash:
 
 <h4 id="43-systemctl-명령어로-filebeat-서비스-관리">4.3. systemctl 명령어로 Filebeat 서비스 관리</h4>
 <h5 id="431-filebeat-서비스-설정-반영">4.3.1. Filebeat 서비스 설정 반영</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl daemon-reload
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl daemon-reload
 </code></pre></div></div>
 
 <h5 id="432-filebeat-서비스-시작">4.3.2. Filebeat 서비스 시작</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl start filebeat.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl start filebeat.service
 </code></pre></div></div>
 
 <h5 id="433-filebeat-서비스-중지">4.3.3. Filebeat 서비스 중지</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl stop filebeat.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl stop filebeat.service
 </code></pre></div></div>
 
 <h5 id="434-filebeat-서비스-재시작">4.3.4. Filebeat 서비스 재시작</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl restart filebeat.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl restart filebeat.service
 </code></pre></div></div>
 
 <h5 id="435-filebeat-서비스-설정-재적용">4.3.5. Filebeat 서비스 설정 재적용</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl reload filebeat.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl reload filebeat.service
 </code></pre></div></div>
 
 <h5 id="436-filebeat-서비스-상태-조회">4.3.6. Filebeat 서비스 상태 조회</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl status filebeat.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl status filebeat.service
 </code></pre></div></div>
 
 <h5 id="437-filebeat-서비스-활성화부팅-시-자동-시작">4.3.7. Filebeat 서비스 활성화(부팅 시 자동 시작)</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl <span class="nb">enable </span>filebeat.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl <span class="nb">enable </span>filebeat.service
 </code></pre></div></div>
 
 <h5 id="438-filebeat-서비스-비활성화">4.3.8. Filebeat 서비스 비활성화</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl disable filebeat.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl disable filebeat.service
 </code></pre></div></div>
 
 <h5 id="439-filebeat-서비스-및-관련-프로세스-모두-중지">4.3.9. Filebeat 서비스 및 관련 프로세스 모두 중지</h5>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl <span class="nb">kill </span>filebeat.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl <span class="nb">kill </span>filebeat.service
 </code></pre></div></div>
 
 <h3 id="5-웹브라우저로-jenkins-접속">5. 웹브라우저로 Jenkins 접속</h3>

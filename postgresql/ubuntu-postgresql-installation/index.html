@@ -439,15 +439,15 @@ macOS 서버의 경우 PostgreSQL이 기본 데이터베이스이며, MS Windows
 
 <h2 id="내용contents">내용(CONTENTS)</h2>
 <h3 id="1-postgresql-debian-packages-repository-추가">1. PostgreSQL debian packages repository 추가</h3>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>sh <span class="nt">-c</span> <span class="s1">'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" &gt; /etc/apt/sources.list.d/pgdg.list'</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>sh <span class="nt">-c</span> <span class="s1">'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" &gt; /etc/apt/sources.list.d/pgdg.list'</span>
 </code></pre></div></div>
 
 <h3 id="2-postgresql-debian-packages-repository-key-추가">2. PostgreSQL debian packages repository key 추가</h3>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>wget <span class="nt">-q</span> https://www.postgresql.org/media/keys/ACCC4CF8.asc <span class="nt">-O</span> - | <span class="nb">sudo </span>apt-key add -
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>wget <span class="nt">-q</span> https://www.postgresql.org/media/keys/ACCC4CF8.asc <span class="nt">-O</span> - | <span class="nb">sudo </span>apt-key add -
 </code></pre></div></div>
 
 <h3 id="3-apt-install-명령어로-postgresql-설치">3. apt install 명령어로 PostgreSQL 설치</h3>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>apt update <span class="nt">-y</span> <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>apt <span class="nb">install </span>postgresql postgresql-contrib <span class="nt">-y</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt update <span class="nt">-y</span> <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>apt <span class="nb">install </span>postgresql postgresql-contrib <span class="nt">-y</span>
 </code></pre></div></div>
 
 <h3 id="4-postgresql-설정">4. PostgreSQL 설정</h3>
@@ -457,13 +457,15 @@ macOS 서버의 경우 PostgreSQL이 기본 데이터베이스이며, MS Windows
 </blockquote>
 
 <h4 id="41-pgdata-디렉터리-생성">4.1. PGDATA 디렉터리 생성</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">export </span><span class="nv">LINDAREX_WORKSPACE</span><span class="o">=</span><span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/workspace
-<span class="nv">$ </span><span class="nb">mkdir</span> <span class="nt">-p</span> <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/pgsql/data
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">LINDAREX_WORKSPACE</span><span class="o">=</span><span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/workspace
+<span class="gp">$</span><span class="w"> </span><span class="nb">mkdir</span> <span class="nt">-p</span> <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/pgsql/data
 </code></pre></div></div>
 
 <h4 id="42-pgdata-디렉터리-경로-추가">4.2. PGDATA 디렉터리 경로 추가</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/profile
-<span class="nt">--------------------------------------------------------------------------------</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>vi /etc/profile
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">--------------------------------------------------------------------------------</span>
 <span class="nb">export </span><span class="nv">LINDAREX_WORKSPACE</span><span class="o">=</span>/home/ubuntu/workspace
 <span class="nb">export </span><span class="nv">PGDATA</span><span class="o">=</span><span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/pgsql/data
 <span class="nt">--------------------------------------------------------------------------------</span>
@@ -475,7 +477,7 @@ macOS 서버의 경우 PostgreSQL이 기본 데이터베이스이며, MS Windows
 
 <blockquote>
   <p>수정 내역 적용을 위해 아래 명령어를 입력합니다.</p>
-  <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">source</span> /etc/profile
+  <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">source</span> /etc/profile
 </code></pre></div>  </div>
 </blockquote>
 
@@ -484,7 +486,7 @@ macOS 서버의 경우 PostgreSQL이 기본 데이터베이스이며, MS Windows
   <li>아래 명령어로 Database 초기화를 실행합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>/usr/lib/postgresql/11/bin/initdb
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>/usr/lib/postgresql/11/bin/initdb
 </code></pre></div></div>
 
 <h4 id="44-postgresql-설정-수정">4.4. PostgreSQL 설정 수정</h4>
@@ -492,8 +494,10 @@ macOS 서버의 경우 PostgreSQL이 기본 데이터베이스이며, MS Windows
   <li>아래 설정으로 외부 접속이 가능하게 합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/postgresql/11/main/postgresql.conf
-<span class="nt">--------------------------------------------------------------------------------</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>vi /etc/postgresql/11/main/postgresql.conf
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">--------------------------------------------------------------------------------</span>
 listen_addresses <span class="o">=</span> <span class="s1">'*'</span>
 <span class="nt">--------------------------------------------------------------------------------</span>
 </code></pre></div></div>
@@ -502,8 +506,10 @@ listen_addresses <span class="o">=</span> <span class="s1">'*'</span>
   <li>아래 설정으로 모든 사용자(비밀번호 사용)가 접속이 가능하게 합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/postgresql/11/main/pg_hba.conf
-<span class="nt">--------------------------------------------------------------------------------</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>vi /etc/postgresql/11/main/pg_hba.conf
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">--------------------------------------------------------------------------------</span>
 <span class="c">## Add at the bottom</span>
 host    all             all             0.0.0.0/0               password
 <span class="nt">--------------------------------------------------------------------------------</span>
@@ -511,39 +517,39 @@ host    all             all             0.0.0.0/0               password
 
 <h3 id="5-systemctl-명령어로-postgresql-서비스-관리">5. systemctl 명령어로 PostgreSQL 서비스 관리</h3>
 <h4 id="51-postgresql-서비스-설정-반영">5.1. PostgreSQL 서비스 설정 반영</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl daemon-reload
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl daemon-reload
 </code></pre></div></div>
 
 <h4 id="52-postgresql-서비스-시작">5.2. PostgreSQL 서비스 시작</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl start postgresql.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl start postgresql.service
 </code></pre></div></div>
 
 <h4 id="53-postgresql-서비스-중지">5.3. PostgreSQL 서비스 중지</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl stop postgresql.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl stop postgresql.service
 </code></pre></div></div>
 
 <h4 id="54-postgresql-서비스-재시작">5.4. PostgreSQL 서비스 재시작</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl restart postgresql.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl restart postgresql.service
 </code></pre></div></div>
 
 <h4 id="55-postgresql-서비스-설정-재적용">5.5. PostgreSQL 서비스 설정 재적용</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl reload postgresql.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl reload postgresql.service
 </code></pre></div></div>
 
 <h4 id="56-postgresql-서비스-상태-조회">5.6. PostgreSQL 서비스 상태 조회</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl status postgresql.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl status postgresql.service
 </code></pre></div></div>
 
 <h4 id="57-postgresql-서비스-활성화부팅-시-자동-시작">5.7. PostgreSQL 서비스 활성화(부팅 시 자동 시작)</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl <span class="nb">enable </span>postgresql.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl <span class="nb">enable </span>postgresql.service
 </code></pre></div></div>
 
 <h4 id="58-postgresql-서비스-비활성화">5.8. PostgreSQL 서비스 비활성화</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl disable postgresql.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl disable postgresql.service
 </code></pre></div></div>
 
 <h4 id="59-postgresql-서비스-및-관련-프로세스-모두-중지">5.9. PostgreSQL 서비스 및 관련 프로세스 모두 중지</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl <span class="nb">kill </span>postgresql.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl <span class="nb">kill </span>postgresql.service
 </code></pre></div></div>
 
 <h2 id="마무리conclusion">마무리(CONCLUSION)</h2>

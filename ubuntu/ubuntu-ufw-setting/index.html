@@ -434,7 +434,7 @@ ufw는 기본적으로 Ubuntu 18.04 LTS 이후 버전에서 사용할 수 있습
 <h2 id="내용contents">내용(CONTENTS)</h2>
 <h3 id="1-ufw-활성화-또는-비활성화">1. ufw 활성화 또는 비활성화</h3>
 <h4 id="11-ufw-활성화">1.1. ufw 활성화</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>ufw <span class="nb">enable</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>ufw <span class="nb">enable</span>
 </code></pre></div></div>
 
 <blockquote>
@@ -442,92 +442,92 @@ ufw는 기본적으로 Ubuntu 18.04 LTS 이후 버전에서 사용할 수 있습
 </blockquote>
 
 <h4 id="12-ufw-비활성화">1.2. ufw 비활성화</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>ufw disable
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>ufw disable
 </code></pre></div></div>
 
 <h3 id="2-ufw-상태-조회">2. ufw 상태 조회</h3>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>ufw status verbose
-Status: inactive
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>ufw status verbose
+<span class="go">Status: inactive
+</span></code></pre></div></div>
 
 <h3 id="3-ufw-default-rules-조회">3. ufw default rules 조회</h3>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>ufw show raw
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>ufw show raw
 </code></pre></div></div>
 
 <blockquote>
   <p>아래 경로의 하위 파일을 조회하여 확인할 수 있습니다.</p>
 </blockquote>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo cat</span> /etc/ufw/user.rules
-<span class="k">*</span>filter
-:ufw-user-input - <span class="o">[</span>0:0]
-:ufw-user-output - <span class="o">[</span>0:0]
-:ufw-user-forward - <span class="o">[</span>0:0]
-:ufw-before-logging-input - <span class="o">[</span>0:0]
-:ufw-before-logging-output - <span class="o">[</span>0:0]
-:ufw-before-logging-forward - <span class="o">[</span>0:0]
-:ufw-user-logging-input - <span class="o">[</span>0:0]
-:ufw-user-logging-output - <span class="o">[</span>0:0]
-:ufw-user-logging-forward - <span class="o">[</span>0:0]
-:ufw-after-logging-input - <span class="o">[</span>0:0]
-:ufw-after-logging-output - <span class="o">[</span>0:0]
-:ufw-after-logging-forward - <span class="o">[</span>0:0]
-:ufw-logging-deny - <span class="o">[</span>0:0]
-:ufw-logging-allow - <span class="o">[</span>0:0]
-:ufw-user-limit - <span class="o">[</span>0:0]
-:ufw-user-limit-accept - <span class="o">[</span>0:0]
-<span class="c">### RULES ###</span>
-
-<span class="c">### END RULES ###</span>
-
-<span class="c">### LOGGING ###</span>
-<span class="nt">-A</span> ufw-after-logging-input <span class="nt">-j</span> LOG <span class="nt">--log-prefix</span> <span class="s2">"[UFW BLOCK] "</span> <span class="nt">-m</span> limit <span class="nt">--limit</span> 3/min <span class="nt">--limit-burst</span> 10
-<span class="nt">-A</span> ufw-after-logging-forward <span class="nt">-j</span> LOG <span class="nt">--log-prefix</span> <span class="s2">"[UFW BLOCK] "</span> <span class="nt">-m</span> limit <span class="nt">--limit</span> 3/min <span class="nt">--limit-burst</span> 10
-<span class="nt">-I</span> ufw-logging-deny <span class="nt">-m</span> conntrack <span class="nt">--ctstate</span> INVALID <span class="nt">-j</span> RETURN <span class="nt">-m</span> limit <span class="nt">--limit</span> 3/min <span class="nt">--limit-burst</span> 10
-<span class="nt">-A</span> ufw-logging-deny <span class="nt">-j</span> LOG <span class="nt">--log-prefix</span> <span class="s2">"[UFW BLOCK] "</span> <span class="nt">-m</span> limit <span class="nt">--limit</span> 3/min <span class="nt">--limit-burst</span> 10
-<span class="nt">-A</span> ufw-logging-allow <span class="nt">-j</span> LOG <span class="nt">--log-prefix</span> <span class="s2">"[UFW ALLOW] "</span> <span class="nt">-m</span> limit <span class="nt">--limit</span> 3/min <span class="nt">--limit-burst</span> 10
-<span class="c">### END LOGGING ###</span>
-
-<span class="c">### RATE LIMITING ###</span>
-<span class="nt">-A</span> ufw-user-limit <span class="nt">-m</span> limit <span class="nt">--limit</span> 3/minute <span class="nt">-j</span> LOG <span class="nt">--log-prefix</span> <span class="s2">"[UFW LIMIT BLOCK] "</span>
-<span class="nt">-A</span> ufw-user-limit <span class="nt">-j</span> REJECT
-<span class="nt">-A</span> ufw-user-limit-accept <span class="nt">-j</span> ACCEPT
-<span class="c">### END RATE LIMITING ###</span>
-COMMIT
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo cat</span> /etc/ufw/user.rules
+<span class="go">*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-before-logging-input - [0:0]
+:ufw-before-logging-output - [0:0]
+:ufw-before-logging-forward - [0:0]
+:ufw-user-logging-input - [0:0]
+:ufw-user-logging-output - [0:0]
+:ufw-user-logging-forward - [0:0]
+:ufw-after-logging-input - [0:0]
+:ufw-after-logging-output - [0:0]
+:ufw-after-logging-forward - [0:0]
+:ufw-logging-deny - [0:0]
+:ufw-logging-allow - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+</span><span class="gp">#</span><span class="c">## RULES ###</span>
+<span class="go">
+</span><span class="gp">#</span><span class="c">## END RULES ###</span>
+<span class="go">
+</span><span class="gp">#</span><span class="c">## LOGGING ###</span>
+<span class="go">-A ufw-after-logging-input -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-A ufw-after-logging-forward -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-I ufw-logging-deny -m conntrack --ctstate INVALID -j RETURN -m limit --limit 3/min --limit-burst 10
+-A ufw-logging-deny -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-A ufw-logging-allow -j LOG --log-prefix "[UFW ALLOW] " -m limit --limit 3/min --limit-burst 10
+</span><span class="gp">#</span><span class="c">## END LOGGING ###</span>
+<span class="go">
+</span><span class="gp">#</span><span class="c">## RATE LIMITING ###</span>
+<span class="go">-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+</span><span class="gp">#</span><span class="c">## END RATE LIMITING ###</span>
+<span class="go">COMMIT
+</span></code></pre></div></div>
 
 <h3 id="4-ufw-default-rules-허용-또는-차단">4. ufw default rules 허용 또는 차단</h3>
 <h4 id="41-ufw-default-rules-허용">4.1. ufw default rules 허용</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>ufw default allow
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>ufw default allow
 </code></pre></div></div>
 
 <h4 id="42-ufw-default-rules-차단">4.2. ufw default rules 차단</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>ufw default deny
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>ufw default deny
 </code></pre></div></div>
 
 <h3 id="5-ufw-rule-허용-또는-차단">5. ufw rule 허용 또는 차단</h3>
 <h4 id="51-tcp-8080-포트이하-port-허용">5.1. TCP 8080 포트(이하 port) 허용</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>ufw allow 8080/tcp
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>ufw allow 8080/tcp
 </code></pre></div></div>
 
 <h4 id="52-tcp-8080-port-차단">5.2. TCP 8080 port 차단</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>ufw deny 8080/tcp
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>ufw deny 8080/tcp
 </code></pre></div></div>
 
 <h4 id="53-udp-22-port-허용">5.3. UDP 22 port 허용</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>ufw allow 22/udp
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>ufw allow 22/udp
 </code></pre></div></div>
 
 <h4 id="54-udp-22-port-차단">5.4. UDP 22 port 차단</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>ufw deny 22/udp
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>ufw deny 22/udp
 </code></pre></div></div>
 
 <h4 id="55-tcpudp-53-port-허용">5.5. TCP/UDP 53 port 허용</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>ufw allow 53
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>ufw allow 53
 </code></pre></div></div>
 
 <h4 id="56-tcpudp-53-port-차단">5.6. TCP/UDP 53 port 차단</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>ufw deny 53
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>ufw deny 53
 </code></pre></div></div>
 
 <blockquote>
@@ -536,64 +536,64 @@ COMMIT
 
 <h3 id="6-ufw-rule-삭제">6. ufw rule 삭제</h3>
 <h4 id="61-tcp-8080-port-차단-rule-삭제">6.1. TCP 8080 port 차단 rule 삭제</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>ufw delete deny 8080/tcp
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>ufw delete deny 8080/tcp
 </code></pre></div></div>
 
 <h4 id="62-udp-22-port-차단-rule-삭제">6.2. UDP 22 port 차단 rule 삭제</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>ufw delete deny 22/udp
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>ufw delete deny 22/udp
 </code></pre></div></div>
 
 <h4 id="63-tcpudp-53-port-차단-rule-삭제">6.3. TCP/UDP 53 port 차단 rule 삭제</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>ufw delete deny 53
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>ufw delete deny 53
 </code></pre></div></div>
 
 <h3 id="7-service-명으로-ufw-rule-허용-또는-차단">7. Service 명으로 ufw rule 허용 또는 차단</h3>
 
 <blockquote>
   <p>아래 명령어로 Service 목록을 조회할 수 있습니다.</p>
-  <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cat</span> /etc/services
+  <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cat</span> /etc/services
 </code></pre></div>  </div>
 </blockquote>
 
 <h4 id="71-ssh-service-허용">7.1. SSH service 허용</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>ufw allow ssh
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>ufw allow ssh
 </code></pre></div></div>
 
 <h4 id="72-ssh-service-차단">7.2. SSH service 차단</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>ufw deny ssh
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>ufw deny ssh
 </code></pre></div></div>
 
 <h3 id="8-ip-address로-ufw-rule-허용-또는-차단">8. IP address로 ufw rule 허용 또는 차단</h3>
 <h4 id="81-ip-address-허용">8.1. IP address 허용</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>ufw allow from 192.168.10.20
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>ufw allow from 192.168.10.20
 </code></pre></div></div>
 
 <h4 id="82-ip-address-차단">8.2. IP address 차단</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>ufw deny from 192.168.10.20
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>ufw deny from 192.168.10.20
 </code></pre></div></div>
 
 <h4 id="83-ip-address-subnetnet-mask-허용">8.3. IP address subnet(net mask) 허용</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>ufw allow from 192.168.10.0/24
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>ufw allow from 192.168.10.0/24
 </code></pre></div></div>
 
 <h4 id="84-ip-address-subnetnet-mask-차단">8.4. IP address subnet(net mask) 차단</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>ufw deny from 192.168.10.0/24
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>ufw deny from 192.168.10.0/24
 </code></pre></div></div>
 
 <h4 id="85-ip-address와-port-허용">8.5. IP address와 port 허용</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>ufw allow from 192.168.10.20 to any port 22
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>ufw allow from 192.168.10.20 to any port 22
 </code></pre></div></div>
 
 <h4 id="86-ip-address와-port-차단">8.6. IP address와 port 차단</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>ufw deny from 192.168.10.20 to any port 22
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>ufw deny from 192.168.10.20 to any port 22
 </code></pre></div></div>
 
 <h4 id="87-ip-address와-port-protocol-허용">8.7. IP address와 port, protocol 허용</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>ufw allow from 192.168.10.20 to any port 22 proto tcp
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>ufw allow from 192.168.10.20 to any port 22 proto tcp
 </code></pre></div></div>
 
 <h4 id="88-ip-address와-port-protocol-차단">8.8. IP address와 port, protocol 차단</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>ufw deny from 192.168.10.20 to any port 22 proto tcp
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>ufw deny from 192.168.10.20 to any port 22 proto tcp
 </code></pre></div></div>
 
 <h3 id="9-ufw-pingicmp-허용-또는-차단">9. ufw ping(icmp) 허용 또는 차단</h3>
@@ -603,8 +603,10 @@ COMMIT
 </blockquote>
 
 <h4 id="91-ufw-pingicmp-허용">9.1. ufw ping(icmp) 허용</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/ufw/before.rules
-...
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>vi /etc/ufw/before.rules
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
 <span class="c"># ok icmp codes</span>
 <span class="nt">-A</span> ufw-before-input <span class="nt">-p</span> icmp <span class="nt">--icmp-type</span> destination-unreachable <span class="nt">-j</span> ACCEPT
 <span class="nt">-A</span> ufw-before-input <span class="nt">-p</span> icmp <span class="nt">--icmp-type</span> source-quench <span class="nt">-j</span> ACCEPT
@@ -615,8 +617,10 @@ COMMIT
 </code></pre></div></div>
 
 <h4 id="92-ufw-pingicmp-차단">9.2. ufw ping(icmp) 차단</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/ufw/before.rules
-...
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>vi /etc/ufw/before.rules
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
 <span class="c"># ok icmp codes</span>
 <span class="nt">-A</span> ufw-before-input <span class="nt">-p</span> icmp <span class="nt">--icmp-type</span> destination-unreachable <span class="nt">-j</span> DROP
 <span class="nt">-A</span> ufw-before-input <span class="nt">-p</span> icmp <span class="nt">--icmp-type</span> source-quench <span class="nt">-j</span> DROP
@@ -635,14 +639,14 @@ COMMIT
   <li>설정 파일을 유지하며 ufw를 삭제합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>apt remove ufw
-<span class="nv">$ </span><span class="nb">sudo </span>apt remove <span class="nt">--auto-remove</span> ufw
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt remove ufw
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt remove <span class="nt">--auto-remove</span> ufw
 </code></pre></div></div>
 
 <ul>
   <li>설정 파일과 함께 ufw를 삭제합니다. (단, 사용자 홈 디렉터리의 설정 파일은 유지됩니다.)
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>apt purge ufw
-<span class="nv">$ </span><span class="nb">sudo </span>apt purge <span class="nt">--auto-remove</span> ufw
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt purge ufw
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt purge <span class="nt">--auto-remove</span> ufw
 </code></pre></div>    </div>
   </li>
 </ul>

@@ -442,16 +442,16 @@ SCM Manager 설치는 Standalone 방식(tar, RPM, DEB package)과 WebApp(war) �
   <p>아래 명령어로 workspace 디렉터리를 생성합니다.</p>
 </blockquote>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">export </span><span class="nv">LINDAREX_WORKSPACE</span><span class="o">=</span><span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/workspace
-<span class="nv">$ </span><span class="nb">mkdir</span> <span class="nt">-p</span> <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">LINDAREX_WORKSPACE</span><span class="o">=</span><span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/workspace
+<span class="gp">$</span><span class="w"> </span><span class="nb">mkdir</span> <span class="nt">-p</span> <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>
 </code></pre></div></div>
 
 <h3 id="1-scm-manager-파일-내려받기">1. SCM Manager 파일 내려받기</h3>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>wget <span class="nt">-P</span> <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span> https://maven.scm-manager.org/nexus/content/repositories/releases/sonia/scm//scm-server/1.60/scm-server-1.60-app.tar.gz
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>wget <span class="nt">-P</span> <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span> https://maven.scm-manager.org/nexus/content/repositories/releases/sonia/scm//scm-server/1.60/scm-server-1.60-app.tar.gz
 </code></pre></div></div>
 
 <h3 id="2-내려받은-파일-압축-해제">2. 내려받은 파일 압축 해제</h3>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">tar </span>zxf <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/scm-server-1.60-app.tar.gz <span class="nt">-C</span> <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">tar </span>zxf <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/scm-server-1.60-app.tar.gz <span class="nt">-C</span> <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>
 </code></pre></div></div>
 
 <h3 id="3-scm-manager-설정">3. SCM Manager 설정</h3>
@@ -460,15 +460,17 @@ SCM Manager 설치는 Standalone 방식(tar, RPM, DEB package)과 WebApp(war) �
   <li>SCM Manager UI의 포트를 설정합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>vi <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/scm-server/conf/server-config.xml
-<span class="nt">--------------------------------------------------------------------------------</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>vi <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/scm-server/conf/server-config.xml
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">--------------------------------------------------------------------------------</span>
 &lt;SystemProperty <span class="nv">name</span><span class="o">=</span><span class="s2">"jetty.port"</span> <span class="nv">default</span><span class="o">=</span><span class="s2">"8080"</span> /&gt;
 <span class="nt">--------------------------------------------------------------------------------</span>
 </code></pre></div></div>
 
 <h3 id="4-scm-manager-실행">4. SCM Manager 실행</h3>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/scm-server/bin/
-<span class="nv">$ </span><span class="nb">nohup</span> ./scm-server <span class="o">&gt;</span> /dev/null &amp;
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cd</span> <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/scm-server/bin/
+<span class="gp">$</span><span class="w"> </span><span class="nb">nohup</span> ./scm-server <span class="o">&gt;</span> /dev/null &amp;
 </code></pre></div></div>
 
 <h3 id="5-웹브라우저로-scm-manager-접속">5. 웹브라우저로 SCM Manager 접속</h3>

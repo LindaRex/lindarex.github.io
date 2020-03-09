@@ -432,57 +432,57 @@ wcs_do();
   <p>Ubuntu 18.04 (Bionic)</p>
 </blockquote>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>apt update
-<span class="nv">$ </span><span class="nb">sudo </span>apt <span class="nb">install</span> <span class="nt">-y</span> ca-certificates curl apt-transport-https lsb-release gnupg
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt update
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt <span class="nb">install</span> <span class="nt">-y</span> ca-certificates curl apt-transport-https lsb-release gnupg
 </code></pre></div></div>
 
 <h3 id="2-microsoft-서명-키-설치">2. Microsoft 서명 키 설치</h3>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">-sL</span> https://packages.microsoft.com/keys/microsoft.asc | <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl <span class="nt">-sL</span> https://packages.microsoft.com/keys/microsoft.asc | <span class="se">\</span>
     gpg <span class="nt">--dearmor</span> | <span class="se">\</span>
     <span class="nb">sudo tee</span> /etc/apt/trusted.gpg.d/microsoft.asc.gpg <span class="o">&gt;</span> /dev/null
 </code></pre></div></div>
 
 <h3 id="3-azure-cli-debian-packages-repository-추가">3. azure cli debian packages repository 추가</h3>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ AZ_REPO</span><span class="o">=</span><span class="si">$(</span>lsb_release <span class="nt">-cs</span><span class="si">)</span>
-<span class="nv">$ </span><span class="nb">echo</span> <span class="s2">"deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ </span><span class="nv">$AZ_REPO</span><span class="s2"> main"</span> | <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nv">AZ_REPO</span><span class="o">=</span><span class="si">$(</span>lsb_release <span class="nt">-cs</span><span class="si">)</span>
+<span class="gp">$</span><span class="w"> </span><span class="nb">echo</span> <span class="s2">"deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ </span><span class="nv">$AZ_REPO</span><span class="s2"> main"</span> | <span class="se">\</span>
     <span class="nb">sudo tee</span> /etc/apt/sources.list.d/azure-cli.list
 </code></pre></div></div>
 
 <h3 id="4-azure-cli-설치">4. azure cli 설치</h3>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>apt update
-<span class="nv">$ </span><span class="nb">sudo </span>apt <span class="nb">install </span>azure-cli <span class="nt">-y</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt update
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt <span class="nb">install </span>azure-cli <span class="nt">-y</span>
 </code></pre></div></div>
 
 <h3 id="5-azure-로그인">5. azure 로그인</h3>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>az login
-To sign <span class="k">in</span>, use a web browser to open the page https://microsoft.com/devicelogin and enter the code HGCW1YCF3 to authenticate.
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>az login
+<span class="go">To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code HGCW1YCF3 to authenticate.
 
 
-<span class="o">[</span>
-  <span class="o">{</span>
-    <span class="s2">"cloudName"</span>: <span class="s2">"AzureCloud"</span>,
-    <span class="s2">"id"</span>: <span class="s2">"cd85e66d-8955-67b9-cdb5-cb6b706eb6b9"</span>,
-    <span class="s2">"isDefault"</span>: <span class="nb">true</span>,
-    <span class="s2">"name"</span>: <span class="s2">"Microsoft Azure-LindaRex"</span>,
-    <span class="s2">"state"</span>: <span class="s2">"Enabled"</span>,
-    <span class="s2">"tenantId"</span>: <span class="s2">"2a755963-e627-665a-b039-ba6576750ae1"</span>,
-    <span class="s2">"user"</span>: <span class="o">{</span>
-      <span class="s2">"name"</span>: <span class="s2">"lindarex@lindarex.github.io"</span>,
-      <span class="s2">"type"</span>: <span class="s2">"user"</span>
-    <span class="o">}</span>
-  <span class="o">}</span>
-<span class="o">]</span>
-</code></pre></div></div>
+[
+  {
+    "cloudName": "AzureCloud",
+    "id": "cd85e66d-8955-67b9-cdb5-cb6b706eb6b9",
+    "isDefault": true,
+    "name": "Microsoft Azure-LindaRex",
+    "state": "Enabled",
+    "tenantId": "2a755963-e627-665a-b039-ba6576750ae1",
+    "user": {
+      "name": "lindarex@lindarex.github.io",
+      "type": "user"
+    }
+  }
+]
+</span></code></pre></div></div>
 
 <blockquote>
   <p>위 로그인 결과는 잘못된 값이므로 참고만 하시기를 바랍니다.</p>
 </blockquote>
 
 <h3 id="6-선택사항-azure-cli-삭제">6. (선택사항) azure cli 삭제</h3>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>apt remove azure-cli <span class="nt">-y</span>
-<span class="nv">$ </span><span class="nb">sudo </span>apt autoremove <span class="nt">-y</span>
-<span class="nv">$ </span><span class="nb">sudo rm</span> /etc/apt/sources.list.d/azure-cli.list
-<span class="nv">$ </span><span class="nb">sudo rm</span> /etc/apt/trusted.gpg.d/microsoft.asc.gpg
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt remove azure-cli <span class="nt">-y</span>
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt autoremove <span class="nt">-y</span>
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo rm</span> /etc/apt/sources.list.d/azure-cli.list
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo rm</span> /etc/apt/trusted.gpg.d/microsoft.asc.gpg
 </code></pre></div></div>
 
 <h2 id="마무리conclusion">마무리(CONCLUSION)</h2>

@@ -453,33 +453,37 @@ Jenkins는 모든 프로젝트의 빌드와 배포, 자동화를 지원하며, �
 
 <h2 id="내용contents">내용(CONTENTS)</h2>
 <h3 id="1-jenkins-debian-packages-repository-key-추가">1. Jenkins debian packages repository key 추가</h3>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>wget <span class="nt">-q</span> <span class="nt">-O</span> - https://pkg.jenkins.io/debian/jenkins-ci.org.key | <span class="nb">sudo </span>apt-key add -
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>wget <span class="nt">-q</span> <span class="nt">-O</span> - https://pkg.jenkins.io/debian/jenkins-ci.org.key | <span class="nb">sudo </span>apt-key add -
 </code></pre></div></div>
 
 <h3 id="2-jenkins-debian-packages-repository-추가">2. Jenkins debian packages repository 추가</h3>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>sh <span class="nt">-c</span> <span class="s1">'echo deb https://pkg.jenkins.io/debian-stable binary/ &gt; /etc/apt/sources.list.d/jenkins.list'</span>  
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>sh <span class="nt">-c</span> <span class="s1">'echo deb https://pkg.jenkins.io/debian-stable binary/ &gt; /etc/apt/sources.list.d/jenkins.list'</span>  
 </code></pre></div></div>
 
 <h3 id="3-apt-install-명령어로-jenkins-설치">3. apt install 명령어로 Jenkins 설치</h3>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>apt update <span class="nt">-y</span> <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>apt <span class="nb">install </span>jenkins <span class="nt">-y</span>  
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt update <span class="nt">-y</span> <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>apt <span class="nb">install </span>jenkins <span class="nt">-y</span>  
 </code></pre></div></div>
 
 <h3 id="4-선택사항-java-경로-설정">4. (선택사항) Java 경로 설정</h3>
 <h4 id="41-설치된-java-경로-확인">4.1. 설치된 Java 경로 확인</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>which java
-/usr/bin/java
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>which java
+<span class="go">/usr/bin/java
+</span></code></pre></div></div>
 
 <h4 id="42-java-경로-추가">4.2. Java 경로 추가</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/init.d/jenkins
-<span class="nt">--------------------------------------------------------------------------------</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>vi /etc/init.d/jenkins
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">--------------------------------------------------------------------------------</span>
 <span class="nv">PATH</span><span class="o">=</span><span class="s2">"/bin:/usr/bin:/sbin:/usr/sbin:/usr/bin/java"</span> 
 <span class="nt">--------------------------------------------------------------------------------</span>
 </code></pre></div></div>
 
 <h3 id="5-선택사항-기본-포트-변경">5. (선택사항) 기본 포트 변경</h3>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/default/jenkins  
-<span class="nt">--------------------------------------------------------------------------------</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>vi /etc/default/jenkins  
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">--------------------------------------------------------------------------------</span>
 <span class="nv">JENKINS_PORT</span><span class="o">=</span><span class="s2">"8080"</span>  
 <span class="nv">JENKINS_AJP_PORT</span><span class="o">=</span><span class="s2">"9091"</span>  
 <span class="nv">JENKINS_USER</span><span class="o">=</span><span class="s2">"root"</span>  
@@ -488,39 +492,39 @@ Jenkins는 모든 프로젝트의 빌드와 배포, 자동화를 지원하며, �
 
 <h3 id="6-systemctl-명령어로-jenkins-서비스-관리">6. systemctl 명령어로 Jenkins 서비스 관리</h3>
 <h4 id="61-jenkins-서비스-설정-반영">6.1. Jenkins 서비스 설정 반영</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl daemon-reload
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl daemon-reload
 </code></pre></div></div>
 
 <h4 id="62-jenkins-서비스-시작">6.2. Jenkins 서비스 시작</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl start jenkins.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl start jenkins.service
 </code></pre></div></div>
 
 <h4 id="63-jenkins-서비스-중지">6.3. Jenkins 서비스 중지</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl stop jenkins.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl stop jenkins.service
 </code></pre></div></div>
 
 <h4 id="64-jenkins-서비스-재시작">6.4. Jenkins 서비스 재시작</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl restart jenkins.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl restart jenkins.service
 </code></pre></div></div>
 
 <h4 id="65-jenkins-서비스-설정-재적용">6.5. Jenkins 서비스 설정 재적용</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl reload jenkins.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl reload jenkins.service
 </code></pre></div></div>
 
 <h4 id="66-jenkins-서비스-상태-조회">6.6. Jenkins 서비스 상태 조회</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl status jenkins.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl status jenkins.service
 </code></pre></div></div>
 
 <h4 id="67-jenkins-서비스-활성화부팅-시-자동-시작">6.7. Jenkins 서비스 활성화(부팅 시 자동 시작)</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl <span class="nb">enable </span>jenkins.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl <span class="nb">enable </span>jenkins.service
 </code></pre></div></div>
 
 <h4 id="68-jenkins-서비스-비활성화">6.8. Jenkins 서비스 비활성화</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl disable jenkins.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl disable jenkins.service
 </code></pre></div></div>
 
 <h4 id="69-jenkins-서비스-및-관련-프로세스-모두-중지">6.9. Jenkins 서비스 및 관련 프로세스 모두 중지</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl <span class="nb">kill </span>jenkins.service
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl <span class="nb">kill </span>jenkins.service
 </code></pre></div></div>
 
 <h3 id="7-웹브라우저로-jenkins-접속">7. 웹브라우저로 Jenkins 접속</h3>

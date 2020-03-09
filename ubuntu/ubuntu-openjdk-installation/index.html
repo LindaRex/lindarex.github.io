@@ -433,41 +433,47 @@ JDK는 2개로 나뉘는데, 하나는 BCL(Oracle Binary Code License) 라이선
 
 <h2 id="내용contents">내용(CONTENTS)</h2>
 <h3 id="1-apt-명령어로-openjdk-설치">1. apt 명령어로 OpenJDK 설치</h3>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>apt update <span class="nt">-y</span> <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>apt <span class="nb">install </span>openjdk-8-jdk <span class="nt">-y</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt update <span class="nt">-y</span> <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>apt <span class="nb">install </span>openjdk-8-jdk <span class="nt">-y</span>
 </code></pre></div></div>
 
 <h3 id="2-openjdk-설치-확인">2. OpenJDK 설치 확인</h3>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>java <span class="nt">-version</span>
-openjdk version <span class="s2">"1.8.0_222"</span>
-OpenJDK Runtime Environment <span class="o">(</span>build 1.8.0_222-8u222-b10-1ubuntu1~18.04.1-b10<span class="o">)</span>
-OpenJDK 64-Bit Server VM <span class="o">(</span>build 25.222-b10, mixed mode<span class="o">)</span>
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>java <span class="nt">-version</span>
+<span class="go">openjdk version "1.8.0_222"
+OpenJDK Runtime Environment (build 1.8.0_222-8u222-b10-1ubuntu1~18.04.1-b10)
+OpenJDK 64-Bit Server VM (build 25.222-b10, mixed mode)
+</span></code></pre></div></div>
 
 <h3 id="3-ubuntu-환경변수에-openjdk-java-경로-설정">3. Ubuntu 환경변수에 OpenJDK Java 경로 설정</h3>
 <h4 id="31-설치된-java-경로-확인">3.1. 설치된 Java 경로 확인</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>which java
-/usr/bin/java
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>which java
+<span class="go">/usr/bin/java
+</span></code></pre></div></div>
 
 <h4 id="32-openjdk-java-경로-추가">3.2. OpenJDK Java 경로 추가</h4>
 <blockquote>
   <p>루트(root) 계정</p>
 </blockquote>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/profile
-or
-<span class="c"># vi $HOME/.bashrc</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>vi /etc/profile
+<span class="go">또는
+</span><span class="gp">#</span><span class="w"> </span>vi <span class="nv">$HOME</span>/.bashrc
 </code></pre></div></div>
 
 <blockquote>
   <p>일반 계정</p>
 </blockquote>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>vi <span class="nv">$HOME</span>/.profile
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>vi <span class="nv">$HOME</span>/.profile
 </code></pre></div></div>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/profile
-<span class="nt">----------------------------------------------------------------------------------------------------</span>
+<ul>
+  <li>root 계정으로 OpenJDK Java 경로를 추가합니다.</li>
+</ul>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>vi /etc/profile
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">----------------------------------------------------------------------------------------------------</span>
 <span class="nv">JAVA_HOME</span><span class="o">=</span><span class="si">$(</span><span class="nb">dirname</span> <span class="si">$(</span><span class="nb">dirname</span> <span class="si">$(</span>update-alternatives <span class="nt">--list</span> javac<span class="si">)))</span>
 <span class="nv">JAVA</span><span class="o">=</span><span class="k">${</span><span class="nv">JAVA_HOME</span><span class="k">}</span>/bin
 <span class="nv">CLASSPATH</span><span class="o">=</span>.:<span class="k">${</span><span class="nv">JAVA_HOME</span><span class="k">}</span>/lib/tools.jar
@@ -479,9 +485,10 @@ or
 
 <blockquote>
   <p>수정 내역 적용을 위해 아래 명령어를 입력합니다.</p>
-  <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">source</span> /etc/profile
-</code></pre></div>  </div>
 </blockquote>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">source</span> /etc/profile
+</code></pre></div></div>
 
 <h3 id="4-선택사항-apt-명령어로-openjdk-삭제">4. (선택사항) apt 명령어로 OpenJDK 삭제</h3>
 <ul>
@@ -493,8 +500,8 @@ or
   <li>설정 파일을 유지하며 OpenJDK를 삭제합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>apt remove openjdk<span class="k">*</span>
-<span class="nv">$ </span><span class="nb">sudo </span>apt remove <span class="nt">--auto-remove</span> openjdk<span class="k">*</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt remove openjdk<span class="k">*</span>
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt remove <span class="nt">--auto-remove</span> openjdk<span class="k">*</span>
 </code></pre></div></div>
 
 <h4 id="42-apt-purge-명령어로-openjdk-삭제">4.2. apt purge 명령어로 OpenJDK 삭제</h4>
@@ -502,8 +509,8 @@ or
   <li>설정 파일과 함께 OpenJDK를 삭제합니다. (단, 사용자 홈 디렉터리의 설정 파일은 유지됩니다.)</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>apt purge openjdk<span class="k">*</span>
-<span class="nv">$ </span><span class="nb">sudo </span>apt purge <span class="nt">--auto-remove</span> openjdk<span class="k">*</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt purge openjdk<span class="k">*</span>
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt purge <span class="nt">--auto-remove</span> openjdk<span class="k">*</span>
 </code></pre></div></div>
 
 <h2 id="마무리conclusion">마무리(CONCLUSION)</h2>

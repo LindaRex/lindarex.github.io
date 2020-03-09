@@ -445,20 +445,20 @@ SonarQube는 LGPL(Lesser GNU General Public License) 라이선스로 오픈소�
   <p>아래 명령어로 workspace 디렉터리를 생성합니다.</p>
 </blockquote>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">export </span><span class="nv">LINDAREX_WORKSPACE</span><span class="o">=</span><span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/workspace
-<span class="nv">$ </span><span class="nb">mkdir</span> <span class="nt">-p</span> <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">LINDAREX_WORKSPACE</span><span class="o">=</span><span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/workspace
+<span class="gp">$</span><span class="w"> </span><span class="nb">mkdir</span> <span class="nt">-p</span> <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>
 </code></pre></div></div>
 
 <h3 id="1-sonarqube-파일-내려받기">1. SonarQube 파일 내려받기</h3>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>wget <span class="nt">-P</span> <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span> https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.9.1.zip
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>wget <span class="nt">-P</span> <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span> https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.9.1.zip
 </code></pre></div></div>
 
 <h3 id="2-내려받은-파일-압축-해제">2. 내려받은 파일 압축 해제</h3>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>unzip <span class="nt">-q</span> <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/sonarqube-7.9.1.zip <span class="nt">-d</span> <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>unzip <span class="nt">-q</span> <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/sonarqube-7.9.1.zip <span class="nt">-d</span> <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>
 </code></pre></div></div>
 
 <h3 id="3-symbolic-link-설정">3. Symbolic link 설정</h3>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ln</span> <span class="nt">-s</span> <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/sonarqube-7.9.1 <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/sonarqube
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">ln</span> <span class="nt">-s</span> <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/sonarqube-7.9.1 <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/sonarqube
 </code></pre></div></div>
 
 <h3 id="4-postgresql-설정">4. PostgreSQL 설정</h3>
@@ -467,52 +467,52 @@ SonarQube는 LGPL(Lesser GNU General Public License) 라이선스로 오픈소�
 </ul>
 
 <h4 id="41-postgres-계정-로그인">4.1. postgres 계정 로그인</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>su - postgres
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>su - postgres
 </code></pre></div></div>
 
 <h4 id="42-psql-utility-실행">4.2. psql utility 실행</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>psql postgres
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>psql postgres
 </code></pre></div></div>
 
 <h4 id="43-사용자-생성">4.3. 사용자 생성</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">postgres</span><span class="o">=</span><span class="c"># create user sonar;</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">postgres=#</span><span class="w"> </span>create user sonar<span class="p">;</span>
 </code></pre></div></div>
 
 <h4 id="44-사용자-role-설정">4.4. 사용자 Role 설정</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">postgres</span><span class="o">=</span><span class="c"># alter role sonar with createdb;</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">postgres=#</span><span class="w"> </span>alter role sonar with createdb<span class="p">;</span>
 </code></pre></div></div>
 
 <h4 id="45-사용자-비밀번호-설정">4.5. 사용자 비밀번호 설정</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">postgres</span><span class="o">=</span><span class="c"># alter user sonar with encrypted password 'sonar-password';</span>
-<span class="nv">postgres</span><span class="o">=</span><span class="c"># alter user postgres password 'postgres-password';</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">postgres=#</span><span class="w"> </span>alter user sonar with encrypted password <span class="s1">'sonar-password'</span><span class="p">;</span>
+<span class="gp">postgres=#</span><span class="w"> </span>alter user postgres password <span class="s1">'postgres-password'</span><span class="p">;</span>
 </code></pre></div></div>
 
 <blockquote>
   <p>생성한 사용자 정보를 조회합니다.</p>
-  <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">postgres</span><span class="o">=</span><span class="c"># \du</span>
+  <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">postgres=#</span><span class="w"> </span><span class="se">\d</span>u
 </code></pre></div>  </div>
 </blockquote>
 
 <h4 id="46-database-생성">4.6. Database 생성</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">postgres</span><span class="o">=</span><span class="c"># create database sonar owner sonar;</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">postgres=#</span><span class="w"> </span>create database sonar owner sonar<span class="p">;</span>
 </code></pre></div></div>
 
 <h4 id="47-privileges-설정">4.7. Privileges 설정</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">postgres</span><span class="o">=</span><span class="c"># grant all privileges on database sonar to sonar;</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">postgres=#</span><span class="w"> </span>grant all privileges on database sonar to sonar<span class="p">;</span>
 </code></pre></div></div>
 
 <blockquote>
   <p>생성한 Database를 조회합니다.</p>
-  <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">postgres</span><span class="o">=</span><span class="c"># \l</span>
+  <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">postgres=#</span><span class="w"> </span><span class="se">\l</span>
 </code></pre></div>  </div>
 </blockquote>
 
 <h4 id="48-psql-utility-종료">4.8. psql utility 종료</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">postgres</span><span class="o">=</span><span class="c"># \q</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">postgres=#</span><span class="w"> </span><span class="se">\q</span>
 </code></pre></div></div>
 
 <h4 id="49-postgres-계정-로그아웃">4.9. postgres 계정 로그아웃</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">exit</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">exit</span>
 </code></pre></div></div>
 
 <h3 id="5-sonarqube-설정">5. SonarQube 설정</h3>
@@ -520,8 +520,10 @@ SonarQube는 LGPL(Lesser GNU General Public License) 라이선스로 오픈소�
   <li>위에서 생성한 PostgreSQL 사용자 정보와 Database 정보, SonarQube UI의 포트를 설정합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>vi <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/sonarqube/conf/sonar.properties
-<span class="nt">--------------------------------------------------------------------------------</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>vi <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/sonarqube/conf/sonar.properties
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">--------------------------------------------------------------------------------</span>
 sonar.jdbc.username<span class="o">=</span>sonar
 sonar.jdbc.password<span class="o">=</span>sonar-password
 sonar.jdbc.url<span class="o">=</span>jdbc:postgresql://<span class="o">{</span>MY-IP<span class="o">}</span>/sonar
@@ -533,15 +535,19 @@ sonar.web.port<span class="o">=</span>9000
   <li>OpenJDK(Java) 경로를 설정합니다.</li>
 </ul>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>vi <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/sonarqube/conf/wrapper.conf
-<span class="nt">--------------------------------------------------------------------------------</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>vi <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/sonarqube/conf/wrapper.conf
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">--------------------------------------------------------------------------------</span>
 wrapper.java.command<span class="o">=</span>/home/rex/workspace/tool/java11/bin/java
 <span class="nt">--------------------------------------------------------------------------------</span>
 </code></pre></div></div>
 
 <h3 id="6-max-map-count-설정">6. Max map count 설정</h3>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/profile
-<span class="nt">--------------------------------------------------------------------------------</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>vi /etc/profile
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">--------------------------------------------------------------------------------</span>
 <span class="nb">sudo </span>sysctl <span class="nt">-w</span> vm.max_map_count<span class="o">=</span>262144
 <span class="nt">--------------------------------------------------------------------------------</span>
 </code></pre></div></div>
@@ -562,25 +568,25 @@ wrapper.java.command<span class="o">=</span>/home/rex/workspace/tool/java11/bin/
 
 <blockquote>
   <p>수정 내역 적용을 위해 아래 명령어를 입력합니다.</p>
-  <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># source /etc/profile</span>
+  <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo source</span> /etc/profile
 </code></pre></div>  </div>
 </blockquote>
 
 <h3 id="7-스크립트로-sonarqube-서비스-관리">7. 스크립트로 SonarQube 서비스 관리</h3>
 <h4 id="71-sonarqube-서비스-시작">7.1. SonarQube 서비스 시작</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/sonarqube/bin/linux-x86-64/sonar.sh start
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/sonarqube/bin/linux-x86-64/sonar.sh start
 </code></pre></div></div>
 
 <h4 id="72-sonarqube-서비스-중지">7.2. SonarQube 서비스 중지</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/sonarqube/bin/linux-x86-64/sonar.sh stop
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/sonarqube/bin/linux-x86-64/sonar.sh stop
 </code></pre></div></div>
 
 <h4 id="73-sonarqube-서비스-재시작">7.3. SonarQube 서비스 재시작</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/sonarqube/bin/linux-x86-64/sonar.sh restart
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/sonarqube/bin/linux-x86-64/sonar.sh restart
 </code></pre></div></div>
 
 <h4 id="73-sonarqube-서비스-상태-조회">7.3. SonarQube 서비스 상태 조회</h4>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/sonarqube/bin/linux-x86-64/sonar.sh status
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/sonarqube/bin/linux-x86-64/sonar.sh status
 </code></pre></div></div>
 
 <h3 id="8-웹브라우저로-sonarqube-접속">8. 웹브라우저로 SonarQube 접속</h3>

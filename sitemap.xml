@@ -77,6 +77,10 @@
 <lastmod>2020-02-26T00:00:00+09:00</lastmod>
 </url>
 <url>
+<loc>https://lindarex.github.io/ubuntu/ubuntu-iptables-setting/</loc>
+<lastmod>2020-03-02T00:00:00+09:00</lastmod>
+</url>
+<url>
 <loc>https://lindarex.github.io/about/</loc>
 </url>
 <url>
@@ -256,6 +260,9 @@
 </url>
 <url>
 <loc>https://lindarex.github.io/tags/kubernetes/</loc>
+</url>
+<url>
+<loc>https://lindarex.github.io/tags/iptables/</loc>
 </url>
 <url>
 <loc>https://lindarex.github.io/categories/ubuntu/</loc>

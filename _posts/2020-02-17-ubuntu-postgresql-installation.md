@@ -40,17 +40,17 @@ macOS 서버의 경우 PostgreSQL이 기본 데이터베이스이며, MS Windows
 
 ## 내용(CONTENTS)
 ### 1. PostgreSQL debian packages repository 추가
-```shell
+```console
 $ sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
 ```
 
 ### 2. PostgreSQL debian packages repository key 추가
-```shell
+```console
 $ sudo wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | sudo apt-key add -
 ```
 
 ### 3. apt install 명령어로 PostgreSQL 설치
-```shell
+```console
 $ sudo apt update -y && sudo apt install postgresql postgresql-contrib -y
 ```
 
@@ -59,14 +59,17 @@ $ sudo apt update -y && sudo apt install postgresql postgresql-contrib -y
 > 일반 사용자 계정으로 진행합니다.
 
 #### 4.1. PGDATA 디렉터리 생성
-```shell
+```console
 $ export LINDAREX_WORKSPACE=${HOME}/workspace
 $ mkdir -p ${LINDAREX_WORKSPACE}/pgsql/data
 ```
 
 #### 4.2. PGDATA 디렉터리 경로 추가
-```shell
+```console
 $ sudo vi /etc/profile
+```
+
+```shell
 --------------------------------------------------------------------------------
 export LINDAREX_WORKSPACE=/home/ubuntu/workspace
 export PGDATA=${LINDAREX_WORKSPACE}/pgsql/data
@@ -76,22 +79,25 @@ export PGDATA=${LINDAREX_WORKSPACE}/pgsql/data
 > 위 workspace(LINDAREX_WORKSPACE) 디렉터리 경로는 사용자 계정에 따라 다릅니다.
 
 > 수정 내역 적용을 위해 아래 명령어를 입력합니다.
-```shell
+```console
 $ source /etc/profile
 ```
 
 #### 4.3. Database 초기화
 - 아래 명령어로 Database 초기화를 실행합니다.
 
-```shell
+```console
 $ /usr/lib/postgresql/11/bin/initdb
 ```
 
 #### 4.4. PostgreSQL 설정 수정
 - 아래 설정으로 외부 접속이 가능하게 합니다.
 
-```shell
+```console
 $ sudo vi /etc/postgresql/11/main/postgresql.conf
+```
+
+```shell
 --------------------------------------------------------------------------------
 listen_addresses = '*'
 --------------------------------------------------------------------------------
@@ -99,8 +105,11 @@ listen_addresses = '*'
 
 - 아래 설정으로 모든 사용자(비밀번호 사용)가 접속이 가능하게 합니다.
 
-```shell
+```console
 $ sudo vi /etc/postgresql/11/main/pg_hba.conf
+```
+
+```shell
 --------------------------------------------------------------------------------
 ## Add at the bottom
 host    all             all             0.0.0.0/0               password
@@ -109,47 +118,47 @@ host    all             all             0.0.0.0/0               password
 
 ### 5. systemctl 명령어로 PostgreSQL 서비스 관리
 #### 5.1. PostgreSQL 서비스 설정 반영
-```shell
+```console
 $ sudo systemctl daemon-reload
 ```
 
 #### 5.2. PostgreSQL 서비스 시작
-```shell
+```console
 $ sudo systemctl start postgresql.service
 ```
 
 #### 5.3. PostgreSQL 서비스 중지
-```shell
+```console
 $ sudo systemctl stop postgresql.service
 ```
 
 #### 5.4. PostgreSQL 서비스 재시작
-```shell
+```console
 $ sudo systemctl restart postgresql.service
 ```
 
 #### 5.5. PostgreSQL 서비스 설정 재적용
-```shell
+```console
 $ sudo systemctl reload postgresql.service
 ```
 
 #### 5.6. PostgreSQL 서비스 상태 조회
-```shell
+```console
 $ sudo systemctl status postgresql.service
 ```
 
 #### 5.7. PostgreSQL 서비스 활성화(부팅 시 자동 시작)
-```shell
+```console
 $ sudo systemctl enable postgresql.service
 ```
 
 #### 5.8. PostgreSQL 서비스 비활성화
-```shell
+```console
 $ sudo systemctl disable postgresql.service
 ```
 
 #### 5.9. PostgreSQL 서비스 및 관련 프로세스 모두 중지
-```shell
+```console
 $ sudo systemctl kill postgresql.service
 ```
 

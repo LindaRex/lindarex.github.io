@@ -35,12 +35,12 @@ firewalld는 linux 커널 netfilter 프레임워크의 프런트 엔드 역할�
 
 ## 내용(CONTENTS)
 ### 1. apt 명령어로 firewalld 설치
-```shell
+```console
 $ sudo apt update -y && sudo apt install firewalld -y
 ```
 
 ### 2. firewalld 설치 확인
-```shell
+```console
 $ sudo firewall-cmd --version
 0.4.4.5
 ```
@@ -49,19 +49,19 @@ $ sudo firewall-cmd --version
 #### 3.1. firewalld에  rule 추가
 > 아래 예제는 영구적으로 public zone에 TCP 8080 포트를 추가하는 명령어입니다.
 
-```shell
+```console
 $ sudo firewall-cmd --permanent --zone=public --add-port=8080/tcp
 ```
 
 #### 3.2. firewalld에 rule 적용
 > 아래 명령어를 실행하기 전에는 추가한 rule이 적용되지 않습니다.
 
-```shell
+```console
 $ sudo firewall-cmd --reload
 ```
 
 #### 3.3. firewalld에 설정된 모든 값 조회
-```shell
+```console
 $ sudo firewall-cmd --list-all
 public
   target: default

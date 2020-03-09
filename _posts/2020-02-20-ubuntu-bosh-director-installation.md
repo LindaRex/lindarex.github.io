@@ -60,7 +60,7 @@ BOSH는 Cloud Foundry PaaS(CFAR) 배포를 위해 개발되었지만, 거의 모
 
 > 아래 명령어로 환경변수를 설정하고, workspace 디렉터리를 생성합니다.
 
-```shell
+```console
 $ export LINDAREX_INCEPTION_USER_NAME='ubuntu'
 $ export LINDAREX_BOSH_WORKSPACE=/home/${LINDAREX_INCEPTION_USER_NAME}/workspace
 $ export LINDAREX_BOSH_DIRECTOR='micro-bosh'
@@ -76,35 +76,35 @@ $ mkdir -p ${LINDAREX_BOSH_WORKSPACE}
 
 > Ubuntu 18.04 (Bionic)
 
-```shell
+```console
 $ sudo apt update -y
 $ sudo apt install -y build-essential zlibc zlib1g-dev ruby ruby-dev openssl libxslt1-dev libxml2-dev libssl-dev libreadline7 libreadline-dev libyaml-dev libsqlite3-dev sqlite3
 ```
 
 > Ubuntu 16.04 (Xenial) 또는 Ubuntu Trusty (14.04)
 
-```shell
+```console
 $ sudo apt update -y
 $ sudo apt install -y libcurl4-openssl-dev gcc g++ build-essential zlibc zlib1g-dev ruby ruby-dev openssl libxslt-dev libxml2-dev libssl-dev libreadline6 libreadline6-dev libyaml-dev libsqlite3-dev sqlite3
 ```
 
 #### 1.2. BOSH CLI 파일 내려받기
-```shell
+```console
 $ curl -Lo ${LINDAREX_BOSH_WORKSPACE}/bosh https://github.com/cloudfoundry/bosh-cli/releases/download/v6.2.1/bosh-cli-6.2.1-linux-amd64
 ```
 
 #### 1.3. chmod(change mode) 명령어로 파일 권한 변경(실행 권한 부여)
-```shell
+```console
 $ chmod +x ${LINDAREX_BOSH_WORKSPACE}/bosh
 ```
 
 #### 1.4. 실행 파일을 사용자 프로그램 경로로 옮기기
-```shell
+```console
 $ sudo mv ${LINDAREX_BOSH_WORKSPACE}/bosh /usr/local/bin/bosh
 ```
 
 #### 1.5. BOSH CLI 설치 확인
-```shell
+```console
 $ bosh -v
 version 6.2.1-a28042ac-2020-02-10T18:40:57Z
 
@@ -122,22 +122,22 @@ Succeeded
 
 
 #### 2.1. CF CLI Debian packages repository key 추가
-```shell
+```console
 $ wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
 ```
 
 #### 2.2. CF CLI Debian packages repository 추가
-```shell
+```console
 $ echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
 ```
 
 #### 2.3. apt install 명령어로 CF CLI 설치
-```shell
+```console
 $ sudo apt update -y && sudo apt install cf-cli -y
 ```
 
 #### 2.4. CF CLI 설치 확인
-```shell
+```console
 $ cf --version
 cf version 6.49.0+d0dfa93bb.2020-01-07
 ```
@@ -147,12 +147,12 @@ cf version 6.49.0+d0dfa93bb.2020-01-07
 - UAA는 CFAR과 BOSH에 각각 존재하며 CF UAA CLI를 통해 모두 사용할 수 있습니다.
 
 #### 3.1. Rubygems으로 CF UAA CLI 설치
-```shell
+```console
 $ sudo gem install cf-uaac
 ```
 
 #### 3.2. CF UAA CLI 설치 확인
-```shell
+```console
 $ uaac -v
 UAA client 4.2.0
 ```
@@ -161,27 +161,27 @@ UAA client 4.2.0
 - CredHub는 비밀번호, 인증서(certificates), 인증 기관(certificate authorities), ssh 키, rsa 키와 같은 credentials 정보를 관리합니다. 
 
 #### 4.1. Credhub CLI 파일 내려받기
-```shell
+```console
 $ wget -P ${LINDAREX_BOSH_WORKSPACE} https://github.com/cloudfoundry-incubator/credhub-cli/releases/download/2.6.2/credhub-linux-2.6.2.tgz
 ```
 
 #### 4.2. 내려받은 파일 압축 해제
-```shell
+```console
 $ tar zxf ${LINDAREX_BOSH_WORKSPACE}/credhub-linux-2.6.2.tgz -C ${LINDAREX_BOSH_WORKSPACE}
 ```
 
 #### 4.3. chmod 명령어로 파일 권한 변경(실행 권한 부여)
-```shell
+```console
 $ chmod +x ${LINDAREX_BOSH_WORKSPACE}/credhub
 ```
 
 #### 4.4. 실행 파일을 사용자 프로그램 경로로 옮기기
-```shell
+```console
 $ sudo mv ${LINDAREX_BOSH_WORKSPACE}/credhub /usr/local/bin/credhub
 ```
 
 #### 4.5. Credhub CLI 설치 확인
-```shell
+```console
 $ credhub --version
 CLI Version: 2.6.2
 Server Version: Not Found. Have you targeted and authenticated against a CredHub server?
@@ -189,15 +189,18 @@ Server Version: Not Found. Have you targeted and authenticated against a CredHub
 
 ### 5. BOSH director 설치
 #### 5.1. BOSH deployment repository clone 받기
-```shell
+```console
 $ git clone https://github.com/cloudfoundry/bosh-deployment.git ${LINDAREX_BOSH_WORKSPACE}/bosh-deployment
 ```
 
 > Cloud Foundry github repository에서 제공하는 BOSH deployment는 branch나 tag가 존재하지 않습니다. Clone 받는 당시의 버전으로 설치를 해야 하며, 간혹 오류를 포함한 버전도 배포되곤 합니다.
 
 #### 5.2. 배포 스크립트 작성
-```shell
+```console
 $ vi ${LINDAREX_BOSH_WORKSPACE}/bosh-deployment/deploy-${LINDAREX_BOSH_IAAS}.sh
+```
+
+```shell
 --------------------------------------------------------------------------------
 #!/bin/bash
 
@@ -251,12 +254,12 @@ bosh create-env bosh.yml \
 > 위 배포 스크립트는 AWS 서울 region에 배포되는 설정이지만, region과 az를 제외한 AWS 설정값은 잘못된 값이므로 참고만 하시기를 바랍니다.
 
 #### 5.3. chmod 명령어로 파일 권한 변경(실행 권한 부여)
-```shell
+```console
 $ chmod +x ${LINDAREX_BOSH_WORKSPACE}/bosh-deployment/deploy-${LINDAREX_BOSH_IAAS}.sh
 ```
 
 #### 5.4. (선택사항) 배포 상태 파일 삭제
-```shell
+```console
 $ rm -rf ${LINDAREX_BOSH_WORKSPACE}/bosh-deployment/${LINDAREX_BOSH_IAAS}/state.json
 $ rm -rf ${LINDAREX_BOSH_WORKSPACE}/bosh-deployment/${LINDAREX_BOSH_IAAS}/creds.yml
 ```
@@ -264,14 +267,14 @@ $ rm -rf ${LINDAREX_BOSH_WORKSPACE}/bosh-deployment/${LINDAREX_BOSH_IAAS}/creds.
 > state.json 파일과 creds.yml 파일은 배포 성공 여부와 관계없이 'bosh create-env' 명령어를 한 번이라도 실행하면 생성되는 파일입니다.
 
 #### 5.5. 배포 스크립트 실행
-```shell
+```console
 $ cd ${LINDAREX_BOSH_WORKSPACE}/bosh-deployment
 $ ./deploy-${LINDAREX_BOSH_IAAS}.sh
 ```
 
 ### 6. BOSH UAA 통합 인증
 #### 6.1. BOSH UAA target 설정
-```shell
+```console
 $ uaac target https://10.0.1.6:8443 --skip-ssl-validation
 Unknown key: Max-Age = 86400
 
@@ -280,7 +283,7 @@ Target: https://10.0.1.6:8443
 ```
 
 #### 6.2. Client credentials grant를 통해 UAA admin token 얻기
-```shell
+```console
 $ uaac token client get uaa_admin -s `bosh int ${LINDAREX_BOSH_WORKSPACE}/bosh-deployment/${LINDAREX_BOSH_IAAS}/creds.yml --path /uaa_admin_client_secret`
 Unknown key: Max-Age = 86400
 
@@ -291,7 +294,7 @@ Context: uaa_admin, from client uaa_admin
 ```
 
 #### 6.3. UAA admin token 파싱 및 clients 목록 조회
-```shell
+```console
 $ uaac token decode && uaac clients
 
 Note: no key given to validate token signature
@@ -370,14 +373,14 @@ Note: no key given to validate token signature
 
 ### 7. BOSH director 설정
 #### 7.1. Local alias 설정
-```shell
+```console
 $ export BOSH_CLIENT='admin'
 $ export BOSH_CLIENT_SECRET=`bosh int ${LINDAREX_BOSH_WORKSPACE}/bosh-deployment/${LINDAREX_BOSH_IAAS}/creds.yml --path /admin_password`
 $ bosh alias-env ${LINDAREX_BOSH_DIRECTOR} -e 10.0.1.6 --ca-cert <(bosh int ${LINDAREX_BOSH_WORKSPACE}/bosh-deployment/${LINDAREX_BOSH_IAAS}/creds.yml --path /director_ssl/ca)
 ```
 
 #### 7.2. BOSH 로그인
-```shell
+```console
 $ bosh -e ${LINDAREX_BOSH_DIRECTOR} l
 Successfully authenticated with UAA
 
@@ -385,7 +388,7 @@ Succeeded
 ```
 
 #### 7.3. BOSH director 정보 조회
-```shell
+```console
 $ bosh -e ${LINDAREX_BOSH_DIRECTOR} env
 Using environment '10.0.1.6' as client 'admin'
 
@@ -405,8 +408,11 @@ Succeeded
 ```
 
 #### 7.4. (선택사항) 사용자 프로필에 BOSH director 정보 추가
-```shell
+```console
 $ vi $HOME/.profile
+```
+
+```shell
 --------------------------------------------------------------------------------
 export LINDAREX_INCEPTION_USER_NAME='ubuntu'
 export LINDAREX_BOSH_WORKSPACE=/home/${LINDAREX_INCEPTION_USER_NAME}/workspace
@@ -419,24 +425,24 @@ export BOSH_CLIENT_SECRET=`bosh -e ${LINDAREX_BOSH_DIRECTOR} int ${LINDAREX_BOSH
 ```
 
 > 수정 내역 적용을 위해 아래 명령어를 입력합니다.
-```shell
+```console
 $ source $HOME/.profile
 ```
 
 ### 8. BOSH jumpbox 설정
 #### 8.1. Jumpbox key 생성
-```shell
+```console
 $ cd ${LINDAREX_BOSH_WORKSPACE}/bosh-deployment
 $ bosh int ${LINDAREX_BOSH_IAAS}/creds.yml --path /jumpbox_ssh/private_key > jumpbox.key
 ```
 
 #### 8.2. chmod 명령어로 파일 권한 변경(소유자만 읽기 및 쓰기 권한 부여)
-```shell
+```console
 $ chmod 600 jumpbox.key
 ```
 
 #### 8.3. BOSH director VM에 SSH 접속
-```shell
+```console
 $ ssh jumpbox@${BOSH_ENVIRONMENT} -i ${LINDAREX_BOSH_WORKSPACE}/bosh-deployment/jumpbox.key
 The authenticity of host '10.0.1.6 (10.0.1.6)' can't be established.
 ECDSA key fingerprint is SHA256:Lc0OsEocqPAEgAk0c1X7Y7y+iNWqeFMGkfFFLRlA8ww.
@@ -465,7 +471,7 @@ bosh/0:~$
 ```
 
 #### 8.4. BOSH director VM의 외부 통신 상태 확인
-```shell
+```console
 bosh/0:~$ sudo ping 8.8.8.8
 PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
 64 bytes from 8.8.8.8: icmp_seq=1 ttl=53 time=30.8 ms
@@ -476,12 +482,12 @@ PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
 rtt min/avg/max/mdev = 29.135/30.009/30.884/0.891 ms
 ```
 
-```shell
+```console
 bosh/0:~$ wget https://wordpress.org/latest.zip
 ```
 
 > 아래 명령어로 BOSH director VM의 SSH 접속을 종료할 수 있습니다.
-```shell
+```console
 bosh/0:~$ exit
 logout
 Connection to 10.0.1.6 closed.
@@ -489,7 +495,7 @@ Connection to 10.0.1.6 closed.
 
 ### 9. Credhub 설정
 #### 9.1. Credhub api server 설정
-```shell
+```console
 $ credhub api \
 --ca-cert=<(bosh int ${LINDAREX_BOSH_WORKSPACE}/bosh-deployment/${LINDAREX_BOSH_IAAS}/creds.yml --path /credhub_ca/ca) \
 --ca-cert=<(bosh int ${LINDAREX_BOSH_WORKSPACE}/bosh-deployment/${LINDAREX_BOSH_IAAS}/creds.yml --path /uaa_ssl/ca) \
@@ -498,13 +504,13 @@ Setting the target url: https://10.0.1.6:8844
 ```
 
 #### 9.2. Credhub 로그인
-```shell
+```console
 $ credhub login --client-name=credhub-admin --client-secret=`bosh int ${LINDAREX_BOSH_WORKSPACE}/bosh-deployment/${LINDAREX_BOSH_IAAS}/creds.yml --path /credhub_admin_client_secret`
 Login Successful
 ```
 
 #### 9.3. credentials 전체 조회
-```shell
+```console
 $ credhub find
 credentials: []
 ```

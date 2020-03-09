@@ -53,68 +53,68 @@ ELK Stack은 Elasticsearch, Logstash, Kibana의 연동으로 텍스트, 숫자, 
 - Elasticsearch는 Apache Lucene으로 구축된 JSON 기반의 분산형 오픈소스 RESTful 검색 분석 엔진이며, Logstash를 통해 수신된 데이터를 저장소에 저장하는 역할을 담당합니다.
 
 #### 1.1. Elasticsearch debian packages repository 추가
-```shell
+```console
 $ echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
 ```
 
 #### 1.2. Elasticsearch debian packages repository key 추가
-```shell
+```console
 $ wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
 ```
 
 #### 1.3. apt install 명령어로 Elasticsearch 설치
-```shell
+```console
 $ sudo apt update -y && sudo apt install elasticsearch -y
 ```
 
 #### 1.4. systemctl 명령어로 Elasticsearch 서비스 관리
 ##### 1.4.1. Elasticsearch 서비스 설정 반영
-```shell
+```console
 $ sudo systemctl daemon-reload
 ```
 
 ##### 1.4.2. Elasticsearch 서비스 시작
-```shell
+```console
 $ sudo systemctl start elasticsearch.service
 ```
 
 ##### 1.4.3. Elasticsearch 서비스 중지
-```shell
+```console
 $ sudo systemctl stop elasticsearch.service
 ```
 
 ##### 1.4.4. Elasticsearch 서비스 재시작
-```shell
+```console
 $ sudo systemctl restart elasticsearch.service
 ```
 
 ##### 1.4.5. Elasticsearch 서비스 설정 재적용
-```shell
+```console
 $ sudo systemctl reload elasticsearch.service
 ```
 
 ##### 1.4.6. Elasticsearch 서비스 상태 조회
-```shell
+```console
 $ sudo systemctl status elasticsearch.service
 ```
 
 ##### 1.4.7. Elasticsearch 서비스 활성화(부팅 시 자동 시작)
-```shell
+```console
 $ sudo systemctl enable elasticsearch.service
 ```
 
 ##### 1.4.8. Elasticsearch 서비스 비활성화
-```shell
+```console
 $ sudo systemctl disable elasticsearch.service
 ```
 
 ##### 1.4.9. Elasticsearch 서비스 및 관련 프로세스 모두 중지
-```shell
+```console
 $ sudo systemctl kill elasticsearch.service
 ```
 
 #### 1.5. curl 명령어로 Elasticsearch 서비스 확인
-```shell
+```console
 $ curl -X GET http://localhost:9200
 {
   "name" : "lindarex-elk",
@@ -140,14 +140,17 @@ $ curl -X GET http://localhost:9200
 
 #### 2.1. (선택사항) SSL certificate 생성
 ##### 2.1.1. Hostname or FQDN 설정
-```shell
+```console
 $ cd /etc/ssl/
 $ sudo openssl req -x509 -nodes -newkey rsa:2048 -days 365 -keyout logstash-forwarder.key -out logstash-forwarder.crt -subj /CN=server.lindarex.local
 ```
 
 ##### 2.1.2. IP Address 설정
-```shell
+```console
 $ sudo vi /etc/ssl/openssl.cnf
+```
+
+```shell
 --------------------------------------------------------------------------------
 ...
 [ v3_ca ]
@@ -156,26 +159,29 @@ subjectAltName = IP:192.168.10.20
 --------------------------------------------------------------------------------
 ```
 
-```shell
+```console
 $ cd /etc/ssl/
 $ sudo openssl req -x509 -days 365 -batch -nodes -newkey rsa:2048 -keyout logstash-forwarder.key -out logstash-forwarder.crt
 ```
 
 ##### 2.1.3. SSL 변환
-```shell
+```console
 $ cd /etc/ssl/
 $ sudo openssl pkcs8 -in logstash-forwarder.key  -topk8 -nocrypt -out logstash-forwarder.key.pem
 $ sudo chmod 644 /etc/ssl/logstash-forwarder.key.pem
 ```
 
 #### 2.2. apt install 명령어로 Logstash 설치
-```shell
+```console
 $ sudo apt install logstash -y
 ```
 
 #### 2.3. Logstash 구성
-```shell
+```console
 $ sudo vi /etc/logstash/conf.d/logstash.conf
+```
+
+```shell
 --------------------------------------------------------------------------------
 input {
  beats {
@@ -217,47 +223,47 @@ stdout {
 
 #### 2.4. systemctl 명령어로 Logstash 서비스 관리
 ##### 2.4.1. Logstash 서비스 설정 반영
-```shell
+```console
 $ sudo systemctl daemon-reload
 ```
 
 ##### 2.4.2. Logstash 서비스 시작
-```shell
+```console
 $ sudo systemctl start logstash.service
 ```
 
 ##### 2.4.3. Logstash 서비스 중지
-```shell
+```console
 $ sudo systemctl stop logstash.service
 ```
 
 ##### 2.4.4. Logstash 서비스 재시작
-```shell
+```console
 $ sudo systemctl restart logstash.service
 ```
 
 ##### 2.4.5. Logstash 서비스 설정 재적용
-```shell
+```console
 $ sudo systemctl reload logstash.service
 ```
 
 ##### 2.4.6. Logstash 서비스 상태 조회
-```shell
+```console
 $ sudo systemctl status logstash.service
 ```
 
 ##### 2.4.7. Logstash 서비스 활성화(부팅 시 자동 시작)
-```shell
+```console
 $ sudo systemctl enable logstash.service
 ```
 
 ##### 2.4.8. Logstash 서비스 비활성화
-```shell
+```console
 $ sudo systemctl disable logstash.service
 ```
 
 ##### 2.4.9. Logstash 서비스 및 관련 프로세스 모두 중지
-```shell
+```console
 $ sudo systemctl kill logstash.service
 ```
 
@@ -265,13 +271,16 @@ $ sudo systemctl kill logstash.service
 - Kibana는 프런트 엔드 애플리케이션으로, Elasticsearch에서 인덱스 된 데이터 검색 및 다양한 차트와 그래프를 제공하고, 실시간으로 데이터를 분석하여 시각화를 담당합니다.
 
 #### 3.1. apt install 명령어로 Kibana 설치
-```shell
+```console
 $ sudo apt install kibana -y
 ```
 
 #### 3.2. Kibana 구성
-```shell
+```console
 $ sudo vi /etc/kibana/kibana.yml
+```
+
+```shell
 --------------------------------------------------------------------------------
 ...
 #server.host: "localhost"
@@ -284,47 +293,47 @@ elasticsearch.hosts: ["http://localhost:9200"]
 
 #### 3.3. systemctl 명령어로 Kibana 서비스 관리
 ##### 3.3.1. Kibana 서비스 설정 반영
-```shell
+```console
 $ sudo systemctl daemon-reload
 ```
 
 ##### 3.3.2. Kibana 서비스 시작
-```shell
+```console
 $ sudo systemctl start kibana.service
 ```
 
 ##### 3.3.3. Kibana 서비스 중지
-```shell
+```console
 $ sudo systemctl stop kibana.service
 ```
 
 ##### 3.3.4. Kibana 서비스 재시작
-```shell
+```console
 $ sudo systemctl restart kibana.service
 ```
 
 ##### 3.3.5. Kibana 서비스 설정 재적용
-```shell
+```console
 $ sudo systemctl reload kibana.service
 ```
 
 ##### 3.3.6. Kibana 서비스 상태 조회
-```shell
+```console
 $ sudo systemctl status kibana.service
 ```
 
 ##### 3.3.7. Kibana 서비스 활성화(부팅 시 자동 시작)
-```shell
+```console
 $ sudo systemctl enable kibana.service
 ```
 
 ##### 3.3.8. Kibana 서비스 비활성화
-```shell
+```console
 $ sudo systemctl disable kibana.service
 ```
 
 ##### 3.3.9. Kibana 서비스 및 관련 프로세스 모두 중지
-```shell
+```console
 $ sudo systemctl kill kibana.service
 ```
 
@@ -332,13 +341,16 @@ $ sudo systemctl kill kibana.service
 - Filebeat는 경량 로그 수집기로, SSH 터미널의 사용이 불가능한 상황(로그를 생성하는 서버나 가상 시스템, 컨테이너가 수백\~수천 개에 이르는 경우)에 로그와 파일을 경량화된 방식으로 전달하고 중앙 집중화하여 작업을 보다 간편하게 만들어 주는 역할을 합니다.
 
 #### 4.1. apt install 명령어로 Filebeat 설치
-```shell
+```console
 $ sudo apt install filebeat -y
 ```
 
 #### 4.2. Filebeat 구성
-```shell
+```console
 $ sudo vi /etc/filebeat/filebeat.yml
+```
+
+```shell
 --------------------------------------------------------------------------------
 ...
 - type: log
@@ -377,47 +389,47 @@ output.logstash:
 
 #### 4.3. systemctl 명령어로 Filebeat 서비스 관리
 ##### 4.3.1. Filebeat 서비스 설정 반영
-```shell
+```console
 $ sudo systemctl daemon-reload
 ```
 
 ##### 4.3.2. Filebeat 서비스 시작
-```shell
+```console
 $ sudo systemctl start filebeat.service
 ```
 
 ##### 4.3.3. Filebeat 서비스 중지
-```shell
+```console
 $ sudo systemctl stop filebeat.service
 ```
 
 ##### 4.3.4. Filebeat 서비스 재시작
-```shell
+```console
 $ sudo systemctl restart filebeat.service
 ```
 
 ##### 4.3.5. Filebeat 서비스 설정 재적용
-```shell
+```console
 $ sudo systemctl reload filebeat.service
 ```
 
 ##### 4.3.6. Filebeat 서비스 상태 조회
-```shell
+```console
 $ sudo systemctl status filebeat.service
 ```
 
 ##### 4.3.7. Filebeat 서비스 활성화(부팅 시 자동 시작)
-```shell
+```console
 $ sudo systemctl enable filebeat.service
 ```
 
 ##### 4.3.8. Filebeat 서비스 비활성화
-```shell
+```console
 $ sudo systemctl disable filebeat.service
 ```
 
 ##### 4.3.9. Filebeat 서비스 및 관련 프로세스 모두 중지
-```shell
+```console
 $ sudo systemctl kill filebeat.service
 ```
 

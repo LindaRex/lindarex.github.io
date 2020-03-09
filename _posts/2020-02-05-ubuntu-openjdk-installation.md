@@ -39,12 +39,12 @@ JDK는 2개로 나뉘는데, 하나는 BCL(Oracle Binary Code License) 라이선
 
 ## 내용(CONTENTS)
 ### 1. apt 명령어로 OpenJDK 설치
-```shell
+```console
 $ sudo apt update -y && sudo apt install openjdk-8-jdk -y
 ```
 
 ### 2. OpenJDK 설치 확인
-```shell
+```console
 $ java -version
 openjdk version "1.8.0_222"
 OpenJDK Runtime Environment (build 1.8.0_222-8u222-b10-1ubuntu1~18.04.1-b10)
@@ -53,7 +53,7 @@ OpenJDK 64-Bit Server VM (build 25.222-b10, mixed mode)
 
 ### 3. Ubuntu 환경변수에 OpenJDK Java 경로 설정
 #### 3.1. 설치된 Java 경로 확인
-```shell
+```console
 $ which java
 /usr/bin/java
 ```
@@ -61,20 +61,25 @@ $ which java
 #### 3.2. OpenJDK Java 경로 추가
 > 루트(root) 계정
 
-```shell
+```console
 $ sudo vi /etc/profile
-or
+또는
 # vi $HOME/.bashrc
 ```
 
 > 일반 계정
 
-```shell
+```console
 $ vi $HOME/.profile
 ```
 
-```shell
+- root 계정으로 OpenJDK Java 경로를 추가합니다.
+
+```console
 $ sudo vi /etc/profile
+```
+
+```shell
 ----------------------------------------------------------------------------------------------------
 JAVA_HOME=$(dirname $(dirname $(update-alternatives --list javac)))
 JAVA=${JAVA_HOME}/bin
@@ -86,7 +91,8 @@ export JAVA_HOME JAVA CLASSPATH PATH
 ```
 
 > 수정 내역 적용을 위해 아래 명령어를 입력합니다.
-```shell
+
+```console
 $ source /etc/profile
 ```
 
@@ -96,7 +102,7 @@ $ source /etc/profile
 #### 4.1. apt remove 명령어로 OpenJDK 삭제
 - 설정 파일을 유지하며 OpenJDK를 삭제합니다.
 
-```shell
+```console
 $ sudo apt remove openjdk*
 $ sudo apt remove --auto-remove openjdk*
 ```
@@ -104,7 +110,7 @@ $ sudo apt remove --auto-remove openjdk*
 #### 4.2. apt purge 명령어로 OpenJDK 삭제
 - 설정 파일과 함께 OpenJDK를 삭제합니다. (단, 사용자 홈 디렉터리의 설정 파일은 유지됩니다.)
 
-```shell
+```console
 $ sudo apt purge openjdk*
 $ sudo apt purge --auto-remove openjdk*
 ```

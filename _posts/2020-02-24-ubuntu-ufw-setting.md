@@ -40,31 +40,31 @@ ufw는 기본적으로 Ubuntu 18.04 LTS 이후 버전에서 사용할 수 있습
 ## 내용(CONTENTS)
 ### 1. ufw 활성화 또는 비활성화
 #### 1.1. ufw 활성화
-```shell
+```console
 $ sudo ufw enable
 ```
 
 > ufw은 기본적으로 비활성화되어 있습니다.
 
 #### 1.2. ufw 비활성화
-```shell
+```console
 $ sudo ufw disable
 ```
 
 ### 2. ufw 상태 조회
-```shell
+```console
 $ sudo ufw status verbose
 Status: inactive
 ```
 
 ### 3. ufw default rules 조회
-```shell
+```console
 $ sudo ufw show raw
 ```
 
 > 아래 경로의 하위 파일을 조회하여 확인할 수 있습니다.
 
-```shell
+```console
 $ sudo cat /etc/ufw/user.rules
 *filter
 :ufw-user-input - [0:0]
@@ -105,43 +105,43 @@ COMMIT
 
 ### 4. ufw default rules 허용 또는 차단
 #### 4.1. ufw default rules 허용
-```shell
+```console
 $ sudo ufw default allow
 ```
 
 #### 4.2. ufw default rules 차단
-```shell
+```console
 $ sudo ufw default deny
 ```
 
 ### 5. ufw rule 허용 또는 차단
 #### 5.1. TCP 8080 포트(이하 port) 허용
-```shell
+```console
 $ sudo ufw allow 8080/tcp
 ```
 
 #### 5.2. TCP 8080 port 차단
-```shell
+```console
 $ sudo ufw deny 8080/tcp
 ```
 
 #### 5.3. UDP 22 port 허용
-```shell
+```console
 $ sudo ufw allow 22/udp
 ```
 
 #### 5.4. UDP 22 port 차단
-```shell
+```console
 $ sudo ufw deny 22/udp
 ```
 
 #### 5.5. TCP/UDP 53 port 허용
-```shell
+```console
 $ sudo ufw allow 53
 ```
 
 #### 5.6. TCP/UDP 53 port 차단
-```shell
+```console
 $ sudo ufw deny 53
 ```
 
@@ -149,75 +149,75 @@ $ sudo ufw deny 53
 
 ### 6. ufw rule 삭제
 #### 6.1. TCP 8080 port 차단 rule 삭제
-```shell
+```console
 $ sudo ufw delete deny 8080/tcp
 ```
 
 #### 6.2. UDP 22 port 차단 rule 삭제
-```shell
+```console
 $ sudo ufw delete deny 22/udp
 ```
 
 #### 6.3. TCP/UDP 53 port 차단 rule 삭제
-```shell
+```console
 $ sudo ufw delete deny 53
 ```
 
 ### 7. Service 명으로 ufw rule 허용 또는 차단
 
 > 아래 명령어로 Service 목록을 조회할 수 있습니다.
-```shell
+```console
 $ cat /etc/services
 ```
 
 #### 7.1. SSH service 허용
-```shell
+```console
 $ sudo ufw allow ssh
 ```
 
 #### 7.2. SSH service 차단
-```shell
+```console
 $ sudo ufw deny ssh
 ```
 
 ### 8. IP address로 ufw rule 허용 또는 차단
 #### 8.1. IP address 허용
-```shell
+```console
 $ sudo ufw allow from 192.168.10.20
 ```
 
 #### 8.2. IP address 차단
-```shell
+```console
 $ sudo ufw deny from 192.168.10.20
 ```
 
 #### 8.3. IP address subnet(net mask) 허용
-```shell
+```console
 $ sudo ufw allow from 192.168.10.0/24
 ```
 
 #### 8.4. IP address subnet(net mask) 차단
-```shell
+```console
 $ sudo ufw deny from 192.168.10.0/24
 ```
 
 #### 8.5. IP address와 port 허용
-```shell
+```console
 $ sudo ufw allow from 192.168.10.20 to any port 22
 ```
 
 #### 8.6. IP address와 port 차단
-```shell
+```console
 $ sudo ufw deny from 192.168.10.20 to any port 22
 ```
 
 #### 8.7. IP address와 port, protocol 허용
-```shell
+```console
 $ sudo ufw allow from 192.168.10.20 to any port 22 proto tcp
 ```
 
 #### 8.8. IP address와 port, protocol 차단
-```shell
+```console
 $ sudo ufw deny from 192.168.10.20 to any port 22 proto tcp
 ```
 
@@ -226,8 +226,11 @@ $ sudo ufw deny from 192.168.10.20 to any port 22 proto tcp
 > ufw는 기본적으로 ping 요청을 허용합니다.
 
 #### 9.1. ufw ping(icmp) 허용
-```shell
+```console
 $ sudo vi /etc/ufw/before.rules
+```
+
+```shell
 ...
 # ok icmp codes
 -A ufw-before-input -p icmp --icmp-type destination-unreachable -j ACCEPT
@@ -239,8 +242,11 @@ $ sudo vi /etc/ufw/before.rules
 ```
 
 #### 9.2. ufw ping(icmp) 차단
-```shell
+```console
 $ sudo vi /etc/ufw/before.rules
+```
+
+```shell
 ...
 # ok icmp codes
 -A ufw-before-input -p icmp --icmp-type destination-unreachable -j DROP
@@ -256,13 +262,13 @@ $ sudo vi /etc/ufw/before.rules
 ### 10. (선택사항) apt 명령어로 ufw 삭제
 - 설정 파일을 유지하며 ufw를 삭제합니다.
 
-```shell
+```console
 $ sudo apt remove ufw
 $ sudo apt remove --auto-remove ufw
 ```
 
 - 설정 파일과 함께 ufw를 삭제합니다. (단, 사용자 홈 디렉터리의 설정 파일은 유지됩니다.)
-```shell
+```console
 $ sudo apt purge ufw
 $ sudo apt purge --auto-remove ufw
 ```

@@ -41,18 +41,18 @@ SCM Manager 설치는 Standalone 방식(tar, RPM, DEB package)과 WebApp(war) �
 
 > 아래 명령어로 workspace 디렉터리를 생성합니다.
 
-```shell
+```console
 $ export LINDAREX_WORKSPACE=${HOME}/workspace
 $ mkdir -p ${LINDAREX_WORKSPACE}
 ```
 
 ### 1. SCM Manager 파일 내려받기
-```shell
+```console
 $ wget -P ${LINDAREX_WORKSPACE} https://maven.scm-manager.org/nexus/content/repositories/releases/sonia/scm//scm-server/1.60/scm-server-1.60-app.tar.gz
 ```
 
 ### 2. 내려받은 파일 압축 해제
-```shell
+```console
 $ tar zxf ${LINDAREX_WORKSPACE}/scm-server-1.60-app.tar.gz -C ${LINDAREX_WORKSPACE}
 ```
 
@@ -60,15 +60,18 @@ $ tar zxf ${LINDAREX_WORKSPACE}/scm-server-1.60-app.tar.gz -C ${LINDAREX_WORKSPA
 
 - SCM Manager UI의 포트를 설정합니다.
 
-```shell
+```console
 $ vi ${LINDAREX_WORKSPACE}/scm-server/conf/server-config.xml
+```
+
+```shell
 --------------------------------------------------------------------------------
 <SystemProperty name="jetty.port" default="8080" />
 --------------------------------------------------------------------------------
 ```
 
 ### 4. SCM Manager 실행
-```shell
+```console
 $ cd ${LINDAREX_WORKSPACE}/scm-server/bin/
 $ nohup ./scm-server > /dev/null &
 ```

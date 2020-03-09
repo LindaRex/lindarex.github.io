@@ -44,23 +44,23 @@ SonarQube는 LGPL(Lesser GNU General Public License) 라이선스로 오픈소�
 
 > 아래 명령어로 workspace 디렉터리를 생성합니다.
 
-```shell
+```console
 $ export LINDAREX_WORKSPACE=${HOME}/workspace
 $ mkdir -p ${LINDAREX_WORKSPACE}
 ```
 
 ### 1. SonarQube 파일 내려받기
-```shell
+```console
 $ wget -P ${LINDAREX_WORKSPACE} https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.9.1.zip
 ```
 
 ### 2. 내려받은 파일 압축 해제
-```shell
+```console
 $ unzip -q ${LINDAREX_WORKSPACE}/sonarqube-7.9.1.zip -d ${LINDAREX_WORKSPACE}
 ```
 
 ### 3. Symbolic link 설정
-```shell
+```console
 $ ln -s ${LINDAREX_WORKSPACE}/sonarqube-7.9.1 ${LINDAREX_WORKSPACE}/sonarqube
 ```
 
@@ -68,66 +68,69 @@ $ ln -s ${LINDAREX_WORKSPACE}/sonarqube-7.9.1 ${LINDAREX_WORKSPACE}/sonarqube
 - SonarQube와 연동 될 사용자 계정과 데이터베이스(이하 Database)를 생성합니다.
 
 #### 4.1. postgres 계정 로그인
-```shell
+```console
 $ sudo su - postgres
 ```
 
 #### 4.2. psql utility 실행
-```shell
+```console
 $ psql postgres
 ```
 
 #### 4.3. 사용자 생성
-```shell
+```console
 postgres=# create user sonar;
 ```
 
 #### 4.4. 사용자 Role 설정
-```shell
+```console
 postgres=# alter role sonar with createdb;
 ```
 
 #### 4.5. 사용자 비밀번호 설정
-```shell
+```console
 postgres=# alter user sonar with encrypted password 'sonar-password';
 postgres=# alter user postgres password 'postgres-password';
 ```
 
 > 생성한 사용자 정보를 조회합니다.
-```shell
+```console
 postgres=# \du
 ```
 
 #### 4.6. Database 생성
-```shell
+```console
 postgres=# create database sonar owner sonar;
 ```
 
 #### 4.7. Privileges 설정
-```shell
+```console
 postgres=# grant all privileges on database sonar to sonar;
 ```
 
 > 생성한 Database를 조회합니다.
-```shell
+```console
 postgres=# \l
 ```
 
 #### 4.8. psql utility 종료
-```shell
+```console
 postgres=# \q
 ```
 
 #### 4.9. postgres 계정 로그아웃
-```shell
+```console
 $ exit
 ```
 
 ### 5. SonarQube 설정
 - 위에서 생성한 PostgreSQL 사용자 정보와 Database 정보, SonarQube UI의 포트를 설정합니다.
 
-```shell
+```console
 $ vi ${LINDAREX_WORKSPACE}/sonarqube/conf/sonar.properties
+```
+
+```shell
 --------------------------------------------------------------------------------
 sonar.jdbc.username=sonar
 sonar.jdbc.password=sonar-password
@@ -138,16 +141,22 @@ sonar.web.port=9000
 
 - OpenJDK(Java) 경로를 설정합니다.
 
-```shell
+```console
 $ vi ${LINDAREX_WORKSPACE}/sonarqube/conf/wrapper.conf
+```
+
+```shell
 --------------------------------------------------------------------------------
 wrapper.java.command=/home/rex/workspace/tool/java11/bin/java
 --------------------------------------------------------------------------------
 ```
 
 ### 6. Max map count 설정
-```shell
+```console
 $ sudo vi /etc/profile
+```
+
+```shell
 --------------------------------------------------------------------------------
 sudo sysctl -w vm.max_map_count=262144
 --------------------------------------------------------------------------------
@@ -162,28 +171,28 @@ sudo sysctl -w vm.max_map_count=262144
 > SonarQube 설치 시 필요 요구사항에 대한 자세한 정보는 [https://docs.sonarqube.org/latest/requirements/requirements/](https://docs.sonarqube.org/latest/requirements/requirements/){: target="\_blank"}를 확인해 주시기 바랍니다.
 
 > 수정 내역 적용을 위해 아래 명령어를 입력합니다.
-```shell
-# source /etc/profile
+```console
+$ sudo source /etc/profile
 ```
 
 ### 7. 스크립트로 SonarQube 서비스 관리
 #### 7.1. SonarQube 서비스 시작
-```shell
+```console
 $ ${LINDAREX_WORKSPACE}/sonarqube/bin/linux-x86-64/sonar.sh start
 ```
 
 #### 7.2. SonarQube 서비스 중지
-```shell
+```console
 $ ${LINDAREX_WORKSPACE}/sonarqube/bin/linux-x86-64/sonar.sh stop
 ```
 
 #### 7.3. SonarQube 서비스 재시작
-```shell
+```console
 $ ${LINDAREX_WORKSPACE}/sonarqube/bin/linux-x86-64/sonar.sh restart
 ```
 
 #### 7.3. SonarQube 서비스 상태 조회
-```shell
+```console
 $ ${LINDAREX_WORKSPACE}/sonarqube/bin/linux-x86-64/sonar.sh status
 ```
 

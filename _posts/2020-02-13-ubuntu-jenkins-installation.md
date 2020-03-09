@@ -46,38 +46,44 @@ Jenkins는 모든 프로젝트의 빌드와 배포, 자동화를 지원하며, �
 
 ## 내용(CONTENTS)
 ### 1. Jenkins debian packages repository key 추가
-```shell
+```console
 $ sudo wget -q -O - https://pkg.jenkins.io/debian/jenkins-ci.org.key | sudo apt-key add -
 ```
 
 ### 2. Jenkins debian packages repository 추가
-```shell
+```console
 $ sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'  
 ```
 
 ### 3. apt install 명령어로 Jenkins 설치
-```shell
+```console
 $ sudo apt update -y && sudo apt install jenkins -y  
 ```
 
 ### 4. (선택사항) Java 경로 설정
 #### 4.1. 설치된 Java 경로 확인
-```shell
+```console
 $ sudo which java
 /usr/bin/java
 ```
 
 #### 4.2. Java 경로 추가
-```shell
+```console
 $ sudo vi /etc/init.d/jenkins
+```
+
+```shell
 --------------------------------------------------------------------------------
 PATH="/bin:/usr/bin:/sbin:/usr/sbin:/usr/bin/java" 
 --------------------------------------------------------------------------------
 ```
 
 ### 5. (선택사항) 기본 포트 변경
-```shell
+```console
 $ sudo vi /etc/default/jenkins  
+```
+
+```shell
 --------------------------------------------------------------------------------
 JENKINS_PORT="8080"  
 JENKINS_AJP_PORT="9091"  
@@ -87,47 +93,47 @@ JENKINS_USER="root"
 
 ### 6. systemctl 명령어로 Jenkins 서비스 관리
 #### 6.1. Jenkins 서비스 설정 반영
-```shell
+```console
 $ sudo systemctl daemon-reload
 ```
 
 #### 6.2. Jenkins 서비스 시작
-```shell
+```console
 $ sudo systemctl start jenkins.service
 ```
 
 #### 6.3. Jenkins 서비스 중지
-```shell
+```console
 $ sudo systemctl stop jenkins.service
 ```
 
 #### 6.4. Jenkins 서비스 재시작
-```shell
+```console
 $ sudo systemctl restart jenkins.service
 ```
 
 #### 6.5. Jenkins 서비스 설정 재적용
-```shell
+```console
 $ sudo systemctl reload jenkins.service
 ```
 
 #### 6.6. Jenkins 서비스 상태 조회
-```shell
+```console
 $ sudo systemctl status jenkins.service
 ```
 
 #### 6.7. Jenkins 서비스 활성화(부팅 시 자동 시작)
-```shell
+```console
 $ sudo systemctl enable jenkins.service
 ```
 
 #### 6.8. Jenkins 서비스 비활성화
-```shell
+```console
 $ sudo systemctl disable jenkins.service
 ```
 
 #### 6.9. Jenkins 서비스 및 관련 프로세스 모두 중지
-```shell
+```console
 $ sudo systemctl kill jenkins.service
 ```
 

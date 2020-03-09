@@ -37,33 +37,33 @@ Azure CLI(command line interface, 명령줄 인터페이스, 이하 azure cli)�
 
 > Ubuntu 18.04 (Bionic)
 
-```shell
+```console
 $ sudo apt update
 $ sudo apt install -y ca-certificates curl apt-transport-https lsb-release gnupg
 ```
 
 ### 2. Microsoft 서명 키 설치
-```shell
+```console
 $ curl -sL https://packages.microsoft.com/keys/microsoft.asc | \
     gpg --dearmor | \
     sudo tee /etc/apt/trusted.gpg.d/microsoft.asc.gpg > /dev/null
 ```
 
 ### 3. azure cli debian packages repository 추가
-```shell
+```console
 $ AZ_REPO=$(lsb_release -cs)
 $ echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | \
     sudo tee /etc/apt/sources.list.d/azure-cli.list
 ```
 
 ### 4. azure cli 설치
-```shell
+```console
 $ sudo apt update
 $ sudo apt install azure-cli -y
 ```
 
 ### 5. azure 로그인
-```shell
+```console
 $ az login
 To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code HGCW1YCF3 to authenticate.
 
@@ -87,7 +87,7 @@ To sign in, use a web browser to open the page https://microsoft.com/devicelogin
 > 위 로그인 결과는 잘못된 값이므로 참고만 하시기를 바랍니다.
 
 ### 6. (선택사항) azure cli 삭제
-```shell
+```console
 $ sudo apt remove azure-cli -y
 $ sudo apt autoremove -y
 $ sudo rm /etc/apt/sources.list.d/azure-cli.list

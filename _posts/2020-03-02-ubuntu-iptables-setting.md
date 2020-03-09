@@ -47,12 +47,12 @@ linux 시스템(이하 system)에서 iptables는 /usr/sbin/iptables에 설치되
 > ROOT 권한 필요
 
 #### 1.1. iptables 확인
-```shell
+```console
 # which iptables
 /sbin/iptables
 ```
 
-```shell
+```console
 # iptables -V
 iptables v1.6.1
 ```
@@ -60,13 +60,13 @@ iptables v1.6.1
 #### 1.2. iptables 초기화
 - 모든 chain에 설정된 모든 rule을 제거합니다. 
 
-```shell
+```console
 # iptables -F
 ```
 
 - 기본 chain을 제외한 나머지 모든 chain에 설정된 모든 rule을 제거합니다. 
 
-```shell
+```console
 # iptables -X
 ```
 
@@ -75,7 +75,7 @@ iptables v1.6.1
 
 - 기본 조회입니다.
 
-```shell
+```console
 # iptables -L
 chain INPUT (policy ACCEPT)
 target     prot opt source               destination
@@ -95,7 +95,7 @@ target     prot opt source               destination
 
 - 상세 조회입니다.
 
-```shell
+```console
 # iptables -L -v
 Chain INPUT (policy ACCEPT 10 packets, 676 bytes)
  pkts bytes target     prot opt in     out     source               destination
@@ -109,7 +109,7 @@ Chain OUTPUT (policy ACCEPT 5 packets, 812 bytes)
 
 - IP address와 port number로 표시하여 조회합니다.
 
-```shell
+```console
 # iptables -L -n
 Chain INPUT (policy ACCEPT)
 target     prot opt source               destination
@@ -123,7 +123,7 @@ target     prot opt source               destination
 
 - 정확한 값으로 확장하여 조회합니다.
 
-```shell
+```console
 # iptables -L -x
 Chain INPUT (policy ACCEPT)
 target     prot opt source               destination
@@ -137,7 +137,7 @@ target     prot opt source               destination
 
 - rule의 시작 부분에 숫자를 추가하여 조회합니다.
 
-```shell
+```console
 # iptables -L --line-numbers
 Chain INPUT (policy ACCEPT)
 num  target     prot opt source               destination
@@ -151,7 +151,7 @@ num  target     prot opt source               destination
 
 - 전체 rule을 출력합니다.
 
-```shell
+```console
 # iptables -S
 -P INPUT ACCEPT
 -P FORWARD ACCEPT
@@ -160,7 +160,7 @@ num  target     prot opt source               destination
 
 - 전체 rule을 상세하게 출력합니다.
 
-```shell
+```console
 # iptables -S -v
 -P INPUT ACCEPT -c 117 8240
 -P FORWARD ACCEPT -c 0 0
@@ -257,280 +257,281 @@ num  target     prot opt source               destination
 #### 4.1. rule 추가
 - '-A' 또는 '--append' command를 사용합니다.
 
-```shell
+```console
 # iptables [table] -A chain rule-specification
 ```
 
 - 상세히 설명하면 아래와 같습니다.
 
-```shell
+```console
 # iptables [-t TABLE-NAME] -A chain -m MATCH-NAME [match-options] -j TARGET-NAME [target-options]
 ```
 
 - 예제 :: INPUT chain의 localhost 접속 허용 rule을 추가합니다.
 
-```shell
+```console
 # iptables -A INPUT -i lo -j ACCEPT
 ```
 
 #### 4.2. rule 확인
 - '-C' 또는 '--check' command를 사용합니다.
 
-```shell
+```console
 # iptables [table] -C chain rule-specification
 ```
 
 - 상세히 설명하면 아래와 같습니다.
 
-```shell
+```console
 # iptables [-t TABLE-NAME] -C chain -m MATCH-NAME [match-options] -j TARGET-NAME [target-options]
 ```
 
 - 예제 :: INPUT chain의 tcp 8080 포트(이하 port) 접속 허용 rule을 확인합니다.
 
-```shell
+```console
 # iptables -C INPUT -p tcp --dport 8080 -j ACCEPT
 ```
 
 #### 4.3. rule 삭제
 - '-D' 또는 '--delete' command를 사용합니다.
 
-```shell
+```console
 # iptables [table] -D chain rule-specification
 ```
 
 - 상세히 설명하면 아래와 같습니다.
 
-```shell
+```console
 # iptables [-t TABLE-NAME] -D chain -m MATCH-NAME [match-options] -j TARGET-NAME [target-options]
 ```
 
 - 예제 :: INPUT chain의 tcp 22 port 접속 차단 rule을 삭제합니다.
 
-```shell
+```console
 # iptables -D INPUT -p tcp -m tcp --dport 22 -j REJECT
 ```
 
 #### 4.4. rule number로 rule 삭제
 - '-D' 또는 '--delete' command를 사용합니다.
 
-```shell
+```console
 # iptables [table] -D chain rule-number
 ```
 
 - 상세히 설명하면 아래와 같습니다.
 
-```shell
+```console
 # iptables [-t TABLE-NAME] -D chain rule-number
 ```
 
 - 예제 :: FORWARD chain의 rule number 1번 rule을 삭제합니다.
 
-```shell
+```console
 # iptables -D FORWARD 1
 ```
 
 #### 4.5. rule 삽입
 - '-I' 또는 '--insert' command를 사용합니다.
 
-```shell
+```console
 # iptables [table] -I [rule-number] rule-specification
 ```
 
 - 상세히 설명하면 아래와 같습니다.
 
-```shell
+```console
 # iptables [-t TABLE-NAME] -I chain [rule-number] -m MATCH-NAME [match-options] -j TARGET-NAME [target-options]
 ```
 
 - 예제 :: INPUT chain의 rule number 1번에 udp 53 port 접속 차단 rule을 삽입합니다.
 
-```shell
+```console
 # iptables -I INPUT 1 -p udp --dport 53 -j DROP
 ```
 
 #### 4.6. rule 교체
 - '-R' 또는 '--replace' command를 사용합니다.
 
-```shell
+```console
 # iptables [table] -R rule-number rule-specification
 ```
 
 - 상세히 설명하면 아래와 같습니다.
 
-```shell
+```console
 # iptables [-t TABLE-NAME] -R chain rule-number -m MATCH-NAME [match-options] -j TARGET-NAME [target-options]
 ```
 
 - 예제 :: INPUT chain의 rule number 1번에 출발지 network '10.0.1.0/24' 대역의 tcp 8080 port 접속 허용 rule을 교체합니다.
 
-```shell
+```console
 # iptables -R INPUT 1 -p tcp -s 10.0.1.0/24 --dport 8080 -j ACCEPT
 ```
 
 #### 4.7. rule 조회
 - '-L' 또는 '--list' command를 사용합니다.
 
-```shell
+```console
 # iptables [table] -L [chain [rule-number]] [options]
 ```
 
 - 상세히 설명하면 아래와 같습니다.
 
-```shell
+```console
 # iptables [-t TABLE-NAME] -L [chain [rule-number]] [options]
 ```
 
 - 예제 :: 모든 rule을 service 이름으로 조회합니다.
 
-```shell
+```console
 # iptables -L
 ```
 
 - 예제 :: 모든 rule을 port number로 조회합니다.
 
-```shell
+```console
 # iptables -L -n
 ```
 
 #### 4.8. rule 모두 삭제
 - '-F' 또는 '--flush' command를 사용합니다.
 
-```shell
+```console
 # iptables [table] -F [chain [rule-number]] [options]
 ```
 
 - 상세히 설명하면 아래와 같습니다.
 
-```shell
+```console
 # iptables [-t TABLE-NAME] -F [chain [rule-number]] [options]
 ```
 
 - 예제 :: 모든 chain의 rule을 삭제합니다.
 
-```shell
+```console
 # iptables -F
 ```
 
 - 예제 :: FORWARD chain의 모든 rule을 삭제합니다.
 
-```shell
+```console
 # iptables -F FORWARD
 ```
 
 #### 4.9. rule 출력
 - '-S' 또는 '--list-rules' command를 사용합니다.
 
-```shell
+```console
 # iptables [table] -S [chain [rule-number]]
 ```
 
 - 상세히 설명하면 아래와 같습니다.
 
-```shell
+```console
 # iptables [-t TABLE-NAME] -S [chain [rule-number]]
 ```
 
 - 예제 :: OUTPUT chain의 rule number 1번 rule을 출력합니다.
 
-```shell
+```console
 # iptables -S OUTPUT 1
 ```
 
 #### 4.10. 사용자 정의 chain 생성
 - '-N' 또는 '--new' command를 사용합니다.
 
-```shell
+```console
 # iptables [table] -N chain
 ```
 
 - 상세히 설명하면 아래와 같습니다.
 
-```shell
+```console
 # iptables [-t TABLE-NAME] -N chain
 ```
 
 - 예제 :: 'lindarex-chain-income'이라는 이름의 사용자 정의 chain을 생성합니다.
 
-```shell
+```console
 # iptables -N lindarex-chain-income
 ```
 
 #### 4.11. 사용자 정의 chain 이름 변경
 - '-E' 또는 '--rename-chain' command를 사용합니다.
 
-```shell
+```console
 # iptables [table] -E old-chain-name new-chain-name
 ```
 
 - 상세히 설명하면 아래와 같습니다.
 
-```shell
+```console
 # iptables [-t TABLE-NAME] -E old-chain-name new-chain-name
 ```
 
 - 예제 :: 생성한 'lindarex-chain-income'이라는 이름의 사용자 정의 chain의 이름을 'lindarex-chain-income-new'로 변경합니다.
 
-```shell
+```console
 # iptables -E lindarex-chain-income lindarex-chain-income-new
 ```
 
 #### 4.12. 사용자 정의 chain 삭제
 - '-X' 또는 '--delete-chain' command를 사용합니다.
 
-```shell
+```console
 # iptables [table] -X [chain]
 ```
 
 - 상세히 설명하면 아래와 같습니다.
 
-```shell
+```console
 # iptables [-t TABLE-NAME] -X [chain]
 ```
 
 - 예제 :: 생성한 'lindarex-chain-income-new'라는 이름의 사용자 정의 chain을 삭제합니다.
 
-```shell
+```console
 # iptables -X lindarex-chain-income-new
 ```
 
 #### 4.13. built-in chain의 policy target 설정
 - '-P' 또는 '--policy' command를 사용합니다.
 
-```shell
+```console
 # iptables [table] -P chain target
 ```
 
 - 상세히 설명하면 아래와 같습니다.
 
-```shell
+```console
 # iptables [-t TABLE-NAME] -P chain -j TARGET-NAME [target-options]
 ```
 
 - 예제 :: OUTPUT chain의 policy를 DROP으로 설정합니다.
 
-```shell
+```console
 # iptables -P FORWARD DROP
 ```
 
 #### 4.14. packet과 byte counters를 0으로 설정
 - '-Z' 또는 '--zero' command를 사용합니다.
 
-```shell
+```console
 # iptables [table] -Z [chain [rule-number]] [options]
 ```
 
 - 상세히 설명하면 아래와 같습니다.
 
-```shell
+```console
 # iptables [-t TABLE-NAME] -Z [chain [rule-number]] [options]
 ```
 
 - 예제 :: FORWARD chain의 모든 rule의 counters를 0으로 설정합니다.
 
-```shell
+```console
 # iptables -Z FORWARD
 ```
+
 
 ## 마무리(CONCLUSION)
 Ubuntu 환경에 iptables 설정을 완료했습니다. <br />

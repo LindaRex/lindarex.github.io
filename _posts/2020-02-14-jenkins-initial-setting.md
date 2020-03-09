@@ -38,7 +38,7 @@ tags:
 ### 2. Jenkins 활성화
 - 아래 명령어로 Jenkins 활성화에 필요한 암호(Password)를 조회합니다.
 
-```shell
+```console
 $ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 91623591371f4f57bf6814a674bfeda9
 ```
@@ -86,7 +86,7 @@ $ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
     + 'Install automatically'을 체크해제하여, JDK name과 JAVA_HOME을 기재합니다.
 
    > JAVA_HOME은 아래 명령어로 조회할 수 있습니다.
-   ```shell
+   ```console
    $ echo $JAVA_HOME
    /usr/lib/jvm/java-8-openjdk-amd64
    ```

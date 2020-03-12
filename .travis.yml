@@ -9,7 +9,7 @@ exclude: [vendor]
 
 deploy:
   provider: pages
-  skip_cleanup: true
+  cleanup: false
   github_token: $LINDAREX_GITHUB_TOKEN
   keep_history: true
   local-dir: ./_site

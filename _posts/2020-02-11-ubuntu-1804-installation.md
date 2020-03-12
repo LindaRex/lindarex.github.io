@@ -1,5 +1,5 @@
 ---
-title: "우분투(Ubuntu) 18.04 설치하기"
+title: "우분투(Ubuntu) 서버(Server) 18.04 설치하기"
 categories: 
   - ubuntu
 tags: 
@@ -9,8 +9,8 @@ tags:
 ---
 
 
-우분투(Ubuntu) 18.04 LTS(Long Term Support)는 Ubuntu 16.04 LTS와 비교해 새로운 기능과 개선 사항으로 많은 변화가 있으며, 릴리스의 코드 이름은 'Bionic Beaver'입니다. <br />
-이 포스트에서는 VMware Workstation에 Ubuntu 18.04 LTS를 설치하는 방법을 소개합니다.
+우분투(ubuntu) server 18.04는 ubuntu server 16.04와 비교해 새로운 기능과 개선 사항으로 많은 변화가 있으며, 릴리스의 코드 이름은 'Bionic Beaver'입니다. <br />
+이 포스트에서는 VMware Workstation에 ubuntu server 18.04 LTS를 설치하는 방법을 소개합니다.
 
 
 ## 선행조건(PREREQUISITE)
@@ -21,23 +21,23 @@ tags:
 - VMware® Workstation 15 Pro (15.5.1 build-15018445)
 - Ubuntu 18.04.3 LTS (Bionic Beaver) Server (64-bit)
 
-> Ubuntu 18.04 Server 설치 시 필요한 시스템 요구사항은 [https://help.ubuntu.com/lts/serverguide/preparing-to-install.html](https://help.ubuntu.com/lts/serverguide/preparing-to-install.html){: target="\_blank"}를 확인해 주시기 바랍니다.
+> ubuntu server 18.04 설치 시 필요한 시스템 요구사항은 [https://help.ubuntu.com/lts/serverguide/preparing-to-install.html](https://help.ubuntu.com/lts/serverguide/preparing-to-install.html){: target="\_blank"}를 확인해 주시기 바랍니다.
 
 
 ## 요약(SUMMARY)
-1. Ubuntu 18.04.3 Server ISO 파일 내려받기
+1. ubuntu server 18.04.3 ISO 파일 내려받기
 2. VMware workstation의 VM(Virtual Machine) 설정
-3. Ubuntu 18.04 설치
-4. 리눅스 명령어로 Ubuntu VM 상태 확인
+3. ubuntu server 18.04.3 설치
+4. 리눅스 명령어로 ubuntu VM 상태 확인
 
 
 ## 내용(CONTENTS)
-### 1. Ubuntu 18.04.3 Server ISO 파일 내려받기
-- 웹브라우저로 [Ubuntu Releases 페이지](http://mirror.kakao.com/ubuntu-releases/){: target="\_blank"}를 엽니다.
+### 1. ubuntu server 18.04.3 ISO 파일 내려받기
+- 웹브라우저로 [ubuntu Releases 페이지](http://mirror.kakao.com/ubuntu-releases/){: target="\_blank"}를 엽니다.
 
 ![lindarex-ubuntu-1804-installation-001]
 
-- 목록의 '18.04.3'을 클릭하여 Ubuntu 18.04.3 LTS (Bionic Beaver) 페이지로 이동합니다.
+- 목록의 '18.04.3'을 클릭하여 ubuntu 18.04.3 LTS (Bionic Beaver) 페이지로 이동합니다.
 
 ![lindarex-ubuntu-1804-installation-002]
 
@@ -68,7 +68,7 @@ tags:
 
 ![lindarex-ubuntu-1804-installation-007]
 
-- Guest operating system은 'Linux', Version은 'Ubuntu 64-bit'를 선택하고 'Next'를 클릭합니다.
+- Guest operating system은 'Linux', Version은 'ubuntu 64-bit'를 선택하고 'Next'를 클릭합니다.
 
 ![lindarex-ubuntu-1804-installation-008]
 
@@ -91,7 +91,6 @@ tags:
 - 'Use network address translation (NAT)'를 선택하고 'Next'를 클릭합니다.
 
 > Network type에 대한 자세한 정보는 [VMware Workstation의 가상 네트워크(Virtual Network) 알아보기](https://lindarex.github.io/vmware-workstation/vmware-workstation-virtual-network/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
-
 
 ![lindarex-ubuntu-1804-installation-012]
 
@@ -125,7 +124,7 @@ tags:
 
 ![lindarex-ubuntu-1804-installation-020]
 
-- Use ISO image file 항목의 'Browse..'를 클릭해 내려받은 Ubuntu 18.04.3 LTS (Bionic Beaver) ISO 파일을 선택합니다.
+- Use ISO image file 항목의 'Browse..'를 클릭해 내려받은 ubuntu 18.04.3 LTS (Bionic Beaver) ISO 파일을 선택합니다.
 
 ![lindarex-ubuntu-1804-installation-021]
 
@@ -145,8 +144,8 @@ tags:
 
 ![lindarex-ubuntu-1804-installation-027]
 
-### 3. Ubuntu 18.04 설치
-- 아래 메뉴를 통해 Ubuntu VM을 구동합니다.
+### 3. ubuntu server 18.04.3 설치
+- 아래 메뉴를 통해 ubuntu VM을 구동합니다.
 
 > 상단 메뉴 > 녹색 플레이 버튼 또는 Ctrl + B
 
@@ -175,7 +174,7 @@ tags:
 
 ![lindarex-ubuntu-1804-installation-033]
 
-- Ubuntu archive mirror address를 설정합니다.
+- ubuntu archive mirror address를 설정합니다.
 
 ![lindarex-ubuntu-1804-installation-034]
 
@@ -221,8 +220,7 @@ tags:
 
 ![lindarex-ubuntu-1804-installation-046]
 
-
-### 4. 리눅스 명령어로 Ubuntu VM 상태 확인
+### 4. 리눅스 명령어로 ubuntu VM 상태 확인
 
 - 사용자 이름과 비밀번호를 입력하여 로그인합니다.
 
@@ -258,8 +256,8 @@ tags:
 
 
 ## 마무리(CONCLUSION)
-VMware Workstation에 Ubuntu 18.04.3 LTS (Bionic Beaver) Server 설치를 완료했습니다. <br />
-다음 포스트에서는 Ubuntu Server 운영 시 유용한 패키지를 소개하겠습니다.
+VMware Workstation에 ubuntu 18.04.3 LTS (Bionic Beaver) Server 설치를 완료했습니다. <br />
+다음 포스트에서는 [우분투(ubuntu) 서버(Server) 초기 설정하기](https://lindarex.github.io/ubuntu/ubuntu-initial-setting/){: target="\_blank"}를 소개하겠습니다.
 
 
 ## 참고(REFERENCES)

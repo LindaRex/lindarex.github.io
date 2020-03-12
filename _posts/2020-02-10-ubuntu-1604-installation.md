@@ -1,5 +1,5 @@
 ---
-title: "우분투(Ubuntu) 16.04 설치하기"
+title: "우분투(Ubuntu) 서버(Server) 16.04 설치하기"
 categories: 
   - ubuntu
 tags: 
@@ -9,9 +9,9 @@ tags:
 ---
 
 
-우분투(Ubuntu)는 데비안(이하 debian) 리눅스(이하 linux) 기반으로, debian에 비해 사용자 편의성에 초점을 맞춘 linux 배포판이며 컴퓨터 운영체제(OS, Operating System)입니다. <br />
-새로운 버전은 6개월마다, 장기 지원 버전(LTS, Long Term Support)은 2년에 한 번씩 출시되고, 다양한 언어를 지원하고 낮은 사양의 컴퓨터에서도 작동하도록 설계되어 있습니다. <br />
-이 포스트에서는 VMware Workstation에 Ubuntu 16.04를 설치하는 방법을 소개합니다.
+우분투(ubuntu)는 데비안(debian) 리눅스(linux) 기반으로, debian에 비해 사용자 편의성에 초점을 맞춘 linux 배포판이며 컴퓨터 운영체제(OS, operating system)입니다. <br />
+새로운 버전은 6개월마다, 장기 지원 버전(LTS, long term support)은 2년에 한 번씩 출시되고, 다양한 언어를 지원하고 낮은 사양의 컴퓨터에서도 작동하도록 설계되어 있습니다. <br />
+이 포스트에서는 VMware Workstation에 ubuntu server 16.04 LTS를 설치하는 방법을 소개합니다.
 
 
 ## 선행조건(PREREQUISITE)
@@ -22,23 +22,23 @@ tags:
 - VMware® Workstation 15 Pro (15.5.1 build-15018445)
 - Ubuntu 16.04.6 LTS (Xenial Xerus) Server (64-bit)
 
-> Ubuntu 16.04 Server 설치 시 필요한 시스템 요구사항은 [https://help.ubuntu.com/16.04/serverguide/preparing-to-install.html](https://help.ubuntu.com/16.04/serverguide/preparing-to-install.html){: target="\_blank"}를 확인해 주시기 바랍니다.
+> ubuntu server 16.04 설치 시 필요한 시스템 요구사항은 [https://help.ubuntu.com/16.04/serverguide/preparing-to-install.html](https://help.ubuntu.com/16.04/serverguide/preparing-to-install.html){: target="\_blank"}를 확인해 주시기 바랍니다.
 
 
 ## 요약(SUMMARY)
-1. Ubuntu 16.04.6 Server ISO 파일 내려받기
+1. ubuntu server 16.04.6 ISO 파일 내려받기
 2. VMware workstation의 VM(Virtual Machine) 설정
-3. Ubuntu 16.04 설치
-4. 리눅스 명령어로 Ubuntu VM 상태 확인
+3. ubuntu server 16.04.6 설치
+4. linux 명령어로 ubuntu VM 상태 확인
 
 
 ## 내용(CONTENTS)
-### 1. Ubuntu 16.04.6 Server ISO 파일 내려받기
-- 웹브라우저로 [Ubuntu Releases 페이지](http://mirror.kakao.com/ubuntu-releases/){: target="\_blank"}를 엽니다.
+### 1. ubuntu server 16.04.6 ISO 파일 내려받기
+- 웹브라우저로 [ubuntu Releases 페이지](http://mirror.kakao.com/ubuntu-releases/){: target="\_blank"}를 엽니다.
 
 ![lindarex-ubuntu-1604-installation-001]
 
-- 목록의 '16.04.6'를 클릭하여 Ubuntu 16.04.6 LTS (Xenial Xerus) 페이지로 이동합니다.
+- 목록의 '16.04.6'를 클릭하여 ubuntu 16.04.6 LTS (Xenial Xerus) 페이지로 이동합니다.
 
 ![lindarex-ubuntu-1604-installation-002]
 
@@ -69,7 +69,7 @@ tags:
 
 ![lindarex-ubuntu-1604-installation-007]
 
-- Guest operating system은 'Linux', Version은 'Ubuntu 64-bit'를 선택하고 'Next'를 클릭합니다.
+- Guest operating system은 'Linux', Version은 'ubuntu 64-bit'를 선택하고 'Next'를 클릭합니다.
 
 ![lindarex-ubuntu-1604-installation-008]
 
@@ -126,7 +126,7 @@ tags:
 
 ![lindarex-ubuntu-1604-installation-020]
 
-- Use ISO image file 항목의 'Browse..'를 클릭해 내려받은 Ubuntu 16.04.6 LTS (Xenial Xerus) ISO 파일을 선택합니다.
+- Use ISO image file 항목의 'Browse..'를 클릭해 내려받은 ubuntu 16.04.6 LTS (Xenial Xerus) ISO 파일을 선택합니다.
 
 ![lindarex-ubuntu-1604-installation-021]
 
@@ -146,8 +146,8 @@ tags:
 
 ![lindarex-ubuntu-1604-installation-027]
 
-### 3. Ubuntu 16.04 설치
-- 아래 메뉴를 통해 Ubuntu VM을 구동합니다.
+### 3. ubuntu server 16.04.6 설치
+- 아래 메뉴를 통해 ubuntu VM을 구동합니다.
 
 > 상단 메뉴 > 녹색 플레이 버튼 또는 Ctrl + B
 
@@ -157,11 +157,11 @@ tags:
 
 ![lindarex-ubuntu-1604-installation-029]
 
-- 'Install Ubuntu Server'를 선택하여 설치를 시작합니다.
+- 'Install ubuntu Server'를 선택하여 설치를 시작합니다.
 
 ![lindarex-ubuntu-1604-installation-030]
 
-- Ubuntu Server에 사용하고자 하는 언어를 설정합니다. 'English'를 선택합니다.
+- ubuntu Server에 사용하고자 하는 언어를 설정합니다. 'English'를 선택합니다.
 
 ![lindarex-ubuntu-1604-installation-031]
 
@@ -275,7 +275,7 @@ tags:
 
 ![lindarex-ubuntu-1604-installation-063]
 
-### 4. 리눅스 명령어로 Ubuntu VM 상태 확인
+### 4. linux 명령어로 ubuntu VM 상태 확인
 
 - 사용자 이름과 비밀번호를 입력하여 로그인합니다.
 
@@ -313,9 +313,9 @@ tags:
 
 
 ## 마무리(CONCLUSION)
-VMware Workstation에 Ubuntu 16.04.6 LTS (Xenial Xerus) Server 설치를 완료했습니다. <br />
-2020년 2월 12일 [W3Techs.com 통계](https://w3techs.com/technologies/details/os-linux){: target="\_blank"}에 따르면, Ubuntu 점유율은 linux 배포판을 사용하는 웹사이트 중 1위(38.9%)로, 2위인 debian(18.4%)의 2배 이상 차이가 납니다. 또한 대부분의 오픈소스 소프트웨어는 Ubuntu를 지원하고, 국내외 사용자와 레퍼런스가 많습니다. <br />
-리눅스 입문자 또는 오픈소스 소프트웨어에 관심이 있다면, Ubuntu를 사용하며 리눅스 명령어를 숙지하고 다양한 커뮤니티에서 활동하는 것을 권합니다.
+VMware Workstation에 ubuntu 16.04.6 LTS (Xenial Xerus) Server 설치를 완료했습니다. <br />
+2020년 2월 12일 [W3Techs.com 통계](https://w3techs.com/technologies/details/os-linux){: target="\_blank"}에 따르면, ubuntu 점유율은 linux 배포판을 사용하는 웹사이트 중 1위(38.9%)로, 2위인 debian(18.4%)의 2배 이상 차이가 납니다. 또한 대부분의 오픈소스 소프트웨어는 Ubuntu를 지원하고, 국내외 사용자와 레퍼런스가 많습니다. <br />
+linux 입문자 또는 오픈소스 소프트웨어에 관심이 있다면, Ubuntu를 사용하며 linux 명령어를 숙지하고 다양한 커뮤니티에서 활동하는 것을 권합니다.
 
 
 ## 참고(REFERENCES)

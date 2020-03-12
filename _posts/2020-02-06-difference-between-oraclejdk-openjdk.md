@@ -35,4 +35,3 @@ JDK 유료화에 따라 개인 사용자를 비롯해 기업 사용자는 OpenJD
 - [https://engineering.linecorp.com/ko/blog/line-open-jdk/](https://engineering.linecorp.com/ko/blog/line-open-jdk/){: target="\_blank"}
 - [https://c10106.tistory.com/4075](https://c10106.tistory.com/4075){: target="\_blank"}
 - [https://jsonobject.tistory.com/395](https://jsonobject.tistory.com/395){: target="\_blank"}
-

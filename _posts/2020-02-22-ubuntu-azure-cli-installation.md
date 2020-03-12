@@ -1,5 +1,5 @@
 ---
-title: "우분투(Ubuntu) 환경에 패키지로 Azure CLI 설치하기"
+title: "우분투(Ubuntu) 환경에 패키지(Package)로 Azure CLI 설치하기"
 categories: 
   - azure
 tags: 
@@ -9,15 +9,15 @@ tags:
 ---
 
 
-Azure CLI(command line interface, 명령줄 인터페이스, 이하 azure cli)는 Microsoft Azure(이하 azure)에 리소스를 만들고 관리할 수 도구입니다. <br />
-모든 azure 서비스에서 사용할 수 있으며, azure를 빠르게 사용할 수 있도록 자동화에 초점을 두고 있습니다. <br />
-이 포스트에서는 우분투(이하 Ubuntu) 환경에서 패키지로 azure cli를 설치하는 방법을 소개합니다.
+Azure CLI(command line interface, 명령줄 인터페이스)는 Microsoft Azure에 리소스(resource)를 만들고 관리할 수 도구입니다. <br />
+모든 azure 서비스(service)에서 사용할 수 있으며, azure를 빠르게 사용할 수 있도록 자동화에 초점을 두고 있습니다. <br />
+이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 azure cli를 설치하는 방법을 소개합니다.
 
 
 ## 선행조건(PREREQUISITE)
-- Ubuntu 환경이 필요합니다.
+- ubuntu 환경이 필요합니다.
 
-> Ubuntu 설치 방법은 [VMware workstation에 Ubuntu 16.04 설치하기](https://lindarex.github.io/ubuntu/ubuntu-1604-installation/){: target="\_blank"} 또는 [VMware workstation에 Ubuntu 18.04 설치하기](https://lindarex.github.io/ubuntu/ubuntu-1804-installation/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
+> Ubuntu 설치 방법은 [VMware workstation에 ubuntu server 16.04 설치하기](https://lindarex.github.io/ubuntu/ubuntu-1604-installation/){: target="\_blank"} 또는 [VMware workstation에 ubuntu server 18.04 설치하기](https://lindarex.github.io/ubuntu/ubuntu-1804-installation/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
 
 
 ## 테스트 환경(TEST ENVIRONMENT)
@@ -33,7 +33,7 @@ Azure CLI(command line interface, 명령줄 인터페이스, 이하 azure cli)�
 
 
 ## 내용(CONTENTS)
-### 1. 종속 패키지 설치
+### 1. 종속 package 설치
 
 > Ubuntu 18.04 (Bionic)
 
@@ -96,7 +96,7 @@ $ sudo rm /etc/apt/trusted.gpg.d/microsoft.asc.gpg
 
 
 ## 마무리(CONCLUSION)
-Ubuntu 환경에 패키지로 azure cli 설치를 완료했습니다. <br />
+ubuntu 환경에 package로 azure cli 설치를 완료했습니다. <br />
 다음 포스트에서는 azure 사용을 위한 service principal, resource group, network security group, virtual network, subnet, storage account 등의 설정과 Inception VM 생성 방법을 소개하겠습니다.
 
 

@@ -7,11 +7,11 @@ tags:
 ---
 
 
-이 포스트에서는 우분투(이하 Ubuntu) 환경에 젠킨스(이하 Jenkins)를 설치한 후 초기 설정하는 방법을 소개합니다.
+이 포스트에서는 우분투(ubuntu) 환경에 젠킨스(Jenkins)를 설치한 후 초기 설정하는 방법을 소개합니다.
 
 
 ## 선행조건(PREREQUISITE)
-- Ubuntu 환경에 Jenkins가 설치되어 있어야 합니다.
+- ubuntu 환경에 Jenkins가 설치되어 있어야 합니다.
 
 > Jenkins 설치 방법은 [우분투(Ubuntu) 환경에 패키지로 젠킨스(Jenkins) 설치하기](https://lindarex.github.io/jenkins/jenkins-initial-setting/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
 
@@ -24,10 +24,10 @@ tags:
 
 ## 요약(SUMMARY)
 1. Jenkins 접속 및 활성화
-2. Jenkins 추천 플러인(Plugin) 설치
+2. Jenkins 추천 플러인 설치
 3. 관리자(Admin) 계정 등록
 4. Jenkins 접속 URL 확인
-5. OpenJDK(Java) 설정
+5. OpenJDK Java 설정
 
 
 ## 내용(CONTENTS)
@@ -45,12 +45,12 @@ $ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 
 ![lindarex-jenkins-initial-setting-002]
 
-### 3. Jenkins 플러인(Plugin) 설치
+### 3. Jenkins 플러인(plugin) 설치
 - 'Install suggested plugins'를 선택합니다.
 
 ![lindarex-jenkins-initial-setting-003]
 
-- Plugin 설치를 진행합니다.
+- plugin 설치를 진행합니다.
 
 ![lindarex-jenkins-initial-setting-004]
 
@@ -71,7 +71,7 @@ $ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 
 ![lindarex-jenkins-initial-setting-008]
 
-### 6. OpenJDK(Java) 설정
+### 6. OpenJDK Java 설정
 - 아래 메뉴를 통해 'Global Tool Configuration' 페이지로 이동합니다.
 
 > Jenkins > 왼쪽 상단 메뉴 > Jenkins 관리 > Global Tool Configuration
@@ -96,7 +96,7 @@ $ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 
 ## 마무리(CONCLUSION)
 Jenkins 설치 후 초기 설정을 완료했습니다. <br />
-다음 포스트에서는 유용한 Jenkins Plugin을 소개하겠습니다.
+다음 포스트에서는 유용한 Jenkins plugin을 소개하겠습니다.
 
 
 ## 참고(REFERENCES)

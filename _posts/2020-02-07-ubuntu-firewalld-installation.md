@@ -8,18 +8,18 @@ tags:
 ---
 
 
-방화벽(이하 firewalld)은 IPv4, IPv6, 이더넷 브리지 및 IPSet의 방화벽 설정을 지원하는 리눅스(이하 linux) 방화벽 관리 도구입니다. <br />
-firewalld는 linux 커널 netfilter 프레임워크의 프런트 엔드 역할을 하며, RHEL 7 제품군의 기본 방화벽 관리 소프트웨어입니다. <br />
-우분투(이하 Ubuntu)의 기본 방화벽 시스템은 UFW(Uncomplicated Firewall)이지만, firewalld를 설치하고 사용할 수 있습니다. <br />
-이 포스트에서는 Ubuntu 환경에서 패키지로 firewalld를 설치하고 설정하는 방법을 소개합니다.
+방화벽(firewalld)은 IPv4, IPv6, 이더넷 브리지 및 IPSet의 방화벽(firewall) 설정을 지원하는 리눅스(linux) firewall 관리 도구입니다. <br />
+firewalld는 linux 커널 netfilter 프레임워크의 프런트 엔드 역할을 하며, RHEL 7 제품군의 기본 firewall 관리 소프트웨어입니다. <br />
+우분투(ubuntu)의 기본 firewall 시스템은 UFW(uncomplicated firewall)이지만, firewalld를 설치하고 사용할 수 있습니다. <br />
+이 포스트에서는 ubuntu 환경에서 패키지로 firewalld를 설치하고 설정하는 방법을 소개합니다.
 
 > UFW 설정 방법은 [우분투(Ubuntu) 환경에 방화벽(UFW) 설정하기](https://lindarex.github.io/ubuntu/ubuntu-ufw-setting/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
 
 
 ## 선행조건(PREREQUISITE)
-- Ubuntu 환경이 필요합니다.
+- ubuntu 환경이 필요합니다.
 
-> Ubuntu 설치 방법은 [VMware workstation에 Ubuntu 16.04 설치하기](https://lindarex.github.io/ubuntu/ubuntu-1604-installation/){: target="\_blank"} 또는 [VMware workstation에 Ubuntu 18.04 설치하기](https://lindarex.github.io/ubuntu/ubuntu-1804-installation/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
+> ubuntu 설치 방법은 [VMware workstation에 ubuntu server 16.04 설치하기](https://lindarex.github.io/ubuntu/ubuntu-1604-installation/){: target="\_blank"} 또는 [VMware workstation에 ubuntu server 18.04 설치하기](https://lindarex.github.io/ubuntu/ubuntu-1804-installation/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
 
 
 ## 테스트 환경(TEST ENVIRONMENT)
@@ -80,9 +80,9 @@ public
 
 
 ## 마무리(CONCLUSION)
-Ubuntu 환경에 패키지로 firewalld 설치 및 설정을 완료했습니다. <br />
-firewalld는 CentOS 7부터 이전의 Iptables를 대체해 새롭게 선보인 패킷 필터링 방화벽 프로그램입니다. <br />
-다음 포스트에서는 Iptables, UFW 등의 방화벽 특징과 설정 방법을 소개하겠습니다.
+ubuntu 환경에 패키지로 firewalld 설치 및 설정을 완료했습니다. <br />
+firewalld는 CentOS 7부터 이전의 Iptables를 대체해 새롭게 선보인 패킷 필터링 firewall 프로그램입니다. <br />
+다음 포스트에서는 Iptables, UFW 등의 firewall 특징과 설정 방법을 소개하겠습니다.
 
 
 ## 참고(REFERENCES)

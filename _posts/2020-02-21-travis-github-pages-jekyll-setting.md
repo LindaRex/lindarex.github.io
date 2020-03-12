@@ -9,12 +9,12 @@ tags:
 ---
 
 
-이 포스트에서는 Travis CI(이하 travis)를 이용해 Jekyll 블로그(이하 jekyll)를 GitHub Pages에 자동 배포하는 방법을 소개합니다.
+이 포스트에서는 Travis CI(travis)를 이용해 Jekyll 블로그를 GitHub Pages에 자동 배포(deploy)하는 방법을 소개합니다.
 
 
 ## 선행조건(PREREQUISITE)
 - GitHub 계정이 필요합니다.
-- GitHub Pages의 브랜치(이하 branch)는 빌드(이하 build) 후 배포되는 master branch, jekyll code를 올릴 sources branch로 구성합니다.
+- GitHub Pages의 브랜치(branch)는 빌드(build) 후 deploy되는 master branch, jekyll code를 올릴 sources branch로 구성합니다.
 
 
 ## 테스트 환경(TEST ENVIRONMENT)
@@ -26,11 +26,11 @@ tags:
 1. GitHub Personal access token 생성
 2. Travis CI 설정
 3. travis.yml 파일 작성
-4. 배포 확인
+4. deploy 확인
 
 
 ## 내용(CONTENTS)
-### 1. GitHub Personal access token(이하 token) 생성
+### 1. GitHub Personal access token 생성
 > [https://github.com/](https://github.com/){: target="\_blank"}에 접속합니다.
 
 - 우측 상단의 Profile 아이콘을 선택하여 'Settings' 페이지로 이동합니다.
@@ -63,7 +63,7 @@ tags:
 
 ![lindarex-travis-github-pages-jekyll-setting-006]
 
-- 'Only select repositories' 영역의 'Select repositories'를 클릭하여 travis를 연결할 레파지토리(이하 repository를 선택하고 'Install'을 클릭합니다.
+- 'Only select repositories' 영역의 'Select repositories'를 클릭하여 travis를 연결할 레파지토리(repository)를 선택하고 'Install'을 클릭합니다.
 
 ![lindarex-travis-github-pages-jekyll-setting-007]
 
@@ -121,12 +121,12 @@ branches:
 
 ```
 
-### 4. 배포 확인
+### 4. deploy 확인
 - 설정 완료 후, [travis 첫 페이지](https://travis-ci.com/){: target="\_blank"}으로 이동합니다.
 
 ![lindarex-travis-github-pages-jekyll-setting-014]
 
-- 로컬의 sources branch를 원격 저장소로 Push 하면, travis에서 build하여 master branch로 자동 배포됩니다.
+- 로컬의 sources branch를 원격 저장소로 push 하면, travis에서 build하여 master branch로 자동 deploy됩니다.
 
 ![lindarex-travis-github-pages-jekyll-setting-015]
 
@@ -134,14 +134,14 @@ branches:
 
 ![lindarex-travis-github-pages-jekyll-setting-016]
 
-- 정상 배포되었습니다.
+- 정상 deploy되었습니다.
 
 ![lindarex-travis-github-pages-jekyll-setting-017]
 
 
 ## 마무리(CONCLUSION)
-travis로 jekyll을 GitHub Pages에 자동 배포하는 방법을 완료했습니다. <br />
-다음 포스트에서는 travis로 다른 언어를 배포하는 방법을 소개하겠습니다.
+travis로 jekyll을 GitHub Pages에 자동 deploy하는 방법을 완료했습니다. <br />
+다음 포스트에서는 travis로 다른 언어를 deploy하는 방법을 소개하겠습니다.
 
 
 ## 참고(REFERENCES)
@@ -165,4 +165,3 @@ travis로 jekyll을 GitHub Pages에 자동 배포하는 방법을 완료했습�
 [lindarex-travis-github-pages-jekyll-setting-015]:/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-015.png
 [lindarex-travis-github-pages-jekyll-setting-016]:/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-016.png
 [lindarex-travis-github-pages-jekyll-setting-017]:/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-017.png
-

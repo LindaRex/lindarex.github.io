@@ -9,13 +9,13 @@ tags:
 
 
 SonarQube는 정적 코드 분석기로 20개 이상의 프로그래밍 언어의 버그와 Code smells, 보안 취약점을 발견하고 자동 리뷰를 수행하여 지속적인 코드 품질 검사를 위한 플랫폼입니다. <br />
-SonarQube는 LGPL(Lesser GNU General Public License) 라이선스로 오픈소스 소프트웨어이며, 코드 커버리지, 유닛 테스트, 코딩 표준, 중복 코드, 코드 복잡도, 주석, 버그 및 보안 취약점의 보고서를 제공합니다. <br />
+SonarQube는 LGPL(lesser gnu general public license)로 오픈소스(open source) 소프트웨어이며, 코드 커버리지, 유닛 테스트, 코딩 표준, 중복 코드, 코드 복잡도, 주석, 버그 및 보안 취약점의 보고서를 제공합니다. <br />
 또한 Maven, Ant, Gradle, MSBuild 및 CI(Continuous Integration) 도구인 Atlassian Bamboo, Jenkins, Hudson 등과의 연동을 제공합니다. <br />
-이 포스트에서는 우분투(이하 Ubuntu) 환경에서 SonarQube를 설치하는 방법을 소개합니다.
+이 포스트에서는 우분투(ubuntu) 환경에서 SonarQube를 설치하는 방법을 소개합니다.
 
 
 ## 선행조건(PREREQUISITE)
-- Ubuntu 환경에 PostgreSQL이 설치되어 있어야 합니다.
+- ubuntu 환경에 PostgreSQL이 설치되어 있어야 합니다.
 - 방화벽 설정이 필요합니다.
     + TCP 9000 포트가 개방되어 있어야 합니다.
 
@@ -65,7 +65,7 @@ $ ln -s ${LINDAREX_WORKSPACE}/sonarqube-7.9.1 ${LINDAREX_WORKSPACE}/sonarqube
 ```
 
 ### 4. PostgreSQL 설정
-- SonarQube와 연동 될 사용자 계정과 데이터베이스(이하 Database)를 생성합니다.
+- SonarQube와 연동 될 사용자 계정과 데이터베이스(Database)를 생성합니다.
 
 #### 4.1. postgres 계정 로그인
 ```console
@@ -175,23 +175,23 @@ sudo sysctl -w vm.max_map_count=262144
 $ sudo source /etc/profile
 ```
 
-### 7. 스크립트로 SonarQube 서비스 관리
-#### 7.1. SonarQube 서비스 시작
+### 7. 스크립트로 SonarQube 서비스(service) 관리
+#### 7.1. SonarQube service 시작
 ```console
 $ ${LINDAREX_WORKSPACE}/sonarqube/bin/linux-x86-64/sonar.sh start
 ```
 
-#### 7.2. SonarQube 서비스 중지
+#### 7.2. SonarQube service 중지
 ```console
 $ ${LINDAREX_WORKSPACE}/sonarqube/bin/linux-x86-64/sonar.sh stop
 ```
 
-#### 7.3. SonarQube 서비스 재시작
+#### 7.3. SonarQube service 재시작
 ```console
 $ ${LINDAREX_WORKSPACE}/sonarqube/bin/linux-x86-64/sonar.sh restart
 ```
 
-#### 7.3. SonarQube 서비스 상태 조회
+#### 7.3. SonarQube service 상태 조회
 ```console
 $ ${LINDAREX_WORKSPACE}/sonarqube/bin/linux-x86-64/sonar.sh status
 ```
@@ -201,7 +201,7 @@ $ ${LINDAREX_WORKSPACE}/sonarqube/bin/linux-x86-64/sonar.sh status
 
 
 ## 마무리(CONCLUSION)
-Ubuntu 환경에 SonarQube 설치를 완료했습니다. <br />
+ubuntu 환경에 SonarQube 설치를 완료했습니다. <br />
 다음 포스트에서는 SonarQube 사용 방법과 유용한 플러그인을 소개하겠습니다.
 
 

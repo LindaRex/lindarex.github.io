@@ -1,5 +1,5 @@
 ---
-title: "우분투(Ubuntu) 환경에 패키지로 Elastic Stack 설치하기"
+title: "우분투(Ubuntu) 환경에 패키지(Package)로 Elastic Stack 설치하기"
 categories: 
   - elastic-stack
 tags: 
@@ -14,14 +14,14 @@ tags:
 
 
 Elastic Stack을 소개하기에 앞서 ELK Stack을 먼저 소개하겠습니다. <br />
-ELK Stack은 Elasticsearch, Logstash, Kibana의 연동으로 텍스트, 숫자, 위치 기반 정보, 정형 및 비정형 데이터 등 모든 유형의 데이터를 수집 및 변환하고 분석하여 시각화하는 오픈소스 소프트웨어입니다. <br />
-2015년에 ELK Stack에 경량의 단일 목적 데이터 수집기 제품군(Beats)을 도입하면서 Elastic Stack(이하 elk)으로 명칭이 변경되었습니다. <br />
+ELK Stack은 Elasticsearch, Logstash, Kibana의 연동으로 텍스트, 숫자, 위치 기반 정보, 정형 및 비정형 데이터(data) 등 모든 유형의 data를 수집 및 변환하고 분석하여 시각화하는 오픈소스(open source) 소프트웨어입니다. <br />
+2015년에 ELK Stack에 경량의 단일 목적 data 수집기 제품군(Beats)을 도입하면서 Elastic Stack으로 명칭이 변경되었습니다. <br />
 즉, ELK Stack에 Beats가 추가되어 Elastic Stack으로 통합되었습니다. <br />
-이 포스트에서는 우분투(이하 Ubuntu) 환경에서 패키지로 elk를 설치하는 방법을 소개합니다.
+이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 elastic stack를 설치하는 방법을 소개합니다.
 
 
 ## 선행조건(PREREQUISITE)
-- Ubuntu 환경에 Java가 설치되어 있어야 합니다.
+- ubuntu 환경에 Java가 설치되어 있어야 합니다.
 - 방화벽 설정이 필요합니다.
     + TCP 9200 포트, TCP 5601 포트가 개방되어 있어야 합니다.
 
@@ -50,7 +50,7 @@ ELK Stack은 Elasticsearch, Logstash, Kibana의 연동으로 텍스트, 숫자, 
 
 ## 내용(CONTENTS)
 ### 1. Elasticsearch 설치
-- Elasticsearch는 Apache Lucene으로 구축된 JSON 기반의 분산형 오픈소스 RESTful 검색 분석 엔진이며, Logstash를 통해 수신된 데이터를 저장소에 저장하는 역할을 담당합니다.
+- Elasticsearch는 Apache Lucene으로 구축된 JSON 기반의 분산형 오픈소스 RESTful 검색 분석 엔진이며, Logstash를 통해 수신된 data를 저장소에 저장하는 역할을 담당합니다.
 
 #### 1.1. Elasticsearch debian packages repository 추가
 ```console
@@ -67,53 +67,53 @@ $ wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key a
 $ sudo apt update -y && sudo apt install elasticsearch -y
 ```
 
-#### 1.4. systemctl 명령어로 Elasticsearch 서비스 관리
-##### 1.4.1. Elasticsearch 서비스 설정 반영
+#### 1.4. systemctl 명령어로 Elasticsearch 서비스(service) 관리
+##### 1.4.1. Elasticsearch service 설정 반영
 ```console
 $ sudo systemctl daemon-reload
 ```
 
-##### 1.4.2. Elasticsearch 서비스 시작
+##### 1.4.2. Elasticsearch service 시작
 ```console
 $ sudo systemctl start elasticsearch.service
 ```
 
-##### 1.4.3. Elasticsearch 서비스 중지
+##### 1.4.3. Elasticsearch service 중지
 ```console
 $ sudo systemctl stop elasticsearch.service
 ```
 
-##### 1.4.4. Elasticsearch 서비스 재시작
+##### 1.4.4. Elasticsearch service 재시작
 ```console
 $ sudo systemctl restart elasticsearch.service
 ```
 
-##### 1.4.5. Elasticsearch 서비스 설정 재적용
+##### 1.4.5. Elasticsearch service 설정 재적용
 ```console
 $ sudo systemctl reload elasticsearch.service
 ```
 
-##### 1.4.6. Elasticsearch 서비스 상태 조회
+##### 1.4.6. Elasticsearch service 상태 조회
 ```console
 $ sudo systemctl status elasticsearch.service
 ```
 
-##### 1.4.7. Elasticsearch 서비스 활성화(부팅 시 자동 시작)
+##### 1.4.7. Elasticsearch service 활성화(부팅 시 자동 시작)
 ```console
 $ sudo systemctl enable elasticsearch.service
 ```
 
-##### 1.4.8. Elasticsearch 서비스 비활성화
+##### 1.4.8. Elasticsearch service 비활성화
 ```console
 $ sudo systemctl disable elasticsearch.service
 ```
 
-##### 1.4.9. Elasticsearch 서비스 및 관련 프로세스 모두 중지
+##### 1.4.9. Elasticsearch service 및 관련 프로세스(process) 모두 중지
 ```console
 $ sudo systemctl kill elasticsearch.service
 ```
 
-#### 1.5. curl 명령어로 Elasticsearch 서비스 확인
+#### 1.5. curl 명령어로 Elasticsearch service 확인
 ```console
 $ curl -X GET http://localhost:9200
 {
@@ -136,7 +136,7 @@ $ curl -X GET http://localhost:9200
 ```
 
 ### 2. Logstash 설치
-- Logstash는 서버 사이드 데이터 처리 파이프라인으로, 여러 다양한 소스에서 동시에 데이터를 수집 및 변환하여 Elasticsearch와 같은 stash 보관소로 전송합니다.
+- Logstash는 서버(server) 사이드 data 처리 파이프라인으로, 여러 다양한 소스에서 동시에 data를 수집 및 변환하여 Elasticsearch와 같은 stash 보관소로 전송합니다.
 
 #### 2.1. (선택사항) SSL certificate 생성
 ##### 2.1.1. Hostname or FQDN 설정
@@ -221,54 +221,54 @@ stdout {
 --------------------------------------------------------------------------------
 ```
 
-#### 2.4. systemctl 명령어로 Logstash 서비스 관리
-##### 2.4.1. Logstash 서비스 설정 반영
+#### 2.4. systemctl 명령어로 Logstash service 관리
+##### 2.4.1. Logstash service 설정 반영
 ```console
 $ sudo systemctl daemon-reload
 ```
 
-##### 2.4.2. Logstash 서비스 시작
+##### 2.4.2. Logstash service 시작
 ```console
 $ sudo systemctl start logstash.service
 ```
 
-##### 2.4.3. Logstash 서비스 중지
+##### 2.4.3. Logstash service 중지
 ```console
 $ sudo systemctl stop logstash.service
 ```
 
-##### 2.4.4. Logstash 서비스 재시작
+##### 2.4.4. Logstash service 재시작
 ```console
 $ sudo systemctl restart logstash.service
 ```
 
-##### 2.4.5. Logstash 서비스 설정 재적용
+##### 2.4.5. Logstash service 설정 재적용
 ```console
 $ sudo systemctl reload logstash.service
 ```
 
-##### 2.4.6. Logstash 서비스 상태 조회
+##### 2.4.6. Logstash service 상태 조회
 ```console
 $ sudo systemctl status logstash.service
 ```
 
-##### 2.4.7. Logstash 서비스 활성화(부팅 시 자동 시작)
+##### 2.4.7. Logstash service 활성화(부팅 시 자동 시작)
 ```console
 $ sudo systemctl enable logstash.service
 ```
 
-##### 2.4.8. Logstash 서비스 비활성화
+##### 2.4.8. Logstash service 비활성화
 ```console
 $ sudo systemctl disable logstash.service
 ```
 
-##### 2.4.9. Logstash 서비스 및 관련 프로세스 모두 중지
+##### 2.4.9. Logstash service 및 관련 process 모두 중지
 ```console
 $ sudo systemctl kill logstash.service
 ```
 
 ### 3. Kibana 설치
-- Kibana는 프런트 엔드 애플리케이션으로, Elasticsearch에서 인덱스 된 데이터 검색 및 다양한 차트와 그래프를 제공하고, 실시간으로 데이터를 분석하여 시각화를 담당합니다.
+- Kibana는 프런트 엔드 애플리케이션으로, Elasticsearch에서 인덱스 된 data 검색 및 다양한 차트와 그래프를 제공하고, 실시간으로 data를 분석하여 시각화를 담당합니다.
 
 #### 3.1. apt install 명령어로 Kibana 설치
 ```console
@@ -291,54 +291,54 @@ elasticsearch.hosts: ["http://localhost:9200"]
 --------------------------------------------------------------------------------
 ```
 
-#### 3.3. systemctl 명령어로 Kibana 서비스 관리
-##### 3.3.1. Kibana 서비스 설정 반영
+#### 3.3. systemctl 명령어로 Kibana service 관리
+##### 3.3.1. Kibana service 설정 반영
 ```console
 $ sudo systemctl daemon-reload
 ```
 
-##### 3.3.2. Kibana 서비스 시작
+##### 3.3.2. Kibana service 시작
 ```console
 $ sudo systemctl start kibana.service
 ```
 
-##### 3.3.3. Kibana 서비스 중지
+##### 3.3.3. Kibana service 중지
 ```console
 $ sudo systemctl stop kibana.service
 ```
 
-##### 3.3.4. Kibana 서비스 재시작
+##### 3.3.4. Kibana service 재시작
 ```console
 $ sudo systemctl restart kibana.service
 ```
 
-##### 3.3.5. Kibana 서비스 설정 재적용
+##### 3.3.5. Kibana service 설정 재적용
 ```console
 $ sudo systemctl reload kibana.service
 ```
 
-##### 3.3.6. Kibana 서비스 상태 조회
+##### 3.3.6. Kibana service 상태 조회
 ```console
 $ sudo systemctl status kibana.service
 ```
 
-##### 3.3.7. Kibana 서비스 활성화(부팅 시 자동 시작)
+##### 3.3.7. Kibana service 활성화(부팅 시 자동 시작)
 ```console
 $ sudo systemctl enable kibana.service
 ```
 
-##### 3.3.8. Kibana 서비스 비활성화
+##### 3.3.8. Kibana service 비활성화
 ```console
 $ sudo systemctl disable kibana.service
 ```
 
-##### 3.3.9. Kibana 서비스 및 관련 프로세스 모두 중지
+##### 3.3.9. Kibana service 및 관련 process 모두 중지
 ```console
 $ sudo systemctl kill kibana.service
 ```
 
 ### 4. Filebeat 설치
-- Filebeat는 경량 로그 수집기로, SSH 터미널의 사용이 불가능한 상황(로그를 생성하는 서버나 가상 시스템, 컨테이너가 수백\~수천 개에 이르는 경우)에 로그와 파일을 경량화된 방식으로 전달하고 중앙 집중화하여 작업을 보다 간편하게 만들어 주는 역할을 합니다.
+- Filebeat는 경량 로그(log) 수집기로, SSH 터미널의 사용이 불가능한 상황(log를 생성하는 server나 가상 시스템, 컨테이너가 수백\~수천 개에 이르는 경우)에 log와 파일을 경량화된 방식으로 전달하고 중앙 집중화하여, 작업을 보다 간편하게 만들어 주는 역할을 합니다.
 
 #### 4.1. apt install 명령어로 Filebeat 설치
 ```console
@@ -387,48 +387,48 @@ output.logstash:
 --------------------------------------------------------------------------------
 ```
 
-#### 4.3. systemctl 명령어로 Filebeat 서비스 관리
-##### 4.3.1. Filebeat 서비스 설정 반영
+#### 4.3. systemctl 명령어로 Filebeat service 관리
+##### 4.3.1. Filebeat service 설정 반영
 ```console
 $ sudo systemctl daemon-reload
 ```
 
-##### 4.3.2. Filebeat 서비스 시작
+##### 4.3.2. Filebeat service 시작
 ```console
 $ sudo systemctl start filebeat.service
 ```
 
-##### 4.3.3. Filebeat 서비스 중지
+##### 4.3.3. Filebeat service 중지
 ```console
 $ sudo systemctl stop filebeat.service
 ```
 
-##### 4.3.4. Filebeat 서비스 재시작
+##### 4.3.4. Filebeat service 재시작
 ```console
 $ sudo systemctl restart filebeat.service
 ```
 
-##### 4.3.5. Filebeat 서비스 설정 재적용
+##### 4.3.5. Filebeat service 설정 재적용
 ```console
 $ sudo systemctl reload filebeat.service
 ```
 
-##### 4.3.6. Filebeat 서비스 상태 조회
+##### 4.3.6. Filebeat service 상태 조회
 ```console
 $ sudo systemctl status filebeat.service
 ```
 
-##### 4.3.7. Filebeat 서비스 활성화(부팅 시 자동 시작)
+##### 4.3.7. Filebeat service 활성화(부팅 시 자동 시작)
 ```console
 $ sudo systemctl enable filebeat.service
 ```
 
-##### 4.3.8. Filebeat 서비스 비활성화
+##### 4.3.8. Filebeat service 비활성화
 ```console
 $ sudo systemctl disable filebeat.service
 ```
 
-##### 4.3.9. Filebeat 서비스 및 관련 프로세스 모두 중지
+##### 4.3.9. Filebeat service 및 관련 process 모두 중지
 ```console
 $ sudo systemctl kill filebeat.service
 ```
@@ -438,8 +438,8 @@ $ sudo systemctl kill filebeat.service
 
 
 ## 마무리(CONCLUSION)
-Ubuntu 환경에 패키지로 elk 설치를 완료했습니다. <br />
-다음 포스트에서는 elk 사용 방법을 소개하겠습니다.
+ubuntu 환경에 package로 elastic stack 설치를 완료했습니다. <br />
+다음 포스트에서는 elastic stack 사용 방법을 소개하겠습니다.
 
 
 ## 참고(REFERENCES)

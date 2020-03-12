@@ -8,16 +8,16 @@ tags:
 ---
 
 
-방화벽(UFW, Uncomplicated Firewall, 이하 ufw)은 데비안(이하 debian) 계열 및 다양한 리눅스(이하 linux) 환경에서 작동되고, GPL(GNU General Public License) 라이선스가 적용되며 파이썬(Python)으로 개발되었습니다. <br />
-사용하기 쉬운 CLI(command line interface, 명령줄 인터페이스)를 사용하고 프로그램 구성에는 iptables를 사용하는 netfilter 방화벽을 관리하는 프로그램입니다. <br />
-ufw는 기본적으로 Ubuntu 18.04 LTS 이후 버전에서 사용할 수 있습니다. <br />
-이 포스트에서는 Ubuntu 환경에서 ufw를 설정하는 방법을 소개합니다.
+방화벽(UFW, uncomplicated firewall)은 데비안(debian) 계열 및 다양한 리눅스(linux) 환경에서 작동되고, GPL(GNU General Public License)이 적용되며 파이썬(python)으로 개발되었습니다. <br />
+사용하기 쉬운 CLI(command line interface, 명령줄 인터페이스)를 사용하고 프로그램 구성에는 iptables를 사용하는 netfilter 방화벽(firewall)을 관리하는 프로그램입니다. <br />
+ufw는 기본적으로 ubuntu 18.04 LTS 이후 버전에서 사용할 수 있습니다. <br />
+이 포스트에서는 ubuntu 환경에서 ufw를 설정하는 방법을 소개합니다.
 
 
 ## 선행조건(PREREQUISITE)
-- Ubuntu 환경이 필요합니다.
+- ubuntu 환경이 필요합니다.
 
-> Ubuntu 설치 방법은 [VMware workstation에 Ubuntu 16.04 설치하기](https://lindarex.github.io/ubuntu/ubuntu-1604-installation/){: target="\_blank"} 또는 [VMware workstation에 Ubuntu 18.04 설치하기](https://lindarex.github.io/ubuntu/ubuntu-1804-installation/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
+> Ubuntu 설치 방법은 [VMware workstation에 ubuntu server 16.04 설치하기](https://lindarex.github.io/ubuntu/ubuntu-1604-installation/){: target="\_blank"} 또는 [VMware workstation에 ubuntu server 18.04 설치하기](https://lindarex.github.io/ubuntu/ubuntu-1804-installation/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
 
 
 ## 테스트 환경(TEST ENVIRONMENT)
@@ -27,12 +27,12 @@ ufw는 기본적으로 Ubuntu 18.04 LTS 이후 버전에서 사용할 수 있습
 
 ## 요약(SUMMARY)
 1. ufw 활성화 또는 비활성화
-2. ufw 기본 정책(이하 default rules) 조회
+2. ufw 기본 정책(default rules) 조회
 3. ufw default rules 허용 또는 차단
 4. ufw rule 허용 또는 차단
 5. ufw rule 삭제
-6. Service 명으로 ufw rule 허용 또는 차단
-7. IP 주소(이하 IP address)로 ufw rule 허용 또는 차단
+6. 서비스 명으로 ufw rule 허용 또는 차단
+7. IP 주소로 ufw rule 허용 또는 차단
 8. ufw ping(icmp) 허용 또는 차단
 9. (선택사항) apt 명령어로 ufw 삭제
 
@@ -115,7 +115,7 @@ $ sudo ufw default deny
 ```
 
 ### 5. ufw rule 허용 또는 차단
-#### 5.1. TCP 8080 포트(이하 port) 허용
+#### 5.1. TCP 8080 포트(port) 허용
 ```console
 $ sudo ufw allow 8080/tcp
 ```
@@ -163,9 +163,9 @@ $ sudo ufw delete deny 22/udp
 $ sudo ufw delete deny 53
 ```
 
-### 7. Service 명으로 ufw rule 허용 또는 차단
+### 7. 서비스(service) 명으로 ufw rule 허용 또는 차단
 
-> 아래 명령어로 Service 목록을 조회할 수 있습니다.
+> 아래 명령어로 service 목록을 조회할 수 있습니다.
 ```console
 $ cat /etc/services
 ```
@@ -180,7 +180,7 @@ $ sudo ufw allow ssh
 $ sudo ufw deny ssh
 ```
 
-### 8. IP address로 ufw rule 허용 또는 차단
+### 8. IP 주소(address)로 ufw rule 허용 또는 차단
 #### 8.1. IP address 허용
 ```console
 $ sudo ufw allow from 192.168.10.20
@@ -275,8 +275,8 @@ $ sudo apt purge --auto-remove ufw
 
 
 ## 마무리(CONCLUSION)
-Ubuntu 환경에 ufw 설정을 완료했습니다. <br />
-다음 포스트에서는 Iptables 방화벽 특징과 설정 방법을 소개하겠습니다.
+ubuntu 환경에 ufw 설정을 완료했습니다. <br />
+다음 포스트에서는 iptables 방화벽 특징과 설정 방법을 소개하겠습니다.
 
 
 ## 참고(REFERENCES)

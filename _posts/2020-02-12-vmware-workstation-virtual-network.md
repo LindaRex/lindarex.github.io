@@ -11,8 +11,8 @@ tags:
 ---
 
 
-VMware Workstation은 가상 머신(Virtual Machine, 이하 VM)을 생성하고 가상 네트워크(Virtual Network)를 구성할 수 있습니다. <br />
-이 포스트에서는 VMware Workstation의 Virtual Network에 대해 소개합니다.
+VMware Workstation은 가상 머신(VM, virtual machine)을 생성하고 가상 네트워크(virtual network)를 구성할 수 있습니다. <br />
+이 포스트에서는 VMware Workstation의 virtual network에 대해 소개합니다.
 
 
 ## 선행조건(PREREQUISITE)
@@ -33,10 +33,10 @@ VMware Workstation은 가상 머신(Virtual Machine, 이하 VM)을 생성하고 
 
 ## 내용(CONTENTS)
 ### 1. Bridged Networking
-- Bridged Networking은 호스트(Host) 시스템의 네트워크 어댑터를 사용하여 VM을 Network에 연결합니다.
-- Bridged Networking을 적용한 VM은 물리적 시스템으로 인식되고, 공유기는 개별적으로 IP를 할당합니다.
+- Bridged Networking은 호스트(host) 시스템(system)의 네트워크(network) 어댑터(adapter)를 사용하여 VM을 network에 연결합니다.
+- Bridged Networking을 적용한 VM은 물리적 system으로 인식되고, 공유기는 개별적으로 IP를 할당합니다.
 - 공유기를 통해 외부 통신을 합니다.
-- 동일한 네트워크에 있다는 전제하에, Bridged Networking을 적용한 VM은 Host 시스템을 비롯해 동일 네트워크 내의 다른 시스템에도 엑세스가 가능합니다.
+- 동일한 network에 있다는 전제하에, Bridged Networking을 적용한 VM은 host system을 비롯해 동일 network 내의 다른 system에도 엑세스가 가능합니다.
 - VMware Workstation 설치 시 Bridged Network(VMnet0)가 설정됩니다.
 
 ![lindarex_vmware-workstation-networking-bridged]
@@ -45,9 +45,9 @@ VMware Workstation은 가상 머신(Virtual Machine, 이하 VM)을 생성하고 
 
 
 ### 2. NAT Networking
-- NAT(Network Address Translation) Networking을 적용한 VM은 외부 네트워크 통신을 위한 IP를 할당받지 않습니다.
-- Host 시스템에 별도의 개인 Network가 설정되고, NAT Networking을 적용한 VM은 가상 DHCP 서버로부터 내부 Network 대역을 할당받습니다.
-- Host 시스템을 통해 외부 통신을 합니다.
+- NAT(Network Address Translation) Networking을 적용한 VM은 외부 network 통신을 위한 IP를 할당받지 않습니다.
+- host system에 별도의 개인 network가 설정되고, NAT Networking을 적용한 VM은 가상 DHCP 서버(server)로부터 내부 network 대역을 할당받습니다.
+- host system을 통해 외부 통신을 합니다.
 - NAT Network는 하나만 존재합니다.
 - VMware Workstation 설치 시 NAT Network(VMnet8)가 설정됩니다.
 
@@ -56,7 +56,7 @@ VMware Workstation은 가상 머신(Virtual Machine, 이하 VM)을 생성하고 
 > 출처 :: [https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-89311E3D-CCA9-4ECC-AF5C-C52BE6A89A95.html](https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/15.0/com.vmware.player.win.using.doc/GUID-89311E3D-CCA9-4ECC-AF5C-C52BE6A89A95.html){: target="\_blank"}
 
 ### 3. Host-Only Networking
-- Host-Only Networking을 적용한 VM은 기본적으로 외부 통신, Host 시스템과 통신이 불가능합니다.
+- Host-Only Networking을 적용한 VM은 기본적으로 외부 통신, host system과 통신이 불가능합니다.
 - Host-Only Networking을 적용한 VM은 VMware Workstation에서 생성한 VM만 통신이 가능합니다.
 - VMware Workstation 설치 시 Host-Only Network(VMnet1)가 설정됩니다.
 
@@ -66,8 +66,8 @@ VMware Workstation은 가상 머신(Virtual Machine, 이하 VM)을 생성하고 
 
 
 ## 마무리(CONCLUSION)
-VMware Workstation의 Virtual Network에 대해 알아봤습니다. <br />
-다음 포스트에서는 VMware Workstation의 Virtual Network를 설정하는 방법을 소개하겠습니다.
+VMware Workstation의 virtual network에 대해 알아봤습니다. <br />
+다음 포스트에서는 VMware Workstation의 virtual network를 설정하는 방법을 소개하겠습니다.
 
 
 ## 참고(REFERENCES)

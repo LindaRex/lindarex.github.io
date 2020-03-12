@@ -8,18 +8,18 @@ tags:
 ---
 
 
-iptables은 방화벽(이하 firewall) 구성이나 NAT(network address translation)에 사용되는데, 시스템 관리자가 리눅스(이하 linux) 커널(이하 kernel) 방화벽이 제공하는 테이블(이하 table)과 체인(이하 chain), 규칙(이하 rule)으로 구성합니다. <br />
-각각 다른 kernel 모듈(이하 module)과 프로그램들은 다른 프로토콜(이하 protocol)을 위해 사용되는데, iptables는 IPv4에, ip6tables는 IPv6에, arptables는 ARP에, ebtables는 이더넷(ethernet) 프레임에 적용됩니다. <br />
-linux 시스템(이하 system)에서 iptables는 /usr/sbin/iptables에 설치되며, iptables의 후속 버전은 nftables입니다. <br />
-이 포스트에서는 Ubuntu 환경에서 iptables를 설정하는 방법을 소개합니다.
+iptables은 방화벽(firewall) 구성이나 NAT(network address translation)에 사용되는데, 시스템 관리자가 리눅스(linux) 커널(kernel) firewall이 제공하는 테이블(table)과 체인(chain), 규칙(rule)으로 구성합니다. <br />
+각각 다른 kernel 모듈(module)과 프로그램들은 다른 프로토콜(protocol)을 위해 사용되는데, iptables는 IPv4에, ip6tables는 IPv6에, arptables는 ARP에, ebtables는 이더넷(ethernet) 프레임에 적용됩니다. <br />
+linux 시스템(system)에서 iptables는 /usr/sbin/iptables에 설치되며, iptables의 후속 버전은 nftables입니다. <br />
+이 포스트에서는 ubuntu 환경에서 iptables를 설정하는 방법을 소개합니다.
 
 > nftables이란 iptables에 비해 코드 중복이 적고 처리량이 더 많은 iptables의 후속 버전이며, linux kernel 3.13부터 사용 가능합니다. nftables에 대한 자세한 정보는 [https://en.wikipedia.org/wiki/Nftables](https://en.wikipedia.org/wiki/Nftables){: target="\_blank"}를 확인해 주시기 바랍니다.
 
 
 ## 선행조건(PREREQUISITE)
-- Ubuntu 환경이 필요합니다.
+- ubuntu 환경이 필요합니다.
 
-> Ubuntu 설치 방법은 [VMware workstation에 Ubuntu 16.04 설치하기](https://lindarex.github.io/ubuntu/ubuntu-1604-installation/){: target="\_blank"} 또는 [VMware workstation에 Ubuntu 18.04 설치하기](https://lindarex.github.io/ubuntu/ubuntu-1804-installation/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
+> Ubuntu 설치 방법은 [VMware workstation에 ubuntu server 16.04 설치하기](https://lindarex.github.io/ubuntu/ubuntu-1604-installation/){: target="\_blank"} 또는 [VMware workstation에 ubuntu server 18.04 설치하기](https://lindarex.github.io/ubuntu/ubuntu-1804-installation/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
 
 
 ## 테스트 환경(TEST ENVIRONMENT)
@@ -36,8 +36,8 @@ linux 시스템(이하 system)에서 iptables는 /usr/sbin/iptables에 설치되
 
 ## 내용(CONTENTS)
 - iptables는 kernel 2.4 이전 버전에서 사용되던 ipchains를 대신하는 firewall 도구이며, NetFilter 프로젝트에서 개발했습니다.
-- iptables는 kernel에서 netfilter 패킷(이하 packet) 필터링(이하 filtering) 기능을 사용자 공간에서 제어하는 수준으로 사용하고, protocol 상태 추적, packet 애플리케이션(이하 application) 계층(layer) 검사, 속도 제한, filtering 정책(이하 policy) 등의 기능을 제공합니다.
-- Ubuntu 18.04는 기본적으로 iptables와 함께 UFW(Uncomplicated Firewall, 이하 ufw)를 제공합니다. 
+- iptables는 kernel에서 netfilter 패킷(packet) 필터링(filtering) 기능을 사용자 공간에서 제어하는 수준으로 사용하고, protocol 상태 추적, packet 애플리케이션(application) 계층(layer) 검사, 속도 제한, filtering 정책(policy) 등의 기능을 제공합니다.
+- ubuntu 18.04는 기본적으로 iptables와 함께 UFW(Uncomplicated Firewall, ufw)를 제공합니다. 
 - iptables를 설정하기 전에 ufw를 비활성화하거나 제거하는 것을 추천합니다.
 - iptables 설정에는 ROOT 권한을 요구하기 때문에, 이 포스트에서는 ROOT 사용자가 설정한다는 가정하에 설명합니다.
 
@@ -88,8 +88,8 @@ target     prot opt source               destination
 ```
 
 - 아래는 조회에 사용되는 '-L' command의 옵션 목록입니다.
-    + '-v' 또는 '--verbose' :: 각 chain의 packet과 byte counters 정보, 각 rule에 일치하는 packet과 byte counters 정보 및 특정 rule에 적용되는 인터페이스(이하 interface) 등을 조회합니다.
-    + '-n' 또는 '--numeric' :: 기본 호스트(이하 host) 이름, 네트워크(이하 network) 이름 또는 서비스(이하 service) 형식이 아닌 IP 주소(이하 address)와 포트(이하 port) 번호(이하 number)로 표시합니다.
+    + '-v' 또는 '--verbose' :: 각 chain의 packet과 byte counters 정보, 각 rule에 일치하는 packet과 byte counters 정보 및 특정 rule에 적용되는 인터페이스(interface) 등을 조회합니다.
+    + '-n' 또는 '--numeric' :: 기본 호스트(host) 이름, 네트워크(network) 이름 또는 서비스(service) 형식이 아닌 IP 주소(address)와 포트(port) 번호(number)로 표시합니다.
     + '-x' 또는 '--exact' :: packet과 byte counters 정보를 정확한 값으로 확장하여 표시합니다.
     + '--line-numbers' :: chain의 각 rule의 시작 부분에 숫자를 추가합니다.
 
@@ -216,15 +216,15 @@ num  target     prot opt source               destination
     + raw table은 built-in chain PREROUTING, OUTPUT으로 구성됩니다.
 
 - security table
-    + security table은 SELinux와 같은 linux 보안 module에 의해 구현되는 Mandatory Access Control(이하 MAC) 네트워킹 rule에 사용됩니다.
+    + security table은 SELinux와 같은 linux 보안 module에 의해 구현되는 Mandatory Access Control(MAC) 네트워킹 rule에 사용됩니다.
     + security table은 filter table 다음에 호출되기 때문에, security table MAC rule이므로 filter table의 Discretionary Access Control(DAC)보다 나중에 적용됩니다.
     + security table은 built-in chain INPUT, FORWARD, OUTPUT으로 구성됩니다.
 
 #### 3.4. parameter
 - iptables의 rule 스펙(specification)을 구성하며, add, delete, insert, replace 및 append 명령어에 사용됩니다.
 - 각각의 parameter에 대한 설명은 아래와 같습니다.
-    + '-4' 또는 '--ipv4' :: iptables 및 iptables-restore에 영향이 없고, 단일 rule 파일(이하 file)에서 iptables-restore 및 ip6tables-restore와 함께 사용하여 IPv4 및 IPv6 rule을 허용합니다.
-    + '-6' 또는 '--ipv6' :: ip6tables 및 ip6tables-restore에 영향이 없고, 단일 rule 파일(이하 file)에서 iptables-restore 및 ip6tables-restore와 함께 사용하여 IPv4 및 IPv6 rule을 허용합니다.
+    + '-4' 또는 '--ipv4' :: iptables 및 iptables-restore에 영향이 없고, 단일 rule 파일(file)에서 iptables-restore 및 ip6tables-restore와 함께 사용하여 IPv4 및 IPv6 rule을 허용합니다.
+    + '-6' 또는 '--ipv6' :: ip6tables 및 ip6tables-restore에 영향이 없고, 단일 rule 파일(file)에서 iptables-restore 및 ip6tables-restore와 함께 사용하여 IPv4 및 IPv6 rule을 허용합니다.
     + '-p' 또는 '--protocol' :: rule 또는 packet의 protocol을 확인합니다.
     + '-s' 또는 '--source' :: 출발지 network 이름, host 이름, network IP address(/mask) 또는 일반 IP address를 확인합니다.
     + '-d' 또는 '--destination' :: 목적지 network 이름, host 이름, network IP address(/mask) 또는 일반 IP address를 확인히며, 별칭(alias)은 '-dst'입니다.
@@ -286,7 +286,7 @@ num  target     prot opt source               destination
 # iptables [-t TABLE-NAME] -C chain -m MATCH-NAME [match-options] -j TARGET-NAME [target-options]
 ```
 
-- 예제 :: INPUT chain의 tcp 8080 포트(이하 port) 접속 허용 rule을 확인합니다.
+- 예제 :: INPUT chain의 tcp 8080 포트(port) 접속 허용 rule을 확인합니다.
 
 ```console
 # iptables -C INPUT -p tcp --dport 8080 -j ACCEPT
@@ -534,9 +534,9 @@ num  target     prot opt source               destination
 
 
 ## 마무리(CONCLUSION)
-Ubuntu 환경에 iptables 설정을 완료했습니다. <br />
-iptables 설정을 통해 서버 보안을 많이 향상할 수 있지만, 잘못 설정할 경우에는 접속을 못 하는 경우가 발생할 수 있으니 신중하게 설정해야 합니다. <br />
-다음 포스트에서는 Ubuntu Server 운영 시 유용한 패키지를 소개하겠습니다.
+ubuntu 환경에 iptables 설정을 완료했습니다. <br />
+iptables 설정을 통해 서버(server) 보안을 많이 향상할 수 있지만, 잘못 설정할 경우에는 접속을 못 하는 경우가 발생할 수 있으니 신중하게 설정해야 합니다. <br />
+다음 포스트에서는 ubuntu server 운영 시 유용한 패키지를 소개하겠습니다.
 
 
 ## 참고(REFERENCES)

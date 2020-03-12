@@ -1,5 +1,5 @@
 ---
-title: "우분투(Ubuntu) 환경에 패키지로 PostgreSQL 설치하기"
+title: "우분투(Ubuntu) 환경에 패키지(Package)로 PostgreSQL 설치하기"
 categories: 
   - postgresql
 tags: 
@@ -8,14 +8,14 @@ tags:
 ---
 
 
-PostgreSQL은 BSD 또는 MIT 라이선스와 유사한 PostgreSQL 라이선스로 오픈소스 소프트웨어로 배포됩니다. <br />
-PostgreSQL은 확장 가능성 및 표준 준수를 강조하는 객체-관계형 데이터베이스 관리 시스템(ORDBMS, object-relational database management system)으로, 트랜잭션과 ACID(Atomicity, Consistency, Isolation, Durability)를 지원합니다. <br />
-macOS 서버의 경우 PostgreSQL이 기본 데이터베이스이며, MS Windows와 리눅스에서도 이용할 수 있습니다. <br />
-이 포스트에서는 우분투(이하 Ubuntu) 환경에서 패키지로 PostgreSQL을 설치하는 방법을 소개합니다.
+PostgreSQL은 BSD(berkeley software distribution) 또는 MIT 라이선스(license)와 유사한 PostgreSQL license로 오픈소스(open source) 소프트웨어로 배포(release)됩니다. <br />
+PostgreSQL은 확장 가능성 및 표준 준수를 강조하는 객체-관계형 데이터베이스 관리 시스템(ORDBMS, object-relational database management system)으로, 트랜잭션(transaction)과 ACID(Atomicity, Consistency, Isolation, Durability)를 지원합니다. <br />
+macOS 서버의 경우 PostgreSQL이 기본 데이터베이스(database)이며, MS Windows와 리눅스(linux)에서도 이용할 수 있습니다. <br />
+이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 PostgreSQL을 설치하는 방법을 소개합니다.
 
 
 ## 선행조건(PREREQUISITE)
-- Ubuntu 환경에 Java가 설치되어 있어야 합니다.
+- ubuntu 환경에 Java가 설치되어 있어야 합니다.
 - 방화벽 설정이 필요합니다.
     + TCP 5432 포트가 개방되어 있어야 합니다.
 
@@ -58,13 +58,13 @@ $ sudo apt update -y && sudo apt install postgresql postgresql-contrib -y
 
 > 일반 사용자 계정으로 진행합니다.
 
-#### 4.1. PGDATA 디렉터리 생성
+#### 4.1. PGDATA 디렉터리(directory) 생성
 ```console
 $ export LINDAREX_WORKSPACE=${HOME}/workspace
 $ mkdir -p ${LINDAREX_WORKSPACE}/pgsql/data
 ```
 
-#### 4.2. PGDATA 디렉터리 경로 추가
+#### 4.2. PGDATA directory 경로(path) 추가
 ```console
 $ sudo vi /etc/profile
 ```
@@ -76,7 +76,7 @@ export PGDATA=${LINDAREX_WORKSPACE}/pgsql/data
 --------------------------------------------------------------------------------
 ```
 
-> 위 workspace(LINDAREX_WORKSPACE) 디렉터리 경로는 사용자 계정에 따라 다릅니다.
+> 위 workspace(LINDAREX_WORKSPACE) directory path는 사용자 계정에 따라 다릅니다.
 
 > 수정 내역 적용을 위해 아래 명령어를 입력합니다.
 ```console
@@ -116,55 +116,55 @@ host    all             all             0.0.0.0/0               password
 --------------------------------------------------------------------------------
 ```
 
-### 5. systemctl 명령어로 PostgreSQL 서비스 관리
-#### 5.1. PostgreSQL 서비스 설정 반영
+### 5. systemctl 명령어로 PostgreSQL 서비스(service) 관리
+#### 5.1. PostgreSQL service 설정 반영
 ```console
 $ sudo systemctl daemon-reload
 ```
 
-#### 5.2. PostgreSQL 서비스 시작
+#### 5.2. PostgreSQL service 시작
 ```console
 $ sudo systemctl start postgresql.service
 ```
 
-#### 5.3. PostgreSQL 서비스 중지
+#### 5.3. PostgreSQL service 중지
 ```console
 $ sudo systemctl stop postgresql.service
 ```
 
-#### 5.4. PostgreSQL 서비스 재시작
+#### 5.4. PostgreSQL service 재시작
 ```console
 $ sudo systemctl restart postgresql.service
 ```
 
-#### 5.5. PostgreSQL 서비스 설정 재적용
+#### 5.5. PostgreSQL service 설정 재적용
 ```console
 $ sudo systemctl reload postgresql.service
 ```
 
-#### 5.6. PostgreSQL 서비스 상태 조회
+#### 5.6. PostgreSQL service 상태 조회
 ```console
 $ sudo systemctl status postgresql.service
 ```
 
-#### 5.7. PostgreSQL 서비스 활성화(부팅 시 자동 시작)
+#### 5.7. PostgreSQL service 활성화(부팅 시 자동 시작)
 ```console
 $ sudo systemctl enable postgresql.service
 ```
 
-#### 5.8. PostgreSQL 서비스 비활성화
+#### 5.8. PostgreSQL service 비활성화
 ```console
 $ sudo systemctl disable postgresql.service
 ```
 
-#### 5.9. PostgreSQL 서비스 및 관련 프로세스 모두 중지
+#### 5.9. PostgreSQL service 및 관련 프로세스 모두 중지
 ```console
 $ sudo systemctl kill postgresql.service
 ```
 
 
 ## 마무리(CONCLUSION)
-Ubuntu 환경에 패키지로 PostgreSQL 설치를 완료했습니다. <br />
+ubuntu 환경에 package로 PostgreSQL 설치를 완료했습니다. <br />
 다음 포스트에서는 PostgreSQL 사용 방법을 소개하겠습니다.
 
 

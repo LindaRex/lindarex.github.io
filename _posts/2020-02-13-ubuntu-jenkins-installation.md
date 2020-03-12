@@ -1,5 +1,5 @@
 ---
-title: "우분투(Ubuntu) 환경에 패키지로 젠킨스(Jenkins) 설치하기"
+title: "우분투(Ubuntu) 환경에 패키지(Package)로 젠킨스(Jenkins) 설치하기"
 categories: 
   - jenkins
 tags: 
@@ -8,13 +8,13 @@ tags:
 ---
 
 
-젠킨스(이하 Jenkins)는 MIT license로 오픈소스 소프트웨어이며, 소프트웨어 개발 시 지속적 통합(CI, Continuous Integration) 서비스를 제공하는 자동화 서버입니다. <br />
-Jenkins는 모든 프로젝트의 빌드와 배포, 자동화를 지원하며, 수백 개의 플러그인을 제공합니다. <br />
-이 포스트에서는 우분투(이하 Ubuntu) 환경에서 패키지로 Jenkins를 설치하는 방법을 소개합니다.
+젠킨스(Jenkins)는 MIT license로 오픈소스(open source) 소프트웨어이며, 소프트웨어 개발 시 지속적 통합(CI, continuous integration) 서비스(service)를 제공하는 자동화 서버(server)입니다. <br />
+Jenkins는 모든 프로젝트의 빌드(build)와 배포(deploy), 자동화를 지원하며, 수백 개의 플러그인(plugin)을 제공합니다. <br />
+이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 Jenkins를 설치하는 방법을 소개합니다.
 
 
 ## 선행조건(PREREQUISITE)
-- Ubuntu 환경에 Java가 설치되어 있어야 합니다.
+- ubuntu 환경에 Java가 설치되어 있어야 합니다.
     + Jenkins 버전에 따른 필요 Java 버전
         - 2.164 (2019-02) and newer: Java 8 or Java 11
         - 2.54 (2017-04) and newer: Java 8
@@ -91,48 +91,48 @@ JENKINS_USER="root"
 --------------------------------------------------------------------------------
 ```
 
-### 6. systemctl 명령어로 Jenkins 서비스 관리
-#### 6.1. Jenkins 서비스 설정 반영
+### 6. systemctl 명령어로 Jenkins service 관리
+#### 6.1. Jenkins service 설정 반영
 ```console
 $ sudo systemctl daemon-reload
 ```
 
-#### 6.2. Jenkins 서비스 시작
+#### 6.2. Jenkins service 시작
 ```console
 $ sudo systemctl start jenkins.service
 ```
 
-#### 6.3. Jenkins 서비스 중지
+#### 6.3. Jenkins service 중지
 ```console
 $ sudo systemctl stop jenkins.service
 ```
 
-#### 6.4. Jenkins 서비스 재시작
+#### 6.4. Jenkins service 재시작
 ```console
 $ sudo systemctl restart jenkins.service
 ```
 
-#### 6.5. Jenkins 서비스 설정 재적용
+#### 6.5. Jenkins service 설정 재적용
 ```console
 $ sudo systemctl reload jenkins.service
 ```
 
-#### 6.6. Jenkins 서비스 상태 조회
+#### 6.6. Jenkins service 상태 조회
 ```console
 $ sudo systemctl status jenkins.service
 ```
 
-#### 6.7. Jenkins 서비스 활성화(부팅 시 자동 시작)
+#### 6.7. Jenkins service 활성화(부팅 시 자동 시작)
 ```console
 $ sudo systemctl enable jenkins.service
 ```
 
-#### 6.8. Jenkins 서비스 비활성화
+#### 6.8. Jenkins service 비활성화
 ```console
 $ sudo systemctl disable jenkins.service
 ```
 
-#### 6.9. Jenkins 서비스 및 관련 프로세스 모두 중지
+#### 6.9. Jenkins service 및 관련 프로세스 모두 중지
 ```console
 $ sudo systemctl kill jenkins.service
 ```
@@ -142,9 +142,9 @@ $ sudo systemctl kill jenkins.service
 
 
 ## 마무리(CONCLUSION)
-Ubuntu 환경에 패키지로 Jenkins 설치를 완료했습니다. <br />
+ubuntu 환경에 package로 Jenkins 설치를 완료했습니다. <br />
 Jenkins 초기 설정은 [Jenkins 초기 설정하기](https://lindarex.github.io/jenkins/jenkins-initial-setting/){: target="\_blank"} 포스트를 참고하시기 바랍니다. <br />
-다음 포스트에서는 Ubuntu 환경에서 war 파일을 내려받아 java 명령어로 Jenkins를 실행하는 방법을 소개하겠습니다.
+다음 포스트에서는 ubuntu 환경에서 war 파일을 내려받아 Java 명령어로 Jenkins를 실행하는 방법을 소개하겠습니다.
 
 
 ## 참고(REFERENCES)

@@ -9,7 +9,8 @@ script: bundle install && bundle exec jekyll build
 
 deploy:
   provider: pages
-  skip_cleanup: true
+  edge: true
+  cleanup: false
   token: $LINDAREX_GITHUB_TOKEN
   keep_history: true
   local_dir: ./_site

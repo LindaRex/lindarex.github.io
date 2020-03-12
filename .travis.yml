@@ -9,7 +9,9 @@ script: bundle install && bundle exec jekyll build
 
 deploy:
   provider: pages
-  edge: true
+  # edge: true -> for cleanup
+  edge: true 
+  # cleanup: false -> dpl v2
   cleanup: false
   token: $LINDAREX_GITHUB_TOKEN
   keep_history: true

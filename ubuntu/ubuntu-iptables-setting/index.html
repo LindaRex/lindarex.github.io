@@ -29,7 +29,7 @@
 <meta name="twitter:creator" content="@LindaRex" />
 <meta name="google-site-verification" content="t6VkmqsI15sIx3P1-gh3NYputZtjhDZOTkxhwDaa4Ik" />
 <script type="application/ld+json">
-{"description":"iptables은 방화벽(firewall) 구성이나 NAT(network address translation)에 사용되는데, 시스템 관리자가 리눅스(linux) 커널(kernel) firewall이 제공하는 테이블(table)과 체인(chain), 규칙(rule)으로 구성합니다. 각각 다른 kernel 모듈(module)과 프로그램들은 다른 프로토콜(protocol)을 위해 사용되는데, iptables는 IPv4에, ip6tables는 IPv6에, arptables는 ARP에, ebtables는 이더넷(ethernet) 프레임에 적용됩니다. linux 시스템(system)에서 iptables는 /usr/sbin/iptables에 설치되며, iptables의 후속 버전은 nftables입니다. 이 포스트에서는 ubuntu 환경에서 iptables를 설정하는 방법을 소개합니다.","author":{"@type":"Person","name":"LindaRex"},"@type":"BlogPosting","url":"https://lindarex.github.io/ubuntu/ubuntu-iptables-setting/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"LindaRex"},"headline":"우분투(Ubuntu) 환경에 iptables 설정하기","dateModified":"2020-03-02T00:00:00+09:00","datePublished":"2020-03-02T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/ubuntu/ubuntu-iptables-setting/"},"@context":"https://schema.org"}</script>
+{"headline":"우분투(Ubuntu) 환경에 iptables 설정하기","dateModified":"2020-03-02T00:00:00+09:00","datePublished":"2020-03-02T00:00:00+09:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/ubuntu/ubuntu-iptables-setting/"},"url":"https://lindarex.github.io/ubuntu/ubuntu-iptables-setting/","author":{"@type":"Person","name":"LindaRex"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"LindaRex"},"description":"iptables은 방화벽(firewall) 구성이나 NAT(network address translation)에 사용되는데, 시스템 관리자가 리눅스(linux) 커널(kernel) firewall이 제공하는 테이블(table)과 체인(chain), 규칙(rule)으로 구성합니다. 각각 다른 kernel 모듈(module)과 프로그램들은 다른 프로토콜(protocol)을 위해 사용되는데, iptables는 IPv4에, ip6tables는 IPv6에, arptables는 ARP에, ebtables는 이더넷(ethernet) 프레임에 적용됩니다. linux 시스템(system)에서 iptables는 /usr/sbin/iptables에 설치되며, iptables의 후속 버전은 nftables입니다. 이 포스트에서는 ubuntu 환경에서 iptables를 설정하는 방법을 소개합니다.","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <!-- LINDAREX :: JEKYLL SEO TAG :: END -->
@@ -596,8 +596,8 @@ num  target     prot opt source               destination
       <li>LOG :: packet을 syslog에 기록합니다.</li>
       <li>RETURN :: chain 통과를 중지하고, 이전(호출) chain의 다음 rule에 따라 다시 시작합니다.</li>
       <li>QUEUE :: application에 packet을 대기(queue)시키는 데 사용합니다.</li>
-      <li>SNAT :: 소스 network address 변환(source network address translation)에 사용되며, 이는 packet의 IP 헤더에 source IP address를 다시 쓰는 데 사용됩니다.</li>
-      <li>DNAT :: 대상 network address 변환(destination network address translation)에 사용되며, 이는 packet의 destination IP address를 다시 쓰는 데 사용됩니다.</li>
+      <li>SNAT :: 소스 네트워크 주소 변환(source network address translation)에 사용되며, 이는 packet의 IP 헤더에 source IP address를 다시 쓰는 데 사용됩니다.</li>
+      <li>DNAT :: 대상 네트워크 주소 변환(destination network address translation)에 사용되며, 이는 packet의 destination IP address를 다시 쓰는 데 사용됩니다.</li>
     </ul>
   </li>
 </ul>

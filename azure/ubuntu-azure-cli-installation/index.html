@@ -11,25 +11,25 @@
 
 <!-- LINDAREX :: JEKYLL SEO TAG :: BIGIN -->
 <!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>우분투(Ubuntu) 환경에 패키지로 Azure CLI 설치하기 | LindaRex</title>
+<title>우분투(Ubuntu) 환경에 패키지(Package)로 Azure CLI 설치하기 | LindaRex</title>
 <meta name="generator" content="Jekyll v3.8.5" />
-<meta property="og:title" content="우분투(Ubuntu) 환경에 패키지로 Azure CLI 설치하기" />
+<meta property="og:title" content="우분투(Ubuntu) 환경에 패키지(Package)로 Azure CLI 설치하기" />
 <meta name="author" content="LindaRex" />
 <meta property="og:locale" content="ko_KR" />
-<meta name="description" content="Azure CLI(command line interface, 명령줄 인터페이스, 이하 azure cli)는 Microsoft Azure(이하 azure)에 리소스를 만들고 관리할 수 도구입니다. 모든 azure 서비스에서 사용할 수 있으며, azure를 빠르게 사용할 수 있도록 자동화에 초점을 두고 있습니다. 이 포스트에서는 우분투(이하 Ubuntu) 환경에서 패키지로 azure cli를 설치하는 방법을 소개합니다." />
-<meta property="og:description" content="Azure CLI(command line interface, 명령줄 인터페이스, 이하 azure cli)는 Microsoft Azure(이하 azure)에 리소스를 만들고 관리할 수 도구입니다. 모든 azure 서비스에서 사용할 수 있으며, azure를 빠르게 사용할 수 있도록 자동화에 초점을 두고 있습니다. 이 포스트에서는 우분투(이하 Ubuntu) 환경에서 패키지로 azure cli를 설치하는 방법을 소개합니다." />
+<meta name="description" content="Azure CLI(command line interface, 명령줄 인터페이스)는 Microsoft Azure에 리소스(resource)를 만들고 관리할 수 도구입니다. 모든 azure 서비스(service)에서 사용할 수 있으며, azure를 빠르게 사용할 수 있도록 자동화에 초점을 두고 있습니다. 이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 azure cli를 설치하는 방법을 소개합니다." />
+<meta property="og:description" content="Azure CLI(command line interface, 명령줄 인터페이스)는 Microsoft Azure에 리소스(resource)를 만들고 관리할 수 도구입니다. 모든 azure 서비스(service)에서 사용할 수 있으며, azure를 빠르게 사용할 수 있도록 자동화에 초점을 두고 있습니다. 이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 azure cli를 설치하는 방법을 소개합니다." />
 <link rel="canonical" href="https://lindarex.github.io/azure/ubuntu-azure-cli-installation/" />
 <meta property="og:url" content="https://lindarex.github.io/azure/ubuntu-azure-cli-installation/" />
 <meta property="og:site_name" content="LindaRex" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-02-22T00:00:00+09:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="우분투(Ubuntu) 환경에 패키지로 Azure CLI 설치하기" />
+<meta property="twitter:title" content="우분투(Ubuntu) 환경에 패키지(Package)로 Azure CLI 설치하기" />
 <meta name="twitter:site" content="@" />
 <meta name="twitter:creator" content="@LindaRex" />
 <meta name="google-site-verification" content="t6VkmqsI15sIx3P1-gh3NYputZtjhDZOTkxhwDaa4Ik" />
 <script type="application/ld+json">
-{"description":"Azure CLI(command line interface, 명령줄 인터페이스, 이하 azure cli)는 Microsoft Azure(이하 azure)에 리소스를 만들고 관리할 수 도구입니다. 모든 azure 서비스에서 사용할 수 있으며, azure를 빠르게 사용할 수 있도록 자동화에 초점을 두고 있습니다. 이 포스트에서는 우분투(이하 Ubuntu) 환경에서 패키지로 azure cli를 설치하는 방법을 소개합니다.","author":{"@type":"Person","name":"LindaRex"},"@type":"BlogPosting","url":"https://lindarex.github.io/azure/ubuntu-azure-cli-installation/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"LindaRex"},"headline":"우분투(Ubuntu) 환경에 패키지로 Azure CLI 설치하기","dateModified":"2020-02-22T00:00:00+09:00","datePublished":"2020-02-22T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/azure/ubuntu-azure-cli-installation/"},"@context":"https://schema.org"}</script>
+{"description":"Azure CLI(command line interface, 명령줄 인터페이스)는 Microsoft Azure에 리소스(resource)를 만들고 관리할 수 도구입니다. 모든 azure 서비스(service)에서 사용할 수 있으며, azure를 빠르게 사용할 수 있도록 자동화에 초점을 두고 있습니다. 이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 azure cli를 설치하는 방법을 소개합니다.","author":{"@type":"Person","name":"LindaRex"},"@type":"BlogPosting","url":"https://lindarex.github.io/azure/ubuntu-azure-cli-installation/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"LindaRex"},"headline":"우분투(Ubuntu) 환경에 패키지(Package)로 Azure CLI 설치하기","dateModified":"2020-02-22T00:00:00+09:00","datePublished":"2020-02-22T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/azure/ubuntu-azure-cli-installation/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <!-- LINDAREX :: JEKYLL SEO TAG :: END -->
@@ -358,15 +358,15 @@ wcs_do();
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="우분투(Ubuntu) 환경에 패키지로 Azure CLI 설치하기">
-    <meta itemprop="description" content="Azure CLI(command line interface, 명령줄 인터페이스, 이하 azure cli)는 Microsoft Azure(이하 azure)에 리소스를 만들고 관리할 수 도구입니다. 모든 azure 서비스에서 사용할 수 있으며, azure를 빠르게 사용할 수 있도록 자동화에 초점을 두고 있습니다. 이 포스트에서는 우분투(이하 Ubuntu) 환경에서 패키지로 azure cli를 설치하는 방법을 소개합니다.">
+    <meta itemprop="headline" content="우분투(Ubuntu) 환경에 패키지(Package)로 Azure CLI 설치하기">
+    <meta itemprop="description" content="Azure CLI(command line interface, 명령줄 인터페이스)는 Microsoft Azure에 리소스(resource)를 만들고 관리할 수 도구입니다. 모든 azure 서비스(service)에서 사용할 수 있으며, azure를 빠르게 사용할 수 있도록 자동화에 초점을 두고 있습니다. 이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 azure cli를 설치하는 방법을 소개합니다.">
     <meta itemprop="datePublished" content="2020-02-22T00:00:00+09:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">우분투(Ubuntu) 환경에 패키지로 Azure CLI 설치하기
+          <h1 id="page-title" class="page__title" itemprop="headline">우분투(Ubuntu) 환경에 패키지(Package)로 Azure CLI 설치하기
 </h1>
           
         </header>
@@ -398,17 +398,17 @@ wcs_do();
           <!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: END -->
           </aside>
         
-        <p>Azure CLI(command line interface, 명령줄 인터페이스, 이하 azure cli)는 Microsoft Azure(이하 azure)에 리소스를 만들고 관리할 수 도구입니다. <br />
-모든 azure 서비스에서 사용할 수 있으며, azure를 빠르게 사용할 수 있도록 자동화에 초점을 두고 있습니다. <br />
-이 포스트에서는 우분투(이하 Ubuntu) 환경에서 패키지로 azure cli를 설치하는 방법을 소개합니다.</p>
+        <p>Azure CLI(command line interface, 명령줄 인터페이스)는 Microsoft Azure에 리소스(resource)를 만들고 관리할 수 도구입니다. <br />
+모든 azure 서비스(service)에서 사용할 수 있으며, azure를 빠르게 사용할 수 있도록 자동화에 초점을 두고 있습니다. <br />
+이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 azure cli를 설치하는 방법을 소개합니다.</p>
 
 <h2 id="선행조건prerequisite">선행조건(PREREQUISITE)</h2>
 <ul>
-  <li>Ubuntu 환경이 필요합니다.</li>
+  <li>ubuntu 환경이 필요합니다.</li>
 </ul>
 
 <blockquote>
-  <p>Ubuntu 설치 방법은 <a href="https://lindarex.github.io/ubuntu/ubuntu-1604-installation/" target="\_blank">VMware workstation에 Ubuntu 16.04 설치하기</a> 또는 <a href="https://lindarex.github.io/ubuntu/ubuntu-1804-installation/" target="\_blank">VMware workstation에 Ubuntu 18.04 설치하기</a> 포스트를 참고하시기 바랍니다.</p>
+  <p>Ubuntu 설치 방법은 <a href="https://lindarex.github.io/ubuntu/ubuntu-1604-installation/" target="\_blank">VMware workstation에 ubuntu server 16.04 설치하기</a> 또는 <a href="https://lindarex.github.io/ubuntu/ubuntu-1804-installation/" target="\_blank">VMware workstation에 ubuntu server 18.04 설치하기</a> 포스트를 참고하시기 바랍니다.</p>
 </blockquote>
 
 <h2 id="테스트-환경test-environment">테스트 환경(TEST ENVIRONMENT)</h2>
@@ -426,7 +426,7 @@ wcs_do();
 </ol>
 
 <h2 id="내용contents">내용(CONTENTS)</h2>
-<h3 id="1-종속-패키지-설치">1. 종속 패키지 설치</h3>
+<h3 id="1-종속-package-설치">1. 종속 package 설치</h3>
 
 <blockquote>
   <p>Ubuntu 18.04 (Bionic)</p>
@@ -486,7 +486,7 @@ wcs_do();
 </code></pre></div></div>
 
 <h2 id="마무리conclusion">마무리(CONCLUSION)</h2>
-<p>Ubuntu 환경에 패키지로 azure cli 설치를 완료했습니다. <br />
+<p>ubuntu 환경에 package로 azure cli 설치를 완료했습니다. <br />
 다음 포스트에서는 azure 사용을 위한 service principal, resource group, network security group, virtual network, subnet, storage account 등의 설정과 Inception VM 생성 방법을 소개하겠습니다.</p>
 
 <h2 id="참고references">참고(REFERENCES)</h2>
@@ -558,7 +558,7 @@ wcs_do();
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=%EC%9A%B0%EB%B6%84%ED%88%AC%28Ubuntu%29+%ED%99%98%EA%B2%BD%EC%97%90+%ED%8C%A8%ED%82%A4%EC%A7%80%EB%A1%9C+Azure+CLI+%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0%20https%3A%2F%2Flindarex.github.io%2Fazure%2Fubuntu-azure-cli-installation%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=%EC%9A%B0%EB%B6%84%ED%88%AC%28Ubuntu%29+%ED%99%98%EA%B2%BD%EC%97%90+%ED%8C%A8%ED%82%A4%EC%A7%80%28Package%29%EB%A1%9C+Azure+CLI+%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0%20https%3A%2F%2Flindarex.github.io%2Fazure%2Fubuntu-azure-cli-installation%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
   <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flindarex.github.io%2Fazure%2Fubuntu-azure-cli-installation%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
@@ -573,7 +573,7 @@ wcs_do();
 ">Previous</a>
     
     
-      <a href="/elastic-stack/ubuntu-elastic-stack-installation/" class="pagination--pager" title="우분투(Ubuntu) 환경에 패키지로 Elastic Stack 설치하기
+      <a href="/elastic-stack/ubuntu-elastic-stack-installation/" class="pagination--pager" title="우분투(Ubuntu) 환경에 패키지(Package)로 Elastic Stack 설치하기
 ">Next</a>
     
   </nav>
@@ -620,7 +620,7 @@ wcs_do();
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">iptables은 방화벽(이하 firewall) 구성이나 NAT(network address translation)에 사용되는데, 시스템 관리자가 리눅스(이하 linux) 커널(이하 kernel) 방화벽이 제공하는 테이블(이하 table)과 체인(이하 chain), 규칙(이하 ru...</p>
+    <p class="archive__item-excerpt" itemprop="description">iptables은 방화벽(firewall) 구성이나 NAT(network address translation)에 사용되는데, 시스템 관리자가 리눅스(linux) 커널(kernel) firewall이 제공하는 테이블(table)과 체인(chain), 규칙(rule)으로 구성합니다. ...</p>
   </article>
 </div>
 
@@ -647,7 +647,7 @@ wcs_do();
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">이 포스트에서는 클라우드 파운드리(이하 Cloud Foundry) 프로젝트(이하 projects)를 간단히 소개합니다.
+    <p class="archive__item-excerpt" itemprop="description">이 포스트에서는 클라우드 파운드리(Cloud Foundry) 프로젝트(projects)를 간단히 소개합니다.
 
 </p>
   </article>
@@ -676,7 +676,8 @@ wcs_do();
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">클라우드 파운드리(이하 Cloud Foundry)는 과거에 PaaS(Platform as a Service)와 재단을 가리키는 용어였지만, 현재는 PaaS를 뜻하는 Cloud Foundry는 CFAR(cloud foundry application runtime)로 대체되었습니다. ...</p>
+    <p class="archive__item-excerpt" itemprop="description">클라우드 파운드리(Cloud Foundry)는 과거에 PaaS(platform as a service)와 재단을 가리키는 용어였지만, 현재는 PaaS를 뜻하는 Cloud Foundry는 CFAR(cloud foundry application runtime)로 대체되었습니다. 
+CF...</p>
   </article>
 </div>
 
@@ -703,7 +704,8 @@ wcs_do();
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">방화벽(UFW, Uncomplicated Firewall, 이하 ufw)은 데비안(이하 debian) 계열 및 다양한 리눅스(이하 linux) 환경에서 작동되고, GPL(GNU General Public License) 라이선스가 적용되며 파이썬(Python)으로 개발되었습니다. ...</p>
+    <p class="archive__item-excerpt" itemprop="description">방화벽(UFW, uncomplicated firewall)은 데비안(debian) 계열 및 다양한 리눅스(linux) 환경에서 작동되고, GPL(GNU General Public License)이 적용되며 파이썬(python)으로 개발되었습니다. 
+사용하기 쉬운 CLI(comman...</p>
   </article>
 </div>
 

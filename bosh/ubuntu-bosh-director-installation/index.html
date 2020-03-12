@@ -16,8 +16,8 @@
 <meta property="og:title" content="AWS EC2 우분투(Ubuntu) 환경에 BOSH director 설치하기" />
 <meta name="author" content="LindaRex" />
 <meta property="og:locale" content="ko_KR" />
-<meta name="description" content="Cloud Foundry BOSH는 소규모 및 대규모 클라우드 애플리케이션의 배포와 라이프 사이클 관리, release engineering을 통합하는 오픈소스 소프트웨어 프로젝트입니다. BOSH는 수백 개의 가상머신(Virtual Machine, 이하 VM)에 애플리케이션을 프로비저닝(Provisioning)하고 배포할 수 있으며, 모니터링과 오류 복구, 애플리케이션 업데이트를 수행합니다. BOSH는 Cloud Foundry PaaS(CFAR) 배포를 위해 개발되었지만, 거의 모든 소프트웨어를 배포하는 데에도 사용할 수 있습니다. 예를 들면, Hadoop 또는 Jenkins 등의 오픈소스 소프트웨어를 BOSH release로 작성하여 배포할 수 있으며 대규모 분산 시스템에 적합합니다. 또한 BOSH는 Amazon Web Services EC2, Google Cloud Platform, Microsoft Azure, OpenStack, VMware vSphere 및 Alibaba Cloud와 같은 다양한 IaaS(Infrastructure as a Service) provider를 지원하며, Apache CloudStack, VirtualBox 등의 IaaS provider 지원을 위해 CPI(Cloud Provider Interface)를 제공합니다. 이 포스트에서는 AWS EC2 우분투(이하 Ubuntu) 환경에서 BOSH 사용을 위한 BOSH director를 설치하는 방법을 소개합니다." />
-<meta property="og:description" content="Cloud Foundry BOSH는 소규모 및 대규모 클라우드 애플리케이션의 배포와 라이프 사이클 관리, release engineering을 통합하는 오픈소스 소프트웨어 프로젝트입니다. BOSH는 수백 개의 가상머신(Virtual Machine, 이하 VM)에 애플리케이션을 프로비저닝(Provisioning)하고 배포할 수 있으며, 모니터링과 오류 복구, 애플리케이션 업데이트를 수행합니다. BOSH는 Cloud Foundry PaaS(CFAR) 배포를 위해 개발되었지만, 거의 모든 소프트웨어를 배포하는 데에도 사용할 수 있습니다. 예를 들면, Hadoop 또는 Jenkins 등의 오픈소스 소프트웨어를 BOSH release로 작성하여 배포할 수 있으며 대규모 분산 시스템에 적합합니다. 또한 BOSH는 Amazon Web Services EC2, Google Cloud Platform, Microsoft Azure, OpenStack, VMware vSphere 및 Alibaba Cloud와 같은 다양한 IaaS(Infrastructure as a Service) provider를 지원하며, Apache CloudStack, VirtualBox 등의 IaaS provider 지원을 위해 CPI(Cloud Provider Interface)를 제공합니다. 이 포스트에서는 AWS EC2 우분투(이하 Ubuntu) 환경에서 BOSH 사용을 위한 BOSH director를 설치하는 방법을 소개합니다." />
+<meta name="description" content="Cloud Foundry BOSH는 소규모 및 대규모 클라우드(cloud) 애플리케이션(application)의 배포와 라이프 사이클 관리, release engineering을 통합하는 오픈소스(open source) 소프트웨어 프로젝트입니다. BOSH는 수백 개의 가상머신(VM, virtual machine)에 application을 프로비저닝(provisioning)하고 배포할 수 있으며, 모니터링과 오류 복구, application 업데이트를 수행합니다. BOSH는 Cloud Foundry PaaS(CFAR) 배포를 위해 개발되었지만, 거의 모든 소프트웨어를 배포하는 데에도 사용할 수 있습니다. 예를 들면, Hadoop 또는 Jenkins 등의 오픈소스 소프트웨어를 BOSH release로 작성하여 배포할 수 있으며 대규모 분산 시스템(system)에 적합합니다. 또한 BOSH는 Amazon Web Services EC2, Google Cloud Platform, Microsoft Azure, OpenStack, VMware vSphere 및 Alibaba Cloud와 같은 다양한 IaaS(infrastructure as a service) provider를 지원하며, Apache CloudStack, VirtualBox 등의 IaaS provider 지원을 위해 CPI(cloud provider interface)를 제공합니다. 이 포스트에서는 AWS EC2 우분투(ubuntu) 환경에서 BOSH 사용을 위한 BOSH director를 설치하는 방법을 소개합니다." />
+<meta property="og:description" content="Cloud Foundry BOSH는 소규모 및 대규모 클라우드(cloud) 애플리케이션(application)의 배포와 라이프 사이클 관리, release engineering을 통합하는 오픈소스(open source) 소프트웨어 프로젝트입니다. BOSH는 수백 개의 가상머신(VM, virtual machine)에 application을 프로비저닝(provisioning)하고 배포할 수 있으며, 모니터링과 오류 복구, application 업데이트를 수행합니다. BOSH는 Cloud Foundry PaaS(CFAR) 배포를 위해 개발되었지만, 거의 모든 소프트웨어를 배포하는 데에도 사용할 수 있습니다. 예를 들면, Hadoop 또는 Jenkins 등의 오픈소스 소프트웨어를 BOSH release로 작성하여 배포할 수 있으며 대규모 분산 시스템(system)에 적합합니다. 또한 BOSH는 Amazon Web Services EC2, Google Cloud Platform, Microsoft Azure, OpenStack, VMware vSphere 및 Alibaba Cloud와 같은 다양한 IaaS(infrastructure as a service) provider를 지원하며, Apache CloudStack, VirtualBox 등의 IaaS provider 지원을 위해 CPI(cloud provider interface)를 제공합니다. 이 포스트에서는 AWS EC2 우분투(ubuntu) 환경에서 BOSH 사용을 위한 BOSH director를 설치하는 방법을 소개합니다." />
 <link rel="canonical" href="https://lindarex.github.io/bosh/ubuntu-bosh-director-installation/" />
 <meta property="og:url" content="https://lindarex.github.io/bosh/ubuntu-bosh-director-installation/" />
 <meta property="og:site_name" content="LindaRex" />
@@ -29,7 +29,7 @@
 <meta name="twitter:creator" content="@LindaRex" />
 <meta name="google-site-verification" content="t6VkmqsI15sIx3P1-gh3NYputZtjhDZOTkxhwDaa4Ik" />
 <script type="application/ld+json">
-{"description":"Cloud Foundry BOSH는 소규모 및 대규모 클라우드 애플리케이션의 배포와 라이프 사이클 관리, release engineering을 통합하는 오픈소스 소프트웨어 프로젝트입니다. BOSH는 수백 개의 가상머신(Virtual Machine, 이하 VM)에 애플리케이션을 프로비저닝(Provisioning)하고 배포할 수 있으며, 모니터링과 오류 복구, 애플리케이션 업데이트를 수행합니다. BOSH는 Cloud Foundry PaaS(CFAR) 배포를 위해 개발되었지만, 거의 모든 소프트웨어를 배포하는 데에도 사용할 수 있습니다. 예를 들면, Hadoop 또는 Jenkins 등의 오픈소스 소프트웨어를 BOSH release로 작성하여 배포할 수 있으며 대규모 분산 시스템에 적합합니다. 또한 BOSH는 Amazon Web Services EC2, Google Cloud Platform, Microsoft Azure, OpenStack, VMware vSphere 및 Alibaba Cloud와 같은 다양한 IaaS(Infrastructure as a Service) provider를 지원하며, Apache CloudStack, VirtualBox 등의 IaaS provider 지원을 위해 CPI(Cloud Provider Interface)를 제공합니다. 이 포스트에서는 AWS EC2 우분투(이하 Ubuntu) 환경에서 BOSH 사용을 위한 BOSH director를 설치하는 방법을 소개합니다.","author":{"@type":"Person","name":"LindaRex"},"@type":"BlogPosting","url":"https://lindarex.github.io/bosh/ubuntu-bosh-director-installation/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"LindaRex"},"headline":"AWS EC2 우분투(Ubuntu) 환경에 BOSH director 설치하기","dateModified":"2020-02-20T00:00:00+09:00","datePublished":"2020-02-20T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/bosh/ubuntu-bosh-director-installation/"},"@context":"https://schema.org"}</script>
+{"description":"Cloud Foundry BOSH는 소규모 및 대규모 클라우드(cloud) 애플리케이션(application)의 배포와 라이프 사이클 관리, release engineering을 통합하는 오픈소스(open source) 소프트웨어 프로젝트입니다. BOSH는 수백 개의 가상머신(VM, virtual machine)에 application을 프로비저닝(provisioning)하고 배포할 수 있으며, 모니터링과 오류 복구, application 업데이트를 수행합니다. BOSH는 Cloud Foundry PaaS(CFAR) 배포를 위해 개발되었지만, 거의 모든 소프트웨어를 배포하는 데에도 사용할 수 있습니다. 예를 들면, Hadoop 또는 Jenkins 등의 오픈소스 소프트웨어를 BOSH release로 작성하여 배포할 수 있으며 대규모 분산 시스템(system)에 적합합니다. 또한 BOSH는 Amazon Web Services EC2, Google Cloud Platform, Microsoft Azure, OpenStack, VMware vSphere 및 Alibaba Cloud와 같은 다양한 IaaS(infrastructure as a service) provider를 지원하며, Apache CloudStack, VirtualBox 등의 IaaS provider 지원을 위해 CPI(cloud provider interface)를 제공합니다. 이 포스트에서는 AWS EC2 우분투(ubuntu) 환경에서 BOSH 사용을 위한 BOSH director를 설치하는 방법을 소개합니다.","author":{"@type":"Person","name":"LindaRex"},"@type":"BlogPosting","url":"https://lindarex.github.io/bosh/ubuntu-bosh-director-installation/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"LindaRex"},"headline":"AWS EC2 우분투(Ubuntu) 환경에 BOSH director 설치하기","dateModified":"2020-02-20T00:00:00+09:00","datePublished":"2020-02-20T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/bosh/ubuntu-bosh-director-installation/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <!-- LINDAREX :: JEKYLL SEO TAG :: END -->
@@ -359,7 +359,7 @@ wcs_do();
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="AWS EC2 우분투(Ubuntu) 환경에 BOSH director 설치하기">
-    <meta itemprop="description" content="Cloud Foundry BOSH는 소규모 및 대규모 클라우드 애플리케이션의 배포와 라이프 사이클 관리, release engineering을 통합하는 오픈소스 소프트웨어 프로젝트입니다. BOSH는 수백 개의 가상머신(Virtual Machine, 이하 VM)에 애플리케이션을 프로비저닝(Provisioning)하고 배포할 수 있으며, 모니터링과 오류 복구, 애플리케이션 업데이트를 수행합니다. BOSH는 Cloud Foundry PaaS(CFAR) 배포를 위해 개발되었지만, 거의 모든 소프트웨어를 배포하는 데에도 사용할 수 있습니다. 예를 들면, Hadoop 또는 Jenkins 등의 오픈소스 소프트웨어를 BOSH release로 작성하여 배포할 수 있으며 대규모 분산 시스템에 적합합니다. 또한 BOSH는 Amazon Web Services EC2, Google Cloud Platform, Microsoft Azure, OpenStack, VMware vSphere 및 Alibaba Cloud와 같은 다양한 IaaS(Infrastructure as a Service) provider를 지원하며, Apache CloudStack, VirtualBox 등의 IaaS provider 지원을 위해 CPI(Cloud Provider Interface)를 제공합니다. 이 포스트에서는 AWS EC2 우분투(이하 Ubuntu) 환경에서 BOSH 사용을 위한 BOSH director를 설치하는 방법을 소개합니다.">
+    <meta itemprop="description" content="Cloud Foundry BOSH는 소규모 및 대규모 클라우드(cloud) 애플리케이션(application)의 배포와 라이프 사이클 관리, release engineering을 통합하는 오픈소스(open source) 소프트웨어 프로젝트입니다. BOSH는 수백 개의 가상머신(VM, virtual machine)에 application을 프로비저닝(provisioning)하고 배포할 수 있으며, 모니터링과 오류 복구, application 업데이트를 수행합니다. BOSH는 Cloud Foundry PaaS(CFAR) 배포를 위해 개발되었지만, 거의 모든 소프트웨어를 배포하는 데에도 사용할 수 있습니다. 예를 들면, Hadoop 또는 Jenkins 등의 오픈소스 소프트웨어를 BOSH release로 작성하여 배포할 수 있으며 대규모 분산 시스템(system)에 적합합니다. 또한 BOSH는 Amazon Web Services EC2, Google Cloud Platform, Microsoft Azure, OpenStack, VMware vSphere 및 Alibaba Cloud와 같은 다양한 IaaS(infrastructure as a service) provider를 지원하며, Apache CloudStack, VirtualBox 등의 IaaS provider 지원을 위해 CPI(cloud provider interface)를 제공합니다. 이 포스트에서는 AWS EC2 우분투(ubuntu) 환경에서 BOSH 사용을 위한 BOSH director를 설치하는 방법을 소개합니다.">
     <meta itemprop="datePublished" content="2020-02-20T00:00:00+09:00">
     
 
@@ -398,11 +398,11 @@ wcs_do();
           <!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: END -->
           </aside>
         
-        <p>Cloud Foundry BOSH는 소규모 및 대규모 클라우드 애플리케이션의 배포와 라이프 사이클 관리, release engineering을 통합하는 오픈소스 소프트웨어 프로젝트입니다. 
-BOSH는 수백 개의 가상머신(Virtual Machine, 이하 VM)에 애플리케이션을 프로비저닝(Provisioning)하고 배포할 수 있으며, 모니터링과 오류 복구, 애플리케이션 업데이트를 수행합니다. <br />
-BOSH는 Cloud Foundry PaaS(CFAR) 배포를 위해 개발되었지만, 거의 모든 소프트웨어를 배포하는 데에도 사용할 수 있습니다. 예를 들면, Hadoop 또는 Jenkins 등의 오픈소스 소프트웨어를 BOSH release로 작성하여 배포할 수 있으며 대규모 분산 시스템에 적합합니다. <br />
-또한 BOSH는 Amazon Web Services EC2, Google Cloud Platform, Microsoft Azure, OpenStack, VMware vSphere 및 Alibaba Cloud와 같은 다양한 IaaS(Infrastructure as a Service) provider를 지원하며, Apache CloudStack, VirtualBox 등의 IaaS provider 지원을 위해 CPI(Cloud Provider Interface)를 제공합니다. <br />
-이 포스트에서는 AWS EC2 우분투(이하 Ubuntu) 환경에서 BOSH 사용을 위한 BOSH director를 설치하는 방법을 소개합니다.</p>
+        <p>Cloud Foundry BOSH는 소규모 및 대규모 클라우드(cloud) 애플리케이션(application)의 배포와 라이프 사이클 관리, release engineering을 통합하는 오픈소스(open source) 소프트웨어 프로젝트입니다. 
+BOSH는 수백 개의 가상머신(VM, virtual machine)에 application을 프로비저닝(provisioning)하고 배포할 수 있으며, 모니터링과 오류 복구, application 업데이트를 수행합니다. <br />
+BOSH는 Cloud Foundry PaaS(CFAR) 배포를 위해 개발되었지만, 거의 모든 소프트웨어를 배포하는 데에도 사용할 수 있습니다. 예를 들면, Hadoop 또는 Jenkins 등의 오픈소스 소프트웨어를 BOSH release로 작성하여 배포할 수 있으며 대규모 분산 시스템(system)에 적합합니다. <br />
+또한 BOSH는 Amazon Web Services EC2, Google Cloud Platform, Microsoft Azure, OpenStack, VMware vSphere 및 Alibaba Cloud와 같은 다양한 IaaS(infrastructure as a service) provider를 지원하며, Apache CloudStack, VirtualBox 등의 IaaS provider 지원을 위해 CPI(cloud provider interface)를 제공합니다. <br />
+이 포스트에서는 AWS EC2 우분투(ubuntu) 환경에서 BOSH 사용을 위한 BOSH director를 설치하는 방법을 소개합니다.</p>
 
 <blockquote>
   <p>CFAR에 대해서는 본문의 <a href="#2-%EC%84%A0%ED%83%9D%EC%82%AC%ED%95%AD-cf-cli-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0">CF CLI 설치</a>에서 설명합니다.</p>
@@ -421,7 +421,11 @@ BOSH는 Cloud Foundry PaaS(CFAR) 배포를 위해 개발되었지만, 거의 모
       <li>Quota 설정이 필요합니다.</li>
     </ul>
   </li>
-  <li>AWS EC2 Inception VM이 필요합니다.</li>
+  <li>AWS EC2 Inception VM이 필요합니다.
+    <ul>
+      <li>ubuntu 환경이 필요합니다.</li>
+    </ul>
+  </li>
 </ul>
 
 <blockquote>
@@ -429,15 +433,19 @@ BOSH는 Cloud Foundry PaaS(CFAR) 배포를 위해 개발되었지만, 거의 모
 </blockquote>
 
 <blockquote>
-  <p>AWS, GCP, MS Azure, OpenStack, VMware vSphere 등 IaaS 환경에 BOSH director를 설치하여 BOSH를 사용하거나, 로컬(이하 local) 환경에 BOSH-LITE를 설치하여 BOSH를 사용할 수 있습니다.</p>
+  <p>AWS, GCP, MS Azure, OpenStack, VMware vSphere 등 IaaS 환경에 BOSH director를 설치하여 BOSH를 사용하거나, 로컬(local) 환경에 BOSH-LITE를 설치하여 BOSH를 사용할 수 있습니다.</p>
 </blockquote>
 
 <blockquote>
-  <p>Provisioning이란 사용자의 요구에 맞게 시스템 자원을 할당, 배치, 배포해 두었다가 필요 시 시스템을 즉시 사용할 수 있는 상태로 미리 준비해 두는 것을 의미합니다.</p>
+  <p>Provisioning이란 사용자의 요구에 맞게 system 자원을 할당, 배치, 배포해 두었다가 필요 시 system을 즉시 사용할 수 있는 상태로 미리 준비해 두는 것을 의미합니다.</p>
 </blockquote>
 
 <blockquote>
   <p>Provisioning에 대한 자세한 정보는 <a href="https://ko.wikipedia.org/wiki/%ED%94%84%EB%A1%9C%EB%B9%84%EC%A0%80%EB%8B%9D" target="\_blank">https://ko.wikipedia.org/wiki/프로비저닝</a>, <a href="https://en.wikipedia.org/wiki/Provisioning_(telecommunications)" target="\_blank">https://en.wikipedia.org/wiki/Provisioning_(telecommunications)</a>를 확인해 주시기 바랍니다.</p>
+</blockquote>
+
+<blockquote>
+  <p>Ubuntu 설치 방법은 <a href="https://lindarex.github.io/ubuntu/ubuntu-1604-installation/" target="\_blank">VMware workstation에 ubuntu server 16.04 설치하기</a> 또는 <a href="https://lindarex.github.io/ubuntu/ubuntu-1804-installation/" target="\_blank">VMware workstation에 ubuntu server 18.04 설치하기</a> 포스트를 참고하시기 바랍니다.</p>
 </blockquote>
 
 <h2 id="테스트-환경test-environment">테스트 환경(TEST ENVIRONMENT)</h2>
@@ -462,7 +470,7 @@ BOSH는 Cloud Foundry PaaS(CFAR) 배포를 위해 개발되었지만, 거의 모
 <h2 id="내용contents">내용(CONTENTS)</h2>
 
 <blockquote>
-  <p>아래 명령어로 환경변수를 설정하고, workspace 디렉터리를 생성합니다.</p>
+  <p>아래 명령어로 환경변수를 설정하고, workspace 디렉터리(directory)를 생성합니다.</p>
 </blockquote>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">LINDAREX_INCEPTION_USER_NAME</span><span class="o">=</span><span class="s1">'ubuntu'</span>
@@ -479,11 +487,11 @@ BOSH는 Cloud Foundry PaaS(CFAR) 배포를 위해 개발되었지만, 거의 모
 
 <h4 id="11-종속-패키지-설치">1.1. 종속 패키지 설치</h4>
 <ul>
-  <li>자신이 사용하는 Ubuntu 버전에 따라 아래 명령어로 종속 패키지(Package dependencies)를 설치합니다.</li>
+  <li>자신이 사용하는 ubuntu 버전에 따라 아래 명령어로 종속 패키지(package dependencies)를 설치합니다.</li>
 </ul>
 
 <blockquote>
-  <p>Ubuntu 18.04 (Bionic)</p>
+  <p>ubuntu 18.04 (Bionic)</p>
 </blockquote>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt update <span class="nt">-y</span>
@@ -491,22 +499,22 @@ BOSH는 Cloud Foundry PaaS(CFAR) 배포를 위해 개발되었지만, 거의 모
 </code></pre></div></div>
 
 <blockquote>
-  <p>Ubuntu 16.04 (Xenial) 또는 Ubuntu Trusty (14.04)</p>
+  <p>ubuntu 16.04 (Xenial) 또는 ubuntu 14.04 (Trusty)</p>
 </blockquote>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt update <span class="nt">-y</span>
 <span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt <span class="nb">install</span> <span class="nt">-y</span> libcurl4-openssl-dev gcc g++ build-essential zlibc zlib1g-dev ruby ruby-dev openssl libxslt-dev libxml2-dev libssl-dev libreadline6 libreadline6-dev libyaml-dev libsqlite3-dev sqlite3
 </code></pre></div></div>
 
-<h4 id="12-bosh-cli-파일-내려받기">1.2. BOSH CLI 파일 내려받기</h4>
+<h4 id="12-bosh-cli-파일file-내려받기">1.2. BOSH CLI 파일(file) 내려받기</h4>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl <span class="nt">-Lo</span> <span class="k">${</span><span class="nv">LINDAREX_BOSH_WORKSPACE</span><span class="k">}</span>/bosh https://github.com/cloudfoundry/bosh-cli/releases/download/v6.2.1/bosh-cli-6.2.1-linux-amd64
 </code></pre></div></div>
 
-<h4 id="13-chmodchange-mode-명령어로-파일-권한-변경실행-권한-부여">1.3. chmod(change mode) 명령어로 파일 권한 변경(실행 권한 부여)</h4>
+<h4 id="13-chmodchange-mode-명령어로-file-권한-변경실행-권한-부여">1.3. chmod(change mode) 명령어로 file 권한 변경(실행 권한 부여)</h4>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">chmod</span> +x <span class="k">${</span><span class="nv">LINDAREX_BOSH_WORKSPACE</span><span class="k">}</span>/bosh
 </code></pre></div></div>
 
-<h4 id="14-실행-파일을-사용자-프로그램-경로로-옮기기">1.4. 실행 파일을 사용자 프로그램 경로로 옮기기</h4>
+<h4 id="14-실행-file을-사용자-프로그램-경로path로-옮기기">1.4. 실행 file을 사용자 프로그램 경로(path)로 옮기기</h4>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo mv</span> <span class="k">${</span><span class="nv">LINDAREX_BOSH_WORKSPACE</span><span class="k">}</span>/bosh /usr/local/bin/bosh
 </code></pre></div></div>
 
@@ -521,7 +529,7 @@ Succeeded
 <ul>
   <li>CF CLI에서 CF는 정확히 표현하면 CFAR(cloud foundry application runtime)입니다.</li>
   <li>CF CLI는 CFAR 명령어를 사용하기 위한 설치입니다.</li>
-  <li>CFAR은 BOSH로 배포하며, 다음 포스트에서 소개하겠습니다.</li>
+  <li>CFAR은 BOSH로 배포하며, 배포 방법은 다음 포스트에서 소개하겠습니다.</li>
 </ul>
 
 <blockquote>
@@ -529,7 +537,7 @@ Succeeded
 </blockquote>
 
 <blockquote>
-  <p>최근 컨테이너 플랫폼(Container platform)의 성장과 함께 Cloud Foundry도 kubernetes를 이용한 container runtime을 제공하면서, application runtime인 CF를 CFAR로, container runtime인 kubo를 CFCR로 명칭을 변경했습니다.</p>
+  <p>최근 컨테이너 플랫폼(container platform)의 성장과 함께 Cloud Foundry도 kubernetes를 이용한 container runtime을 제공하면서, application runtime인 CF를 CFAR로, container runtime인 kubo를 CFCR로 명칭을 변경했습니다.</p>
 </blockquote>
 
 <h4 id="21-cf-cli-debian-packages-repository-key-추가">2.1. CF CLI Debian packages repository key 추가</h4>
@@ -552,7 +560,7 @@ Succeeded
 <h3 id="3-cf-uaa-cli-설치하기">3. CF UAA CLI 설치하기</h3>
 <ul>
   <li>UAA는 사용자 계정 및 인증 서버(User Account and Authentication server)입니다.</li>
-  <li>UAA는 CFAR과 BOSH에 각각 존재하며 CF UAA CLI를 통해 모두 사용할 수 있습니다.</li>
+  <li>UAA는 CFAR과 BOSH에 각각 존재하며, CF UAA CLI를 통해 모두 사용할 수 있습니다.</li>
 </ul>
 
 <h4 id="31-rubygems으로-cf-uaa-cli-설치">3.1. Rubygems으로 CF UAA CLI 설치</h4>
@@ -569,19 +577,19 @@ Succeeded
   <li>CredHub는 비밀번호, 인증서(certificates), 인증 기관(certificate authorities), ssh 키, rsa 키와 같은 credentials 정보를 관리합니다.</li>
 </ul>
 
-<h4 id="41-credhub-cli-파일-내려받기">4.1. Credhub CLI 파일 내려받기</h4>
+<h4 id="41-credhub-cli-file-내려받기">4.1. Credhub CLI file 내려받기</h4>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>wget <span class="nt">-P</span> <span class="k">${</span><span class="nv">LINDAREX_BOSH_WORKSPACE</span><span class="k">}</span> https://github.com/cloudfoundry-incubator/credhub-cli/releases/download/2.6.2/credhub-linux-2.6.2.tgz
 </code></pre></div></div>
 
-<h4 id="42-내려받은-파일-압축-해제">4.2. 내려받은 파일 압축 해제</h4>
+<h4 id="42-내려받은-file-압축-해제">4.2. 내려받은 file 압축 해제</h4>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">tar </span>zxf <span class="k">${</span><span class="nv">LINDAREX_BOSH_WORKSPACE</span><span class="k">}</span>/credhub-linux-2.6.2.tgz <span class="nt">-C</span> <span class="k">${</span><span class="nv">LINDAREX_BOSH_WORKSPACE</span><span class="k">}</span>
 </code></pre></div></div>
 
-<h4 id="43-chmod-명령어로-파일-권한-변경실행-권한-부여">4.3. chmod 명령어로 파일 권한 변경(실행 권한 부여)</h4>
+<h4 id="43-chmod-명령어로-file-권한-변경실행-권한-부여">4.3. chmod 명령어로 file 권한 변경(실행 권한 부여)</h4>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">chmod</span> +x <span class="k">${</span><span class="nv">LINDAREX_BOSH_WORKSPACE</span><span class="k">}</span>/credhub
 </code></pre></div></div>
 
-<h4 id="44-실행-파일을-사용자-프로그램-경로로-옮기기">4.4. 실행 파일을 사용자 프로그램 경로로 옮기기</h4>
+<h4 id="44-실행-file을-사용자-프로그램-path로-옮기기">4.4. 실행 file을 사용자 프로그램 path로 옮기기</h4>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo mv</span> <span class="k">${</span><span class="nv">LINDAREX_BOSH_WORKSPACE</span><span class="k">}</span>/credhub /usr/local/bin/credhub
 </code></pre></div></div>
 
@@ -600,7 +608,7 @@ Server Version: Not Found. Have you targeted and authenticated against a CredHub
   <p>Cloud Foundry github repository에서 제공하는 BOSH deployment는 branch나 tag가 존재하지 않습니다. Clone 받는 당시의 버전으로 설치를 해야 하며, 간혹 오류를 포함한 버전도 배포되곤 합니다.</p>
 </blockquote>
 
-<h4 id="52-배포-스크립트-작성">5.2. 배포 스크립트 작성</h4>
+<h4 id="52-배포-스크립트script-작성">5.2. 배포 스크립트(script) 작성</h4>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>vi <span class="k">${</span><span class="nv">LINDAREX_BOSH_WORKSPACE</span><span class="k">}</span>/bosh-deployment/deploy-<span class="k">${</span><span class="nv">LINDAREX_BOSH_IAAS</span><span class="k">}</span>.sh
 </code></pre></div></div>
 
@@ -630,54 +638,54 @@ bosh create-env bosh.yml <span class="se">\</span>
 </code></pre></div></div>
 
 <ul>
-  <li>‘-o’ 옵션은 YAML로 작성된 옵션 파일의 경로를 지정하여 배포 시에 적용합니다.</li>
+  <li>‘-o’ 옵션은 YAML로 작성된 옵션 file의 path를 지정하여 배포 시에 적용합니다.</li>
   <li>
     <p>‘-v’ 옵션은 변수를 설정하여 배포 시에 적용합니다.</p>
   </li>
-  <li>배포 스크립트를 상세하게 설명하겠습니다.
+  <li>배포 script를 상세하게 설명하겠습니다.
     <ul>
       <li>‘create-env’ :: BOSH director를 배포하는 명령어입니다.</li>
-      <li>‘bosh.yml’ :: 설정한 YAML 파일을 기반으로 Single VM을 생성합니다.</li>
-      <li>’–state’ :: 배포 상태 파일의 경로입니다.</li>
-      <li>’–vars-store’ :: Credentials 정보를 저장하는 YAML 파일의 경로입니다.</li>
+      <li>‘bosh.yml’ :: 설정한 YAML file을 기반으로 Single VM을 생성합니다.</li>
+      <li>’–state’ :: 배포 상태 file의 path입니다.</li>
+      <li>’–vars-store’ :: Credentials 정보를 저장하는 YAML file의 path입니다.</li>
       <li>‘-o aws/cpi.yml’ :: AWS CPI를 적용합니다. IaaS 마다 CPI가 다릅니다.</li>
       <li>‘-o uaa.yml’ :: UAA를 적용합니다.</li>
       <li>‘-o credhub.yml’ :: Credhub을 적용합니다.</li>
       <li>‘-o jumpbox-user.yml’ :: Jumpbox user를 적용합니다. BOSH director VM에 SSH 접속을 할 수 있습니다.</li>
-      <li>‘-v internal_cidr’ :: BOSH director VM에 적용할 네트워크의 cidr입니다.</li>
-      <li>‘-v internal_gw’ :: BOSH director VM에 적용할 네트워크의 gateway ip입니다.</li>
-      <li>‘-v internal_ip’ :: BOSH director VM에 적용할 네트워크의 private ip입니다.</li>
-      <li>‘-v director_name’ :: BOSH director 명입니다.</li>
+      <li>‘-v internal_cidr’ :: BOSH director VM에 적용할 네트워크(network)의 cidr입니다.</li>
+      <li>‘-v internal_gw’ :: BOSH director VM에 적용할 network의 gateway ip입니다.</li>
+      <li>‘-v internal_ip’ :: BOSH director VM에 적용할 network의 private ip입니다.</li>
+      <li>‘-v director_name’ :: BOSH director 이름입니다. BOSH login할 때 사용합니다.</li>
       <li>‘-v access_key_id’ :: IaaS가 AWS인 경우 필요한 변수이며, AWS access key id입니다.</li>
       <li>‘-v secret_access_key’ :: IaaS가 AWS인 경우 필요한 변수이며, AWS secret access key입니다.</li>
       <li>‘-v region’ :: IaaS가 AWS인 경우 필요한 변수이며, AWS region입니다.</li>
-      <li>‘-v az’ :: IaaS가 AWS인 경우 필요한 변수이며, AWS az(availability zone, 가용 영역)입니다.</li>
+      <li>‘-v az’ :: IaaS가 AWS인 경우 필요한 변수이며, AWS az(가용 영역, availability zone)입니다.</li>
       <li>‘-v default_key_name’ :: IaaS가 AWS인 경우 필요한 변수이며, AWS key name입니다.</li>
       <li>‘-v default_security_groups’ :: IaaS가 AWS인 경우 필요한 변수이며, AWS security_group입니다.</li>
-      <li>‘-v subnet_id’ :: IaaS가 AWS인 경우 필요한 변수이며, BOSH director VM에 적용할 네트워크의 subnet id입니다.</li>
-      <li>‘-v private_key’ :: IaaS가 AWS인 경우 필요한 변수이며, AWS private key 파일의 경로입니다.</li>
+      <li>‘-v subnet_id’ :: IaaS가 AWS인 경우 필요한 변수이며, BOSH director VM에 적용할 network의 subnet id입니다.</li>
+      <li>‘-v private_key’ :: IaaS가 AWS인 경우 필요한 변수이며, AWS private key file의 path입니다.</li>
     </ul>
   </li>
 </ul>
 
 <blockquote>
-  <p>위 배포 스크립트는 AWS 서울 region에 배포되는 설정이지만, region과 az를 제외한 AWS 설정값은 잘못된 값이므로 참고만 하시기를 바랍니다.</p>
+  <p>위 배포 script는 AWS 서울 region에 배포되는 설정이지만, region과 az를 제외한 AWS 설정값은 잘못된 값이므로 참고만 하시기를 바랍니다.</p>
 </blockquote>
 
-<h4 id="53-chmod-명령어로-파일-권한-변경실행-권한-부여">5.3. chmod 명령어로 파일 권한 변경(실행 권한 부여)</h4>
+<h4 id="53-chmod-명령어로-file-권한-변경실행-권한-부여">5.3. chmod 명령어로 file 권한 변경(실행 권한 부여)</h4>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">chmod</span> +x <span class="k">${</span><span class="nv">LINDAREX_BOSH_WORKSPACE</span><span class="k">}</span>/bosh-deployment/deploy-<span class="k">${</span><span class="nv">LINDAREX_BOSH_IAAS</span><span class="k">}</span>.sh
 </code></pre></div></div>
 
-<h4 id="54-선택사항-배포-상태-파일-삭제">5.4. (선택사항) 배포 상태 파일 삭제</h4>
+<h4 id="54-선택사항-배포-상태-file-삭제">5.4. (선택사항) 배포 상태 file 삭제</h4>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">rm</span> <span class="nt">-rf</span> <span class="k">${</span><span class="nv">LINDAREX_BOSH_WORKSPACE</span><span class="k">}</span>/bosh-deployment/<span class="k">${</span><span class="nv">LINDAREX_BOSH_IAAS</span><span class="k">}</span>/state.json
 <span class="gp">$</span><span class="w"> </span><span class="nb">rm</span> <span class="nt">-rf</span> <span class="k">${</span><span class="nv">LINDAREX_BOSH_WORKSPACE</span><span class="k">}</span>/bosh-deployment/<span class="k">${</span><span class="nv">LINDAREX_BOSH_IAAS</span><span class="k">}</span>/creds.yml
 </code></pre></div></div>
 
 <blockquote>
-  <p>state.json 파일과 creds.yml 파일은 배포 성공 여부와 관계없이 ‘bosh create-env’ 명령어를 한 번이라도 실행하면 생성되는 파일입니다.</p>
+  <p>state.json file과 creds.yml file은 배포 성공 여부와 관계없이 ‘bosh create-env’ 명령어를 한 번이라도 실행하면 생성되는 file입니다.</p>
 </blockquote>
 
-<h4 id="55-배포-스크립트-실행">5.5. 배포 스크립트 실행</h4>
+<h4 id="55-배포-script-실행">5.5. 배포 script 실행</h4>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cd</span> <span class="k">${</span><span class="nv">LINDAREX_BOSH_WORKSPACE</span><span class="k">}</span>/bosh-deployment
 <span class="gp">$</span><span class="w"> </span>./deploy-<span class="k">${</span><span class="nv">LINDAREX_BOSH_IAAS</span><span class="k">}</span>.sh
 </code></pre></div></div>
@@ -828,9 +836,10 @@ Succeeded
 
 <blockquote>
   <p>수정 내역 적용을 위해 아래 명령어를 입력합니다.</p>
-  <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">source</span> <span class="nv">$HOME</span>/.profile
-</code></pre></div>  </div>
 </blockquote>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">source</span> <span class="nv">$HOME</span>/.profile
+</code></pre></div></div>
 
 <h3 id="8-bosh-jumpbox-설정">8. BOSH jumpbox 설정</h3>
 <h4 id="81-jumpbox-key-생성">8.1. Jumpbox key 생성</h4>
@@ -838,7 +847,7 @@ Succeeded
 <span class="gp">$</span><span class="w"> </span>bosh int <span class="k">${</span><span class="nv">LINDAREX_BOSH_IAAS</span><span class="k">}</span>/creds.yml <span class="nt">--path</span> /jumpbox_ssh/private_key <span class="o">&gt;</span> jumpbox.key
 </code></pre></div></div>
 
-<h4 id="82-chmod-명령어로-파일-권한-변경소유자만-읽기-및-쓰기-권한-부여">8.2. chmod 명령어로 파일 권한 변경(소유자만 읽기 및 쓰기 권한 부여)</h4>
+<h4 id="82-chmod-명령어로-file-권한-변경소유자만-읽기-및-쓰기-권한-부여">8.2. chmod 명령어로 file 권한 변경(소유자만 읽기 및 쓰기 권한 부여)</h4>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">chmod </span>600 jumpbox.key
 </code></pre></div></div>
 
@@ -886,11 +895,12 @@ rtt min/avg/max/mdev = 29.135/30.009/30.884/0.891 ms
 
 <blockquote>
   <p>아래 명령어로 BOSH director VM의 SSH 접속을 종료할 수 있습니다.</p>
-  <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">bosh/0:~$</span><span class="w"> </span><span class="nb">exit</span>
+</blockquote>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">bosh/0:~$</span><span class="w"> </span><span class="nb">exit</span>
 <span class="go">logout
 Connection to 10.0.1.6 closed.
-</span></code></pre></div>  </div>
-</blockquote>
+</span></code></pre></div></div>
 
 <h3 id="9-credhub-설정">9. Credhub 설정</h3>
 <h4 id="91-credhub-api-server-설정">9.1. Credhub api server 설정</h4>
@@ -912,7 +922,7 @@ Connection to 10.0.1.6 closed.
 </span></code></pre></div></div>
 
 <h2 id="마무리conclusion">마무리(CONCLUSION)</h2>
-<p>AWS EC2 Ubuntu 환경에 BOSH director 설치를 완료했습니다. <br />
+<p>AWS EC2 ubuntu 환경에 BOSH director 설치를 완료했습니다. <br />
 BOSH director 설치는 CFAR 및 CFCR 등 BOSH release 배포를 위한 기반 작업이며, 설치 진행을 위해서는 적지 않은 IaaS 설정이 필요합니다. <br />
 다음 포스트에서는 BOSH director 설치를 위한 AWS 환경 설정과 AWS EC2 Inception VM 생성 방법, BOSH components에 대한 설명과 BOSH release 작성 방법을 소개하겠습니다.</p>
 
@@ -924,7 +934,6 @@ BOSH director 설치는 CFAR 및 CFCR 등 BOSH release 배포를 위한 기반 �
   <li><a href="https://github.com/cloudfoundry/cf-uaac" target="\_blank">https://github.com/cloudfoundry/cf-uaac</a></li>
   <li><a href="https://github.com/cloudfoundry-incubator/credhub-cli" target="\_blank">https://github.com/cloudfoundry-incubator/credhub-cli</a></li>
 </ul>
-
 
         
       </section>
@@ -1056,7 +1065,7 @@ BOSH director 설치는 CFAR 및 CFCR 등 BOSH release 배포를 위한 기반 �
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">iptables은 방화벽(이하 firewall) 구성이나 NAT(network address translation)에 사용되는데, 시스템 관리자가 리눅스(이하 linux) 커널(이하 kernel) 방화벽이 제공하는 테이블(이하 table)과 체인(이하 chain), 규칙(이하 ru...</p>
+    <p class="archive__item-excerpt" itemprop="description">iptables은 방화벽(firewall) 구성이나 NAT(network address translation)에 사용되는데, 시스템 관리자가 리눅스(linux) 커널(kernel) firewall이 제공하는 테이블(table)과 체인(chain), 규칙(rule)으로 구성합니다. ...</p>
   </article>
 </div>
 
@@ -1083,7 +1092,7 @@ BOSH director 설치는 CFAR 및 CFCR 등 BOSH release 배포를 위한 기반 �
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">이 포스트에서는 클라우드 파운드리(이하 Cloud Foundry) 프로젝트(이하 projects)를 간단히 소개합니다.
+    <p class="archive__item-excerpt" itemprop="description">이 포스트에서는 클라우드 파운드리(Cloud Foundry) 프로젝트(projects)를 간단히 소개합니다.
 
 </p>
   </article>
@@ -1112,7 +1121,8 @@ BOSH director 설치는 CFAR 및 CFCR 등 BOSH release 배포를 위한 기반 �
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">클라우드 파운드리(이하 Cloud Foundry)는 과거에 PaaS(Platform as a Service)와 재단을 가리키는 용어였지만, 현재는 PaaS를 뜻하는 Cloud Foundry는 CFAR(cloud foundry application runtime)로 대체되었습니다. ...</p>
+    <p class="archive__item-excerpt" itemprop="description">클라우드 파운드리(Cloud Foundry)는 과거에 PaaS(platform as a service)와 재단을 가리키는 용어였지만, 현재는 PaaS를 뜻하는 Cloud Foundry는 CFAR(cloud foundry application runtime)로 대체되었습니다. 
+CF...</p>
   </article>
 </div>
 
@@ -1139,7 +1149,8 @@ BOSH director 설치는 CFAR 및 CFCR 등 BOSH release 배포를 위한 기반 �
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">방화벽(UFW, Uncomplicated Firewall, 이하 ufw)은 데비안(이하 debian) 계열 및 다양한 리눅스(이하 linux) 환경에서 작동되고, GPL(GNU General Public License) 라이선스가 적용되며 파이썬(Python)으로 개발되었습니다. ...</p>
+    <p class="archive__item-excerpt" itemprop="description">방화벽(UFW, uncomplicated firewall)은 데비안(debian) 계열 및 다양한 리눅스(linux) 환경에서 작동되고, GPL(GNU General Public License)이 적용되며 파이썬(python)으로 개발되었습니다. 
+사용하기 쉬운 CLI(comman...</p>
   </article>
 </div>
 

@@ -16,8 +16,8 @@
 <meta property="og:title" content="클라우드 파운드리(Cloud Foundry, CFAR) 소개" />
 <meta name="author" content="LindaRex" />
 <meta property="og:locale" content="ko_KR" />
-<meta name="description" content="클라우드 파운드리(이하 Cloud Foundry)는 과거에 PaaS(Platform as a Service)와 재단을 가리키는 용어였지만, 현재는 PaaS를 뜻하는 Cloud Foundry는 CFAR(cloud foundry application runtime)로 대체되었습니다. CFAR은 개방형 기여(contribution) 및 개방형 거버넌스 모델(governance model)을 갖춘 Apache License 2.0으로 배포된 오픈소스 클라우드 애플리케이션 플랫폼(open source cloud application platform)입니다. 사용자가 업체(vendor)에 종속되지 않도록 유연성을 제공하고, 애플리케이션(이하 application)을 더 빠르고 쉽게 구축(이하 build)하여 테스트(이하 test)하고 배포(이하 deploy)하며 확장할 수 있는 기능을 제공합니다. 이 포스트에서는 CFAR을 소개합니다." />
-<meta property="og:description" content="클라우드 파운드리(이하 Cloud Foundry)는 과거에 PaaS(Platform as a Service)와 재단을 가리키는 용어였지만, 현재는 PaaS를 뜻하는 Cloud Foundry는 CFAR(cloud foundry application runtime)로 대체되었습니다. CFAR은 개방형 기여(contribution) 및 개방형 거버넌스 모델(governance model)을 갖춘 Apache License 2.0으로 배포된 오픈소스 클라우드 애플리케이션 플랫폼(open source cloud application platform)입니다. 사용자가 업체(vendor)에 종속되지 않도록 유연성을 제공하고, 애플리케이션(이하 application)을 더 빠르고 쉽게 구축(이하 build)하여 테스트(이하 test)하고 배포(이하 deploy)하며 확장할 수 있는 기능을 제공합니다. 이 포스트에서는 CFAR을 소개합니다." />
+<meta name="description" content="클라우드 파운드리(Cloud Foundry)는 과거에 PaaS(platform as a service)와 재단을 가리키는 용어였지만, 현재는 PaaS를 뜻하는 Cloud Foundry는 CFAR(cloud foundry application runtime)로 대체되었습니다. CFAR은 개방형 기여(contribution) 및 개방형 거버넌스 모델(governance model)을 갖춘 Apache License 2.0으로 배포된 오픈소스 클라우드 애플리케이션 플랫폼(open source cloud application platform)입니다. 사용자가 업체(vendor)에 종속되지 않도록 유연성을 제공하고, 애플리케이션(application)을 더 빠르고 쉽게 구축(build)하여 테스트(test)하고 배포(deploy)하며 확장할 수 있는 기능을 제공합니다. 이 포스트에서는 CFAR을 소개합니다." />
+<meta property="og:description" content="클라우드 파운드리(Cloud Foundry)는 과거에 PaaS(platform as a service)와 재단을 가리키는 용어였지만, 현재는 PaaS를 뜻하는 Cloud Foundry는 CFAR(cloud foundry application runtime)로 대체되었습니다. CFAR은 개방형 기여(contribution) 및 개방형 거버넌스 모델(governance model)을 갖춘 Apache License 2.0으로 배포된 오픈소스 클라우드 애플리케이션 플랫폼(open source cloud application platform)입니다. 사용자가 업체(vendor)에 종속되지 않도록 유연성을 제공하고, 애플리케이션(application)을 더 빠르고 쉽게 구축(build)하여 테스트(test)하고 배포(deploy)하며 확장할 수 있는 기능을 제공합니다. 이 포스트에서는 CFAR을 소개합니다." />
 <link rel="canonical" href="https://lindarex.github.io/cfar/cfar-introduction/" />
 <meta property="og:url" content="https://lindarex.github.io/cfar/cfar-introduction/" />
 <meta property="og:site_name" content="LindaRex" />
@@ -29,7 +29,7 @@
 <meta name="twitter:creator" content="@LindaRex" />
 <meta name="google-site-verification" content="t6VkmqsI15sIx3P1-gh3NYputZtjhDZOTkxhwDaa4Ik" />
 <script type="application/ld+json">
-{"description":"클라우드 파운드리(이하 Cloud Foundry)는 과거에 PaaS(Platform as a Service)와 재단을 가리키는 용어였지만, 현재는 PaaS를 뜻하는 Cloud Foundry는 CFAR(cloud foundry application runtime)로 대체되었습니다. CFAR은 개방형 기여(contribution) 및 개방형 거버넌스 모델(governance model)을 갖춘 Apache License 2.0으로 배포된 오픈소스 클라우드 애플리케이션 플랫폼(open source cloud application platform)입니다. 사용자가 업체(vendor)에 종속되지 않도록 유연성을 제공하고, 애플리케이션(이하 application)을 더 빠르고 쉽게 구축(이하 build)하여 테스트(이하 test)하고 배포(이하 deploy)하며 확장할 수 있는 기능을 제공합니다. 이 포스트에서는 CFAR을 소개합니다.","author":{"@type":"Person","name":"LindaRex"},"@type":"BlogPosting","url":"https://lindarex.github.io/cfar/cfar-introduction/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"LindaRex"},"headline":"클라우드 파운드리(Cloud Foundry, CFAR) 소개","dateModified":"2020-02-25T00:00:00+09:00","datePublished":"2020-02-25T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/cfar/cfar-introduction/"},"@context":"https://schema.org"}</script>
+{"description":"클라우드 파운드리(Cloud Foundry)는 과거에 PaaS(platform as a service)와 재단을 가리키는 용어였지만, 현재는 PaaS를 뜻하는 Cloud Foundry는 CFAR(cloud foundry application runtime)로 대체되었습니다. CFAR은 개방형 기여(contribution) 및 개방형 거버넌스 모델(governance model)을 갖춘 Apache License 2.0으로 배포된 오픈소스 클라우드 애플리케이션 플랫폼(open source cloud application platform)입니다. 사용자가 업체(vendor)에 종속되지 않도록 유연성을 제공하고, 애플리케이션(application)을 더 빠르고 쉽게 구축(build)하여 테스트(test)하고 배포(deploy)하며 확장할 수 있는 기능을 제공합니다. 이 포스트에서는 CFAR을 소개합니다.","author":{"@type":"Person","name":"LindaRex"},"@type":"BlogPosting","url":"https://lindarex.github.io/cfar/cfar-introduction/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"LindaRex"},"headline":"클라우드 파운드리(Cloud Foundry, CFAR) 소개","dateModified":"2020-02-25T00:00:00+09:00","datePublished":"2020-02-25T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/cfar/cfar-introduction/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <!-- LINDAREX :: JEKYLL SEO TAG :: END -->
@@ -359,7 +359,7 @@ wcs_do();
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="클라우드 파운드리(Cloud Foundry, CFAR) 소개">
-    <meta itemprop="description" content="클라우드 파운드리(이하 Cloud Foundry)는 과거에 PaaS(Platform as a Service)와 재단을 가리키는 용어였지만, 현재는 PaaS를 뜻하는 Cloud Foundry는 CFAR(cloud foundry application runtime)로 대체되었습니다. CFAR은 개방형 기여(contribution) 및 개방형 거버넌스 모델(governance model)을 갖춘 Apache License 2.0으로 배포된 오픈소스 클라우드 애플리케이션 플랫폼(open source cloud application platform)입니다. 사용자가 업체(vendor)에 종속되지 않도록 유연성을 제공하고, 애플리케이션(이하 application)을 더 빠르고 쉽게 구축(이하 build)하여 테스트(이하 test)하고 배포(이하 deploy)하며 확장할 수 있는 기능을 제공합니다. 이 포스트에서는 CFAR을 소개합니다.">
+    <meta itemprop="description" content="클라우드 파운드리(Cloud Foundry)는 과거에 PaaS(platform as a service)와 재단을 가리키는 용어였지만, 현재는 PaaS를 뜻하는 Cloud Foundry는 CFAR(cloud foundry application runtime)로 대체되었습니다. CFAR은 개방형 기여(contribution) 및 개방형 거버넌스 모델(governance model)을 갖춘 Apache License 2.0으로 배포된 오픈소스 클라우드 애플리케이션 플랫폼(open source cloud application platform)입니다. 사용자가 업체(vendor)에 종속되지 않도록 유연성을 제공하고, 애플리케이션(application)을 더 빠르고 쉽게 구축(build)하여 테스트(test)하고 배포(deploy)하며 확장할 수 있는 기능을 제공합니다. 이 포스트에서는 CFAR을 소개합니다.">
     <meta itemprop="datePublished" content="2020-02-25T00:00:00+09:00">
     
 
@@ -398,21 +398,21 @@ wcs_do();
           <!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: END -->
           </aside>
         
-        <p>클라우드 파운드리(이하 Cloud Foundry)는 과거에 PaaS(Platform as a Service)와 재단을 가리키는 용어였지만, 현재는 PaaS를 뜻하는 Cloud Foundry는 CFAR(cloud foundry application runtime)로 대체되었습니다. <br />
+        <p>클라우드 파운드리(Cloud Foundry)는 과거에 PaaS(platform as a service)와 재단을 가리키는 용어였지만, 현재는 PaaS를 뜻하는 Cloud Foundry는 CFAR(cloud foundry application runtime)로 대체되었습니다. <br />
 CFAR은 개방형 기여(contribution) 및 개방형 거버넌스 모델(governance model)을 갖춘 Apache License 2.0으로 배포된 오픈소스 클라우드 애플리케이션 플랫폼(open source cloud application platform)입니다. <br />
-사용자가 업체(vendor)에 종속되지 않도록 유연성을 제공하고, 애플리케이션(이하 application)을 더 빠르고 쉽게 구축(이하 build)하여 테스트(이하 test)하고 배포(이하 deploy)하며 확장할 수 있는 기능을 제공합니다. <br />
+사용자가 업체(vendor)에 종속되지 않도록 유연성을 제공하고, 애플리케이션(application)을 더 빠르고 쉽게 구축(build)하여 테스트(test)하고 배포(deploy)하며 확장할 수 있는 기능을 제공합니다. <br />
 이 포스트에서는 CFAR을 소개합니다.</p>
 
 <h2 id="내용contents">내용(CONTENTS)</h2>
 <ul>
-  <li>CFAR은 클라우드(IaaS) 환경, 개발 프레임워크(Buildpack) 및 application 서비스(Service)를 선택할 수 있으며, application을 빠르고 쉽게 build, test하고 deploy 하며 확장할 수 있는 오픈소스(이하 open source) 멀티 클라우드(이하 cloud) application PaaS입니다.</li>
-  <li>CFAR의 컨테이너(이하 container) 기반 아키텍처는 아마존 웹 서비스(AWS), 마이크로소프트 애저(Azure), 구글 컴퓨트 플랫폼(GCP), 오픈스택(OpenStack), VM웨어(VMware) vSphere 등의 다양한 cloud 환경 위에서 다양한 언어로 application을 실행할 수 있도록 합니다.</li>
+  <li>CFAR은 클라우드(IaaS) 환경, 개발 프레임워크(Buildpack) 및 application 서비스(Service)를 선택할 수 있으며, application을 빠르고 쉽게 build, test하고 deploy 하며 확장할 수 있는 오픈소스(open source) 멀티 클라우드(cloud) application PaaS입니다.</li>
+  <li>CFAR의 컨테이너(container) 기반 아키텍처는 아마존 웹 서비스(AWS), 마이크로소프트 애저(Azure), 구글 컴퓨트 플랫폼(GCP), 오픈스택(OpenStack), VM웨어(VMware) vSphere 등의 다양한 cloud 환경 위에서 다양한 언어로 application을 실행할 수 있도록 합니다.</li>
   <li>CFAR은 초기 개발부터 test, 그리고 deploy에 이르는 완전한 application 수명 주기(lifecycle)를 지원하기 때문에 지속적 배포(CD, continuous delivery)에 적합합니다.</li>
-  <li>CFAR은 루비(Ruby), 고언어(Go), 자바(Java)로 개발되었으며, BOSH deployment 스크립트(이하 script)를 이용하여 IaaS에 deploy 합니다.</li>
+  <li>CFAR은 루비(Ruby), 고언어(Go), 자바(Java)로 개발되었으며, BOSH deployment 스크립트(script)를 이용하여 IaaS에 deploy 합니다.</li>
 </ul>
 
 <blockquote>
-  <p>국내에서는 한국정보화진흥원(NIA, National Information Society Agency)에서 2014년부터 CFAR을 이용한 PaaS 아키텍처와 기능 분석을 시작했고, 2016년에 CFAR과 개발 도구 및 운영 도구를 패키징한 <a href="https://paas-ta.kr/" target="\_blank">PaaS-TA</a>라는 open source PaaS 플랫폼(이하 platform)을 공개했습니다. 2016년에 버전 1.0을 시작으로 다양한 서비스(이하 service)와 버전 업그레이드를 통해 코스콤, KT, LG CNS, SK 등 민간 기업과 협력하면서 2019년에 버전 5.0까지 배포되었습니다.</p>
+  <p>국내에서는 한국정보화진흥원(NIA, National Information Society Agency)에서 2014년부터 CFAR을 이용한 PaaS 아키텍처와 기능 분석을 시작했고, 2016년에 CFAR과 개발 도구 및 운영 도구를 패키징한 <a href="https://paas-ta.kr/" target="\_blank">PaaS-TA</a>라는 open source PaaS 플랫폼(platform)을 공개했습니다. 2016년에 버전 1.0을 시작으로 다양한 서비스(service)와 버전 업그레이드를 통해 코스콤, KT, LG CNS, SK 등 민간 기업과 협력하면서 2019년에 버전 5.0까지 배포되었습니다.</p>
 </blockquote>
 
 <blockquote>
@@ -420,31 +420,31 @@ CFAR은 개방형 기여(contribution) 및 개방형 거버넌스 모델(governa
 </blockquote>
 
 <blockquote>
-  <p>IaaS(Infrastructure as a Service)란 서버 자원, 네트워크(network), 스토리지(storage) 등 인프라(이하 infra) 자원(resources)을 쉽고 편하게 이용할 수 있는 cloud service 형태로 제공하는 것을 의미하며, PaaS와 SaaS(Software as a Service)의 기반입니다. 
-서버 가상화, 데스크톱 가상화 등의 기술로 구현되며, 대표적으로 AWS EC2(Elastic Cloud Compute), MS Azure, Google compute engine, OpenStack 등이 있습니다.</p>
+  <p>IaaS(infrastructure as a service)란 서버(server) 자원(resource), 네트워크(network), 스토리지(storage) 등 인프라(infra) resources을 쉽고 편하게 이용할 수 있는 cloud service 형태로 제공하는 것을 의미하며, PaaS와 SaaS(software as a service)의 기반입니다. 
+server 가상화, 데스크톱 가상화 등의 기술로 구현되며, 대표적으로 AWS EC2(Elastic Cloud Compute), MS Azure, Google compute engine, OpenStack 등이 있습니다.</p>
 </blockquote>
 
 <blockquote>
-  <p>PaaS란 Platform as a Service의 약자로 application 개발을 위한 infra를 구축하고 유지보수하는 복잡함 없이, application을 개발하고 실행 및 관리할 있는 platform을 제공하는 service를 의미합니다. 
+  <p>PaaS란 platform as a service의 약자로 application 개발을 위한 infra를 구축하고 유지보수하는 복잡함 없이, application을 개발하고 실행 및 관리할 있는 platform을 제공하는 service를 의미합니다. 
 대표적인 상용 PaaS로는 Pivotal Cloud Foundry, Google App Engine, Oracle Cloud Platform, Heroku 등이 있습니다.</p>
 </blockquote>
 
 <blockquote>
-  <p>SaaS는 cloud 환경에서 동작하는 application을 service 형태로 제공하는 것으로 Software as a Service의 약자입니다. 
+  <p>SaaS는 cloud 환경에서 동작하는 application을 service 형태로 제공하는 것으로 software as a service의 약자입니다. 
 주문형 소프트웨어(on-demand software)라고도 하며, 대표적으로 Google Gmail, Google docs, Dropbox 등이 있습니다.</p>
 </blockquote>
 
 <blockquote>
-  <p>Buildpack이란 application을 CFAR로 배포(이하 push)할 때, application에 대한 프레임워크(이하 framework) 및 런타임(이하 runtime) 지원을 제공합니다. CFAR은 push 되는 application을 검사하여 적합한 buildpack을 감지하고, 이 buildpack은 내려받을 종속성(dependencies)을 결정하고 바인딩(이하 binding) 된 service와 통신하도록 application 구성을 설정합니다. buildpack에 대한 자세한 정보는 <a href="https://docs.cloudfoundry.org/buildpacks/" target="\_blank">https://docs.cloudfoundry.org/buildpacks/</a>를 확인해 주시기 바랍니다.</p>
+  <p>Buildpack이란 application을 CFAR로 배포(push)할 때, application에 대한 프레임워크(framework) 및 런타임(runtime) 지원을 제공합니다. CFAR은 push 되는 application을 검사하여 적합한 buildpack을 감지하고, 이 buildpack은 내려받을 종속성(dependencies)을 결정하고 바인딩(binding) 된 service와 통신하도록 application 구성을 설정합니다. buildpack에 대한 자세한 정보는 <a href="https://docs.cloudfoundry.org/buildpacks/" target="\_blank">https://docs.cloudfoundry.org/buildpacks/</a>를 확인해 주시기 바랍니다.</p>
 </blockquote>
 
 <blockquote>
-  <p>바인딩(Binding)이란 일반적으로 하나를 다른 것으로 매핑시키는 것을 의미합니다. Cloud Foundry에서 binding은 service instance를 push 된 application에 연결 또는 연관(association)시키는 것이며, 반대는 unbinding입니다.</p>
+  <p>바인딩(binding)이란 일반적으로 하나를 다른 것으로 매핑시키는 것을 의미합니다. Cloud Foundry에서 binding은 service instance를 push 된 application에 연결 또는 연관(association)시키는 것이며, 반대는 unbinding입니다.</p>
 </blockquote>
 
 <h3 id="1-역사history">1. 역사(history)</h3>
 <ul>
-  <li>CFAR은 VMware에 의해 개발되어 Pivotal Software로 넘어간 후, 2015년 1월에 Cloud Foundry 재단이 비영리 독립 리눅스 재단 협업 project의 하나로 설립되어, Cloud Foundry 소프트웨어(소스 코드 및 모든 관련 상표)는 open source 소프트웨어 재단의 소유가 되었습니다.</li>
+  <li>CFAR은 VMware에 의해 개발되어 Pivotal Software로 넘어간 후, 2015년 1월에 Cloud Foundry 재단이 비영리 독립 리눅스(linux) 재단 협업 project의 하나로 설립되어, Cloud Foundry 소프트웨어(소스 코드 및 모든 관련 상표)는 open source 소프트웨어 재단의 소유가 되었습니다.</li>
   <li>현재 CFAR 개발은 Cloud Foundry 재단이 관리 및 통제하고 있습니다.</li>
 </ul>
 
@@ -468,13 +468,13 @@ CFAR은 개방형 기여(contribution) 및 개방형 거버넌스 모델(governa
 
 <h3 id="4-구성요소component">4. 구성요소(component)</h3>
 <ul>
-  <li>각 구성요소에 대한 최신 배포(release) 버전과 저장소(이하 repository), 개별 설치 방법은 생략합니다.</li>
+  <li>각 구성요소에 대한 최신 배포(release) 버전과 저장소(repository), 개별 설치 방법은 생략합니다.</li>
 </ul>
 
 <h4 id="41-router">4.1. Router</h4>
 <ul>
-  <li>라우터(이하 router)는 들어오는 트래픽을 클라우드 컨트롤러(Cloud Controller) 컴포넌트(이하 component) 또는 디에고 셀(Diego Cell)에서 실행되는 호스팅 된 application으로 라우팅합니다.</li>
-  <li>router는 주기적으로 Diego Bulletin Board System(BBS)을 조회하여 현재 application이 실행 중인 셀(이하 cell)과 container를 결정하고, 이 정보로 각 cell 가상 머신(virtual machine, 이하 VM)의 IP 주소(address)와 cell container의 호스트 측 포트(port) 번호를 기반으로 새로운 라우팅 테이블을 다시 계산합니다.</li>
+  <li>라우터(router)는 들어오는 트래픽을 클라우드 컨트롤러(Cloud Controller) 컴포넌트(component) 또는 디에고 셀(Diego Cell)에서 실행되는 호스팅 된 application으로 라우팅합니다.</li>
+  <li>router는 주기적으로 Diego BBS(bulletin board system)를 조회하여 현재 application이 실행 중인 셀(cell)과 container를 결정하고, 이 정보로 각 cell 가상 머신(VM, virtual machine)의 IP 주소(address)와 cell container의 호스트 측 포트(port) 번호를 기반으로 새로운 라우팅 테이블을 다시 계산합니다.</li>
 </ul>
 
 <blockquote>
@@ -483,11 +483,11 @@ CFAR은 개방형 기여(contribution) 및 개방형 거버넌스 모델(governa
 
 <h4 id="42-oauth2-uaa-server">4.2. OAuth2 UAA server</h4>
 <ul>
-  <li>OAuth2 UAA(User Account and Authentication) 서버(이하 server)와 로그인(이하 login) server는 함께 작동하여 ID 관리 기능을 제공합니다.</li>
-  <li>UAA는 OAuth2 제공자(이하 provider)로서 CFAR 사용자를 대신하여 클라이언트(이하 client) application이 사용할 수 있는 토큰(token)을 발행합니다.</li>
-  <li>UAA는 login server와 연동하여 CFAR 자격 증명(credentials)으로 사용자를 인증 할 수 있으며, 이러한 자격 증명이나 다른 자격 증명을 사용하여 SSO service를 제공할 수 있습니다.</li>
-  <li>UAA에는 사용자 계정을 관리하고 OAuth2 client를 등록하기 위한 엔드 포인트(이하 endpoints)와 다양한 관리 기능이 있습니다.</li>
-  <li>CFAR에는 기본적으로 두 개의 UAA 인스턴스(이하 instance)가 있는데, 하나는 BOSH Director 용이며 다른 하나는 BOSH 배포(CFAR도 BOSH 배포에 포함) 용도로 사용됩니다.</li>
+  <li>OAuth2 UAA(user account and authentication) server와 로그인(login) server는 함께 작동하여 ID 관리 기능을 제공합니다.</li>
+  <li>UAA는 OAuth2 제공자(provider)로서 CFAR 사용자를 대신하여 클라이언트(client) application이 사용할 수 있는 토큰(token)을 발행합니다.</li>
+  <li>UAA는 login server와 연동하여 CFAR 자격 증명(credentials)으로 사용자를 인증 할 수 있으며, 이러한 credentials나 다른 credentials를 사용하여 SSO service를 제공할 수 있습니다.</li>
+  <li>UAA에는 사용자 계정을 관리하고 OAuth2 client를 등록하기 위한 엔드 포인트(endpoints)와 다양한 관리 기능이 있습니다.</li>
+  <li>CFAR에는 기본적으로 두 개의 UAA 인스턴스(instance)가 있는데, 하나는 BOSH Director 용이며 다른 하나는 BOSH 배포(CFAR도 BOSH 배포에 포함) 용도로 사용됩니다.</li>
   <li>하나의 runtime 또는 service에 login 하면, UAA를 사용하여 인증하는 다른 runtime 및 service에는 login 되지 않고, 각 runtime 또는 service에 별도로 login 해야 합니다.</li>
 </ul>
 
@@ -497,9 +497,9 @@ CFAR은 개방형 기여(contribution) 및 개방형 거버넌스 모델(governa
 
 <h4 id="43-cloud-controller">4.3. Cloud Controller</h4>
 <ul>
-  <li>클라우드 컨트롤러(Cloud Controller, 이하 CC)는 application push를 지시합니다.</li>
+  <li>클라우드 컨트롤러(CC, cloud controller)는 application push를 지시합니다.</li>
   <li>application을 CFAR로 push 하기 위해 CC를 대상(target)으로 하고, CC-Bridge components를 통해 Diego Brain에 지시하여 개별 Diego Cell을 조정한 후, application을 준비(stage)하고 실행합니다.</li>
-  <li>CC는 client가 시스템에 접근할 수 있도록 REST API endpoints를 제공하고, 조직(orgs), 공간(spaces), 서비스(services), 사용자 역할(user roles) 등의 데이터베이스(이하 database)를 유지하고 관리합니다.</li>
+  <li>CC는 client가 시스템(system)에 접근할 수 있도록 REST API endpoints를 제공하고, 조직(orgs), 공간(spaces), 서비스(services), 사용자 역할(user roles) 등의 데이터베이스(database)를 유지하고 관리합니다.</li>
 </ul>
 
 <blockquote>
@@ -512,8 +512,8 @@ CFAR은 개방형 기여(contribution) 및 개방형 거버넌스 모델(governa
 
 <h4 id="44-blobstore">4.4. Blobstore</h4>
 <ul>
-  <li>Blobstore는 큰 바이너리(이하 binary) 파일(이하 file)을 저장할 수 있는 repository입니다.</li>
-  <li>application code packages, buildpacks, droplets를 포함하고 있으며, 내부 server 또는 외부 S3 또는 S3 호환 endpoints로 구성할 수 있습니다.</li>
+  <li>Blobstore는 큰 바이너리(binary) 파일(file)을 저장할 수 있는 repository입니다.</li>
+  <li>application code packages, buildpacks, droplets를 포함하고 있으며, 내부 server 또는 외부 S3, S3 호환 endpoints로 구성할 수 있습니다.</li>
 </ul>
 
 <blockquote>
@@ -523,7 +523,7 @@ CFAR은 개방형 기여(contribution) 및 개방형 거버넌스 모델(governa
 <h4 id="45-diego-cell">4.5. Diego Cell</h4>
 <ul>
   <li>application instances와 application tasks, staging tasks는 모두 Diego Cell VM에서 Garden container로 실행됩니다.</li>
-  <li>Diego cell rep component는 container의 lifecycle과 container에서 실행되는 프로세스(process)를 관리하고, container 상태를 Diego BBS에 보고하며, 로그(이하 log)와 측정지표(이하 metrics)를 Loggregator로 보냅니다.</li>
+  <li>Diego cell rep component는 container의 lifecycle과 container에서 실행되는 프로세스(process)를 관리하고, container 상태를 Diego BBS에 보고하며, 로그(log)와 측정지표(metrics)를 Loggregator로 보냅니다.</li>
 </ul>
 
 <blockquote>
@@ -536,7 +536,7 @@ CFAR은 개방형 기여(contribution) 및 개방형 거버넌스 모델(governa
 </ul>
 
 <blockquote>
-  <p>프로비저닝(Provisioning)이란 사용자의 요구에 맞게 시스템 자원을 할당하고 배치하여 배포해 두었다가, 필요할 때 시스템을 즉시 사용할 수 있는 상태로 미리 준비해 두는 것을 의미합니다.</p>
+  <p>프로비저닝(provisioning)이란 사용자의 요구에 맞게 system resource를 할당하고 배치하여 배포해 두었다가, 필요할 때 system을 즉시 사용할 수 있는 상태로 미리 준비해 두는 것을 의미합니다.</p>
 </blockquote>
 
 <blockquote>
@@ -545,7 +545,7 @@ CFAR은 개방형 기여(contribution) 및 개방형 거버넌스 모델(governa
 
 <h4 id="47-internal-networking">4.7. Internal networking</h4>
 <ul>
-  <li>CFAR component VM은 HTTP와 HTTPS 프로토콜(이하 protocol)을 통해 내부적으로 서로 통신하며, Diego의 Bulletin Board System(BBS)에 저장된 임시 메시지(이하 message)와 데이터(이하 data)를 공유합니다.</li>
+  <li>CFAR component VM은 HTTP와 HTTPS 프로토콜(protocol)을 통해 내부적으로 서로 통신하며, Diego BBS에 저장된 임시 메시지(message)와 데이터(data)를 공유합니다.</li>
   <li>BOSH Director는 deploy 된 모든 VM에 BOSH DNS server를 설치하고, 모든 VM은 다른 모든 VM에 대한 최신 DNS 레코드(record)를 같은 기반으로 유지하여 VM 간의 service 검색을 가능하게 합니다.</li>
   <li>BOSH DNS는 여러 VM을 사용할 수 있을 때, 상태가 양호한 VM을 임의로 선택하여 client 측 로드 밸런싱(load balancing)을 제공합니다.</li>
   <li>route-emitter component는 NATS protocol을 사용하여 최신 라우팅 테이블을 router로 전송합니다.</li>
@@ -553,7 +553,7 @@ CFAR은 개방형 기여(contribution) 및 개방형 거버넌스 모델(governa
 </ul>
 
 <blockquote>
-  <p>Bulletin Board System(BBS)에 대한 자세한 정보는 <a href="https://docs.cloudfoundry.org/concepts/diego/diego-architecture.html#bbs" target="\_blank">https://docs.cloudfoundry.org/concepts/diego/diego-architecture.html#bbs</a>를 확인해 주시기 바랍니다.</p>
+  <p>BBS(Bulletin Board System)에 대한 자세한 정보는 <a href="https://docs.cloudfoundry.org/concepts/diego/diego-architecture.html#bbs" target="\_blank">https://docs.cloudfoundry.org/concepts/diego/diego-architecture.html#bbs</a>를 확인해 주시기 바랍니다.</p>
 </blockquote>
 
 <blockquote>
@@ -718,7 +718,7 @@ CFAR을 비롯해서 Cloud, PaaS, IaaS, SaaS 등의 기술 트랜드는 선택�
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">iptables은 방화벽(이하 firewall) 구성이나 NAT(network address translation)에 사용되는데, 시스템 관리자가 리눅스(이하 linux) 커널(이하 kernel) 방화벽이 제공하는 테이블(이하 table)과 체인(이하 chain), 규칙(이하 ru...</p>
+    <p class="archive__item-excerpt" itemprop="description">iptables은 방화벽(firewall) 구성이나 NAT(network address translation)에 사용되는데, 시스템 관리자가 리눅스(linux) 커널(kernel) firewall이 제공하는 테이블(table)과 체인(chain), 규칙(rule)으로 구성합니다. ...</p>
   </article>
 </div>
 
@@ -745,7 +745,7 @@ CFAR을 비롯해서 Cloud, PaaS, IaaS, SaaS 등의 기술 트랜드는 선택�
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">이 포스트에서는 클라우드 파운드리(이하 Cloud Foundry) 프로젝트(이하 projects)를 간단히 소개합니다.
+    <p class="archive__item-excerpt" itemprop="description">이 포스트에서는 클라우드 파운드리(Cloud Foundry) 프로젝트(projects)를 간단히 소개합니다.
 
 </p>
   </article>
@@ -774,7 +774,8 @@ CFAR을 비롯해서 Cloud, PaaS, IaaS, SaaS 등의 기술 트랜드는 선택�
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">방화벽(UFW, Uncomplicated Firewall, 이하 ufw)은 데비안(이하 debian) 계열 및 다양한 리눅스(이하 linux) 환경에서 작동되고, GPL(GNU General Public License) 라이선스가 적용되며 파이썬(Python)으로 개발되었습니다. ...</p>
+    <p class="archive__item-excerpt" itemprop="description">방화벽(UFW, uncomplicated firewall)은 데비안(debian) 계열 및 다양한 리눅스(linux) 환경에서 작동되고, GPL(GNU General Public License)이 적용되며 파이썬(python)으로 개발되었습니다. 
+사용하기 쉬운 CLI(comman...</p>
   </article>
 </div>
 
@@ -796,13 +797,13 @@ CFAR을 비롯해서 Cloud, PaaS, IaaS, SaaS 등의 기술 트랜드는 선택�
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/elastic-stack/ubuntu-elastic-stack-installation/" rel="permalink">우분투(Ubuntu) 환경에 패키지로 Elastic Stack 설치하기
+        <a href="/elastic-stack/ubuntu-elastic-stack-installation/" rel="permalink">우분투(Ubuntu) 환경에 패키지(Package)로 Elastic Stack 설치하기
 </a>
       
     </h2>
     
     <p class="archive__item-excerpt" itemprop="description">Elastic Stack을 소개하기에 앞서 ELK Stack을 먼저 소개하겠습니다. 
-ELK Stack은 Elasticsearch, Logstash, Kibana의 연동으로 텍스트, 숫자, 위치 기반 정보, 정형 및 비정형 데이터 등 모든 유형의 데이터를 수집 및 변환하고 분석하여...</p>
+ELK Stack은 Elasticsearch, Logstash, Kibana의 연동으로 텍스트, 숫자, 위치 기반 정보, 정형 및 비정형 데이터(data) 등 모든 유형의 data를 수집 및 변환...</p>
   </article>
 </div>
 

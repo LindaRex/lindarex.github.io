@@ -16,8 +16,8 @@
 <meta property="og:title" content="VMware Workstation의 가상 네트워크(Virtual Network) 알아보기" />
 <meta name="author" content="LindaRex" />
 <meta property="og:locale" content="ko_KR" />
-<meta name="description" content="VMware Workstation은 가상 머신(Virtual Machine, 이하 VM)을 생성하고 가상 네트워크(Virtual Network)를 구성할 수 있습니다. 이 포스트에서는 VMware Workstation의 Virtual Network에 대해 소개합니다." />
-<meta property="og:description" content="VMware Workstation은 가상 머신(Virtual Machine, 이하 VM)을 생성하고 가상 네트워크(Virtual Network)를 구성할 수 있습니다. 이 포스트에서는 VMware Workstation의 Virtual Network에 대해 소개합니다." />
+<meta name="description" content="VMware Workstation은 가상 머신(VM, virtual machine)을 생성하고 가상 네트워크(virtual network)를 구성할 수 있습니다. 이 포스트에서는 VMware Workstation의 virtual network에 대해 소개합니다." />
+<meta property="og:description" content="VMware Workstation은 가상 머신(VM, virtual machine)을 생성하고 가상 네트워크(virtual network)를 구성할 수 있습니다. 이 포스트에서는 VMware Workstation의 virtual network에 대해 소개합니다." />
 <link rel="canonical" href="https://lindarex.github.io/vmware-workstation/vmware-workstation-virtual-network/" />
 <meta property="og:url" content="https://lindarex.github.io/vmware-workstation/vmware-workstation-virtual-network/" />
 <meta property="og:site_name" content="LindaRex" />
@@ -29,7 +29,7 @@
 <meta name="twitter:creator" content="@LindaRex" />
 <meta name="google-site-verification" content="t6VkmqsI15sIx3P1-gh3NYputZtjhDZOTkxhwDaa4Ik" />
 <script type="application/ld+json">
-{"description":"VMware Workstation은 가상 머신(Virtual Machine, 이하 VM)을 생성하고 가상 네트워크(Virtual Network)를 구성할 수 있습니다. 이 포스트에서는 VMware Workstation의 Virtual Network에 대해 소개합니다.","author":{"@type":"Person","name":"LindaRex"},"@type":"BlogPosting","url":"https://lindarex.github.io/vmware-workstation/vmware-workstation-virtual-network/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"LindaRex"},"headline":"VMware Workstation의 가상 네트워크(Virtual Network) 알아보기","dateModified":"2020-02-12T00:00:00+09:00","datePublished":"2020-02-12T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/vmware-workstation/vmware-workstation-virtual-network/"},"@context":"https://schema.org"}</script>
+{"description":"VMware Workstation은 가상 머신(VM, virtual machine)을 생성하고 가상 네트워크(virtual network)를 구성할 수 있습니다. 이 포스트에서는 VMware Workstation의 virtual network에 대해 소개합니다.","author":{"@type":"Person","name":"LindaRex"},"@type":"BlogPosting","url":"https://lindarex.github.io/vmware-workstation/vmware-workstation-virtual-network/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"LindaRex"},"headline":"VMware Workstation의 가상 네트워크(Virtual Network) 알아보기","dateModified":"2020-02-12T00:00:00+09:00","datePublished":"2020-02-12T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/vmware-workstation/vmware-workstation-virtual-network/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <!-- LINDAREX :: JEKYLL SEO TAG :: END -->
@@ -359,7 +359,7 @@ wcs_do();
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="VMware Workstation의 가상 네트워크(Virtual Network) 알아보기">
-    <meta itemprop="description" content="VMware Workstation은 가상 머신(Virtual Machine, 이하 VM)을 생성하고 가상 네트워크(Virtual Network)를 구성할 수 있습니다. 이 포스트에서는 VMware Workstation의 Virtual Network에 대해 소개합니다.">
+    <meta itemprop="description" content="VMware Workstation은 가상 머신(VM, virtual machine)을 생성하고 가상 네트워크(virtual network)를 구성할 수 있습니다. 이 포스트에서는 VMware Workstation의 virtual network에 대해 소개합니다.">
     <meta itemprop="datePublished" content="2020-02-12T00:00:00+09:00">
     
 
@@ -398,8 +398,8 @@ wcs_do();
           <!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: END -->
           </aside>
         
-        <p>VMware Workstation은 가상 머신(Virtual Machine, 이하 VM)을 생성하고 가상 네트워크(Virtual Network)를 구성할 수 있습니다. <br />
-이 포스트에서는 VMware Workstation의 Virtual Network에 대해 소개합니다.</p>
+        <p>VMware Workstation은 가상 머신(VM, virtual machine)을 생성하고 가상 네트워크(virtual network)를 구성할 수 있습니다. <br />
+이 포스트에서는 VMware Workstation의 virtual network에 대해 소개합니다.</p>
 
 <h2 id="선행조건prerequisite">선행조건(PREREQUISITE)</h2>
 <ul>
@@ -423,10 +423,10 @@ wcs_do();
 <h2 id="내용contents">내용(CONTENTS)</h2>
 <h3 id="1-bridged-networking">1. Bridged Networking</h3>
 <ul>
-  <li>Bridged Networking은 호스트(Host) 시스템의 네트워크 어댑터를 사용하여 VM을 Network에 연결합니다.</li>
-  <li>Bridged Networking을 적용한 VM은 물리적 시스템으로 인식되고, 공유기는 개별적으로 IP를 할당합니다.</li>
+  <li>Bridged Networking은 호스트(host) 시스템(system)의 네트워크(network) 어댑터(adapter)를 사용하여 VM을 network에 연결합니다.</li>
+  <li>Bridged Networking을 적용한 VM은 물리적 system으로 인식되고, 공유기는 개별적으로 IP를 할당합니다.</li>
   <li>공유기를 통해 외부 통신을 합니다.</li>
-  <li>동일한 네트워크에 있다는 전제하에, Bridged Networking을 적용한 VM은 Host 시스템을 비롯해 동일 네트워크 내의 다른 시스템에도 엑세스가 가능합니다.</li>
+  <li>동일한 network에 있다는 전제하에, Bridged Networking을 적용한 VM은 host system을 비롯해 동일 network 내의 다른 system에도 엑세스가 가능합니다.</li>
   <li>VMware Workstation 설치 시 Bridged Network(VMnet0)가 설정됩니다.</li>
 </ul>
 
@@ -438,9 +438,9 @@ wcs_do();
 
 <h3 id="2-nat-networking">2. NAT Networking</h3>
 <ul>
-  <li>NAT(Network Address Translation) Networking을 적용한 VM은 외부 네트워크 통신을 위한 IP를 할당받지 않습니다.</li>
-  <li>Host 시스템에 별도의 개인 Network가 설정되고, NAT Networking을 적용한 VM은 가상 DHCP 서버로부터 내부 Network 대역을 할당받습니다.</li>
-  <li>Host 시스템을 통해 외부 통신을 합니다.</li>
+  <li>NAT(Network Address Translation) Networking을 적용한 VM은 외부 network 통신을 위한 IP를 할당받지 않습니다.</li>
+  <li>host system에 별도의 개인 network가 설정되고, NAT Networking을 적용한 VM은 가상 DHCP 서버(server)로부터 내부 network 대역을 할당받습니다.</li>
+  <li>host system을 통해 외부 통신을 합니다.</li>
   <li>NAT Network는 하나만 존재합니다.</li>
   <li>VMware Workstation 설치 시 NAT Network(VMnet8)가 설정됩니다.</li>
 </ul>
@@ -453,7 +453,7 @@ wcs_do();
 
 <h3 id="3-host-only-networking">3. Host-Only Networking</h3>
 <ul>
-  <li>Host-Only Networking을 적용한 VM은 기본적으로 외부 통신, Host 시스템과 통신이 불가능합니다.</li>
+  <li>Host-Only Networking을 적용한 VM은 기본적으로 외부 통신, host system과 통신이 불가능합니다.</li>
   <li>Host-Only Networking을 적용한 VM은 VMware Workstation에서 생성한 VM만 통신이 가능합니다.</li>
   <li>VMware Workstation 설치 시 Host-Only Network(VMnet1)가 설정됩니다.</li>
 </ul>
@@ -465,8 +465,8 @@ wcs_do();
 </blockquote>
 
 <h2 id="마무리conclusion">마무리(CONCLUSION)</h2>
-<p>VMware Workstation의 Virtual Network에 대해 알아봤습니다. <br />
-다음 포스트에서는 VMware Workstation의 Virtual Network를 설정하는 방법을 소개하겠습니다.</p>
+<p>VMware Workstation의 virtual network에 대해 알아봤습니다. <br />
+다음 포스트에서는 VMware Workstation의 virtual network를 설정하는 방법을 소개하겠습니다.</p>
 
 <h2 id="참고references">참고(REFERENCES)</h2>
 <ul>
@@ -557,11 +557,11 @@ wcs_do();
       
   <nav class="pagination">
     
-      <a href="/ubuntu/ubuntu-1804-installation/" class="pagination--pager" title="우분투(Ubuntu) 18.04 설치하기
+      <a href="/ubuntu/ubuntu-1804-installation/" class="pagination--pager" title="우분투(Ubuntu) 서버(Server) 18.04 설치하기
 ">Previous</a>
     
     
-      <a href="/jenkins/ubuntu-jenkins-installation/" class="pagination--pager" title="우분투(Ubuntu) 환경에 패키지로 젠킨스(Jenkins) 설치하기
+      <a href="/jenkins/ubuntu-jenkins-installation/" class="pagination--pager" title="우분투(Ubuntu) 환경에 패키지(Package)로 젠킨스(Jenkins) 설치하기
 ">Next</a>
     
   </nav>
@@ -608,7 +608,7 @@ wcs_do();
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">iptables은 방화벽(이하 firewall) 구성이나 NAT(network address translation)에 사용되는데, 시스템 관리자가 리눅스(이하 linux) 커널(이하 kernel) 방화벽이 제공하는 테이블(이하 table)과 체인(이하 chain), 규칙(이하 ru...</p>
+    <p class="archive__item-excerpt" itemprop="description">iptables은 방화벽(firewall) 구성이나 NAT(network address translation)에 사용되는데, 시스템 관리자가 리눅스(linux) 커널(kernel) firewall이 제공하는 테이블(table)과 체인(chain), 규칙(rule)으로 구성합니다. ...</p>
   </article>
 </div>
 
@@ -635,7 +635,7 @@ wcs_do();
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">이 포스트에서는 클라우드 파운드리(이하 Cloud Foundry) 프로젝트(이하 projects)를 간단히 소개합니다.
+    <p class="archive__item-excerpt" itemprop="description">이 포스트에서는 클라우드 파운드리(Cloud Foundry) 프로젝트(projects)를 간단히 소개합니다.
 
 </p>
   </article>
@@ -664,7 +664,8 @@ wcs_do();
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">클라우드 파운드리(이하 Cloud Foundry)는 과거에 PaaS(Platform as a Service)와 재단을 가리키는 용어였지만, 현재는 PaaS를 뜻하는 Cloud Foundry는 CFAR(cloud foundry application runtime)로 대체되었습니다. ...</p>
+    <p class="archive__item-excerpt" itemprop="description">클라우드 파운드리(Cloud Foundry)는 과거에 PaaS(platform as a service)와 재단을 가리키는 용어였지만, 현재는 PaaS를 뜻하는 Cloud Foundry는 CFAR(cloud foundry application runtime)로 대체되었습니다. 
+CF...</p>
   </article>
 </div>
 
@@ -691,7 +692,8 @@ wcs_do();
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">방화벽(UFW, Uncomplicated Firewall, 이하 ufw)은 데비안(이하 debian) 계열 및 다양한 리눅스(이하 linux) 환경에서 작동되고, GPL(GNU General Public License) 라이선스가 적용되며 파이썬(Python)으로 개발되었습니다. ...</p>
+    <p class="archive__item-excerpt" itemprop="description">방화벽(UFW, uncomplicated firewall)은 데비안(debian) 계열 및 다양한 리눅스(linux) 환경에서 작동되고, GPL(GNU General Public License)이 적용되며 파이썬(python)으로 개발되었습니다. 
+사용하기 쉬운 CLI(comman...</p>
   </article>
 </div>
 

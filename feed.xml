@@ -6,13 +6,13 @@
     <description>오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 LindaRex(린다렉스)의 블로그입니다</description>
     <link>https://lindarex.github.io/</link>
     <atom:link href="https://lindarex.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 12 Mar 2020 22:20:36 +0900</pubDate>
-    <lastBuildDate>Thu, 12 Mar 2020 22:20:36 +0900</lastBuildDate>
+    <pubDate>Thu, 12 Mar 2020 22:30:56 +0900</pubDate>
+    <lastBuildDate>Thu, 12 Mar 2020 22:30:56 +0900</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
         <title>우분투(Ubuntu) 환경에 iptables 설정하기</title>
-        <description>&lt;p&gt;iptables은 방화벽(firewall) 구성이나 NAT(network address translation)에 사용되는데, 시스템 관리자가 리눅스(linux) 커널(kernel) firewall이 제공하는 테이블(table)과 체인(chain), 규칙(rule)으로 구성합니다. &lt;br /&gt;
+        <description>&lt;p&gt;iptables은 방화벽(firewall) 구성이나 NAT(network address translation)에 사용되는데, 리눅스(linux) 커널(kernel) firewall이 제공하는 테이블(table)과 체인(chain), 규칙(rule)을 시스템 관리자가 구성합니다. &lt;br /&gt;
 각각 다른 kernel 모듈(module)과 프로그램들은 다른 프로토콜(protocol)을 위해 사용되는데, iptables는 IPv4에, ip6tables는 IPv6에, arptables는 ARP에, ebtables는 이더넷(ethernet) 프레임에 적용됩니다. &lt;br /&gt;
 linux 시스템(system)에서 iptables는 /usr/sbin/iptables에 설치되며, iptables의 후속 버전은 nftables입니다. &lt;br /&gt;
 이 포스트에서는 ubuntu 환경에서 iptables를 설정하는 방법을 소개합니다.&lt;/p&gt;

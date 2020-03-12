@@ -179,8 +179,8 @@ num  target     prot opt source               destination
     + LOG :: packet을 syslog에 기록합니다.
     + RETURN :: chain 통과를 중지하고, 이전(호출) chain의 다음 rule에 따라 다시 시작합니다.
     + QUEUE :: application에 packet을 대기(queue)시키는 데 사용합니다.
-    + SNAT :: 소스 network address 변환(source network address translation)에 사용되며, 이는 packet의 IP 헤더에 source IP address를 다시 쓰는 데 사용됩니다.
-    + DNAT :: 대상 network address 변환(destination network address translation)에 사용되며, 이는 packet의 destination IP address를 다시 쓰는 데 사용됩니다.
+    + SNAT :: 소스 네트워크 주소 변환(source network address translation)에 사용되며, 이는 packet의 IP 헤더에 source IP address를 다시 쓰는 데 사용됩니다.
+    + DNAT :: 대상 네트워크 주소 변환(destination network address translation)에 사용되며, 이는 packet의 destination IP address를 다시 쓰는 데 사용됩니다.
 
 #### 3.2. chain
 - chain은 순차적으로 검사하는 rule 세트이며, packet이 rule 중 하나와 일치하면 관련 작업이 실행되고, chain의 나머지 rule은 확인하지 않습니다.

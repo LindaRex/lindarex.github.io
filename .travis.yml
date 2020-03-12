@@ -5,15 +5,13 @@ rvm:
 
 script: bundle install && bundle exec jekyll build
 
-exclude: [vendor]
-
 deploy:
   provider: pages
   skip_cleanup: true
   github_token: $LINDAREX_GITHUB_TOKEN
   keep_history: true
-  local-dir: ./_site
-  target-branch: master
+  local_dir: ./_site
+  target_branch: master
   on:
     branch: sources
 

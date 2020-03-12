@@ -1,3 +1,5 @@
+dist: xenial
+os: linux
 language: ruby
 cache: bundler
 rvm:
@@ -8,7 +10,7 @@ script: bundle install && bundle exec jekyll build
 deploy:
   provider: pages
   skip_cleanup: true
-  github_token: $LINDAREX_GITHUB_TOKEN
+  token: $LINDAREX_GITHUB_TOKEN
   keep_history: true
   local_dir: ./_site
   target_branch: master

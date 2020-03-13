@@ -60,6 +60,7 @@ $(document).ready(function() {
   //   speedAsDuration: true,
   //   durationMax: 500
   // });
+  // scroll.destroy();
 
   // Gumshoe scroll spy init
   if($("nav.toc").length > 0) {

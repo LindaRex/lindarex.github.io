@@ -27,7 +27,7 @@ tags:
 
 ## 요약(SUMMARY)
 1. ubuntu server 16.04.6 ISO 파일 내려받기
-2. VMware workstation의 VM(Virtual Machine) 설정
+2. VMware workstation의 VM(virtual machine) 설정
 3. ubuntu server 16.04.6 설치
 4. linux 명령어로 ubuntu VM 상태 확인
 
@@ -313,7 +313,7 @@ tags:
 
 
 ## 마무리(CONCLUSION)
-VMware Workstation에 ubuntu 16.04.6 LTS (Xenial Xerus) Server 설치를 완료했습니다. <br />
+VMware Workstation에 Ubuntu 16.04.6 LTS (Xenial Xerus) Server 설치를 완료했습니다. <br />
 2020년 2월 12일 [W3Techs.com 통계](https://w3techs.com/technologies/details/os-linux){: target="\_blank"}에 따르면, ubuntu 점유율은 linux 배포판을 사용하는 웹사이트 중 1위(38.9%)로, 2위인 debian(18.4%)의 2배 이상 차이가 납니다. 또한 대부분의 오픈소스 소프트웨어는 Ubuntu를 지원하고, 국내외 사용자와 레퍼런스가 많습니다. <br />
 linux 입문자 또는 오픈소스 소프트웨어에 관심이 있다면, Ubuntu를 사용하며 linux 명령어를 숙지하고 다양한 커뮤니티에서 활동하는 것을 권합니다.
 

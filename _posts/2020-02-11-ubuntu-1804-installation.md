@@ -26,7 +26,7 @@ tags:
 
 ## 요약(SUMMARY)
 1. ubuntu server 18.04.3 ISO 파일 내려받기
-2. VMware workstation의 VM(Virtual Machine) 설정
+2. VMware workstation의 VM(virtual machine) 설정
 3. ubuntu server 18.04.3 설치
 4. 리눅스 명령어로 ubuntu VM 상태 확인
 
@@ -256,8 +256,8 @@ tags:
 
 
 ## 마무리(CONCLUSION)
-VMware Workstation에 ubuntu 18.04.3 LTS (Bionic Beaver) Server 설치를 완료했습니다. <br />
-다음 포스트에서는 [우분투(ubuntu) 서버(Server) 초기 설정하기](https://lindarex.github.io/ubuntu/ubuntu-initial-setting/){: target="\_blank"}를 소개하겠습니다.
+VMware Workstation에 Ubuntu 18.04.3 LTS (Bionic Beaver) Server 설치를 완료했습니다. <br />
+다음 포스트에서는 [우분투(Ubuntu) 서버(Server) 초기 설정하기](https://lindarex.github.io/ubuntu/ubuntu-initial-setting/){: target="\_blank"}를 소개하겠습니다.
 
 
 ## 참고(REFERENCES)

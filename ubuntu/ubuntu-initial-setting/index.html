@@ -420,7 +420,7 @@ wcs_do();
   <li>리눅스 버전 조회</li>
   <li>관리자(root) 계정 활성화</li>
   <li>패키지 업데이트</li>
-  <li>필수 패키지 설치</li>
+  <li>유용한 패키지 설치</li>
   <li>사용자 계정 생성</li>
   <li>시스템 언어 설정</li>
   <li>시스템 시간 설정</li>
@@ -516,10 +516,19 @@ passwd: password updated successfully
 </span></code></pre></div></div>
 
 <blockquote>
-  <p>‘sudo’(substitute user do)는 현재 계정에서 다른 계정, 즉 슈퍼 유저(superuser)로서 관리자(root) 권한을 가진 계정으로 프로그램(program)을 구동할 수 있도록 하는 command이며, ‘sudo -i’는 root 계정으로 로그인(login)하며 ‘/root’ 디렉터리(directory)로 이동하는 command이고, ‘sudo -s’는 현재 directory를 유지하며 root 계정으로 login 하는 command입니다. ‘sudo’, ‘sudo -i’, ‘sudo -s’ command는 현재 계정의 password를 요구하고, 전환된 계정의 환경변수는 적용하지 않습니다. <br />
-‘su’(substitute user, switch user)는 현재 계정에서 log out 하지 않고 다른 계정(기본값은 root 계정)으로 전환하며 현재 계정의 환경변수를 유지하는 command이고, ‘su -‘는 ‘su’와 동일하게 계정을 전환하며, 전환된 계정의 환경변수를 적용하는 command입니다. ‘su’, ‘su -‘ command는 전환될 계정의 password를 요구합니다. <br />
-‘sudo’ command는 현재 계정에서 root 계정의 권한만 빌리기 때문에 작업 내역은 현재 계정으로 남고, ‘su’ command는 현재 계정에서 root 계정으로 전환하기 때문에 작업 내역은 root 계정으로 저장됩니다. <br />
-자세한 정보는 <a href="https://ko.wikipedia.org/wiki/Sudo" target="\_blank">https://ko.wikipedia.org/wiki/Sudo</a>와 [https://zetawiki.com/wiki/리눅스_sudo\,<em>su_차이점](https://zetawiki.com/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_sudo,_su</em>%EC%B0%A8%EC%9D%B4%EC%A0%90){: target=”_blank”}을 확인해 주시기 바랍니다.</p>
+  <p>‘sudo’(substitute user do)는 현재 계정에서 다른 계정, 즉 슈퍼 유저(superuser)로서 관리자(root) 권한을 가진 계정으로 프로그램(program)을 구동할 수 있도록 하는 command이며, ‘sudo -i’는 root 계정으로 로그인(login)하며 ‘/root’ 디렉터리(directory)로 이동하는 command이고, ‘sudo -s’는 현재 directory를 유지하며 root 계정으로 login 하는 command입니다. ‘sudo’, ‘sudo -i’, ‘sudo -s’ command는 현재 계정의 password를 요구하고, 전환된 계정의 환경변수는 적용하지 않습니다.</p>
+</blockquote>
+
+<blockquote>
+  <p>‘su’(substitute user, switch user)는 현재 계정에서 log out 하지 않고 다른 계정(기본값은 root 계정)으로 전환하며 현재 계정의 환경변수를 유지하는 command이고, ‘su -‘는 ‘su’와 동일하게 계정을 전환하며, 전환된 계정의 환경변수를 적용하는 command입니다. ‘su’, ‘su -‘ command는 전환될 계정의 password를 요구합니다.</p>
+</blockquote>
+
+<blockquote>
+  <p>‘sudo’ command는 현재 계정에서 root 계정의 권한만 빌리기 때문에 작업 내역은 현재 계정으로 남고, ‘su’ command는 현재 계정에서 root 계정으로 전환하기 때문에 작업 내역은 root 계정으로 저장됩니다.</p>
+</blockquote>
+
+<blockquote>
+  <p>‘sudo’ command에 대한 자세한 정보는 <a href="https://ko.wikipedia.org/wiki/Sudo" target="\_blank">https://ko.wikipedia.org/wiki/Sudo</a>와 [https://zetawiki.com/wiki/리눅스_sudo\,<em>su_차이점](https://zetawiki.com/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_sudo,_su</em>%EC%B0%A8%EC%9D%B4%EC%A0%90){: target=”_blank”}을 확인해 주시기 바랍니다.</p>
 </blockquote>
 
 <h3 id="3-패키지package-업데이트update">3. 패키지(package) 업데이트(update)</h3>
@@ -547,10 +556,10 @@ passwd: password updated successfully
 <span class="go">[sudo] password for rex:
 </span></code></pre></div></div>
 
-<h3 id="4-필수-package-설치">4. 필수 package 설치</h3>
+<h3 id="4-유용한-package-설치">4. 유용한 package 설치</h3>
 
 <ul>
-  <li>‘apt install’ command로 arp, ifconfig, netstat,  rarp 등 네트워크 제어 명령어를 포함한 net-tools package를 설치합니다.</li>
+  <li>‘apt install’ command로 arp, ifconfig, netstat,  rarp 등 네트워크 제어 command를 포함한 net-tools package를 설치합니다.</li>
 </ul>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt <span class="nb">install </span>net-tools <span class="nt">-y</span>
@@ -578,7 +587,7 @@ passwd: password updated successfully
   <li>‘adduser’ command로 user 계정을 추가합니다.</li>
 </ul>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>adduser rex
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>adduser rex2
 <span class="go">[sudo] password for rex:
 </span></code></pre></div></div>
 
@@ -586,7 +595,7 @@ passwd: password updated successfully
   <li>root 계정의 password 설정 시와 동일하게, ‘passwd’ command로 user 계정의 password를 설정합니다.</li>
 </ul>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>passwd rex
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>passwd rex2
 <span class="go">[sudo] password for rex:
 </span></code></pre></div></div>
 
@@ -622,6 +631,7 @@ Defaults        <span class="nv">secure_path</span><span class="o">=</span><span
 <span class="c"># User privilege specification</span>
 root    <span class="nv">ALL</span><span class="o">=(</span>ALL:ALL<span class="o">)</span> ALL
 rex     <span class="nv">ALL</span><span class="o">=(</span>ALL:ALL<span class="o">)</span> ALL
+rex2    <span class="nv">ALL</span><span class="o">=(</span>ALL:ALL<span class="o">)</span> ALL
 
 <span class="c"># Members of the admin group may gain root privileges</span>
 %admin <span class="nv">ALL</span><span class="o">=(</span>ALL<span class="o">)</span> ALL
@@ -650,6 +660,7 @@ rex     <span class="nv">ALL</span><span class="o">=(</span>ALL:ALL<span class="
 <span class="c"># User privilege specification</span>
 root    <span class="nv">ALL</span><span class="o">=(</span>ALL:ALL<span class="o">)</span> ALL
 rex     <span class="nv">ALL</span><span class="o">=</span>NOPASSWD:ALL
+rex2    <span class="nv">ALL</span><span class="o">=</span>NOPASSWD:ALL
 ~
 <span class="nt">----------------------------------------------------------------------------------------------------</span>
 </code></pre></div></div>
@@ -657,7 +668,7 @@ rex     <span class="nv">ALL</span><span class="o">=</span>NOPASSWD:ALL
 <h3 id="6-시스템system-언어locale-설정">6. 시스템(system) 언어(locale) 설정</h3>
 
 <ul>
-  <li>‘locale’ command로 현재 설정을 조회합니다.</li>
+  <li>‘locale’ command로 현재 locale 설정을 조회합니다.</li>
 </ul>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>locale
@@ -744,7 +755,7 @@ POSIX
 </span></code></pre></div></div>
 
 <ul>
-  <li>‘timedatectl’ command로 좀 더 자세한 설정을 조회합니다.</li>
+  <li>‘timedatectl’ command로 자세한 timezone 설정을 조회합니다.</li>
 </ul>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>timedatectl
@@ -788,7 +799,7 @@ UTC
 </span></code></pre></div></div>
 
 <ul>
-  <li>‘timedatectl’ command로 설정한 timezone이 적용된 설정을 조회합니다.</li>
+  <li>‘timedatectl’ command로 ‘Asia/Seoul’으로 설정한 timezone 설정을 조회합니다.</li>
 </ul>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>timedatectl

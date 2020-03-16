@@ -8,6 +8,7 @@ rvm:
 script: bundle install && bundle exec jekyll build
 
 deploy:
+  strategy: git
   provider: pages
   # edge: true -> for cleanup
   edge: true 

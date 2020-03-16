@@ -25,7 +25,7 @@ tags:
 1. 리눅스 버전 조회
 2. 관리자(root) 계정 활성화
 3. 패키지 업데이트
-4. 필수 패키지 설치
+4. 유용한 패키지 설치
 5. 사용자 계정 생성
 6. 시스템 언어 설정
 7. 시스템 시간 설정
@@ -111,10 +111,13 @@ logout
 rex@lindarex:~$
 ```
 
-> 'sudo'(substitute user do)는 현재 계정에서 다른 계정, 즉 슈퍼 유저(superuser)로서 관리자(root) 권한을 가진 계정으로 프로그램(program)을 구동할 수 있도록 하는 command이며, 'sudo -i'는 root 계정으로 로그인(login)하며 '/root' 디렉터리(directory)로 이동하는 command이고, 'sudo -s'는 현재 directory를 유지하며 root 계정으로 login 하는 command입니다. 'sudo', 'sudo -i', 'sudo -s' command는 현재 계정의 password를 요구하고, 전환된 계정의 환경변수는 적용하지 않습니다. <br />
-'su'(substitute user, switch user)는 현재 계정에서 log out 하지 않고 다른 계정(기본값은 root 계정)으로 전환하며 현재 계정의 환경변수를 유지하는 command이고, 'su -'는 'su'와 동일하게 계정을 전환하며, 전환된 계정의 환경변수를 적용하는 command입니다. 'su', 'su -' command는 전환될 계정의 password를 요구합니다. <br />
-'sudo' command는 현재 계정에서 root 계정의 권한만 빌리기 때문에 작업 내역은 현재 계정으로 남고, 'su' command는 현재 계정에서 root 계정으로 전환하기 때문에 작업 내역은 root 계정으로 저장됩니다. <br />
-자세한 정보는 [https://ko.wikipedia.org/wiki/Sudo](https://ko.wikipedia.org/wiki/Sudo){: target="\_blank"}와 [https://zetawiki.com/wiki/리눅스_sudo\,_su_차이점](https://zetawiki.com/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_sudo,_su_%EC%B0%A8%EC%9D%B4%EC%A0%90){: target="\_blank"}을 확인해 주시기 바랍니다.
+> 'sudo'(substitute user do)는 현재 계정에서 다른 계정, 즉 슈퍼 유저(superuser)로서 관리자(root) 권한을 가진 계정으로 프로그램(program)을 구동할 수 있도록 하는 command이며, 'sudo -i'는 root 계정으로 로그인(login)하며 '/root' 디렉터리(directory)로 이동하는 command이고, 'sudo -s'는 현재 directory를 유지하며 root 계정으로 login 하는 command입니다. 'sudo', 'sudo -i', 'sudo -s' command는 현재 계정의 password를 요구하고, 전환된 계정의 환경변수는 적용하지 않습니다.
+
+> 'su'(substitute user, switch user)는 현재 계정에서 log out 하지 않고 다른 계정(기본값은 root 계정)으로 전환하며 현재 계정의 환경변수를 유지하는 command이고, 'su -'는 'su'와 동일하게 계정을 전환하며, 전환된 계정의 환경변수를 적용하는 command입니다. 'su', 'su -' command는 전환될 계정의 password를 요구합니다.
+
+> 'sudo' command는 현재 계정에서 root 계정의 권한만 빌리기 때문에 작업 내역은 현재 계정으로 남고, 'su' command는 현재 계정에서 root 계정으로 전환하기 때문에 작업 내역은 root 계정으로 저장됩니다.
+
+> 'sudo' command에 대한 자세한 정보는 [https://ko.wikipedia.org/wiki/Sudo](https://ko.wikipedia.org/wiki/Sudo){: target="\_blank"}와 [https://zetawiki.com/wiki/리눅스_sudo\,_su_차이점](https://zetawiki.com/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_sudo,_su_%EC%B0%A8%EC%9D%B4%EC%A0%90){: target="\_blank"}을 확인해 주시기 바랍니다.
 
 ### 3. 패키지(package) 업데이트(update)
 - 'apt update' command로 package 인덱스를 update합니다.
@@ -138,9 +141,9 @@ $ sudo reboot
 [sudo] password for rex:
 ```
 
-### 4. 필수 package 설치
+### 4. 유용한 package 설치
 
-- 'apt install' command로 arp, ifconfig, netstat,  rarp 등 네트워크 제어 명령어를 포함한 net-tools package를 설치합니다.
+- 'apt install' command로 arp, ifconfig, netstat,  rarp 등 네트워크 제어 command를 포함한 net-tools package를 설치합니다.
 
 ```console
 $ sudo apt install net-tools -y
@@ -165,14 +168,14 @@ $ sudo apt install tree -y
 - 'adduser' command로 user 계정을 추가합니다.
 
 ```console
-$ sudo adduser rex
+$ sudo adduser rex2
 [sudo] password for rex:
 ```
 
 - root 계정의 password 설정 시와 동일하게, 'passwd' command로 user 계정의 password를 설정합니다.
 
 ```console
-$ sudo passwd rex
+$ sudo passwd rex2
 [sudo] password for rex:
 ```
 
@@ -208,6 +211,7 @@ Defaults        secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/
 # User privilege specification
 root    ALL=(ALL:ALL) ALL
 rex     ALL=(ALL:ALL) ALL
+rex2    ALL=(ALL:ALL) ALL
 
 # Members of the admin group may gain root privileges
 %admin ALL=(ALL) ALL
@@ -236,13 +240,14 @@ $ sudo visudo
 # User privilege specification
 root    ALL=(ALL:ALL) ALL
 rex     ALL=NOPASSWD:ALL
+rex2    ALL=NOPASSWD:ALL
 ~
 ----------------------------------------------------------------------------------------------------
 ```
 
 ### 6. 시스템(system) 언어(locale) 설정
 
-- 'locale' command로 현재 설정을 조회합니다.
+- 'locale' command로 현재 locale 설정을 조회합니다.
 
 ```console
 $ locale
@@ -323,7 +328,7 @@ $ date
 Mon Mar 14 07:29:26 UTC 2020
 ```
 
-- 'timedatectl' command로 좀 더 자세한 설정을 조회합니다.
+- 'timedatectl' command로 자세한 timezone 설정을 조회합니다.
 
 ```console
 $ timedatectl
@@ -363,7 +368,7 @@ $ date
 Mon Mar 14 16:35:27 KST 2020
 ```
 
-- 'timedatectl' command로 설정한 timezone이 적용된 설정을 조회합니다.
+- 'timedatectl' command로 'Asia/Seoul'으로 설정한 timezone 설정을 조회합니다.
 
 ```console
 $ timedatectl

@@ -6,9 +6,429 @@
     <description>오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 LindaRex(린다렉스)의 블로그입니다</description>
     <link>https://lindarex.github.io/</link>
     <atom:link href="https://lindarex.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 16 Mar 2020 11:29:11 +0900</pubDate>
-    <lastBuildDate>Mon, 16 Mar 2020 11:29:11 +0900</lastBuildDate>
+    <pubDate>Mon, 16 Mar 2020 18:39:51 +0900</pubDate>
+    <lastBuildDate>Mon, 16 Mar 2020 18:39:51 +0900</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
+    
+      <item>
+        <title>우분투(Ubuntu) 서버(Server) 초기 설정하기</title>
+        <description>&lt;p&gt;이 포스트에서는 우분투(ubuntu) 서버(server) 설치 후 초기 설정하는 방법을 소개합니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;선행조건prerequisite&quot;&gt;선행조건(PREREQUISITE)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;ubuntu 환경이 필요합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Ubuntu 설치 방법은 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1604-installation/&quot; target=&quot;\_blank&quot;&gt;VMware workstation에 ubuntu server 16.04 설치하기&lt;/a&gt; 또는 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1804-installation/&quot; target=&quot;\_blank&quot;&gt;VMware workstation에 ubuntu server 18.04 설치하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;테스트-환경test-environment&quot;&gt;테스트 환경(TEST ENVIRONMENT)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;VMware® Workstation 15 Pro (15.5.1 build-15018445)&lt;/li&gt;
+  &lt;li&gt;Ubuntu 18.04.4 LTS (Bionic Beaver) Server (64-bit)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;요약summary&quot;&gt;요약(SUMMARY)&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;Jenkins 접속 및 활성화&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;내용contents&quot;&gt;내용(CONTENTS)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;아래 설정은 ubuntu server 16.04, ubuntu server 18.04에 모두 동일하게 적용됩니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;1-리눅스linux-버전-조회&quot;&gt;1. 리눅스(linux) 버전 조회&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;아래 예제는 buntu 18.04의 정보입니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; /etc/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-release&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;/etc/lsb-release:DISTRIB_ID=Ubuntu
+/etc/lsb-release:DISTRIB_RELEASE=18.04
+/etc/lsb-release:DISTRIB_CODENAME=bionic
+/etc/lsb-release:DISTRIB_DESCRIPTION=&quot;Ubuntu 18.04.4 LTS&quot;
+/etc/os-release:NAME=&quot;Ubuntu&quot;
+/etc/os-release:VERSION=&quot;18.04.4 LTS (Bionic Beaver)&quot;
+/etc/os-release:ID=ubuntu
+/etc/os-release:ID_LIKE=debian
+/etc/os-release:PRETTY_NAME=&quot;Ubuntu 18.04.4 LTS&quot;
+/etc/os-release:VERSION_ID=&quot;18.04&quot;
+/etc/os-release:HOME_URL=&quot;https://www.ubuntu.com/&quot;
+/etc/os-release:SUPPORT_URL=&quot;https://help.ubuntu.com/&quot;
+/etc/os-release:BUG_REPORT_URL=&quot;https://bugs.launchpad.net/ubuntu/&quot;
+/etc/os-release:PRIVACY_POLICY_URL=&quot;https://www.ubuntu.com/legal/terms-and-policies/privacy-policy&quot;
+/etc/os-release:VERSION_CODENAME=bionic
+/etc/os-release:UBUNTU_CODENAME=bionic
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;아래 예제는 buntu 16.04의 정보입니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; /etc/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-release&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;/etc/lsb-release:DISTRIB_ID=Ubuntu
+/etc/lsb-release:DISTRIB_RELEASE=16.04
+/etc/lsb-release:DISTRIB_CODENAME=xenial
+/etc/lsb-release:DISTRIB_DESCRIPTION=&quot;Ubuntu 16.04.5 LTS&quot;
+/etc/os-release:NAME=&quot;Ubuntu&quot;
+/etc/os-release:VERSION=&quot;16.04.5 LTS (Xenial Xerus)&quot;
+/etc/os-release:ID=ubuntu
+/etc/os-release:ID_LIKE=debian
+/etc/os-release:PRETTY_NAME=&quot;Ubuntu 16.04.5 LTS&quot;
+/etc/os-release:VERSION_ID=&quot;16.04&quot;
+/etc/os-release:HOME_URL=&quot;http://www.ubuntu.com/&quot;
+/etc/os-release:SUPPORT_URL=&quot;http://help.ubuntu.com/&quot;
+/etc/os-release:BUG_REPORT_URL=&quot;http://bugs.launchpad.net/ubuntu/&quot;
+/etc/os-release:VERSION_CODENAME=xenial
+/etc/os-release:UBUNTU_CODENAME=xenial
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;2-관리자root-계정-활성화&quot;&gt;2. 관리자(root) 계정 활성화&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;ubuntu를 비롯한 linux를 설치하면 기본적으로 관리자(root) 계정이 생성됩니다. root 계정은 비밀번호(password)를 설정하기 전까지 비활성화 상태이기 때문에, password를 설정하여 root 계정을 활성화합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;21-root-계정-password-설정&quot;&gt;2.1. root 계정 password 설정&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;‘passwd’ 명령어(command)로 root password를 설정합니다.&lt;/li&gt;
+  &lt;li&gt;password를 2번 동일하게 입력하면 아래와 같이 password가 갱신되었다는 메시지를 확인할 수 있습니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;passwd root
+&lt;span class=&quot;go&quot;&gt;[sudo] password for rex:
+Enter new UNIX password:
+Retype new UNIX password:
+passwd: password updated successfully
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;22-root-계정-활성화-확인&quot;&gt;2.2. root 계정 활성화 확인&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;‘su -‘ command를 사용하여 root 계정으로 사용자 계정 전환에 성공하면, root 계정이 정상적으로 활성화된 것입니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;rex@lindarex:~$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;su - root
+&lt;span class=&quot;go&quot;&gt;Password:
+&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;root@lindarex:~#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;‘exit’ 또는 ‘logout’ command로 root 계정에서 로그아웃(logout)을 할 수 있습니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;root@lindarex:~#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;exit&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;logout
+&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;rex@lindarex:~$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;‘sudo’(substitute user do)는 현재 계정에서 다른 계정, 즉 슈퍼 유저(superuser)로서 관리자(root) 권한을 가진 계정으로 프로그램(program)을 구동할 수 있도록 하는 command이며, ‘sudo -i’는 root 계정으로 로그인(login)하며 ‘/root’ 디렉터리(directory)로 이동하는 command이고, ‘sudo -s’는 현재 directory를 유지하며 root 계정으로 login 하는 command입니다. ‘sudo’, ‘sudo -i’, ‘sudo -s’ command는 현재 계정의 password를 요구하고, 전환된 계정의 환경변수는 적용하지 않습니다. &lt;br /&gt;
+‘su’(substitute user, switch user)는 현재 계정에서 log out 하지 않고 다른 계정(기본값은 root 계정)으로 전환하며 현재 계정의 환경변수를 유지하는 command이고, ‘su -‘는 ‘su’와 동일하게 계정을 전환하며, 전환된 계정의 환경변수를 적용하는 command입니다. ‘su’, ‘su -‘ command는 전환될 계정의 password를 요구합니다. &lt;br /&gt;
+‘sudo’ command는 현재 계정에서 root 계정의 권한만 빌리기 때문에 작업 내역은 현재 계정으로 남고, ‘su’ command는 현재 계정에서 root 계정으로 전환하기 때문에 작업 내역은 root 계정으로 저장됩니다. &lt;br /&gt;
+자세한 정보는 &lt;a href=&quot;https://ko.wikipedia.org/wiki/Sudo&quot; target=&quot;\_blank&quot;&gt;https://ko.wikipedia.org/wiki/Sudo&lt;/a&gt;와 [https://zetawiki.com/wiki/리눅스_sudo\,&lt;em&gt;su_차이점](https://zetawiki.com/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_sudo,_su&lt;/em&gt;%EC%B0%A8%EC%9D%B4%EC%A0%90){: target=”_blank”}을 확인해 주시기 바랍니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;3-패키지package-업데이트update&quot;&gt;3. 패키지(package) 업데이트(update)&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;‘apt update’ command로 package 인덱스를 update합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt update
+&lt;span class=&quot;go&quot;&gt;[sudo] password for rex:
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;‘apt upgrade’ command로 업그레이드 가능한 모든 package를 update합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt upgrade &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;[sudo] password for rex:
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;ubuntu를 재시작합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;reboot
+&lt;span class=&quot;go&quot;&gt;[sudo] password for rex:
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;4-필수-package-설치&quot;&gt;4. 필수 package 설치&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;‘apt install’ command로 arp, ifconfig, netstat,  rarp 등 네트워크 제어 명령어를 포함한 net-tools package를 설치합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;net-tools &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;[sudo] password for rex:
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;‘apt install’ command로 압축 program인 unzip package를 설치합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;unzip &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;[sudo] password for rex:
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;‘apt install’ command로 tree 구조로 디렉터리를 조회할 수 있는 tree package를 설치합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;tree &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;[sudo] password for rex:
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;5-사용자user-계정-생성&quot;&gt;5. 사용자(user) 계정 생성&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;‘adduser’ command로 user 계정을 추가합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;adduser rex
+&lt;span class=&quot;go&quot;&gt;[sudo] password for rex:
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;root 계정의 password 설정 시와 동일하게, ‘passwd’ command로 user 계정의 password를 설정합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;passwd rex
+&lt;span class=&quot;go&quot;&gt;[sudo] password for rex:
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;​- ‘visudo’ command로 생성한 user 계정에 root(sudo) 권한을 추가합니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;‘/etc/sudoers’를 vi로 수정할 수도 있지만, 설정 유효성과 문법 체크를 위해 ‘visudo’ command로 수정하시기 바랍니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;visudo
+&lt;span class=&quot;go&quot;&gt;[sudo] password for rex:
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;----------------------------------------------------------------------------------------------------&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# This file MUST be edited with the 'visudo' command as root.&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Please consider adding local content in /etc/sudoers.d/ instead of&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# directly modifying this file.&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# See the man page for details on how to write a sudoers file.&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#&lt;/span&gt;
+Defaults        env_reset
+Defaults        mail_badpass
+Defaults        &lt;span class=&quot;nv&quot;&gt;secure_path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Host alias specification&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# User alias specification&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Cmnd alias specification&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# User privilege specification&lt;/span&gt;
+root    &lt;span class=&quot;nv&quot;&gt;ALL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=(&lt;/span&gt;ALL:ALL&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; ALL
+rex     &lt;span class=&quot;nv&quot;&gt;ALL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=(&lt;/span&gt;ALL:ALL&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; ALL
+
+&lt;span class=&quot;c&quot;&gt;# Members of the admin group may gain root privileges&lt;/span&gt;
+%admin &lt;span class=&quot;nv&quot;&gt;ALL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=(&lt;/span&gt;ALL&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; ALL
+
+&lt;span class=&quot;c&quot;&gt;# Allow members of group sudo to execute any command&lt;/span&gt;
+%sudo   &lt;span class=&quot;nv&quot;&gt;ALL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=(&lt;/span&gt;ALL:ALL&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; ALL
+
+&lt;span class=&quot;c&quot;&gt;# See sudoers(5) for more information on &quot;#include&quot; directives:&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;#includedir /etc/sudoers.d&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;----------------------------------------------------------------------------------------------------&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;​- ‘visudo’ command로 생성한 user 계정에 root(sudo) 권한 추가와 함께 password 입력 없이 사용할 때는 아래와 같이 설정합니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;sudo password 입력 없이 사용하면, 보안상 안전하지 않을 수 있으니 주의하시기 바랍니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;visudo
+&lt;span class=&quot;go&quot;&gt;[sudo] password for rex:
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;----------------------------------------------------------------------------------------------------&lt;/span&gt;
+~
+&lt;span class=&quot;c&quot;&gt;# User privilege specification&lt;/span&gt;
+root    &lt;span class=&quot;nv&quot;&gt;ALL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=(&lt;/span&gt;ALL:ALL&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; ALL
+rex     &lt;span class=&quot;nv&quot;&gt;ALL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;NOPASSWD:ALL
+~
+&lt;span class=&quot;nt&quot;&gt;----------------------------------------------------------------------------------------------------&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;6-시스템system-언어locale-설정&quot;&gt;6. 시스템(system) 언어(locale) 설정&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;‘locale’ command로 현재 설정을 조회합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;locale
+&lt;span class=&quot;go&quot;&gt;LANG=en_US.UTF-8
+LANGUAGE=
+LC_CTYPE=&quot;en_US.UTF-8&quot;
+LC_NUMERIC=&quot;en_US.UTF-8&quot;
+LC_TIME=&quot;en_US.UTF-8&quot;
+LC_COLLATE=&quot;en_US.UTF-8&quot;
+LC_MONETARY=&quot;en_US.UTF-8&quot;
+LC_MESSAGES=&quot;en_US.UTF-8&quot;
+LC_PAPER=&quot;en_US.UTF-8&quot;
+LC_NAME=&quot;en_US.UTF-8&quot;
+LC_ADDRESS=&quot;en_US.UTF-8&quot;
+LC_TELEPHONE=&quot;en_US.UTF-8&quot;
+LC_MEASUREMENT=&quot;en_US.UTF-8&quot;
+LC_IDENTIFICATION=&quot;en_US.UTF-8&quot;
+LC_ALL=
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;‘locale -a’ command로 설치되어 있는 locale을 조회합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;locale &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;C
+C.UTF-8
+en_US.utf8
+POSIX
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;‘apt install’ command로 한국어(Korean) package를 설치합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;language-pack-ko &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;[sudo] password for rex:
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Korean 설정을 합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;vi /etc/default/locale
+&lt;span class=&quot;go&quot;&gt;[sudo] password for rex:
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;----------------------------------------------------------------------------------------------------&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;LANG&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ko_KR.UTF-8&quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;LANGUAGE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ko_KR:ko:en_US:en&quot;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;----------------------------------------------------------------------------------------------------&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;설정 후 재접속하여 한글 출력을 확인합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo ls&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;[sudo] rex의 암호:
+죄송합니다만, 다시 시도하십시오.
+[sudo] rex의 암호:
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;‘locale -a’ command로 설치된 Korean locale을 조회합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;locale &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;C
+C.UTF-8
+en_US.utf8
+ko_KR.utf8
+POSIX
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;7-시스템system-시간timezone-설정&quot;&gt;7. 시스템(system) 시간(timezone) 설정&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;‘date’ command로 현재 시각을 조회합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;date&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;Mon Mar 14 07:29:26 UTC 2020
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;‘timedatectl’ command로 좀 더 자세한 설정을 조회합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;timedatectl
+&lt;span class=&quot;go&quot;&gt;                      Local time: Mon 2020-03-14 07:26:52 UTC
+                  Universal time: Mon 2020-03-14 07:26:52 UTC
+                        RTC time: Mon 2020-03-14 07:26:53
+                       Time zone: Etc/UTC (UTC, +0000)
+       System clock synchronized: yes
+systemd-timesyncd.service active: yes
+                 RTC in local TZ: no
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;‘timedatectl list-timezones’ command로 사용 가능한 timezone 목록을 조회합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;timedatectl list-timezones
+&lt;span class=&quot;go&quot;&gt;Africa/Abidjan
+Africa/Accra
+Africa/Addis_Ababa
+~
+Pacific/Tongatapu
+Pacific/Wake
+Pacific/Wallis
+UTC
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;‘timedatectl set-timezone’ command로 ‘Asia/Seoul’ timezone으로 설정합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;timedatectl set-timezone Asia/Seoul
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;‘date’ command로 설정한 timezone이 적용된 현재 시각을 조회합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;date&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;Mon Mar 14 16:35:27 KST 2020
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;‘timedatectl’ command로 설정한 timezone이 적용된 설정을 조회합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;timedatectl
+&lt;span class=&quot;go&quot;&gt;                      Local time: Mon 2020-03-14 16:35:29 KST
+                  Universal time: Mon 2020-03-14 07:35:29 UTC
+                        RTC time: Mon 2020-03-14 07:35:30
+                       Time zone: Asia/Seoul (KST, +0900)
+       System clock synchronized: yes
+systemd-timesyncd.service active: yes
+                 RTC in local TZ: no
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
+&lt;p&gt;ubuntu server 설치 후 초기 설정을 완료했습니다. &lt;br /&gt;
+다음 포스트에서는 ubuntu 보안 강화를 위한 오픈소스(open source) 소프트웨어인 fail2ban을 소개하겠습니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ubuntu.com/&quot; target=&quot;\_blank&quot;&gt;https://ubuntu.com/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ubuntu.com/tutorials/tutorial-install-ubuntu-server#1-overview&quot; target=&quot;\_blank&quot;&gt;https://ubuntu.com/tutorials/tutorial-install-ubuntu-server#1-overview&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Wed, 11 Mar 2020 00:00:00 +0900</pubDate>
+        <link>https://lindarex.github.io/ubuntu/ubuntu-initial-setting/</link>
+        <guid isPermaLink="true">https://lindarex.github.io/ubuntu/ubuntu-initial-setting/</guid>
+        
+        <category>ubuntu</category>
+        
+        
+        <category>ubuntu</category>
+        
+      </item>
     
       <item>
         <title>우분투(Ubuntu) 환경에 iptables 설정하기</title>
@@ -3850,7 +4270,7 @@ DHCP에 대한 자세한 정보는 &lt;a href=&quot;https://ko.wikipedia.org/wik
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-046.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-046&quot; /&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;4-리눅스-명령어로-ubuntu-vm-상태-확인&quot;&gt;4. 리눅스 명령어로 ubuntu VM 상태 확인&lt;/h3&gt;
+&lt;h3 id=&quot;4-리눅스-명령어command로-ubuntu-vm-상태-확인&quot;&gt;4. 리눅스 명령어(command)로 ubuntu VM 상태 확인&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;사용자 이름과 비밀번호를 입력하여 로그인합니다.&lt;/li&gt;
@@ -3859,41 +4279,41 @@ DHCP에 대한 자세한 정보는 &lt;a href=&quot;https://ko.wikipedia.org/wik
 &lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-047.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-047&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;free 명령어로 메모리 상태를 확인합니다.&lt;/li&gt;
+  &lt;li&gt;free command로 메모리 상태를 확인합니다.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-048.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-048&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;df 명령어로 디스크 사용량을 확인합니다.&lt;/li&gt;
+  &lt;li&gt;df command로 디스크 사용량을 확인합니다.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-049.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-049&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;ifconfig 명령어로 네트워크 정보를 확인합니다.&lt;/li&gt;
+  &lt;li&gt;ifconfig command로 네트워크 정보를 확인합니다.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-050.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-050&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;ping 명령어로 네트워크 상태를 확인합니다.&lt;/li&gt;
+  &lt;li&gt;ping command로 네트워크 상태를 확인합니다.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-051.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-051&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;apt update 명령어로 패키지 인덱스를 업데이트합니다.&lt;/li&gt;
+  &lt;li&gt;‘apt update’ command로 패키지 인덱스를 업데이트합니다.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;apt update 명령어는 업그레이드 가능한 패키지 정보를 업데이트하는 것이며, 실제로 패키지를 업데이트하지 않습니다.&lt;/p&gt;
+  &lt;p&gt;‘apt update’ command는 업그레이드 가능한 패키지 정보를 업데이트하는 것이며, 실제로 패키지를 업데이트하지 않습니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-052.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-052&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;apt upgrade 명령어로 업그레이드 가능한 모든 패키지를 업데이트합니다.&lt;/li&gt;
+  &lt;li&gt;‘apt upgrade’ command로 업그레이드 가능한 모든 패키지를 업데이트합니다.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-053.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-053&quot; /&gt;&lt;/p&gt;
@@ -4309,7 +4729,7 @@ ubuntu-16.04.6-server-amd64.iso 파일 사이즈는 약 893 MB입니다.&lt;/p&g
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-063.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-063&quot; /&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;4-linux-명령어로-ubuntu-vm-상태-확인&quot;&gt;4. linux 명령어로 ubuntu VM 상태 확인&lt;/h3&gt;
+&lt;h3 id=&quot;4-linux-명령어command로-ubuntu-vm-상태-확인&quot;&gt;4. linux 명령어(command)로 ubuntu VM 상태 확인&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;사용자 이름과 비밀번호를 입력하여 로그인합니다.&lt;/li&gt;
@@ -4318,41 +4738,41 @@ ubuntu-16.04.6-server-amd64.iso 파일 사이즈는 약 893 MB입니다.&lt;/p&g
 &lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-064.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-064&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;free 명령어로 메모리 상태를 확인합니다.&lt;/li&gt;
+  &lt;li&gt;free command로 메모리 상태를 확인합니다.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-065.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-065&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;df 명령어로 디스크 사용량을 확인합니다.&lt;/li&gt;
+  &lt;li&gt;df command로 디스크 사용량을 확인합니다.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-066.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-066&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;ifconfig 명령어로 네트워크 정보를 확인합니다.&lt;/li&gt;
+  &lt;li&gt;ifconfig command로 네트워크 정보를 확인합니다.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-067.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-067&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;ping 명령어로 네트워크 상태를 확인합니다.&lt;/li&gt;
+  &lt;li&gt;ping command로 네트워크 상태를 확인합니다.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-068.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-068&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;apt update 명령어로 패키지 인덱스를 업데이트합니다.&lt;/li&gt;
+  &lt;li&gt;‘apt update’ command로 패키지 인덱스를 업데이트합니다.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;apt update 명령어는 업그레이드 가능한 패키지 정보를 업데이트하는 것이며, 실제로 패키지를 업데이트하지 않습니다.&lt;/p&gt;
+  &lt;p&gt;‘apt update’ command는 업그레이드 가능한 패키지 정보를 업데이트하는 것이며, 실제로 패키지를 업데이트하지 않습니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-069.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-069&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;apt upgrade 명령어로 업그레이드 가능한 모든 패키지를 업데이트합니다.&lt;/li&gt;
+  &lt;li&gt;‘apt upgrade’ command로 업그레이드 가능한 모든 패키지를 업데이트합니다.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-070.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-070&quot; /&gt;&lt;/p&gt;
@@ -4364,7 +4784,7 @@ ubuntu-16.04.6-server-amd64.iso 파일 사이즈는 약 893 MB입니다.&lt;/p&g
 &lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
 &lt;p&gt;VMware Workstation에 Ubuntu 16.04.6 LTS (Xenial Xerus) Server 설치를 완료했습니다. &lt;br /&gt;
 2020년 2월 12일 &lt;a href=&quot;https://w3techs.com/technologies/details/os-linux&quot; target=&quot;\_blank&quot;&gt;W3Techs.com 통계&lt;/a&gt;에 따르면, ubuntu 점유율은 linux 배포판을 사용하는 웹사이트 중 1위(38.9%)로, 2위인 debian(18.4%)의 2배 이상 차이가 납니다. 또한 대부분의 오픈소스 소프트웨어는 Ubuntu를 지원하고, 국내외 사용자와 레퍼런스가 많습니다. &lt;br /&gt;
-linux 입문자 또는 오픈소스 소프트웨어에 관심이 있다면, Ubuntu를 사용하며 linux 명령어를 숙지하고 다양한 커뮤니티에서 활동하는 것을 권합니다.&lt;/p&gt;
+linux 입문자 또는 오픈소스 소프트웨어에 관심이 있다면, Ubuntu를 사용하며 linux command를 숙지하고 다양한 커뮤니티에서 활동하는 것을 권합니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;
 &lt;ul&gt;

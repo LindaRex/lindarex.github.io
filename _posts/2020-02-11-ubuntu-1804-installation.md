@@ -220,35 +220,35 @@ tags:
 
 ![lindarex-ubuntu-1804-installation-046]
 
-### 4. 리눅스 명령어로 ubuntu VM 상태 확인
+### 4. 리눅스 명령어(command)로 ubuntu VM 상태 확인
 
 - 사용자 이름과 비밀번호를 입력하여 로그인합니다.
 
 ![lindarex-ubuntu-1804-installation-047]
 
-- free 명령어로 메모리 상태를 확인합니다.
+- free command로 메모리 상태를 확인합니다.
 
 ![lindarex-ubuntu-1804-installation-048]
 
-- df 명령어로 디스크 사용량을 확인합니다.
+- df command로 디스크 사용량을 확인합니다.
 
 ![lindarex-ubuntu-1804-installation-049]
 
-- ifconfig 명령어로 네트워크 정보를 확인합니다.
+- ifconfig command로 네트워크 정보를 확인합니다.
 
 ![lindarex-ubuntu-1804-installation-050]
 
-- ping 명령어로 네트워크 상태를 확인합니다.
+- ping command로 네트워크 상태를 확인합니다.
 
 ![lindarex-ubuntu-1804-installation-051]
 
-- apt update 명령어로 패키지 인덱스를 업데이트합니다.
+- 'apt update' command로 패키지 인덱스를 업데이트합니다.
 
-> apt update 명령어는 업그레이드 가능한 패키지 정보를 업데이트하는 것이며, 실제로 패키지를 업데이트하지 않습니다.
+> 'apt update' command는 업그레이드 가능한 패키지 정보를 업데이트하는 것이며, 실제로 패키지를 업데이트하지 않습니다.
 
 ![lindarex-ubuntu-1804-installation-052]
 
-- apt upgrade 명령어로 업그레이드 가능한 모든 패키지를 업데이트합니다.
+- 'apt upgrade' command로 업그레이드 가능한 모든 패키지를 업데이트합니다.
 
 ![lindarex-ubuntu-1804-installation-053]
 

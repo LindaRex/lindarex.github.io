@@ -275,35 +275,35 @@ tags:
 
 ![lindarex-ubuntu-1604-installation-063]
 
-### 4. linux 명령어로 ubuntu VM 상태 확인
+### 4. linux 명령어(command)로 ubuntu VM 상태 확인
 
 - 사용자 이름과 비밀번호를 입력하여 로그인합니다.
 
 ![lindarex-ubuntu-1604-installation-064]
 
-- free 명령어로 메모리 상태를 확인합니다.
+- free command로 메모리 상태를 확인합니다.
 
 ![lindarex-ubuntu-1604-installation-065]
 
-- df 명령어로 디스크 사용량을 확인합니다.
+- df command로 디스크 사용량을 확인합니다.
 
 ![lindarex-ubuntu-1604-installation-066]
 
-- ifconfig 명령어로 네트워크 정보를 확인합니다.
+- ifconfig command로 네트워크 정보를 확인합니다.
 
 ![lindarex-ubuntu-1604-installation-067]
 
-- ping 명령어로 네트워크 상태를 확인합니다.
+- ping command로 네트워크 상태를 확인합니다.
 
 ![lindarex-ubuntu-1604-installation-068]
 
-- apt update 명령어로 패키지 인덱스를 업데이트합니다.
+- 'apt update' command로 패키지 인덱스를 업데이트합니다.
 
-> apt update 명령어는 업그레이드 가능한 패키지 정보를 업데이트하는 것이며, 실제로 패키지를 업데이트하지 않습니다.
+> 'apt update' command는 업그레이드 가능한 패키지 정보를 업데이트하는 것이며, 실제로 패키지를 업데이트하지 않습니다.
 
 ![lindarex-ubuntu-1604-installation-069]
 
-- apt upgrade 명령어로 업그레이드 가능한 모든 패키지를 업데이트합니다.
+- 'apt upgrade' command로 업그레이드 가능한 모든 패키지를 업데이트합니다.
 
 ![lindarex-ubuntu-1604-installation-070]
 
@@ -315,7 +315,7 @@ tags:
 ## 마무리(CONCLUSION)
 VMware Workstation에 Ubuntu 16.04.6 LTS (Xenial Xerus) Server 설치를 완료했습니다. <br />
 2020년 2월 12일 [W3Techs.com 통계](https://w3techs.com/technologies/details/os-linux){: target="\_blank"}에 따르면, ubuntu 점유율은 linux 배포판을 사용하는 웹사이트 중 1위(38.9%)로, 2위인 debian(18.4%)의 2배 이상 차이가 납니다. 또한 대부분의 오픈소스 소프트웨어는 Ubuntu를 지원하고, 국내외 사용자와 레퍼런스가 많습니다. <br />
-linux 입문자 또는 오픈소스 소프트웨어에 관심이 있다면, Ubuntu를 사용하며 linux 명령어를 숙지하고 다양한 커뮤니티에서 활동하는 것을 권합니다.
+linux 입문자 또는 오픈소스 소프트웨어에 관심이 있다면, Ubuntu를 사용하며 linux command를 숙지하고 다양한 커뮤니티에서 활동하는 것을 권합니다.
 
 
 ## 참고(REFERENCES)

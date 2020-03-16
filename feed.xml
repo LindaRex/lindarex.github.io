@@ -6,8 +6,8 @@
     <description>오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 LindaRex(린다렉스)의 블로그입니다</description>
     <link>https://lindarex.github.io/</link>
     <atom:link href="https://lindarex.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 13 Mar 2020 14:01:36 +0900</pubDate>
-    <lastBuildDate>Fri, 13 Mar 2020 14:01:36 +0900</lastBuildDate>
+    <pubDate>Mon, 16 Mar 2020 10:39:53 +0900</pubDate>
+    <lastBuildDate>Mon, 16 Mar 2020 10:39:53 +0900</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
@@ -642,7 +642,7 @@ num  target     prot opt source               destination
 &lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
 &lt;p&gt;ubuntu 환경에 iptables 설정을 완료했습니다. &lt;br /&gt;
 iptables 설정을 통해 서버(server) 보안을 많이 향상할 수 있지만, 잘못 설정할 경우에는 접속을 못 하는 경우가 발생할 수 있으니 신중하게 설정해야 합니다. &lt;br /&gt;
-다음 포스트에서는 ubuntu server 운영 시 유용한 패키지를 소개하겠습니다.&lt;/p&gt;
+다음 포스트에서는 ubuntu server 운영 시 유용한 패키지와 명령어를 소개하겠습니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;
 &lt;ul&gt;
@@ -3566,7 +3566,7 @@ Jenkins 초기 설정은 &lt;a href=&quot;https://lindarex.github.io/jenkins/jen
 &lt;h2 id=&quot;요약summary&quot;&gt;요약(SUMMARY)&lt;/h2&gt;
 &lt;ol&gt;
   &lt;li&gt;ubuntu server 18.04.3 ISO 파일 내려받기&lt;/li&gt;
-  &lt;li&gt;VMware workstation의 VM(Virtual Machine) 설정&lt;/li&gt;
+  &lt;li&gt;VMware workstation의 VM(virtual machine) 설정&lt;/li&gt;
   &lt;li&gt;ubuntu server 18.04.3 설치&lt;/li&gt;
   &lt;li&gt;리눅스 명령어로 ubuntu VM 상태 확인&lt;/li&gt;
 &lt;/ol&gt;
@@ -3901,8 +3901,8 @@ DHCP에 대한 자세한 정보는 &lt;a href=&quot;https://ko.wikipedia.org/wik
 &lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-054.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-054&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
-&lt;p&gt;VMware Workstation에 ubuntu 18.04.3 LTS (Bionic Beaver) Server 설치를 완료했습니다. &lt;br /&gt;
-다음 포스트에서는 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-initial-setting/&quot; target=&quot;\_blank&quot;&gt;우분투(ubuntu) 서버(Server) 초기 설정하기&lt;/a&gt;를 소개하겠습니다.&lt;/p&gt;
+&lt;p&gt;VMware Workstation에 Ubuntu 18.04.3 LTS (Bionic Beaver) Server 설치를 완료했습니다. &lt;br /&gt;
+다음 포스트에서는 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-initial-setting/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 서버(Server) 초기 설정하기&lt;/a&gt;를 소개하겠습니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;
 &lt;ul&gt;
@@ -3952,7 +3952,7 @@ DHCP에 대한 자세한 정보는 &lt;a href=&quot;https://ko.wikipedia.org/wik
 &lt;h2 id=&quot;요약summary&quot;&gt;요약(SUMMARY)&lt;/h2&gt;
 &lt;ol&gt;
   &lt;li&gt;ubuntu server 16.04.6 ISO 파일 내려받기&lt;/li&gt;
-  &lt;li&gt;VMware workstation의 VM(Virtual Machine) 설정&lt;/li&gt;
+  &lt;li&gt;VMware workstation의 VM(virtual machine) 설정&lt;/li&gt;
   &lt;li&gt;ubuntu server 16.04.6 설치&lt;/li&gt;
   &lt;li&gt;linux 명령어로 ubuntu VM 상태 확인&lt;/li&gt;
 &lt;/ol&gt;
@@ -4362,7 +4362,7 @@ ubuntu-16.04.6-server-amd64.iso 파일 사이즈는 약 893 MB입니다.&lt;/p&g
 &lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-072.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-072&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
-&lt;p&gt;VMware Workstation에 ubuntu 16.04.6 LTS (Xenial Xerus) Server 설치를 완료했습니다. &lt;br /&gt;
+&lt;p&gt;VMware Workstation에 Ubuntu 16.04.6 LTS (Xenial Xerus) Server 설치를 완료했습니다. &lt;br /&gt;
 2020년 2월 12일 &lt;a href=&quot;https://w3techs.com/technologies/details/os-linux&quot; target=&quot;\_blank&quot;&gt;W3Techs.com 통계&lt;/a&gt;에 따르면, ubuntu 점유율은 linux 배포판을 사용하는 웹사이트 중 1위(38.9%)로, 2위인 debian(18.4%)의 2배 이상 차이가 납니다. 또한 대부분의 오픈소스 소프트웨어는 Ubuntu를 지원하고, 국내외 사용자와 레퍼런스가 많습니다. &lt;br /&gt;
 linux 입문자 또는 오픈소스 소프트웨어에 관심이 있다면, Ubuntu를 사용하며 linux 명령어를 숙지하고 다양한 커뮤니티에서 활동하는 것을 권합니다.&lt;/p&gt;
 

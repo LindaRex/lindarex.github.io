@@ -1,0 +1,1169 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.18.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- LINDAREX :: JEKYLL SEO TAG :: BIGIN -->
+<!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>우분투(Ubuntu) 서버(Server) 16.04 설치하기 | LindaRex</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="우분투(Ubuntu) 서버(Server) 16.04 설치하기" />
+<meta name="author" content="LindaRex" />
+<meta property="og:locale" content="ko_KR" />
+<meta name="description" content="우분투(ubuntu)는 데비안(debian) 리눅스(linux) 기반으로, debian에 비해 사용자 편의성에 초점을 맞춘 linux 배포판이며 컴퓨터 운영체제(OS, operating system)입니다. 새로운 버전은 6개월마다, 장기 지원 버전(LTS, long term support)은 2년에 한 번씩 출시되고, 다양한 언어를 지원하고 낮은 사양의 컴퓨터에서도 작동하도록 설계되어 있습니다. 이 포스트에서는 VMware Workstation에 ubuntu server 16.04 LTS를 설치하는 방법을 소개합니다." />
+<meta property="og:description" content="우분투(ubuntu)는 데비안(debian) 리눅스(linux) 기반으로, debian에 비해 사용자 편의성에 초점을 맞춘 linux 배포판이며 컴퓨터 운영체제(OS, operating system)입니다. 새로운 버전은 6개월마다, 장기 지원 버전(LTS, long term support)은 2년에 한 번씩 출시되고, 다양한 언어를 지원하고 낮은 사양의 컴퓨터에서도 작동하도록 설계되어 있습니다. 이 포스트에서는 VMware Workstation에 ubuntu server 16.04 LTS를 설치하는 방법을 소개합니다." />
+<link rel="canonical" href="https://lindarex.github.io/ubuntu/ubuntu-1604-installation/" />
+<meta property="og:url" content="https://lindarex.github.io/ubuntu/ubuntu-1604-installation/" />
+<meta property="og:site_name" content="LindaRex" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-02-10T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="우분투(Ubuntu) 서버(Server) 16.04 설치하기" />
+<meta name="twitter:site" content="@" />
+<meta name="twitter:creator" content="@LindaRex" />
+<meta name="google-site-verification" content="t6VkmqsI15sIx3P1-gh3NYputZtjhDZOTkxhwDaa4Ik" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/ubuntu/ubuntu-1604-installation/"},"@type":"BlogPosting","url":"https://lindarex.github.io/ubuntu/ubuntu-1604-installation/","headline":"우분투(Ubuntu) 서버(Server) 16.04 설치하기","dateModified":"2020-02-10T00:00:00+09:00","datePublished":"2020-02-10T00:00:00+09:00","author":{"@type":"Person","name":"LindaRex"},"description":"우분투(ubuntu)는 데비안(debian) 리눅스(linux) 기반으로, debian에 비해 사용자 편의성에 초점을 맞춘 linux 배포판이며 컴퓨터 운영체제(OS, operating system)입니다. 새로운 버전은 6개월마다, 장기 지원 버전(LTS, long term support)은 2년에 한 번씩 출시되고, 다양한 언어를 지원하고 낮은 사양의 컴퓨터에서도 작동하도록 설계되어 있습니다. 이 포스트에서는 VMware Workstation에 ubuntu server 16.04 LTS를 설치하는 방법을 소개합니다.","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"LindaRex"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<!-- LINDAREX :: JEKYLL SEO TAG :: END -->
+
+<!-- LINDAREX :: NAVER SITE VERIFICATION :: BIGIN -->
+<meta name="naver-site-verification" content="190d9b8e0a63058b72f2031ce67825da7b9038f5">
+<!-- LINDAREX :: NAVER SITE VERIFICATION :: END -->
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="LindaRex Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- LINDAREX :: FAVICON :: BIGIN -->
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico">
+<!-- LINDAREX :: FAVICON :: END -->
+
+<!-- LINDAREX :: FEED :: BIGIN -->
+<!-- <link rel="alternate" type="application/rss+xml" href="https://lindarex.github.io/feed.xml" title="LindaRex Feed"> -->
+<!-- LINDAREX :: FEED :: END -->
+
+<!-- LINDAREX :: GOOGLE ANALYTICS :: BIGIN -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-157973560-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-157973560-1');
+</script>
+<!-- LINDAREX :: GOOGLE ANALYTICS :: END -->
+
+<!-- LINDAREX :: NAVER ANALYTICS :: BIGIN -->
+<!-- Naver Analytics -->
+<script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
+<script type="text/javascript">
+if(!wcs_add) var wcs_add = {};
+wcs_add["wa"] = "42df78a7dfd6f0";
+wcs_do();
+</script>
+<!-- LINDAREX :: NAVER ANALYTICS :: END -->
+
+<!-- LINDAREX :: GOOGLE ADSENSE :: BIGIN -->
+<script data-ad-client="ca-pub-8367174639781348" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- LINDAREX :: GOOGLE ADSENSE :: END -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/LindaRex_LOGO.jpg" alt="LindaRex logo"></a>
+        
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/year-archive/" >Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/" >Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/" >Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/" >About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">OPEN SOURCE SOFTWARE</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/jenkins/" class="">JENKINS</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/sonarqube/" class="">SONARQUBE</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/scm-manager/" class="">SCM MANAGER</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/postgresql/" class="">POSTGRESQL</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/elastic-stack/" class="">ELASTIC STACK</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">CLOUD FOUNDRY</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/bosh/" class="">BOSH</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/cfar/" class="">CFAR</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">CLOUD COMPUTING</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/aws/" class="">AWS</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/azure/" class="">AZURE</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">INTERESTED</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/ubuntu/" class="">UBUNTU</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/concepts/" class="">CONCEPTS</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/vmware-workstation/" class="">VMWARE WORKSTATION</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/travis-ci/" class="">TRAVIS CI</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+  <!-- LINDAREX :: GOOGLE ADSENSE :: LEFT-SIDEBAR :: BIGIN-->
+  <!-- LINDAREX :: GOOGLE ADSENSE :: LEFT-SIDEBAR :: HTML :: BIGIN -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 2020-02-22-ad-left-sidebar -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:200px;height:200px"
+     data-ad-client="ca-pub-8367174639781348"
+     data-ad-slot="5840394475"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<!-- LINDAREX :: GOOGLE ADSENSE :: LEFT-SIDEBAR :: HTML :: END -->
+
+  <!-- LINDAREX :: GOOGLE ADSENSE :: LEFT-SIDEBAR :: END-->
+</nav>
+    
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="우분투(Ubuntu) 서버(Server) 16.04 설치하기">
+    <meta itemprop="description" content="우분투(ubuntu)는 데비안(debian) 리눅스(linux) 기반으로, debian에 비해 사용자 편의성에 초점을 맞춘 linux 배포판이며 컴퓨터 운영체제(OS, operating system)입니다. 새로운 버전은 6개월마다, 장기 지원 버전(LTS, long term support)은 2년에 한 번씩 출시되고, 다양한 언어를 지원하고 낮은 사양의 컴퓨터에서도 작동하도록 설계되어 있습니다. 이 포스트에서는 VMware Workstation에 ubuntu server 16.04 LTS를 설치하는 방법을 소개합니다.">
+    <meta itemprop="datePublished" content="2020-02-10T00:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">우분투(Ubuntu) 서버(Server) 16.04 설치하기
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+          
+          <!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: BIGIN -->
+          
+            <nav class="toc-custom">
+            <!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: HTML :: BIGIN -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 2020-02-22-ad-right-sidebar -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8367174639781348"
+     data-ad-slot="5781712397"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: HTML :: END -->
+
+            </nav>
+          
+          <!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: END -->
+          </aside>
+        
+        <p>우분투(ubuntu)는 데비안(debian) 리눅스(linux) 기반으로, debian에 비해 사용자 편의성에 초점을 맞춘 linux 배포판이며 컴퓨터 운영체제(OS, operating system)입니다. <br />
+새로운 버전은 6개월마다, 장기 지원 버전(LTS, long term support)은 2년에 한 번씩 출시되고, 다양한 언어를 지원하고 낮은 사양의 컴퓨터에서도 작동하도록 설계되어 있습니다. <br />
+이 포스트에서는 VMware Workstation에 ubuntu server 16.04 LTS를 설치하는 방법을 소개합니다.</p>
+
+<h2 id="선행조건prerequisite">선행조건(PREREQUISITE)</h2>
+<ul>
+  <li>VMware Workstation이 설치되어 있어야 합니다.</li>
+</ul>
+
+<h2 id="테스트-환경test-environment">테스트 환경(TEST ENVIRONMENT)</h2>
+<ul>
+  <li>VMware® Workstation 15 Pro (15.5.1 build-15018445)</li>
+  <li>Ubuntu 16.04.6 LTS (Xenial Xerus) Server (64-bit)</li>
+</ul>
+
+<blockquote>
+  <p>ubuntu server 16.04 설치 시 필요한 시스템 요구사항은 <a href="https://help.ubuntu.com/16.04/serverguide/preparing-to-install.html" target="\_blank">https://help.ubuntu.com/16.04/serverguide/preparing-to-install.html</a>를 확인해 주시기 바랍니다.</p>
+</blockquote>
+
+<h2 id="요약summary">요약(SUMMARY)</h2>
+<ol>
+  <li>ubuntu server 16.04.6 ISO 파일 내려받기</li>
+  <li>VMware workstation의 VM(virtual machine) 설정</li>
+  <li>ubuntu server 16.04.6 설치</li>
+  <li>linux 명령어로 ubuntu VM 상태 확인</li>
+</ol>
+
+<h2 id="내용contents">내용(CONTENTS)</h2>
+<h3 id="1-ubuntu-server-16046-iso-파일-내려받기">1. ubuntu server 16.04.6 ISO 파일 내려받기</h3>
+<ul>
+  <li>웹브라우저로 <a href="http://mirror.kakao.com/ubuntu-releases/" target="\_blank">ubuntu Releases 페이지</a>를 엽니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-001.png" alt="lindarex-ubuntu-1604-installation-001" /></p>
+
+<ul>
+  <li>목록의 ‘16.04.6’를 클릭하여 ubuntu 16.04.6 LTS (Xenial Xerus) 페이지로 이동합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-002.png" alt="lindarex-ubuntu-1604-installation-002" /></p>
+
+<ul>
+  <li>Server install image 영역의 ‘64-bit PC (AMD64) server install image’를 클릭하여 ISO 파일을 내려받습니다.</li>
+</ul>
+
+<blockquote>
+  <p><a href="http://mirror.kakao.com/ubuntu-releases/16.04.6/ubuntu-16.04.6-server-amd64.iso" target="\_blank">http://mirror.kakao.com/ubuntu-releases/16.04.6/ubuntu-16.04.6-server-amd64.iso</a>를 통해 바로 내려받을 수 있습니다. <br />
+ubuntu-16.04.6-server-amd64.iso 파일 사이즈는 약 893 MB입니다.</p>
+</blockquote>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-003.png" alt="lindarex-ubuntu-1604-installation-003" /></p>
+
+<h3 id="2-vmware-workstation의-vmvirtual-machine-설정">2. VMware workstation의 VM(Virtual Machine) 설정</h3>
+<ul>
+  <li>VMware workstation을 실행합니다.</li>
+  <li>아래 메뉴를 통해 ‘New Virtual Machine Wizard’ 팝업을 엽니다.</li>
+</ul>
+
+<blockquote>
+  <p>상단 메뉴 &gt; File &gt; ‘New Virtual Machine…’ 또는 Ctrl + N</p>
+</blockquote>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-004.png" alt="lindarex-ubuntu-1604-installation-004" /></p>
+
+<ul>
+  <li>상세 설정을 위해 ‘Custom (advanced)’를 선택하고 ‘Next’를 클릭합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-005.png" alt="lindarex-ubuntu-1604-installation-005" /></p>
+
+<ul>
+  <li>VMware Workstation 버전을 선택하고 ‘Next’를 클릭합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-006.png" alt="lindarex-ubuntu-1604-installation-006" /></p>
+
+<ul>
+  <li>상세 설정을 위해 ‘I will install the operating system later.’를 선택하고 ‘Next’를 클릭합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-007.png" alt="lindarex-ubuntu-1604-installation-007" /></p>
+
+<ul>
+  <li>Guest operating system은 ‘Linux’, Version은 ‘ubuntu 64-bit’를 선택하고 ‘Next’를 클릭합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-008.png" alt="lindarex-ubuntu-1604-installation-008" /></p>
+
+<ul>
+  <li>Virtual machine name을 입력하고, Location에 vmdk 파일이 저장될 경로를 입력하거나 ‘Browse..’를 클릭해 위치를 선택하고 ‘Next’를 클릭합니다.</li>
+</ul>
+
+<blockquote>
+  <p>VMDK란 Virtual Machine Disk의 약자이며, 자세한 정보는 <a href="https://en.wikipedia.org/wiki/VMDK" target="\_blank">https://en.wikipedia.org/wiki/VMDK</a>를 참고하시기 바랍니다.</p>
+</blockquote>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-009.png" alt="lindarex-ubuntu-1604-installation-009" /></p>
+
+<ul>
+  <li>processors ‘1’, cores per processor ‘1’을 입력하고 ‘Next’를 클릭합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-010.png" alt="lindarex-ubuntu-1604-installation-010" /></p>
+
+<ul>
+  <li>권장값인 ‘2048’MB를 입력하고 ‘Next’를 클릭합니다.</li>
+</ul>
+
+<blockquote>
+  <p>권장값은 자신의 PC 메모리(Host memory)에 따라 다를 수 있습니다.</p>
+</blockquote>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-011.png" alt="lindarex-ubuntu-1604-installation-011" /></p>
+
+<ul>
+  <li>‘Use network address translation (NAT)’를 선택하고 ‘Next’를 클릭합니다.</li>
+</ul>
+
+<blockquote>
+  <p>Network type에 대한 자세한 정보는 <a href="https://lindarex.github.io/vmware-workstation/vmware-workstation-virtual-network/" target="\_blank">VMware Workstation의 가상 네트워크(Virtual Network) 알아보기</a> 포스트를 참고하시기 바랍니다.</p>
+</blockquote>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-012.png" alt="lindarex-ubuntu-1604-installation-012" /></p>
+
+<ul>
+  <li>권장값인 ‘LSI Logic (Recommended)’를 선택하고 ‘Next’를 클릭합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-013.png" alt="lindarex-ubuntu-1604-installation-013" /></p>
+
+<ul>
+  <li>권장값인 ‘SCSI Logic (Recommended)’를 선택하고 ‘Next’를 클릭합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-014.png" alt="lindarex-ubuntu-1604-installation-014" /></p>
+
+<ul>
+  <li>‘Create a new virtual disk’를 선택하고 ‘Next’를 클릭합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-015.png" alt="lindarex-ubuntu-1604-installation-015" /></p>
+
+<ul>
+  <li>Maximum disk size를 ‘20.0’을 입력하고 ‘Split virtual disk into multiple files’를 선택하고 ‘Next’를 클릭합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-016.png" alt="lindarex-ubuntu-1604-installation-016" /></p>
+
+<ul>
+  <li>Disk file 명을 입력하고 ‘Next’를 클릭합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-017.png" alt="lindarex-ubuntu-1604-installation-017" /></p>
+
+<ul>
+  <li>‘Customize Hardware..’를 클릭하여 Hardware 팝업을 엽니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-018.png" alt="lindarex-ubuntu-1604-installation-018" /></p>
+
+<ul>
+  <li>앞에서 설정한 내용을 확인합니다. (Memory, Processors)</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-019.png" alt="lindarex-ubuntu-1604-installation-019" /></p>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-020.png" alt="lindarex-ubuntu-1604-installation-020" /></p>
+
+<ul>
+  <li>Use ISO image file 항목의 ‘Browse..’를 클릭해 내려받은 ubuntu 16.04.6 LTS (Xenial Xerus) ISO 파일을 선택합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-021.png" alt="lindarex-ubuntu-1604-installation-021" /></p>
+
+<ul>
+  <li>앞에서 설정한 내용을 확인합니다. (Network Adapter, USB Controller, Sound Card, Printer, Display)</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-022.png" alt="lindarex-ubuntu-1604-installation-022" /></p>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-023.png" alt="lindarex-ubuntu-1604-installation-023" /></p>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-024.png" alt="lindarex-ubuntu-1604-installation-024" /></p>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-025.png" alt="lindarex-ubuntu-1604-installation-025" /></p>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-026.png" alt="lindarex-ubuntu-1604-installation-026" /></p>
+
+<ul>
+  <li>모든 설정을 확인하고 ‘Finish’를 클릭합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-027.png" alt="lindarex-ubuntu-1604-installation-027" /></p>
+
+<h3 id="3-ubuntu-server-16046-설치">3. ubuntu server 16.04.6 설치</h3>
+<ul>
+  <li>아래 메뉴를 통해 ubuntu VM을 구동합니다.</li>
+</ul>
+
+<blockquote>
+  <p>상단 메뉴 &gt; 녹색 플레이 버튼 또는 Ctrl + B</p>
+</blockquote>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-028.png" alt="lindarex-ubuntu-1604-installation-028" /></p>
+
+<ul>
+  <li>설치할 때 사용하고자 하는 언어를 선택합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-029.png" alt="lindarex-ubuntu-1604-installation-029" /></p>
+
+<ul>
+  <li>‘Install ubuntu Server’를 선택하여 설치를 시작합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-030.png" alt="lindarex-ubuntu-1604-installation-030" /></p>
+
+<ul>
+  <li>ubuntu Server에 사용하고자 하는 언어를 설정합니다. ‘English’를 선택합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-031.png" alt="lindarex-ubuntu-1604-installation-031" /></p>
+
+<ul>
+  <li>Location을 설정합니다. ‘other’를 선택한 후, ‘Asia’의 ‘Korea, Republic of’를 선택합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-032.png" alt="lindarex-ubuntu-1604-installation-032" /></p>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-033.png" alt="lindarex-ubuntu-1604-installation-033" /></p>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-034.png" alt="lindarex-ubuntu-1604-installation-034" /></p>
+
+<ul>
+  <li>Locale을 설정합니다. ‘United States’를 선택합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-035.png" alt="lindarex-ubuntu-1604-installation-035" /></p>
+
+<ul>
+  <li>Keyboard layout을 설정합니다. ‘No’를 선택한 후, ‘English (US)’를 선택합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-036.png" alt="lindarex-ubuntu-1604-installation-036" /></p>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-037.png" alt="lindarex-ubuntu-1604-installation-037" /></p>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-038.png" alt="lindarex-ubuntu-1604-installation-038" /></p>
+
+<ul>
+  <li>설치가 진행됩니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-039.png" alt="lindarex-ubuntu-1604-installation-039" /></p>
+
+<ul>
+  <li>호스트네임(Hostname)을 입력합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-040.png" alt="lindarex-ubuntu-1604-installation-040" /></p>
+
+<ul>
+  <li>사용자 이름(User name)을 입력합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-041.png" alt="lindarex-ubuntu-1604-installation-041" /></p>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-042.png" alt="lindarex-ubuntu-1604-installation-042" /></p>
+
+<ul>
+  <li>비밀번호(Password)를 입력합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-043.png" alt="lindarex-ubuntu-1604-installation-043" /></p>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-044.png" alt="lindarex-ubuntu-1604-installation-044" /></p>
+
+<ul>
+  <li>Home directory의 암호화를 설정합니다. ‘No’를 선택합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-045.png" alt="lindarex-ubuntu-1604-installation-045" /></p>
+
+<ul>
+  <li>설치가 진행됩니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-046.png" alt="lindarex-ubuntu-1604-installation-046" /></p>
+
+<ul>
+  <li>타임존(Time zone)을 설정합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-047.png" alt="lindarex-ubuntu-1604-installation-047" /></p>
+
+<ul>
+  <li>Disk partition을 설정합니다. ‘Guided - use entire disk and set up LVM’을 선택합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-048.png" alt="lindarex-ubuntu-1604-installation-048" /></p>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-049.png" alt="lindarex-ubuntu-1604-installation-049" /></p>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-050.png" alt="lindarex-ubuntu-1604-installation-050" /></p>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-051.png" alt="lindarex-ubuntu-1604-installation-051" /></p>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-052.png" alt="lindarex-ubuntu-1604-installation-052" /></p>
+
+<ul>
+  <li>설치가 진행됩니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-053.png" alt="lindarex-ubuntu-1604-installation-053" /></p>
+
+<ul>
+  <li>HTTP proxy를 설정합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-054.png" alt="lindarex-ubuntu-1604-installation-054" /></p>
+
+<ul>
+  <li>설치가 진행됩니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-055.png" alt="lindarex-ubuntu-1604-installation-055" /></p>
+
+<ul>
+  <li>Upgrade 주기를 설정합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-056.png" alt="lindarex-ubuntu-1604-installation-056" /></p>
+
+<ul>
+  <li>추가로 설치할 패키지를 선택합니다.</li>
+</ul>
+
+<blockquote>
+  <p>Xshell을 비롯해 SSH 클라이언트 사용을 위해 OpenSSH server 패키지를 추가합니다.</p>
+</blockquote>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-057.png" alt="lindarex-ubuntu-1604-installation-057" /></p>
+
+<ul>
+  <li>설치가 진행됩니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-058.png" alt="lindarex-ubuntu-1604-installation-058" /></p>
+
+<ul>
+  <li>GRUB boot loader를 설정합니다. ‘Yes’를 선택합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-059.png" alt="lindarex-ubuntu-1604-installation-059" /></p>
+
+<ul>
+  <li>설치가 진행됩니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-060.png" alt="lindarex-ubuntu-1604-installation-060" /></p>
+
+<ul>
+  <li>설치 과정의 마지막입니다. ‘Continue’를 선택합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-061.png" alt="lindarex-ubuntu-1604-installation-061" /></p>
+
+<ul>
+  <li>재부팅됩니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-062.png" alt="lindarex-ubuntu-1604-installation-062" /></p>
+
+<ul>
+  <li>정상 설치 후 로그인 프롬프트 상태입니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-063.png" alt="lindarex-ubuntu-1604-installation-063" /></p>
+
+<h3 id="4-linux-명령어로-ubuntu-vm-상태-확인">4. linux 명령어로 ubuntu VM 상태 확인</h3>
+
+<ul>
+  <li>사용자 이름과 비밀번호를 입력하여 로그인합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-064.png" alt="lindarex-ubuntu-1604-installation-064" /></p>
+
+<ul>
+  <li>free 명령어로 메모리 상태를 확인합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-065.png" alt="lindarex-ubuntu-1604-installation-065" /></p>
+
+<ul>
+  <li>df 명령어로 디스크 사용량을 확인합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-066.png" alt="lindarex-ubuntu-1604-installation-066" /></p>
+
+<ul>
+  <li>ifconfig 명령어로 네트워크 정보를 확인합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-067.png" alt="lindarex-ubuntu-1604-installation-067" /></p>
+
+<ul>
+  <li>ping 명령어로 네트워크 상태를 확인합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-068.png" alt="lindarex-ubuntu-1604-installation-068" /></p>
+
+<ul>
+  <li>apt update 명령어로 패키지 인덱스를 업데이트합니다.</li>
+</ul>
+
+<blockquote>
+  <p>apt update 명령어는 업그레이드 가능한 패키지 정보를 업데이트하는 것이며, 실제로 패키지를 업데이트하지 않습니다.</p>
+</blockquote>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-069.png" alt="lindarex-ubuntu-1604-installation-069" /></p>
+
+<ul>
+  <li>apt upgrade 명령어로 업그레이드 가능한 모든 패키지를 업데이트합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-070.png" alt="lindarex-ubuntu-1604-installation-070" /></p>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-071.png" alt="lindarex-ubuntu-1604-installation-071" /></p>
+
+<p><img src="/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-072.png" alt="lindarex-ubuntu-1604-installation-072" /></p>
+
+<h2 id="마무리conclusion">마무리(CONCLUSION)</h2>
+<p>VMware Workstation에 Ubuntu 16.04.6 LTS (Xenial Xerus) Server 설치를 완료했습니다. <br />
+2020년 2월 12일 <a href="https://w3techs.com/technologies/details/os-linux" target="\_blank">W3Techs.com 통계</a>에 따르면, ubuntu 점유율은 linux 배포판을 사용하는 웹사이트 중 1위(38.9%)로, 2위인 debian(18.4%)의 2배 이상 차이가 납니다. 또한 대부분의 오픈소스 소프트웨어는 Ubuntu를 지원하고, 국내외 사용자와 레퍼런스가 많습니다. <br />
+linux 입문자 또는 오픈소스 소프트웨어에 관심이 있다면, Ubuntu를 사용하며 linux 명령어를 숙지하고 다양한 커뮤니티에서 활동하는 것을 권합니다.</p>
+
+<h2 id="참고references">참고(REFERENCES)</h2>
+<ul>
+  <li><a href="https://ubuntu.com/" target="\_blank">https://ubuntu.com/</a></li>
+  <li><a href="http://mirror.kakao.com/ubuntu-releases/" target="\_blank">http://mirror.kakao.com/ubuntu-releases/</a></li>
+  <li><a href="https://ubuntu.com/tutorials/tutorial-install-ubuntu-server#1-overview" target="\_blank">https://ubuntu.com/tutorials/tutorial-install-ubuntu-server#1-overview</a></li>
+  <li><a href="https://ko.wikipedia.org/wiki/%EC%9A%B0%EB%B6%84%ED%88%AC_(%EC%9A%B4%EC%98%81_%EC%B2%B4%EC%A0%9C)" target="\_blank">https://ko.wikipedia.org/wiki/우분투_(운영_체제)</a></li>
+</ul>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/16-04" class="page__taxonomy-item" rel="tag">16.04</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/ubuntu" class="page__taxonomy-item" rel="tag">ubuntu</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/vmware-workstation" class="page__taxonomy-item" rel="tag">vmware workstation</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/ubuntu" class="page__taxonomy-item" rel="tag">ubuntu</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-02-10T00:00:00+09:00">February 10, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%EC%9A%B0%EB%B6%84%ED%88%AC%28Ubuntu%29+%EC%84%9C%EB%B2%84%28Server%29+16.04+%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0%20https%3A%2F%2Flindarex.github.io%2Fubuntu%2Fubuntu-1604-installation%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flindarex.github.io%2Fubuntu%2Fubuntu-1604-installation%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flindarex.github.io%2Fubuntu%2Fubuntu-1604-installation%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/ubuntu/ubuntu-firewalld-installation/" class="pagination--pager" title="우분투(Ubuntu) 환경에 방화벽(Firewalld) 설치 및 설정하기
+">Previous</a>
+    
+    
+      <a href="/ubuntu/ubuntu-1804-installation/" class="pagination--pager" title="우분투(Ubuntu) 서버(Server) 18.04 설치하기
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Leave a comment</h4>
+      <section id="disqus_thread"></section>
+    
+</div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/ubuntu/ubuntu-iptables-setting/" rel="permalink">우분투(Ubuntu) 환경에 iptables 설정하기
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">iptables은 방화벽(firewall) 구성이나 NAT(network address translation)에 사용되는데, 리눅스(linux) 커널(kernel) firewall이 제공하는 테이블(table)과 체인(chain), 규칙(rule)을 시스템 관리자가 구성합니다. 
+...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/cfar/cloud-foundry-projects-introduction/" rel="permalink">클라우드 파운드리(Cloud Foundry) 프로젝트(projects) 소개
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">이 포스트에서는 클라우드 파운드리(Cloud Foundry) 프로젝트(projects)를 간단히 소개합니다.
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/cfar/cfar-introduction/" rel="permalink">클라우드 파운드리(Cloud Foundry, CFAR) 소개
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">클라우드 파운드리(Cloud Foundry)는 과거에 PaaS(platform as a service)와 재단을 가리키는 용어였지만, 현재는 PaaS를 뜻하는 Cloud Foundry는 CFAR(cloud foundry application runtime)로 대체되었습니다. 
+CF...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/ubuntu/ubuntu-ufw-setting/" rel="permalink">우분투(Ubuntu) 환경에 방화벽(UFW) 설정하기
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">방화벽(UFW, uncomplicated firewall)은 데비안(debian) 계열 및 다양한 리눅스(linux) 환경에서 작동되고, GPL(GNU General Public License)이 적용되며 파이썬(python)으로 개발되었습니다. 
+사용하기 쉬운 CLI(comman...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- LINDAREX :: GOOGLE ADSENSE :: FOOTER :: BIGIN -->
+        <!-- LINDAREX :: GOOGLE ADSENSE :: FOOTER :: HTML ::  BIGIN -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 2020-02-22-ad-footer -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8367174639781348"
+     data-ad-slot="1870387544"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<!-- LINDAREX :: GOOGLE ADSENSE :: FOOTER :: HTML ::  END -->
+        <!-- LINDAREX :: GOOGLE ADSENSE :: FOOTER :: END -->
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://github.com/lindarex/lindarex.github.io" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 LindaRex. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+    <!-- LINDAREX :: BACK TO TOP :: BEGIN -->
+    <!-- <aside class="sidebar__top">
+      <a href="#site-nav"> <i class="fas fa-angle-double-up fa-2x"></i></a>
+    </aside> -->
+    <!-- LINDAREX :: BACK TO TOP :: END -->
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://lindarex.github.io/ubuntu/ubuntu-1604-installation/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/ubuntu/ubuntu-1604-installation"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://lindarex-github-io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

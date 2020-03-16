@@ -1,0 +1,844 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.18.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- LINDAREX :: JEKYLL SEO TAG :: BIGIN -->
+<!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>클라우드 파운드리(Cloud Foundry) 프로젝트(projects) 소개 | LindaRex</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="클라우드 파운드리(Cloud Foundry) 프로젝트(projects) 소개" />
+<meta name="author" content="LindaRex" />
+<meta property="og:locale" content="ko_KR" />
+<meta name="description" content="이 포스트에서는 클라우드 파운드리(Cloud Foundry) 프로젝트(projects)를 간단히 소개합니다." />
+<meta property="og:description" content="이 포스트에서는 클라우드 파운드리(Cloud Foundry) 프로젝트(projects)를 간단히 소개합니다." />
+<link rel="canonical" href="https://lindarex.github.io/cfar/cloud-foundry-projects-introduction/" />
+<meta property="og:url" content="https://lindarex.github.io/cfar/cloud-foundry-projects-introduction/" />
+<meta property="og:site_name" content="LindaRex" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-02-26T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="클라우드 파운드리(Cloud Foundry) 프로젝트(projects) 소개" />
+<meta name="twitter:site" content="@" />
+<meta name="twitter:creator" content="@LindaRex" />
+<meta name="google-site-verification" content="t6VkmqsI15sIx3P1-gh3NYputZtjhDZOTkxhwDaa4Ik" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/cfar/cloud-foundry-projects-introduction/"},"@type":"BlogPosting","url":"https://lindarex.github.io/cfar/cloud-foundry-projects-introduction/","headline":"클라우드 파운드리(Cloud Foundry) 프로젝트(projects) 소개","dateModified":"2020-02-26T00:00:00+09:00","datePublished":"2020-02-26T00:00:00+09:00","author":{"@type":"Person","name":"LindaRex"},"description":"이 포스트에서는 클라우드 파운드리(Cloud Foundry) 프로젝트(projects)를 간단히 소개합니다.","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"LindaRex"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<!-- LINDAREX :: JEKYLL SEO TAG :: END -->
+
+<!-- LINDAREX :: NAVER SITE VERIFICATION :: BIGIN -->
+<meta name="naver-site-verification" content="190d9b8e0a63058b72f2031ce67825da7b9038f5">
+<!-- LINDAREX :: NAVER SITE VERIFICATION :: END -->
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="LindaRex Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- LINDAREX :: FAVICON :: BIGIN -->
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico">
+<!-- LINDAREX :: FAVICON :: END -->
+
+<!-- LINDAREX :: FEED :: BIGIN -->
+<!-- <link rel="alternate" type="application/rss+xml" href="https://lindarex.github.io/feed.xml" title="LindaRex Feed"> -->
+<!-- LINDAREX :: FEED :: END -->
+
+<!-- LINDAREX :: GOOGLE ANALYTICS :: BIGIN -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-157973560-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-157973560-1');
+</script>
+<!-- LINDAREX :: GOOGLE ANALYTICS :: END -->
+
+<!-- LINDAREX :: NAVER ANALYTICS :: BIGIN -->
+<!-- Naver Analytics -->
+<script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
+<script type="text/javascript">
+if(!wcs_add) var wcs_add = {};
+wcs_add["wa"] = "42df78a7dfd6f0";
+wcs_do();
+</script>
+<!-- LINDAREX :: NAVER ANALYTICS :: END -->
+
+<!-- LINDAREX :: GOOGLE ADSENSE :: BIGIN -->
+<script data-ad-client="ca-pub-8367174639781348" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- LINDAREX :: GOOGLE ADSENSE :: END -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/LindaRex_LOGO.jpg" alt="LindaRex logo"></a>
+        
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/year-archive/" >Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/" >Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/" >Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/" >About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">OPEN SOURCE SOFTWARE</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/jenkins/" class="">JENKINS</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/sonarqube/" class="">SONARQUBE</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/scm-manager/" class="">SCM MANAGER</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/postgresql/" class="">POSTGRESQL</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/elastic-stack/" class="">ELASTIC STACK</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">CLOUD FOUNDRY</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/bosh/" class="">BOSH</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/cfar/" class="">CFAR</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">CLOUD COMPUTING</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/aws/" class="">AWS</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/azure/" class="">AZURE</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">INTERESTED</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/ubuntu/" class="">UBUNTU</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/concepts/" class="">CONCEPTS</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/vmware-workstation/" class="">VMWARE WORKSTATION</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/travis-ci/" class="">TRAVIS CI</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+  <!-- LINDAREX :: GOOGLE ADSENSE :: LEFT-SIDEBAR :: BIGIN-->
+  <!-- LINDAREX :: GOOGLE ADSENSE :: LEFT-SIDEBAR :: HTML :: BIGIN -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 2020-02-22-ad-left-sidebar -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:200px;height:200px"
+     data-ad-client="ca-pub-8367174639781348"
+     data-ad-slot="5840394475"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<!-- LINDAREX :: GOOGLE ADSENSE :: LEFT-SIDEBAR :: HTML :: END -->
+
+  <!-- LINDAREX :: GOOGLE ADSENSE :: LEFT-SIDEBAR :: END-->
+</nav>
+    
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="클라우드 파운드리(Cloud Foundry) 프로젝트(projects) 소개">
+    <meta itemprop="description" content="이 포스트에서는 클라우드 파운드리(Cloud Foundry) 프로젝트(projects)를 간단히 소개합니다.">
+    <meta itemprop="datePublished" content="2020-02-26T00:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">클라우드 파운드리(Cloud Foundry) 프로젝트(projects) 소개
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+          
+          <!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: BIGIN -->
+          
+            <nav class="toc-custom">
+            <!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: HTML :: BIGIN -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 2020-02-22-ad-right-sidebar -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8367174639781348"
+     data-ad-slot="5781712397"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: HTML :: END -->
+
+            </nav>
+          
+          <!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: END -->
+          </aside>
+        
+        <p>이 포스트에서는 클라우드 파운드리(Cloud Foundry) 프로젝트(projects)를 간단히 소개합니다.</p>
+
+<h2 id="내용contents">내용(CONTENTS)</h2>
+<h3 id="1-bosh">1. BOSH</h3>
+<ul>
+  <li>BOSH는 복잡한 분산 시스템의 release engineering, 배포(deploy) 및 애플리케이션(application) 수명 주기(lifecycle) 관리를 위한 클라우드(cloud) 오픈소스(open source) 소프트웨어입니다.</li>
+  <li>BOSH는 가상 머신(VM, virtual machine)이나 컨테이너(container), 베어 메탈(bare metal) 등 어디에 deploy 하든 상관없이 동일한 접근 방식을 취하고, 대부분의 application을 deploy 할 때 BOSH가 사용됩니다.</li>
+  <li>BOSH는 백그라운드에서 작동하며, 구성요소(component)가 변경될 때, application을 최신 상태로 유지하고, 환경이 올바르게 구성되었는지 확인하여 환경이 정의되었을 때 실행 방식을 조정하도록 재구성합니다.</li>
+  <li>BOSH는 스템셀(stemcell), 릴리스(release) 및 배포 매니페스트(deployment manifest)를 사용하여 cloud 환경의 무결성(integrity)을 유지합니다.
+    <ul>
+      <li>stemcell
+        <ul>
+          <li>VM을 생성하는 데 사용되는 골든 운영체제 이미지(golden operating system image)와 유사합니다.</li>
+          <li>배포에 포함된 기본 운영체제(OS, operating system)를 다른 application 패키지(package)와 분리합니다.</li>
+        </ul>
+      </li>
+      <li>release
+        <ul>
+          <li>stemcell 위에 놓인 레이어(layer)로 어떤 application을 deploy하고 어떻게 구성해야 하는지 BOSH에 application을 패키지화하여 전달합니다.</li>
+          <li>release는 구성 속성(configuration properties) 및 템플릿(templates), 시작(startup) scripts, 소스 코드(source code), 바이너리(binary) 아티팩트(artifacts)를 포함하며, 재현 가능한 방식(reproducible)으로 application을 build하고 deploy 하는 데 필요한 모든 것이 포함됩니다.</li>
+        </ul>
+      </li>
+      <li>deployment manifest
+        <ul>
+          <li>어떤 cloud 또는 인프라(infra)에 어떤 BOSH release를 deploy하고, 어떻게 구성해야 하는지 설명하는 yaml file입니다.</li>
+          <li>BOSH는 manifest file을 사용하여 대상 infra에 deploy하고, VM 또는 container의 상태를 모니터링하고, 필요시에 복구합니다.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>BOSH는 CPI(cloud provider interface) 모델(model)을 포함하며, 이는 멀티(multi) cloud 기능(capability)의 핵심입니다.</li>
+  <li>BOSH는 CPI를 사용하여 AWS, Azure, GCP, OpenStack, VMware vSphere 등을 포함한 여러 cloud 환경에 application을 deploy 할 수 있습니다.</li>
+  <li>CPI는 BOSH가 infra와 상호 작용하여 stemcell, VM 및 디스크(disk)를 생성하고 관리하는 데 사용하는 API입니다.</li>
+  <li>BOSH는 초기에 CFAR을 배포하기 위해 생성되었지만, 현재는 다른 환경에서 모든 종류의 application을 package하고 관리하기 위해 사용되고 있습니다.</li>
+</ul>
+
+<blockquote>
+  <p>Bare metal이란 소프트웨어가 설치되어 있지 않은 단일 테넌트(single-tenant) 물리적 하드웨어를 의미하며, 가상화 및 cloud 호스팅(hosting)과 구별하기 위해 사용됩니다. bare metal에 대한 자세한 정보는 <a href="https://en.wikipedia.org/wiki/Bare-metal_server" target="\_blank">https://en.wikipedia.org/wiki/Bare-metal_server</a>를 확인해 주시기 바랍니다.</p>
+</blockquote>
+
+<h3 id="2-cfarcloud-foundry-application-runtime">2. CFAR(cloud foundry application runtime)</h3>
+<ul>
+  <li>CFAR은 클라우드 환경과 개발 프레임워크, application 서비스(service)를 선택할 수 있으며, application을 빠르고 쉽게 구축하고 테스트하여 deploy 할 수 있는, 완전한 application lifecycle을 지원하는 open source multi cloud application PaaS(platform as a service)입니다.</li>
+</ul>
+
+<blockquote>
+  <p>CFAR에 대한 자세한 설명은 <a href="https://lindarex.github.io/cfar/cfar-introduction/" target="\_blank">클라우드 파운드리(Cloud Foundry, CFAR) 소개</a> 포스트를 참고하시기 바랍니다.</p>
+</blockquote>
+
+<h3 id="3-cfcrcloud-foundry-container-runtime">3. CFCR(cloud foundry container runtime)</h3>
+<ul>
+  <li>CFCR은 kubernetes를 사용하여 container를 더 세밀하게 제어하고 관리할 수 ​​있는 기능을 제공합니다.</li>
+  <li>CFCR은 과거에 Cloud Foundry Foundation 내의 incubating project인 Project Kubo였는데, container platform의 성장과 함께 container runtime인 kubo를 CFCR로 명칭을 변경했습니다.</li>
+  <li>CFCR은 2017년 11월에 kubernetes 적합성 인증(Certified Kubernetes)을 받았고, BOSH를 사용하여 cloud platform에서 고가용성(high availability)의 kubernetes 클러스터(cluster)를 인스턴스화하고 deploy 및 관리할 수 있는 기능을 제공합니다.</li>
+  <li>kubernetes와 BOSH의 조합으로 BOSH를 통해 deploy 및 lifecycle를 관리하면, kubernetes cluster의 스케일링(scaling)과 VM healing, 롤링 업그레이드(rolling upgrade)를 할 수 있습니다.</li>
+</ul>
+
+<blockquote>
+  <p>Certified Kubernetes란 CNCF(Cloud Native Computing Foundation)의 Kubernetes Software Conformance Certification Program으로 kubernetes의 목표인 일관성과 휴대성을 위한 검토와 인증에 대한 적합성 시험 결과를 CNCF로 제출하여, CNCF로부터 준수 구현을 공식적으로 인증받은 것을 의미합니다. Certified Kubernetes에 대한 자세한 정보는 <a href="https://www.cncf.io/certification/software-conformance/" target="\_blank">https://www.cncf.io/certification/software-conformance/</a>를 확인해 주시기 바랍니다.</p>
+</blockquote>
+
+<h3 id="4-quarks">4. Quarks</h3>
+<ul>
+  <li>Project Quarks(quarks)는 Cloud Foundry Foundation 내의 incubating project로, CFAR을 VM 대신 container로 패키징하여 kubernetes에 쉽게 deploy 할 수 있는 기능을 제공합니다.</li>
+  <li>container형 CFAR은 BOSH로 deploy 한 CFAR과 동일한 기능을 제공하고, 더 적은 infra 용량으로 kubernetes 운영자에게 익숙한 환경을 제공합니다.</li>
+  <li>quarks는 기존 BOSH release를 kubernetes에 설치하기 위해 docker 이미지(image) 또는 helm charts로 변환합니다.</li>
+  <li>kubernetes는 CFAR instance의 자동 확장 및 실패한 노드(node)를 복구하는 기능을 제공합니다.</li>
+  <li>kubernetes를 기본 infra로 사용하면 quarks를 모든 private 또는 public cloud에 쉽게 deploy 할 수 있습니다.</li>
+</ul>
+
+<blockquote>
+  <p>helm은 Kubernetes의 package 관리자이며, helm을 사용하면 application 및 리소스(resources)를 Kubernetes cluster에 쉽게 설치할 수 있습니다. helm charts는 Kubernetes resources 세트를 Kubernetes cluster에 설치하기 위한 helm package이며, helm charts에는 chart.yaml, templates, values.yaml 및 의존성(dependencies)이 포함됩니다. helm에 대한 자세한 정보는 <a href="https://helm.sh/" target="\_blank">https://helm.sh/</a>를 확인해 주시기 바랍니다.</p>
+</blockquote>
+
+<h3 id="5-eirini">5. Eirini</h3>
+<ul>
+  <li>Project Eirini(eirini)는 Cloud Foundry Foundation 내의 incubating project로, CFAR을 위한 플러그형 스케줄링을 가능하게 하며 application container instance를 조정하기 위해 Diego/Garden 또는 Kubernetes 중에서 선택할 수 있습니다.</li>
+  <li>eirini는 기존 Kubernetes cluster infra를 재사용하여 CFAR에 의해 deploy 된 application을 hosting 합니다.</li>
+  <li>개발자가 buildpack을 사용하여 application을 push 하면, kubernetes 내부에서 일회성 스테이징 작업이 포드(pod)로 실행되고, 드롭릿(droplet)이 동일한 방식으로 생성하여 업로드됩니다. 이 과정에서 application은 docker image로 다운로드되어 kubernetes에 deploy 됩니다.</li>
+  <li>eirini는 CFAR 운영자가 kubernetes를 container 스케줄러로 선택할 수 있도록 하여, kubernetes에 익숙한 조직이 CFAR을 보다 쉽게 이용할 수 있도록 합니다.</li>
+</ul>
+
+<h3 id="6-open-service-broker-api">6. Open Service Broker API</h3>
+<ul>
+  <li>Open Service Broker API project를 통해 독립적인 application vendor와 SaaS provider는 CFAR과 kubernetes와 같은 cloud native platform에서 실행되는 워크로드(workload)에 대한 백 앤드 service를 쉽게 제공할 수 있습니다.</li>
+  <li>Open Service Broker API는 많은 platform과 service provider가 채택하였고, Google, IBM, Pivotal, Red Hat, SAP 등 다수의 cloud 회사들이 기여했습니다.</li>
+  <li>Open Service Broker API 사양의 service broker는 service lifecycle을 관리하고, platform은 service broker와 상호 작용하여 service를 provisioning 및 access하고 관리합니다.</li>
+</ul>
+
+<h2 id="마무리conclusion">마무리(CONCLUSION)</h2>
+<p>Cloud Foundry projects를 살펴보았습니다. <br />
+BOSH는 Cloud Foundry projects에 기반이 되는 프로젝트이고, CFAR을 제외한 나머지 CFCR, Quarks, Eirini 등의 공통 키워드는 Kubernetes입니다. 더 말이 필요 없는 kubernetes… <br />
+다음 포스트에서는 kubernetes 소개와 CFAR을 설치하는 방법을 소개하겠습니다.</p>
+
+<h2 id="참고references">참고(REFERENCES)</h2>
+<ul>
+  <li><a href="https://www.cloudfoundry.org/" target="\_blank">https://www.cloudfoundry.org/</a></li>
+  <li><a href="https://www.cncf.io/" target="\_blank">https://www.cncf.io/</a></li>
+  <li><a href="https://github.com/cncf/k8s-conformance" target="\_blank">https://github.com/cncf/k8s-conformance</a></li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/bosh" class="page__taxonomy-item" rel="tag">bosh</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/cfar" class="page__taxonomy-item" rel="tag">cfar</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/cfcr" class="page__taxonomy-item" rel="tag">cfcr</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/cloud-foundry" class="page__taxonomy-item" rel="tag">cloud foundry</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/eirini" class="page__taxonomy-item" rel="tag">eirini</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/kubernetes" class="page__taxonomy-item" rel="tag">kubernetes</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/paas" class="page__taxonomy-item" rel="tag">paas</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/quarks" class="page__taxonomy-item" rel="tag">quarks</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/cfar" class="page__taxonomy-item" rel="tag">cfar</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-02-26T00:00:00+09:00">February 26, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C+%ED%8C%8C%EC%9A%B4%EB%93%9C%EB%A6%AC%28Cloud+Foundry%29+%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%28projects%29+%EC%86%8C%EA%B0%9C%20https%3A%2F%2Flindarex.github.io%2Fcfar%2Fcloud-foundry-projects-introduction%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flindarex.github.io%2Fcfar%2Fcloud-foundry-projects-introduction%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flindarex.github.io%2Fcfar%2Fcloud-foundry-projects-introduction%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/cfar/cfar-introduction/" class="pagination--pager" title="클라우드 파운드리(Cloud Foundry, CFAR) 소개
+">Previous</a>
+    
+    
+      <a href="/ubuntu/ubuntu-iptables-setting/" class="pagination--pager" title="우분투(Ubuntu) 환경에 iptables 설정하기
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Leave a comment</h4>
+      <section id="disqus_thread"></section>
+    
+</div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/ubuntu/ubuntu-iptables-setting/" rel="permalink">우분투(Ubuntu) 환경에 iptables 설정하기
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">iptables은 방화벽(firewall) 구성이나 NAT(network address translation)에 사용되는데, 리눅스(linux) 커널(kernel) firewall이 제공하는 테이블(table)과 체인(chain), 규칙(rule)을 시스템 관리자가 구성합니다. 
+...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/cfar/cfar-introduction/" rel="permalink">클라우드 파운드리(Cloud Foundry, CFAR) 소개
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">클라우드 파운드리(Cloud Foundry)는 과거에 PaaS(platform as a service)와 재단을 가리키는 용어였지만, 현재는 PaaS를 뜻하는 Cloud Foundry는 CFAR(cloud foundry application runtime)로 대체되었습니다. 
+CF...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/ubuntu/ubuntu-ufw-setting/" rel="permalink">우분투(Ubuntu) 환경에 방화벽(UFW) 설정하기
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">방화벽(UFW, uncomplicated firewall)은 데비안(debian) 계열 및 다양한 리눅스(linux) 환경에서 작동되고, GPL(GNU General Public License)이 적용되며 파이썬(python)으로 개발되었습니다. 
+사용하기 쉬운 CLI(comman...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/elastic-stack/ubuntu-elastic-stack-installation/" rel="permalink">우분투(Ubuntu) 환경에 패키지(Package)로 Elastic Stack 설치하기
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Elastic Stack을 소개하기에 앞서 ELK Stack을 먼저 소개하겠습니다. 
+ELK Stack은 Elasticsearch, Logstash, Kibana의 연동으로 텍스트, 숫자, 위치 기반 정보, 정형 및 비정형 데이터(data) 등 모든 유형의 data를 수집 및 변환...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- LINDAREX :: GOOGLE ADSENSE :: FOOTER :: BIGIN -->
+        <!-- LINDAREX :: GOOGLE ADSENSE :: FOOTER :: HTML ::  BIGIN -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 2020-02-22-ad-footer -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8367174639781348"
+     data-ad-slot="1870387544"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<!-- LINDAREX :: GOOGLE ADSENSE :: FOOTER :: HTML ::  END -->
+        <!-- LINDAREX :: GOOGLE ADSENSE :: FOOTER :: END -->
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://github.com/lindarex/lindarex.github.io" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 LindaRex. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+    <!-- LINDAREX :: BACK TO TOP :: BEGIN -->
+    <!-- <aside class="sidebar__top">
+      <a href="#site-nav"> <i class="fas fa-angle-double-up fa-2x"></i></a>
+    </aside> -->
+    <!-- LINDAREX :: BACK TO TOP :: END -->
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://lindarex.github.io/cfar/cloud-foundry-projects-introduction/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/cfar/cloud-foundry-projects-introduction"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://lindarex-github-io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

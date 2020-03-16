@@ -1,7 +1,7 @@
 ---
 title: "클라우드 파운드리(Cloud Foundry) 프로젝트(projects) 소개"
 categories: 
-  - concepts
+  - cfar
 tags: 
   - "cloud foundry"
   - cfar

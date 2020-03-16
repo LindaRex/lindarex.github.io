@@ -6,8 +6,8 @@
     <description>오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 LindaRex(린다렉스)의 블로그입니다</description>
     <link>https://lindarex.github.io/</link>
     <atom:link href="https://lindarex.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 16 Mar 2020 10:39:53 +0900</pubDate>
-    <lastBuildDate>Mon, 16 Mar 2020 10:39:53 +0900</lastBuildDate>
+    <pubDate>Mon, 16 Mar 2020 11:18:39 +0900</pubDate>
+    <lastBuildDate>Mon, 16 Mar 2020 11:18:39 +0900</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
@@ -769,8 +769,8 @@ BOSH는 Cloud Foundry projects에 기반이 되는 프로젝트이고, CFAR을 �
 &lt;/ul&gt;
 </description>
         <pubDate>Wed, 26 Feb 2020 00:00:00 +0900</pubDate>
-        <link>https://lindarex.github.io/concepts/cloud-foundry-projects-introduction/</link>
-        <guid isPermaLink="true">https://lindarex.github.io/concepts/cloud-foundry-projects-introduction/</guid>
+        <link>https://lindarex.github.io/cfar/cloud-foundry-projects-introduction/</link>
+        <guid isPermaLink="true">https://lindarex.github.io/cfar/cloud-foundry-projects-introduction/</guid>
         
         <category>cloud foundry</category>
         
@@ -789,7 +789,7 @@ BOSH는 Cloud Foundry projects에 기반이 되는 프로젝트이고, CFAR을 �
         <category>paas</category>
         
         
-        <category>concepts</category>
+        <category>cfar</category>
         
       </item>
     

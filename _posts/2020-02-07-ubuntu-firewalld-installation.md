@@ -82,7 +82,7 @@ public
 ## 마무리(CONCLUSION)
 ubuntu 환경에 패키지로 firewalld 설치 및 설정을 완료했습니다. <br />
 firewalld는 CentOS 7부터 이전의 Iptables를 대체해 새롭게 선보인 패킷 필터링 firewall 프로그램입니다. <br />
-다음 포스트에서는 Iptables, UFW 등의 firewall 특징과 설정 방법을 소개하겠습니다.
+다음 포스트에서는 [우분투(Ubuntu) 환경에 방화벽(UFW) 설정하기](https://lindarex.github.io/ubuntu/ubuntu-ufw-setting/){: target="\_blank"}를 소개하겠습니다.
 
 
 ## 참고(REFERENCES)

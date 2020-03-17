@@ -536,7 +536,7 @@ num  target     prot opt source               destination
 ## 마무리(CONCLUSION)
 ubuntu 환경에 iptables 설정을 완료했습니다. <br />
 iptables 설정을 통해 서버(server) 보안을 많이 향상할 수 있지만, 잘못 설정할 경우에는 접속을 못 하는 경우가 발생할 수 있으니 신중하게 설정해야 합니다. <br />
-다음 포스트에서는 ubuntu server 운영 시 유용한 패키지와 명령어를 소개하겠습니다.
+다음 포스트에서는 [우분투(Ubuntu) 서버(Server) 초기 설정하기](https://lindarex.github.io/ubuntu/ubuntu-initial-setting/){: target="\_blank"}를 소개하겠습니다.
 
 
 ## 참고(REFERENCES)

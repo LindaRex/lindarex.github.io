@@ -6,8 +6,8 @@
     <description>오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 LindaRex(린다렉스)의 블로그입니다</description>
     <link>https://lindarex.github.io/</link>
     <atom:link href="https://lindarex.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 16 Mar 2020 20:09:47 +0900</pubDate>
-    <lastBuildDate>Mon, 16 Mar 2020 20:09:47 +0900</lastBuildDate>
+    <pubDate>Tue, 17 Mar 2020 16:20:55 +0900</pubDate>
+    <lastBuildDate>Tue, 17 Mar 2020 16:20:55 +0900</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
@@ -1079,7 +1079,7 @@ num  target     prot opt source               destination
 &lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
 &lt;p&gt;ubuntu 환경에 iptables 설정을 완료했습니다. &lt;br /&gt;
 iptables 설정을 통해 서버(server) 보안을 많이 향상할 수 있지만, 잘못 설정할 경우에는 접속을 못 하는 경우가 발생할 수 있으니 신중하게 설정해야 합니다. &lt;br /&gt;
-다음 포스트에서는 ubuntu server 운영 시 유용한 패키지와 명령어를 소개하겠습니다.&lt;/p&gt;
+다음 포스트에서는 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-initial-setting/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 서버(Server) 초기 설정하기&lt;/a&gt;를 소개하겠습니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;
 &lt;ul&gt;
@@ -1698,7 +1698,7 @@ ufw는 기본적으로 ubuntu 18.04 LTS 이후 버전에서 사용할 수 있습
 
 &lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
 &lt;p&gt;ubuntu 환경에 ufw 설정을 완료했습니다. &lt;br /&gt;
-다음 포스트에서는 iptables 방화벽 특징과 설정 방법을 소개하겠습니다.&lt;/p&gt;
+다음 포스트에서는 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-iptables-setting/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 환경에 iptables 설정하기&lt;/a&gt;를 소개하겠습니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;
 &lt;ul&gt;
@@ -4907,7 +4907,7 @@ firewalld는 linux 커널 netfilter 프레임워크의 프런트 엔드 역할�
 &lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
 &lt;p&gt;ubuntu 환경에 패키지로 firewalld 설치 및 설정을 완료했습니다. &lt;br /&gt;
 firewalld는 CentOS 7부터 이전의 Iptables를 대체해 새롭게 선보인 패킷 필터링 firewall 프로그램입니다. &lt;br /&gt;
-다음 포스트에서는 Iptables, UFW 등의 firewall 특징과 설정 방법을 소개하겠습니다.&lt;/p&gt;
+다음 포스트에서는 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-ufw-setting/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 환경에 방화벽(UFW) 설정하기&lt;/a&gt;를 소개하겠습니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;
 &lt;ul&gt;

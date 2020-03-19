@@ -6,9 +6,190 @@
     <description>오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 LindaRex(린다렉스)의 블로그입니다</description>
     <link>https://lindarex.github.io/</link>
     <atom:link href="https://lindarex.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 17 Mar 2020 16:20:55 +0900</pubDate>
-    <lastBuildDate>Tue, 17 Mar 2020 16:20:55 +0900</lastBuildDate>
+    <pubDate>Thu, 19 Mar 2020 15:37:15 +0900</pubDate>
+    <lastBuildDate>Thu, 19 Mar 2020 15:37:15 +0900</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
+    
+      <item>
+        <title>우분투(Ubuntu) 환경에 WAR 파일로 젠킨스(Jenkins) 설치하기</title>
+        <description>&lt;p&gt;젠킨스(Jenkins)를 설치하는 방법은 다양합니다. 패키지(package)로 jenkins를 설치하는 방법은 &lt;a href=&quot;https://lindarex.github.io/jenkins/ubuntu-jenkins-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 환경에 패키지(Package)로 젠킨스(Jenkins) 설치하기&lt;/a&gt; 포스트를 참고하시기 바랍니다. &lt;br /&gt;
+이 포스트에서는 우분투(ubuntu) 환경에서 WAR 파일(file)로 jenkins를 설치하는 방법을 소개합니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;선행조건prerequisite&quot;&gt;선행조건(PREREQUISITE)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;ubuntu 환경에 Java가 설치되어 있어야 합니다.
+    &lt;ul&gt;
+      &lt;li&gt;Java 8 or Java 11 버전(version)이 필요합니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;방화벽 설정이 필요합니다.
+    &lt;ul&gt;
+      &lt;li&gt;TCP 8080 포트가 개방되어 있어야 합니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Java 설치 방법은 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-openjdk-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 환경에 OpenJDK(Java) 설치하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;jenkins version에 따른 Java version에 대한 자세한 정보는 &lt;a href=&quot;https://jenkins.io/doc/administration/requirements/java/&quot; target=&quot;\_blank&quot;&gt;https://jenkins.io/doc/administration/requirements/java/&lt;/a&gt;를 확인해 주시기 바랍니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;방화벽 설정 방법은 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-firewalld-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 환경에 방화벽(Firewalld) 설치 및 설정하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;테스트-환경test-environment&quot;&gt;테스트 환경(TEST ENVIRONMENT)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;VMware® Workstation 15 Pro (15.5.1 build-15018445)&lt;/li&gt;
+  &lt;li&gt;Ubuntu 18.04.4 LTS (Bionic Beaver) Server (64-bit)&lt;/li&gt;
+  &lt;li&gt;jenkins 2.204.5&lt;/li&gt;
+  &lt;li&gt;OpenJDK 1.8.0_242&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;요약summary&quot;&gt;요약(SUMMARY)&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;작업 공간(workspace) 생성&lt;/li&gt;
+  &lt;li&gt;jenkins war file 내려받기&lt;/li&gt;
+  &lt;li&gt;java 명령어로 jenkins 실행&lt;/li&gt;
+  &lt;li&gt;웹브라우저로 jenkins 접속&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;내용contents&quot;&gt;내용(CONTENTS)&lt;/h2&gt;
+&lt;h3 id=&quot;1-workspace-생성&quot;&gt;1. workspace 생성&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;로그인한 사용자의 ubuntu 홈 디렉터리(directory) 아래에 ‘workspace’ directory를 생성합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;HOME&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;/workspace
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;2-jenkins-war-file-내려받기&quot;&gt;2. jenkins war file 내려받기&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;위에서 생성한 workspace directory에 wget 명령어(command)로 jenkins war file을 내려받습니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;wget &lt;span class=&quot;nt&quot;&gt;-P&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;HOME&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;/workspace http://mirrors.jenkins.io/war-stable/latest/jenkins.war
+&lt;span class=&quot;go&quot;&gt;--2020-03-19 04:25:52--  http://mirrors.jenkins.io/war-stable/latest/jenkins.war
+Resolving mirrors.jenkins.io (mirrors.jenkins.io)... 52.202.51.185
+Connecting to mirrors.jenkins.io (mirrors.jenkins.io)|52.202.51.185|:80... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: http://ftp-nyc.osuosl.org/pub/jenkins/war-stable/2.204.5/jenkins.war [following]
+--2020-03-19 04:25:53--  http://ftp-nyc.osuosl.org/pub/jenkins/war-stable/2.204.5/jenkins.war
+Resolving ftp-nyc.osuosl.org (ftp-nyc.osuosl.org)... 64.50.233.100, 2600:3404:200:237::2
+Connecting to ftp-nyc.osuosl.org (ftp-nyc.osuosl.org)|64.50.233.100|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 63466030 (61M) [application/x-java-archive]
+Saving to: ‘/home/rex/workspace/jenkins.war’
+
+&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;jenkins.war                                              100%[=================================================================================================================================&amp;gt;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;  60.53M  31.0MB/s    &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;2.0s
+&lt;span class=&quot;go&quot;&gt;
+2020-03-19 04:25:55 (31.0 MB/s) - ‘/home/rex/workspace/jenkins.war’ saved [63466030/63466030]
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;jenkins.war file을 확인합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;ll &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;HOME&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;/workspace
+&lt;span class=&quot;go&quot;&gt;total 61988
+drwxrwxr-x 2 rex rex     4096 Mar 19 04:25 ./
+drwxr-xr-x 5 rex rex     4096 Mar 19 04:25 ../
+-rw-rw-r-- 1 rex rex 63466030 Mar  8 06:20 jenkins.war
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;3-java-command로-jenkins-실행&quot;&gt;3. java command로 jenkins 실행&lt;/h3&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;java &lt;span class=&quot;nt&quot;&gt;-jar&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;HOME&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;/workspace/jenkins.war &lt;span class=&quot;nt&quot;&gt;--httpPort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;8080
+&lt;span class=&quot;go&quot;&gt;Running from: /home/rex/workspace/jenkins.war
+&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;webroot: $&lt;/span&gt;user.home/.jenkins
+&lt;span class=&quot;gp&quot;&gt;2020-03-19 05:28:15.555+0000 [id=1]	INFO	org.eclipse.jetty.util.log.Log#&lt;/span&gt;initialized: Logging initialized @516ms to org.eclipse.jetty.util.log.JavaUtilLog
+&lt;span class=&quot;gp&quot;&gt;2020-03-19 05:28:15.689+0000 [id=1]	INFO	winstone.Logger#&lt;/span&gt;logInternal: Beginning extraction from war file
+&lt;span class=&quot;gp&quot;&gt;2020-03-19 05:28:16.774+0000 [id=1]	WARNING	o.e.j.s.handler.ContextHandler#&lt;/span&gt;setContextPath: Empty contextPath
+&lt;span class=&quot;gp&quot;&gt;2020-03-19 05:28:16.841+0000 [id=1]	INFO	org.eclipse.jetty.server.Server#&lt;/span&gt;doStart: jetty-9.4.z-SNAPSHOT&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; built: 2019-05-02T00:04:53.875Z&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; git: e1bc35120a6617ee3df052294e433f3a25ce7097&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; jvm 1.8.0_242-8u242-b08-0ubuntu3~18.04-b08
+&lt;span class=&quot;gp&quot;&gt;2020-03-19 05:28:17.214+0000 [id=1]	INFO	o.e.j.w.StandardDescriptorProcessor#&lt;/span&gt;visitServlet: NO JSP Support &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; /, did not find org.eclipse.jetty.jsp.JettyJspServlet
+&lt;span class=&quot;gp&quot;&gt;2020-03-19 05:28:17.291+0000 [id=1]	INFO	o.e.j.s.s.DefaultSessionIdManager#&lt;/span&gt;doStart: DefaultSessionIdManager &lt;span class=&quot;nv&quot;&gt;workerName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;node0
+&lt;span class=&quot;gp&quot;&gt;2020-03-19 05:28:17.292+0000 [id=1]	INFO	o.e.j.s.s.DefaultSessionIdManager#&lt;/span&gt;doStart: No SessionScavenger &lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;, using defaults
+&lt;span class=&quot;gp&quot;&gt;2020-03-19 05:28:17.295+0000 [id=1]	INFO	o.e.j.server.session.HouseKeeper#&lt;/span&gt;startScavenging: node0 Scavenging every 600000ms
+&lt;span class=&quot;gp&quot;&gt;2020-03-19 05:28:17.757+0000 [id=1]	INFO	hudson.WebAppMain#&lt;/span&gt;contextInitialized: Jenkins home directory: /home/rex/.jenkins found at: &lt;span class=&quot;nv&quot;&gt;$user&lt;/span&gt;.home/.jenkins
+&lt;span class=&quot;gp&quot;&gt;2020-03-19 05:28:17.930+0000 [id=1]	INFO	o.e.j.s.handler.ContextHandler#&lt;/span&gt;doStart: Started w.@4a9e6faf&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;Jenkins v2.204.5,/,file:///home/rex/.jenkins/war/,AVAILABLE&lt;span class=&quot;o&quot;&gt;}{&lt;/span&gt;/home/rex/.jenkins/war&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;gp&quot;&gt;2020-03-19 05:28:17.974+0000 [id=1]	INFO	o.e.j.server.AbstractConnector#&lt;/span&gt;doStart: Started ServerConnector@7a5ceedd&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;HTTP/1.1,[http/1.1]&lt;span class=&quot;o&quot;&gt;}{&lt;/span&gt;0.0.0.0:8080&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;gp&quot;&gt;2020-03-19 05:28:17.977+0000 [id=1]	INFO	org.eclipse.jetty.server.Server#&lt;/span&gt;doStart: Started @2938ms
+&lt;span class=&quot;gp&quot;&gt;2020-03-19 05:28:17.981+0000 [id=20]	INFO	winstone.Logger#&lt;/span&gt;logInternal: Winstone Servlet Engine v4.0 running: &lt;span class=&quot;nv&quot;&gt;controlPort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;disabled
+&lt;span class=&quot;gp&quot;&gt;2020-03-19 05:28:19.005+0000 [id=25]	INFO	jenkins.InitReactorRunner$&lt;/span&gt;1#onAttained: Started initialization
+&lt;span class=&quot;gp&quot;&gt;2020-03-19 05:28:19.050+0000 [id=25]	INFO	jenkins.InitReactorRunner$&lt;/span&gt;1#onAttained: Listed all plugins
+&lt;span class=&quot;gp&quot;&gt;2020-03-19 05:28:20.675+0000 [id=25]	INFO	jenkins.InitReactorRunner$&lt;/span&gt;1#onAttained: Prepared all plugins
+&lt;span class=&quot;gp&quot;&gt;2020-03-19 05:28:20.689+0000 [id=25]	INFO	jenkins.InitReactorRunner$&lt;/span&gt;1#onAttained: Started all plugins
+&lt;span class=&quot;gp&quot;&gt;2020-03-19 05:28:20.716+0000 [id=26]	INFO	jenkins.InitReactorRunner$&lt;/span&gt;1#onAttained: Augmented all extensions
+&lt;span class=&quot;gp&quot;&gt;2020-03-19 05:28:21.991+0000 [id=26]	INFO	jenkins.InitReactorRunner$&lt;/span&gt;1#onAttained: Loaded all &lt;span class=&quot;nb&quot;&gt;jobs&lt;/span&gt;
+&lt;span class=&quot;gp&quot;&gt;2020-03-19 05:28:22.027+0000 [id=39]	INFO	hudson.model.AsyncPeriodicWork#&lt;/span&gt;lambda&lt;span class=&quot;nv&quot;&gt;$doRun$0&lt;/span&gt;: Started Download metadata
+&lt;span class=&quot;gp&quot;&gt;2020-03-19 05:28:22.050+0000 [id=39]	INFO	hudson.util.Retrier#&lt;/span&gt;start: Attempt &lt;span class=&quot;c&quot;&gt;#1 to do the action check updates server&lt;/span&gt;
+&lt;span class=&quot;gp&quot;&gt;2020-03-19 05:28:23.246+0000 [id=26]	INFO	o.s.c.s.AbstractApplicationContext#&lt;/span&gt;prepareRefresh: Refreshing org.springframework.web.context.support.StaticWebApplicationContext@2f650e69: display name &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Root WebApplicationContext]&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; startup &lt;span class=&quot;nb&quot;&gt;date&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Thu Mar 19 04:28:23 KST 2020]&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; root of context hierarchy
+&lt;span class=&quot;gp&quot;&gt;2020-03-19 05:28:23.250+0000 [id=26]	INFO	o.s.c.s.AbstractApplicationContext#&lt;/span&gt;obtainFreshBeanFactory: Bean factory &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;application context &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;org.springframework.web.context.support.StaticWebApplicationContext@2f650e69]: org.springframework.beans.factory.support.DefaultListableBeanFactory@252ba0b0
+&lt;span class=&quot;gp&quot;&gt;2020-03-19 05:28:23.274+0000 [id=26]	INFO	o.s.b.f.s.DefaultListableBeanFactory#&lt;/span&gt;preInstantiateSingletons: Pre-instantiating singletons &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;org.springframework.beans.factory.support.DefaultListableBeanFactory@252ba0b0: defining beans &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;authenticationManager]&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; root of factory hierarchy
+&lt;span class=&quot;gp&quot;&gt;2020-03-19 05:28:23.532+0000 [id=26]	INFO	o.s.c.s.AbstractApplicationContext#&lt;/span&gt;prepareRefresh: Refreshing org.springframework.web.context.support.StaticWebApplicationContext@17aa246c: display name &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Root WebApplicationContext]&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; startup &lt;span class=&quot;nb&quot;&gt;date&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Thu Mar 19 04:28:23 KST 2020]&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; root of context hierarchy
+&lt;span class=&quot;gp&quot;&gt;2020-03-19 05:28:23.533+0000 [id=26]	INFO	o.s.c.s.AbstractApplicationContext#&lt;/span&gt;obtainFreshBeanFactory: Bean factory &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;application context &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;org.springframework.web.context.support.StaticWebApplicationContext@17aa246c]: org.springframework.beans.factory.support.DefaultListableBeanFactory@45e8b062
+&lt;span class=&quot;gp&quot;&gt;2020-03-19 05:28:23.534+0000 [id=26]	INFO	o.s.b.f.s.DefaultListableBeanFactory#&lt;/span&gt;preInstantiateSingletons: Pre-instantiating singletons &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;org.springframework.beans.factory.support.DefaultListableBeanFactory@45e8b062: defining beans &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;filter,legacy]&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; root of factory hierarchy
+&lt;span class=&quot;gp&quot;&gt;2020-03-19 05:28:23.817+0000 [id=26]	INFO	jenkins.install.SetupWizard#&lt;/span&gt;init:
+&lt;span class=&quot;go&quot;&gt;
+*************************************************************
+*************************************************************
+*************************************************************
+
+Jenkins initial setup is required. An admin user has been created and a password generated.
+Please use the following password to proceed to installation:
+
+cqqb445c1bad4f219e3737661dd2740d
+
+This may also be found at: /home/rex/.jenkins/secrets/initialAdminPassword
+
+*************************************************************
+*************************************************************
+*************************************************************
+
+&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;2020-03-19 05:28:33.139+0000 [id=39]	INFO	hudson.model.UpdateSite#&lt;/span&gt;updateData: Obtained the latest update center data file &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;UpdateSource default
+&lt;span class=&quot;gp&quot;&gt;2020-03-19 05:28:33.770+0000 [id=26]	INFO	hudson.model.UpdateSite#&lt;/span&gt;updateData: Obtained the latest update center data file &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;UpdateSource default
+&lt;span class=&quot;gp&quot;&gt;2020-03-19 05:28:34.144+0000 [id=26]	INFO	jenkins.InitReactorRunner$&lt;/span&gt;1#onAttained: Completed initialization
+&lt;span class=&quot;gp&quot;&gt;2020-03-19 05:28:34.162+0000 [id=19]	INFO	hudson.WebAppMain$&lt;/span&gt;3#run: Jenkins is fully up and running
+&lt;span class=&quot;gp&quot;&gt;2020-03-19 05:28:34.796+0000 [id=39]	INFO	h.m.DownloadService$&lt;/span&gt;Downloadable#load: Obtained the updated data file &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;hudson.tasks.Maven.MavenInstaller
+&lt;span class=&quot;gp&quot;&gt;2020-03-19 05:28:34.797+0000 [id=39]	INFO	hudson.util.Retrier#&lt;/span&gt;start: Performed the action check updates server successfully at the attempt &lt;span class=&quot;c&quot;&gt;#1&lt;/span&gt;
+&lt;span class=&quot;gp&quot;&gt;2020-03-19 05:28:34.800+0000 [id=39]	INFO	hudson.model.AsyncPeriodicWork#&lt;/span&gt;lambda&lt;span class=&quot;nv&quot;&gt;$doRun$0&lt;/span&gt;: Finished Download metadata. 12,771 ms
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;위 콘솔 로그에서 비밀번호(‘cqqb445c1bad4f219e3737661dd2740d’)는 jenkins 초기 설정할 때 필요합니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;4-웹브라우저로-jenkins-접속&quot;&gt;4. 웹브라우저로 jenkins 접속&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;http://[MY-IP]:8080&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
+&lt;p&gt;ubuntu 환경에 war file로 jenkins 설치를 완료했습니다. &lt;br /&gt;
+jenkins 초기 설정은 &lt;a href=&quot;https://lindarex.github.io/jenkins/jenkins-initial-setting/&quot; target=&quot;\_blank&quot;&gt;젠킨스(Jenkins) 초기 설정하기&lt;/a&gt; 포스트를 참고하시기 바랍니다. &lt;br /&gt;
+다음 포스트에서는 유용한 jenkins 플러그인(plugin)을 소개하겠습니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://jenkins.io/&quot; target=&quot;\_blank&quot;&gt;https://jenkins.io/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://jenkins.io/doc/pipeline/tour/getting-started/&quot; target=&quot;\_blank&quot;&gt;https://jenkins.io/doc/pipeline/tour/getting-started/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Thu, 19 Mar 2020 00:00:00 +0900</pubDate>
+        <link>https://lindarex.github.io/jenkins/ubuntu-jenkins-war-installation/</link>
+        <guid isPermaLink="true">https://lindarex.github.io/jenkins/ubuntu-jenkins-war-installation/</guid>
+        
+        <category>jenkins</category>
+        
+        <category>ubuntu</category>
+        
+        
+        <category>jenkins</category>
+        
+      </item>
     
       <item>
         <title>우분투(Ubuntu) 서버(Server) 초기 설정하기</title>
@@ -3726,14 +3907,14 @@ host    all             all             0.0.0.0/0               password
       <item>
         <title>우분투(Ubuntu) 환경에 패키지(Package)로 젠킨스(Jenkins) 설치하기</title>
         <description>&lt;p&gt;젠킨스(Jenkins)는 MIT license로 오픈소스(open source) 소프트웨어이며, 소프트웨어 개발 시 지속적 통합(CI, continuous integration) 서비스(service)를 제공하는 자동화 서버(server)입니다. &lt;br /&gt;
-Jenkins는 모든 프로젝트의 빌드(build)와 배포(deploy), 자동화를 지원하며, 수백 개의 플러그인(plugin)을 제공합니다. &lt;br /&gt;
-이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 Jenkins를 설치하는 방법을 소개합니다.&lt;/p&gt;
+jenkins는 모든 프로젝트의 빌드(build)와 배포(deploy), 자동화를 지원하며, 수백 개의 플러그인(plugin)을 제공합니다. &lt;br /&gt;
+이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 jenkins를 설치하는 방법을 소개합니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;선행조건prerequisite&quot;&gt;선행조건(PREREQUISITE)&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;ubuntu 환경에 Java가 설치되어 있어야 합니다.
     &lt;ul&gt;
-      &lt;li&gt;Jenkins 버전에 따른 필요 Java 버전
+      &lt;li&gt;jenkins 버전(version)에 따른 필요 Java version
         &lt;ul&gt;
           &lt;li&gt;2.164 (2019-02) and newer: Java 8 or Java 11&lt;/li&gt;
           &lt;li&gt;2.54 (2017-04) and newer: Java 8&lt;/li&gt;
@@ -3754,7 +3935,7 @@ Jenkins는 모든 프로젝트의 빌드(build)와 배포(deploy), 자동화를 
 &lt;/blockquote&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;Java 버전에 대한 자세한 정보는 &lt;a href=&quot;https://jenkins.io/doc/administration/requirements/java/&quot; target=&quot;\_blank&quot;&gt;https://jenkins.io/doc/administration/requirements/java/&lt;/a&gt;를 확인해 주시기 바랍니다.&lt;/p&gt;
+  &lt;p&gt;jenkins version에 따른 Java version에 대한 자세한 정보는 &lt;a href=&quot;https://jenkins.io/doc/administration/requirements/java/&quot; target=&quot;\_blank&quot;&gt;https://jenkins.io/doc/administration/requirements/java/&lt;/a&gt;를 확인해 주시기 바랍니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;blockquote&gt;
@@ -3765,29 +3946,29 @@ Jenkins는 모든 프로젝트의 빌드(build)와 배포(deploy), 자동화를 
 &lt;ul&gt;
   &lt;li&gt;VMware® Workstation 15 Pro (15.5.1 build-15018445)&lt;/li&gt;
   &lt;li&gt;Ubuntu 16.04.4 LTS (Xenial Xerus) Server (64-bit)&lt;/li&gt;
-  &lt;li&gt;Jenkins 2.121.1&lt;/li&gt;
+  &lt;li&gt;jenkins 2.121.1&lt;/li&gt;
   &lt;li&gt;OpenJDK 1.8.0_171&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;요약summary&quot;&gt;요약(SUMMARY)&lt;/h2&gt;
 &lt;ol&gt;
-  &lt;li&gt;Jenkins debian packages repository 설정&lt;/li&gt;
-  &lt;li&gt;apt 명령어로 Jenkins 설치&lt;/li&gt;
-  &lt;li&gt;(선택사항) Java 경로 설정 및 Jenkins의 기본 포트 변경&lt;/li&gt;
-  &lt;li&gt;systemctl 명령어로 Jenkins 실행&lt;/li&gt;
-  &lt;li&gt;웹브라우저로 Jenkins 접속&lt;/li&gt;
+  &lt;li&gt;jenkins debian packages repository 설정&lt;/li&gt;
+  &lt;li&gt;apt 명령어로 jenkins 설치&lt;/li&gt;
+  &lt;li&gt;(선택사항) Java 경로 설정 및 jenkins의 기본 포트 변경&lt;/li&gt;
+  &lt;li&gt;systemctl 명령어로 jenkins 실행&lt;/li&gt;
+  &lt;li&gt;웹브라우저로 jenkins 접속&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h2 id=&quot;내용contents&quot;&gt;내용(CONTENTS)&lt;/h2&gt;
-&lt;h3 id=&quot;1-jenkins-debian-packages-repository-key-추가&quot;&gt;1. Jenkins debian packages repository key 추가&lt;/h3&gt;
+&lt;h3 id=&quot;1-jenkins-debian-packages-repository-key-추가&quot;&gt;1. jenkins debian packages repository key 추가&lt;/h3&gt;
 &lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;wget &lt;span class=&quot;nt&quot;&gt;-q&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-O&lt;/span&gt; - https://pkg.jenkins.io/debian/jenkins-ci.org.key | &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-key add -
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;2-jenkins-debian-packages-repository-추가&quot;&gt;2. Jenkins debian packages repository 추가&lt;/h3&gt;
+&lt;h3 id=&quot;2-jenkins-debian-packages-repository-추가&quot;&gt;2. jenkins debian packages repository 추가&lt;/h3&gt;
 &lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;sh &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'echo deb https://pkg.jenkins.io/debian-stable binary/ &amp;gt; /etc/apt/sources.list.d/jenkins.list'&lt;/span&gt;  
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;3-apt-install-명령어로-jenkins-설치&quot;&gt;3. apt install 명령어로 Jenkins 설치&lt;/h3&gt;
+&lt;h3 id=&quot;3-apt-install-명령어로-jenkins-설치&quot;&gt;3. apt install 명령어로 jenkins 설치&lt;/h3&gt;
 &lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt update &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;jenkins &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;  
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -3817,52 +3998,52 @@ Jenkins는 모든 프로젝트의 빌드(build)와 배포(deploy), 자동화를 
 &lt;span class=&quot;nt&quot;&gt;--------------------------------------------------------------------------------&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;6-systemctl-명령어로-jenkins-service-관리&quot;&gt;6. systemctl 명령어로 Jenkins service 관리&lt;/h3&gt;
-&lt;h4 id=&quot;61-jenkins-service-설정-반영&quot;&gt;6.1. Jenkins service 설정 반영&lt;/h4&gt;
+&lt;h3 id=&quot;6-systemctl-명령어로-jenkins-service-관리&quot;&gt;6. systemctl 명령어로 jenkins service 관리&lt;/h3&gt;
+&lt;h4 id=&quot;61-jenkins-service-설정-반영&quot;&gt;6.1. jenkins service 설정 반영&lt;/h4&gt;
 &lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl daemon-reload
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h4 id=&quot;62-jenkins-service-시작&quot;&gt;6.2. Jenkins service 시작&lt;/h4&gt;
+&lt;h4 id=&quot;62-jenkins-service-시작&quot;&gt;6.2. jenkins service 시작&lt;/h4&gt;
 &lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl start jenkins.service
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h4 id=&quot;63-jenkins-service-중지&quot;&gt;6.3. Jenkins service 중지&lt;/h4&gt;
+&lt;h4 id=&quot;63-jenkins-service-중지&quot;&gt;6.3. jenkins service 중지&lt;/h4&gt;
 &lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl stop jenkins.service
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h4 id=&quot;64-jenkins-service-재시작&quot;&gt;6.4. Jenkins service 재시작&lt;/h4&gt;
+&lt;h4 id=&quot;64-jenkins-service-재시작&quot;&gt;6.4. jenkins service 재시작&lt;/h4&gt;
 &lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl restart jenkins.service
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h4 id=&quot;65-jenkins-service-설정-재적용&quot;&gt;6.5. Jenkins service 설정 재적용&lt;/h4&gt;
+&lt;h4 id=&quot;65-jenkins-service-설정-재적용&quot;&gt;6.5. jenkins service 설정 재적용&lt;/h4&gt;
 &lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl reload jenkins.service
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h4 id=&quot;66-jenkins-service-상태-조회&quot;&gt;6.6. Jenkins service 상태 조회&lt;/h4&gt;
+&lt;h4 id=&quot;66-jenkins-service-상태-조회&quot;&gt;6.6. jenkins service 상태 조회&lt;/h4&gt;
 &lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl status jenkins.service
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h4 id=&quot;67-jenkins-service-활성화부팅-시-자동-시작&quot;&gt;6.7. Jenkins service 활성화(부팅 시 자동 시작)&lt;/h4&gt;
+&lt;h4 id=&quot;67-jenkins-service-활성화부팅-시-자동-시작&quot;&gt;6.7. jenkins service 활성화(부팅 시 자동 시작)&lt;/h4&gt;
 &lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;jenkins.service
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h4 id=&quot;68-jenkins-service-비활성화&quot;&gt;6.8. Jenkins service 비활성화&lt;/h4&gt;
+&lt;h4 id=&quot;68-jenkins-service-비활성화&quot;&gt;6.8. jenkins service 비활성화&lt;/h4&gt;
 &lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl disable jenkins.service
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h4 id=&quot;69-jenkins-service-및-관련-프로세스-모두-중지&quot;&gt;6.9. Jenkins service 및 관련 프로세스 모두 중지&lt;/h4&gt;
+&lt;h4 id=&quot;69-jenkins-service-및-관련-프로세스-모두-중지&quot;&gt;6.9. jenkins service 및 관련 프로세스 모두 중지&lt;/h4&gt;
 &lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl &lt;span class=&quot;nb&quot;&gt;kill &lt;/span&gt;jenkins.service
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;7-웹브라우저로-jenkins-접속&quot;&gt;7. 웹브라우저로 Jenkins 접속&lt;/h3&gt;
+&lt;h3 id=&quot;7-웹브라우저로-jenkins-접속&quot;&gt;7. 웹브라우저로 jenkins 접속&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;http://[MY-IP]:8080&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
-&lt;p&gt;ubuntu 환경에 package로 Jenkins 설치를 완료했습니다. &lt;br /&gt;
-Jenkins 초기 설정은 &lt;a href=&quot;https://lindarex.github.io/jenkins/jenkins-initial-setting/&quot; target=&quot;\_blank&quot;&gt;Jenkins 초기 설정하기&lt;/a&gt; 포스트를 참고하시기 바랍니다. &lt;br /&gt;
-다음 포스트에서는 ubuntu 환경에서 war 파일을 내려받아 Java 명령어로 Jenkins를 실행하는 방법을 소개하겠습니다.&lt;/p&gt;
+&lt;p&gt;ubuntu 환경에 package로 jenkins 설치를 완료했습니다. &lt;br /&gt;
+jenkins 초기 설정은 &lt;a href=&quot;https://lindarex.github.io/jenkins/jenkins-initial-setting/&quot; target=&quot;\_blank&quot;&gt;젠킨스(Jenkins) 초기 설정하기&lt;/a&gt; 포스트를 참고하시기 바랍니다. &lt;br /&gt;
+다음 포스트에서는 &lt;a href=&quot;https://lindarex.github.io/jenkins/ubuntu-jenkins-war-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 환경에 WAR 파일로 젠킨스(Jenkins) 설치하기&lt;/a&gt;를 소개하겠습니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;
 &lt;ul&gt;

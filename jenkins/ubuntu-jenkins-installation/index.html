@@ -16,8 +16,8 @@
 <meta property="og:title" content="우분투(Ubuntu) 환경에 패키지(Package)로 젠킨스(Jenkins) 설치하기" />
 <meta name="author" content="LindaRex" />
 <meta property="og:locale" content="ko_KR" />
-<meta name="description" content="젠킨스(Jenkins)는 MIT license로 오픈소스(open source) 소프트웨어이며, 소프트웨어 개발 시 지속적 통합(CI, continuous integration) 서비스(service)를 제공하는 자동화 서버(server)입니다. Jenkins는 모든 프로젝트의 빌드(build)와 배포(deploy), 자동화를 지원하며, 수백 개의 플러그인(plugin)을 제공합니다. 이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 Jenkins를 설치하는 방법을 소개합니다." />
-<meta property="og:description" content="젠킨스(Jenkins)는 MIT license로 오픈소스(open source) 소프트웨어이며, 소프트웨어 개발 시 지속적 통합(CI, continuous integration) 서비스(service)를 제공하는 자동화 서버(server)입니다. Jenkins는 모든 프로젝트의 빌드(build)와 배포(deploy), 자동화를 지원하며, 수백 개의 플러그인(plugin)을 제공합니다. 이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 Jenkins를 설치하는 방법을 소개합니다." />
+<meta name="description" content="젠킨스(Jenkins)는 MIT license로 오픈소스(open source) 소프트웨어이며, 소프트웨어 개발 시 지속적 통합(CI, continuous integration) 서비스(service)를 제공하는 자동화 서버(server)입니다. jenkins는 모든 프로젝트의 빌드(build)와 배포(deploy), 자동화를 지원하며, 수백 개의 플러그인(plugin)을 제공합니다. 이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 jenkins를 설치하는 방법을 소개합니다." />
+<meta property="og:description" content="젠킨스(Jenkins)는 MIT license로 오픈소스(open source) 소프트웨어이며, 소프트웨어 개발 시 지속적 통합(CI, continuous integration) 서비스(service)를 제공하는 자동화 서버(server)입니다. jenkins는 모든 프로젝트의 빌드(build)와 배포(deploy), 자동화를 지원하며, 수백 개의 플러그인(plugin)을 제공합니다. 이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 jenkins를 설치하는 방법을 소개합니다." />
 <link rel="canonical" href="https://lindarex.github.io/jenkins/ubuntu-jenkins-installation/" />
 <meta property="og:url" content="https://lindarex.github.io/jenkins/ubuntu-jenkins-installation/" />
 <meta property="og:site_name" content="LindaRex" />
@@ -29,7 +29,7 @@
 <meta name="twitter:creator" content="@LindaRex" />
 <meta name="google-site-verification" content="t6VkmqsI15sIx3P1-gh3NYputZtjhDZOTkxhwDaa4Ik" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/jenkins/ubuntu-jenkins-installation/"},"@type":"BlogPosting","url":"https://lindarex.github.io/jenkins/ubuntu-jenkins-installation/","headline":"우분투(Ubuntu) 환경에 패키지(Package)로 젠킨스(Jenkins) 설치하기","dateModified":"2020-02-13T00:00:00+09:00","datePublished":"2020-02-13T00:00:00+09:00","author":{"@type":"Person","name":"LindaRex"},"description":"젠킨스(Jenkins)는 MIT license로 오픈소스(open source) 소프트웨어이며, 소프트웨어 개발 시 지속적 통합(CI, continuous integration) 서비스(service)를 제공하는 자동화 서버(server)입니다. Jenkins는 모든 프로젝트의 빌드(build)와 배포(deploy), 자동화를 지원하며, 수백 개의 플러그인(plugin)을 제공합니다. 이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 Jenkins를 설치하는 방법을 소개합니다.","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"LindaRex"},"@context":"https://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/jenkins/ubuntu-jenkins-installation/"},"@type":"BlogPosting","url":"https://lindarex.github.io/jenkins/ubuntu-jenkins-installation/","headline":"우분투(Ubuntu) 환경에 패키지(Package)로 젠킨스(Jenkins) 설치하기","dateModified":"2020-02-13T00:00:00+09:00","datePublished":"2020-02-13T00:00:00+09:00","author":{"@type":"Person","name":"LindaRex"},"description":"젠킨스(Jenkins)는 MIT license로 오픈소스(open source) 소프트웨어이며, 소프트웨어 개발 시 지속적 통합(CI, continuous integration) 서비스(service)를 제공하는 자동화 서버(server)입니다. jenkins는 모든 프로젝트의 빌드(build)와 배포(deploy), 자동화를 지원하며, 수백 개의 플러그인(plugin)을 제공합니다. 이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 jenkins를 설치하는 방법을 소개합니다.","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"LindaRex"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <!-- LINDAREX :: JEKYLL SEO TAG :: END -->
@@ -359,7 +359,7 @@ wcs_do();
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="우분투(Ubuntu) 환경에 패키지(Package)로 젠킨스(Jenkins) 설치하기">
-    <meta itemprop="description" content="젠킨스(Jenkins)는 MIT license로 오픈소스(open source) 소프트웨어이며, 소프트웨어 개발 시 지속적 통합(CI, continuous integration) 서비스(service)를 제공하는 자동화 서버(server)입니다. Jenkins는 모든 프로젝트의 빌드(build)와 배포(deploy), 자동화를 지원하며, 수백 개의 플러그인(plugin)을 제공합니다. 이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 Jenkins를 설치하는 방법을 소개합니다.">
+    <meta itemprop="description" content="젠킨스(Jenkins)는 MIT license로 오픈소스(open source) 소프트웨어이며, 소프트웨어 개발 시 지속적 통합(CI, continuous integration) 서비스(service)를 제공하는 자동화 서버(server)입니다. jenkins는 모든 프로젝트의 빌드(build)와 배포(deploy), 자동화를 지원하며, 수백 개의 플러그인(plugin)을 제공합니다. 이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 jenkins를 설치하는 방법을 소개합니다.">
     <meta itemprop="datePublished" content="2020-02-13T00:00:00+09:00">
     
 
@@ -399,14 +399,14 @@ wcs_do();
           </aside>
         
         <p>젠킨스(Jenkins)는 MIT license로 오픈소스(open source) 소프트웨어이며, 소프트웨어 개발 시 지속적 통합(CI, continuous integration) 서비스(service)를 제공하는 자동화 서버(server)입니다. <br />
-Jenkins는 모든 프로젝트의 빌드(build)와 배포(deploy), 자동화를 지원하며, 수백 개의 플러그인(plugin)을 제공합니다. <br />
-이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 Jenkins를 설치하는 방법을 소개합니다.</p>
+jenkins는 모든 프로젝트의 빌드(build)와 배포(deploy), 자동화를 지원하며, 수백 개의 플러그인(plugin)을 제공합니다. <br />
+이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 jenkins를 설치하는 방법을 소개합니다.</p>
 
 <h2 id="선행조건prerequisite">선행조건(PREREQUISITE)</h2>
 <ul>
   <li>ubuntu 환경에 Java가 설치되어 있어야 합니다.
     <ul>
-      <li>Jenkins 버전에 따른 필요 Java 버전
+      <li>jenkins 버전(version)에 따른 필요 Java version
         <ul>
           <li>2.164 (2019-02) and newer: Java 8 or Java 11</li>
           <li>2.54 (2017-04) and newer: Java 8</li>
@@ -427,7 +427,7 @@ Jenkins는 모든 프로젝트의 빌드(build)와 배포(deploy), 자동화를 
 </blockquote>
 
 <blockquote>
-  <p>Java 버전에 대한 자세한 정보는 <a href="https://jenkins.io/doc/administration/requirements/java/" target="\_blank">https://jenkins.io/doc/administration/requirements/java/</a>를 확인해 주시기 바랍니다.</p>
+  <p>jenkins version에 따른 Java version에 대한 자세한 정보는 <a href="https://jenkins.io/doc/administration/requirements/java/" target="\_blank">https://jenkins.io/doc/administration/requirements/java/</a>를 확인해 주시기 바랍니다.</p>
 </blockquote>
 
 <blockquote>
@@ -438,29 +438,29 @@ Jenkins는 모든 프로젝트의 빌드(build)와 배포(deploy), 자동화를 
 <ul>
   <li>VMware® Workstation 15 Pro (15.5.1 build-15018445)</li>
   <li>Ubuntu 16.04.4 LTS (Xenial Xerus) Server (64-bit)</li>
-  <li>Jenkins 2.121.1</li>
+  <li>jenkins 2.121.1</li>
   <li>OpenJDK 1.8.0_171</li>
 </ul>
 
 <h2 id="요약summary">요약(SUMMARY)</h2>
 <ol>
-  <li>Jenkins debian packages repository 설정</li>
-  <li>apt 명령어로 Jenkins 설치</li>
-  <li>(선택사항) Java 경로 설정 및 Jenkins의 기본 포트 변경</li>
-  <li>systemctl 명령어로 Jenkins 실행</li>
-  <li>웹브라우저로 Jenkins 접속</li>
+  <li>jenkins debian packages repository 설정</li>
+  <li>apt 명령어로 jenkins 설치</li>
+  <li>(선택사항) Java 경로 설정 및 jenkins의 기본 포트 변경</li>
+  <li>systemctl 명령어로 jenkins 실행</li>
+  <li>웹브라우저로 jenkins 접속</li>
 </ol>
 
 <h2 id="내용contents">내용(CONTENTS)</h2>
-<h3 id="1-jenkins-debian-packages-repository-key-추가">1. Jenkins debian packages repository key 추가</h3>
+<h3 id="1-jenkins-debian-packages-repository-key-추가">1. jenkins debian packages repository key 추가</h3>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>wget <span class="nt">-q</span> <span class="nt">-O</span> - https://pkg.jenkins.io/debian/jenkins-ci.org.key | <span class="nb">sudo </span>apt-key add -
 </code></pre></div></div>
 
-<h3 id="2-jenkins-debian-packages-repository-추가">2. Jenkins debian packages repository 추가</h3>
+<h3 id="2-jenkins-debian-packages-repository-추가">2. jenkins debian packages repository 추가</h3>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>sh <span class="nt">-c</span> <span class="s1">'echo deb https://pkg.jenkins.io/debian-stable binary/ &gt; /etc/apt/sources.list.d/jenkins.list'</span>  
 </code></pre></div></div>
 
-<h3 id="3-apt-install-명령어로-jenkins-설치">3. apt install 명령어로 Jenkins 설치</h3>
+<h3 id="3-apt-install-명령어로-jenkins-설치">3. apt install 명령어로 jenkins 설치</h3>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt update <span class="nt">-y</span> <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>apt <span class="nb">install </span>jenkins <span class="nt">-y</span>  
 </code></pre></div></div>
 
@@ -490,52 +490,52 @@ Jenkins는 모든 프로젝트의 빌드(build)와 배포(deploy), 자동화를 
 <span class="nt">--------------------------------------------------------------------------------</span>
 </code></pre></div></div>
 
-<h3 id="6-systemctl-명령어로-jenkins-service-관리">6. systemctl 명령어로 Jenkins service 관리</h3>
-<h4 id="61-jenkins-service-설정-반영">6.1. Jenkins service 설정 반영</h4>
+<h3 id="6-systemctl-명령어로-jenkins-service-관리">6. systemctl 명령어로 jenkins service 관리</h3>
+<h4 id="61-jenkins-service-설정-반영">6.1. jenkins service 설정 반영</h4>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl daemon-reload
 </code></pre></div></div>
 
-<h4 id="62-jenkins-service-시작">6.2. Jenkins service 시작</h4>
+<h4 id="62-jenkins-service-시작">6.2. jenkins service 시작</h4>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl start jenkins.service
 </code></pre></div></div>
 
-<h4 id="63-jenkins-service-중지">6.3. Jenkins service 중지</h4>
+<h4 id="63-jenkins-service-중지">6.3. jenkins service 중지</h4>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl stop jenkins.service
 </code></pre></div></div>
 
-<h4 id="64-jenkins-service-재시작">6.4. Jenkins service 재시작</h4>
+<h4 id="64-jenkins-service-재시작">6.4. jenkins service 재시작</h4>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl restart jenkins.service
 </code></pre></div></div>
 
-<h4 id="65-jenkins-service-설정-재적용">6.5. Jenkins service 설정 재적용</h4>
+<h4 id="65-jenkins-service-설정-재적용">6.5. jenkins service 설정 재적용</h4>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl reload jenkins.service
 </code></pre></div></div>
 
-<h4 id="66-jenkins-service-상태-조회">6.6. Jenkins service 상태 조회</h4>
+<h4 id="66-jenkins-service-상태-조회">6.6. jenkins service 상태 조회</h4>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl status jenkins.service
 </code></pre></div></div>
 
-<h4 id="67-jenkins-service-활성화부팅-시-자동-시작">6.7. Jenkins service 활성화(부팅 시 자동 시작)</h4>
+<h4 id="67-jenkins-service-활성화부팅-시-자동-시작">6.7. jenkins service 활성화(부팅 시 자동 시작)</h4>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl <span class="nb">enable </span>jenkins.service
 </code></pre></div></div>
 
-<h4 id="68-jenkins-service-비활성화">6.8. Jenkins service 비활성화</h4>
+<h4 id="68-jenkins-service-비활성화">6.8. jenkins service 비활성화</h4>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl disable jenkins.service
 </code></pre></div></div>
 
-<h4 id="69-jenkins-service-및-관련-프로세스-모두-중지">6.9. Jenkins service 및 관련 프로세스 모두 중지</h4>
+<h4 id="69-jenkins-service-및-관련-프로세스-모두-중지">6.9. jenkins service 및 관련 프로세스 모두 중지</h4>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl <span class="nb">kill </span>jenkins.service
 </code></pre></div></div>
 
-<h3 id="7-웹브라우저로-jenkins-접속">7. 웹브라우저로 Jenkins 접속</h3>
+<h3 id="7-웹브라우저로-jenkins-접속">7. 웹브라우저로 jenkins 접속</h3>
 <ul>
   <li>http://[MY-IP]:8080</li>
 </ul>
 
 <h2 id="마무리conclusion">마무리(CONCLUSION)</h2>
-<p>ubuntu 환경에 package로 Jenkins 설치를 완료했습니다. <br />
-Jenkins 초기 설정은 <a href="https://lindarex.github.io/jenkins/jenkins-initial-setting/" target="\_blank">Jenkins 초기 설정하기</a> 포스트를 참고하시기 바랍니다. <br />
-다음 포스트에서는 ubuntu 환경에서 war 파일을 내려받아 Java 명령어로 Jenkins를 실행하는 방법을 소개하겠습니다.</p>
+<p>ubuntu 환경에 package로 jenkins 설치를 완료했습니다. <br />
+jenkins 초기 설정은 <a href="https://lindarex.github.io/jenkins/jenkins-initial-setting/" target="\_blank">젠킨스(Jenkins) 초기 설정하기</a> 포스트를 참고하시기 바랍니다. <br />
+다음 포스트에서는 <a href="https://lindarex.github.io/jenkins/ubuntu-jenkins-war-installation/" target="\_blank">우분투(Ubuntu) 환경에 WAR 파일로 젠킨스(Jenkins) 설치하기</a>를 소개하겠습니다.</p>
 
 <h2 id="참고references">참고(REFERENCES)</h2>
 <ul>
@@ -660,6 +660,34 @@ Jenkins 초기 설정은 <a href="https://lindarex.github.io/jenkins/jenkins-ini
     
     <h2 class="archive__item-title" itemprop="headline">
       
+        <a href="/jenkins/ubuntu-jenkins-war-installation/" rel="permalink">우분투(Ubuntu) 환경에 WAR 파일로 젠킨스(Jenkins) 설치하기
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">젠킨스(Jenkins)를 설치하는 방법은 다양합니다. 패키지(package)로 jenkins를 설치하는 방법은 우분투(Ubuntu) 환경에 패키지(Package)로 젠킨스(Jenkins) 설치하기 포스트를 참고하시기 바랍니다. 
+이 포스트에서는 우분투(ubuntu) 환경에서 WAR...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
         <a href="/ubuntu/ubuntu-initial-setting/" rel="permalink">우분투(Ubuntu) 서버(Server) 초기 설정하기
 </a>
       
@@ -725,34 +753,6 @@ Jenkins 초기 설정은 <a href="https://lindarex.github.io/jenkins/jenkins-ini
     <p class="archive__item-excerpt" itemprop="description">이 포스트에서는 클라우드 파운드리(Cloud Foundry) 프로젝트(projects)를 간단히 소개합니다.
 
 </p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src=
-          
-            "/assets/images/LindaRex_LOGO.jpg"
-          
-          alt="">
-      </div>
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/cfar/cfar-introduction/" rel="permalink">클라우드 파운드리(Cloud Foundry, CFAR) 소개
-</a>
-      
-    </h2>
-    
-    <p class="archive__item-excerpt" itemprop="description">클라우드 파운드리(Cloud Foundry)는 과거에 PaaS(platform as a service)와 재단을 가리키는 용어였지만, 현재는 PaaS를 뜻하는 Cloud Foundry는 CFAR(cloud foundry application runtime)로 대체되었습니다. 
-CF...</p>
   </article>
 </div>
 

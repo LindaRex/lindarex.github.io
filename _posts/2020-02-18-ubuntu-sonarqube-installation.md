@@ -202,7 +202,7 @@ $ ${LINDAREX_WORKSPACE}/sonarqube/bin/linux-x86-64/sonar.sh status
 
 ## 마무리(CONCLUSION)
 ubuntu 환경에 SonarQube 설치를 완료했습니다. <br />
-다음 포스트에서는 SonarQube 사용 방법과 유용한 플러그인을 소개하겠습니다.
+다음 포스트에서는 SonarQube 사용 방법을 소개하겠습니다.
 
 
 ## 참고(REFERENCES)

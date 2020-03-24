@@ -6,8 +6,8 @@
     <description>오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 LindaRex(린다렉스)의 블로그입니다</description>
     <link>https://lindarex.github.io/</link>
     <atom:link href="https://lindarex.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 19 Mar 2020 15:37:15 +0900</pubDate>
-    <lastBuildDate>Thu, 19 Mar 2020 15:37:15 +0900</lastBuildDate>
+    <pubDate>Tue, 24 Mar 2020 14:08:41 +0900</pubDate>
+    <lastBuildDate>Tue, 24 Mar 2020 14:08:41 +0900</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
@@ -170,7 +170,7 @@ This may also be found at: /home/rex/.jenkins/secrets/initialAdminPassword
 &lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
 &lt;p&gt;ubuntu 환경에 war file로 jenkins 설치를 완료했습니다. &lt;br /&gt;
 jenkins 초기 설정은 &lt;a href=&quot;https://lindarex.github.io/jenkins/jenkins-initial-setting/&quot; target=&quot;\_blank&quot;&gt;젠킨스(Jenkins) 초기 설정하기&lt;/a&gt; 포스트를 참고하시기 바랍니다. &lt;br /&gt;
-다음 포스트에서는 유용한 jenkins 플러그인(plugin)을 소개하겠습니다.&lt;/p&gt;
+다음 포스트에서는 GitHub Webhook을 이용해서 자동으로 jenkins job을 실행(빌드 자동화)하는 방법을 소개하겠습니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;
 &lt;ul&gt;
@@ -3566,7 +3566,7 @@ wrapper.java.command&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/home/rex/work
 
 &lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
 &lt;p&gt;ubuntu 환경에 SonarQube 설치를 완료했습니다. &lt;br /&gt;
-다음 포스트에서는 SonarQube 사용 방법과 유용한 플러그인을 소개하겠습니다.&lt;/p&gt;
+다음 포스트에서는 SonarQube 사용 방법을 소개하겠습니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;
 &lt;ul&gt;
@@ -3885,7 +3885,7 @@ host    all             all             0.0.0.0/0               password
 
 &lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
 &lt;p&gt;Jenkins 설치 후 초기 설정을 완료했습니다. &lt;br /&gt;
-다음 포스트에서는 유용한 Jenkins plugin을 소개하겠습니다.&lt;/p&gt;
+다음 포스트에서는 &lt;a href=&quot;https://lindarex.github.io/jenkins/ubuntu-jenkins-war-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 환경에 WAR 파일로 젠킨스(Jenkins) 설치하기&lt;/a&gt;를 소개하겠습니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;
 &lt;ul&gt;

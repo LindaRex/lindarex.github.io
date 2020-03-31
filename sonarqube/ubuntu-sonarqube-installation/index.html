@@ -16,8 +16,8 @@
 <meta property="og:title" content="우분투(Ubuntu) 환경에 SonarQube 설치하기" />
 <meta name="author" content="Rex" />
 <meta property="og:locale" content="ko_KR" />
-<meta name="description" content="SonarQube는 정적 코드 분석기로 20개 이상의 프로그래밍 언어의 버그와 Code smells, 보안 취약점을 발견하고 자동 리뷰를 수행하여 지속적인 코드 품질 검사를 위한 플랫폼입니다. SonarQube는 LGPL(lesser gnu general public license)로 오픈소스(open source) 소프트웨어이며, 코드 커버리지, 유닛 테스트, 코딩 표준, 중복 코드, 코드 복잡도, 주석, 버그 및 보안 취약점의 보고서를 제공합니다. 또한 Maven, Ant, Gradle, MSBuild 및 CI(Continuous Integration) 도구인 Atlassian Bamboo, Jenkins, Hudson 등과의 연동을 제공합니다. 이 포스트에서는 우분투(ubuntu) 환경에서 SonarQube를 설치하는 방법을 소개합니다." />
-<meta property="og:description" content="SonarQube는 정적 코드 분석기로 20개 이상의 프로그래밍 언어의 버그와 Code smells, 보안 취약점을 발견하고 자동 리뷰를 수행하여 지속적인 코드 품질 검사를 위한 플랫폼입니다. SonarQube는 LGPL(lesser gnu general public license)로 오픈소스(open source) 소프트웨어이며, 코드 커버리지, 유닛 테스트, 코딩 표준, 중복 코드, 코드 복잡도, 주석, 버그 및 보안 취약점의 보고서를 제공합니다. 또한 Maven, Ant, Gradle, MSBuild 및 CI(Continuous Integration) 도구인 Atlassian Bamboo, Jenkins, Hudson 등과의 연동을 제공합니다. 이 포스트에서는 우분투(ubuntu) 환경에서 SonarQube를 설치하는 방법을 소개합니다." />
+<meta name="description" content="SonarQube는 정적 코드 분석기로 20개 이상의 프로그래밍 언어의 버그와 Code smells, 보안 취약점을 발견하고 자동 리뷰를 수행하여 지속적인 코드 품질 검사를 위한 플랫폼입니다. SonarQube는 LGPL(lesser gnu general public license)로 오픈소스(open source) 소프트웨어이며, 코드 커버리지, 유닛 테스트, 코딩 표준, 중복 코드, 코드 복잡도, 주석, 버그 및 보안 취약점의 보고서를 제공합니다. 또한 Maven, Ant, Gradle, MSBuild 및 CI(continuous integration) 도구인 Atlassian Bamboo, Jenkins, Hudson 등과의 연동을 제공합니다. 이 포스트에서는 우분투(ubuntu) 환경에서 SonarQube를 설치하는 방법을 소개합니다." />
+<meta property="og:description" content="SonarQube는 정적 코드 분석기로 20개 이상의 프로그래밍 언어의 버그와 Code smells, 보안 취약점을 발견하고 자동 리뷰를 수행하여 지속적인 코드 품질 검사를 위한 플랫폼입니다. SonarQube는 LGPL(lesser gnu general public license)로 오픈소스(open source) 소프트웨어이며, 코드 커버리지, 유닛 테스트, 코딩 표준, 중복 코드, 코드 복잡도, 주석, 버그 및 보안 취약점의 보고서를 제공합니다. 또한 Maven, Ant, Gradle, MSBuild 및 CI(continuous integration) 도구인 Atlassian Bamboo, Jenkins, Hudson 등과의 연동을 제공합니다. 이 포스트에서는 우분투(ubuntu) 환경에서 SonarQube를 설치하는 방법을 소개합니다." />
 <link rel="canonical" href="https://lindarex.github.io/sonarqube/ubuntu-sonarqube-installation/" />
 <meta property="og:url" content="https://lindarex.github.io/sonarqube/ubuntu-sonarqube-installation/" />
 <meta property="og:site_name" content="LindaRex" />
@@ -29,7 +29,7 @@
 <meta name="twitter:creator" content="@Rex" />
 <meta name="google-site-verification" content="t6VkmqsI15sIx3P1-gh3NYputZtjhDZOTkxhwDaa4Ik" />
 <script type="application/ld+json">
-{"datePublished":"2020-02-18T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/sonarqube/ubuntu-sonarqube-installation/"},"@type":"BlogPosting","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"Rex"},"url":"https://lindarex.github.io/sonarqube/ubuntu-sonarqube-installation/","author":{"@type":"Person","name":"Rex"},"headline":"우분투(Ubuntu) 환경에 SonarQube 설치하기","description":"SonarQube는 정적 코드 분석기로 20개 이상의 프로그래밍 언어의 버그와 Code smells, 보안 취약점을 발견하고 자동 리뷰를 수행하여 지속적인 코드 품질 검사를 위한 플랫폼입니다. SonarQube는 LGPL(lesser gnu general public license)로 오픈소스(open source) 소프트웨어이며, 코드 커버리지, 유닛 테스트, 코딩 표준, 중복 코드, 코드 복잡도, 주석, 버그 및 보안 취약점의 보고서를 제공합니다. 또한 Maven, Ant, Gradle, MSBuild 및 CI(Continuous Integration) 도구인 Atlassian Bamboo, Jenkins, Hudson 등과의 연동을 제공합니다. 이 포스트에서는 우분투(ubuntu) 환경에서 SonarQube를 설치하는 방법을 소개합니다.","dateModified":"2020-02-18T00:00:00+09:00","@context":"https://schema.org"}</script>
+{"datePublished":"2020-02-18T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/sonarqube/ubuntu-sonarqube-installation/"},"@type":"BlogPosting","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"Rex"},"url":"https://lindarex.github.io/sonarqube/ubuntu-sonarqube-installation/","author":{"@type":"Person","name":"Rex"},"headline":"우분투(Ubuntu) 환경에 SonarQube 설치하기","description":"SonarQube는 정적 코드 분석기로 20개 이상의 프로그래밍 언어의 버그와 Code smells, 보안 취약점을 발견하고 자동 리뷰를 수행하여 지속적인 코드 품질 검사를 위한 플랫폼입니다. SonarQube는 LGPL(lesser gnu general public license)로 오픈소스(open source) 소프트웨어이며, 코드 커버리지, 유닛 테스트, 코딩 표준, 중복 코드, 코드 복잡도, 주석, 버그 및 보안 취약점의 보고서를 제공합니다. 또한 Maven, Ant, Gradle, MSBuild 및 CI(continuous integration) 도구인 Atlassian Bamboo, Jenkins, Hudson 등과의 연동을 제공합니다. 이 포스트에서는 우분투(ubuntu) 환경에서 SonarQube를 설치하는 방법을 소개합니다.","dateModified":"2020-02-18T00:00:00+09:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <!-- LINDAREX :: JEKYLL SEO TAG :: END -->
@@ -359,7 +359,7 @@ wcs_do();
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="우분투(Ubuntu) 환경에 SonarQube 설치하기">
-    <meta itemprop="description" content="SonarQube는 정적 코드 분석기로 20개 이상의 프로그래밍 언어의 버그와 Code smells, 보안 취약점을 발견하고 자동 리뷰를 수행하여 지속적인 코드 품질 검사를 위한 플랫폼입니다. SonarQube는 LGPL(lesser gnu general public license)로 오픈소스(open source) 소프트웨어이며, 코드 커버리지, 유닛 테스트, 코딩 표준, 중복 코드, 코드 복잡도, 주석, 버그 및 보안 취약점의 보고서를 제공합니다. 또한 Maven, Ant, Gradle, MSBuild 및 CI(Continuous Integration) 도구인 Atlassian Bamboo, Jenkins, Hudson 등과의 연동을 제공합니다. 이 포스트에서는 우분투(ubuntu) 환경에서 SonarQube를 설치하는 방법을 소개합니다.">
+    <meta itemprop="description" content="SonarQube는 정적 코드 분석기로 20개 이상의 프로그래밍 언어의 버그와 Code smells, 보안 취약점을 발견하고 자동 리뷰를 수행하여 지속적인 코드 품질 검사를 위한 플랫폼입니다. SonarQube는 LGPL(lesser gnu general public license)로 오픈소스(open source) 소프트웨어이며, 코드 커버리지, 유닛 테스트, 코딩 표준, 중복 코드, 코드 복잡도, 주석, 버그 및 보안 취약점의 보고서를 제공합니다. 또한 Maven, Ant, Gradle, MSBuild 및 CI(continuous integration) 도구인 Atlassian Bamboo, Jenkins, Hudson 등과의 연동을 제공합니다. 이 포스트에서는 우분투(ubuntu) 환경에서 SonarQube를 설치하는 방법을 소개합니다.">
     <meta itemprop="datePublished" content="2020-02-18T00:00:00+09:00">
     
 
@@ -400,7 +400,7 @@ wcs_do();
         
         <p>SonarQube는 정적 코드 분석기로 20개 이상의 프로그래밍 언어의 버그와 Code smells, 보안 취약점을 발견하고 자동 리뷰를 수행하여 지속적인 코드 품질 검사를 위한 플랫폼입니다. <br />
 SonarQube는 LGPL(lesser gnu general public license)로 오픈소스(open source) 소프트웨어이며, 코드 커버리지, 유닛 테스트, 코딩 표준, 중복 코드, 코드 복잡도, 주석, 버그 및 보안 취약점의 보고서를 제공합니다. <br />
-또한 Maven, Ant, Gradle, MSBuild 및 CI(Continuous Integration) 도구인 Atlassian Bamboo, Jenkins, Hudson 등과의 연동을 제공합니다. <br />
+또한 Maven, Ant, Gradle, MSBuild 및 CI(continuous integration) 도구인 Atlassian Bamboo, Jenkins, Hudson 등과의 연동을 제공합니다. <br />
 이 포스트에서는 우분투(ubuntu) 환경에서 SonarQube를 설치하는 방법을 소개합니다.</p>
 
 <h2 id="선행조건prerequisite">선행조건(PREREQUISITE)</h2>
@@ -596,7 +596,10 @@ wrapper.java.command<span class="o">=</span>/home/rex/workspace/tool/java11/bin/
 
 <h2 id="마무리conclusion">마무리(CONCLUSION)</h2>
 <p>ubuntu 환경에 SonarQube 설치를 완료했습니다. <br />
-다음 포스트에서는 SonarQube 사용 방법을 소개하겠습니다.</p>
+하지만, SonarQube 하나로는 아무것도 할 수 없습니다. <br />
+SonarQube를 활용하기 위해서는 로컬 환경에 설정을 하거나 CI와 연동을 해야 합니다. <br />
+대부분 Jenkins 등의 CI, GitHub 등의 버전 관리(version control) 시스템과 연동하여 SonarQube Scanner를 통해 소스 코드를 분석합니다. <br />
+더 자세한 내용은 아래 참고 페이지를 확인해 주시기 바랍니다.</p>
 
 <h2 id="참고references">참고(REFERENCES)</h2>
 <ul>

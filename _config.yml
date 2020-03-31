@@ -21,7 +21,7 @@ title                    : "LindaRex"
 title_separator          : "|"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "LindaRex"
-description              : "오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 LindaRex(린다렉스)의 블로그입니다"
+description              : "오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 블로그입니다 | It shares technologies such as open source software, cloud computing, PaaS and container platforms"
 url                      : "https://lindarex.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "lindarex/lindarex.github.io" # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
@@ -108,9 +108,9 @@ analytics:
 
 # Site Author
 author:
-  name             : "LindaRex"
+  name             : "Rex"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "Cloud and Full stack developer"
+  bio              : "Cloud engineer and full stack developer"
   location         : "Seoul, Republic of Korea"
   email            :
   links:
@@ -183,7 +183,6 @@ exclude:
   - package.json
   - package-lock.json
   - Rakefile
-  - README
   - tmp
   - /docs # ignore Minimal Mistakes /docs
   - /test # ignore Minimal Mistakes /test

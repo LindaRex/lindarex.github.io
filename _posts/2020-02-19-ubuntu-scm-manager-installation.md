@@ -8,7 +8,7 @@ tags:
 ---
 
 
-SCM Manager는 사설 버전관리 레파지토리(private source code and version control repository)로 BSD(berkeley software distribution) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. <br />
+SCM Manager는 사설 버전 관리 레파지토리(private source code and version control repository)로 BSD(berkeley software distribution) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. <br />
 SCM Manager는 Git과 Mercurial, Subversion을 지원하고, 다양한 플러그인과 RESTFul API를 제공합니다. <br />
 SCM Manager 설치는 Standalone 방식(tar, RPM, DEB package)과 WebApp(war) 방식을 제공하는데, 이 포스트에서는 우분투(ubuntu) 환경에서 Standalone 방식으로 SCM Manager를 설치하는 방법을 소개합니다.
 

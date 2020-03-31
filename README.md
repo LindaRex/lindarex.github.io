@@ -1,6 +1,6 @@
-# [lindarex.github.io](https://lindarex.github.io/){: target="\_blank"}
+# [lindarex.github.io](https://lindarex.github.io/)
 
-#### Rex | Cloud and full stack developer
+### Rex | Cloud and full stack developer
 ##### Seoul, Republic of Korea
 
 - 오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 블로그입니다.

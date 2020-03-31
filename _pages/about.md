@@ -7,7 +7,7 @@ author_profile: false
 
 ![LindaRex_LOGO]
 
-### *Cloud engineer & Full stack developer* ###
+### *Cloud engineer & full stack developer* ###
 
 ## WORK EXPERIENCE :: ##
 ---
@@ -282,6 +282,7 @@ author_profile: false
 
 ## CONTACT :: ##
 ---
+- [lindarex.dev@gmail.com](#)
 - [rexx4314@gmail.com](#)
 
 

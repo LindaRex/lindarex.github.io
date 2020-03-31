@@ -14,7 +14,7 @@
 <title>우분투(Ubuntu) 환경에 iptables 설정하기 | LindaRex</title>
 <meta name="generator" content="Jekyll v3.8.5" />
 <meta property="og:title" content="우분투(Ubuntu) 환경에 iptables 설정하기" />
-<meta name="author" content="LindaRex" />
+<meta name="author" content="Rex" />
 <meta property="og:locale" content="ko_KR" />
 <meta name="description" content="iptables은 방화벽(firewall) 구성이나 NAT(network address translation)에 사용되는데, 리눅스(linux) 커널(kernel) firewall이 제공하는 테이블(table)과 체인(chain), 규칙(rule)을 시스템 관리자가 구성합니다. 각각 다른 kernel 모듈(module)과 프로그램들은 다른 프로토콜(protocol)을 위해 사용되는데, iptables는 IPv4에, ip6tables는 IPv6에, arptables는 ARP에, ebtables는 이더넷(ethernet) 프레임에 적용됩니다. linux 시스템(system)에서 iptables는 /usr/sbin/iptables에 설치되며, iptables의 후속 버전은 nftables입니다. 이 포스트에서는 ubuntu 환경에서 iptables를 설정하는 방법을 소개합니다." />
 <meta property="og:description" content="iptables은 방화벽(firewall) 구성이나 NAT(network address translation)에 사용되는데, 리눅스(linux) 커널(kernel) firewall이 제공하는 테이블(table)과 체인(chain), 규칙(rule)을 시스템 관리자가 구성합니다. 각각 다른 kernel 모듈(module)과 프로그램들은 다른 프로토콜(protocol)을 위해 사용되는데, iptables는 IPv4에, ip6tables는 IPv6에, arptables는 ARP에, ebtables는 이더넷(ethernet) 프레임에 적용됩니다. linux 시스템(system)에서 iptables는 /usr/sbin/iptables에 설치되며, iptables의 후속 버전은 nftables입니다. 이 포스트에서는 ubuntu 환경에서 iptables를 설정하는 방법을 소개합니다." />
@@ -26,10 +26,10 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="우분투(Ubuntu) 환경에 iptables 설정하기" />
 <meta name="twitter:site" content="@" />
-<meta name="twitter:creator" content="@LindaRex" />
+<meta name="twitter:creator" content="@Rex" />
 <meta name="google-site-verification" content="t6VkmqsI15sIx3P1-gh3NYputZtjhDZOTkxhwDaa4Ik" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/ubuntu/ubuntu-iptables-setting/"},"@type":"BlogPosting","url":"https://lindarex.github.io/ubuntu/ubuntu-iptables-setting/","headline":"우분투(Ubuntu) 환경에 iptables 설정하기","dateModified":"2020-03-02T00:00:00+09:00","datePublished":"2020-03-02T00:00:00+09:00","author":{"@type":"Person","name":"LindaRex"},"description":"iptables은 방화벽(firewall) 구성이나 NAT(network address translation)에 사용되는데, 리눅스(linux) 커널(kernel) firewall이 제공하는 테이블(table)과 체인(chain), 규칙(rule)을 시스템 관리자가 구성합니다. 각각 다른 kernel 모듈(module)과 프로그램들은 다른 프로토콜(protocol)을 위해 사용되는데, iptables는 IPv4에, ip6tables는 IPv6에, arptables는 ARP에, ebtables는 이더넷(ethernet) 프레임에 적용됩니다. linux 시스템(system)에서 iptables는 /usr/sbin/iptables에 설치되며, iptables의 후속 버전은 nftables입니다. 이 포스트에서는 ubuntu 환경에서 iptables를 설정하는 방법을 소개합니다.","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"LindaRex"},"@context":"https://schema.org"}</script>
+{"datePublished":"2020-03-02T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/ubuntu/ubuntu-iptables-setting/"},"@type":"BlogPosting","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"Rex"},"url":"https://lindarex.github.io/ubuntu/ubuntu-iptables-setting/","author":{"@type":"Person","name":"Rex"},"headline":"우분투(Ubuntu) 환경에 iptables 설정하기","description":"iptables은 방화벽(firewall) 구성이나 NAT(network address translation)에 사용되는데, 리눅스(linux) 커널(kernel) firewall이 제공하는 테이블(table)과 체인(chain), 규칙(rule)을 시스템 관리자가 구성합니다. 각각 다른 kernel 모듈(module)과 프로그램들은 다른 프로토콜(protocol)을 위해 사용되는데, iptables는 IPv4에, ip6tables는 IPv6에, arptables는 ARP에, ebtables는 이더넷(ethernet) 프레임에 적용됩니다. linux 시스템(system)에서 iptables는 /usr/sbin/iptables에 설치되며, iptables의 후속 버전은 nftables입니다. 이 포스트에서는 ubuntu 환경에서 iptables를 설정하는 방법을 소개합니다.","dateModified":"2020-03-02T00:00:00+09:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <!-- LINDAREX :: JEKYLL SEO TAG :: END -->

@@ -57,7 +57,7 @@ $ sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > /etc/apt/s
 
 ### 3. apt install 명령어로 jenkins 설치
 ```console
-$ sudo apt update -y && sudo apt install jenkins -y  
+$ sudo apt update && sudo apt install jenkins -y  
 ```
 
 ### 4. (선택사항) Java 경로 설정

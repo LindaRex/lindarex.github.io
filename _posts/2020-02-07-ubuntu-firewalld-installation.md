@@ -36,7 +36,7 @@ firewalld는 linux 커널 netfilter 프레임워크의 프런트 엔드 역할�
 ## 내용(CONTENTS)
 ### 1. apt 명령어로 firewalld 설치
 ```console
-$ sudo apt update -y && sudo apt install firewalld -y
+$ sudo apt update && sudo apt install firewalld -y
 ```
 
 ### 2. firewalld 설치 확인

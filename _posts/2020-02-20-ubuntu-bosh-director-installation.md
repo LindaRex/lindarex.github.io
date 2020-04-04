@@ -80,14 +80,14 @@ $ mkdir -p ${LINDAREX_BOSH_WORKSPACE}
 > ubuntu 18.04 (Bionic)
 
 ```console
-$ sudo apt update -y
+$ sudo apt update
 $ sudo apt install -y build-essential zlibc zlib1g-dev ruby ruby-dev openssl libxslt1-dev libxml2-dev libssl-dev libreadline7 libreadline-dev libyaml-dev libsqlite3-dev sqlite3
 ```
 
 > ubuntu 16.04 (Xenial) 또는 ubuntu 14.04 (Trusty)
 
 ```console
-$ sudo apt update -y
+$ sudo apt update
 $ sudo apt install -y libcurl4-openssl-dev gcc g++ build-essential zlibc zlib1g-dev ruby ruby-dev openssl libxslt-dev libxml2-dev libssl-dev libreadline6 libreadline6-dev libyaml-dev libsqlite3-dev sqlite3
 ```
 
@@ -136,7 +136,7 @@ $ echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /et
 
 #### 2.3. apt install 명령어로 CF CLI 설치
 ```console
-$ sudo apt update -y && sudo apt install cf-cli -y
+$ sudo apt update && sudo apt install cf-cli -y
 ```
 
 #### 2.4. CF CLI 설치 확인

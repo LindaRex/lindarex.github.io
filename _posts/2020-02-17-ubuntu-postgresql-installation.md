@@ -51,7 +51,7 @@ $ sudo wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | sudo ap
 
 ### 3. apt install 명령어로 PostgreSQL 설치
 ```console
-$ sudo apt update -y && sudo apt install postgresql postgresql-contrib -y
+$ sudo apt update && sudo apt install postgresql postgresql-contrib -y
 ```
 
 ### 4. PostgreSQL 설정

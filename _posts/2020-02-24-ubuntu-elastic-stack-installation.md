@@ -64,7 +64,7 @@ $ wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key a
 
 #### 1.3. apt install 명령어로 Elasticsearch 설치
 ```console
-$ sudo apt update -y && sudo apt install elasticsearch -y
+$ sudo apt update && sudo apt install elasticsearch -y
 ```
 
 #### 1.4. systemctl 명령어로 Elasticsearch 서비스(service) 관리

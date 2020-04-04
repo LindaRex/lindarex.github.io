@@ -40,7 +40,7 @@ JDK는 2개로 나뉘는데, 하나는 BCL(Oracle Binary Code License)의 Oracle
 ## 내용(CONTENTS)
 ### 1. apt 명령어로 OpenJDK 설치
 ```console
-$ sudo apt update -y && sudo apt install openjdk-8-jdk -y
+$ sudo apt update && sudo apt install openjdk-8-jdk -y
 ```
 
 ### 2. OpenJDK 설치 확인
@@ -114,6 +114,7 @@ $ sudo apt remove --auto-remove openjdk*
 $ sudo apt purge openjdk*
 $ sudo apt purge --auto-remove openjdk*
 ```
+
 
 ## 마무리(CONCLUSION)
 ubuntu 환경에 package로 OpenJDK 설치를 완료했습니다. <br />

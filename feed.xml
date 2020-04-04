@@ -6,9 +6,127 @@
     <description>오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 블로그입니다 | It shares technologies such as open source software, cloud computing, PaaS and container platforms</description>
     <link>https://lindarex.github.io/</link>
     <atom:link href="https://lindarex.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 31 Mar 2020 16:42:20 +0900</pubDate>
-    <lastBuildDate>Tue, 31 Mar 2020 16:42:20 +0900</lastBuildDate>
+    <pubDate>Sat, 04 Apr 2020 22:05:28 +0900</pubDate>
+    <lastBuildDate>Sat, 04 Apr 2020 22:05:28 +0900</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
+    
+      <item>
+        <title>우분투(Ubuntu) 환경에 패키지(Package)로 BIND(BIND9) 설치하기</title>
+        <description>&lt;p&gt;BIND(bind9, berkeley internet name domain)는 안정성과 고품질로 유닉스(unix) 및 리눅스(linux)에서 널리 사용되며, 모든 기능을 갖춘 매우 유연한 DNS(dns, domain name server) 시스템(system)입니다. &lt;br /&gt;
+bind9은 MPL(mozilla public license) 2.0 라이선스(license)가 적용되는 오픈소스(open source) 소프트웨어이며, 인터넷에 dns 정보를 게시 할 수 있을 뿐만 아니라 사용자의 dns 쿼리를 처리할 수 있습니다.  &lt;br /&gt;
+bind9은 내부 dns 서버(server)를 설정하여, server가 개인 호스트(host) 이름과 개인 IP 주소(address)를 확인하는 데 사용합니다. &lt;br /&gt;
+이를 통해 내부 host 이름과 개인 IP address를 중앙에서 관리할 수 ​​있으며, 이는 사용자 환경이 몇 개 이상의 host로 확장될 때 필요합니다. &lt;br /&gt;
+이 포스트에서는 우분투(ubuntu) 환경에서 package로 bind9을 설치하는 방법을 소개합니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;server 구성 및 인프라(Infrastructure) 관리 시에 중요한 부분은 dns를 설정하여 네트워크(network) 인터페이스와 IP address를 쉽게 검색할 방법을 유지하는 것입니다. &lt;br /&gt;
+IP address 대신 FQDN(fully qualified domain name)을 사용하여 network address를 지정하면, 애플리케이션(application) 및 서비스(service) 구성이 쉬워지고 구성 파일의 유지 관리가 향상됩니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;선행조건prerequisite&quot;&gt;선행조건(PREREQUISITE)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;ubuntu 환경이 필요합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;ubuntu 설치 방법은 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1604-installation/&quot; target=&quot;\_blank&quot;&gt;VMware workstation에 ubuntu server 16.04 설치하기&lt;/a&gt; 또는 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1804-installation/&quot; target=&quot;\_blank&quot;&gt;VMware workstation에 ubuntu server 18.04 설치하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;테스트-환경test-environment&quot;&gt;테스트 환경(TEST ENVIRONMENT)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;VMware® Workstation 15 Pro (15.5.2 build-15785246)&lt;/li&gt;
+  &lt;li&gt;Ubuntu 18.04.4 LTS (Bionic Beaver) Server (64-bit)&lt;/li&gt;
+  &lt;li&gt;BIND 9.11.3&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;요약summary&quot;&gt;요약(SUMMARY)&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;apt 명령어로 bind9 설치&lt;/li&gt;
+  &lt;li&gt;bind9 설치 확인&lt;/li&gt;
+  &lt;li&gt;(선택사항) apt 명령어로 bind9 삭제&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;내용contents&quot;&gt;내용(CONTENTS)&lt;/h2&gt;
+&lt;h3 id=&quot;1-apt-명령어로-bind9-설치&quot;&gt;1. apt 명령어로 bind9 설치&lt;/h3&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt update &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;bind9 bind9utils bind9-doc &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;2-bind9-설치-확인&quot;&gt;2. bind9 설치 확인&lt;/h3&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;named &lt;span class=&quot;nt&quot;&gt;-V&lt;/span&gt;
+&lt;span class=&quot;gp&quot;&gt;BIND 9.11.3-1ubuntu1.11-Ubuntu (Extended Support Version) &amp;lt;id:a375815&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;running on Linux x86_64 4.15.0-91-generic #&lt;/span&gt;92-Ubuntu SMP Fri Feb 28 11:09:48 UTC 2020
+&lt;span class=&quot;go&quot;&gt;built by make with '--build=x86_64-linux-gnu' '--prefix=/usr' '--includedir=/usr/include' '--mandir=/usr/share/man' '--infodir=/usr/share/info' '--sysconfdir=/etc' '--localstatedir=/var' '--disable-silent-rules' '--libdir=/usr/lib/x86_64-linux-gnu' '--libexecdir=/usr/lib/x86_64-linux-gnu' '--disable-maintainer-mode' '--disable-dependency-tracking' '--libdir=/usr/lib/x86_64-linux-gnu' '--sysconfdir=/etc/bind' '--with-python=python3' '--localstatedir=/' '--enable-threads' '--enable-largefile' '--with-libtool' '--enable-shared' '--enable-static' '--with-gost=no' '--with-openssl=/usr' '--with-gssapi=/usr' '--with-libjson=/usr' '--without-lmdb' '--with-gnu-ld' '--with-geoip=/usr' '--with-atf=no' '--enable-ipv6' '--enable-rrl' '--enable-filter-aaaa' '--enable-native-pkcs11' '--with-pkcs11=/usr/lib/softhsm/libsofthsm2.so' '--with-randomdev=/dev/urandom' '--with-eddsa=no' 'build_alias=x86_64-linux-gnu''CFLAGS=-g -O2 -fdebug-prefix-map=/build/bind9-uW3Pyl/bind9-9.11.3+dfsg=. -fstack-protector-strong -Wformat -Werror=format-security -fno-strict-aliasing -fno-delete-null-pointer-checks -DNO_VERSION_DATE -DDIG_SIGCHASE' 'LDFLAGS=-Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,now' 'CPPFLAGS=-Wdate-time -D_FORTIFY_SOURCE=2'
+compiled by GCC 7.4.0
+compiled with OpenSSL version: OpenSSL 1.1.1  11 Sep 2018
+linked to OpenSSL version: OpenSSL 1.1.1  11 Sep 2018
+compiled with libxml2 version: 2.9.4
+linked to libxml2 version: 20904
+compiled with libjson-c version: 0.12.1
+linked to libjson-c version: 0.12.1
+compiled with zlib version: 1.2.11
+linked to zlib version: 1.2.11
+threads support is enabled
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;systemctl status bind9
+&lt;span class=&quot;go&quot;&gt;● bind9.service - BIND Domain Name Server
+&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;   Loaded: loaded (/lib/systemd/system/bind9.service;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;enabled&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; vendor preset: enabled&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;gp&quot;&gt;   Active: active (running) since Sat 2020-04-03 12:00:48 UTC;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;15min ago
+&lt;span class=&quot;go&quot;&gt;     Docs: man:named(8)
+ Main PID: 923 (named)
+    Tasks: 4 (limit: 1080)
+   CGroup: /system.slice/bind9.service
+           └─923 /usr/sbin/named -f -u bind
+&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;...
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;3-선택사항-apt-명령어로-bind9-삭제&quot;&gt;3. (선택사항) apt 명령어로 bind9 삭제&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;’–auto-remove’ 옵션을 추가하면, 사용하지 않는 관련 package를 모두 삭제합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;31-apt-remove-명령어로-bind9-삭제&quot;&gt;3.1. apt remove 명령어로 bind9 삭제&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;설정 파일을 유지하며 bind9을 삭제합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt remove bind9&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
+&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt remove &lt;span class=&quot;nt&quot;&gt;--auto-remove&lt;/span&gt; bind9&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;32-apt-purge-명령어로-bind9-삭제&quot;&gt;3.2. apt purge 명령어로 bind9 삭제&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;설정 파일과 함께 bind9을 삭제합니다. (단, 사용자 홈 디렉터리의 설정 파일은 유지됩니다.)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt purge bind9&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
+&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt purge &lt;span class=&quot;nt&quot;&gt;--auto-remove&lt;/span&gt; bind9&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
+&lt;p&gt;ubuntu 환경에 package로 bind9 설치를 완료했습니다. &lt;br /&gt;
+다음 포스트에서는 bind9을 설정하는 방법을 소개하겠습니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.isc.org/bind/&quot; target=&quot;\_blank&quot;&gt;https://www.isc.org/bind/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.linuxbabe.com/ubuntu/set-up-authoritative-dns-server-ubuntu-18-04-bind9&quot; target=&quot;\_blank&quot;&gt;https://www.linuxbabe.com/ubuntu/set-up-authoritative-dns-server-ubuntu-18-04-bind9&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.digitalocean.com/community/tutorials/how-to-configure-bind-as-a-private-network-dns-server-on-ubuntu-18-04&quot; target=&quot;\_blank&quot;&gt;https://www.digitalocean.com/community/tutorials/how-to-configure-bind-as-a-private-network-dns-server-on-ubuntu-18-04&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.linuxtechi.com/install-configure-bind-9-dns-server-ubuntu-debian/&quot; target=&quot;\_blank&quot;&gt;https://www.linuxtechi.com/install-configure-bind-9-dns-server-ubuntu-debian/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Fri, 03 Apr 2020 00:00:00 +0900</pubDate>
+        <link>https://lindarex.github.io/bind9/ubuntu-bind9-installation/</link>
+        <guid isPermaLink="true">https://lindarex.github.io/bind9/ubuntu-bind9-installation/</guid>
+        
+        <category>bind9</category>
+        
+        <category>ubuntu</category>
+        
+        
+        <category>bind9</category>
+        
+      </item>
     
       <item>
         <title>우분투(Ubuntu) 환경에 WAR 파일로 젠킨스(Jenkins) 설치하기</title>
@@ -1961,7 +2079,7 @@ ELK Stack은 Elasticsearch, Logstash, Kibana의 연동으로 텍스트, 숫자, 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h4 id=&quot;13-apt-install-명령어로-elasticsearch-설치&quot;&gt;1.3. apt install 명령어로 Elasticsearch 설치&lt;/h4&gt;
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt update &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;elasticsearch &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt update &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;elasticsearch &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h4 id=&quot;14-systemctl-명령어로-elasticsearch-서비스service-관리&quot;&gt;1.4. systemctl 명령어로 Elasticsearch 서비스(service) 관리&lt;/h4&gt;
@@ -2734,7 +2852,7 @@ BOSH는 Cloud Foundry PaaS(CFAR) 배포를 위해 개발되었지만, 거의 모
   &lt;p&gt;ubuntu 18.04 (Bionic)&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt update &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt update
 &lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; build-essential zlibc zlib1g-dev ruby ruby-dev openssl libxslt1-dev libxml2-dev libssl-dev libreadline7 libreadline-dev libyaml-dev libsqlite3-dev sqlite3
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -2742,7 +2860,7 @@ BOSH는 Cloud Foundry PaaS(CFAR) 배포를 위해 개발되었지만, 거의 모
   &lt;p&gt;ubuntu 16.04 (Xenial) 또는 ubuntu 14.04 (Trusty)&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt update &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt update
 &lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; libcurl4-openssl-dev gcc g++ build-essential zlibc zlib1g-dev ruby ruby-dev openssl libxslt-dev libxml2-dev libssl-dev libreadline6 libreadline6-dev libyaml-dev libsqlite3-dev sqlite3
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -2789,7 +2907,7 @@ Succeeded
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h4 id=&quot;23-apt-install-명령어로-cf-cli-설치&quot;&gt;2.3. apt install 명령어로 CF CLI 설치&lt;/h4&gt;
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt update &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;cf-cli &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt update &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;cf-cli &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h4 id=&quot;24-cf-cli-설치-확인&quot;&gt;2.4. CF CLI 설치 확인&lt;/h4&gt;
@@ -3642,7 +3760,7 @@ macOS 서버의 경우 PostgreSQL이 기본 데이터베이스(database)이며, 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;3-apt-install-명령어로-postgresql-설치&quot;&gt;3. apt install 명령어로 PostgreSQL 설치&lt;/h3&gt;
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt update &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;postgresql postgresql-contrib &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt update &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;postgresql postgresql-contrib &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;4-postgresql-설정&quot;&gt;4. PostgreSQL 설정&lt;/h3&gt;
@@ -3984,7 +4102,7 @@ jenkins는 모든 프로젝트의 빌드(build)와 배포(deploy), 자동화를 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;3-apt-install-명령어로-jenkins-설치&quot;&gt;3. apt install 명령어로 jenkins 설치&lt;/h3&gt;
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt update &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;jenkins &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;  
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt update &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;jenkins &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;  
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;4-선택사항-java-경로-설정&quot;&gt;4. (선택사항) Java 경로 설정&lt;/h3&gt;
@@ -5061,7 +5179,7 @@ firewalld는 linux 커널 netfilter 프레임워크의 프런트 엔드 역할�
 
 &lt;h2 id=&quot;내용contents&quot;&gt;내용(CONTENTS)&lt;/h2&gt;
 &lt;h3 id=&quot;1-apt-명령어로-firewalld-설치&quot;&gt;1. apt 명령어로 firewalld 설치&lt;/h3&gt;
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt update &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;firewalld &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt update &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;firewalld &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;2-firewalld-설치-확인&quot;&gt;2. firewalld 설치 확인&lt;/h3&gt;
@@ -5211,7 +5329,7 @@ JDK는 2개로 나뉘는데, 하나는 BCL(Oracle Binary Code License)의 Oracle
 
 &lt;h2 id=&quot;내용contents&quot;&gt;내용(CONTENTS)&lt;/h2&gt;
 &lt;h3 id=&quot;1-apt-명령어로-openjdk-설치&quot;&gt;1. apt 명령어로 OpenJDK 설치&lt;/h3&gt;
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt update &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;openjdk-8-jdk &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt update &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;openjdk-8-jdk &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;2-openjdk-설치-확인&quot;&gt;2. OpenJDK 설치 확인&lt;/h3&gt;

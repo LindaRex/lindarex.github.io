@@ -22,6 +22,8 @@ sidebar:
         url: /categories/postgresql/
       - title: "ELASTIC STACK"
         url: /categories/elastic-stack/
+      - title: "BIND9"
+        url: /categories/bind9/
   - title: "CLOUD FOUNDRY"
     children:
       - title: "BOSH"

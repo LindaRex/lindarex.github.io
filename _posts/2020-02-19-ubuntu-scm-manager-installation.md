@@ -10,7 +10,7 @@ tags:
 
 SCM Manager는 사설 버전 관리 레파지토리(private source code and version control repository)로 BSD(berkeley software distribution) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. <br />
 SCM Manager는 Git과 Mercurial, Subversion을 지원하고, 다양한 플러그인과 RESTFul API를 제공합니다. <br />
-SCM Manager 설치는 Standalone 방식(tar, RPM, DEB package)과 WebApp(war) 방식을 제공하는데, 이 포스트에서는 우분투(ubuntu) 환경에서 Standalone 방식으로 SCM Manager를 설치하는 방법을 소개합니다.
+SCM Manager 설치는 Standalone 방식(tar, RPM, DEB package)과 WebApp(war) 방식을 제공하는데, 이 포스트에서는 우분투(ubuntu) 환경에서 standalone 방식으로 SCM Manager를 설치하는 방법을 소개합니다.
 
 
 ## 선행조건(PREREQUISITE)
@@ -79,11 +79,17 @@ $ nohup ./scm-server > /dev/null &
 ### 5. 웹브라우저로 SCM Manager 접속
 - http://[MY-IP]:8080
 
+> SCM Manager의 기본 계정은 'scmadmin', 비밀번호도 'scmadmin' 입니다.
+
 
 ## 마무리(CONCLUSION)
-ubuntu 환경에 Standalone 방식으로 SCM Manager 설치를 완료했습니다. <br />
-다음 포스트에서는 SCM Manager 사용 방법을 소개하겠습니다.
+ubuntu 환경에 standalone 방식으로 SCM Manager 설치를 완료했습니다. <br />
+SCM Manager 외에도 GitHub, GitLab, Bitbucket, GitStack 등 다양한 private git 호스팅 서비스(service)가 존재합니다. <br />
+타 service와 비교 시, SCM Manager는 간단히 설치하여 사용 가능하고, 설정하기 쉽습니다. <br />
+또한, git 외에도 svn과 mercurial 서버(server)까지 동시에 사용할 수 있으며, 기존에 사용 중이던 svn server를 그대로 이용할 수 있습니다. <br />
+더 자세한 내용은 아래 참고 페이지를 확인해 주시기 바랍니다.
 
 
 ## 참고(REFERENCES)
+- [https://www.scm-manager.org/](https://www.scm-manager.org/){: target="\_blank"}
 - [https://www.scm-manager.org/download/](https://www.scm-manager.org/download/){: target="\_blank"}

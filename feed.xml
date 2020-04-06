@@ -6,8 +6,8 @@
     <description>오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 블로그입니다 | It shares technologies such as open source software, cloud computing, PaaS and container platforms</description>
     <link>https://lindarex.github.io/</link>
     <atom:link href="https://lindarex.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 04 Apr 2020 22:05:28 +0900</pubDate>
-    <lastBuildDate>Sat, 04 Apr 2020 22:05:28 +0900</lastBuildDate>
+    <pubDate>Mon, 06 Apr 2020 15:32:44 +0900</pubDate>
+    <lastBuildDate>Mon, 06 Apr 2020 15:32:44 +0900</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
@@ -43,6 +43,7 @@ IP address 대신 FQDN(fully qualified domain name)을 사용하여 network addr
 &lt;ol&gt;
   &lt;li&gt;apt 명령어로 bind9 설치&lt;/li&gt;
   &lt;li&gt;bind9 설치 확인&lt;/li&gt;
+  &lt;li&gt;systemctl 명령어로 bind9 서비스 관리&lt;/li&gt;
   &lt;li&gt;(선택사항) apt 명령어로 bind9 삭제&lt;/li&gt;
 &lt;/ol&gt;
 
@@ -68,24 +69,49 @@ linked to zlib version: 1.2.11
 threads support is enabled
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;systemctl status bind9
-&lt;span class=&quot;go&quot;&gt;● bind9.service - BIND Domain Name Server
-&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;   Loaded: loaded (/lib/systemd/system/bind9.service;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;enabled&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; vendor preset: enabled&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;gp&quot;&gt;   Active: active (running) since Sat 2020-04-03 12:00:48 UTC;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;15min ago
-&lt;span class=&quot;go&quot;&gt;     Docs: man:named(8)
- Main PID: 923 (named)
-    Tasks: 4 (limit: 1080)
-   CGroup: /system.slice/bind9.service
-           └─923 /usr/sbin/named -f -u bind
-&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;...
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h3 id=&quot;3-systemctl-명령어로-bind9-서비스service-관리&quot;&gt;3. systemctl 명령어로 bind9 서비스(service) 관리&lt;/h3&gt;
+&lt;h4 id=&quot;31-bind9-service-설정-반영&quot;&gt;3.1. bind9 service 설정 반영&lt;/h4&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl daemon-reload
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;3-선택사항-apt-명령어로-bind9-삭제&quot;&gt;3. (선택사항) apt 명령어로 bind9 삭제&lt;/h3&gt;
+&lt;h4 id=&quot;32-bind9-service-시작&quot;&gt;3.2. bind9 service 시작&lt;/h4&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl start bind9.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;33-bind9-service-중지&quot;&gt;3.3. bind9 service 중지&lt;/h4&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl stop bind9.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;34-bind9-service-재시작&quot;&gt;3.4. bind9 service 재시작&lt;/h4&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl restart bind9.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;35-bind9-service-설정-재적용&quot;&gt;3.5. bind9 service 설정 재적용&lt;/h4&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl reload bind9.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;36-bind9-service-상태-조회&quot;&gt;3.6. bind9 service 상태 조회&lt;/h4&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl status bind9.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;37-bind9-service-활성화부팅-시-자동-시작&quot;&gt;3.7. bind9 service 활성화(부팅 시 자동 시작)&lt;/h4&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;bind9.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;38-bind9-service-비활성화&quot;&gt;3.8. bind9 service 비활성화&lt;/h4&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl disable bind9.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;39-bind9-service-및-관련-프로세스-모두-중지&quot;&gt;3.9. bind9 service 및 관련 프로세스 모두 중지&lt;/h4&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl &lt;span class=&quot;nb&quot;&gt;kill &lt;/span&gt;bind9.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;4-선택사항-apt-명령어로-bind9-삭제&quot;&gt;4. (선택사항) apt 명령어로 bind9 삭제&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;’–auto-remove’ 옵션을 추가하면, 사용하지 않는 관련 package를 모두 삭제합니다.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&quot;31-apt-remove-명령어로-bind9-삭제&quot;&gt;3.1. apt remove 명령어로 bind9 삭제&lt;/h4&gt;
+&lt;h4 id=&quot;41-apt-remove-명령어로-bind9-삭제&quot;&gt;4.1. apt remove 명령어로 bind9 삭제&lt;/h4&gt;
 &lt;ul&gt;
   &lt;li&gt;설정 파일을 유지하며 bind9을 삭제합니다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -94,7 +120,7 @@ threads support is enabled
 &lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt remove &lt;span class=&quot;nt&quot;&gt;--auto-remove&lt;/span&gt; bind9&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h4 id=&quot;32-apt-purge-명령어로-bind9-삭제&quot;&gt;3.2. apt purge 명령어로 bind9 삭제&lt;/h4&gt;
+&lt;h4 id=&quot;42-apt-purge-명령어로-bind9-삭제&quot;&gt;4.2. apt purge 명령어로 bind9 삭제&lt;/h4&gt;
 &lt;ul&gt;
   &lt;li&gt;설정 파일과 함께 bind9을 삭제합니다. (단, 사용자 홈 디렉터리의 설정 파일은 유지됩니다.)&lt;/li&gt;
 &lt;/ul&gt;

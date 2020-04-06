@@ -33,7 +33,8 @@ IP address 대신 FQDN(fully qualified domain name)을 사용하여 network addr
 ## 요약(SUMMARY)
 1. apt 명령어로 bind9 설치
 2. bind9 설치 확인
-3. (선택사항) apt 명령어로 bind9 삭제
+3. systemctl 명령어로 bind9 서비스 관리
+4. (선택사항) apt 명령어로 bind9 삭제
 
 
 ## 내용(CONTENTS)
@@ -60,23 +61,56 @@ linked to zlib version: 1.2.11
 threads support is enabled
 ```
 
+### 3. systemctl 명령어로 bind9 서비스(service) 관리
+#### 3.1. bind9 service 설정 반영
 ```console
-$ systemctl status bind9
-● bind9.service - BIND Domain Name Server
-   Loaded: loaded (/lib/systemd/system/bind9.service; enabled; vendor preset: enabled)
-   Active: active (running) since Sat 2020-04-03 12:00:48 UTC; 15min ago
-     Docs: man:named(8)
- Main PID: 923 (named)
-    Tasks: 4 (limit: 1080)
-   CGroup: /system.slice/bind9.service
-           └─923 /usr/sbin/named -f -u bind
-...
+$ sudo systemctl daemon-reload
 ```
 
-### 3. (선택사항) apt 명령어로 bind9 삭제
+#### 3.2. bind9 service 시작
+```console
+$ sudo systemctl start bind9.service
+```
+
+#### 3.3. bind9 service 중지
+```console
+$ sudo systemctl stop bind9.service
+```
+
+#### 3.4. bind9 service 재시작
+```console
+$ sudo systemctl restart bind9.service
+```
+
+#### 3.5. bind9 service 설정 재적용
+```console
+$ sudo systemctl reload bind9.service
+```
+
+#### 3.6. bind9 service 상태 조회
+```console
+$ sudo systemctl status bind9.service
+```
+
+#### 3.7. bind9 service 활성화(부팅 시 자동 시작)
+```console
+$ sudo systemctl enable bind9.service
+```
+
+#### 3.8. bind9 service 비활성화
+```console
+$ sudo systemctl disable bind9.service
+```
+
+#### 3.9. bind9 service 및 관련 프로세스 모두 중지
+```console
+$ sudo systemctl kill bind9.service
+```
+
+### 4. (선택사항) apt 명령어로 bind9 삭제
 - '--auto-remove' 옵션을 추가하면, 사용하지 않는 관련 package를 모두 삭제합니다.
 
-#### 3.1. apt remove 명령어로 bind9 삭제
+#### 4.1. apt remove 명령어로 bind9 삭제
 - 설정 파일을 유지하며 bind9을 삭제합니다.
 
 ```console
@@ -84,7 +118,7 @@ $ sudo apt remove bind9*
 $ sudo apt remove --auto-remove bind9*
 ```
 
-#### 3.2. apt purge 명령어로 bind9 삭제
+#### 4.2. apt purge 명령어로 bind9 삭제
 - 설정 파일과 함께 bind9을 삭제합니다. (단, 사용자 홈 디렉터리의 설정 파일은 유지됩니다.)
 
 ```console

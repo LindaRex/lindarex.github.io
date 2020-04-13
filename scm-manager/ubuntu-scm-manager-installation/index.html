@@ -16,8 +16,8 @@
 <meta property="og:title" content="우분투(Ubuntu) 환경에 SCM Manager 설치하기" />
 <meta name="author" content="Rex" />
 <meta property="og:locale" content="ko_KR" />
-<meta name="description" content="SCM Manager는 사설 버전 관리 레파지토리(private source code and version control repository)로 BSD(berkeley software distribution) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. SCM Manager는 Git과 Mercurial, Subversion을 지원하고, 다양한 플러그인과 RESTFul API를 제공합니다. SCM Manager 설치는 Standalone 방식(tar, RPM, DEB package)과 WebApp(war) 방식을 제공하는데, 이 포스트에서는 우분투(ubuntu) 환경에서 Standalone 방식으로 SCM Manager를 설치하는 방법을 소개합니다." />
-<meta property="og:description" content="SCM Manager는 사설 버전 관리 레파지토리(private source code and version control repository)로 BSD(berkeley software distribution) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. SCM Manager는 Git과 Mercurial, Subversion을 지원하고, 다양한 플러그인과 RESTFul API를 제공합니다. SCM Manager 설치는 Standalone 방식(tar, RPM, DEB package)과 WebApp(war) 방식을 제공하는데, 이 포스트에서는 우분투(ubuntu) 환경에서 Standalone 방식으로 SCM Manager를 설치하는 방법을 소개합니다." />
+<meta name="description" content="SCM Manager는 사설 버전 관리 레파지토리(private source code and version control repository)로 BSD(berkeley software distribution) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. SCM Manager는 Git과 Mercurial, Subversion을 지원하고, 다양한 플러그인과 RESTFul API를 제공합니다. SCM Manager 설치는 Standalone 방식(tar, RPM, DEB package)과 WebApp(war) 방식을 제공하는데, 이 포스트에서는 우분투(ubuntu) 환경에서 standalone 방식으로 SCM Manager를 설치하는 방법을 소개합니다." />
+<meta property="og:description" content="SCM Manager는 사설 버전 관리 레파지토리(private source code and version control repository)로 BSD(berkeley software distribution) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. SCM Manager는 Git과 Mercurial, Subversion을 지원하고, 다양한 플러그인과 RESTFul API를 제공합니다. SCM Manager 설치는 Standalone 방식(tar, RPM, DEB package)과 WebApp(war) 방식을 제공하는데, 이 포스트에서는 우분투(ubuntu) 환경에서 standalone 방식으로 SCM Manager를 설치하는 방법을 소개합니다." />
 <link rel="canonical" href="https://lindarex.github.io/scm-manager/ubuntu-scm-manager-installation/" />
 <meta property="og:url" content="https://lindarex.github.io/scm-manager/ubuntu-scm-manager-installation/" />
 <meta property="og:site_name" content="LindaRex" />
@@ -29,7 +29,7 @@
 <meta name="twitter:creator" content="@Rex" />
 <meta name="google-site-verification" content="t6VkmqsI15sIx3P1-gh3NYputZtjhDZOTkxhwDaa4Ik" />
 <script type="application/ld+json">
-{"datePublished":"2020-02-19T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/scm-manager/ubuntu-scm-manager-installation/"},"@type":"BlogPosting","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"Rex"},"url":"https://lindarex.github.io/scm-manager/ubuntu-scm-manager-installation/","author":{"@type":"Person","name":"Rex"},"headline":"우분투(Ubuntu) 환경에 SCM Manager 설치하기","description":"SCM Manager는 사설 버전 관리 레파지토리(private source code and version control repository)로 BSD(berkeley software distribution) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. SCM Manager는 Git과 Mercurial, Subversion을 지원하고, 다양한 플러그인과 RESTFul API를 제공합니다. SCM Manager 설치는 Standalone 방식(tar, RPM, DEB package)과 WebApp(war) 방식을 제공하는데, 이 포스트에서는 우분투(ubuntu) 환경에서 Standalone 방식으로 SCM Manager를 설치하는 방법을 소개합니다.","dateModified":"2020-02-19T00:00:00+09:00","@context":"https://schema.org"}</script>
+{"datePublished":"2020-02-19T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/scm-manager/ubuntu-scm-manager-installation/"},"@type":"BlogPosting","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"Rex"},"url":"https://lindarex.github.io/scm-manager/ubuntu-scm-manager-installation/","author":{"@type":"Person","name":"Rex"},"headline":"우분투(Ubuntu) 환경에 SCM Manager 설치하기","description":"SCM Manager는 사설 버전 관리 레파지토리(private source code and version control repository)로 BSD(berkeley software distribution) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. SCM Manager는 Git과 Mercurial, Subversion을 지원하고, 다양한 플러그인과 RESTFul API를 제공합니다. SCM Manager 설치는 Standalone 방식(tar, RPM, DEB package)과 WebApp(war) 방식을 제공하는데, 이 포스트에서는 우분투(ubuntu) 환경에서 standalone 방식으로 SCM Manager를 설치하는 방법을 소개합니다.","dateModified":"2020-02-19T00:00:00+09:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <!-- LINDAREX :: JEKYLL SEO TAG :: END -->
@@ -367,7 +367,7 @@ wcs_do();
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="우분투(Ubuntu) 환경에 SCM Manager 설치하기">
-    <meta itemprop="description" content="SCM Manager는 사설 버전 관리 레파지토리(private source code and version control repository)로 BSD(berkeley software distribution) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. SCM Manager는 Git과 Mercurial, Subversion을 지원하고, 다양한 플러그인과 RESTFul API를 제공합니다. SCM Manager 설치는 Standalone 방식(tar, RPM, DEB package)과 WebApp(war) 방식을 제공하는데, 이 포스트에서는 우분투(ubuntu) 환경에서 Standalone 방식으로 SCM Manager를 설치하는 방법을 소개합니다.">
+    <meta itemprop="description" content="SCM Manager는 사설 버전 관리 레파지토리(private source code and version control repository)로 BSD(berkeley software distribution) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. SCM Manager는 Git과 Mercurial, Subversion을 지원하고, 다양한 플러그인과 RESTFul API를 제공합니다. SCM Manager 설치는 Standalone 방식(tar, RPM, DEB package)과 WebApp(war) 방식을 제공하는데, 이 포스트에서는 우분투(ubuntu) 환경에서 standalone 방식으로 SCM Manager를 설치하는 방법을 소개합니다.">
     <meta itemprop="datePublished" content="2020-02-19T00:00:00+09:00">
     
 
@@ -408,7 +408,7 @@ wcs_do();
         
         <p>SCM Manager는 사설 버전 관리 레파지토리(private source code and version control repository)로 BSD(berkeley software distribution) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. <br />
 SCM Manager는 Git과 Mercurial, Subversion을 지원하고, 다양한 플러그인과 RESTFul API를 제공합니다. <br />
-SCM Manager 설치는 Standalone 방식(tar, RPM, DEB package)과 WebApp(war) 방식을 제공하는데, 이 포스트에서는 우분투(ubuntu) 환경에서 Standalone 방식으로 SCM Manager를 설치하는 방법을 소개합니다.</p>
+SCM Manager 설치는 Standalone 방식(tar, RPM, DEB package)과 WebApp(war) 방식을 제공하는데, 이 포스트에서는 우분투(ubuntu) 환경에서 standalone 방식으로 SCM Manager를 설치하는 방법을 소개합니다.</p>
 
 <h2 id="선행조건prerequisite">선행조건(PREREQUISITE)</h2>
 <ul>
@@ -486,12 +486,20 @@ SCM Manager 설치는 Standalone 방식(tar, RPM, DEB package)과 WebApp(war) �
   <li>http://[MY-IP]:8080</li>
 </ul>
 
+<blockquote>
+  <p>SCM Manager의 기본 계정은 ‘scmadmin’, 비밀번호도 ‘scmadmin’ 입니다.</p>
+</blockquote>
+
 <h2 id="마무리conclusion">마무리(CONCLUSION)</h2>
-<p>ubuntu 환경에 Standalone 방식으로 SCM Manager 설치를 완료했습니다. <br />
-다음 포스트에서는 SCM Manager 사용 방법을 소개하겠습니다.</p>
+<p>ubuntu 환경에 standalone 방식으로 SCM Manager 설치를 완료했습니다. <br />
+SCM Manager 외에도 GitHub, GitLab, Bitbucket, GitStack 등 다양한 private git 호스팅 서비스(service)가 존재합니다. <br />
+타 service와 비교 시, SCM Manager는 간단히 설치하여 사용 가능하고, 설정하기 쉽습니다. <br />
+또한, git 외에도 svn과 mercurial 서버(server)까지 동시에 사용할 수 있으며, 기존에 사용 중이던 svn server를 그대로 이용할 수 있습니다. <br />
+더 자세한 내용은 아래 참고 페이지를 확인해 주시기 바랍니다.</p>
 
 <h2 id="참고references">참고(REFERENCES)</h2>
 <ul>
+  <li><a href="https://www.scm-manager.org/" target="\_blank">https://www.scm-manager.org/</a></li>
   <li><a href="https://www.scm-manager.org/download/" target="\_blank">https://www.scm-manager.org/download/</a></li>
 </ul>
 
@@ -612,6 +620,34 @@ SCM Manager 설치는 Standalone 방식(tar, RPM, DEB package)과 WebApp(war) �
     
     <h2 class="archive__item-title" itemprop="headline">
       
+        <a href="/bind9/ubuntu-bind9-setting/" rel="permalink">우분투(Ubuntu) 환경에 BIND(BIND9) 설정하기
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">BIND(bind9, berkeley internet name domain)는 DNS(domain name system)를 제공하는 서버(server), 즉 네임 서버(name server) 기능을 갖춘 오픈소스(open source) 소프트웨어입니다. 
+bind9 설정은 인프라(...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
         <a href="/bind9/ubuntu-bind9-installation/" rel="permalink">우분투(Ubuntu) 환경에 패키지(Package)로 BIND(BIND9) 설치하기
 </a>
       
@@ -676,34 +712,6 @@ bind9은...</p>
     <p class="archive__item-excerpt" itemprop="description">이 포스트에서는 우분투(ubuntu) 서버(server) 설치 후 초기 설정하는 방법을 소개합니다.
 
 </p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src=
-          
-            "/assets/images/LindaRex_LOGO.jpg"
-          
-          alt="">
-      </div>
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/ubuntu/ubuntu-iptables-setting/" rel="permalink">우분투(Ubuntu) 환경에 iptables 설정하기
-</a>
-      
-    </h2>
-    
-    <p class="archive__item-excerpt" itemprop="description">iptables은 방화벽(firewall) 구성이나 NAT(network address translation)에 사용되는데, 리눅스(linux) 커널(kernel) firewall이 제공하는 테이블(table)과 체인(chain), 규칙(rule)을 시스템 관리자가 구성합니다. 
-...</p>
   </article>
 </div>
 

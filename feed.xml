@@ -6,8 +6,8 @@
     <description>오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 블로그입니다 | It shares technologies such as open source software, cloud computing, PaaS and container platforms</description>
     <link>https://lindarex.github.io/</link>
     <atom:link href="https://lindarex.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 20 Apr 2020 17:28:30 +0900</pubDate>
-    <lastBuildDate>Mon, 20 Apr 2020 17:28:30 +0900</lastBuildDate>
+    <pubDate>Tue, 21 Apr 2020 14:45:48 +0900</pubDate>
+    <lastBuildDate>Tue, 21 Apr 2020 14:45:48 +0900</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
@@ -638,7 +638,7 @@ threads support is enabled
 
 &lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
 &lt;p&gt;ubuntu 환경에 package로 bind9 설치를 완료했습니다. &lt;br /&gt;
-bind9 설정은 &lt;a href=&quot;https://lindarex.github.io/bind9/ubuntu-bind9-setting/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 환경에 BIND(BIND9) 설정하기&lt;/a&gt; 포스트를 참고하시기 바랍니다. &lt;br /&gt;&lt;/p&gt;
+bind9 설정은 &lt;a href=&quot;https://lindarex.github.io/bind9/ubuntu-bind9-setting/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 환경에 BIND(BIND9) 설정하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;
 &lt;ul&gt;
@@ -2243,7 +2243,7 @@ server 가상화, 데스크톱 가상화 등의 기술로 구현되며, 대표�
 &lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
 &lt;p&gt;CFAR에 대한 소개와 architecture, component 등을 살펴보았습니다. &lt;br /&gt;
 CFAR을 비롯해서 Cloud, PaaS, IaaS, SaaS 등의 기술 트랜드는 선택이 아닌 필수가 되었습니다. 대기업 및 금융권 등 현업에서는 Cloud 전환 프로젝트가 빠르게 진행 중이고, 공공 기관에서도 위에 소개한 PaaS-TA를 이용한 다양한 과제가 진행되고 있습니다. CFAR에 대한 더 자세한 내용은 앞으로 다양한 포스트로 소개할 예정입니다. &lt;br /&gt;
-다음 포스트에서는 Cloud Foundry projects를 소개하겠습니다.&lt;/p&gt;
+다음 포스트에서는 &lt;a href=&quot;https://lindarex.github.io/cfar/cloud-foundry-projects-introduction/&quot; target=&quot;\_blank&quot;&gt;클라우드 파운드리(Cloud Foundry) 프로젝트(projects)&lt;/a&gt;를 소개하겠습니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;
 &lt;ul&gt;

@@ -128,7 +128,7 @@ server 가상화, 데스크톱 가상화 등의 기술로 구현되며, 대표�
 ## 마무리(CONCLUSION)
 CFAR에 대한 소개와 architecture, component 등을 살펴보았습니다. <br />
 CFAR을 비롯해서 Cloud, PaaS, IaaS, SaaS 등의 기술 트랜드는 선택이 아닌 필수가 되었습니다. 대기업 및 금융권 등 현업에서는 Cloud 전환 프로젝트가 빠르게 진행 중이고, 공공 기관에서도 위에 소개한 PaaS-TA를 이용한 다양한 과제가 진행되고 있습니다. CFAR에 대한 더 자세한 내용은 앞으로 다양한 포스트로 소개할 예정입니다. <br />
-다음 포스트에서는 Cloud Foundry projects를 소개하겠습니다.
+다음 포스트에서는 [클라우드 파운드리(Cloud Foundry) 프로젝트(projects)](https://lindarex.github.io/cfar/cloud-foundry-projects-introduction/){: target="\_blank"}를 소개하겠습니다.
 
 
 ## 참고(REFERENCES)

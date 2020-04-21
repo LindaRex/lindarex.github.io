@@ -129,7 +129,7 @@ $ sudo apt purge --auto-remove bind9*
 
 ## 마무리(CONCLUSION)
 ubuntu 환경에 package로 bind9 설치를 완료했습니다. <br />
-bind9 설정은 [우분투(Ubuntu) 환경에 BIND(BIND9) 설정하기](https://lindarex.github.io/bind9/ubuntu-bind9-setting/){: target="\_blank"} 포스트를 참고하시기 바랍니다. <br />
+bind9 설정은 [우분투(Ubuntu) 환경에 BIND(BIND9) 설정하기](https://lindarex.github.io/bind9/ubuntu-bind9-setting/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
 
 
 ## 참고(REFERENCES)

@@ -6,8 +6,8 @@
     <description>오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 블로그입니다 | It shares technologies such as open source software, cloud computing, PaaS and container platforms</description>
     <link>https://lindarex.github.io/</link>
     <atom:link href="https://lindarex.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 21 Apr 2020 17:59:00 +0900</pubDate>
-    <lastBuildDate>Tue, 21 Apr 2020 17:59:00 +0900</lastBuildDate>
+    <pubDate>Thu, 23 Apr 2020 14:21:08 +0900</pubDate>
+    <lastBuildDate>Thu, 23 Apr 2020 14:21:08 +0900</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
@@ -2118,15 +2118,53 @@ server 가상화, 데스크톱 가상화 등의 기술로 구현되며, 대표�
 &lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-25-cfar-introduction/lindarex-cfar-architecture-001.png&quot; alt=&quot;lindarex-cfar-architecture-001&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;3-지원되는-런타임-및-프레임워크runtimes-and-frameworks&quot;&gt;3. 지원되는 런타임 및 프레임워크(runtimes and frameworks)&lt;/h3&gt;
-&lt;p&gt;|언어(language)|런타임(runtimes)|프레임워크(frameworks)|
-|—|—|—|
-|자바(Java)|Java 6 ~ 8	|스프링 프레임워크(Spring Frameworks) 3.x, 4.x|
-|루비(Ruby)|Ruby 1.8 ~ 2.2|레일즈(Rails), Sinatra|
-|Node.js|V8 자바스크립트 엔진 (구글 크롬)|Node.js|
-|스칼라(Scala)|Scala 2.x	|플레이(play) 2.x, 리프트(lift)|
-|파이썬(Python)|Python 2.7.10 ~ 3.5.1|Python|
-|PHP|PHP 5.5 ~ 7.0|PHP|
-|Go|Go 1.1.1 ~ 1.4.2|Go|&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;언어(language)&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;런타임(runtimes)&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;프레임워크(frameworks)&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;자바(Java)&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Java 6 ~ 8&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;스프링 프레임워크(Spring Frameworks) 3.x, 4.x&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;루비(Ruby)&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Ruby 1.8 ~ 2.2&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;레일즈(Rails), Sinatra&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Node.js&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;V8 자바스크립트 엔진 (구글 크롬)&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Node.js&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;스칼라(Scala)&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Scala 2.x&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;플레이(play) 2.x, 리프트(lift)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;파이썬(Python)&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Python 2.7.10 ~ 3.5.1&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Python&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;PHP&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;PHP 5.5 ~ 7.0&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;PHP&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Go&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Go 1.1.1 ~ 1.4.2&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Go&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;출처 :: &lt;a href=&quot;https://ko.wikipedia.org/w/index.php?title=%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C_%ED%8C%8C%EC%9A%B4%EB%93%9C%EB%A6%AC&amp;amp;action=edit&amp;amp;section=4&quot; target=&quot;\_blank&quot;&gt;https://ko.wikipedia.org/w/index.php?title=클라우드_파운드리&amp;amp;action=edit&amp;amp;section=4&lt;/a&gt;&lt;/p&gt;

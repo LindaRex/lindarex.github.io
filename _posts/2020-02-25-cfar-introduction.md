@@ -46,15 +46,16 @@ server 가상화, 데스크톱 가상화 등의 기술로 구현되며, 대표�
 ![lindarex-cfar-architecture-001]
 
 ### 3. 지원되는 런타임 및 프레임워크(runtimes and frameworks)
-|언어(language)|런타임(runtimes)|프레임워크(frameworks)|
-|---|---|---|
-|자바(Java)|Java 6 ~ 8	|스프링 프레임워크(Spring Frameworks) 3.x, 4.x|
-|루비(Ruby)|Ruby 1.8 ~ 2.2|레일즈(Rails), Sinatra|
-|Node.js|V8 자바스크립트 엔진 (구글 크롬)|Node.js|
-|스칼라(Scala)|Scala 2.x	|플레이(play) 2.x, 리프트(lift)|
-|파이썬(Python)|Python 2.7.10 ~ 3.5.1|Python|
-|PHP|PHP 5.5 ~ 7.0|PHP|
-|Go|Go 1.1.1 ~ 1.4.2|Go|
+
+| 언어(language) | 런타임(runtimes) | 프레임워크(frameworks) |
+|:--------|:--------|:--------|
+| 자바(Java) | Java 6 ~ 8	 | 스프링 프레임워크(Spring Frameworks) 3.x, 4.x |
+| 루비(Ruby) | Ruby 1.8 ~ 2.2 | 레일즈(Rails), Sinatra |
+| Node.js | V8 자바스크립트 엔진 (구글 크롬) | Node.js |
+| 스칼라(Scala) | Scala 2.x	 | 플레이(play) 2.x, 리프트(lift) |
+| 파이썬(Python) | Python 2.7.10 ~ 3.5.1 | Python |
+| PHP | PHP 5.5 ~ 7.0 | PHP |
+| Go | Go 1.1.1 ~ 1.4.2 | Go |
 
 > 출처 :: [https://ko.wikipedia.org/w/index.php?title=클라우드_파운드리&action=edit&section=4](https://ko.wikipedia.org/w/index.php?title=%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C_%ED%8C%8C%EC%9A%B4%EB%93%9C%EB%A6%AC&action=edit&section=4){: target="\_blank"}
 

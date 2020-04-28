@@ -1,5 +1,5 @@
 ---
-title: "GitHub Webhook으로 Jenkins Job을 실행(자동화)하는 방법"
+title: "GitHub Webhook으로 젠킨스(Jenkins) Job을 실행(자동화)하는 방법"
 categories: 
   - jenkins
 tags: 
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-이 포스트에서는 GitHub Webhook으로 Jenkins Job을 실행(자동화)하는 방법을 소개합니다.
+이 포스트에서는 GitHub Webhook으로 젠킨스(Jenkins) Job을 실행(자동화)하는 방법을 소개합니다.
 
 
 ## 선행조건(PREREQUISITE)

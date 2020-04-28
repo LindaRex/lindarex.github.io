@@ -6,13 +6,13 @@
     <description>오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 블로그입니다 | It shares technologies such as open source software, cloud computing, PaaS and container platforms</description>
     <link>https://lindarex.github.io/</link>
     <atom:link href="https://lindarex.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 28 Apr 2020 20:17:51 +0900</pubDate>
-    <lastBuildDate>Tue, 28 Apr 2020 20:17:51 +0900</lastBuildDate>
+    <pubDate>Tue, 28 Apr 2020 20:22:40 +0900</pubDate>
+    <lastBuildDate>Tue, 28 Apr 2020 20:22:40 +0900</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
-        <title>GitHub Webhook으로 Jenkins Job을 실행(자동화)하는 방법</title>
-        <description>&lt;p&gt;이 포스트에서는 GitHub Webhook으로 Jenkins Job을 실행(자동화)하는 방법을 소개합니다.&lt;/p&gt;
+        <title>GitHub Webhook으로 젠킨스(Jenkins) Job을 실행(자동화)하는 방법</title>
+        <description>&lt;p&gt;이 포스트에서는 GitHub Webhook으로 젠킨스(Jenkins) Job을 실행(자동화)하는 방법을 소개합니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;선행조건prerequisite&quot;&gt;선행조건(PREREQUISITE)&lt;/h2&gt;
 &lt;ul&gt;
@@ -1287,7 +1287,7 @@ This may also be found at: /home/rex/.jenkins/secrets/initialAdminPassword
 &lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
 &lt;p&gt;ubuntu 환경에 war file로 jenkins 설치를 완료했습니다. &lt;br /&gt;
 jenkins 초기 설정은 &lt;a href=&quot;https://lindarex.github.io/jenkins/jenkins-initial-setting/&quot; target=&quot;\_blank&quot;&gt;젠킨스(Jenkins) 초기 설정하기&lt;/a&gt; 포스트를 참고하시기 바랍니다. &lt;br /&gt;
-다음 포스트에서는 &lt;a href=&quot;https://lindarex.github.io/jenkins/jenkins-github-webhook-setting/&quot; target=&quot;\_blank&quot;&gt;GitHub Webhook으로 Jenkins Job을 실행(자동화)하는 방법&lt;/a&gt;을 소개하겠습니다.&lt;/p&gt;
+다음 포스트에서는 &lt;a href=&quot;https://lindarex.github.io/jenkins/jenkins-github-webhook-setting/&quot; target=&quot;\_blank&quot;&gt;GitHub Webhook으로 젠킨스(Jenkins) Job을 실행(자동화)하는 방법&lt;/a&gt;을 소개하겠습니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;
 &lt;ul&gt;

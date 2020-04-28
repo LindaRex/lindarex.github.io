@@ -97,6 +97,10 @@
 <lastmod>2020-04-04T00:00:00+09:00</lastmod>
 </url>
 <url>
+<loc>https://lindarex.github.io/jenkins/jenkins-github-webhook-setting/</loc>
+<lastmod>2020-04-23T00:00:00+09:00</lastmod>
+</url>
+<url>
 <loc>https://lindarex.github.io/about/</loc>
 </url>
 <url>
@@ -282,6 +286,12 @@
 </url>
 <url>
 <loc>https://lindarex.github.io/tags/bind9/</loc>
+</url>
+<url>
+<loc>https://lindarex.github.io/tags/github/</loc>
+</url>
+<url>
+<loc>https://lindarex.github.io/tags/webhook/</loc>
 </url>
 <url>
 <loc>https://lindarex.github.io/categories/ubuntu/</loc>

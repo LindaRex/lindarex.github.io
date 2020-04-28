@@ -147,7 +147,7 @@ This may also be found at: /home/rex/.jenkins/secrets/initialAdminPassword
 ## 마무리(CONCLUSION)
 ubuntu 환경에 war file로 jenkins 설치를 완료했습니다. <br />
 jenkins 초기 설정은 [젠킨스(Jenkins) 초기 설정하기](https://lindarex.github.io/jenkins/jenkins-initial-setting/){: target="\_blank"} 포스트를 참고하시기 바랍니다. <br />
-다음 포스트에서는 GitHub Webhook을 이용해서 자동으로 jenkins job을 실행(빌드 자동화)하는 방법을 소개하겠습니다.
+다음 포스트에서는 [GitHub Webhook으로 Jenkins Job을 실행(자동화)하는 방법](https://lindarex.github.io/jenkins/jenkins-github-webhook-setting/){: target="\_blank"}을 소개하겠습니다.
 
 
 ## 참고(REFERENCES)

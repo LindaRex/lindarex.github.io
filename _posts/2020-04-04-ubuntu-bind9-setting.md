@@ -352,7 +352,7 @@ $ dig -x 10.0.1.32
 - 아래 command는 외부 VM(10.0.1.0/24)에서 실행합니다.
 - 외부 VM에 name server 설정이 필요합니다.
 
-<!-- > name server 설정 방법은 [우분투(Ubuntu) 환경에 네임 서버(name server) 설정하기](https://lindarex.github.io/ubuntu/ubuntu-nameserver-setting/){: target="\_blank"} 포스트를 참고하시기 바랍니다. -->
+> name server 설정 방법은 [우분투(Ubuntu) 환경에 네임 서버(Name server) 설정하기](https://lindarex.github.io/ubuntu/ubuntu-nameserver-setting/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
 
 #### 6.1. nslookup command로 확인
 ```console

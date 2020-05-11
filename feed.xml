@@ -6,8 +6,8 @@
     <description>오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 블로그입니다 | It shares technologies such as open source software, cloud computing, PaaS and container platforms</description>
     <link>https://lindarex.github.io/</link>
     <atom:link href="https://lindarex.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 11 May 2020 18:32:39 +0900</pubDate>
-    <lastBuildDate>Mon, 11 May 2020 18:32:39 +0900</lastBuildDate>
+    <pubDate>Mon, 11 May 2020 18:44:32 +0900</pubDate>
+    <lastBuildDate>Mon, 11 May 2020 18:44:32 +0900</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
@@ -1337,7 +1337,9 @@ ns.lindarex.local.	0	IN	A	10.0.1.32
   &lt;li&gt;외부 VM에 name server 설정이 필요합니다.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;!-- &gt; name server 설정 방법은 [우분투(Ubuntu) 환경에 네임 서버(name server) 설정하기](https://lindarex.github.io/ubuntu/ubuntu-nameserver-setting/){: target=&quot;\_blank&quot;} 포스트를 참고하시기 바랍니다. --&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;name server 설정 방법은 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-nameserver-setting/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 환경에 네임 서버(Name server) 설정하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;h4 id=&quot;61-nslookup-command로-확인&quot;&gt;6.1. nslookup command로 확인&lt;/h4&gt;
 &lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;nslookup ns.lindarex.local

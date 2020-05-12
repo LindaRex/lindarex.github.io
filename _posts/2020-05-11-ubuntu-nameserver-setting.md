@@ -1,10 +1,10 @@
 ---
 title: "우분투(Ubuntu) 환경에 네임 서버(Name server) 설정하기"
 categories: 
-  - Ubuntu
+  - ubuntu
 tags: 
   - nameserver
-  - Ubuntu
+  - ubuntu
 ---
 
 

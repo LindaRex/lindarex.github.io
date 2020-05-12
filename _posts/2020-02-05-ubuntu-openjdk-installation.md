@@ -12,16 +12,16 @@ tags:
 OpenJDK는 Java 애플리케이션(application) 구축을 위한 오픈소스(open source) 기반의 JDK(Java Development Kit)입니다. <br />
 JDK는 JVM(Java Virtual Machine), JRE(Java Runtime Environment)와 함께 Java 프로그래밍에 필요한 핵심 기술 패키지(package)입니다. <br />
 JDK는 2개로 나뉘는데, 하나는 BCL(Oracle Binary Code License)의 Oracle JDK, 하나는 GNU GPL v2(GNU General Public License)의 OpenJDK입니다. <br />
-이 포스트에서는 우분투(ubuntu) 환경에서 package로 OpenJDK를 설치하는 방법을 소개합니다.
+이 포스트에서는 우분투(Ubuntu) 환경에서 package로 OpenJDK를 설치하는 방법을 소개합니다.
 
 
 > Oracle JDK와 OpenJDK에 대한 자세한 정보는 [Oracle JDK와 OpenJDK의 차이점](https://lindarex.github.io/concepts/difference-between-oraclejdk-openjdk/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
 
 
 ## 선행조건(PREREQUISITE)
-- ubuntu 환경이 필요합니다.
+- Ubuntu 환경이 필요합니다.
 
-> ubuntu 설치 방법은 [VMware workstation에 ubuntu server 16.04 설치하기](https://lindarex.github.io/ubuntu/ubuntu-1604-installation/){: target="\_blank"} 또는 [VMware workstation에 ubuntu server 18.04 설치하기](https://lindarex.github.io/ubuntu/ubuntu-1804-installation/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
+> Ubuntu 설치 방법은 [VMware workstation에 Ubuntu server 16.04 설치하기](https://lindarex.github.io/ubuntu/ubuntu-1604-installation/){: target="\_blank"} 또는 [VMware workstation에 Ubuntu server 18.04 설치하기](https://lindarex.github.io/ubuntu/ubuntu-1804-installation/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
 
 
 ## 테스트 환경(TEST ENVIRONMENT)
@@ -33,7 +33,7 @@ JDK는 2개로 나뉘는데, 하나는 BCL(Oracle Binary Code License)의 Oracle
 ## 요약(SUMMARY)
 1. apt 명령어로 OpenJDK 설치
 2. OpenJDK 설치 확인
-3. ubuntu 환경변수에 OpenJDK Java 경로 설정
+3. Ubuntu 환경변수에 OpenJDK Java 경로 설정
 4. (선택사항) apt 명령어로 OpenJDK 삭제
 
 
@@ -51,7 +51,7 @@ OpenJDK Runtime Environment (build 1.8.0_222-8u222-b10-1ubuntu1~18.04.1-b10)
 OpenJDK 64-Bit Server VM (build 25.222-b10, mixed mode)
 ```
 
-### 3. ubuntu 환경변수에 OpenJDK Java 경로(path) 설정
+### 3. Ubuntu 환경변수에 OpenJDK Java 경로(path) 설정
 #### 3.1. 설치된 Java path 확인
 ```console
 $ which java
@@ -117,7 +117,7 @@ $ sudo apt purge --auto-remove openjdk*
 
 
 ## 마무리(CONCLUSION)
-ubuntu 환경에 package로 OpenJDK 설치를 완료했습니다. <br />
+Ubuntu 환경에 package로 OpenJDK 설치를 완료했습니다. <br />
 JDK는 Java 프로그래밍에 필수 요소이며, 상당수의 open source 소프트웨어와 국내 SI(system integration) 프로젝트에서 JDK를 요구합니다. <br />
 정부 발주 프로젝트에 다수를 차지하는 SI 회사가 Java와 스프링 프레임워크(spring framework) 또는 Java와 전자정부표준프레임워크(eGov) 구성을 사용하기 때문에 Java의 인기는 시들지 않고 있습니다. <br />
 Java는 플랫폼에 독립적이고 수많은 개발자와 레퍼런스를 보유하고 있다는 장점과 속도 문제라는 단점을 가진 언어입니다. <br />

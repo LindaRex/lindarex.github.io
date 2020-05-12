@@ -1,0 +1,1162 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.18.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- LINDAREX :: JEKYLL SEO TAG :: BIGIN -->
+<!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>우분투(Ubuntu) 환경에 네임 서버(Name server) 설정하기 | LindaRex</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="우분투(Ubuntu) 환경에 네임 서버(Name server) 설정하기" />
+<meta name="author" content="Rex" />
+<meta property="og:locale" content="ko_KR" />
+<meta name="description" content="네임 서버(name server)는 인터넷에서 도메인 네임 서비스(domain name service)를 제공하는 server를 의미합니다. 도메인으로 IP를 조회할 때, 로컬 캐시 조회, ‘/etc/hosts’ 조회, DNS 조회 순으로 진행되며, 이 중 ‘/etc/hosts’ 설정은 개별적으로 수정해야 하기 때문에 협업 시 불편하고 일괄 관리에 어려움이 있습니다. 이 포스트에서는 Ubuntu 환경에서 위 과정의 DNS 조회를 위한 name server를 설정하는 방법을 소개합니다." />
+<meta property="og:description" content="네임 서버(name server)는 인터넷에서 도메인 네임 서비스(domain name service)를 제공하는 server를 의미합니다. 도메인으로 IP를 조회할 때, 로컬 캐시 조회, ‘/etc/hosts’ 조회, DNS 조회 순으로 진행되며, 이 중 ‘/etc/hosts’ 설정은 개별적으로 수정해야 하기 때문에 협업 시 불편하고 일괄 관리에 어려움이 있습니다. 이 포스트에서는 Ubuntu 환경에서 위 과정의 DNS 조회를 위한 name server를 설정하는 방법을 소개합니다." />
+<link rel="canonical" href="https://lindarex.github.io/ubuntu/ubuntu-nameserver-setting/" />
+<meta property="og:url" content="https://lindarex.github.io/ubuntu/ubuntu-nameserver-setting/" />
+<meta property="og:site_name" content="LindaRex" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-05-11T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="우분투(Ubuntu) 환경에 네임 서버(Name server) 설정하기" />
+<meta name="twitter:site" content="@" />
+<meta name="twitter:creator" content="@Rex" />
+<meta name="google-site-verification" content="t6VkmqsI15sIx3P1-gh3NYputZtjhDZOTkxhwDaa4Ik" />
+<script type="application/ld+json">
+{"datePublished":"2020-05-11T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/ubuntu/ubuntu-nameserver-setting/"},"@type":"BlogPosting","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"Rex"},"url":"https://lindarex.github.io/ubuntu/ubuntu-nameserver-setting/","author":{"@type":"Person","name":"Rex"},"headline":"우분투(Ubuntu) 환경에 네임 서버(Name server) 설정하기","description":"네임 서버(name server)는 인터넷에서 도메인 네임 서비스(domain name service)를 제공하는 server를 의미합니다. 도메인으로 IP를 조회할 때, 로컬 캐시 조회, ‘/etc/hosts’ 조회, DNS 조회 순으로 진행되며, 이 중 ‘/etc/hosts’ 설정은 개별적으로 수정해야 하기 때문에 협업 시 불편하고 일괄 관리에 어려움이 있습니다. 이 포스트에서는 Ubuntu 환경에서 위 과정의 DNS 조회를 위한 name server를 설정하는 방법을 소개합니다.","dateModified":"2020-05-11T00:00:00+09:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<!-- LINDAREX :: JEKYLL SEO TAG :: END -->
+
+<!-- LINDAREX :: NAVER SITE VERIFICATION :: BIGIN -->
+<meta name="naver-site-verification" content="190d9b8e0a63058b72f2031ce67825da7b9038f5">
+<!-- LINDAREX :: NAVER SITE VERIFICATION :: END -->
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="LindaRex Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- LINDAREX :: FAVICON :: BIGIN -->
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico">
+<!-- LINDAREX :: FAVICON :: END -->
+
+<!-- LINDAREX :: FEED :: BIGIN -->
+<!-- <link rel="alternate" type="application/rss+xml" href="https://lindarex.github.io/feed.xml" title="LindaRex Feed"> -->
+<!-- LINDAREX :: FEED :: END -->
+
+<!-- LINDAREX :: GOOGLE ANALYTICS :: BIGIN -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-157973560-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-157973560-1');
+</script>
+<!-- LINDAREX :: GOOGLE ANALYTICS :: END -->
+
+<!-- LINDAREX :: NAVER ANALYTICS :: BIGIN -->
+<!-- Naver Analytics -->
+<script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
+<script type="text/javascript">
+if(!wcs_add) var wcs_add = {};
+wcs_add["wa"] = "42df78a7dfd6f0";
+wcs_do();
+</script>
+<!-- LINDAREX :: NAVER ANALYTICS :: END -->
+
+<!-- LINDAREX :: GOOGLE ADSENSE :: BIGIN -->
+<script data-ad-client="ca-pub-8367174639781348" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- LINDAREX :: GOOGLE ADSENSE :: END -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/LindaRex_LOGO.jpg" alt="LindaRex logo"></a>
+        
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/year-archive/" >Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/" >Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/" >Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/" >About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">OPEN SOURCE SOFTWARE</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/jenkins/" class="">JENKINS</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/sonarqube/" class="">SONARQUBE</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/scm-manager/" class="">SCM MANAGER</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/postgresql/" class="">POSTGRESQL</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/elastic-stack/" class="">ELASTIC STACK</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/bind9/" class="">BIND9</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">CLOUD FOUNDRY</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/bosh/" class="">BOSH</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/cfar/" class="">CFAR</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">CLOUD COMPUTING</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/aws/" class="">AWS</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/azure/" class="">AZURE</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">INTERESTED</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/ubuntu/" class="">UBUNTU</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/concepts/" class="">CONCEPTS</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/vmware-workstation/" class="">VMWARE WORKSTATION</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/travis-ci/" class="">TRAVIS CI</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+  <!-- LINDAREX :: GOOGLE ADSENSE :: LEFT-SIDEBAR :: BIGIN-->
+  <!-- LINDAREX :: GOOGLE ADSENSE :: LEFT-SIDEBAR :: HTML :: BIGIN -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 2020-02-22-ad-left-sidebar -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:200px;height:200px"
+     data-ad-client="ca-pub-8367174639781348"
+     data-ad-slot="5840394475"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<!-- LINDAREX :: GOOGLE ADSENSE :: LEFT-SIDEBAR :: HTML :: END -->
+
+  <!-- LINDAREX :: GOOGLE ADSENSE :: LEFT-SIDEBAR :: END-->
+</nav>
+    
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="우분투(Ubuntu) 환경에 네임 서버(Name server) 설정하기">
+    <meta itemprop="description" content="네임 서버(name server)는 인터넷에서 도메인 네임 서비스(domain name service)를 제공하는 server를 의미합니다.도메인으로 IP를 조회할 때, 로컬 캐시 조회, ‘/etc/hosts’ 조회, DNS 조회 순으로 진행되며, 이 중 ‘/etc/hosts’ 설정은 개별적으로 수정해야 하기 때문에 협업 시 불편하고 일괄 관리에 어려움이 있습니다.이 포스트에서는 Ubuntu 환경에서 위 과정의 DNS 조회를 위한 name server를 설정하는 방법을 소개합니다.">
+    <meta itemprop="datePublished" content="2020-05-11T00:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">우분투(Ubuntu) 환경에 네임 서버(Name server) 설정하기
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+          
+          <!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: BIGIN -->
+          
+            <nav class="toc-custom">
+            <!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: HTML :: BIGIN -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 2020-02-22-ad-right-sidebar -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8367174639781348"
+     data-ad-slot="5781712397"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: HTML :: END -->
+
+            </nav>
+          
+          <!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: END -->
+          </aside>
+        
+        <p>네임 서버(name server)는 인터넷에서 도메인 네임 서비스(domain name service)를 제공하는 server를 의미합니다.
+<br /><br />
+도메인으로 IP를 조회할 때, 로컬 캐시 조회, ‘/etc/hosts’ 조회, DNS 조회 순으로 진행되며, 이 중 ‘/etc/hosts’ 설정은 개별적으로 수정해야 하기 때문에 협업 시 불편하고 일괄 관리에 어려움이 있습니다.
+<br /><br />
+이 포스트에서는 Ubuntu 환경에서 위 과정의 DNS 조회를 위한 name server를 설정하는 방법을 소개합니다.</p>
+
+<h2 id="선행조건prerequisite">선행조건(PREREQUISITE)</h2>
+<ul>
+  <li>Ubuntu 환경이 필요합니다.</li>
+  <li>방화벽 설정이 필요합니다.
+    <ul>
+      <li>TCP 및 UDP 53 포트가 개방되어 있어야 합니다.</li>
+    </ul>
+  </li>
+</ul>
+
+<blockquote>
+  <p>방화벽 설정 방법은 <a href="https://lindarex.github.io/ubuntu/ubuntu-firewalld-installation/" target="\_blank">우분투(Ubuntu) 환경에 방화벽(Firewalld) 설치 및 설정하기</a> 포스트를 참고하시기 바랍니다.</p>
+</blockquote>
+
+<h2 id="테스트-환경test-environment">테스트 환경(TEST ENVIRONMENT)</h2>
+<ul>
+  <li>VMware® Workstation 15 Pro (15.5.2 build-15785246)</li>
+  <li>Ubuntu 18.04.4 LTS (Bionic Beaver) Server (64-bit)</li>
+  <li>Ubuntu 16.04.6 LTS (Xenial Xerus) Server (64-bit)</li>
+</ul>
+
+<h2 id="요약summary">요약(SUMMARY)</h2>
+<ol>
+  <li>Ubuntu 16.04 환경에 name server 설정</li>
+  <li>Ubuntu 18.04 환경에 name server 설정</li>
+  <li>(선택사항) 네트워크 명령어로 DNS 확인</li>
+</ol>
+
+<h2 id="내용contents">내용(CONTENTS)</h2>
+<h3 id="1-ubuntu-1604-환경에-name-server-설정">1. Ubuntu 16.04 환경에 name server 설정</h3>
+<h4 id="11-name-server-조회">1.1. name server 조회</h4>
+<ul>
+  <li>‘/etc/resolv.conf’ 파일(file) 확인</li>
+</ul>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cat</span> /etc/resolv.conf
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Dynamic resolv.conf(5) file for glibc resolver(3) generated by resolvconf(8)</span>
+<span class="c">#     DO NOT EDIT THIS FILE BY HAND -- YOUR CHANGES WILL BE OVERWRITTEN</span>
+nameserver 10.0.1.2
+search localdomain
+</code></pre></div></div>
+
+<blockquote>
+  <p>‘/etc/resolv.conf’ file은 서버를 재부팅하면 설정이 초기화되기 때문에 조회 용도로만 사용합니다.</p>
+</blockquote>
+
+<h4 id="12-name-server-설정">1.2. name server 설정</h4>
+<ul>
+  <li>‘/etc/resolvconf/resolv.conf.d/head’ file을 설정합니다.</li>
+</ul>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>vi /etc/resolvconf/resolv.conf.d/head
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Dynamic resolv.conf(5) file for glibc resolver(3) generated by resolvconf(8)</span>
+<span class="c">#     DO NOT EDIT THIS FILE BY HAND -- YOUR CHANGES WILL BE OVERWRITTEN</span>
+nameserver 10.0.1.32
+</code></pre></div></div>
+
+<blockquote>
+  <p>위 스크립트는 name server(10.0.1.32)를 추가한 예제입니다.</p>
+</blockquote>
+
+<h4 id="13-resolvconf-서비스-재시작">1.3. resolvconf 서비스 재시작</h4>
+<ul>
+  <li>위에서 설정한 name server를 적용하기 위해 resolvconf 서비스(service)를 재시작합니다.</li>
+</ul>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl restart resolvconf
+</code></pre></div></div>
+
+<ul>
+  <li>resolvconf service가 정상적으로 재시작되었는지 확인합니다.</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo systemctl status resolvconf
+● resolvconf.service - Nameserver information manager
+   Loaded: loaded (/lib/systemd/system/resolvconf.service; enabled; vendor preset: enabled)
+   Active: active (exited) since Mon 2020-05-11 15:25:52 KST; 8s ago
+     Docs: man:resolvconf(8)
+  Process: 2586 ExecStop=/sbin/resolvconf --disable-updates (code=exited, status=0/SUCCESS)
+  Process: 2602 ExecStart=/sbin/resolvconf --enable-updates (code=exited, status=0/SUCCESS)
+  Process: 2596 ExecStartPre=/bin/touch /run/resolvconf/postponed-update (code=exited, status=0/SUCCESS)
+  Process: 2593 ExecStartPre=/bin/mkdir -p /run/resolvconf/interface (code=exited, status=0/SUCCESS)
+ Main PID: 2602 (code=exited, status=0/SUCCESS)
+
+May 11 15:25:52 lindarex systemd[1]: Stopped Nameserver information manager.
+May 11 15:25:52 lindarex systemd[1]: Starting Nameserver information manager...
+May 11 15:25:52 lindarex systemd[1]: Started Nameserver information manager.
+</code></pre></div></div>
+
+<h4 id="14-설정된-name-server-조회">1.4. 설정된 name server 조회</h4>
+<ul>
+  <li>‘/etc/resolv.conf’ file을 확인합니다.</li>
+</ul>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cat</span> /etc/resolv.conf
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Dynamic resolv.conf(5) file for glibc resolver(3) generated by resolvconf(8)</span>
+<span class="c">#     DO NOT EDIT THIS FILE BY HAND -- YOUR CHANGES WILL BE OVERWRITTEN</span>
+nameserver 10.0.1.32
+nameserver 10.0.1.2
+search localdomain
+</code></pre></div></div>
+
+<h3 id="2-ubuntu-1804-환경에-name-server-설정">2. Ubuntu 18.04 환경에 name server 설정</h3>
+<h4 id="21-name-server-조회">2.1. name server 조회</h4>
+<ul>
+  <li>‘/etc/resolv.conf’ file을 확인합니다.</li>
+</ul>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cat</span> /etc/resolv.conf
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Dynamic resolv.conf(5) file for glibc resolver(3) generated by resolvconf(8)</span>
+<span class="c">#     DO NOT EDIT THIS FILE BY HAND -- YOUR CHANGES WILL BE OVERWRITTEN</span>
+<span class="c"># 127.0.0.53 is the systemd-resolved stub resolver.</span>
+<span class="c"># run "systemd-resolve --status" to see details about the actual nameservers.</span>
+
+nameserver 127.0.0.53
+search localdomain
+options edns0
+</code></pre></div></div>
+
+<ul>
+  <li>systemd-resolve command로 확인합니다.</li>
+</ul>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemd-resolve <span class="nt">--status</span>
+<span class="go">Global
+          DNSSEC NTA: 10.in-addr.arpa
+                      16.172.in-addr.arpa
+                      168.192.in-addr.arpa
+                      17.172.in-addr.arpa
+                      18.172.in-addr.arpa
+                      19.172.in-addr.arpa
+                      20.172.in-addr.arpa
+                      21.172.in-addr.arpa
+                      22.172.in-addr.arpa
+                      23.172.in-addr.arpa
+                      24.172.in-addr.arpa
+                      25.172.in-addr.arpa
+                      26.172.in-addr.arpa
+                      27.172.in-addr.arpa
+                      28.172.in-addr.arpa
+                      29.172.in-addr.arpa
+                      30.172.in-addr.arpa
+                      31.172.in-addr.arpa
+                      corp
+                      d.f.ip6.arpa
+                      home
+                      internal
+                      intranet
+                      lan
+                      local
+                      private
+                      test
+
+Link 2 (ens33)
+      Current Scopes: DNS
+       LLMNR setting: yes
+MulticastDNS setting: no
+      DNSSEC setting: no
+    DNSSEC supported: no
+         DNS Servers: 10.0.1.2
+          DNS Domain: localdomain
+</span></code></pre></div></div>
+
+<h4 id="22-resolvconf-패키지package-설치">2.2. resolvconf 패키지(package) 설치</h4>
+<ul>
+  <li>Ubuntu 18.04에 resolvconf package를 설치하여 Ubuntu 16.04와 동일한 방법으로 name server를 설정합니다.</li>
+</ul>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt <span class="nb">install </span>resolvconf <span class="nt">-y</span>
+</code></pre></div></div>
+
+<ul>
+  <li>resolvconf package 설치 완료 후 resolvconf service 상태를 조회합니다.</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo systemctl status resolvconf
+● resolvconf.service - Nameserver information manager
+   Loaded: loaded (/lib/systemd/system/resolvconf.service; enabled; vendor preset: enabled)
+   Active: inactive (dead)
+     Docs: man:resolvconf(8)
+</code></pre></div></div>
+
+<h4 id="23-name-server-설정">2.3. name server 설정</h4>
+<ul>
+  <li>‘/etc/resolvconf/resolv.conf.d/head’ file을 설정합니다.</li>
+</ul>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>vi /etc/resolvconf/resolv.conf.d/head
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Dynamic resolv.conf(5) file for glibc resolver(3) generated by resolvconf(8)</span>
+<span class="c">#     DO NOT EDIT THIS FILE BY HAND -- YOUR CHANGES WILL BE OVERWRITTEN</span>
+<span class="c"># 127.0.0.53 is the systemd-resolved stub resolver.</span>
+<span class="c"># run "systemd-resolve --status" to see details about the actual nameservers.</span>
+nameserver 10.0.1.32
+</code></pre></div></div>
+
+<blockquote>
+  <p>위 스크립트는 name server(10.0.1.32)를 추가한 예제입니다.</p>
+</blockquote>
+
+<h4 id="24-resolvconf-service-재시작">2.4. resolvconf service 재시작</h4>
+<ul>
+  <li>위에서 설정한 name server를 적용하기 위해 resolvconf service를 재시작합니다.</li>
+</ul>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl restart resolvconf
+</code></pre></div></div>
+
+<ul>
+  <li>resolvconf service가 정상적으로 재시작되었는지 확인합니다.</li>
+</ul>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl status resolvconf
+<span class="go">● resolvconf.service - Nameserver information manager
+</span><span class="gp">   Loaded: loaded (/lib/systemd/system/resolvconf.service;</span><span class="w"> </span>enabled<span class="p">;</span> vendor preset: enabled<span class="o">)</span>
+<span class="gp">   Active: active (exited) since Mon 2020-05-11 06:49:25 UTC;</span><span class="w"> </span>1s ago
+<span class="go">     Docs: man:resolvconf(8)
+  Process: 15117 ExecStart=/sbin/resolvconf --enable-updates (code=exited, status=0/SUCCESS)
+  Process: 15107 ExecStartPre=/bin/touch /run/resolvconf/postponed-update (code=exited, status=0/SUCCESS)
+  Process: 15105 ExecStartPre=/bin/mkdir -p /run/resolvconf/interface (code=exited, status=0/SUCCESS)
+ Main PID: 15117 (code=exited, status=0/SUCCESS)
+
+May 11 06:49:25 lindarex systemd[1]: Starting Nameserver information manager...
+May 11 06:49:25 lindarex systemd[1]: Started Nameserver information manager.
+</span></code></pre></div></div>
+
+<h4 id="25-설정된-name-server-조회">2.5. 설정된 name server 조회</h4>
+<ul>
+  <li>‘/etc/resolv.conf’ file을 확인합니다.</li>
+</ul>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cat</span> /etc/resolv.conf
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Dynamic resolv.conf(5) file for glibc resolver(3) generated by resolvconf(8)</span>
+<span class="c">#     DO NOT EDIT THIS FILE BY HAND -- YOUR CHANGES WILL BE OVERWRITTEN</span>
+<span class="c"># 127.0.0.53 is the systemd-resolved stub resolver.</span>
+<span class="c"># run "systemd-resolve --status" to see details about the actual nameservers.</span>
+
+nameserver 10.0.1.32
+nameserver 127.0.0.53
+search localdomain
+options edns0
+</code></pre></div></div>
+
+<ul>
+  <li>systemd-resolve command로 확인합니다.</li>
+</ul>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemd-resolve <span class="nt">--status</span>
+<span class="go">Global
+         DNS Servers: 10.0.1.32
+          DNS Domain: localdomain
+          DNSSEC NTA: 10.in-addr.arpa
+                      16.172.in-addr.arpa
+                      168.192.in-addr.arpa
+                      17.172.in-addr.arpa
+                      18.172.in-addr.arpa
+                      19.172.in-addr.arpa
+                      20.172.in-addr.arpa
+                      21.172.in-addr.arpa
+                      22.172.in-addr.arpa
+                      23.172.in-addr.arpa
+                      24.172.in-addr.arpa
+                      25.172.in-addr.arpa
+                      26.172.in-addr.arpa
+                      27.172.in-addr.arpa
+                      28.172.in-addr.arpa
+                      29.172.in-addr.arpa
+                      30.172.in-addr.arpa
+                      31.172.in-addr.arpa
+                      corp
+                      d.f.ip6.arpa
+                      home
+                      internal
+                      intranet
+                      lan
+                      local
+                      private
+                      test
+
+Link 2 (ens33)
+      Current Scopes: DNS
+       LLMNR setting: yes
+MulticastDNS setting: no
+      DNSSEC setting: no
+    DNSSEC supported: no
+         DNS Servers: 10.0.1.2
+          DNS Domain: localdomain
+</span></code></pre></div></div>
+
+<h3 id="3-선택사항-네트워크-명령어로-dns-확인">3. (선택사항) 네트워크 명령어로 DNS 확인</h3>
+<ul>
+  <li>아래 command는 DNS 서버 설정이 되어 있는 VM(10.0.1.32)이 있다는 가정하에 실행합니다.</li>
+</ul>
+
+<blockquote>
+  <p>bind9 설치 방법은 <a href="https://lindarex.github.io/bind9/ubuntu-bind9-installation/" target="\_blank">우분투(Ubuntu) 환경에 패키지(Package)로 BIND(BIND9) 설치하기</a> 포스트를 참고하시기 바랍니다.</p>
+</blockquote>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>nslookup ns.lindarex.local
+<span class="go">Server:   10.0.1.32
+</span><span class="gp">Address:  10.0.1.32#</span>53
+<span class="go">
+Name: ns.lindarex.local
+Address: 10.0.1.32
+</span></code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>nslookup www.lindarex.local
+<span class="go">Server:   10.0.1.32
+</span><span class="gp">Address:  10.0.1.32#</span>53
+<span class="go">
+Name: www.lindarex.local
+Address: 10.0.1.32
+</span></code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>nslookup 10.0.1.32
+<span class="go">Server:   10.0.1.32
+</span><span class="gp">Address:  10.0.1.32#</span>53
+<span class="go">
+32.1.0.10.in-addr.arpa  name = ns.lindarex.local.
+32.1.0.10.in-addr.arpa  name = www.lindarex.local.
+</span></code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>dig ns.lindarex.local
+<span class="go">
+</span><span class="gp">;</span><span class="w"> </span>&lt;&lt;<span class="o">&gt;&gt;</span> DiG 9.10.3-P4-Ubuntu &lt;&lt;<span class="o">&gt;&gt;</span> ns.lindarex.local
+<span class="gp">;</span><span class="p">;</span> global options: +cmd
+<span class="gp">;</span><span class="p">;</span> Got answer:
+<span class="gp">;</span><span class="p">;</span> -&gt;&gt;HEADER<span class="o">&lt;&lt;-</span> <span class="no">opcode</span><span class="sh">: QUERY, status: NOERROR, id: 32791
+</span><span class="gp">;</span><span class="sh">; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 1, ADDITIONAL: 1
+</span><span class="go">
+</span><span class="gp">;</span><span class="p">;</span> OPT PSEUDOSECTION:
+<span class="gp">;</span><span class="w"> </span>EDNS: version: 0, flags:<span class="p">;</span> udp: 4096
+<span class="gp">;</span><span class="p">;</span> QUESTION SECTION:
+<span class="gp">;</span>ns.lindarex.local.   IN  A
+<span class="go">
+</span><span class="gp">;</span><span class="p">;</span> ANSWER SECTION:
+<span class="go">ns.lindarex.local.  86400 IN  A 10.0.1.32
+
+</span><span class="gp">;</span><span class="p">;</span> AUTHORITY SECTION:
+<span class="go">lindarex.local.   86400 IN  NS  ns.lindarex.local.
+
+</span><span class="gp">;</span><span class="p">;</span> Query <span class="nb">time</span>: 0 msec
+<span class="gp">;</span><span class="p">;</span> SERVER: 10.0.1.32#53<span class="o">(</span>10.0.1.32<span class="o">)</span>
+<span class="gp">;</span><span class="p">;</span> WHEN: Mon May 11 16:29:44 KST 2020
+<span class="gp">;</span><span class="p">;</span> MSG SIZE  rcvd: 76
+</code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>dig www.lindarex.local
+<span class="go">
+</span><span class="gp">;</span><span class="w"> </span>&lt;&lt;<span class="o">&gt;&gt;</span> DiG 9.10.3-P4-Ubuntu &lt;&lt;<span class="o">&gt;&gt;</span> www.lindarex.local
+<span class="gp">;</span><span class="p">;</span> global options: +cmd
+<span class="gp">;</span><span class="p">;</span> Got answer:
+<span class="gp">;</span><span class="p">;</span> -&gt;&gt;HEADER<span class="o">&lt;&lt;-</span> <span class="no">opcode</span><span class="sh">: QUERY, status: NOERROR, id: 59631
+</span><span class="gp">;</span><span class="sh">; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 1, ADDITIONAL: 2
+</span><span class="go">
+</span><span class="gp">;</span><span class="p">;</span> OPT PSEUDOSECTION:
+<span class="gp">;</span><span class="w"> </span>EDNS: version: 0, flags:<span class="p">;</span> udp: 4096
+<span class="gp">;</span><span class="p">;</span> QUESTION SECTION:
+<span class="gp">;</span>www.lindarex.local.    IN  A
+<span class="go">
+</span><span class="gp">;</span><span class="p">;</span> ANSWER SECTION:
+<span class="go">www.lindarex.local. 86400 IN  A 10.0.1.32
+
+</span><span class="gp">;</span><span class="p">;</span> AUTHORITY SECTION:
+<span class="go">lindarex.local.   86400 IN  NS  ns.lindarex.local.
+
+</span><span class="gp">;</span><span class="p">;</span> ADDITIONAL SECTION:
+<span class="go">ns.lindarex.local.  86400 IN  A 10.0.1.32
+
+</span><span class="gp">;</span><span class="p">;</span> Query <span class="nb">time</span>: 0 msec
+<span class="gp">;</span><span class="p">;</span> SERVER: 10.0.1.32#53<span class="o">(</span>10.0.1.32<span class="o">)</span>
+<span class="gp">;</span><span class="p">;</span> WHEN: Mon May 11 16:30:44 KST 2020
+<span class="gp">;</span><span class="p">;</span> MSG SIZE  rcvd: 96
+</code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>dig <span class="nt">-x</span> 10.0.1.32
+<span class="go">
+</span><span class="gp">;</span><span class="w"> </span>&lt;&lt;<span class="o">&gt;&gt;</span> DiG 9.10.3-P4-Ubuntu &lt;&lt;<span class="o">&gt;&gt;</span> <span class="nt">-x</span> 10.0.1.32
+<span class="gp">;</span><span class="p">;</span> global options: +cmd
+<span class="gp">;</span><span class="p">;</span> Got answer:
+<span class="gp">;</span><span class="p">;</span> -&gt;&gt;HEADER<span class="o">&lt;&lt;-</span> <span class="no">opcode</span><span class="sh">: QUERY, status: NOERROR, id: 18085
+</span><span class="gp">;</span><span class="sh">; flags: qr aa rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 1, ADDITIONAL: 1
+</span><span class="go">
+</span><span class="gp">;</span><span class="p">;</span> OPT PSEUDOSECTION:
+<span class="gp">;</span><span class="w"> </span>EDNS: version: 0, flags:<span class="p">;</span> udp: 4096
+<span class="gp">;</span><span class="p">;</span> QUESTION SECTION:
+<span class="gp">;</span>32.1.0.10.in-addr.arpa.    IN  PTR
+<span class="go">
+</span><span class="gp">;</span><span class="p">;</span> ANSWER SECTION:
+<span class="go">32.1.0.10.in-addr.arpa. 86400 IN  PTR www.lindarex.local.
+32.1.0.10.in-addr.arpa. 86400 IN  PTR ns.lindarex.local.
+
+</span><span class="gp">;</span><span class="p">;</span> AUTHORITY SECTION:
+<span class="go">1.0.10.in-addr.arpa.  86400 IN  NS  ns.
+
+</span><span class="gp">;</span><span class="p">;</span> Query <span class="nb">time</span>: 0 msec
+<span class="gp">;</span><span class="p">;</span> SERVER: 10.0.1.32#53<span class="o">(</span>10.0.1.32<span class="o">)</span>
+<span class="gp">;</span><span class="p">;</span> WHEN: Mon May 11 16:30:20 KST 2020
+<span class="gp">;</span><span class="p">;</span> MSG SIZE  rcvd: 116
+</code></pre></div></div>
+
+<h2 id="마무리conclusion">마무리(CONCLUSION)</h2>
+<p>Ubuntu 환경에 DNS 조회를 위한 name server 설정을 완료했습니다.
+<br /><br />
+내부 네트워크(network)의 name server 설정으로 network 관리가 용이하고 보안을 강화할 수 있습니다. <br />
+개발자 입장에서는 name server 설정을 통해 host file 변경 없이 내부 도메인을 사용할 수 있고, IP 변경에 신경 쓰지 않아도 되는 이점이 있습니다.
+<br /><br />
+현업에서는 name server를 주로 보안을 위해 사용하기 때문에, 개발자가 크게 신경 쓸 부분이 아닙니다. 하지만, DNS, name server에 대한 기본 개념은 이해하고 있어야 합니다.
+<br /><br />
+더 자세한 내용은 아래 참고 페이지를 확인해 주시기 바랍니다.</p>
+
+<h2 id="참고references">참고(REFERENCES)</h2>
+<ul>
+  <li><a href="https://datawookie.netlify.app/blog/2018/10/dns-on-ubuntu-18.04/" target="\_blank">https://datawookie.netlify.app/blog/2018/10/dns-on-ubuntu-18.04/</a></li>
+  <li><a href="https://www.tecmint.com/set-permanent-dns-nameservers-in-ubuntu-debian/" target="\_blank">https://www.tecmint.com/set-permanent-dns-nameservers-in-ubuntu-debian/</a></li>
+  <li><a href="https://wiki.archlinux.org/index.php/Domain_name_resolution" target="\_blank">https://wiki.archlinux.org/index.php/Domain_name_resolution</a></li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/nameserver" class="page__taxonomy-item" rel="tag">nameserver</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/ubuntu" class="page__taxonomy-item" rel="tag">Ubuntu</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/ubuntu" class="page__taxonomy-item" rel="tag">Ubuntu</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-05-11T00:00:00+09:00">May 11, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%EC%9A%B0%EB%B6%84%ED%88%AC%28Ubuntu%29+%ED%99%98%EA%B2%BD%EC%97%90+%EB%84%A4%EC%9E%84+%EC%84%9C%EB%B2%84%28Name+server%29+%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0%20https%3A%2F%2Flindarex.github.io%2Fubuntu%2Fubuntu-nameserver-setting%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flindarex.github.io%2Fubuntu%2Fubuntu-nameserver-setting%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flindarex.github.io%2Fubuntu%2Fubuntu-nameserver-setting%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/jenkins/jenkins-github-webhook-setting/" class="pagination--pager" title="GitHub Webhook으로 젠킨스(Jenkins) Job을 실행(자동화)하는 방법
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Leave a comment</h4>
+      <section id="disqus_thread"></section>
+    
+</div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/jenkins/jenkins-github-webhook-setting/" rel="permalink">GitHub Webhook으로 젠킨스(Jenkins) Job을 실행(자동화)하는 방법
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">이 포스트에서는 GitHub Webhook으로 젠킨스(Jenkins) Job을 실행(자동화)하는 방법을 소개합니다.
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/bind9/ubuntu-bind9-setting/" rel="permalink">우분투(Ubuntu) 환경에 BIND(BIND9) 설정하기
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">BIND(bind9, berkeley internet name domain)는 DNS(domain name system)를 제공하는 서버(server), 즉 네임 서버(name server) 기능을 갖춘 오픈소스(open source) 소프트웨어입니다. 
+bind9 설정은 인프라(...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/bind9/ubuntu-bind9-installation/" rel="permalink">우분투(Ubuntu) 환경에 패키지(Package)로 BIND(BIND9) 설치하기
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">BIND(bind9, berkeley internet name domain)는 안정성과 고품질로 유닉스(unix) 및 리눅스(linux)에서 널리 사용되며, 모든 기능을 갖춘 매우 유연한 DNS(dns, domain name server) 시스템(system)입니다. 
+bind9은...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/jenkins/ubuntu-jenkins-war-installation/" rel="permalink">우분투(Ubuntu) 환경에 WAR 파일로 젠킨스(Jenkins) 설치하기
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">젠킨스(Jenkins)를 설치하는 방법은 다양합니다. 패키지(package)로 jenkins를 설치하는 방법은 우분투(Ubuntu) 환경에 패키지(Package)로 젠킨스(Jenkins) 설치하기 포스트를 참고하시기 바랍니다. 
+이 포스트에서는 우분투(ubuntu) 환경에서 WAR...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- LINDAREX :: GOOGLE ADSENSE :: FOOTER :: BIGIN -->
+        <!-- LINDAREX :: GOOGLE ADSENSE :: FOOTER :: HTML ::  BIGIN -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 2020-02-22-ad-footer -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8367174639781348"
+     data-ad-slot="1870387544"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<!-- LINDAREX :: GOOGLE ADSENSE :: FOOTER :: HTML ::  END -->
+        <!-- LINDAREX :: GOOGLE ADSENSE :: FOOTER :: END -->
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://github.com/lindarex/lindarex.github.io" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 LindaRex. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+    <!-- LINDAREX :: BACK TO TOP :: BEGIN -->
+    <!-- <aside class="sidebar__top">
+      <a href="#site-nav"> <i class="fas fa-angle-double-up fa-2x"></i></a>
+    </aside> -->
+    <!-- LINDAREX :: BACK TO TOP :: END -->
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://lindarex.github.io/ubuntu/ubuntu-nameserver-setting/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/ubuntu/ubuntu-nameserver-setting"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://lindarex-github-io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

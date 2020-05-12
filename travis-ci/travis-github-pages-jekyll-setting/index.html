@@ -1,0 +1,916 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.18.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- LINDAREX :: JEKYLL SEO TAG :: BIGIN -->
+<!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Travis CI로 Jekyll 블로그를 GitHub Pages에 자동 배포하기 | LindaRex</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="Travis CI로 Jekyll 블로그를 GitHub Pages에 자동 배포하기" />
+<meta name="author" content="Rex" />
+<meta property="og:locale" content="ko_KR" />
+<meta name="description" content="이 포스트에서는 Travis CI(travis)를 이용해 Jekyll 블로그를 GitHub Pages에 자동 배포(deploy)하는 방법을 소개합니다." />
+<meta property="og:description" content="이 포스트에서는 Travis CI(travis)를 이용해 Jekyll 블로그를 GitHub Pages에 자동 배포(deploy)하는 방법을 소개합니다." />
+<link rel="canonical" href="https://lindarex.github.io/travis-ci/travis-github-pages-jekyll-setting/" />
+<meta property="og:url" content="https://lindarex.github.io/travis-ci/travis-github-pages-jekyll-setting/" />
+<meta property="og:site_name" content="LindaRex" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-02-21T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Travis CI로 Jekyll 블로그를 GitHub Pages에 자동 배포하기" />
+<meta name="twitter:site" content="@" />
+<meta name="twitter:creator" content="@Rex" />
+<meta name="google-site-verification" content="t6VkmqsI15sIx3P1-gh3NYputZtjhDZOTkxhwDaa4Ik" />
+<script type="application/ld+json">
+{"datePublished":"2020-02-21T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/travis-ci/travis-github-pages-jekyll-setting/"},"@type":"BlogPosting","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"Rex"},"url":"https://lindarex.github.io/travis-ci/travis-github-pages-jekyll-setting/","author":{"@type":"Person","name":"Rex"},"headline":"Travis CI로 Jekyll 블로그를 GitHub Pages에 자동 배포하기","description":"이 포스트에서는 Travis CI(travis)를 이용해 Jekyll 블로그를 GitHub Pages에 자동 배포(deploy)하는 방법을 소개합니다.","dateModified":"2020-02-21T00:00:00+09:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<!-- LINDAREX :: JEKYLL SEO TAG :: END -->
+
+<!-- LINDAREX :: NAVER SITE VERIFICATION :: BIGIN -->
+<meta name="naver-site-verification" content="190d9b8e0a63058b72f2031ce67825da7b9038f5">
+<!-- LINDAREX :: NAVER SITE VERIFICATION :: END -->
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="LindaRex Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- LINDAREX :: FAVICON :: BIGIN -->
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico">
+<!-- LINDAREX :: FAVICON :: END -->
+
+<!-- LINDAREX :: FEED :: BIGIN -->
+<!-- <link rel="alternate" type="application/rss+xml" href="https://lindarex.github.io/feed.xml" title="LindaRex Feed"> -->
+<!-- LINDAREX :: FEED :: END -->
+
+<!-- LINDAREX :: GOOGLE ANALYTICS :: BIGIN -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-157973560-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-157973560-1');
+</script>
+<!-- LINDAREX :: GOOGLE ANALYTICS :: END -->
+
+<!-- LINDAREX :: NAVER ANALYTICS :: BIGIN -->
+<!-- Naver Analytics -->
+<script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
+<script type="text/javascript">
+if(!wcs_add) var wcs_add = {};
+wcs_add["wa"] = "42df78a7dfd6f0";
+wcs_do();
+</script>
+<!-- LINDAREX :: NAVER ANALYTICS :: END -->
+
+<!-- LINDAREX :: GOOGLE ADSENSE :: BIGIN -->
+<script data-ad-client="ca-pub-8367174639781348" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- LINDAREX :: GOOGLE ADSENSE :: END -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/LindaRex_LOGO.jpg" alt="LindaRex logo"></a>
+        
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/year-archive/" >Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/" >Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/" >Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/" >About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">OPEN SOURCE SOFTWARE</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/jenkins/" class="">JENKINS</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/sonarqube/" class="">SONARQUBE</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/scm-manager/" class="">SCM MANAGER</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/postgresql/" class="">POSTGRESQL</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/elastic-stack/" class="">ELASTIC STACK</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/bind9/" class="">BIND9</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">CLOUD FOUNDRY</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/bosh/" class="">BOSH</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/cfar/" class="">CFAR</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">CLOUD COMPUTING</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/aws/" class="">AWS</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/azure/" class="">AZURE</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">INTERESTED</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/ubuntu/" class="">UBUNTU</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/concepts/" class="">CONCEPTS</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/vmware-workstation/" class="">VMWARE WORKSTATION</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/travis-ci/" class="">TRAVIS CI</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+  <!-- LINDAREX :: GOOGLE ADSENSE :: LEFT-SIDEBAR :: BIGIN-->
+  <!-- LINDAREX :: GOOGLE ADSENSE :: LEFT-SIDEBAR :: HTML :: BIGIN -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 2020-02-22-ad-left-sidebar -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:200px;height:200px"
+     data-ad-client="ca-pub-8367174639781348"
+     data-ad-slot="5840394475"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<!-- LINDAREX :: GOOGLE ADSENSE :: LEFT-SIDEBAR :: HTML :: END -->
+
+  <!-- LINDAREX :: GOOGLE ADSENSE :: LEFT-SIDEBAR :: END-->
+</nav>
+    
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Travis CI로 Jekyll 블로그를 GitHub Pages에 자동 배포하기">
+    <meta itemprop="description" content="이 포스트에서는 Travis CI(travis)를 이용해 Jekyll 블로그를 GitHub Pages에 자동 배포(deploy)하는 방법을 소개합니다.">
+    <meta itemprop="datePublished" content="2020-02-21T00:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Travis CI로 Jekyll 블로그를 GitHub Pages에 자동 배포하기
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+          
+          <!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: BIGIN -->
+          
+            <nav class="toc-custom">
+            <!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: HTML :: BIGIN -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 2020-02-22-ad-right-sidebar -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8367174639781348"
+     data-ad-slot="5781712397"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: HTML :: END -->
+
+            </nav>
+          
+          <!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: END -->
+          </aside>
+        
+        <p>이 포스트에서는 Travis CI(travis)를 이용해 Jekyll 블로그를 GitHub Pages에 자동 배포(deploy)하는 방법을 소개합니다.</p>
+
+<h2 id="선행조건prerequisite">선행조건(PREREQUISITE)</h2>
+<ul>
+  <li>GitHub 계정이 필요합니다.</li>
+  <li>GitHub Pages의 브랜치(branch)는 빌드(build) 후 deploy되는 master branch, jekyll code를 올릴 sources branch로 구성합니다.</li>
+</ul>
+
+<h2 id="테스트-환경test-environment">테스트 환경(TEST ENVIRONMENT)</h2>
+<ul>
+  <li>Chrome v80.0.3987.116(공식 빌드) (64비트)</li>
+  <li>Firefox Browser v74.0b5 (64-비트)</li>
+</ul>
+
+<h2 id="요약summary">요약(SUMMARY)</h2>
+<ol>
+  <li>GitHub Personal access token 생성</li>
+  <li>Travis CI 설정</li>
+  <li>travis.yml 파일 작성</li>
+  <li>deploy 확인</li>
+</ol>
+
+<h2 id="내용contents">내용(CONTENTS)</h2>
+<h3 id="1-github-personal-access-token-생성">1. GitHub Personal access token 생성</h3>
+<blockquote>
+  <p><a href="https://github.com/" target="\_blank">https://github.com/</a>에 접속합니다.</p>
+</blockquote>
+
+<ul>
+  <li>우측 상단의 Profile 아이콘을 선택하여 ‘Settings’ 페이지로 이동합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-001.png" alt="lindarex-travis-github-pages-jekyll-setting-001" /></p>
+
+<ul>
+  <li>좌측 중간에 Personal access tokens 메뉴를 클릭합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-002.png" alt="lindarex-travis-github-pages-jekyll-setting-002" /></p>
+
+<ul>
+  <li>GitHub 계정의 비밀번호를 입력합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-003.png" alt="lindarex-travis-github-pages-jekyll-setting-003" /></p>
+
+<ul>
+  <li>token 이름을 입력하고, token으로 접근 가능한 Scope(repo 전체)를 체크하고, 화면 하단의 ‘Generate token’을 클릭합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-004.png" alt="lindarex-travis-github-pages-jekyll-setting-004" /></p>
+
+<p><img src="/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-004-1.png" alt="lindarex-travis-github-pages-jekyll-setting-004-1" /></p>
+
+<ul>
+  <li>생성된 token 값은 travis 설정에 필요하기 때문에 메모해 둡니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-005.png" alt="lindarex-travis-github-pages-jekyll-setting-005" /></p>
+
+<h3 id="2-travis-ci-설정">2. Travis CI 설정</h3>
+
+<blockquote>
+  <p><a href="https://github.com/apps/travis-ci" target="\_blank">https://github.com/apps/travis-ci</a>에 접속합니다.</p>
+</blockquote>
+
+<ul>
+  <li>우측 상단의 ‘Install’을 클릭합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-006.png" alt="lindarex-travis-github-pages-jekyll-setting-006" /></p>
+
+<ul>
+  <li>‘Only select repositories’ 영역의 ‘Select repositories’를 클릭하여 travis를 연결할 레파지토리(repository)를 선택하고 ‘Install’을 클릭합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-007.png" alt="lindarex-travis-github-pages-jekyll-setting-007" /></p>
+
+<ul>
+  <li>travis가 GitHub repository에 접근할 수 있도록 권한 부여에 승인합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-008.png" alt="lindarex-travis-github-pages-jekyll-setting-008" /></p>
+
+<p><img src="/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-009.png" alt="lindarex-travis-github-pages-jekyll-setting-009" /></p>
+
+<ul>
+  <li><a href="https://travis-ci.com/" target="\_blank">https://travis-ci.com/</a>으로 이동하여 승인이 진행됩니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-010.png" alt="lindarex-travis-github-pages-jekyll-setting-010" /></p>
+
+<ul>
+  <li>우측 하단의 ‘Settings’를 클릭합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-011.png" alt="lindarex-travis-github-pages-jekyll-setting-011" /></p>
+
+<ul>
+  <li>‘Environment Variables’ 영역에서 아래와 같이 입력하고 ‘Add’를 클릭합니다.
+    <ul>
+      <li>Name :: LINDAREX_GITHUB_TOKEN</li>
+      <li>Value :: 메모해 두었던 token</li>
+    </ul>
+  </li>
+</ul>
+
+<blockquote>
+  <p>위 Name은 임의로 입력해도 무관합니다. 단, 이후 travis 설정과 동일해야 합니다.</p>
+</blockquote>
+
+<p><img src="/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-013.png" alt="lindarex-travis-github-pages-jekyll-setting-013" /></p>
+
+<h3 id="3-travisyml-파일-작성">3. travis.yml 파일 작성</h3>
+
+<blockquote>
+  <p>실제 생성하는 파일명은 ‘.travis.yml’입니다.</p>
+</blockquote>
+
+<ul>
+  <li>아래와 같이 ‘.travis.yml’ 파일을 작성하여 jekyll 최상위 디렉터리(index.html 파일이 있는 경로)에 저장합니다.</li>
+  <li>travis 설정 시 Environment Variable에 입력한 name과 아래 github_token 값이 동일해야 합니다.</li>
+</ul>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="ss">language: </span><span class="n">ruby</span>
+<span class="ss">rvm:
+</span><span class="o">-</span> <span class="mf">2.3</span><span class="o">.</span><span class="mi">3</span>
+
+<span class="ss">script: </span><span class="n">bundle</span> <span class="n">install</span> <span class="o">&amp;&amp;</span> <span class="n">bundle</span> <span class="nb">exec</span> <span class="n">jekyll</span> <span class="n">build</span>
+
+<span class="ss">exclude: </span><span class="p">[</span><span class="n">vendor</span><span class="p">]</span>
+
+<span class="ss">deploy:
+  provider: </span><span class="n">pages</span>
+  <span class="ss">skip_cleanup: </span><span class="kp">true</span>
+  <span class="ss">github_token: </span><span class="vg">$LINDAREX_GITHUB_TOKEN</span>
+  <span class="ss">keep_history: </span><span class="kp">true</span>
+  <span class="n">local</span><span class="o">-</span><span class="ss">dir: </span><span class="p">.</span><span class="nf">/</span><span class="n">_site</span>
+  <span class="n">target</span><span class="o">-</span><span class="ss">branch: </span><span class="n">master</span>
+  <span class="ss">on:
+    branch: </span><span class="n">sources</span>
+
+<span class="ss">branches:
+  only:
+  </span><span class="o">-</span> <span class="n">sources</span>
+
+</code></pre></div></div>
+
+<h3 id="4-deploy-확인">4. deploy 확인</h3>
+<ul>
+  <li>설정 완료 후, <a href="https://travis-ci.com/" target="\_blank">travis 첫 페이지</a>으로 이동합니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-014.png" alt="lindarex-travis-github-pages-jekyll-setting-014" /></p>
+
+<ul>
+  <li>로컬의 sources branch를 원격 저장소로 push 하면, travis에서 build하여 master branch로 자동 deploy됩니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-015.png" alt="lindarex-travis-github-pages-jekyll-setting-015" /></p>
+
+<ul>
+  <li>build 중입니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-016.png" alt="lindarex-travis-github-pages-jekyll-setting-016" /></p>
+
+<ul>
+  <li>정상 deploy되었습니다.</li>
+</ul>
+
+<p><img src="/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-017.png" alt="lindarex-travis-github-pages-jekyll-setting-017" /></p>
+
+<h2 id="마무리conclusion">마무리(CONCLUSION)</h2>
+<p>travis로 jekyll을 GitHub Pages에 자동 deploy하는 방법을 완료했습니다. <br />
+다음 포스트에서는 travis로 다른 언어를 deploy하는 방법을 소개하겠습니다.</p>
+
+<h2 id="참고references">참고(REFERENCES)</h2>
+<ul>
+  <li><a href="https://travis-ci.com/" target="\_blank">https://travis-ci.com/</a></li>
+</ul>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/github-pages" class="page__taxonomy-item" rel="tag">github pages</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/jekyll" class="page__taxonomy-item" rel="tag">jekyll</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/travis-ci" class="page__taxonomy-item" rel="tag">travis ci</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/travis-ci" class="page__taxonomy-item" rel="tag">travis-ci</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-02-21T00:00:00+09:00">February 21, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Travis+CI%EB%A1%9C+Jekyll+%EB%B8%94%EB%A1%9C%EA%B7%B8%EB%A5%BC+GitHub+Pages%EC%97%90+%EC%9E%90%EB%8F%99+%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0%20https%3A%2F%2Flindarex.github.io%2Ftravis-ci%2Ftravis-github-pages-jekyll-setting%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flindarex.github.io%2Ftravis-ci%2Ftravis-github-pages-jekyll-setting%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flindarex.github.io%2Ftravis-ci%2Ftravis-github-pages-jekyll-setting%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/bosh/ubuntu-bosh-director-installation/" class="pagination--pager" title="AWS EC2 우분투(Ubuntu) 환경에 BOSH director 설치하기
+">Previous</a>
+    
+    
+      <a href="/azure/ubuntu-azure-cli-installation/" class="pagination--pager" title="우분투(Ubuntu) 환경에 패키지(Package)로 Azure CLI 설치하기
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Leave a comment</h4>
+      <section id="disqus_thread"></section>
+    
+</div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/ubuntu/ubuntu-nameserver-setting/" rel="permalink">우분투(Ubuntu) 환경에 네임 서버(Name server) 설정하기
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">네임 서버(name server)는 인터넷에서 도메인 네임 서비스(domain name service)를 제공하는 server를 의미합니다.
+
+도메인으로 IP를 조회할 때, 로컬 캐시 조회, ‘/etc/hosts’ 조회, DNS 조회 순으로 진행되며, 이 중 ‘/etc/hosts’...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/jenkins/jenkins-github-webhook-setting/" rel="permalink">GitHub Webhook으로 젠킨스(Jenkins) Job을 실행(자동화)하는 방법
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">이 포스트에서는 GitHub Webhook으로 젠킨스(Jenkins) Job을 실행(자동화)하는 방법을 소개합니다.
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/bind9/ubuntu-bind9-setting/" rel="permalink">우분투(Ubuntu) 환경에 BIND(BIND9) 설정하기
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">BIND(bind9, berkeley internet name domain)는 DNS(domain name system)를 제공하는 서버(server), 즉 네임 서버(name server) 기능을 갖춘 오픈소스(open source) 소프트웨어입니다. 
+bind9 설정은 인프라(...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/bind9/ubuntu-bind9-installation/" rel="permalink">우분투(Ubuntu) 환경에 패키지(Package)로 BIND(BIND9) 설치하기
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">BIND(bind9, berkeley internet name domain)는 안정성과 고품질로 유닉스(unix) 및 리눅스(linux)에서 널리 사용되며, 모든 기능을 갖춘 매우 유연한 DNS(dns, domain name server) 시스템(system)입니다. 
+bind9은...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- LINDAREX :: GOOGLE ADSENSE :: FOOTER :: BIGIN -->
+        <!-- LINDAREX :: GOOGLE ADSENSE :: FOOTER :: HTML ::  BIGIN -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 2020-02-22-ad-footer -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8367174639781348"
+     data-ad-slot="1870387544"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<!-- LINDAREX :: GOOGLE ADSENSE :: FOOTER :: HTML ::  END -->
+        <!-- LINDAREX :: GOOGLE ADSENSE :: FOOTER :: END -->
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://github.com/lindarex/lindarex.github.io" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 LindaRex. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+    <!-- LINDAREX :: BACK TO TOP :: BEGIN -->
+    <!-- <aside class="sidebar__top">
+      <a href="#site-nav"> <i class="fas fa-angle-double-up fa-2x"></i></a>
+    </aside> -->
+    <!-- LINDAREX :: BACK TO TOP :: END -->
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://lindarex.github.io/travis-ci/travis-github-pages-jekyll-setting/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/travis-ci/travis-github-pages-jekyll-setting"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://lindarex-github-io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

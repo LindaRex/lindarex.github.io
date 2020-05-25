@@ -6,8 +6,8 @@
     <description>오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 블로그입니다 | It shares technologies such as open source software, cloud computing, PaaS and container platforms</description>
     <link>https://lindarex.github.io/</link>
     <atom:link href="https://lindarex.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 25 May 2020 18:10:01 +0900</pubDate>
-    <lastBuildDate>Mon, 25 May 2020 18:10:01 +0900</lastBuildDate>
+    <pubDate>Mon, 25 May 2020 18:29:55 +0900</pubDate>
+    <lastBuildDate>Mon, 25 May 2020 18:29:55 +0900</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
@@ -5728,7 +5728,7 @@ jenkins 초기 설정은 &lt;a href=&quot;https://lindarex.github.io/jenkins/jen
       <item>
         <title>VMware Workstation의 가상 네트워크(Virtual Network) 알아보기</title>
         <description>&lt;p&gt;VMware Workstation은 가상 머신(VM, virtual machine)을 생성하고 가상 네트워크(virtual network)를 구성할 수 있습니다.
-&lt;br /&gt;
+&lt;br /&gt;&lt;br /&gt;
 이 포스트에서는 VMware Workstation의 virtual network에 대해 소개합니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;선행조건prerequisite&quot;&gt;선행조건(PREREQUISITE)&lt;/h2&gt;
@@ -5830,7 +5830,8 @@ jenkins 초기 설정은 &lt;a href=&quot;https://lindarex.github.io/jenkins/jen
     
       <item>
         <title>우분투(Ubuntu) 서버(Server) 18.04 설치하기</title>
-        <description>&lt;p&gt;우분투(ubuntu) server 18.04는 ubuntu server 16.04와 비교해 새로운 기능과 개선 사항으로 많은 변화가 있으며, 릴리스의 코드 이름은 ‘Bionic Beaver’입니다. &lt;br /&gt;
+        <description>&lt;p&gt;우분투(ubuntu) server 18.04는 ubuntu server 16.04와 비교해 새로운 기능과 개선 사항으로 많은 변화가 있으며, 릴리스의 코드 이름은 ‘Bionic Beaver’입니다.
+&lt;br /&gt;&lt;br /&gt;
 이 포스트에서는 VMware Workstation에 ubuntu server 18.04 LTS를 설치하는 방법을 소개합니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;선행조건prerequisite&quot;&gt;선행조건(PREREQUISITE)&lt;/h2&gt;
@@ -6186,7 +6187,8 @@ DHCP에 대한 자세한 정보는 &lt;a href=&quot;https://ko.wikipedia.org/wik
 &lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-054.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-054&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
-&lt;p&gt;VMware Workstation에 Ubuntu 18.04.3 LTS (Bionic Beaver) Server 설치를 완료했습니다. &lt;br /&gt;
+&lt;p&gt;VMware Workstation에 Ubuntu 18.04.3 LTS (Bionic Beaver) Server 설치를 완료했습니다.
+&lt;br /&gt;&lt;br /&gt;
 다음 포스트에서는 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-initial-setting/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 서버(Server) 초기 설정하기&lt;/a&gt;를 소개하겠습니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;
@@ -6681,9 +6683,10 @@ linux 입문자 또는 오픈소스 소프트웨어에 관심이 있다면, Ubun
     
       <item>
         <title>우분투(Ubuntu) 환경에 방화벽(Firewalld) 설치 및 설정하기</title>
-        <description>&lt;p&gt;방화벽(firewalld)은 IPv4, IPv6, 이더넷 브리지 및 IPSet의 방화벽(firewall) 설정을 지원하는 리눅스(linux) firewall 관리 도구입니다. &lt;br /&gt;
-firewalld는 linux 커널 netfilter 프레임워크의 프런트 엔드 역할을 하며, RHEL 7 제품군의 기본 firewall 관리 소프트웨어입니다. &lt;br /&gt;
-우분투(ubuntu)의 기본 firewall 시스템은 UFW(uncomplicated firewall)이지만, firewalld를 설치하고 사용할 수 있습니다. &lt;br /&gt;
+        <description>&lt;p&gt;방화벽(firewalld)은 IPv4, IPv6, 이더넷 브리지 및 IPSet의 방화벽(firewall) 설정을 지원하는 리눅스(linux) firewall 관리 도구이며, linux 커널 netfilter 프레임워크의 프런트 엔드 역할을 하는 RHEL 7 제품군의 기본 firewall 관리 소프트웨어입니다.
+&lt;br /&gt;&lt;br /&gt;
+우분투(ubuntu)의 기본 firewall 시스템은 UFW(uncomplicated firewall)이지만, firewalld를 설치하여 사용할 수 있습니다.
+&lt;br /&gt;&lt;br /&gt;
 이 포스트에서는 ubuntu 환경에서 패키지로 firewalld를 설치하고 설정하는 방법을 소개합니다.&lt;/p&gt;
 
 &lt;blockquote&gt;
@@ -6757,7 +6760,8 @@ firewalld는 linux 커널 netfilter 프레임워크의 프런트 엔드 역할�
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
-&lt;p&gt;ubuntu 환경에 패키지로 firewalld 설치 및 설정을 완료했습니다. &lt;br /&gt;
+&lt;p&gt;ubuntu 환경에 패키지로 firewalld 설치 및 설정을 완료했습니다.
+&lt;br /&gt;&lt;br /&gt;
 firewalld는 CentOS 7부터 이전의 Iptables를 대체해 새롭게 선보인 패킷 필터링 firewall 프로그램입니다. &lt;br /&gt;
 다음 포스트에서는 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-ufw-setting/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 환경에 방화벽(UFW) 설정하기&lt;/a&gt;를 소개하겠습니다.&lt;/p&gt;
 
@@ -6772,6 +6776,8 @@ firewalld는 CentOS 7부터 이전의 Iptables를 대체해 새롭게 선보인 
         <guid isPermaLink="true">https://lindarex.github.io/ubuntu/ubuntu-firewalld-installation/</guid>
         
         <category>firewalld</category>
+        
+        <category>firewall</category>
         
         <category>ubuntu</category>
         

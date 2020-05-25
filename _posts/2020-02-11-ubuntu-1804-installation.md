@@ -9,7 +9,8 @@ tags:
 ---
 
 
-우분투(ubuntu) server 18.04는 ubuntu server 16.04와 비교해 새로운 기능과 개선 사항으로 많은 변화가 있으며, 릴리스의 코드 이름은 'Bionic Beaver'입니다. <br />
+우분투(ubuntu) server 18.04는 ubuntu server 16.04와 비교해 새로운 기능과 개선 사항으로 많은 변화가 있으며, 릴리스의 코드 이름은 'Bionic Beaver'입니다.
+<br /><br />
 이 포스트에서는 VMware Workstation에 ubuntu server 18.04 LTS를 설치하는 방법을 소개합니다.
 
 
@@ -256,7 +257,8 @@ tags:
 
 
 ## 마무리(CONCLUSION)
-VMware Workstation에 Ubuntu 18.04.3 LTS (Bionic Beaver) Server 설치를 완료했습니다. <br />
+VMware Workstation에 Ubuntu 18.04.3 LTS (Bionic Beaver) Server 설치를 완료했습니다.
+<br /><br />
 다음 포스트에서는 [우분투(Ubuntu) 서버(Server) 초기 설정하기](https://lindarex.github.io/ubuntu/ubuntu-initial-setting/){: target="\_blank"}를 소개하겠습니다.
 
 

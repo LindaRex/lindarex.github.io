@@ -4,13 +4,15 @@ categories:
   - ubuntu
 tags: 
   - firewalld
+  - firewall
   - ubuntu
 ---
 
 
-방화벽(firewalld)은 IPv4, IPv6, 이더넷 브리지 및 IPSet의 방화벽(firewall) 설정을 지원하는 리눅스(linux) firewall 관리 도구입니다. <br />
-firewalld는 linux 커널 netfilter 프레임워크의 프런트 엔드 역할을 하며, RHEL 7 제품군의 기본 firewall 관리 소프트웨어입니다. <br />
-우분투(ubuntu)의 기본 firewall 시스템은 UFW(uncomplicated firewall)이지만, firewalld를 설치하고 사용할 수 있습니다. <br />
+방화벽(firewalld)은 IPv4, IPv6, 이더넷 브리지 및 IPSet의 방화벽(firewall) 설정을 지원하는 리눅스(linux) firewall 관리 도구이며, linux 커널 netfilter 프레임워크의 프런트 엔드 역할을 하는 RHEL 7 제품군의 기본 firewall 관리 소프트웨어입니다.
+<br /><br />
+우분투(ubuntu)의 기본 firewall 시스템은 UFW(uncomplicated firewall)이지만, firewalld를 설치하여 사용할 수 있습니다.
+<br /><br />
 이 포스트에서는 ubuntu 환경에서 패키지로 firewalld를 설치하고 설정하는 방법을 소개합니다.
 
 > UFW 설정 방법은 [우분투(Ubuntu) 환경에 방화벽(UFW) 설정하기](https://lindarex.github.io/ubuntu/ubuntu-ufw-setting/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
@@ -80,7 +82,8 @@ public
 
 
 ## 마무리(CONCLUSION)
-ubuntu 환경에 패키지로 firewalld 설치 및 설정을 완료했습니다. <br />
+ubuntu 환경에 패키지로 firewalld 설치 및 설정을 완료했습니다.
+<br /><br />
 firewalld는 CentOS 7부터 이전의 Iptables를 대체해 새롭게 선보인 패킷 필터링 firewall 프로그램입니다. <br />
 다음 포스트에서는 [우분투(Ubuntu) 환경에 방화벽(UFW) 설정하기](https://lindarex.github.io/ubuntu/ubuntu-ufw-setting/){: target="\_blank"}를 소개하겠습니다.
 

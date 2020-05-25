@@ -6,8 +6,8 @@
     <description>오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 블로그입니다 | It shares technologies such as open source software, cloud computing, PaaS and container platforms</description>
     <link>https://lindarex.github.io/</link>
     <atom:link href="https://lindarex.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 12 May 2020 10:23:30 +0900</pubDate>
-    <lastBuildDate>Tue, 12 May 2020 10:23:30 +0900</lastBuildDate>
+    <pubDate>Mon, 25 May 2020 17:47:36 +0900</pubDate>
+    <lastBuildDate>Mon, 25 May 2020 17:47:36 +0900</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
@@ -2891,7 +2891,9 @@ iptables 설정을 통해 서버(server) 보안을 많이 향상할 수 있지�
 &lt;/ul&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;Bare metal이란 소프트웨어가 설치되어 있지 않은 단일 테넌트(single-tenant) 물리적 하드웨어를 의미하며, 가상화 및 cloud 호스팅(hosting)과 구별하기 위해 사용됩니다. bare metal에 대한 자세한 정보는 &lt;a href=&quot;https://en.wikipedia.org/wiki/Bare-metal_server&quot; target=&quot;\_blank&quot;&gt;https://en.wikipedia.org/wiki/Bare-metal_server&lt;/a&gt;를 확인해 주시기 바랍니다.&lt;/p&gt;
+  &lt;p&gt;Bare metal이란 소프트웨어가 설치되어 있지 않은 단일 테넌트(single-tenant) 물리적 하드웨어를 의미하며, 가상화 및 cloud 호스팅(hosting)과 구별하기 위해 사용됩니다.
+&lt;br /&gt;&lt;br /&gt;
+bare metal에 대한 자세한 정보는 &lt;a href=&quot;https://en.wikipedia.org/wiki/Bare-metal_server&quot; target=&quot;\_blank&quot;&gt;https://en.wikipedia.org/wiki/Bare-metal_server&lt;/a&gt;를 확인해 주시기 바랍니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h3 id=&quot;2-cfarcloud-foundry-application-runtime&quot;&gt;2. CFAR(cloud foundry application runtime)&lt;/h3&gt;
@@ -2900,7 +2902,7 @@ iptables 설정을 통해 서버(server) 보안을 많이 향상할 수 있지�
 &lt;/ul&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;CFAR에 대한 자세한 설명은 &lt;a href=&quot;https://lindarex.github.io/cfar/cfar-introduction/&quot; target=&quot;\_blank&quot;&gt;클라우드 파운드리(Cloud Foundry, CFAR) 소개&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
+  &lt;p&gt;CFAR에 대한 자세한 설명은 &lt;a href=&quot;https://lindarex.github.io/cfar/cloud-foundry-cfar-introduction/&quot; target=&quot;\_blank&quot;&gt;클라우드 파운드리(Cloud Foundry, CFAR) 소개&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h3 id=&quot;3-cfcrcloud-foundry-container-runtime&quot;&gt;3. CFCR(cloud foundry container runtime)&lt;/h3&gt;
@@ -2912,7 +2914,9 @@ iptables 설정을 통해 서버(server) 보안을 많이 향상할 수 있지�
 &lt;/ul&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;Certified Kubernetes란 CNCF(Cloud Native Computing Foundation)의 Kubernetes Software Conformance Certification Program으로 kubernetes의 목표인 일관성과 휴대성을 위한 검토와 인증에 대한 적합성 시험 결과를 CNCF로 제출하여, CNCF로부터 준수 구현을 공식적으로 인증받은 것을 의미합니다. Certified Kubernetes에 대한 자세한 정보는 &lt;a href=&quot;https://www.cncf.io/certification/software-conformance/&quot; target=&quot;\_blank&quot;&gt;https://www.cncf.io/certification/software-conformance/&lt;/a&gt;를 확인해 주시기 바랍니다.&lt;/p&gt;
+  &lt;p&gt;Certified Kubernetes란 CNCF(Cloud Native Computing Foundation)의 Kubernetes Software Conformance Certification Program으로 kubernetes의 목표인 일관성과 휴대성을 위한 검토와 인증에 대한 적합성 시험 결과를 CNCF로 제출하여, CNCF로부터 준수 구현을 공식적으로 인증받은 것을 의미합니다.
+&lt;br /&gt;&lt;br /&gt;
+Certified Kubernetes에 대한 자세한 정보는 &lt;a href=&quot;https://www.cncf.io/certification/software-conformance/&quot; target=&quot;\_blank&quot;&gt;https://www.cncf.io/certification/software-conformance/&lt;/a&gt;를 확인해 주시기 바랍니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h3 id=&quot;4-quarks&quot;&gt;4. Quarks&lt;/h3&gt;
@@ -2925,7 +2929,11 @@ iptables 설정을 통해 서버(server) 보안을 많이 향상할 수 있지�
 &lt;/ul&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;helm은 Kubernetes의 package 관리자이며, helm을 사용하면 application 및 리소스(resources)를 Kubernetes cluster에 쉽게 설치할 수 있습니다. helm charts는 Kubernetes resources 세트를 Kubernetes cluster에 설치하기 위한 helm package이며, helm charts에는 chart.yaml, templates, values.yaml 및 의존성(dependencies)이 포함됩니다. helm에 대한 자세한 정보는 &lt;a href=&quot;https://helm.sh/&quot; target=&quot;\_blank&quot;&gt;https://helm.sh/&lt;/a&gt;를 확인해 주시기 바랍니다.&lt;/p&gt;
+  &lt;p&gt;helm은 Kubernetes의 package 관리자이며, helm을 사용하면 application 및 리소스(resources)를 Kubernetes cluster에 쉽게 설치할 수 있습니다.
+&lt;br /&gt;&lt;br /&gt;
+helm charts는 Kubernetes resources 세트를 Kubernetes cluster에 설치하기 위한 helm package이며, helm charts에는 chart.yaml, templates, values.yaml 및 의존성(dependencies)이 포함됩니다.
+&lt;br /&gt;&lt;br /&gt;
+helm에 대한 자세한 정보는 &lt;a href=&quot;https://helm.sh/&quot; target=&quot;\_blank&quot;&gt;https://helm.sh/&lt;/a&gt;를 확인해 주시기 바랍니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h3 id=&quot;5-eirini&quot;&gt;5. Eirini&lt;/h3&gt;
@@ -2944,7 +2952,8 @@ iptables 설정을 통해 서버(server) 보안을 많이 향상할 수 있지�
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
-&lt;p&gt;Cloud Foundry projects를 살펴보았습니다. &lt;br /&gt;
+&lt;p&gt;Cloud Foundry projects를 살펴보았습니다.
+&lt;br /&gt;&lt;br /&gt;
 BOSH는 Cloud Foundry projects에 기반이 되는 프로젝트이고, CFAR을 제외한 나머지 CFCR, Quarks, Eirini 등의 공통 키워드는 Kubernetes입니다. 더 말이 필요 없는 kubernetes… &lt;br /&gt;
 다음 포스트에서는 kubernetes 소개와 CFAR을 설치하는 방법을 소개하겠습니다.&lt;/p&gt;
 
@@ -2982,9 +2991,12 @@ BOSH는 Cloud Foundry projects에 기반이 되는 프로젝트이고, CFAR을 �
     
       <item>
         <title>클라우드 파운드리(Cloud Foundry, CFAR) 소개</title>
-        <description>&lt;p&gt;클라우드 파운드리(Cloud Foundry)는 과거에 PaaS(platform as a service)와 재단을 가리키는 용어였지만, 현재는 PaaS를 뜻하는 Cloud Foundry는 CFAR(cloud foundry application runtime)로 대체되었습니다. &lt;br /&gt;
-CFAR은 개방형 기여(contribution) 및 개방형 거버넌스 모델(governance model)을 갖춘 Apache License 2.0으로 배포된 오픈소스 클라우드 애플리케이션 플랫폼(open source cloud application platform)입니다. &lt;br /&gt;
-사용자가 업체(vendor)에 종속되지 않도록 유연성을 제공하고, 애플리케이션(application)을 더 빠르고 쉽게 구축(build)하여 테스트(test)하고 배포(deploy)하며 확장할 수 있는 기능을 제공합니다. &lt;br /&gt;
+        <description>&lt;p&gt;클라우드 파운드리(Cloud Foundry)는 과거에 PaaS(platform as a service)와 재단을 가리키는 용어였지만, 현재는 PaaS를 뜻하는 Cloud Foundry는 CFAR(cloud foundry application runtime)로 대체되었습니다.
+&lt;br /&gt;&lt;br /&gt;
+CFAR은 개방형 기여(contribution) 및 개방형 거버넌스 모델(governance model)을 갖춘 Apache License 2.0으로 배포된 오픈소스 클라우드 애플리케이션 플랫폼(open source cloud application platform)입니다.
+&lt;br /&gt;&lt;br /&gt;
+사용자가 업체(vendor)에 종속되지 않도록 유연성을 제공하고, 애플리케이션(application)을 더 빠르고 쉽게 구축(build)하여 테스트(test)하고 배포(deploy)하며 확장할 수 있는 기능을 제공합니다.
+&lt;br /&gt;&lt;br /&gt;
 이 포스트에서는 CFAR을 소개합니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;내용contents&quot;&gt;내용(CONTENTS)&lt;/h2&gt;
@@ -2996,7 +3008,9 @@ CFAR은 개방형 기여(contribution) 및 개방형 거버넌스 모델(governa
 &lt;/ul&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;국내에서는 한국정보화진흥원(NIA, National Information Society Agency)에서 2014년부터 CFAR을 이용한 PaaS 아키텍처와 기능 분석을 시작했고, 2016년에 CFAR과 개발 도구 및 운영 도구를 패키징한 &lt;a href=&quot;https://paas-ta.kr/&quot; target=&quot;\_blank&quot;&gt;PaaS-TA&lt;/a&gt;라는 open source PaaS 플랫폼(platform)을 공개했습니다. 2016년에 버전 1.0을 시작으로 다양한 서비스(service)와 버전 업그레이드를 통해 코스콤, KT, LG CNS, SK 등 민간 기업과 협력하면서 2019년에 버전 5.0까지 배포되었습니다.&lt;/p&gt;
+  &lt;p&gt;국내에서는 한국정보화진흥원(NIA, National Information Society Agency)에서 2014년부터 CFAR을 이용한 PaaS 아키텍처와 기능 분석을 시작했고, 2016년에 CFAR과 개발 도구 및 운영 도구를 패키징한 &lt;a href=&quot;https://paas-ta.kr/&quot; target=&quot;\_blank&quot;&gt;PaaS-TA&lt;/a&gt;라는 open source PaaS 플랫폼(platform)을 공개했습니다.
+&lt;br /&gt;&lt;br /&gt;
+2016년 버전 1.0을 시작으로 다양한 서비스(service)와 버전 업그레이드를 통해 코스콤, KT, LG CNS, SK 등 민간 기업과 협력하면서 2019년에 버전 5.0까지 배포되었습니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;blockquote&gt;
@@ -3004,26 +3018,35 @@ CFAR은 개방형 기여(contribution) 및 개방형 거버넌스 모델(governa
 &lt;/blockquote&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;IaaS(infrastructure as a service)란 서버(server) 자원(resource), 네트워크(network), 스토리지(storage) 등 인프라(infra) resources을 쉽고 편하게 이용할 수 있는 cloud service 형태로 제공하는 것을 의미하며, PaaS와 SaaS(software as a service)의 기반입니다. 
+  &lt;p&gt;IaaS(infrastructure as a service)란 서버(server) 자원(resource), 네트워크(network), 스토리지(storage) 등 인프라(infra) resources을 쉽고 편하게 이용할 수 있는 cloud service 형태로 제공하는 것을 의미하며, PaaS와 SaaS(software as a service)의 기반입니다.
+&lt;br /&gt;&lt;br /&gt;
 server 가상화, 데스크톱 가상화 등의 기술로 구현되며, 대표적으로 AWS EC2(Elastic Cloud Compute), MS Azure, Google compute engine, OpenStack 등이 있습니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;PaaS란 platform as a service의 약자로 application 개발을 위한 infra를 구축하고 유지보수하는 복잡함 없이, application을 개발하고 실행 및 관리할 있는 platform을 제공하는 service를 의미합니다. 
+  &lt;p&gt;PaaS란 platform as a service의 약자로 application 개발을 위한 infra를 구축하고 유지보수하는 복잡함 없이, application을 개발하고 실행 및 관리할 있는 platform을 제공하는 service를 의미합니다.
+&lt;br /&gt;&lt;br /&gt;
 대표적인 상용 PaaS로는 Pivotal Cloud Foundry, Google App Engine, Oracle Cloud Platform, Heroku 등이 있습니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;SaaS는 cloud 환경에서 동작하는 application을 service 형태로 제공하는 것으로 software as a service의 약자입니다. 
+  &lt;p&gt;SaaS는 cloud 환경에서 동작하는 application을 service 형태로 제공하는 것으로 software as a service의 약자입니다.
+&lt;br /&gt;&lt;br /&gt;
 주문형 소프트웨어(on-demand software)라고도 하며, 대표적으로 Google Gmail, Google docs, Dropbox 등이 있습니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;Buildpack이란 application을 CFAR로 배포(push)할 때, application에 대한 프레임워크(framework) 및 런타임(runtime) 지원을 제공합니다. CFAR은 push 되는 application을 검사하여 적합한 buildpack을 감지하고, 이 buildpack은 내려받을 종속성(dependencies)을 결정하고 바인딩(binding) 된 service와 통신하도록 application 구성을 설정합니다. buildpack에 대한 자세한 정보는 &lt;a href=&quot;https://docs.cloudfoundry.org/buildpacks/&quot; target=&quot;\_blank&quot;&gt;https://docs.cloudfoundry.org/buildpacks/&lt;/a&gt;를 확인해 주시기 바랍니다.&lt;/p&gt;
+  &lt;p&gt;Buildpack이란 application을 CFAR로 배포(push)할 때, application에 대한 프레임워크(framework) 및 런타임(runtime) 지원을 제공합니다.
+&lt;br /&gt;&lt;br /&gt;
+CFAR은 push 되는 application을 검사하여 적합한 buildpack을 감지하고, 이 buildpack은 내려받을 종속성(dependencies)을 결정하고 바인딩(binding) 된 service와 통신하도록 application 구성을 설정합니다.
+&lt;br /&gt;&lt;br /&gt;
+buildpack에 대한 자세한 정보는 &lt;a href=&quot;https://docs.cloudfoundry.org/buildpacks/&quot; target=&quot;\_blank&quot;&gt;https://docs.cloudfoundry.org/buildpacks/&lt;/a&gt;를 확인해 주시기 바랍니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;바인딩(binding)이란 일반적으로 하나를 다른 것으로 매핑시키는 것을 의미합니다. Cloud Foundry에서 binding은 service instance를 push 된 application에 연결 또는 연관(association)시키는 것이며, 반대는 unbinding입니다.&lt;/p&gt;
+  &lt;p&gt;바인딩(binding)이란 일반적으로 하나를 다른 것으로 매핑시키는 것을 의미합니다.
+&lt;br /&gt;&lt;br /&gt;
+Cloud Foundry에서 binding은 service instance를 push 된 application에 연결 또는 연관(association)시키는 것이며, 반대는 unbinding입니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h3 id=&quot;1-역사history&quot;&gt;1. 역사(history)&lt;/h3&gt;
@@ -3197,8 +3220,11 @@ server 가상화, 데스크톱 가상화 등의 기술로 구현되며, 대표�
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
-&lt;p&gt;CFAR에 대한 소개와 architecture, component 등을 살펴보았습니다. &lt;br /&gt;
-CFAR을 비롯해서 Cloud, PaaS, IaaS, SaaS 등의 기술 트랜드는 선택이 아닌 필수가 되었습니다. 대기업 및 금융권 등 현업에서는 Cloud 전환 프로젝트가 빠르게 진행 중이고, 공공 기관에서도 위에 소개한 PaaS-TA를 이용한 다양한 과제가 진행되고 있습니다. CFAR에 대한 더 자세한 내용은 앞으로 다양한 포스트로 소개할 예정입니다. &lt;br /&gt;
+&lt;p&gt;CFAR에 대한 소개와 architecture, component 등을 살펴보았습니다.
+&lt;br /&gt;&lt;br /&gt;
+CFAR을 비롯해서 Cloud, PaaS, IaaS, SaaS 등의 기술 트랜드는 선택이 아닌 필수가 되었습니다. 대기업 및 금융권 등 현업에서는 Cloud 전환 프로젝트가 빠르게 진행 중이고, 공공 기관에서도 위에 소개한 PaaS-TA를 이용한 다양한 과제가 진행되고 있습니다.
+&lt;br /&gt;&lt;br /&gt;
+CFAR에 대한 더 자세한 내용은 앞으로 다양한 포스트로 소개할 예정입니다.
 다음 포스트에서는 &lt;a href=&quot;https://lindarex.github.io/cfar/cloud-foundry-projects-introduction/&quot; target=&quot;\_blank&quot;&gt;클라우드 파운드리(Cloud Foundry) 프로젝트(projects)&lt;/a&gt;를 소개하겠습니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;
@@ -3215,8 +3241,8 @@ CFAR을 비롯해서 Cloud, PaaS, IaaS, SaaS 등의 기술 트랜드는 선택�
 
 </description>
         <pubDate>Tue, 25 Feb 2020 00:00:00 +0900</pubDate>
-        <link>https://lindarex.github.io/cfar/cfar-introduction/</link>
-        <guid isPermaLink="true">https://lindarex.github.io/cfar/cfar-introduction/</guid>
+        <link>https://lindarex.github.io/cfar/cloud-foundry-cfar-introduction/</link>
+        <guid isPermaLink="true">https://lindarex.github.io/cfar/cloud-foundry-cfar-introduction/</guid>
         
         <category>cloud foundry</category>
         

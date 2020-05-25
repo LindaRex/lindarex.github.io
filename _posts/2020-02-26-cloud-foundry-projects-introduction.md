@@ -37,13 +37,15 @@ tags:
 - CPI는 BOSH가 infra와 상호 작용하여 stemcell, VM 및 디스크(disk)를 생성하고 관리하는 데 사용하는 API입니다.
 - BOSH는 초기에 CFAR을 배포하기 위해 생성되었지만, 현재는 다른 환경에서 모든 종류의 application을 package하고 관리하기 위해 사용되고 있습니다. 
 
-> Bare metal이란 소프트웨어가 설치되어 있지 않은 단일 테넌트(single-tenant) 물리적 하드웨어를 의미하며, 가상화 및 cloud 호스팅(hosting)과 구별하기 위해 사용됩니다. bare metal에 대한 자세한 정보는 [https://en.wikipedia.org/wiki/Bare-metal_server](https://en.wikipedia.org/wiki/Bare-metal_server){: target="\_blank"}를 확인해 주시기 바랍니다.
+> Bare metal이란 소프트웨어가 설치되어 있지 않은 단일 테넌트(single-tenant) 물리적 하드웨어를 의미하며, 가상화 및 cloud 호스팅(hosting)과 구별하기 위해 사용됩니다.
+<br /><br />
+bare metal에 대한 자세한 정보는 [https://en.wikipedia.org/wiki/Bare-metal_server](https://en.wikipedia.org/wiki/Bare-metal_server){: target="\_blank"}를 확인해 주시기 바랍니다.
 
 
 ### 2. CFAR(cloud foundry application runtime)
 - CFAR은 클라우드 환경과 개발 프레임워크, application 서비스(service)를 선택할 수 있으며, application을 빠르고 쉽게 구축하고 테스트하여 deploy 할 수 있는, 완전한 application lifecycle을 지원하는 open source multi cloud application PaaS(platform as a service)입니다.
 
-> CFAR에 대한 자세한 설명은 [클라우드 파운드리(Cloud Foundry, CFAR) 소개](https://lindarex.github.io/cfar/cfar-introduction/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
+> CFAR에 대한 자세한 설명은 [클라우드 파운드리(Cloud Foundry, CFAR) 소개](https://lindarex.github.io/cfar/cloud-foundry-cfar-introduction/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
 
 ### 3. CFCR(cloud foundry container runtime)
 - CFCR은 kubernetes를 사용하여 container를 더 세밀하게 제어하고 관리할 수 ​​있는 기능을 제공합니다.
@@ -51,7 +53,9 @@ tags:
 - CFCR은 2017년 11월에 kubernetes 적합성 인증(Certified Kubernetes)을 받았고, BOSH를 사용하여 cloud platform에서 고가용성(high availability)의 kubernetes 클러스터(cluster)를 인스턴스화하고 deploy 및 관리할 수 있는 기능을 제공합니다.
 - kubernetes와 BOSH의 조합으로 BOSH를 통해 deploy 및 lifecycle를 관리하면, kubernetes cluster의 스케일링(scaling)과 VM healing, 롤링 업그레이드(rolling upgrade)를 할 수 있습니다.
 
-> Certified Kubernetes란 CNCF(Cloud Native Computing Foundation)의 Kubernetes Software Conformance Certification Program으로 kubernetes의 목표인 일관성과 휴대성을 위한 검토와 인증에 대한 적합성 시험 결과를 CNCF로 제출하여, CNCF로부터 준수 구현을 공식적으로 인증받은 것을 의미합니다. Certified Kubernetes에 대한 자세한 정보는 [https://www.cncf.io/certification/software-conformance/](https://www.cncf.io/certification/software-conformance/){: target="\_blank"}를 확인해 주시기 바랍니다.
+> Certified Kubernetes란 CNCF(Cloud Native Computing Foundation)의 Kubernetes Software Conformance Certification Program으로 kubernetes의 목표인 일관성과 휴대성을 위한 검토와 인증에 대한 적합성 시험 결과를 CNCF로 제출하여, CNCF로부터 준수 구현을 공식적으로 인증받은 것을 의미합니다.
+<br /><br />
+Certified Kubernetes에 대한 자세한 정보는 [https://www.cncf.io/certification/software-conformance/](https://www.cncf.io/certification/software-conformance/){: target="\_blank"}를 확인해 주시기 바랍니다.
 
 ### 4. Quarks
 - Project Quarks(quarks)는 Cloud Foundry Foundation 내의 incubating project로, CFAR을 VM 대신 container로 패키징하여 kubernetes에 쉽게 deploy 할 수 있는 기능을 제공합니다. 
@@ -60,7 +64,11 @@ tags:
 - kubernetes는 CFAR instance의 자동 확장 및 실패한 노드(node)를 복구하는 기능을 제공합니다. 
 - kubernetes를 기본 infra로 사용하면 quarks를 모든 private 또는 public cloud에 쉽게 deploy 할 수 있습니다.
 
-> helm은 Kubernetes의 package 관리자이며, helm을 사용하면 application 및 리소스(resources)를 Kubernetes cluster에 쉽게 설치할 수 있습니다. helm charts는 Kubernetes resources 세트를 Kubernetes cluster에 설치하기 위한 helm package이며, helm charts에는 chart.yaml, templates, values.yaml 및 의존성(dependencies)이 포함됩니다. helm에 대한 자세한 정보는 [https://helm.sh/](https://helm.sh/){: target="\_blank"}를 확인해 주시기 바랍니다.
+> helm은 Kubernetes의 package 관리자이며, helm을 사용하면 application 및 리소스(resources)를 Kubernetes cluster에 쉽게 설치할 수 있습니다.
+<br /><br />
+helm charts는 Kubernetes resources 세트를 Kubernetes cluster에 설치하기 위한 helm package이며, helm charts에는 chart.yaml, templates, values.yaml 및 의존성(dependencies)이 포함됩니다.
+<br /><br />
+helm에 대한 자세한 정보는 [https://helm.sh/](https://helm.sh/){: target="\_blank"}를 확인해 주시기 바랍니다.
 
 ### 5. Eirini
 - Project Eirini(eirini)는 Cloud Foundry Foundation 내의 incubating project로, CFAR을 위한 플러그형 스케줄링을 가능하게 하며 application container instance를 조정하기 위해 Diego/Garden 또는 Kubernetes 중에서 선택할 수 있습니다. 
@@ -75,7 +83,8 @@ tags:
 
 
 ## 마무리(CONCLUSION)
-Cloud Foundry projects를 살펴보았습니다. <br />
+Cloud Foundry projects를 살펴보았습니다.
+<br /><br />
 BOSH는 Cloud Foundry projects에 기반이 되는 프로젝트이고, CFAR을 제외한 나머지 CFCR, Quarks, Eirini 등의 공통 키워드는 Kubernetes입니다. 더 말이 필요 없는 kubernetes... <br />
 다음 포스트에서는 kubernetes 소개와 CFAR을 설치하는 방법을 소개하겠습니다.
 

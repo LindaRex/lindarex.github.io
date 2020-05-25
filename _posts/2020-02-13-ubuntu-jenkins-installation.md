@@ -8,8 +8,10 @@ tags:
 ---
 
 
-젠킨스(Jenkins)는 MIT license로 오픈소스(open source) 소프트웨어이며, 소프트웨어 개발 시 지속적 통합(CI, continuous integration) 서비스(service)를 제공하는 자동화 서버(server)입니다. <br />
-jenkins는 모든 프로젝트의 빌드(build)와 배포(deploy), 자동화를 지원하며, 수백 개의 플러그인(plugin)을 제공합니다. <br />
+젠킨스(Jenkins)는 MIT license로 오픈소스(open source) 소프트웨어이며, 소프트웨어 개발 시 지속적 통합(CI, continuous integration) 서비스(service)를 제공하는 자동화 서버(server)입니다.
+<br /><br />
+jenkins는 모든 프로젝트의 빌드(build)와 배포(deploy), 자동화를 지원하며, 수백 개의 플러그인(plugin)을 제공합니다.
+<br /><br />
 이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 jenkins를 설치하는 방법을 소개합니다.
 
 
@@ -142,8 +144,10 @@ $ sudo systemctl kill jenkins.service
 
 
 ## 마무리(CONCLUSION)
-ubuntu 환경에 package로 jenkins 설치를 완료했습니다. <br />
-jenkins 초기 설정은 [젠킨스(Jenkins) 초기 설정하기](https://lindarex.github.io/jenkins/jenkins-initial-setting/){: target="\_blank"} 포스트를 참고하시기 바랍니다. <br />
+ubuntu 환경에 package로 jenkins 설치를 완료했습니다.
+<br /><br />
+jenkins 초기 설정은 [젠킨스(Jenkins) 초기 설정하기](https://lindarex.github.io/jenkins/jenkins-initial-setting/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
+<br /><br />
 다음 포스트에서는 [우분투(Ubuntu) 환경에 WAR 파일로 젠킨스(Jenkins) 설치하기](https://lindarex.github.io/jenkins/ubuntu-jenkins-war-installation/){: target="\_blank"}를 소개하겠습니다.
 
 

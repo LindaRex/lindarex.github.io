@@ -9,8 +9,10 @@ tags:
 ---
 
 
-우분투(ubuntu)는 데비안(debian) 리눅스(linux) 기반으로, debian에 비해 사용자 편의성에 초점을 맞춘 linux 배포판이며 컴퓨터 운영체제(OS, operating system)입니다. <br />
-새로운 버전은 6개월마다, 장기 지원 버전(LTS, long term support)은 2년에 한 번씩 출시되고, 다양한 언어를 지원하고 낮은 사양의 컴퓨터에서도 작동하도록 설계되어 있습니다. <br />
+우분투(ubuntu)는 데비안(debian) 리눅스(linux) 기반으로, debian에 비해 사용자 편의성에 초점을 맞춘 linux 배포판이며 컴퓨터 운영체제(OS, operating system)입니다.
+<br /><br />
+새로운 버전은 6개월마다, 장기 지원 버전(LTS, long term support)은 2년에 한 번씩 출시되고, 다양한 언어를 지원하고 낮은 사양의 컴퓨터에서도 작동하도록 설계되어 있습니다.
+<br /><br />
 이 포스트에서는 VMware Workstation에 ubuntu server 16.04 LTS를 설치하는 방법을 소개합니다.
 
 
@@ -92,7 +94,6 @@ tags:
 - 'Use network address translation (NAT)'를 선택하고 'Next'를 클릭합니다.
 
 > Network type에 대한 자세한 정보는 [VMware Workstation의 가상 네트워크(Virtual Network) 알아보기](https://lindarex.github.io/vmware-workstation/vmware-workstation-virtual-network/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
-
 
 ![lindarex-ubuntu-1604-installation-012]
 
@@ -313,8 +314,10 @@ tags:
 
 
 ## 마무리(CONCLUSION)
-VMware Workstation에 Ubuntu 16.04.6 LTS (Xenial Xerus) Server 설치를 완료했습니다. <br />
-2020년 2월 12일 [W3Techs.com 통계](https://w3techs.com/technologies/details/os-linux){: target="\_blank"}에 따르면, ubuntu 점유율은 linux 배포판을 사용하는 웹사이트 중 1위(38.9%)로, 2위인 debian(18.4%)의 2배 이상 차이가 납니다. 또한 대부분의 오픈소스 소프트웨어는 Ubuntu를 지원하고, 국내외 사용자와 레퍼런스가 많습니다. <br />
+VMware Workstation에 Ubuntu 16.04.6 LTS (Xenial Xerus) Server 설치를 완료했습니다.
+<br /><br />
+2020년 2월 12일 [W3Techs.com 통계](https://w3techs.com/technologies/details/os-linux){: target="\_blank"}에 따르면, ubuntu 점유율은 linux 배포판을 사용하는 웹사이트 중 1위(38.9%)로, 2위인 debian(18.4%)의 2배 이상 차이가 납니다. 또한 대부분의 오픈소스 소프트웨어는 Ubuntu를 지원하고, 국내외 사용자와 레퍼런스가 많습니다.
+<br /><br />
 linux 입문자 또는 오픈소스 소프트웨어에 관심이 있다면, Ubuntu를 사용하며 linux command를 숙지하고 다양한 커뮤니티에서 활동하는 것을 권합니다.
 
 

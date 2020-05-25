@@ -11,7 +11,8 @@ tags:
 ---
 
 
-VMware Workstation은 가상 머신(VM, virtual machine)을 생성하고 가상 네트워크(virtual network)를 구성할 수 있습니다. <br />
+VMware Workstation은 가상 머신(VM, virtual machine)을 생성하고 가상 네트워크(virtual network)를 구성할 수 있습니다.
+<br />
 이 포스트에서는 VMware Workstation의 virtual network에 대해 소개합니다.
 
 
@@ -66,10 +67,12 @@ VMware Workstation은 가상 머신(VM, virtual machine)을 생성하고 가상 
 
 
 ## 마무리(CONCLUSION)
-VMware Workstation의 virtual network에 대해 알아봤습니다. <br />
-위에 기재한 networking 개념은 VMware Workstation뿐만 아니라 모든 운영체제(OS, operating system), 특히 IaaS network 설정에 필요합니다. <br />
-대부분 로컬 테스트를 할 때, VMware Workstation의 virtual network 설정을 수정하는 경우는 드뭅니다. <br />
-하지만, 클라우드(cloud) 기반 프로젝트에서는 기본적인 network 개념을 충분히 이해하고 테스트할 필요가 있습니다. <br />
+VMware Workstation의 virtual network에 대해 알아봤습니다.
+<br /><br />
+위에 기재한 networking 개념은 VMware Workstation뿐만 아니라 모든 운영체제(OS, operating system), 특히 IaaS network 설정에 필요합니다.
+<br /><br />
+대부분 로컬 테스트를 할 때, VMware Workstation의 virtual network 설정을 수정하는 경우는 드물지만, 클라우드(cloud) 기반 프로젝트에서는 기본적인 network 개념을 충분히 이해하고 테스트할 필요가 있습니다.
+<br /><br />
 더 자세한 내용은 아래 참고 페이지를 확인해 주시기 바랍니다.
 
 

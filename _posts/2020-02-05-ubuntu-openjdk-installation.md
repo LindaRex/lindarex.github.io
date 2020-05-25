@@ -9,9 +9,10 @@ tags:
 ---
 
 
-OpenJDK는 Java 애플리케이션(application) 구축을 위한 오픈소스(open source) 기반의 JDK(Java Development Kit)입니다. <br />
-JDK는 JVM(Java Virtual Machine), JRE(Java Runtime Environment)와 함께 Java 프로그래밍에 필요한 핵심 기술 패키지(package)입니다. <br />
-JDK는 2개로 나뉘는데, 하나는 BCL(Oracle Binary Code License)의 Oracle JDK, 하나는 GNU GPL v2(GNU General Public License)의 OpenJDK입니다. <br />
+OpenJDK는 Java 애플리케이션(application) 구축을 위한 오픈소스(open source) 기반의 JDK(Java Development Kit)입니다.
+<br /><br />
+JDK는 JVM(Java Virtual Machine), JRE(Java Runtime Environment)와 함께 Java 프로그래밍에 필요한 핵심 기술 패키지(package)입니다. JDK는 2개로 나뉘는데, 하나는 BCL(Oracle Binary Code License)의 Oracle JDK, 하나는 GNU GPL v2(GNU General Public License)의 OpenJDK입니다.
+<br /><br />
 이 포스트에서는 우분투(Ubuntu) 환경에서 package로 OpenJDK를 설치하는 방법을 소개합니다.
 
 
@@ -117,11 +118,15 @@ $ sudo apt purge --auto-remove openjdk*
 
 
 ## 마무리(CONCLUSION)
-Ubuntu 환경에 package로 OpenJDK 설치를 완료했습니다. <br />
-JDK는 Java 프로그래밍에 필수 요소이며, 상당수의 open source 소프트웨어와 국내 SI(system integration) 프로젝트에서 JDK를 요구합니다. <br />
-정부 발주 프로젝트에 다수를 차지하는 SI 회사가 Java와 스프링 프레임워크(spring framework) 또는 Java와 전자정부표준프레임워크(eGov) 구성을 사용하기 때문에 Java의 인기는 시들지 않고 있습니다. <br />
-Java는 플랫폼에 독립적이고 수많은 개발자와 레퍼런스를 보유하고 있다는 장점과 속도 문제라는 단점을 가진 언어입니다. <br />
-국내 현업에서는 Java를 비롯한 여러 가지 언어가 자주 사용되므로 개발 환경이나 작업 특성에 따라 적합한 언어를 선택할 수 있는 지식과 노하우가 필요합니다.
+Ubuntu 환경에 package로 OpenJDK 설치를 완료했습니다.
+<br /><br />
+JDK는 Java 프로그래밍에 필수 요소이며, 상당수의 open source 소프트웨어와 국내 SI(system integration) 프로젝트에서 JDK를 요구합니다.
+<br /><br />
+정부 발주 프로젝트에 다수를 차지하는 SI 회사가 Java와 스프링 프레임워크(spring framework) 또는 Java와 전자정부표준프레임워크(eGov) 구성을 사용하기 때문에 Java의 인기는 시들지 않고 있습니다.
+<br /><br />
+Java는 플랫폼에 독립적이고 수많은 개발자와 레퍼런스를 보유하고 있다는 장점과 속도 문제라는 단점을 가진 언어입니다.
+<br /><br />
+국내 현업에서는 Java를 비롯한 여러 가지 언어가 자주 사용되므로, 개발 환경이나 작업 특성에 따라 적합한 언어를 선택할 수 있는 지식과 노하우가 필요합니다.
 
 
 ## 참고(REFERENCES)

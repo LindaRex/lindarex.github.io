@@ -9,9 +9,12 @@ tags:
 ---
 
 
-클라우드 파운드리(Cloud Foundry)는 과거에 PaaS(platform as a service)와 재단을 가리키는 용어였지만, 현재는 PaaS를 뜻하는 Cloud Foundry는 CFAR(cloud foundry application runtime)로 대체되었습니다. <br />
-CFAR은 개방형 기여(contribution) 및 개방형 거버넌스 모델(governance model)을 갖춘 Apache License 2.0으로 배포된 오픈소스 클라우드 애플리케이션 플랫폼(open source cloud application platform)입니다. <br />
-사용자가 업체(vendor)에 종속되지 않도록 유연성을 제공하고, 애플리케이션(application)을 더 빠르고 쉽게 구축(build)하여 테스트(test)하고 배포(deploy)하며 확장할 수 있는 기능을 제공합니다. <br />
+클라우드 파운드리(Cloud Foundry)는 과거에 PaaS(platform as a service)와 재단을 가리키는 용어였지만, 현재는 PaaS를 뜻하는 Cloud Foundry는 CFAR(cloud foundry application runtime)로 대체되었습니다.
+<br /><br />
+CFAR은 개방형 기여(contribution) 및 개방형 거버넌스 모델(governance model)을 갖춘 Apache License 2.0으로 배포된 오픈소스 클라우드 애플리케이션 플랫폼(open source cloud application platform)입니다.
+<br /><br />
+사용자가 업체(vendor)에 종속되지 않도록 유연성을 제공하고, 애플리케이션(application)을 더 빠르고 쉽게 구축(build)하여 테스트(test)하고 배포(deploy)하며 확장할 수 있는 기능을 제공합니다.
+<br /><br />
 이 포스트에서는 CFAR을 소개합니다.
 
 
@@ -21,22 +24,33 @@ CFAR은 개방형 기여(contribution) 및 개방형 거버넌스 모델(governa
 - CFAR은 초기 개발부터 test, 그리고 deploy에 이르는 완전한 application 수명 주기(lifecycle)를 지원하기 때문에 지속적 배포(CD, continuous delivery)에 적합합니다. 
 - CFAR은 루비(Ruby), 고언어(Go), 자바(Java)로 개발되었으며, BOSH deployment 스크립트(script)를 이용하여 IaaS에 deploy 합니다.
 
-> 국내에서는 한국정보화진흥원(NIA, National Information Society Agency)에서 2014년부터 CFAR을 이용한 PaaS 아키텍처와 기능 분석을 시작했고, 2016년에 CFAR과 개발 도구 및 운영 도구를 패키징한 [PaaS-TA](https://paas-ta.kr/){: target="\_blank"}라는 open source PaaS 플랫폼(platform)을 공개했습니다. 2016년에 버전 1.0을 시작으로 다양한 서비스(service)와 버전 업그레이드를 통해 코스콤, KT, LG CNS, SK 등 민간 기업과 협력하면서 2019년에 버전 5.0까지 배포되었습니다.
+> 국내에서는 한국정보화진흥원(NIA, National Information Society Agency)에서 2014년부터 CFAR을 이용한 PaaS 아키텍처와 기능 분석을 시작했고, 2016년에 CFAR과 개발 도구 및 운영 도구를 패키징한 [PaaS-TA](https://paas-ta.kr/){: target="\_blank"}라는 open source PaaS 플랫폼(platform)을 공개했습니다.
+<br /><br />
+2016년 버전 1.0을 시작으로 다양한 서비스(service)와 버전 업그레이드를 통해 코스콤, KT, LG CNS, SK 등 민간 기업과 협력하면서 2019년에 버전 5.0까지 배포되었습니다.
 
 > open source project인 CFAR을 상용화한 Pivotal Cloud Foundry(PCF)와 IBM Cloud(IBM Bluemix) 등은 전 세계적으로 TOP 10 안에 드는 PaaS platform이며, Public, Private 또는 하이브리드(Hybrid) IaaS 환경에서 모두 활용 가능합니다.
 
-> IaaS(infrastructure as a service)란 서버(server) 자원(resource), 네트워크(network), 스토리지(storage) 등 인프라(infra) resources을 쉽고 편하게 이용할 수 있는 cloud service 형태로 제공하는 것을 의미하며, PaaS와 SaaS(software as a service)의 기반입니다. 
+> IaaS(infrastructure as a service)란 서버(server) 자원(resource), 네트워크(network), 스토리지(storage) 등 인프라(infra) resources을 쉽고 편하게 이용할 수 있는 cloud service 형태로 제공하는 것을 의미하며, PaaS와 SaaS(software as a service)의 기반입니다.
+<br /><br />
 server 가상화, 데스크톱 가상화 등의 기술로 구현되며, 대표적으로 AWS EC2(Elastic Cloud Compute), MS Azure, Google compute engine, OpenStack 등이 있습니다.
 
-> PaaS란 platform as a service의 약자로 application 개발을 위한 infra를 구축하고 유지보수하는 복잡함 없이, application을 개발하고 실행 및 관리할 있는 platform을 제공하는 service를 의미합니다. 
+> PaaS란 platform as a service의 약자로 application 개발을 위한 infra를 구축하고 유지보수하는 복잡함 없이, application을 개발하고 실행 및 관리할 있는 platform을 제공하는 service를 의미합니다.
+<br /><br />
 대표적인 상용 PaaS로는 Pivotal Cloud Foundry, Google App Engine, Oracle Cloud Platform, Heroku 등이 있습니다.
 
-> SaaS는 cloud 환경에서 동작하는 application을 service 형태로 제공하는 것으로 software as a service의 약자입니다. 
+> SaaS는 cloud 환경에서 동작하는 application을 service 형태로 제공하는 것으로 software as a service의 약자입니다.
+<br /><br />
 주문형 소프트웨어(on-demand software)라고도 하며, 대표적으로 Google Gmail, Google docs, Dropbox 등이 있습니다.
 
-> Buildpack이란 application을 CFAR로 배포(push)할 때, application에 대한 프레임워크(framework) 및 런타임(runtime) 지원을 제공합니다. CFAR은 push 되는 application을 검사하여 적합한 buildpack을 감지하고, 이 buildpack은 내려받을 종속성(dependencies)을 결정하고 바인딩(binding) 된 service와 통신하도록 application 구성을 설정합니다. buildpack에 대한 자세한 정보는 [https://docs.cloudfoundry.org/buildpacks/](https://docs.cloudfoundry.org/buildpacks/){: target="\_blank"}를 확인해 주시기 바랍니다.
+> Buildpack이란 application을 CFAR로 배포(push)할 때, application에 대한 프레임워크(framework) 및 런타임(runtime) 지원을 제공합니다.
+<br /><br />
+CFAR은 push 되는 application을 검사하여 적합한 buildpack을 감지하고, 이 buildpack은 내려받을 종속성(dependencies)을 결정하고 바인딩(binding) 된 service와 통신하도록 application 구성을 설정합니다.
+<br /><br />
+buildpack에 대한 자세한 정보는 [https://docs.cloudfoundry.org/buildpacks/](https://docs.cloudfoundry.org/buildpacks/){: target="\_blank"}를 확인해 주시기 바랍니다.
 
-> 바인딩(binding)이란 일반적으로 하나를 다른 것으로 매핑시키는 것을 의미합니다. Cloud Foundry에서 binding은 service instance를 push 된 application에 연결 또는 연관(association)시키는 것이며, 반대는 unbinding입니다.
+> 바인딩(binding)이란 일반적으로 하나를 다른 것으로 매핑시키는 것을 의미합니다.
+<br /><br />
+Cloud Foundry에서 binding은 service instance를 push 된 application에 연결 또는 연관(association)시키는 것이며, 반대는 unbinding입니다.
 
 ### 1. 역사(history)
 - CFAR은 VMware에 의해 개발되어 Pivotal Software로 넘어간 후, 2015년 1월에 Cloud Foundry 재단이 비영리 독립 리눅스(linux) 재단 협업 project의 하나로 설립되어, Cloud Foundry 소프트웨어(소스 코드 및 모든 관련 상표)는 open source 소프트웨어 재단의 소유가 되었습니다.
@@ -127,8 +141,11 @@ server 가상화, 데스크톱 가상화 등의 기술로 구현되며, 대표�
 
 
 ## 마무리(CONCLUSION)
-CFAR에 대한 소개와 architecture, component 등을 살펴보았습니다. <br />
-CFAR을 비롯해서 Cloud, PaaS, IaaS, SaaS 등의 기술 트랜드는 선택이 아닌 필수가 되었습니다. 대기업 및 금융권 등 현업에서는 Cloud 전환 프로젝트가 빠르게 진행 중이고, 공공 기관에서도 위에 소개한 PaaS-TA를 이용한 다양한 과제가 진행되고 있습니다. CFAR에 대한 더 자세한 내용은 앞으로 다양한 포스트로 소개할 예정입니다. <br />
+CFAR에 대한 소개와 architecture, component 등을 살펴보았습니다.
+<br /><br />
+CFAR을 비롯해서 Cloud, PaaS, IaaS, SaaS 등의 기술 트랜드는 선택이 아닌 필수가 되었습니다. 대기업 및 금융권 등 현업에서는 Cloud 전환 프로젝트가 빠르게 진행 중이고, 공공 기관에서도 위에 소개한 PaaS-TA를 이용한 다양한 과제가 진행되고 있습니다.
+<br /><br />
+CFAR에 대한 더 자세한 내용은 앞으로 다양한 포스트로 소개할 예정입니다.
 다음 포스트에서는 [클라우드 파운드리(Cloud Foundry) 프로젝트(projects)](https://lindarex.github.io/cfar/cloud-foundry-projects-introduction/){: target="\_blank"}를 소개하겠습니다.
 
 

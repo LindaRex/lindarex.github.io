@@ -6,6 +6,9 @@ tags:
   - ubuntu
   - "16.04"
   - "vmware workstation"
+  - "open source software"
+  - "open source"
+  - oss
 ---
 
 

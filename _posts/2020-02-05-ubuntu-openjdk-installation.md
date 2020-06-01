@@ -5,6 +5,9 @@ categories:
 tags: 
   - openjdk
   - java
+  - "open source software"
+  - "open source"
+  - oss
   - ubuntu
 ---
 

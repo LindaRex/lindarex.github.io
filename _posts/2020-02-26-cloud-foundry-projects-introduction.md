@@ -11,6 +11,9 @@ tags:
   - eirini
   - kubernetes
   - paas
+  - "open source software"
+  - "open source"
+  - oss
 ---
 
 

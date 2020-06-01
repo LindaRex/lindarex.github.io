@@ -4,6 +4,10 @@ categories:
   - bind9
 tags: 
   - bind9
+  - dns
+  - "open source software"
+  - "open source"
+  - oss
   - ubuntu
 ---
 

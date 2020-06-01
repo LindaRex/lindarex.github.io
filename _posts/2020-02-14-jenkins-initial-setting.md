@@ -4,6 +4,11 @@ categories:
   - jenkins
 tags: 
   - jenkins
+  - ci
+  - "continuous integration"
+  - "open source software"
+  - "open source"
+  - oss
 ---
 
 

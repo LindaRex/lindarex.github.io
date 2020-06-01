@@ -4,6 +4,8 @@ categories:
   - ubuntu
 tags: 
   - nameserver
+  - "name server"
+  - dns
   - ubuntu
 ---
 

@@ -6,6 +6,9 @@ tags:
   - ubuntu
   - "18.04"
   - "vmware workstation"
+  - "open source software"
+  - "open source"
+  - oss
 ---
 
 

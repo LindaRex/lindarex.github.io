@@ -6,6 +6,11 @@ tags:
   - jenkins
   - github
   - webhook
+  - ci
+  - "continuous integration"
+  - "open source software"
+  - "open source"
+  - oss
 ---
 
 

@@ -4,6 +4,10 @@ categories:
   - ubuntu
 tags: 
   - ufw
+  - firewall
+  - "open source software"
+  - "open source"
+  - oss
   - ubuntu
 ---
 

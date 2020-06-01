@@ -5,6 +5,9 @@ categories:
 tags: 
   - oraclejdk
   - openjdk
+  - "open source software"
+  - "open source"
+  - oss
   - java
 ---
 

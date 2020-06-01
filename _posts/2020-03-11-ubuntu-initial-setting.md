@@ -4,6 +4,9 @@ categories:
   - ubuntu
 tags: 
   - ubuntu
+  - "open source software"
+  - "open source"
+  - oss
 ---
 
 

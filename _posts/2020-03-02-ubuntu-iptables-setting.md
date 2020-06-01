@@ -4,6 +4,11 @@ categories:
   - ubuntu
 tags: 
   - iptables
+  - firewall
+  - nat
+  - "open source software"
+  - "open source"
+  - oss
   - ubuntu
 ---
 

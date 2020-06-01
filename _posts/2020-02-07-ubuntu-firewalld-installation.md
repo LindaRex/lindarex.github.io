@@ -5,6 +5,9 @@ categories:
 tags: 
   - firewalld
   - firewall
+  - "open source software"
+  - "open source"
+  - oss
   - ubuntu
 ---
 

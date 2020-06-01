@@ -9,6 +9,9 @@ tags:
   - logstash
   - kibana
   - filebeat
+  - "open source software"
+  - "open source"
+  - oss
   - ubuntu
 ---
 

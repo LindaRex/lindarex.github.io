@@ -4,16 +4,23 @@ categories:
   - bosh
 tags: 
   - bosh
+  - "cloud foundry"
   - ubuntu
   - aws
   - ec2
+  - "open source software"
+  - "open source"
+  - oss
 ---
 
 
 Cloud Foundry BOSH는 소규모 및 대규모 클라우드(cloud) 애플리케이션(application)의 배포와 라이프 사이클 관리, release engineering을 통합하는 오픈소스(open source) 소프트웨어 프로젝트입니다. 
-BOSH는 수백 개의 가상머신(VM, virtual machine)에 application을 프로비저닝(provisioning)하고 배포할 수 있으며, 모니터링과 오류 복구, application 업데이트를 수행합니다. <br />
-BOSH는 Cloud Foundry PaaS(CFAR) 배포를 위해 개발되었지만, 거의 모든 소프트웨어를 배포하는 데에도 사용할 수 있습니다. 예를 들면, Hadoop 또는 Jenkins 등의 오픈소스 소프트웨어를 BOSH release로 작성하여 배포할 수 있으며 대규모 분산 시스템(system)에 적합합니다. <br />
-또한 BOSH는 Amazon Web Services EC2, Google Cloud Platform, Microsoft Azure, OpenStack, VMware vSphere 및 Alibaba Cloud와 같은 다양한 IaaS(infrastructure as a service) provider를 지원하며, Apache CloudStack, VirtualBox 등의 IaaS provider 지원을 위해 CPI(cloud provider interface)를 제공합니다. <br />
+BOSH는 수백 개의 가상머신(VM, virtual machine)에 application을 프로비저닝(provisioning)하고 배포할 수 있으며, 모니터링과 오류 복구, application 업데이트를 수행합니다.
+<br /><br />
+BOSH는 Cloud Foundry PaaS(CFAR) 배포를 위해 개발되었지만, 거의 모든 소프트웨어를 배포하는 데에도 사용할 수 있습니다. 예를 들면, Hadoop 또는 Jenkins 등의 오픈소스 소프트웨어를 BOSH release로 작성하여 배포할 수 있으며 대규모 분산 시스템(system)에 적합합니다.
+<br /><br />
+또한 BOSH는 Amazon Web Services EC2, Google Cloud Platform, Microsoft Azure, OpenStack, VMware vSphere 및 Alibaba Cloud와 같은 다양한 IaaS(infrastructure as a service) provider를 지원하며, Apache CloudStack, VirtualBox 등의 IaaS provider 지원을 위해 CPI(cloud provider interface)를 제공합니다.
+<br /><br />
 이 포스트에서는 AWS EC2 우분투(ubuntu) 환경에서 BOSH 사용을 위한 BOSH director를 설치하는 방법을 소개합니다.
 
 > CFAR에 대해서는 본문의 [CF CLI 설치](#2-%EC%84%A0%ED%83%9D%EC%82%AC%ED%95%AD-cf-cli-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0)에서 설명합니다.
@@ -522,8 +529,10 @@ credentials: []
 
 
 ## 마무리(CONCLUSION)
-AWS EC2 ubuntu 환경에 BOSH director 설치를 완료했습니다. <br />
-BOSH director 설치는 CFAR 및 CFCR 등 BOSH release 배포를 위한 기반 작업이며, 설치 진행을 위해서는 적지 않은 IaaS 설정이 필요합니다. <br />
+AWS EC2 ubuntu 환경에 BOSH director 설치를 완료했습니다.
+<br /><br />
+BOSH director 설치는 CFAR 및 CFCR 등 BOSH release 배포를 위한 기반 작업이며, 설치 진행을 위해서는 적지 않은 IaaS 설정이 필요합니다.
+<br /><br />
 다음 포스트에서는 BOSH director 설치를 위한 AWS 환경 설정과 AWS EC2 Inception VM 생성 방법, BOSH components에 대한 설명과 BOSH release 작성 방법을 소개하겠습니다.
 
 

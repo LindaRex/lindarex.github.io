@@ -4,13 +4,17 @@ categories:
   - sonarqube
 tags: 
   - sonarqube
+  - "open source software"
+  - "open source"
+  - oss
   - ubuntu
 ---
 
 
-SonarQube는 정적 코드 분석기로 20개 이상의 프로그래밍 언어의 버그와 Code smells, 보안 취약점을 발견하고 자동 리뷰를 수행하여 지속적인 코드 품질 검사를 위한 플랫폼입니다. <br />
-SonarQube는 LGPL(lesser gnu general public license)로 오픈소스(open source) 소프트웨어이며, 코드 커버리지, 유닛 테스트, 코딩 표준, 중복 코드, 코드 복잡도, 주석, 버그 및 보안 취약점의 보고서를 제공합니다. <br />
-또한 Maven, Ant, Gradle, MSBuild 및 CI(continuous integration) 도구인 Atlassian Bamboo, Jenkins, Hudson 등과의 연동을 제공합니다. <br />
+SonarQube는 정적 코드 분석기로, LGPL(lesser gnu general public license)로 오픈소스(open source) 소프트웨어이며, 20개 이상의 프로그래밍 언어의 버그와 code smells, 코드 커버리지, 유닛 테스트, 코딩 표준, 중복 코드, 코드 복잡도, 주석 및 보안 취약점의 보고서를 제공하고, 자동 리뷰를 수행하여 지속적인 코드 품질 검사를 위한 플랫폼입니다.
+<br /><br />
+SonarQube는 Maven, Ant, Gradle, MSBuild 및 CI(continuous integration) 도구인 Atlassian Bamboo, Jenkins, Hudson 등과의 연동을 제공합니다.
+<br /><br />
 이 포스트에서는 우분투(ubuntu) 환경에서 SonarQube를 설치하는 방법을 소개합니다.
 
 
@@ -201,10 +205,16 @@ $ ${LINDAREX_WORKSPACE}/sonarqube/bin/linux-x86-64/sonar.sh status
 
 
 ## 마무리(CONCLUSION)
-ubuntu 환경에 SonarQube 설치를 완료했습니다. <br />
-하지만, SonarQube 하나로는 아무것도 할 수 없습니다. <br />
-SonarQube를 활용하기 위해서는 로컬 환경에 설정을 하거나 CI와 연동을 해야 합니다. <br />
-대부분 Jenkins 등의 CI, GitHub 등의 버전 관리(version control) 시스템과 연동하여 SonarQube Scanner를 통해 소스 코드를 분석합니다. <br />
+ubuntu 환경에 SonarQube 설치를 완료했습니다.
+<br /><br />
+SonarQube를 활용하기 위해서는 추가적인 설정이 필요합니다.
+<br />
+SonarQube 하나만으로는 아무것도 할 수 없습니다.
+<br />
+Java 프로젝트(project)의 코드 정적 분석을 할 경우, project 설정 파일(build.gradle, pom.xml 등)에 SonarScanner 설정을 추가하고, CI와 연동하거나 로컬 환경에 SonarQube 설정을 해야 합니다.
+<br />
+대부분 현업에서는 Jenkins 등의 CI, GitHub 등의 버전 관리(version control) 시스템과 연동하여 SonarScanner를 통해 소스 코드를 분석합니다.
+<br /><br />
 더 자세한 내용은 아래 참고 페이지를 확인해 주시기 바랍니다.
 
 

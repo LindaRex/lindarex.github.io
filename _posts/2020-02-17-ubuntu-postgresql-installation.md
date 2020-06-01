@@ -4,13 +4,20 @@ categories:
   - postgresql
 tags: 
   - postgresql
+  - database
+  - "open source software"
+  - "open source"
+  - oss
   - ubuntu
 ---
 
 
-PostgreSQL은 BSD(berkeley software distribution) 또는 MIT 라이선스(license)와 유사한 PostgreSQL license가 적용된 오픈소스(open source) 소프트웨어로 배포(release) 됩니다. <br />
-PostgreSQL은 확장 가능성 및 표준 준수를 강조하는 객체-관계형 데이터베이스 관리 시스템(ORDBMS, object-relational database management system)으로, 트랜잭션(transaction)과 ACID(Atomicity, Consistency, Isolation, Durability)를 지원합니다. <br />
-macOS 서버의 경우 PostgreSQL이 기본 데이터베이스(database)이며, MS Windows와 리눅스(linux)에서도 이용할 수 있습니다. <br />
+PostgreSQL은 BSD(berkeley software distribution) 또는 MIT 라이선스(license)와 유사한 PostgreSQL license가 적용된 오픈소스(open source) 소프트웨어로 배포(release) 됩니다.
+<br /><br />
+PostgreSQL은 확장 가능성 및 표준 준수를 강조하는 객체-관계형 데이터베이스 관리 시스템(ORDBMS, object-relational database management system)으로, 트랜잭션(transaction)과 ACID(Atomicity, Consistency, Isolation, Durability)를 지원합니다.
+<br /><br />
+macOS 서버의 경우 PostgreSQL이 기본 데이터베이스(database)이며, MS Windows와 리눅스(linux)에서도 이용할 수 있습니다.
+<br /><br />
 이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 PostgreSQL을 설치하는 방법을 소개합니다.
 
 
@@ -164,11 +171,12 @@ $ sudo systemctl kill postgresql.service
 
 
 ## 마무리(CONCLUSION)
-ubuntu 환경에 package로 PostgreSQL 설치를 완료했습니다. <br />
-2020년 3월 기준, open source 소프트웨어인 PostgreSQL은 세계 점유율 4위로, open source 프로젝트 커뮤니티 기반의 database 중에는 1위입니다. <br />
-대량 Insert 처리에 적합하고, DW(data warehouse)에 강한 PostgreSQL은 국내에서도 점유율이 증가하는 추세입니다. <br />
-pgAdmin, psql cli(command line interface, 명령줄 인터페이스) 등으로 PostgreSQL을 관리합니다. <br />
-PostgreSQL은 실제 기능적인 면에서 Oracle과 유사한 것이 많기 때문에, Oracle 사용자들이 가장 쉽게 테스트하고 적용할 수 있습니다. <br />
+ubuntu 환경에 package로 PostgreSQL 설치를 완료했습니다.
+<br /><br />
+2020년 3월 기준, open source 소프트웨어인 PostgreSQL은 세계 점유율 4위로, open source 프로젝트 커뮤니티 기반의 database 중에는 1위이며, 대량 Insert 처리와 DW(data warehouse)에 강한 모습을 보이면서 국내에서도 점유율이 증가하는 추세입니다.
+<br /><br />
+PostgreSQL은 pgAdmin, psql cli(command line interface, 명령줄 인터페이스) 등으로 PostgreSQL을 관리하며, 실제 기능적인 면에서 Oracle과 유사한 것이 많기 때문에, Oracle 사용자들이 가장 쉽게 테스트하고 적용할 수 있습니다.
+<br /><br />
 더 자세한 내용은 아래 참고 페이지를 확인해 주시기 바랍니다.
 
 > database ranking에 대한 자세한 정보는 [https://db-engines.com/en/ranking](https://db-engines.com/en/ranking){: target="\_blank"}, [https://db-engines.com/en/ranking_trend](https://db-engines.com/en/ranking_trend){: target="\_blank"}를 확인해 주시기 바랍니다.

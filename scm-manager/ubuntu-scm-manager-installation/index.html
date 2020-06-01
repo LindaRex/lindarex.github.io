@@ -12,12 +12,12 @@
 <!-- LINDAREX :: JEKYLL SEO TAG :: BIGIN -->
 <!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>우분투(Ubuntu) 환경에 SCM Manager 설치하기 | LindaRex</title>
-<meta name="generator" content="Jekyll v3.8.5" />
+<meta name="generator" content="Jekyll v3.8.7" />
 <meta property="og:title" content="우분투(Ubuntu) 환경에 SCM Manager 설치하기" />
 <meta name="author" content="Rex" />
 <meta property="og:locale" content="ko_KR" />
-<meta name="description" content="SCM Manager는 사설 버전 관리 레파지토리(private source code and version control repository)로 BSD(berkeley software distribution) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. SCM Manager는 Git과 Mercurial, Subversion을 지원하고, 다양한 플러그인과 RESTFul API를 제공합니다. SCM Manager 설치는 Standalone 방식(tar, RPM, DEB package)과 WebApp(war) 방식을 제공하는데, 이 포스트에서는 우분투(ubuntu) 환경에서 standalone 방식으로 SCM Manager를 설치하는 방법을 소개합니다." />
-<meta property="og:description" content="SCM Manager는 사설 버전 관리 레파지토리(private source code and version control repository)로 BSD(berkeley software distribution) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. SCM Manager는 Git과 Mercurial, Subversion을 지원하고, 다양한 플러그인과 RESTFul API를 제공합니다. SCM Manager 설치는 Standalone 방식(tar, RPM, DEB package)과 WebApp(war) 방식을 제공하는데, 이 포스트에서는 우분투(ubuntu) 환경에서 standalone 방식으로 SCM Manager를 설치하는 방법을 소개합니다." />
+<meta name="description" content="SCM Manager는 사설 버전 관리 레파지토리(private source code and version control repository)로 BSD(berkeley software distribution) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. SCM Manager는 Git과 Mercurial, Subversion을 지원하고, 다양한 플러그인과 RESTFul API를 제공하며, 설치 방법으로는 Standalone 방식(tar, RPM, DEB package)과 WebApp(war) 방식을 제공합니다. 이 포스트에서는 우분투(ubuntu) 환경에서 standalone 방식으로 SCM Manager를 설치하는 방법을 소개합니다." />
+<meta property="og:description" content="SCM Manager는 사설 버전 관리 레파지토리(private source code and version control repository)로 BSD(berkeley software distribution) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. SCM Manager는 Git과 Mercurial, Subversion을 지원하고, 다양한 플러그인과 RESTFul API를 제공하며, 설치 방법으로는 Standalone 방식(tar, RPM, DEB package)과 WebApp(war) 방식을 제공합니다. 이 포스트에서는 우분투(ubuntu) 환경에서 standalone 방식으로 SCM Manager를 설치하는 방법을 소개합니다." />
 <link rel="canonical" href="https://lindarex.github.io/scm-manager/ubuntu-scm-manager-installation/" />
 <meta property="og:url" content="https://lindarex.github.io/scm-manager/ubuntu-scm-manager-installation/" />
 <meta property="og:site_name" content="LindaRex" />
@@ -29,7 +29,7 @@
 <meta name="twitter:creator" content="@Rex" />
 <meta name="google-site-verification" content="t6VkmqsI15sIx3P1-gh3NYputZtjhDZOTkxhwDaa4Ik" />
 <script type="application/ld+json">
-{"datePublished":"2020-02-19T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/scm-manager/ubuntu-scm-manager-installation/"},"@type":"BlogPosting","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"Rex"},"url":"https://lindarex.github.io/scm-manager/ubuntu-scm-manager-installation/","author":{"@type":"Person","name":"Rex"},"headline":"우분투(Ubuntu) 환경에 SCM Manager 설치하기","description":"SCM Manager는 사설 버전 관리 레파지토리(private source code and version control repository)로 BSD(berkeley software distribution) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. SCM Manager는 Git과 Mercurial, Subversion을 지원하고, 다양한 플러그인과 RESTFul API를 제공합니다. SCM Manager 설치는 Standalone 방식(tar, RPM, DEB package)과 WebApp(war) 방식을 제공하는데, 이 포스트에서는 우분투(ubuntu) 환경에서 standalone 방식으로 SCM Manager를 설치하는 방법을 소개합니다.","dateModified":"2020-02-19T00:00:00+09:00","@context":"https://schema.org"}</script>
+{"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"Rex"},"@type":"BlogPosting","url":"https://lindarex.github.io/scm-manager/ubuntu-scm-manager-installation/","dateModified":"2020-02-19T00:00:00+09:00","datePublished":"2020-02-19T00:00:00+09:00","headline":"우분투(Ubuntu) 환경에 SCM Manager 설치하기","author":{"@type":"Person","name":"Rex"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/scm-manager/ubuntu-scm-manager-installation/"},"description":"SCM Manager는 사설 버전 관리 레파지토리(private source code and version control repository)로 BSD(berkeley software distribution) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. SCM Manager는 Git과 Mercurial, Subversion을 지원하고, 다양한 플러그인과 RESTFul API를 제공하며, 설치 방법으로는 Standalone 방식(tar, RPM, DEB package)과 WebApp(war) 방식을 제공합니다. 이 포스트에서는 우분투(ubuntu) 환경에서 standalone 방식으로 SCM Manager를 설치하는 방법을 소개합니다.","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <!-- LINDAREX :: JEKYLL SEO TAG :: END -->
@@ -367,7 +367,7 @@ wcs_do();
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="우분투(Ubuntu) 환경에 SCM Manager 설치하기">
-    <meta itemprop="description" content="SCM Manager는 사설 버전 관리 레파지토리(private source code and version control repository)로 BSD(berkeley software distribution) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. SCM Manager는 Git과 Mercurial, Subversion을 지원하고, 다양한 플러그인과 RESTFul API를 제공합니다. SCM Manager 설치는 Standalone 방식(tar, RPM, DEB package)과 WebApp(war) 방식을 제공하는데, 이 포스트에서는 우분투(ubuntu) 환경에서 standalone 방식으로 SCM Manager를 설치하는 방법을 소개합니다.">
+    <meta itemprop="description" content="SCM Manager는 사설 버전 관리 레파지토리(private source code and version control repository)로 BSD(berkeley software distribution) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다.SCM Manager는 Git과 Mercurial, Subversion을 지원하고, 다양한 플러그인과 RESTFul API를 제공하며, 설치 방법으로는 Standalone 방식(tar, RPM, DEB package)과 WebApp(war) 방식을 제공합니다.이 포스트에서는 우분투(ubuntu) 환경에서 standalone 방식으로 SCM Manager를 설치하는 방법을 소개합니다.">
     <meta itemprop="datePublished" content="2020-02-19T00:00:00+09:00">
     
 
@@ -406,9 +406,11 @@ wcs_do();
           <!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: END -->
           </aside>
         
-        <p>SCM Manager는 사설 버전 관리 레파지토리(private source code and version control repository)로 BSD(berkeley software distribution) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. <br />
-SCM Manager는 Git과 Mercurial, Subversion을 지원하고, 다양한 플러그인과 RESTFul API를 제공합니다. <br />
-SCM Manager 설치는 Standalone 방식(tar, RPM, DEB package)과 WebApp(war) 방식을 제공하는데, 이 포스트에서는 우분투(ubuntu) 환경에서 standalone 방식으로 SCM Manager를 설치하는 방법을 소개합니다.</p>
+        <p>SCM Manager는 사설 버전 관리 레파지토리(private source code and version control repository)로 BSD(berkeley software distribution) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다.
+<br /><br />
+SCM Manager는 Git과 Mercurial, Subversion을 지원하고, 다양한 플러그인과 RESTFul API를 제공하며, 설치 방법으로는 Standalone 방식(tar, RPM, DEB package)과 WebApp(war) 방식을 제공합니다.
+<br /><br />
+이 포스트에서는 우분투(ubuntu) 환경에서 standalone 방식으로 SCM Manager를 설치하는 방법을 소개합니다.</p>
 
 <h2 id="선행조건prerequisite">선행조건(PREREQUISITE)</h2>
 <ul>
@@ -491,10 +493,14 @@ SCM Manager 설치는 Standalone 방식(tar, RPM, DEB package)과 WebApp(war) �
 </blockquote>
 
 <h2 id="마무리conclusion">마무리(CONCLUSION)</h2>
-<p>ubuntu 환경에 standalone 방식으로 SCM Manager 설치를 완료했습니다. <br />
-SCM Manager 외에도 GitHub, GitLab, Bitbucket, GitStack 등 다양한 private git 호스팅 서비스(service)가 존재합니다. <br />
-타 service와 비교 시, SCM Manager는 간단히 설치하여 사용 가능하고, 설정하기 쉽습니다. <br />
-또한, git 외에도 svn과 mercurial 서버(server)까지 동시에 사용할 수 있으며, 기존에 사용 중이던 svn server를 그대로 이용할 수 있습니다. <br />
+<p>ubuntu 환경에 standalone 방식으로 SCM Manager 설치를 완료했습니다.
+<br /><br />
+SCM Manager 외에도 GitHub, GitLab, Bitbucket, GitStack 등 다양한 private git 호스팅 서비스(service)가 존재합니다.
+<br />
+타 service와 비교 시, SCM Manager의 장점은 간단히 설치하여 사용 가능하고, 설정하기 쉽다는 것입니다.
+<br />
+또한, git 외에도 svn과 mercurial 서버(server)까지 동시에 사용할 수 있으며, 기존에 사용 중이던 svn server를 그대로 이용할 수 있습니다.
+<br /><br />
 더 자세한 내용은 아래 참고 페이지를 확인해 주시기 바랍니다.</p>
 
 <h2 id="참고references">참고(REFERENCES)</h2>
@@ -522,11 +528,27 @@ SCM Manager 외에도 GitHub, GitLab, Bitbucket, GitStack 등 다양한 private 
     
       
       
+      <a href="/tags/open-source-software" class="page__taxonomy-item" rel="tag">open source software</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/open-source" class="page__taxonomy-item" rel="tag">open source</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/oss" class="page__taxonomy-item" rel="tag">oss</a><span class="sep">, </span>
+    
+      
+      
       <a href="/tags/scm-manager" class="page__taxonomy-item" rel="tag">scm manager</a><span class="sep">, </span>
     
       
       
-      <a href="/tags/ubuntu" class="page__taxonomy-item" rel="tag">ubuntu</a>
+      <a href="/tags/ubuntu" class="page__taxonomy-item" rel="tag">ubuntu</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/version-control" class="page__taxonomy-item" rel="tag">version control</a>
     
     </span>
   </p>

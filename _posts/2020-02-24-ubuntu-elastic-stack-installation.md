@@ -16,10 +16,14 @@ tags:
 ---
 
 
-Elastic Stack을 소개하기에 앞서 ELK Stack을 먼저 소개하겠습니다. <br />
-ELK Stack은 Elasticsearch, Logstash, Kibana의 연동으로 텍스트, 숫자, 위치 기반 정보, 정형 및 비정형 데이터(data) 등 모든 유형의 data를 수집 및 변환하고 분석하여 시각화하는 오픈소스(open source) 소프트웨어입니다. <br />
-2015년에 ELK Stack에 경량의 단일 목적 data 수집기 제품군(Beats)을 도입하면서 Elastic Stack으로 명칭이 변경되었습니다. <br />
-즉, ELK Stack에 Beats가 추가되어 Elastic Stack으로 통합되었습니다. <br />
+Elastic Stack을 소개하기에 앞서 ELK Stack을 먼저 소개하겠습니다.
+<br /><br />
+ELK Stack은 Elasticsearch, Logstash, Kibana의 연동으로 텍스트, 숫자, 위치 기반 정보, 정형 및 비정형 데이터(data) 등 모든 유형의 data를 수집 및 변환하고 분석하여 시각화하는 오픈소스(open source) 소프트웨어입니다.
+<br /><br />
+2015년에 ELK Stack에 경량의 단일 목적 data 수집기 제품군(Beats)을 도입하면서 Elastic Stack으로 명칭이 변경되었습니다.
+<br />
+즉, ELK Stack에 Beats가 추가되어 Elastic Stack으로 통합되었습니다.
+<br /><br />
 이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 elastic stack를 설치하는 방법을 소개합니다.
 
 
@@ -441,7 +445,8 @@ $ sudo systemctl kill filebeat.service
 
 
 ## 마무리(CONCLUSION)
-ubuntu 환경에 package로 elastic stack 설치를 완료했습니다. <br />
+ubuntu 환경에 package로 elastic stack 설치를 완료했습니다.
+<br /><br />
 다음 포스트에서는 elastic stack 사용 방법을 소개하겠습니다.
 
 

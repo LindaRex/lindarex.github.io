@@ -88,7 +88,8 @@ helm에 대한 자세한 정보는 [https://helm.sh/](https://helm.sh/){: target
 ## 마무리(CONCLUSION)
 Cloud Foundry projects를 살펴보았습니다.
 <br /><br />
-BOSH는 Cloud Foundry projects에 기반이 되는 프로젝트이고, CFAR을 제외한 나머지 CFCR, Quarks, Eirini 등의 공통 키워드는 Kubernetes입니다. 더 말이 필요 없는 kubernetes... <br />
+BOSH는 Cloud Foundry projects에 기반이 되는 프로젝트이고, CFAR을 제외한 나머지 CFCR, Quarks, Eirini 등의 공통 키워드는 Kubernetes입니다. 더 말이 필요 없는 kubernetes...
+<br /><br />
 다음 포스트에서는 kubernetes 소개와 CFAR을 설치하는 방법을 소개하겠습니다.
 
 

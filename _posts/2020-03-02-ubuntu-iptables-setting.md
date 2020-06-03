@@ -13,9 +13,12 @@ tags:
 ---
 
 
-iptables은 방화벽(firewall) 구성이나 NAT(network address translation)에 사용되는데, 리눅스(linux) 커널(kernel) firewall이 제공하는 테이블(table)과 체인(chain), 규칙(rule)을 시스템 관리자가 구성합니다. <br />
-각각 다른 kernel 모듈(module)과 프로그램들은 다른 프로토콜(protocol)을 위해 사용되는데, iptables는 IPv4에, ip6tables는 IPv6에, arptables는 ARP에, ebtables는 이더넷(ethernet) 프레임에 적용됩니다. <br />
-linux 시스템(system)에서 iptables는 /usr/sbin/iptables에 설치되며, iptables의 후속 버전은 nftables입니다. <br />
+iptables은 방화벽(firewall) 구성이나 NAT(network address translation)에 사용되는데, 리눅스(linux) 커널(kernel) firewall이 제공하는 테이블(table)과 체인(chain), 규칙(rule)을 시스템 관리자가 구성합니다.
+<br /><br />
+각각 다른 kernel 모듈(module)과 프로그램들은 다른 프로토콜(protocol)을 위해 사용되는데, iptables는 IPv4에, ip6tables는 IPv6에, arptables는 ARP에, ebtables는 이더넷(ethernet) 프레임에 적용됩니다.
+<br />
+linux 시스템(system)에서 iptables는 /usr/sbin/iptables에 설치되며, iptables의 후속 버전은 nftables입니다.
+<br /><br />
 이 포스트에서는 ubuntu 환경에서 iptables를 설정하는 방법을 소개합니다.
 
 > nftables이란 iptables에 비해 코드 중복이 적고 처리량이 더 많은 iptables의 후속 버전이며, linux kernel 3.13부터 사용 가능합니다. nftables에 대한 자세한 정보는 [https://en.wikipedia.org/wiki/Nftables](https://en.wikipedia.org/wiki/Nftables){: target="\_blank"}를 확인해 주시기 바랍니다.
@@ -539,8 +542,10 @@ num  target     prot opt source               destination
 
 
 ## 마무리(CONCLUSION)
-ubuntu 환경에 iptables 설정을 완료했습니다. <br />
-iptables 설정을 통해 서버(server) 보안을 많이 향상할 수 있지만, 잘못 설정할 경우에는 접속을 못 하는 경우가 발생할 수 있으니 신중하게 설정해야 합니다. <br />
+ubuntu 환경에 iptables 설정을 완료했습니다.
+<br /><br />
+iptables 설정을 통해 서버(server) 보안을 많이 향상할 수 있지만, 잘못 설정할 경우에는 접속을 못 하는 경우가 발생할 수 있으니 신중하게 설정해야 합니다.
+<br /><br />
 다음 포스트에서는 [우분투(Ubuntu) 서버(Server) 초기 설정하기](https://lindarex.github.io/ubuntu/ubuntu-initial-setting/){: target="\_blank"}를 소개하겠습니다.
 
 

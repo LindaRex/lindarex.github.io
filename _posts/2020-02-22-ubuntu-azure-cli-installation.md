@@ -9,8 +9,10 @@ tags:
 ---
 
 
-Azure CLI(command line interface, 명령줄 인터페이스)는 Microsoft Azure에 리소스(resource)를 만들고 관리할 수 도구입니다. <br />
-모든 azure 서비스(service)에서 사용할 수 있으며, azure를 빠르게 사용할 수 있도록 자동화에 초점을 두고 있습니다. <br />
+Azure CLI(command line interface, 명령줄 인터페이스)는 Microsoft Azure(azure)에 리소스(resource)를 만들고 관리할 수 있는 도구입니다.
+<br /><br />
+모든 azure 서비스(service)에서 사용할 수 있으며, azure를 빠르게 사용할 수 있도록 자동화에 초점을 두고 있습니다.
+<br /><br />
 이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 azure cli를 설치하는 방법을 소개합니다.
 
 
@@ -96,7 +98,8 @@ $ sudo rm /etc/apt/trusted.gpg.d/microsoft.asc.gpg
 
 
 ## 마무리(CONCLUSION)
-ubuntu 환경에 package로 azure cli 설치를 완료했습니다. <br />
+ubuntu 환경에 package로 azure cli 설치를 완료했습니다.
+<br /><br />
 다음 포스트에서는 azure 사용을 위한 service principal, resource group, network security group, virtual network, subnet, storage account 등의 설정과 Inception VM 생성 방법을 소개하겠습니다.
 
 

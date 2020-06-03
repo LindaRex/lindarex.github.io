@@ -12,9 +12,12 @@ tags:
 ---
 
 
-방화벽(UFW, uncomplicated firewall)은 데비안(debian) 계열 및 다양한 리눅스(linux) 환경에서 작동되고, GPL(GNU General Public License)이 적용되며 파이썬(python)으로 개발되었습니다. <br />
-사용하기 쉬운 CLI(command line interface, 명령줄 인터페이스)를 사용하고 프로그램 구성에는 iptables를 사용하는 netfilter 방화벽(firewall)을 관리하는 프로그램입니다. <br />
-ufw는 기본적으로 ubuntu 18.04 LTS 이후 버전에서 사용할 수 있습니다. <br />
+방화벽(UFW, uncomplicated firewall)은 데비안(debian) 계열 및 다양한 리눅스(linux) 환경에서 작동되고, GPL(GNU General Public License)이 적용되며 파이썬(python)으로 개발되었습니다.
+<br /><br />
+ufw는 기본적으로 ubuntu 18.04 LTS 이후 버전에서 사용할 수 있습니다.
+<br />
+사용하기 쉬운 CLI(command line interface, 명령줄 인터페이스)를 사용하고, 프로그램 구성에 iptables를 사용하여 netfilter 방화벽(firewall)을 관리하는 프로그램입니다.
+<br /><br />
 이 포스트에서는 ubuntu 환경에서 ufw를 설정하는 방법을 소개합니다.
 
 
@@ -279,7 +282,8 @@ $ sudo apt purge --auto-remove ufw
 
 
 ## 마무리(CONCLUSION)
-ubuntu 환경에 ufw 설정을 완료했습니다. <br />
+ubuntu 환경에 ufw 설정을 완료했습니다.
+<br /><br />
 다음 포스트에서는 [우분투(Ubuntu) 환경에 iptables 설정하기](https://lindarex.github.io/ubuntu/ubuntu-iptables-setting/){: target="\_blank"}를 소개하겠습니다.
 
 

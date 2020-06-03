@@ -300,10 +300,14 @@ tags:
 
 
 ## 마무리(CONCLUSION)
-github webhook으로 jenkins job을 실행(자동화)하는 방법을 소개했습니다. <br /> <br />
-현업에서는 github에서 제공하는 webhook을 사용해서 'Pull Request' 발생에 따라 빌드뿐만 아니라 테스트, 코드 분석, 리뷰, 알람 등을 적용하여 개발 프로세스를 최대한 자동화합니다. <br /> <br />
-하지만 어디까지나 개발 서버와 연동하는 수준이며, 운영 서버는 보안 및 승인 등의 이유로 github webhook을 연동하는 경우는 거의 없습니다. <br /> <br />
-그리고 github webhook을 적용하기 위해서는 github와 jenkins 간의 통신이 가능해야 하므로 jenkins는 외부망에 위치해야 합니다. 그래서 내부망 또는 폐쇄망에서는 github webhook을 사용할 수 없는 단점이 있습니다. <br /> <br />
+github webhook으로 jenkins job을 실행(자동화)하는 방법을 소개했습니다.
+<br /><br />
+현업에서는 github에서 제공하는 webhook을 사용해서 'Pull Request' 발생에 따라 빌드뿐만 아니라 테스트, 코드 분석, 리뷰, 알람 등을 적용하여 개발 프로세스를 최대한 자동화합니다.
+<br /><br />
+하지만 어디까지나 개발 서버와 연동하는 수준이며, 운영 서버는 보안 및 승인 등의 이유로 github webhook을 연동하는 경우는 거의 없습니다.
+<br /><br />
+그리고 github webhook을 적용하기 위해서는 github와 jenkins 간의 통신이 가능해야 하므로 jenkins는 외부망에 위치해야 합니다. 그래서 내부망 또는 폐쇄망에서는 github webhook을 사용할 수 없는 단점이 있습니다.
+<br /><br />
 하지만 상당수의 많은 프로젝트에서, 특히 DevOps를 지향하는 사이트에서는 자동화된 CI/CD(continuous integration/continuous delivery 또는 continuous deployment) 구축을 위해 github webhook 연동을 필수로 설정합니다.
 
 

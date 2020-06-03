@@ -83,7 +83,8 @@ $ grep . /etc/*-release
 ```
 
 ### 2. 관리자(root) 계정 활성화
-- ubuntu를 비롯한 linux를 설치하면 기본적으로 관리자(root) 계정이 생성됩니다. root 계정은 비밀번호(password)를 설정하기 전까지 비활성화 상태이기 때문에, password를 설정하여 root 계정을 활성화합니다.
+- ubuntu를 비롯한 linux를 설치하면 기본적으로 관리자(root) 계정이 생성됩니다.
+- root 계정은 비밀번호(password)를 설정하기 전까지 비활성화 상태이기 때문에, password를 설정하여 root 계정을 활성화합니다.
 
 #### 2.1. root 계정 password 설정
 - 'passwd' 명령어(command)로 root password를 설정합니다.
@@ -114,11 +115,21 @@ logout
 rex@lindarex:~$
 ```
 
-> 'sudo'(substitute user do)는 현재 계정에서 다른 계정, 즉 슈퍼 유저(superuser)로서 관리자(root) 권한을 가진 계정으로 프로그램(program)을 구동할 수 있도록 하는 command이며, 'sudo -i'는 root 계정으로 로그인(login)하며 '/root' 디렉터리(directory)로 이동하는 command이고, 'sudo -s'는 현재 directory를 유지하며 root 계정으로 login 하는 command입니다. 'sudo', 'sudo -i', 'sudo -s' command는 현재 계정의 password를 요구하고, 전환된 계정의 환경변수는 적용하지 않습니다.
+> 'sudo'(substitute user do)는 현재 계정에서 다른 계정, 즉 슈퍼 유저(superuser)로서 관리자(root) 권한을 가진 계정으로 프로그램(program)을 구동할 수 있도록 하는 command입니다.
+<br /><br />
+'sudo -i'는 root 계정으로 로그인(login)하며 '/root' 디렉터리(directory)로 이동하는 command이고, 'sudo -s'는 현재 directory를 유지하며 root 계정으로 login 하는 command입니다.
+<br /><br />
+'sudo', 'sudo -i', 'sudo -s' command는 현재 계정의 password를 요구하고, 전환된 계정의 환경변수는 적용하지 않습니다.
 
-> 'su'(substitute user, switch user)는 현재 계정에서 log out 하지 않고 다른 계정(기본값은 root 계정)으로 전환하며 현재 계정의 환경변수를 유지하는 command이고, 'su -'는 'su'와 동일하게 계정을 전환하며, 전환된 계정의 환경변수를 적용하는 command입니다. 'su', 'su -' command는 전환될 계정의 password를 요구합니다.
+> 'su'(substitute user, switch user)는 현재 계정에서 log out 하지 않고 다른 계정(기본값은 root 계정)으로 전환하며 현재 계정의 환경변수를 유지하는 command입니다.
+<br /><br />
+'su -'는 'su'와 동일하게 계정을 전환하며, 전환된 계정의 환경변수를 적용하는 command입니다.
+<br /><br />
+'su', 'su -' command는 전환될 계정의 password를 요구합니다.
 
-> 'sudo' command는 현재 계정에서 root 계정의 권한만 빌리기 때문에 작업 내역은 현재 계정으로 남고, 'su' command는 현재 계정에서 root 계정으로 전환하기 때문에 작업 내역은 root 계정으로 저장됩니다.
+> 'sudo' command는 현재 계정에서 root 계정의 권한만 빌리기 때문에 작업 내역은 현재 계정으로 남고, 
+<br />
+'su' command는 현재 계정에서 root 계정으로 전환하기 때문에 작업 내역은 root 계정으로 저장됩니다.
 
 > 'sudo' command에 대한 자세한 정보는 [https://ko.wikipedia.org/wiki/Sudo](https://ko.wikipedia.org/wiki/Sudo){: target="\_blank"}와 [https://zetawiki.com/wiki/리눅스_sudo\,_su_차이점](https://zetawiki.com/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_sudo,_su_%EC%B0%A8%EC%9D%B4%EC%A0%90){: target="\_blank"}을 확인해 주시기 바랍니다.
 
@@ -386,7 +397,8 @@ systemd-timesyncd.service active: yes
 
 
 ## 마무리(CONCLUSION)
-ubuntu server 설치 후 초기 설정을 완료했습니다. <br />
+ubuntu server 설치 후 초기 설정을 완료했습니다.
+<br /><br />
 다음 포스트에서는 ubuntu 보안 강화를 위한 오픈소스(open source) 소프트웨어인 fail2ban을 소개하겠습니다.
 
 

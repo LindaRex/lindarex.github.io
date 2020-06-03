@@ -13,8 +13,11 @@ tags:
 ---
 
 
-젠킨스(Jenkins)를 설치하는 방법은 다양합니다. 패키지(package)로 jenkins를 설치하는 방법은 [우분투(Ubuntu) 환경에 패키지(Package)로 젠킨스(Jenkins) 설치하기](https://lindarex.github.io/jenkins/ubuntu-jenkins-installation/){: target="\_blank"} 포스트를 참고하시기 바랍니다. <br />
+젠킨스(Jenkins)를 설치하는 방법은 다양합니다.
+<br /><br />
 이 포스트에서는 우분투(ubuntu) 환경에서 WAR 파일(file)로 jenkins를 설치하는 방법을 소개합니다.
+
+> 패키지(package)로 jenkins를 설치하는 방법은 [우분투(Ubuntu) 환경에 패키지(Package)로 젠킨스(Jenkins) 설치하기](https://lindarex.github.io/jenkins/ubuntu-jenkins-installation/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
 
 
 ## 선행조건(PREREQUISITE)
@@ -150,8 +153,10 @@ This may also be found at: /home/rex/.jenkins/secrets/initialAdminPassword
 
 
 ## 마무리(CONCLUSION)
-ubuntu 환경에 war file로 jenkins 설치를 완료했습니다. <br />
-jenkins 초기 설정은 [젠킨스(Jenkins) 초기 설정하기](https://lindarex.github.io/jenkins/jenkins-initial-setting/){: target="\_blank"} 포스트를 참고하시기 바랍니다. <br />
+ubuntu 환경에 war file로 jenkins 설치를 완료했습니다.
+<br /><br />
+jenkins 초기 설정은 [젠킨스(Jenkins) 초기 설정하기](https://lindarex.github.io/jenkins/jenkins-initial-setting/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
+<br /><br />
 다음 포스트에서는 [GitHub Webhook으로 젠킨스(Jenkins) Job을 실행(자동화)하는 방법](https://lindarex.github.io/jenkins/jenkins-github-webhook-setting/){: target="\_blank"}을 소개하겠습니다.
 
 

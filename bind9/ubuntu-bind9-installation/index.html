@@ -367,7 +367,7 @@ wcs_do();
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="우분투(Ubuntu) 환경에 패키지(Package)로 BIND(BIND9) 설치하기">
-    <meta itemprop="description" content="BIND(bind9, berkeley internet name domain)는 안정성과 고품질로 유닉스(unix) 및 리눅스(linux)에서 널리 사용되며, 모든 기능을 갖춘 매우 유연한 DNS(dns, domain name server) 시스템(system)입니다. bind9은 MPL(mozilla public license) 2.0 라이선스(license)가 적용되는 오픈소스(open source) 소프트웨어이며, 인터넷에 dns 정보를 게시 할 수 있을 뿐만 아니라 사용자의 dns 쿼리를 처리할 수 있습니다.  bind9은 내부 dns 서버(server)를 설정하여, server가 개인 호스트(host) 이름과 개인 IP 주소(address)를 확인하는 데 사용합니다. 이를 통해 내부 host 이름과 개인 IP address를 중앙에서 관리할 수 ​​있으며, 이는 사용자 환경이 몇 개 이상의 host로 확장될 때 필요합니다. 이 포스트에서는 우분투(ubuntu) 환경에서 package로 bind9을 설치하는 방법을 소개합니다.">
+    <meta itemprop="description" content="BIND(bind9, berkeley internet name domain)는 안정성과 고품질로 유닉스(unix) 및 리눅스(linux)에서 널리 사용되며, 모든 기능을 갖춘 매우 유연한 DNS(dns, domain name server) 시스템(system)입니다.bind9은 MPL(mozilla public license) 2.0 라이선스(license)가 적용되는 오픈소스(open source) 소프트웨어이며, 인터넷에 dns 정보를 게시 할 수 있을 뿐만 아니라 사용자의 dns 쿼리를 처리할 수 있습니다. bind9은 내부 dns 서버(server)를 설정하여, server가 개인 호스트(host) 이름과 개인 IP 주소(address)를 확인하는 데 사용합니다. 이를 통해 내부 host 이름과 개인 IP address를 중앙에서 관리할 수 ​​있으며, 이는 사용자 환경이 몇 개 이상의 host로 확장될 때 필요합니다.이 포스트에서는 우분투(ubuntu) 환경에서 package로 bind9을 설치하는 방법을 소개합니다.">
     <meta itemprop="datePublished" content="2020-04-03T00:00:00+09:00">
     
 
@@ -406,14 +406,17 @@ wcs_do();
           <!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: END -->
           </aside>
         
-        <p>BIND(bind9, berkeley internet name domain)는 안정성과 고품질로 유닉스(unix) 및 리눅스(linux)에서 널리 사용되며, 모든 기능을 갖춘 매우 유연한 DNS(dns, domain name server) 시스템(system)입니다. <br />
-bind9은 MPL(mozilla public license) 2.0 라이선스(license)가 적용되는 오픈소스(open source) 소프트웨어이며, 인터넷에 dns 정보를 게시 할 수 있을 뿐만 아니라 사용자의 dns 쿼리를 처리할 수 있습니다.  <br />
-bind9은 내부 dns 서버(server)를 설정하여, server가 개인 호스트(host) 이름과 개인 IP 주소(address)를 확인하는 데 사용합니다. <br />
-이를 통해 내부 host 이름과 개인 IP address를 중앙에서 관리할 수 ​​있으며, 이는 사용자 환경이 몇 개 이상의 host로 확장될 때 필요합니다. <br />
+        <p>BIND(bind9, berkeley internet name domain)는 안정성과 고품질로 유닉스(unix) 및 리눅스(linux)에서 널리 사용되며, 모든 기능을 갖춘 매우 유연한 DNS(dns, domain name server) 시스템(system)입니다.
+<br /><br />
+bind9은 MPL(mozilla public license) 2.0 라이선스(license)가 적용되는 오픈소스(open source) 소프트웨어이며, 인터넷에 dns 정보를 게시 할 수 있을 뿐만 아니라 사용자의 dns 쿼리를 처리할 수 있습니다. 
+<br /><br />
+bind9은 내부 dns 서버(server)를 설정하여, server가 개인 호스트(host) 이름과 개인 IP 주소(address)를 확인하는 데 사용합니다. 이를 통해 내부 host 이름과 개인 IP address를 중앙에서 관리할 수 ​​있으며, 이는 사용자 환경이 몇 개 이상의 host로 확장될 때 필요합니다.
+<br /><br />
 이 포스트에서는 우분투(ubuntu) 환경에서 package로 bind9을 설치하는 방법을 소개합니다.</p>
 
 <blockquote>
-  <p>server 구성 및 인프라(Infrastructure) 관리 시에 중요한 부분은 dns를 설정하여 네트워크(network) 인터페이스와 IP address를 쉽게 검색할 방법을 유지하는 것입니다. <br />
+  <p>server 구성 및 인프라(Infrastructure) 관리 시에 중요한 부분은, dns를 설정하여 네트워크(network) 인터페이스와 IP address를 쉽게 검색할 방법을 유지하는 것입니다.
+<br /><br />
 IP address 대신 FQDN(fully qualified domain name)을 사용하여 network address를 지정하면, 애플리케이션(application) 및 서비스(service) 구성이 쉬워지고 구성 파일의 유지 관리가 향상됩니다.</p>
 </blockquote>
 
@@ -524,7 +527,8 @@ threads support is enabled
 </code></pre></div></div>
 
 <h2 id="마무리conclusion">마무리(CONCLUSION)</h2>
-<p>ubuntu 환경에 package로 bind9 설치를 완료했습니다. <br />
+<p>ubuntu 환경에 package로 bind9 설치를 완료했습니다.
+<br /><br />
 bind9 설정은 <a href="https://lindarex.github.io/bind9/ubuntu-bind9-setting/" target="\_blank">우분투(Ubuntu) 환경에 BIND(BIND9) 설정하기</a> 포스트를 참고하시기 바랍니다.</p>
 
 <h2 id="참고references">참고(REFERENCES)</h2>
@@ -759,8 +763,11 @@ bind9 설정은 인프라(...</p>
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">젠킨스(Jenkins)를 설치하는 방법은 다양합니다. 패키지(package)로 jenkins를 설치하는 방법은 우분투(Ubuntu) 환경에 패키지(Package)로 젠킨스(Jenkins) 설치하기 포스트를 참고하시기 바랍니다. 
-이 포스트에서는 우분투(ubuntu) 환경에서 WAR...</p>
+    <p class="archive__item-excerpt" itemprop="description">젠킨스(Jenkins)를 설치하는 방법은 다양합니다.
+
+이 포스트에서는 우분투(ubuntu) 환경에서 WAR 파일(file)로 jenkins를 설치하는 방법을 소개합니다.
+
+</p>
   </article>
 </div>
 

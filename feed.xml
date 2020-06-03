@@ -6,8 +6,8 @@
     <description>오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 블로그입니다 | It shares technologies such as open source software, cloud computing, PaaS and container platforms</description>
     <link>https://lindarex.github.io/</link>
     <atom:link href="https://lindarex.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 03 Jun 2020 17:13:58 +0900</pubDate>
-    <lastBuildDate>Wed, 03 Jun 2020 17:13:58 +0900</lastBuildDate>
+    <pubDate>Wed, 03 Jun 2020 18:19:38 +0900</pubDate>
+    <lastBuildDate>Wed, 03 Jun 2020 18:19:38 +0900</lastBuildDate>
     <generator>Jekyll v3.8.7</generator>
     
       <item>
@@ -1459,14 +1459,17 @@ bind9 설정에 대한 더 자세한 내용은 아래 참고 페이지를 확인
     
       <item>
         <title>우분투(Ubuntu) 환경에 패키지(Package)로 BIND(BIND9) 설치하기</title>
-        <description>&lt;p&gt;BIND(bind9, berkeley internet name domain)는 안정성과 고품질로 유닉스(unix) 및 리눅스(linux)에서 널리 사용되며, 모든 기능을 갖춘 매우 유연한 DNS(dns, domain name server) 시스템(system)입니다. &lt;br /&gt;
-bind9은 MPL(mozilla public license) 2.0 라이선스(license)가 적용되는 오픈소스(open source) 소프트웨어이며, 인터넷에 dns 정보를 게시 할 수 있을 뿐만 아니라 사용자의 dns 쿼리를 처리할 수 있습니다.  &lt;br /&gt;
-bind9은 내부 dns 서버(server)를 설정하여, server가 개인 호스트(host) 이름과 개인 IP 주소(address)를 확인하는 데 사용합니다. &lt;br /&gt;
-이를 통해 내부 host 이름과 개인 IP address를 중앙에서 관리할 수 ​​있으며, 이는 사용자 환경이 몇 개 이상의 host로 확장될 때 필요합니다. &lt;br /&gt;
+        <description>&lt;p&gt;BIND(bind9, berkeley internet name domain)는 안정성과 고품질로 유닉스(unix) 및 리눅스(linux)에서 널리 사용되며, 모든 기능을 갖춘 매우 유연한 DNS(dns, domain name server) 시스템(system)입니다.
+&lt;br /&gt;&lt;br /&gt;
+bind9은 MPL(mozilla public license) 2.0 라이선스(license)가 적용되는 오픈소스(open source) 소프트웨어이며, 인터넷에 dns 정보를 게시 할 수 있을 뿐만 아니라 사용자의 dns 쿼리를 처리할 수 있습니다. 
+&lt;br /&gt;&lt;br /&gt;
+bind9은 내부 dns 서버(server)를 설정하여, server가 개인 호스트(host) 이름과 개인 IP 주소(address)를 확인하는 데 사용합니다. 이를 통해 내부 host 이름과 개인 IP address를 중앙에서 관리할 수 ​​있으며, 이는 사용자 환경이 몇 개 이상의 host로 확장될 때 필요합니다.
+&lt;br /&gt;&lt;br /&gt;
 이 포스트에서는 우분투(ubuntu) 환경에서 package로 bind9을 설치하는 방법을 소개합니다.&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;server 구성 및 인프라(Infrastructure) 관리 시에 중요한 부분은 dns를 설정하여 네트워크(network) 인터페이스와 IP address를 쉽게 검색할 방법을 유지하는 것입니다. &lt;br /&gt;
+  &lt;p&gt;server 구성 및 인프라(Infrastructure) 관리 시에 중요한 부분은, dns를 설정하여 네트워크(network) 인터페이스와 IP address를 쉽게 검색할 방법을 유지하는 것입니다.
+&lt;br /&gt;&lt;br /&gt;
 IP address 대신 FQDN(fully qualified domain name)을 사용하여 network address를 지정하면, 애플리케이션(application) 및 서비스(service) 구성이 쉬워지고 구성 파일의 유지 관리가 향상됩니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -1577,7 +1580,8 @@ threads support is enabled
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
-&lt;p&gt;ubuntu 환경에 package로 bind9 설치를 완료했습니다. &lt;br /&gt;
+&lt;p&gt;ubuntu 환경에 package로 bind9 설치를 완료했습니다.
+&lt;br /&gt;&lt;br /&gt;
 bind9 설정은 &lt;a href=&quot;https://lindarex.github.io/bind9/ubuntu-bind9-setting/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 환경에 BIND(BIND9) 설정하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;
@@ -1611,8 +1615,13 @@ bind9 설정은 &lt;a href=&quot;https://lindarex.github.io/bind9/ubuntu-bind9-s
     
       <item>
         <title>우분투(Ubuntu) 환경에 WAR 파일로 젠킨스(Jenkins) 설치하기</title>
-        <description>&lt;p&gt;젠킨스(Jenkins)를 설치하는 방법은 다양합니다. 패키지(package)로 jenkins를 설치하는 방법은 &lt;a href=&quot;https://lindarex.github.io/jenkins/ubuntu-jenkins-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 환경에 패키지(Package)로 젠킨스(Jenkins) 설치하기&lt;/a&gt; 포스트를 참고하시기 바랍니다. &lt;br /&gt;
+        <description>&lt;p&gt;젠킨스(Jenkins)를 설치하는 방법은 다양합니다.
+&lt;br /&gt;&lt;br /&gt;
 이 포스트에서는 우분투(ubuntu) 환경에서 WAR 파일(file)로 jenkins를 설치하는 방법을 소개합니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;패키지(package)로 jenkins를 설치하는 방법은 &lt;a href=&quot;https://lindarex.github.io/jenkins/ubuntu-jenkins-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 환경에 패키지(Package)로 젠킨스(Jenkins) 설치하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;h2 id=&quot;선행조건prerequisite&quot;&gt;선행조건(PREREQUISITE)&lt;/h2&gt;
 &lt;ul&gt;
@@ -1767,8 +1776,10 @@ This may also be found at: /home/rex/.jenkins/secrets/initialAdminPassword
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
-&lt;p&gt;ubuntu 환경에 war file로 jenkins 설치를 완료했습니다. &lt;br /&gt;
-jenkins 초기 설정은 &lt;a href=&quot;https://lindarex.github.io/jenkins/jenkins-initial-setting/&quot; target=&quot;\_blank&quot;&gt;젠킨스(Jenkins) 초기 설정하기&lt;/a&gt; 포스트를 참고하시기 바랍니다. &lt;br /&gt;
+&lt;p&gt;ubuntu 환경에 war file로 jenkins 설치를 완료했습니다.
+&lt;br /&gt;&lt;br /&gt;
+jenkins 초기 설정은 &lt;a href=&quot;https://lindarex.github.io/jenkins/jenkins-initial-setting/&quot; target=&quot;\_blank&quot;&gt;젠킨스(Jenkins) 초기 설정하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.
+&lt;br /&gt;&lt;br /&gt;
 다음 포스트에서는 &lt;a href=&quot;https://lindarex.github.io/jenkins/jenkins-github-webhook-setting/&quot; target=&quot;\_blank&quot;&gt;GitHub Webhook으로 젠킨스(Jenkins) Job을 실행(자동화)하는 방법&lt;/a&gt;을 소개하겠습니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;
@@ -1884,7 +1895,8 @@ jenkins 초기 설정은 &lt;a href=&quot;https://lindarex.github.io/jenkins/jen
 
 &lt;h3 id=&quot;2-관리자root-계정-활성화&quot;&gt;2. 관리자(root) 계정 활성화&lt;/h3&gt;
 &lt;ul&gt;
-  &lt;li&gt;ubuntu를 비롯한 linux를 설치하면 기본적으로 관리자(root) 계정이 생성됩니다. root 계정은 비밀번호(password)를 설정하기 전까지 비활성화 상태이기 때문에, password를 설정하여 root 계정을 활성화합니다.&lt;/li&gt;
+  &lt;li&gt;ubuntu를 비롯한 linux를 설치하면 기본적으로 관리자(root) 계정이 생성됩니다.&lt;/li&gt;
+  &lt;li&gt;root 계정은 비밀번호(password)를 설정하기 전까지 비활성화 상태이기 때문에, password를 설정하여 root 계정을 활성화합니다.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h4 id=&quot;21-root-계정-password-설정&quot;&gt;2.1. root 계정 password 설정&lt;/h4&gt;
@@ -1920,15 +1932,25 @@ passwd: password updated successfully
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;‘sudo’(substitute user do)는 현재 계정에서 다른 계정, 즉 슈퍼 유저(superuser)로서 관리자(root) 권한을 가진 계정으로 프로그램(program)을 구동할 수 있도록 하는 command이며, ‘sudo -i’는 root 계정으로 로그인(login)하며 ‘/root’ 디렉터리(directory)로 이동하는 command이고, ‘sudo -s’는 현재 directory를 유지하며 root 계정으로 login 하는 command입니다. ‘sudo’, ‘sudo -i’, ‘sudo -s’ command는 현재 계정의 password를 요구하고, 전환된 계정의 환경변수는 적용하지 않습니다.&lt;/p&gt;
+  &lt;p&gt;‘sudo’(substitute user do)는 현재 계정에서 다른 계정, 즉 슈퍼 유저(superuser)로서 관리자(root) 권한을 가진 계정으로 프로그램(program)을 구동할 수 있도록 하는 command입니다.
+&lt;br /&gt;&lt;br /&gt;
+‘sudo -i’는 root 계정으로 로그인(login)하며 ‘/root’ 디렉터리(directory)로 이동하는 command이고, ‘sudo -s’는 현재 directory를 유지하며 root 계정으로 login 하는 command입니다.
+&lt;br /&gt;&lt;br /&gt;
+‘sudo’, ‘sudo -i’, ‘sudo -s’ command는 현재 계정의 password를 요구하고, 전환된 계정의 환경변수는 적용하지 않습니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;‘su’(substitute user, switch user)는 현재 계정에서 log out 하지 않고 다른 계정(기본값은 root 계정)으로 전환하며 현재 계정의 환경변수를 유지하는 command이고, ‘su -‘는 ‘su’와 동일하게 계정을 전환하며, 전환된 계정의 환경변수를 적용하는 command입니다. ‘su’, ‘su -‘ command는 전환될 계정의 password를 요구합니다.&lt;/p&gt;
+  &lt;p&gt;‘su’(substitute user, switch user)는 현재 계정에서 log out 하지 않고 다른 계정(기본값은 root 계정)으로 전환하며 현재 계정의 환경변수를 유지하는 command입니다.
+&lt;br /&gt;&lt;br /&gt;
+‘su -‘는 ‘su’와 동일하게 계정을 전환하며, 전환된 계정의 환경변수를 적용하는 command입니다.
+&lt;br /&gt;&lt;br /&gt;
+‘su’, ‘su -‘ command는 전환될 계정의 password를 요구합니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;‘sudo’ command는 현재 계정에서 root 계정의 권한만 빌리기 때문에 작업 내역은 현재 계정으로 남고, ‘su’ command는 현재 계정에서 root 계정으로 전환하기 때문에 작업 내역은 root 계정으로 저장됩니다.&lt;/p&gt;
+  &lt;p&gt;‘sudo’ command는 현재 계정에서 root 계정의 권한만 빌리기 때문에 작업 내역은 현재 계정으로 남고, 
+&lt;br /&gt;
+‘su’ command는 현재 계정에서 root 계정으로 전환하기 때문에 작업 내역은 root 계정으로 저장됩니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;blockquote&gt;
@@ -2217,7 +2239,8 @@ systemd-timesyncd.service active: yes
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
-&lt;p&gt;ubuntu server 설치 후 초기 설정을 완료했습니다. &lt;br /&gt;
+&lt;p&gt;ubuntu server 설치 후 초기 설정을 완료했습니다.
+&lt;br /&gt;&lt;br /&gt;
 다음 포스트에서는 ubuntu 보안 강화를 위한 오픈소스(open source) 소프트웨어인 fail2ban을 소개하겠습니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;

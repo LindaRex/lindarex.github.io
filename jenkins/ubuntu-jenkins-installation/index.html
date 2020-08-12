@@ -12,7 +12,7 @@
 <!-- LINDAREX :: JEKYLL SEO TAG :: BIGIN -->
 <!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>우분투(Ubuntu) 환경에 패키지(Package)로 젠킨스(Jenkins) 설치하기 | LindaRex</title>
-<meta name="generator" content="Jekyll v3.8.7" />
+<meta name="generator" content="Jekyll v3.9.0" />
 <meta property="og:title" content="우분투(Ubuntu) 환경에 패키지(Package)로 젠킨스(Jenkins) 설치하기" />
 <meta name="author" content="Rex" />
 <meta property="og:locale" content="ko_KR" />
@@ -29,7 +29,7 @@
 <meta name="twitter:creator" content="@Rex" />
 <meta name="google-site-verification" content="t6VkmqsI15sIx3P1-gh3NYputZtjhDZOTkxhwDaa4Ik" />
 <script type="application/ld+json">
-{"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"Rex"},"@type":"BlogPosting","url":"https://lindarex.github.io/jenkins/ubuntu-jenkins-installation/","dateModified":"2020-02-13T00:00:00+09:00","datePublished":"2020-02-13T00:00:00+09:00","headline":"우분투(Ubuntu) 환경에 패키지(Package)로 젠킨스(Jenkins) 설치하기","author":{"@type":"Person","name":"Rex"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/jenkins/ubuntu-jenkins-installation/"},"description":"젠킨스(Jenkins)는 MIT license로 오픈소스(open source) 소프트웨어이며, 소프트웨어 개발 시 지속적 통합(CI, continuous integration) 서비스(service)를 제공하는 자동화 서버(server)입니다. jenkins는 모든 프로젝트의 빌드(build)와 배포(deploy), 자동화를 지원하며, 수백 개의 플러그인(plugin)을 제공합니다. 이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 jenkins를 설치하는 방법을 소개합니다.","@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","url":"https://lindarex.github.io/jenkins/ubuntu-jenkins-installation/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"Rex"},"headline":"우분투(Ubuntu) 환경에 패키지(Package)로 젠킨스(Jenkins) 설치하기","dateModified":"2020-02-13T00:00:00+09:00","datePublished":"2020-02-13T00:00:00+09:00","author":{"@type":"Person","name":"Rex"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/jenkins/ubuntu-jenkins-installation/"},"description":"젠킨스(Jenkins)는 MIT license로 오픈소스(open source) 소프트웨어이며, 소프트웨어 개발 시 지속적 통합(CI, continuous integration) 서비스(service)를 제공하는 자동화 서버(server)입니다. jenkins는 모든 프로젝트의 빌드(build)와 배포(deploy), 자동화를 지원하며, 수백 개의 플러그인(plugin)을 제공합니다. 이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 jenkins를 설치하는 방법을 소개합니다.","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <!-- LINDAREX :: JEKYLL SEO TAG :: END -->
@@ -463,11 +463,11 @@ jenkins는 모든 프로젝트의 빌드(build)와 배포(deploy), 자동화를 
 
 <h2 id="내용contents">내용(CONTENTS)</h2>
 <h3 id="1-jenkins-debian-packages-repository-key-추가">1. jenkins debian packages repository key 추가</h3>
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>wget <span class="nt">-q</span> <span class="nt">-O</span> - https://pkg.jenkins.io/debian/jenkins-ci.org.key | <span class="nb">sudo </span>apt-key add -
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>wget <span class="nt">-q</span> <span class="nt">-O</span> - https://pkg.jenkins.io/debian-stable/jenkins.io.key | <span class="nb">sudo </span>apt-key add -
 </code></pre></div></div>
 
 <h3 id="2-jenkins-debian-packages-repository-추가">2. jenkins debian packages repository 추가</h3>
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>sh <span class="nt">-c</span> <span class="s1">'echo deb https://pkg.jenkins.io/debian-stable binary/ &gt; /etc/apt/sources.list.d/jenkins.list'</span>  
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>sh <span class="nt">-c</span> <span class="s1">'echo deb https://pkg.jenkins.io/debian-stable binary/ &gt; /etc/apt/sources.list.d/jenkins.list'</span>
 </code></pre></div></div>
 
 <h3 id="3-apt-install-명령어로-jenkins-설치">3. apt install 명령어로 jenkins 설치</h3>

@@ -6,9 +6,9 @@
     <description>오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 블로그입니다 | It shares technologies such as open source software, cloud computing, PaaS and container platforms</description>
     <link>https://lindarex.github.io/</link>
     <atom:link href="https://lindarex.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 03 Jun 2020 19:17:07 +0900</pubDate>
-    <lastBuildDate>Wed, 03 Jun 2020 19:17:07 +0900</lastBuildDate>
-    <generator>Jekyll v3.8.7</generator>
+    <pubDate>Wed, 12 Aug 2020 14:23:55 +0900</pubDate>
+    <lastBuildDate>Wed, 12 Aug 2020 14:23:55 +0900</lastBuildDate>
+    <generator>Jekyll v3.9.0</generator>
     
       <item>
         <title>우분투(Ubuntu) 환경에 네임 서버(Name server) 설정하기</title>
@@ -3162,6 +3162,8 @@ BOSH는 Cloud Foundry projects에 기반이 되는 프로젝트이고, CFAR을 �
         
         <category>cloud foundry</category>
         
+        <category>cf</category>
+        
         <category>cfar</category>
         
         <category>cfcr</category>
@@ -3324,6 +3326,10 @@ Cloud Foundry에서 binding은 service instance를 push 된 application에 연�
   &lt;p&gt;router에 대한 자세한 정보는 &lt;a href=&quot;https://docs.cloudfoundry.org/concepts/architecture/router.html&quot; target=&quot;\_blank&quot;&gt;https://docs.cloudfoundry.org/concepts/architecture/router.html&lt;/a&gt;을 확인해 주시기 바랍니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
+&lt;blockquote&gt;
+  &lt;p&gt;Diego cell에 대한 자세한 정보는 &lt;a href=&quot;https://docs.cloudfoundry.org/concepts/architecture/#diego-cell&quot; target=&quot;\_blank&quot;&gt;https://docs.cloudfoundry.org/concepts/architecture/#diego-cell&lt;/a&gt;을 확인해 주시기 바랍니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
 &lt;h4 id=&quot;42-oauth2-uaa-server&quot;&gt;4.2. OAuth2 UAA server&lt;/h4&gt;
 &lt;ul&gt;
   &lt;li&gt;OAuth2 UAA(user account and authentication) server와 로그인(login) server는 함께 작동하여 ID 관리 기능을 제공합니다.&lt;/li&gt;
@@ -3347,10 +3353,6 @@ Cloud Foundry에서 binding은 service instance를 push 된 application에 연�
 
 &lt;blockquote&gt;
   &lt;p&gt;CC에 대한 자세한 정보는 &lt;a href=&quot;https://docs.cloudfoundry.org/concepts/architecture/cloud-controller.html&quot; target=&quot;\_blank&quot;&gt;https://docs.cloudfoundry.org/concepts/architecture/cloud-controller.html&lt;/a&gt;을 확인해 주시기 바랍니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Diego cell에 대한 자세한 정보는 &lt;a href=&quot;https://docs.cloudfoundry.org/concepts/architecture/#diego-cell&quot; target=&quot;\_blank&quot;&gt;https://docs.cloudfoundry.org/concepts/architecture/#diego-cell&lt;/a&gt;을 확인해 주시기 바랍니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h4 id=&quot;44-blobstore&quot;&gt;4.4. Blobstore&lt;/h4&gt;
@@ -3443,6 +3445,8 @@ CFAR에 대한 더 자세한 내용은 앞으로 다양한 포스트로 소개�
         <guid isPermaLink="true">https://lindarex.github.io/cfar/cloud-foundry-cfar-introduction/</guid>
         
         <category>cloud foundry</category>
+        
+        <category>cf</category>
         
         <category>cfar</category>
         
@@ -5916,11 +5920,11 @@ jenkins는 모든 프로젝트의 빌드(build)와 배포(deploy), 자동화를 
 
 &lt;h2 id=&quot;내용contents&quot;&gt;내용(CONTENTS)&lt;/h2&gt;
 &lt;h3 id=&quot;1-jenkins-debian-packages-repository-key-추가&quot;&gt;1. jenkins debian packages repository key 추가&lt;/h3&gt;
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;wget &lt;span class=&quot;nt&quot;&gt;-q&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-O&lt;/span&gt; - https://pkg.jenkins.io/debian/jenkins-ci.org.key | &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-key add -
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;wget &lt;span class=&quot;nt&quot;&gt;-q&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-O&lt;/span&gt; - https://pkg.jenkins.io/debian-stable/jenkins.io.key | &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-key add -
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;2-jenkins-debian-packages-repository-추가&quot;&gt;2. jenkins debian packages repository 추가&lt;/h3&gt;
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;sh &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'echo deb https://pkg.jenkins.io/debian-stable binary/ &amp;gt; /etc/apt/sources.list.d/jenkins.list'&lt;/span&gt;  
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;sh &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'echo deb https://pkg.jenkins.io/debian-stable binary/ &amp;gt; /etc/apt/sources.list.d/jenkins.list'&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;3-apt-install-명령어로-jenkins-설치&quot;&gt;3. apt install 명령어로 jenkins 설치&lt;/h3&gt;

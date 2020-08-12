@@ -54,12 +54,12 @@ jenkins는 모든 프로젝트의 빌드(build)와 배포(deploy), 자동화를 
 ## 내용(CONTENTS)
 ### 1. jenkins debian packages repository key 추가
 ```console
-$ sudo wget -q -O - https://pkg.jenkins.io/debian/jenkins-ci.org.key | sudo apt-key add -
+$ sudo wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
 ```
 
 ### 2. jenkins debian packages repository 추가
 ```console
-$ sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'  
+$ sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
 ```
 
 ### 3. apt install 명령어로 jenkins 설치

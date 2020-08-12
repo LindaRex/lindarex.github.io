@@ -4,6 +4,7 @@ categories:
   - cfar
 tags: 
   - "cloud foundry"
+  - cf
   - cfar
   - paas
   - "open source software"
@@ -85,6 +86,8 @@ Cloud Foundry에서 binding은 service instance를 push 된 application에 연�
 
 > router에 대한 자세한 정보는 [https://docs.cloudfoundry.org/concepts/architecture/router.html](https://docs.cloudfoundry.org/concepts/architecture/router.html){: target="\_blank"}을 확인해 주시기 바랍니다.
 
+> Diego cell에 대한 자세한 정보는 [https://docs.cloudfoundry.org/concepts/architecture/#diego-cell](https://docs.cloudfoundry.org/concepts/architecture/#diego-cell){: target="\_blank"}을 확인해 주시기 바랍니다.
+
 #### 4.2. OAuth2 UAA server
 - OAuth2 UAA(user account and authentication) server와 로그인(login) server는 함께 작동하여 ID 관리 기능을 제공합니다.
 - UAA는 OAuth2 제공자(provider)로서 CFAR 사용자를 대신하여 클라이언트(client) application이 사용할 수 있는 토큰(token)을 발행합니다. 
@@ -101,8 +104,6 @@ Cloud Foundry에서 binding은 service instance를 push 된 application에 연�
 - CC는 client가 시스템(system)에 접근할 수 있도록 REST API endpoints를 제공하고, 조직(orgs), 공간(spaces), 서비스(services), 사용자 역할(user roles) 등의 데이터베이스(database)를 유지하고 관리합니다.
 
 > CC에 대한 자세한 정보는 [https://docs.cloudfoundry.org/concepts/architecture/cloud-controller.html](https://docs.cloudfoundry.org/concepts/architecture/cloud-controller.html){: target="\_blank"}을 확인해 주시기 바랍니다.
-
-> Diego cell에 대한 자세한 정보는 [https://docs.cloudfoundry.org/concepts/architecture/#diego-cell](https://docs.cloudfoundry.org/concepts/architecture/#diego-cell){: target="\_blank"}을 확인해 주시기 바랍니다.
 
 #### 4.4. Blobstore
 - Blobstore는 큰 바이너리(binary) 파일(file)을 저장할 수 있는 repository입니다.

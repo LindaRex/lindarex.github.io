@@ -4,6 +4,7 @@ categories:
   - cfar
 tags: 
   - "cloud foundry"
+  - cf
   - cfar
   - cfcr
   - bosh

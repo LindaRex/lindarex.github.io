@@ -1,5 +1,5 @@
 ---
-title: "우분투(Ubuntu) 환경에 패키지(Package)로 fail2ban 설치하기"
+title: "우분투(Ubuntu) 환경에 패키지(Package)로 Fail2ban 설치하기"
 categories: 
   - fail2ban
 tags: 
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-Fail2ban은 침입 차단 소프트웨어 프레임워크(framework)로, 파이썬(python) 언어로 개발되었습니다. <br />
+Fail2ban(fail2ban)은 침입 차단 소프트웨어 프레임워크(framework)로, 파이썬(python) 언어로 개발되었습니다. <br />
 로그(log) 파일과 iptables를 이용하여 접속 시도를 확인하고 차단하여 무차별 대입 공격으로부터 시스템을 보호합니다. <br />
 패킷 제어 시스템이나 로컬 방화벽(iptables 또는 TCP wrapper)과의 인터페이스를 갖는 POSIX 시스템에서 사용할 수 있으며, GNU General Public License(GNU GPL 또는 GPL) v2+가 적용된 오픈소스(open source) 소프트웨어로 배포(release)됩니다. <br />
 이 포스트에서는 우분투(ubuntu) 환경에서 package로 fail2ban을 설치하는 방법을 소개합니다.

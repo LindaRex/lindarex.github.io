@@ -24,6 +24,8 @@ sidebar:
         url: /categories/elastic-stack/
       - title: "BIND9"
         url: /categories/bind9/
+      - title: "FAIL2BAN"
+        url: /categories/fail2ban/
   - title: "CLOUD FOUNDRY"
     children:
       - title: "BOSH"

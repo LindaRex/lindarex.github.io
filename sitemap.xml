@@ -105,6 +105,10 @@
 <lastmod>2020-05-11T00:00:00+09:00</lastmod>
 </url>
 <url>
+<loc>https://lindarex.github.io/fail2ban/ubuntu-fail2ban-installation/</loc>
+<lastmod>2020-10-29T00:00:00+09:00</lastmod>
+</url>
+<url>
 <loc>https://lindarex.github.io/about/</loc>
 </url>
 <url>
@@ -334,6 +338,9 @@
 <loc>https://lindarex.github.io/tags/name-server/</loc>
 </url>
 <url>
+<loc>https://lindarex.github.io/tags/fail2ban/</loc>
+</url>
+<url>
 <loc>https://lindarex.github.io/categories/ubuntu/</loc>
 </url>
 <url>
@@ -374,6 +381,9 @@
 </url>
 <url>
 <loc>https://lindarex.github.io/categories/bind9/</loc>
+</url>
+<url>
+<loc>https://lindarex.github.io/categories/fail2ban/</loc>
 </url>
 <url>
 <loc>https://lindarex.github.io/page2/</loc>

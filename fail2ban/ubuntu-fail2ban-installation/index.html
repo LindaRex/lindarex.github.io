@@ -1,0 +1,1001 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.18.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- LINDAREX :: JEKYLL SEO TAG :: BIGIN -->
+<!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>우분투(Ubuntu) 환경에 패키지(Package)로 fail2ban 설치하기 | LindaRex</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="우분투(Ubuntu) 환경에 패키지(Package)로 fail2ban 설치하기" />
+<meta name="author" content="Rex" />
+<meta property="og:locale" content="ko_KR" />
+<meta name="description" content="Fail2ban은 침입 차단 소프트웨어 프레임워크(framework)로, 파이썬(python) 언어로 개발되었습니다. 로그(log) 파일과 iptables를 이용하여 접속 시도를 확인하고 차단하여 무차별 대입 공격으로부터 시스템을 보호합니다. 패킷 제어 시스템이나 로컬 방화벽(iptables 또는 TCP wrapper)과의 인터페이스를 갖는 POSIX 시스템에서 사용할 수 있으며, GNU General Public License(GNU GPL 또는 GPL) v2+가 적용된 오픈소스(open source) 소프트웨어로 배포(release)됩니다. 이 포스트에서는 우분투(ubuntu) 환경에서 package로 fail2ban을 설치하는 방법을 소개합니다." />
+<meta property="og:description" content="Fail2ban은 침입 차단 소프트웨어 프레임워크(framework)로, 파이썬(python) 언어로 개발되었습니다. 로그(log) 파일과 iptables를 이용하여 접속 시도를 확인하고 차단하여 무차별 대입 공격으로부터 시스템을 보호합니다. 패킷 제어 시스템이나 로컬 방화벽(iptables 또는 TCP wrapper)과의 인터페이스를 갖는 POSIX 시스템에서 사용할 수 있으며, GNU General Public License(GNU GPL 또는 GPL) v2+가 적용된 오픈소스(open source) 소프트웨어로 배포(release)됩니다. 이 포스트에서는 우분투(ubuntu) 환경에서 package로 fail2ban을 설치하는 방법을 소개합니다." />
+<link rel="canonical" href="https://lindarex.github.io/fail2ban/ubuntu-fail2ban-installation/" />
+<meta property="og:url" content="https://lindarex.github.io/fail2ban/ubuntu-fail2ban-installation/" />
+<meta property="og:site_name" content="LindaRex" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-10-29T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="우분투(Ubuntu) 환경에 패키지(Package)로 fail2ban 설치하기" />
+<meta name="twitter:site" content="@" />
+<meta name="twitter:creator" content="@Rex" />
+<meta name="google-site-verification" content="t6VkmqsI15sIx3P1-gh3NYputZtjhDZOTkxhwDaa4Ik" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/fail2ban/ubuntu-fail2ban-installation/"},"author":{"@type":"Person","name":"Rex"},"@type":"BlogPosting","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"Rex"},"url":"https://lindarex.github.io/fail2ban/ubuntu-fail2ban-installation/","headline":"우분투(Ubuntu) 환경에 패키지(Package)로 fail2ban 설치하기","dateModified":"2020-10-29T00:00:00+09:00","datePublished":"2020-10-29T00:00:00+09:00","description":"Fail2ban은 침입 차단 소프트웨어 프레임워크(framework)로, 파이썬(python) 언어로 개발되었습니다. 로그(log) 파일과 iptables를 이용하여 접속 시도를 확인하고 차단하여 무차별 대입 공격으로부터 시스템을 보호합니다. 패킷 제어 시스템이나 로컬 방화벽(iptables 또는 TCP wrapper)과의 인터페이스를 갖는 POSIX 시스템에서 사용할 수 있으며, GNU General Public License(GNU GPL 또는 GPL) v2+가 적용된 오픈소스(open source) 소프트웨어로 배포(release)됩니다. 이 포스트에서는 우분투(ubuntu) 환경에서 package로 fail2ban을 설치하는 방법을 소개합니다.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<!-- LINDAREX :: JEKYLL SEO TAG :: END -->
+
+<!-- LINDAREX :: NAVER SITE VERIFICATION :: BIGIN -->
+<meta name="naver-site-verification" content="190d9b8e0a63058b72f2031ce67825da7b9038f5">
+<!-- LINDAREX :: NAVER SITE VERIFICATION :: END -->
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="LindaRex Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- LINDAREX :: FAVICON :: BIGIN -->
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico">
+<!-- LINDAREX :: FAVICON :: END -->
+
+<!-- LINDAREX :: FEED :: BIGIN -->
+<!-- <link rel="alternate" type="application/rss+xml" href="https://lindarex.github.io/feed.xml" title="LindaRex Feed"> -->
+<!-- LINDAREX :: FEED :: END -->
+
+<!-- LINDAREX :: GOOGLE ANALYTICS :: BIGIN -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-157973560-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-157973560-1');
+</script>
+<!-- LINDAREX :: GOOGLE ANALYTICS :: END -->
+
+<!-- LINDAREX :: NAVER ANALYTICS :: BIGIN -->
+<!-- Naver Analytics -->
+<script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
+<script type="text/javascript">
+if(!wcs_add) var wcs_add = {};
+wcs_add["wa"] = "42df78a7dfd6f0";
+wcs_do();
+</script>
+<!-- LINDAREX :: NAVER ANALYTICS :: END -->
+
+<!-- LINDAREX :: GOOGLE ADSENSE :: BIGIN -->
+<script data-ad-client="ca-pub-8367174639781348" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- LINDAREX :: GOOGLE ADSENSE :: END -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/LindaRex_LOGO.jpg" alt="LindaRex logo"></a>
+        
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/year-archive/" >Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/" >Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/" >Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/" >About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">OPEN SOURCE SOFTWARE</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/jenkins/" class="">JENKINS</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/sonarqube/" class="">SONARQUBE</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/scm-manager/" class="">SCM MANAGER</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/postgresql/" class="">POSTGRESQL</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/elastic-stack/" class="">ELASTIC STACK</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/bind9/" class="">BIND9</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">CLOUD FOUNDRY</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/bosh/" class="">BOSH</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/cfar/" class="">CFAR</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">CLOUD COMPUTING</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/aws/" class="">AWS</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/azure/" class="">AZURE</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">INTERESTED</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/ubuntu/" class="">UBUNTU</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/concepts/" class="">CONCEPTS</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/vmware-workstation/" class="">VMWARE WORKSTATION</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/travis-ci/" class="">TRAVIS CI</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+  <!-- LINDAREX :: GOOGLE ADSENSE :: LEFT-SIDEBAR :: BIGIN-->
+  <!-- LINDAREX :: GOOGLE ADSENSE :: LEFT-SIDEBAR :: HTML :: BIGIN -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 2020-02-22-ad-left-sidebar -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:200px;height:200px"
+     data-ad-client="ca-pub-8367174639781348"
+     data-ad-slot="5840394475"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<!-- LINDAREX :: GOOGLE ADSENSE :: LEFT-SIDEBAR :: HTML :: END -->
+
+  <!-- LINDAREX :: GOOGLE ADSENSE :: LEFT-SIDEBAR :: END-->
+</nav>
+    
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="우분투(Ubuntu) 환경에 패키지(Package)로 fail2ban 설치하기">
+    <meta itemprop="description" content="Fail2ban은 침입 차단 소프트웨어 프레임워크(framework)로, 파이썬(python) 언어로 개발되었습니다. 로그(log) 파일과 iptables를 이용하여 접속 시도를 확인하고 차단하여 무차별 대입 공격으로부터 시스템을 보호합니다. 패킷 제어 시스템이나 로컬 방화벽(iptables 또는 TCP wrapper)과의 인터페이스를 갖는 POSIX 시스템에서 사용할 수 있으며, GNU General Public License(GNU GPL 또는 GPL) v2+가 적용된 오픈소스(open source) 소프트웨어로 배포(release)됩니다. 이 포스트에서는 우분투(ubuntu) 환경에서 package로 fail2ban을 설치하는 방법을 소개합니다.">
+    <meta itemprop="datePublished" content="2020-10-29T00:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">우분투(Ubuntu) 환경에 패키지(Package)로 fail2ban 설치하기
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+          
+          <!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: BIGIN -->
+          
+            <nav class="toc-custom">
+            <!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: HTML :: BIGIN -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 2020-02-22-ad-right-sidebar -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8367174639781348"
+     data-ad-slot="5781712397"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: HTML :: END -->
+
+            </nav>
+          
+          <!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: END -->
+          </aside>
+        
+        <p>Fail2ban은 침입 차단 소프트웨어 프레임워크(framework)로, 파이썬(python) 언어로 개발되었습니다. <br />
+로그(log) 파일과 iptables를 이용하여 접속 시도를 확인하고 차단하여 무차별 대입 공격으로부터 시스템을 보호합니다. <br />
+패킷 제어 시스템이나 로컬 방화벽(iptables 또는 TCP wrapper)과의 인터페이스를 갖는 POSIX 시스템에서 사용할 수 있으며, GNU General Public License(GNU GPL 또는 GPL) v2+가 적용된 오픈소스(open source) 소프트웨어로 배포(release)됩니다. <br />
+이 포스트에서는 우분투(ubuntu) 환경에서 package로 fail2ban을 설치하는 방법을 소개합니다.</p>
+
+<blockquote>
+  <p>침입 차단 소프트웨어(Intrusion Prevention Systems (IPS), Intrusion Detection and Prevention Systems (IDPS))에 대한 자세한 정보는 <a href="https://ko.wikipedia.org/wiki/%EC%B9%A8%EC%9E%85_%EC%B0%A8%EB%8B%A8_%EC%8B%9C%EC%8A%A4%ED%85%9C" target="\_blank">https://ko.wikipedia.org/wiki/침입_차단_시스템</a>을 확인해 주시기 바랍니다.</p>
+</blockquote>
+
+<blockquote>
+  <p>무차별 대입 공격(brute-force attack)에 대한 자세한 정보는 <a href="https://ko.wikipedia.org/wiki/%EB%AC%B4%EC%B0%A8%EB%B3%84_%EB%8C%80%EC%9E%85_%EA%B3%B5%EA%B2%A9" target="\_blank">https://ko.wikipedia.org/wiki/무차별_대입_공격</a>을 확인해 주시기 바랍니다.</p>
+</blockquote>
+
+<blockquote>
+  <p>iptables에 대한 자세한 정보는 <a href="https://ko.wikipedia.org/wiki/Iptables" target="\_blank">https://ko.wikipedia.org/wiki/Iptables</a>를 확인해 주시기 바랍니다.</p>
+</blockquote>
+
+<blockquote>
+  <p>TCP wrapper에 대한 자세한 정보는 <a href="https://ko.wikipedia.org/wiki/TCP_%EB%9E%98%ED%8D%BC" target="\_blank">https://ko.wikipedia.org/wiki/TCP_래퍼</a>를 확인해 주시기 바랍니다.</p>
+</blockquote>
+
+<blockquote>
+  <p>POSIX 시스템에 대한 자세한 정보는 <a href="https://ko.wikipedia.org/wiki/POSIX" target="\_blank">https://ko.wikipedia.org/wiki/POSIX</a>를 확인해 주시기 바랍니다.</p>
+</blockquote>
+
+<h2 id="선행조건prerequisite">선행조건(PREREQUISITE)</h2>
+<ul>
+  <li>ubuntu 환경이 필요합니다.</li>
+</ul>
+
+<blockquote>
+  <p>ubuntu 설치 방법은 <a href="https://lindarex.github.io/ubuntu/ubuntu-1604-installation/" target="\_blank">VMware workstation에 ubuntu server 16.04 설치하기</a> 또는 <a href="https://lindarex.github.io/ubuntu/ubuntu-1804-installation/" target="\_blank">VMware workstation에 ubuntu server 18.04 설치하기</a> 포스트를 참고하시기 바랍니다.</p>
+</blockquote>
+
+<h2 id="테스트-환경test-environment">테스트 환경(TEST ENVIRONMENT)</h2>
+<ul>
+  <li>AWS EC2 Instance Ubuntu Server 18.04 LTS (HVM), SSD Volume Type</li>
+  <li>Ubuntu 18.04.5 LTS (GNU/Linux 5.4.0-1029-aws x86_64)</li>
+  <li>Fail2Ban v0.10.2</li>
+</ul>
+
+<h2 id="요약summary">요약(SUMMARY)</h2>
+<ol>
+  <li>apt 명령어로 fail2ban 설치</li>
+  <li>fail2ban 설치 확인</li>
+  <li>systemctl 명령어로 fail2ban 서비스 관리</li>
+  <li>(선택사항) apt 명령어로 fail2ban 삭제</li>
+  <li>fail2ban 설정</li>
+  <li>fail2ban 사용 방법</li>
+</ol>
+
+<h2 id="내용contents">내용(CONTENTS)</h2>
+<h3 id="1-apt-명령어로-fail2ban-설치">1. apt 명령어로 fail2ban 설치</h3>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt update <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>apt <span class="nb">install </span>fail2ban <span class="nt">-y</span>
+</code></pre></div></div>
+
+<h3 id="2-fail2ban-설치-확인">2. fail2ban 설치 확인</h3>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>fail2ban-client <span class="nt">-V</span>
+<span class="go">Fail2Ban v0.10.2
+
+Copyright (c) 2004-2008 Cyril Jaquier, 2008- Fail2Ban Contributors
+Copyright of modifications held by their respective authors.
+Licensed under the GNU General Public License v2 (GPL).
+</span></code></pre></div></div>
+
+<h3 id="3-systemctl-명령어로-fail2ban-서비스service-관리">3. systemctl 명령어로 fail2ban 서비스(service) 관리</h3>
+<h4 id="31-fail2ban-service-설정-반영">3.1. fail2ban service 설정 반영</h4>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl daemon-reload
+</code></pre></div></div>
+
+<h4 id="32-fail2ban-service-시작">3.2. fail2ban service 시작</h4>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl start fail2ban.service
+</code></pre></div></div>
+
+<h4 id="33-fail2ban-service-중지">3.3. fail2ban service 중지</h4>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl stop fail2ban.service
+</code></pre></div></div>
+
+<h4 id="34-fail2ban-service-재시작">3.4. fail2ban service 재시작</h4>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl restart fail2ban.service
+</code></pre></div></div>
+
+<h4 id="35-fail2ban-service-설정-재적용">3.5. fail2ban service 설정 재적용</h4>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl reload fail2ban.service
+</code></pre></div></div>
+
+<h4 id="36-fail2ban-service-상태-조회">3.6. fail2ban service 상태 조회</h4>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl status fail2ban.service
+</code></pre></div></div>
+
+<h4 id="37-fail2ban-service-활성화부팅-시-자동-시작">3.7. fail2ban service 활성화(부팅 시 자동 시작)</h4>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl <span class="nb">enable </span>fail2ban.service
+</code></pre></div></div>
+
+<h4 id="38-fail2ban-service-비활성화">3.8. fail2ban service 비활성화</h4>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl disable fail2ban.service
+</code></pre></div></div>
+
+<h4 id="39-fail2ban-service-및-관련-프로세스-모두-중지">3.9. fail2ban service 및 관련 프로세스 모두 중지</h4>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl <span class="nb">kill </span>fail2ban.service
+</code></pre></div></div>
+
+<h3 id="4-선택사항-apt-명령어로-fail2ban-삭제">4. (선택사항) apt 명령어로 fail2ban 삭제</h3>
+<ul>
+  <li>’–auto-remove’ 옵션을 추가하면, 사용하지 않는 관련 package를 모두 삭제합니다.</li>
+</ul>
+
+<h4 id="41-apt-remove-명령어로-fail2ban-삭제">4.1. apt remove 명령어로 fail2ban 삭제</h4>
+<ul>
+  <li>설정 파일을 유지하며 fail2ban을 삭제합니다.</li>
+</ul>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt remove fail2ban<span class="k">*</span>
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt remove <span class="nt">--auto-remove</span> fail2ban<span class="k">*</span>
+</code></pre></div></div>
+
+<h4 id="42-apt-purge-명령어로-fail2ban-삭제">4.2. apt purge 명령어로 fail2ban 삭제</h4>
+<ul>
+  <li>설정 파일과 함께 fail2ban을 삭제합니다. (단, 사용자 홈 디렉터리의 설정 파일은 유지됩니다.)</li>
+</ul>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt purge fail2ban<span class="k">*</span>
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt purge <span class="nt">--auto-remove</span> fail2ban<span class="k">*</span>
+</code></pre></div></div>
+
+<h3 id="5-fail2ban-설정">5. fail2ban 설정</h3>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>vi /etc/fail2ban/jail.conf
+</code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">--------------------------------------------------------------------------------
+[DEFAULT]
+</span><span class="gp">#</span><span class="w"> </span>차단 예외 IPs, 추가 시 스페이스로 구분
+<span class="go">ignoreip = 127.0.0.1/8
+
+</span><span class="gp">#</span><span class="w"> </span>접속 차단 시간, 1분 <span class="o">=</span> 60, 아래 예제는 1일, <span class="nt">-1</span> 설정 시 영구 차단
+<span class="go">bantime = 86400
+
+</span><span class="gp">#</span><span class="w"> </span>설정 시간 내 maxretry 설정만큼 접속 실패 시 차단
+<span class="go">findtime = 86400
+
+</span><span class="gp">#</span><span class="w"> </span>최대 허용 횟수
+<span class="go">maxretry = 3
+
+</span><span class="gp">#</span><span class="w"> </span>차단 방법, firewalld 사용 시 <span class="s1">'firewallcmd-new'</span>, iptables 사용 시 <span class="s1">'iptables-multiport'</span>
+<span class="go">banaction = iptables-multiport
+
+
+[sshd]
+enabled = true
+--------------------------------------------------------------------------------
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>‘/etc/fail2ban/jail.conf’ 파일은 업데이트 시 초기화되므로, ‘/etc/fail2ban/jail.d/*.conf’ 또는 ‘/etc/fail2ban/jail.local’ 파일 생성 후 설정하는 것을 추천합니다.</p>
+</blockquote>
+
+<ul>
+  <li>설정 반영을 위해 아래 명령어로 fail2ban을 재시작합니다.</li>
+</ul>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl restart fail2ban.service
+</code></pre></div></div>
+
+<h3 id="6-fail2ban-사용-방법">6. fail2ban 사용 방법</h3>
+<h4 id="61-차단-목록-조회">6.1. 차단 목록 조회</h4>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>fail2ban-client status
+</code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">Status
+|- Number of jail:	1
+`- Jail list:	sshd
+</span></code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>fail2ban-client status sshd
+</code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">Status for the jail: sshd
+|- Filter
+|  |- Currently failed:	3
+|  |- Total failed:	23
+|  `- File list:	/var/log/auth.log
+`- Actions
+   |- Currently banned:	0
+   |- Total banned:	0
+   `- Banned IP list:
+</span></code></pre></div></div>
+
+<h4 id="62-차단-설정">6.2. 차단 설정</h4>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>fail2ban-client <span class="nb">set</span> <span class="k">${</span><span class="nv">JAIL_NAME</span><span class="k">}</span> banip <span class="k">${</span><span class="p">차단 IP</span><span class="k">}</span>
+</code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>fail2ban-client <span class="nb">set </span>sshd banip 192.168.0.11
+</code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">192.168.0.11
+</span></code></pre></div></div>
+
+<h4 id="63-차단-해제">6.3. 차단 해제</h4>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>fail2ban-client <span class="nb">set</span> <span class="k">${</span><span class="nv">JAIL_NAME</span><span class="k">}</span> unbanip <span class="k">${</span><span class="p">차단 해제 IP</span><span class="k">}</span>
+</code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>fail2ban-client <span class="nb">set </span>sshd unbanip 192.168.0.11
+</code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">192.168.0.11
+</span></code></pre></div></div>
+
+<h4 id="64-log-조회">6.4. log 조회</h4>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cat</span> /var/log/fail2ban.log
+</code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">2020-10-29 05:15:09,537 fail2ban.server         [1588]: INFO    --------------------------------------------------
+2020-10-29 05:15:09,537 fail2ban.server         [1588]: INFO    Starting Fail2ban v0.10.2
+2020-10-29 05:15:09,548 fail2ban.database       [1588]: INFO    Connected to fail2ban persistent database '/var/lib/fail2ban/fail2ban.sqlite3'
+2020-10-29 05:15:09,552 fail2ban.database       [1588]: WARNING New database created. Version '2'
+2020-10-29 05:15:09,553 fail2ban.jail           [1588]: INFO    Creating new jail 'sshd'
+2020-10-29 05:15:09,584 fail2ban.jail           [1588]: INFO    Jail 'sshd' uses pyinotify {}
+2020-10-29 05:15:09,587 fail2ban.jail           [1588]: INFO    Initiated 'pyinotify' backend
+2020-10-29 05:15:09,588 fail2ban.filter         [1588]: INFO      maxLines: 1
+2020-10-29 05:15:09,614 fail2ban.server         [1588]: INFO    Jail sshd is not a JournalFilter instance
+2020-10-29 05:15:09,615 fail2ban.filter         [1588]: INFO    Added logfile: '/var/log/auth.log' (pos = 0, hash = 25791bcc640f76a6b3ead17d55a5f0e66465461c)
+2020-10-29 05:15:09,619 fail2ban.filter         [1588]: INFO      encoding: UTF-8
+2020-10-29 05:15:09,619 fail2ban.filter         [1588]: INFO      maxRetry: 5
+2020-10-29 05:15:09,619 fail2ban.filter         [1588]: INFO      findtime: 600
+2020-10-29 05:15:09,619 fail2ban.actions        [1588]: INFO      banTime: 600
+2020-10-29 05:15:09,621 fail2ban.jail           [1588]: INFO    Jail 'sshd' started
+2020-10-29 05:15:27,281 fail2ban.filter         [1588]: INFO    [sshd] Found 193.112.23.105 - 2020-10-29 05:10:15
+2020-10-29 05:15:27,281 fail2ban.filter         [1588]: INFO    [sshd] Found 159.89.1.242 - 2020-10-29 05:10:18
+2020-10-29 05:15:27,281 fail2ban.filter         [1588]: INFO    [sshd] Found 51.15.94.14 - 2020-10-29 05:14:53
+2020-10-29 05:15:27,282 fail2ban.filter         [1588]: INFO    [sshd] Found 122.51.238.27 - 2020-10-29 05:15:27
+2020-10-29 05:26:15,805 fail2ban.filter         [1588]: INFO    [sshd] Found 141.98.10.211 - 2020-10-29 05:26:15
+2020-10-29 05:26:19,199 fail2ban.filter         [1588]: INFO    [sshd] Found 141.98.10.212 - 2020-10-29 05:26:19
+2020-10-29 05:26:26,824 fail2ban.filter         [1588]: INFO    [sshd] Found 141.98.10.214 - 2020-10-29 05:26:26
+2020-10-29 05:26:31,431 fail2ban.filter         [1588]: INFO    [sshd] Found 141.98.10.209 - 2020-10-29 05:26:31
+2020-10-29 05:26:35,751 fail2ban.filter         [1588]: INFO    [sshd] Found 141.98.10.210 - 2020-10-29 05:26:35
+2020-10-29 05:26:39,393 fail2ban.filter         [1588]: INFO    [sshd] Found 141.98.10.211 - 2020-10-29 05:26:39
+2020-10-29 05:26:49,698 fail2ban.filter         [1588]: INFO    [sshd] Found 141.98.10.213 - 2020-10-29 05:26:49
+2020-10-29 05:26:55,779 fail2ban.filter         [1588]: INFO    [sshd] Found 141.98.10.214 - 2020-10-29 05:26:55
+2020-10-29 05:26:59,919 fail2ban.filter         [1588]: INFO    [sshd] Found 141.98.10.209 - 2020-10-29 05:26:59
+2020-10-29 05:27:29,170 fail2ban.filter         [1588]: INFO    [sshd] Found 200.73.128.64 - 2020-10-29 05:27:29
+2020-10-29 05:27:49,164 fail2ban.filter         [1588]: INFO    [sshd] Found 137.74.5.81 - 2020-10-29 05:27:49
+2020-10-29 05:35:28,107 fail2ban.filter         [1588]: INFO    [sshd] Found 91.74.129.82 - 2020-10-29 05:35:28
+2020-10-29 05:36:05,060 fail2ban.filter         [1588]: INFO    [sshd] Found 179.184.0.112 - 2020-10-29 05:36:04
+2020-10-29 05:36:49,781 fail2ban.filter         [1588]: INFO    [sshd] Found 161.35.200.233 - 2020-10-29 05:36:49
+2020-10-29 05:41:38,714 fail2ban.filter         [1588]: INFO    [sshd] Found 60.248.199.194 - 2020-10-29 05:41:38
+2020-10-29 05:41:45,894 fail2ban.filter         [1588]: INFO    [sshd] Found 151.80.176.191 - 2020-10-29 05:41:45
+2020-10-29 05:46:13,683 fail2ban.filter         [1588]: INFO    [sshd] Found 122.51.130.21 - 2020-10-29 05:46:13
+2020-10-29 05:52:53,319 fail2ban.filter         [1588]: INFO    [sshd] Found 51.83.41.120 - 2020-10-29 05:52:48
+2020-10-29 05:55:49,062 fail2ban.filter         [1588]: INFO    [sshd] Found 161.35.162.11 - 2020-10-29 05:55:49
+2020-10-29 06:14:12,583 fail2ban.actions        [1588]: NOTICE  [sshd] Ban 192.168.0.11
+2020-10-29 06:15:31,272 fail2ban.actions        [1588]: NOTICE  [sshd] Unban 192.168.0.11
+</span></code></pre></div></div>
+
+<h2 id="마무리conclusion">마무리(CONCLUSION)</h2>
+<p>ubuntu 환경에 package로 fail2ban 설치를 완료했습니다. <br />
+fail2ban은 설치만으로 데몬(daemon)으로 실행되면서 기본 설정까지 완료됩니다. <br />
+fail2ban은 IPv6 미지원과 분산 무차별 대입 공격에 취약한 단점이 있지만, 기본 설정으로 대부분의 brute force 공격을 막을 수 있습니다. <br />
+기본 설정에는 Apache HTTP Server, Lighttpd, sshd, vsftpd, qmail, Postfix 그리고 Courier 메일 서버를 위한 필터가 제공됩니다. <br />
+필터는 python 정규식으로 정의되며, 관리자는 필터를 커스터마이징 하여 더 강력한 보안 설정을 할 수 있습니다.</p>
+
+<h2 id="참고references">참고(REFERENCES)</h2>
+<ul>
+  <li><a href="https://ko.wikipedia.org/wiki/Fail2ban" target="\_blank">https://ko.wikipedia.org/wiki/Fail2ban</a></li>
+  <li><a href="https://www.fail2ban.org/" target="\_blank">https://www.fail2ban.org/</a></li>
+  <li><a href="http://www.fail2ban.org/wiki/index.php/Fail2Ban" target="\_blank">http://www.fail2ban.org/wiki/index.php/Fail2Ban</a></li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/fail2ban" class="page__taxonomy-item" rel="tag">fail2ban</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/firewall" class="page__taxonomy-item" rel="tag">firewall</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/ubuntu" class="page__taxonomy-item" rel="tag">ubuntu</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/fail2ban" class="page__taxonomy-item" rel="tag">fail2ban</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-10-29T00:00:00+09:00">October 29, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%EC%9A%B0%EB%B6%84%ED%88%AC%28Ubuntu%29+%ED%99%98%EA%B2%BD%EC%97%90+%ED%8C%A8%ED%82%A4%EC%A7%80%28Package%29%EB%A1%9C+fail2ban+%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0%20https%3A%2F%2Flindarex.github.io%2Ffail2ban%2Fubuntu-fail2ban-installation%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flindarex.github.io%2Ffail2ban%2Fubuntu-fail2ban-installation%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flindarex.github.io%2Ffail2ban%2Fubuntu-fail2ban-installation%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/ubuntu/ubuntu-nameserver-setting/" class="pagination--pager" title="우분투(Ubuntu) 환경에 네임 서버(Name server) 설정하기
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Leave a comment</h4>
+      <section id="disqus_thread"></section>
+    
+</div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/ubuntu/ubuntu-nameserver-setting/" rel="permalink">우분투(Ubuntu) 환경에 네임 서버(Name server) 설정하기
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">네임 서버(name server)는 인터넷에서 도메인 네임 서비스(domain name service)를 제공하는 server를 의미합니다.
+
+도메인으로 IP를 조회할 때, 로컬 캐시 조회, ‘/etc/hosts’ 조회, DNS 조회 순으로 진행되며, 이 중 ‘/etc/hosts’...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/jenkins/jenkins-github-webhook-setting/" rel="permalink">GitHub Webhook으로 젠킨스(Jenkins) Job을 실행(자동화)하는 방법
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">이 포스트에서는 GitHub Webhook으로 젠킨스(Jenkins) Job을 실행(자동화)하는 방법을 소개합니다.
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/bind9/ubuntu-bind9-setting/" rel="permalink">우분투(Ubuntu) 환경에 BIND(BIND9) 설정하기
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">BIND(bind9, berkeley internet name domain)는 DNS(domain name system)를 제공하는 서버(server), 즉 네임 서버(name server) 기능을 갖춘 오픈소스(open source) 소프트웨어입니다.
+
+bind9 설정은 인프라(...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/bind9/ubuntu-bind9-installation/" rel="permalink">우분투(Ubuntu) 환경에 패키지(Package)로 BIND(BIND9) 설치하기
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">BIND(bind9, berkeley internet name domain)는 안정성과 고품질로 유닉스(unix) 및 리눅스(linux)에서 널리 사용되며, 모든 기능을 갖춘 매우 유연한 DNS(dns, domain name server) 시스템(system)입니다.
+
+bind9은...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- LINDAREX :: GOOGLE ADSENSE :: FOOTER :: BIGIN -->
+        <!-- LINDAREX :: GOOGLE ADSENSE :: FOOTER :: HTML ::  BIGIN -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 2020-02-22-ad-footer -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8367174639781348"
+     data-ad-slot="1870387544"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<!-- LINDAREX :: GOOGLE ADSENSE :: FOOTER :: HTML ::  END -->
+        <!-- LINDAREX :: GOOGLE ADSENSE :: FOOTER :: END -->
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://github.com/lindarex/lindarex.github.io" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 LindaRex. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+    <!-- LINDAREX :: BACK TO TOP :: BEGIN -->
+    <!-- <aside class="sidebar__top">
+      <a href="#site-nav"> <i class="fas fa-angle-double-up fa-2x"></i></a>
+    </aside> -->
+    <!-- LINDAREX :: BACK TO TOP :: END -->
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://lindarex.github.io/fail2ban/ubuntu-fail2ban-installation/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/fail2ban/ubuntu-fail2ban-installation"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://lindarex-github-io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

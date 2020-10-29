@@ -399,7 +399,7 @@ systemd-timesyncd.service active: yes
 ## 마무리(CONCLUSION)
 ubuntu server 설치 후 초기 설정을 완료했습니다.
 <br /><br />
-다음 포스트에서는 ubuntu 보안 강화를 위한 오픈소스(open source) 소프트웨어인 fail2ban을 소개하겠습니다.
+다음 포스트에서는 ubuntu 보안 강화를 위한 오픈소스(open source) 소프트웨어인 [Fail2ban](https://lindarex.github.io/fail2ban/ubuntu-fail2ban-installation/){: target="\_blank"}을 소개하겠습니다.
 
 
 ## 참고(REFERENCES)

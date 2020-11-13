@@ -5,6 +5,9 @@ categories:
 tags: 
   - fail2ban
   - firewall
+  - "open source software"
+  - "open source"
+  - oss
   - ubuntu
 ---
 

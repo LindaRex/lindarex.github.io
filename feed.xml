@@ -6,12 +6,12 @@
     <description>오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 블로그입니다 | It shares technologies such as open source software, cloud computing, PaaS and container platforms</description>
     <link>https://lindarex.github.io/</link>
     <atom:link href="https://lindarex.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 22 Mar 2021 15:39:01 +0900</pubDate>
-    <lastBuildDate>Mon, 22 Mar 2021 15:39:01 +0900</lastBuildDate>
+    <pubDate>Mon, 22 Mar 2021 15:42:15 +0900</pubDate>
+    <lastBuildDate>Mon, 22 Mar 2021 15:42:15 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
-        <title>우분투(Ubuntu) 환경에 scm manager 설치하기</title>
+        <title>우분투(Ubuntu) 환경에 SCM Manager v2 설치하기</title>
         <description>&lt;p&gt;SCM Manager v2(이하 scm manager)는 개별적으로 확장 가능한 가벼운 소스 코드 관리 도구로, MIT 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다.
 &lt;br /&gt;&lt;br /&gt;
 scm manager는 다양한 플러그인과 Level 3 RESTful WebService를 제공하고, Git과 Mercurial, Subversion 저장소(repository)를 지원합니다.

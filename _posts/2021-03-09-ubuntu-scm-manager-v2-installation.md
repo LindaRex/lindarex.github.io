@@ -1,5 +1,5 @@
 ---
-title: "우분투(Ubuntu) 환경에 scm manager 설치하기"
+title: "우분투(Ubuntu) 환경에 SCM Manager v2 설치하기"
 categories: 
   - scm-manager
 tags: 

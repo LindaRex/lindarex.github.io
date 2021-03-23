@@ -6,19 +6,19 @@
     <description>오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 블로그입니다 | It shares technologies such as open source software, cloud computing, PaaS and container platforms</description>
     <link>https://lindarex.github.io/</link>
     <atom:link href="https://lindarex.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 22 Mar 2021 15:42:15 +0900</pubDate>
-    <lastBuildDate>Mon, 22 Mar 2021 15:42:15 +0900</lastBuildDate>
+    <pubDate>Tue, 23 Mar 2021 09:23:25 +0900</pubDate>
+    <lastBuildDate>Tue, 23 Mar 2021 09:23:25 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
-        <title>우분투(Ubuntu) 환경에 SCM Manager v2 설치하기</title>
+        <title>우분투(Ubuntu) 환경에 패키지(Package)로 SCM Manager v2 설치하기</title>
         <description>&lt;p&gt;SCM Manager v2(이하 scm manager)는 개별적으로 확장 가능한 가벼운 소스 코드 관리 도구로, MIT 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다.
 &lt;br /&gt;&lt;br /&gt;
 scm manager는 다양한 플러그인과 Level 3 RESTful WebService를 제공하고, Git과 Mercurial, Subversion 저장소(repository)를 지원합니다.
 &lt;br /&gt;&lt;br /&gt;
-scm manager는 웹 서버(web server), 데이터베이스(database) 등의 종속성이 없고, Ubuntu/CentOS/Fedora/Windows/MacOS X/Docker/Kubernetes 환경에 편리한 설치 가이드를 제공합니다.
+scm manager는 웹 서버(web server), 데이터베이스(database) 등의 종속성이 없고, 다양한 환경(Ubuntu, CentOS, Fedora, Windows, MacOS X, Docker, Kubernetes)에 설치할 수 있습니다.
 &lt;br /&gt;&lt;br /&gt;
-이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 scm manager를 설치하는 방법을 소개합니다.&lt;/p&gt;
+이 포스트에서는 우분투(ubuntu) 환경에 package로 scm manager를 설치하는 방법을 소개합니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;선행조건prerequisite&quot;&gt;선행조건(PREREQUISITE)&lt;/h2&gt;
 &lt;ul&gt;
@@ -74,7 +74,7 @@ gpg:              unchanged: 1
 &lt;h3 id=&quot;4-선택사항-scm-manager-설정&quot;&gt;4. (선택사항) scm manager 설정&lt;/h3&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;SCM Manager UI의 포트를 설정합니다.&lt;/li&gt;
+  &lt;li&gt;scm manager UI의 포트를 설정합니다.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;vi /etc/default/scm-server
@@ -128,7 +128,7 @@ gpg:              unchanged: 1
 &lt;/ul&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;SCM Manager의 기본 계정은 ‘scmadmin’, 비밀번호도 ‘scmadmin’ 입니다.&lt;/p&gt;
+  &lt;p&gt;SCM Manager의 기본 계정은 ‘scmadmin’이며, 비밀번호는 ‘scmadmin’ 입니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;

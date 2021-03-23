@@ -1,5 +1,5 @@
 ---
-title: "우분투(Ubuntu) 환경에 SCM Manager v2 설치하기"
+title: "우분투(Ubuntu) 환경에 패키지(Package)로 SCM Manager v2 설치하기"
 categories: 
   - scm-manager
 tags: 
@@ -18,9 +18,9 @@ SCM Manager v2(이하 scm manager)는 개별적으로 확장 가능한 가벼운
 <br /><br />
 scm manager는 다양한 플러그인과 Level 3 RESTful WebService를 제공하고, Git과 Mercurial, Subversion 저장소(repository)를 지원합니다.
 <br /><br />
-scm manager는 웹 서버(web server), 데이터베이스(database) 등의 종속성이 없고, Ubuntu/CentOS/Fedora/Windows/MacOS X/Docker/Kubernetes 환경에 편리한 설치 가이드를 제공합니다.
+scm manager는 웹 서버(web server), 데이터베이스(database) 등의 종속성이 없고, 다양한 환경(Ubuntu, CentOS, Fedora, Windows, MacOS X, Docker, Kubernetes)에 설치할 수 있습니다.
 <br /><br />
-이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 scm manager를 설치하는 방법을 소개합니다.
+이 포스트에서는 우분투(ubuntu) 환경에 package로 scm manager를 설치하는 방법을 소개합니다.
 
 
 ## 선행조건(PREREQUISITE)
@@ -72,7 +72,7 @@ $ sudo apt-get install scm-server -y
 
 ### 4. (선택사항) scm manager 설정
 
-- SCM Manager UI의 포트를 설정합니다.
+- scm manager UI의 포트를 설정합니다.
 
 ```console
 $ sudo vi /etc/default/scm-server
@@ -133,7 +133,7 @@ $ sudo systemctl kill scm-server
 ### 6. 웹브라우저로 scm manager 접속
 - http://[MY-IP]:8080/scm
 
-> SCM Manager의 기본 계정은 'scmadmin', 비밀번호도 'scmadmin' 입니다.
+> SCM Manager의 기본 계정은 'scmadmin'이며, 비밀번호는 'scmadmin' 입니다.
 
 
 ## 마무리(CONCLUSION)

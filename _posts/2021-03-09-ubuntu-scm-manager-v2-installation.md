@@ -24,8 +24,11 @@ scm manager는 웹 서버(web server), 데이터베이스(database) 등의 종�
 
 
 ## 선행조건(PREREQUISITE)
+- ubuntu 환경이 필요합니다.
 - 방화벽 설정이 필요합니다.
     + TCP 8080 포트가 개방되어 있어야 합니다.
+
+> ubuntu 설치 방법은 [우분투(Ubuntu) 서버(Server) 16.04 설치하기](https://lindarex.github.io/ubuntu/ubuntu-1604-installation/){: target="\_blank"} 또는 [우분투(Ubuntu) 서버(Server) 18.04 설치하기](https://lindarex.github.io/ubuntu/ubuntu-1804-installation/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
 
 > 방화벽 설정 방법은 [우분투(Ubuntu) 환경에 방화벽(Firewalld) 설치 및 설정하기](https://lindarex.github.io/ubuntu/ubuntu-firewalld-installation/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
 

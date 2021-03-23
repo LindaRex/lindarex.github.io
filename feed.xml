@@ -6,8 +6,8 @@
     <description>오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 블로그입니다 | It shares technologies such as open source software, cloud computing, PaaS and container platforms</description>
     <link>https://lindarex.github.io/</link>
     <atom:link href="https://lindarex.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 23 Mar 2021 09:23:25 +0900</pubDate>
-    <lastBuildDate>Tue, 23 Mar 2021 09:23:25 +0900</lastBuildDate>
+    <pubDate>Tue, 23 Mar 2021 09:46:29 +0900</pubDate>
+    <lastBuildDate>Tue, 23 Mar 2021 09:46:29 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
@@ -22,12 +22,17 @@ scm manager는 웹 서버(web server), 데이터베이스(database) 등의 종�
 
 &lt;h2 id=&quot;선행조건prerequisite&quot;&gt;선행조건(PREREQUISITE)&lt;/h2&gt;
 &lt;ul&gt;
+  &lt;li&gt;ubuntu 환경이 필요합니다.&lt;/li&gt;
   &lt;li&gt;방화벽 설정이 필요합니다.
     &lt;ul&gt;
       &lt;li&gt;TCP 8080 포트가 개방되어 있어야 합니다.&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;ubuntu 설치 방법은 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1604-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 서버(Server) 16.04 설치하기&lt;/a&gt; 또는 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1804-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 서버(Server) 18.04 설치하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;방화벽 설정 방법은 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-firewalld-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 환경에 방화벽(Firewalld) 설치 및 설정하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
@@ -199,7 +204,7 @@ SCM Manager의 자세한 내용은 아래 페이지를 확인해 주시기 바�
 &lt;/ul&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;ubuntu 설치 방법은 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1604-installation/&quot; target=&quot;\_blank&quot;&gt;VMware workstation에 ubuntu server 16.04 설치하기&lt;/a&gt; 또는 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1804-installation/&quot; target=&quot;\_blank&quot;&gt;VMware workstation에 ubuntu server 18.04 설치하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
+  &lt;p&gt;ubuntu 설치 방법은 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1604-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 서버(Server) 16.04 설치하기&lt;/a&gt; 또는 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1804-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 서버(Server) 18.04 설치하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h2 id=&quot;테스트-환경test-environment&quot;&gt;테스트 환경(TEST ENVIRONMENT)&lt;/h2&gt;
@@ -2032,7 +2037,7 @@ IP address 대신 FQDN(fully qualified domain name)을 사용하여 network addr
 &lt;/ul&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;ubuntu 설치 방법은 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1604-installation/&quot; target=&quot;\_blank&quot;&gt;VMware workstation에 ubuntu server 16.04 설치하기&lt;/a&gt; 또는 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1804-installation/&quot; target=&quot;\_blank&quot;&gt;VMware workstation에 ubuntu server 18.04 설치하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
+  &lt;p&gt;ubuntu 설치 방법은 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1604-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 서버(Server) 16.04 설치하기&lt;/a&gt; 또는 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1804-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 서버(Server) 18.04 설치하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h2 id=&quot;테스트-환경test-environment&quot;&gt;테스트 환경(TEST ENVIRONMENT)&lt;/h2&gt;
@@ -2374,7 +2379,7 @@ jenkins 초기 설정은 &lt;a href=&quot;https://lindarex.github.io/jenkins/jen
 &lt;/ul&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;Ubuntu 설치 방법은 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1604-installation/&quot; target=&quot;\_blank&quot;&gt;VMware workstation에 ubuntu server 16.04 설치하기&lt;/a&gt; 또는 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1804-installation/&quot; target=&quot;\_blank&quot;&gt;VMware workstation에 ubuntu server 18.04 설치하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
+  &lt;p&gt;Ubuntu 설치 방법은 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1604-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 서버(Server) 16.04 설치하기&lt;/a&gt; 또는 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1804-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 서버(Server) 18.04 설치하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h2 id=&quot;테스트-환경test-environment&quot;&gt;테스트 환경(TEST ENVIRONMENT)&lt;/h2&gt;
@@ -2839,7 +2844,7 @@ linux 시스템(system)에서 iptables는 /usr/sbin/iptables에 설치되며, ip
 &lt;/ul&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;Ubuntu 설치 방법은 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1604-installation/&quot; target=&quot;\_blank&quot;&gt;VMware workstation에 ubuntu server 16.04 설치하기&lt;/a&gt; 또는 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1804-installation/&quot; target=&quot;\_blank&quot;&gt;VMware workstation에 ubuntu server 18.04 설치하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
+  &lt;p&gt;Ubuntu 설치 방법은 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1604-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 서버(Server) 16.04 설치하기&lt;/a&gt; 또는 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1804-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 서버(Server) 18.04 설치하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h2 id=&quot;테스트-환경test-environment&quot;&gt;테스트 환경(TEST ENVIRONMENT)&lt;/h2&gt;
@@ -4647,7 +4652,7 @@ output.logstash:
 &lt;/ul&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;Ubuntu 설치 방법은 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1604-installation/&quot; target=&quot;\_blank&quot;&gt;VMware workstation에 ubuntu server 16.04 설치하기&lt;/a&gt; 또는 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1804-installation/&quot; target=&quot;\_blank&quot;&gt;VMware workstation에 ubuntu server 18.04 설치하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
+  &lt;p&gt;Ubuntu 설치 방법은 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1604-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 서버(Server) 16.04 설치하기&lt;/a&gt; 또는 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1804-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 서버(Server) 18.04 설치하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h2 id=&quot;테스트-환경test-environment&quot;&gt;테스트 환경(TEST ENVIRONMENT)&lt;/h2&gt;
@@ -5002,7 +5007,7 @@ BOSH는 Cloud Foundry PaaS(CFAR) 배포를 위해 개발되었지만, 거의 모
 &lt;/blockquote&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;Ubuntu 설치 방법은 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1604-installation/&quot; target=&quot;\_blank&quot;&gt;VMware workstation에 ubuntu server 16.04 설치하기&lt;/a&gt; 또는 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1804-installation/&quot; target=&quot;\_blank&quot;&gt;VMware workstation에 ubuntu server 18.04 설치하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
+  &lt;p&gt;Ubuntu 설치 방법은 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1604-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 서버(Server) 16.04 설치하기&lt;/a&gt; 또는 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1804-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 서버(Server) 18.04 설치하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h2 id=&quot;테스트-환경test-environment&quot;&gt;테스트 환경(TEST ENVIRONMENT)&lt;/h2&gt;
@@ -5537,7 +5542,7 @@ Python 2.6.5 이상이 필요하며, pip을 사용하여 AWS CLI를 설치합니
 &lt;/ul&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;Ubuntu 설치 방법은 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1604-installation/&quot; target=&quot;\_blank&quot;&gt;VMware workstation에 ubuntu server 16.04 설치하기&lt;/a&gt; 또는 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1804-installation/&quot; target=&quot;\_blank&quot;&gt;VMware workstation에 ubuntu server 18.04 설치하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
+  &lt;p&gt;Ubuntu 설치 방법은 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1604-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 서버(Server) 16.04 설치하기&lt;/a&gt; 또는 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1804-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 서버(Server) 18.04 설치하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h2 id=&quot;테스트-환경test-environment&quot;&gt;테스트 환경(TEST ENVIRONMENT)&lt;/h2&gt;
@@ -7467,7 +7472,7 @@ linux 입문자 또는 오픈소스 소프트웨어에 관심이 있다면, Ubun
 &lt;/ul&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;ubuntu 설치 방법은 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1604-installation/&quot; target=&quot;\_blank&quot;&gt;VMware workstation에 ubuntu server 16.04 설치하기&lt;/a&gt; 또는 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1804-installation/&quot; target=&quot;\_blank&quot;&gt;VMware workstation에 ubuntu server 18.04 설치하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
+  &lt;p&gt;ubuntu 설치 방법은 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1604-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 서버(Server) 16.04 설치하기&lt;/a&gt; 또는 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1804-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 서버(Server) 18.04 설치하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h2 id=&quot;테스트-환경test-environment&quot;&gt;테스트 환경(TEST ENVIRONMENT)&lt;/h2&gt;
@@ -7634,7 +7639,7 @@ JDK는 JVM(Java Virtual Machine), JRE(Java Runtime Environment)와 함께 Java �
 &lt;/ul&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;Ubuntu 설치 방법은 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1604-installation/&quot; target=&quot;\_blank&quot;&gt;VMware workstation에 Ubuntu server 16.04 설치하기&lt;/a&gt; 또는 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1804-installation/&quot; target=&quot;\_blank&quot;&gt;VMware workstation에 Ubuntu server 18.04 설치하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
+  &lt;p&gt;Ubuntu 설치 방법은 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1604-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 서버(Server) 16.04 설치하기&lt;/a&gt; 또는 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1804-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 서버(Server) 18.04 설치하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h2 id=&quot;테스트-환경test-environment&quot;&gt;테스트 환경(TEST ENVIRONMENT)&lt;/h2&gt;

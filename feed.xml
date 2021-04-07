@@ -6,8 +6,8 @@
     <description>오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 블로그입니다 | It shares technologies such as open source software, cloud computing, PaaS and container platforms</description>
     <link>https://lindarex.github.io/</link>
     <atom:link href="https://lindarex.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 07 Apr 2021 10:30:40 +0900</pubDate>
-    <lastBuildDate>Wed, 07 Apr 2021 10:30:40 +0900</lastBuildDate>
+    <pubDate>Wed, 07 Apr 2021 17:14:41 +0900</pubDate>
+    <lastBuildDate>Wed, 07 Apr 2021 17:14:41 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
@@ -382,7 +382,7 @@ kube-system   kube-scheduler-ip-10-0-0-162            1/1     Running   0       
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
-&lt;p&gt;ubuntu 환경에 package로 kubernetes cluster 설치를 완료했습니다. &lt;br /&gt;
+&lt;p&gt;ubuntu 환경에 kubeadm으로 kubernetes cluster 설치를 완료했습니다. &lt;br /&gt;
 다음 포스트에서 kubernetes architectures 및 concepts, resources 등을 소개하겠습니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;

@@ -12,6 +12,8 @@ main:
 sidebar:
   - title: "OPEN SOURCE SOFTWARE"
     children:
+      - title: "KUBERNETES"
+        url: /categories/kubernetes/
       - title: "JENKINS"
         url: /categories/jenkins/
       - title: "SONARQUBE"

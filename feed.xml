@@ -6,8 +6,8 @@
     <description>오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 블로그입니다 | It shares technologies such as open source software, cloud computing, PaaS and container platforms</description>
     <link>https://lindarex.github.io/</link>
     <atom:link href="https://lindarex.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 23 Mar 2021 09:46:29 +0900</pubDate>
-    <lastBuildDate>Tue, 23 Mar 2021 09:46:29 +0900</lastBuildDate>
+    <pubDate>Wed, 07 Apr 2021 10:08:24 +0900</pubDate>
+    <lastBuildDate>Wed, 07 Apr 2021 10:08:24 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
@@ -168,6 +168,419 @@ SCM Manager의 자세한 내용은 아래 페이지를 확인해 주시기 바�
         
         
         <category>scm-manager</category>
+        
+      </item>
+    
+      <item>
+        <title>우분투(Ubuntu) 환경에 Kubeadm으로 Kubernetes 클러스터(cluster) 설치하기</title>
+        <description>&lt;p&gt;Kubernetes(kubernetes)는 컨테이너화된 애플리케이션(application)의 배포(deployment), 확장(scaling) 및 관리(management)를 자동화하는 Apache License 2.0이 적용되는 오픈소스(open source) 컨테이너(container) 오케스트레이션(orchestration) 플랫폼(platform)입니다. &lt;br /&gt;
+kubernetes는 구글(Google)이 container management를 위해 개발한 Borg를 시작으로 container 운영 경험과 커뮤니티의 아이디어가 결합하여 개발되었습니다. &lt;br /&gt;
+kubernetes는 리눅스(linux) container를 실행하는 호스트(host) 그룹을 함께 클러스터링(clustering) 할 수 있으며, 이러한 cluster를 효율적으로 관리할 수 있습니다. &lt;br /&gt;
+이 포스트에서는 우분투(ubuntu) 환경에서 Kubeadm(kubeadm)을 사용하여 kubernetes cluster를 설치하는 방법을 소개합니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;kubernetes의 아키텍처(architectures) 및 개념(concepts), 리소스(resources) 등의 부가 설명은 이 포스트에서 다루지 않으며, 다음 포스트에서 kubernetes에 대한 자세한 설명을 소개하겠습니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;선행조건prerequisite&quot;&gt;선행조건(PREREQUISITE)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;최소 2개(마스터, 워커 각각 1개)의 ubuntu 환경이 필요합니다.&lt;/li&gt;
+  &lt;li&gt;방화벽 설정이 필요합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;마스터(master)는 master 노드(node) 또는 API 서버(server)로 불리며, 워커(worker)는 worker node 또는 node로 불립니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;ubuntu 설치 방법은 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1804-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 서버(Server) 18.04 설치하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;kubernetes 최소 설치 권장 사항은 &lt;a href=&quot;https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#before-you-begin&quot; target=&quot;\_blank&quot;&gt;https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#before-you-begin&lt;/a&gt; 페이지를 참고하시기 바랍니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;방화벽 설정 방법은 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-firewalld-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 환경에 방화벽(Firewalld) 설치 및 설정하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;kubernetes 실행에 필요한 필수 포트는 &lt;a href=&quot;https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#check-required-ports&quot; target=&quot;\_blank&quot;&gt;https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#check-required-ports&lt;/a&gt; 페이지를 참고하시기 바랍니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;kubernetes(정확히는 Pod) 실행을 위해서는 모든 node에 container 런타임(runtime)이 설치되어 있어야 하며, kubernetes에서 지원하는 container runtime은 containerd, CRI-O, 도커(docker) 등이 있습니다. 이 포스트에서는 docker를 기준으로 설명합니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;container runtime에 대한 자세한 사항은 &lt;a href=&quot;https://kubernetes.io/docs/setup/production-environment/container-runtimes/&quot; target=&quot;\_blank&quot;&gt;https://kubernetes.io/docs/setup/production-environment/container-runtimes/&lt;/a&gt; 페이지를 참고하시기 바랍니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;테스트-환경test-environment&quot;&gt;테스트 환경(TEST ENVIRONMENT)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;AWS EC2 instance
+    &lt;ul&gt;
+      &lt;li&gt;Ubuntu Server 18.04 LTS (HVM), EBS General Purpose (SSD) Volume Type (64비트 Arm)&lt;/li&gt;
+      &lt;li&gt;m5.large (ECU, 2 vCPUs, 3.1 GHz, 8 GiB 메모리, EBS 전용)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Ubuntu 18.04.5 LTS (GNU/Linux 5.4.0-1038-aws x86_64)&lt;/li&gt;
+  &lt;li&gt;docker 20.10.5&lt;/li&gt;
+  &lt;li&gt;kubernetes 1.20.5&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;요약summary&quot;&gt;요약(SUMMARY)&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;docker 설치&lt;/li&gt;
+  &lt;li&gt;패키지(package)로 kubeadm, kubelet, kubectl 설치&lt;/li&gt;
+  &lt;li&gt;master node에 kubeadm 설치&lt;/li&gt;
+  &lt;li&gt;worker node를 master node에 연결&lt;/li&gt;
+  &lt;li&gt;kubernetes cluster 설치 확인&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;내용contents&quot;&gt;내용(CONTENTS)&lt;/h2&gt;
+&lt;h3 id=&quot;1-docker-설치&quot;&gt;1. docker 설치&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;master node와 worker node에서 실행합니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;11-package-index-업데이트&quot;&gt;1.1. package index 업데이트&lt;/h4&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;apt update
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;12-package-dependencies-설치&quot;&gt;1.2. package dependencies 설치&lt;/h4&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; apt-transport-https ca-certificates curl gnupg lsb-release
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;13-doocker-official-gpg-key-내려받기&quot;&gt;1.3. doocker official GPG key 내려받기&lt;/h4&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-fsSL&lt;/span&gt; https://download.docker.com/linux/ubuntu/gpg | gpg &lt;span class=&quot;nt&quot;&gt;--dearmor&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; /usr/share/keyrings/docker-archive-keyring.gpg
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;14-packages-repository-설정-및-package-index-업데이트&quot;&gt;1.4. packages repository 설정 및 package index 업데이트&lt;/h4&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;lsb_release &lt;span class=&quot;nt&quot;&gt;-cs&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; stable&quot;&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;tee&lt;/span&gt; /etc/apt/sources.list.d/docker.list &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; /dev/null
+&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;apt update
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;15-설치-가능한-docker-버전-조회&quot;&gt;1.5. 설치 가능한 docker 버전 조회&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;아래 목록은 2021년 3월 2일 기준입니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;apt-cache madison docker-ce
+&lt;span class=&quot;go&quot;&gt; ---
+ docker-ce | 5:20.10.5~3-0~ubuntu-bionic | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+ docker-ce | 5:20.10.4~3-0~ubuntu-bionic | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+ docker-ce | 5:20.10.3~3-0~ubuntu-bionic | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+ docker-ce | 5:20.10.2~3-0~ubuntu-bionic | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+ docker-ce | 5:20.10.1~3-0~ubuntu-bionic | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+ docker-ce | 5:20.10.0~3-0~ubuntu-bionic | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+ docker-ce | 5:19.03.15~3-0~ubuntu-bionic | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+ docker-ce | 5:19.03.14~3-0~ubuntu-bionic | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+ docker-ce | 5:19.03.13~3-0~ubuntu-bionic | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+ docker-ce | 5:19.03.12~3-0~ubuntu-bionic | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+ docker-ce | 5:19.03.11~3-0~ubuntu-bionic | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+ docker-ce | 5:19.03.10~3-0~ubuntu-bionic | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+ docker-ce | 5:19.03.9~3-0~ubuntu-bionic | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+ docker-ce | 5:19.03.8~3-0~ubuntu-bionic | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+ docker-ce | 5:19.03.7~3-0~ubuntu-bionic | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+ docker-ce | 5:19.03.6~3-0~ubuntu-bionic | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+ docker-ce | 5:19.03.5~3-0~ubuntu-bionic | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+ docker-ce | 5:19.03.4~3-0~ubuntu-bionic | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+ docker-ce | 5:19.03.3~3-0~ubuntu-bionic | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+ docker-ce | 5:19.03.2~3-0~ubuntu-bionic | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+ docker-ce | 5:19.03.1~3-0~ubuntu-bionic | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+ docker-ce | 5:19.03.0~3-0~ubuntu-bionic | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+ docker-ce | 5:18.09.9~3-0~ubuntu-bionic | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+ docker-ce | 5:18.09.8~3-0~ubuntu-bionic | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+ docker-ce | 5:18.09.7~3-0~ubuntu-bionic | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+ docker-ce | 5:18.09.6~3-0~ubuntu-bionic | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+ docker-ce | 5:18.09.5~3-0~ubuntu-bionic | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+ docker-ce | 5:18.09.4~3-0~ubuntu-bionic | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+ docker-ce | 5:18.09.3~3-0~ubuntu-bionic | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+ docker-ce | 5:18.09.2~3-0~ubuntu-bionic | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+ docker-ce | 5:18.09.1~3-0~ubuntu-bionic | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+ docker-ce | 5:18.09.0~3-0~ubuntu-bionic | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+ docker-ce | 18.06.3~ce~3-0~ubuntu | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+ docker-ce | 18.06.2~ce~3-0~ubuntu | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+ docker-ce | 18.06.1~ce~3-0~ubuntu | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+ docker-ce | 18.06.0~ce~3-0~ubuntu | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+ docker-ce | 18.03.1~ce~3-0~ubuntu | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+ ---
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;16-docker-엔진engine-설치&quot;&gt;1.6. docker 엔진(engine) 설치&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;# apt install -y docker-ce={VERSION_STRING} docker-ce-cli={VERSION_STRING} containerd.io&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; docker-ce&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;5:20.10.5~3-0~ubuntu-bionic docker-ce-cli&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;5:20.10.5~3-0~ubuntu-bionic containerd.io
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;17-선택사항-docker-그룹에-사용자-계정-추가&quot;&gt;1.7. (선택사항) docker 그룹에 사용자 계정 추가&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;# usermod -aG docker {USER}&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;usermod &lt;span class=&quot;nt&quot;&gt;-aG&lt;/span&gt; docker rex
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;18-docker-설치-확인&quot;&gt;1.8. docker 설치 확인&lt;/h4&gt;
+&lt;h5 id=&quot;181-docker-테스트-이미지image-실행&quot;&gt;1.8.1. docker 테스트 이미지(image) 실행&lt;/h5&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;docker run hello-world
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;182-docker-container-목록-조회&quot;&gt;1.8.2. docker container 목록 조회&lt;/h5&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;docker ps &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;CONTAINER ID   IMAGE                    COMMAND                  CREATED             STATUS                      PORTS     NAMES
+76735cb09a1e   hello-world              &quot;/hello&quot;                 41 seconds ago      Exited (0) 40 seconds ago             jovial_edison
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;183-docker-버전-확인&quot;&gt;1.8.3. docker 버전 확인&lt;/h5&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;docker &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;Docker version 20.10.5, build 55c4c88
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;2-package로-kubeadm-kubelet-kubectl-설치&quot;&gt;2. package로 kubeadm, kubelet, kubectl 설치&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;master node와 worker node에서 실행합니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;선택사항-21-package-index-업데이트&quot;&gt;(선택사항) 2.1. package index 업데이트&lt;/h4&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;apt update
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;선택사항-22-package-dependencies-설치&quot;&gt;(선택사항) 2.2. package dependencies 설치&lt;/h4&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; apt-transport-https ca-certificates curl
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;23-google-cloud-public-signing-key-내려받기&quot;&gt;2.3. Google Cloud public signing key 내려받기&lt;/h4&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-fsSLo&lt;/span&gt; /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;24-packages-repository-설정-및-package-index-업데이트&quot;&gt;2.4. packages repository 설정 및 package index 업데이트&lt;/h4&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main&quot;&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;tee&lt;/span&gt; /etc/apt/sources.list.d/kubernetes.list
+&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;apt update
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;25-kubelet-kubeadm-kubectl-설치&quot;&gt;2.5. kubelet, kubeadm, kubectl 설치&lt;/h4&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; kubelet kubeadm kubectl
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;26-선택사항-kubelet-kubeadm-kubectl-버전-유지-설정&quot;&gt;2.6. (선택사항) kubelet, kubeadm, kubectl 버전 유지 설정&lt;/h4&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;apt-mark hold kubelet kubeadm kubectl
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;27-kubelet-kubeadm-kubectl-설치-확인&quot;&gt;2.7. kubelet, kubeadm, kubectl 설치 확인&lt;/h4&gt;
+&lt;h5 id=&quot;271-kubelet-버전-확인&quot;&gt;2.7.1. kubelet 버전 확인&lt;/h5&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;kubelet &lt;span class=&quot;nt&quot;&gt;--version&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;kubernetes v1.20.5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;272-kubeadm-버전-확인&quot;&gt;2.7.2. kubeadm 버전 확인&lt;/h5&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;kubeadm version
+&lt;span class=&quot;go&quot;&gt;kubeadm version: &amp;amp;version.Info{Major:&quot;1&quot;, Minor:&quot;20&quot;, GitVersion:&quot;v1.20.5&quot;, GitCommit:&quot;6b1d87acf3c8253c123756b9e61dac642678305f&quot;, GitTreeState:&quot;clean&quot;, BuildDate:&quot;2021-03-18T01:08:27Z&quot;, GoVersion:&quot;go1.15.8&quot;, Compiler:&quot;gc&quot;, Platform:&quot;linux/amd64&quot;}
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;273-kubectl-버전-확인&quot;&gt;2.7.3. kubectl 버전 확인&lt;/h5&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;kubectl version
+&lt;span class=&quot;go&quot;&gt;Client Version: version.Info{Major:&quot;1&quot;, Minor:&quot;20&quot;, GitVersion:&quot;v1.20.5&quot;, GitCommit:&quot;6b1d87acf3c8253c123756b9e61dac642678305f&quot;, GitTreeState:&quot;clean&quot;, BuildDate:&quot;2021-03-18T01:10:43Z&quot;, GoVersion:&quot;go1.15.8&quot;, Compiler:&quot;gc&quot;, Platform:&quot;linux/amd64&quot;}
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;3-master-node에-kubeadm-설치&quot;&gt;3. master node에 kubeadm 설치&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;master에서 실행합니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;31-kubeadm-init-명령어로-master-node-초기화-initializing&quot;&gt;3.1. kubeadm init 명령어로 master node 초기화 (initializing)&lt;/h4&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;kubeadm init &lt;span class=&quot;nt&quot;&gt;--pod-network-cidr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;10.244.0.0/16
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;위 ‘–pod-network-cidr=10.244.0.0/16’ 옵션은 pod 통신을 위해 pod network add-on인 flannel CNI 설정입니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;flannel은 레이어(layer) 3 네트워크(network) 패브릭(fabric)을 구성하는 kubernetes를 위한 오버레이(overlay) network입니다. 자세한 설명은 &lt;a href=&quot;https://github.com/flannel-io/flannel&quot; target=&quot;\_blank&quot;&gt;https://github.com/flannel-io/flannel&lt;/a&gt; 페이지를 참고하시기 바랍니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;CNI((Container Network Interface, cni)는 linux container에서 network interface를 구성하기 위해 필요한 플러그인(plugin)에 대한 사양(specification) 및 라이브러리(library)로 구성된 CNCF(Cloud Native Computing Foundation)에서 관리하는 프로젝트이며, GO 언어로 개발되었습니다. 자세한 설명은 &lt;a href=&quot;https://github.com/containernetworking/cni&quot; target=&quot;\_blank&quot;&gt;https://github.com/containernetworking/cni&lt;/a&gt; 페이지를 참고하시기 바랍니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;초기화 완료 후 아래와 같이 화면 하단에 출력되는 ‘kubeadm join’ 명령어는 worker node 연결을 위해 필요하오니 별도로 저장해 두시기 바랍니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;go&quot;&gt;kubeadm join 10.0.0.11:6443 --token qabzp1.86v3o2nfpf6qh4eu \
+    --discovery-token-ca-cert-hash sha256:3f08ac5ef2d0592147e402be885cc7d39550af5b903a6d229e01358b45e17e0d
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;32-kubectl-설정&quot;&gt;3.2. kubectl 설정&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;root 사용자&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt;/.kube
+&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cp&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; /etc/kubernetes/admin.conf &lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt;/.kube/config
+&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;chown&lt;/span&gt; &lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;:&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-g&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt;/.kube/config
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;일반 사용자&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt;/.kube
+&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo cp&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; /etc/kubernetes/admin.conf &lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt;/.kube/config
+&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo chown&lt;/span&gt; &lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;:&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-g&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt;/.kube/config
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;33-master-node의-pod-목록-조회&quot;&gt;3.3. master node의 pod 목록 조회&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;아래 결과는 flannel 설치 전이기 때문에 coredns pod가 pending 상태입니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;kubectl get pods &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; kube-system
+&lt;span class=&quot;go&quot;&gt;NAME                                    READY   STATUS     RESTARTS   AGE
+coredns-74ff55c5b-jz6tz                 0/1     Pending    0          5m40s
+coredns-74ff55c5b-ksnfl                 0/1     Pending    0          5m40s
+etcd-ip-10-0-0-162                      1/1     Running    0          5m55s
+kube-apiserver-ip-10-0-0-162            1/1     Running    0          5m55s
+kube-controller-manager-ip-10-0-0-162   1/1     Running    0          5m55s
+kube-proxy-rjqkc                        1/1     Running    0          5m40s
+kube-scheduler-ip-10-0-0-162            1/1     Running    0          5m55s
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;34-flannel-설치&quot;&gt;3.4. flannel 설치&lt;/h4&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;kubectl apply &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;35-flannel-설치-확인&quot;&gt;3.5. flannel 설치 확인&lt;/h4&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;kubectl get pods &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; kube-system
+&lt;span class=&quot;go&quot;&gt;NAME                                    READY   STATUS    RESTARTS   AGE
+coredns-74ff55c5b-jz6tz                 1/1     Running   0          6m2s
+coredns-74ff55c5b-ksnfl                 1/1     Running   0          6m2s
+etcd-ip-10-0-0-162                      1/1     Running   0          6m17s
+kube-apiserver-ip-10-0-0-162            1/1     Running   0          6m17s
+kube-controller-manager-ip-10-0-0-162   1/1     Running   0          6m17s
+kube-flannel-ds-dg45x                   1/1     Running   0          30s
+kube-proxy-rjqkc                        1/1     Running   0          6m2s
+kube-scheduler-ip-10-0-0-162            1/1     Running   0          6m17s
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;36-kubernetes-cluster-설치-확인&quot;&gt;3.6. kubernetes cluster 설치 확인&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;아래 결과는 worker node 연결 전이기 때문에 master node만 조회됩니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;kubectl get nodes &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; wide
+&lt;span class=&quot;go&quot;&gt;NAME            STATUS     ROLES                  AGE    VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION   CONTAINER-RUNTIME
+&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;ip-10-0-0-162   Ready      control-plane,master   8m2s   v1.20.5   10.0.0.11    &amp;lt;none&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;Ubuntu 18.04.5 LTS   5.4.0-1041-aws   docker://20.10.5
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;4-worker-node를-master-node에-연결&quot;&gt;4. worker node를 master node에 연결&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;worker node에서 실행합니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;41-kubeadm-join-명령어로-worker-node를-master-node에-연결&quot;&gt;4.1. kubeadm join 명령어로 worker node를 master node에 연결&lt;/h4&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;kubeadm &lt;span class=&quot;nb&quot;&gt;join &lt;/span&gt;10.0.0.11:6443 &lt;span class=&quot;nt&quot;&gt;--token&lt;/span&gt; qabzp1.86v3o2nfpf6qh4eu &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;--discovery-token-ca-cert-hash&lt;/span&gt; sha256:3f08ac5ef2d0592147e402be885cc7d39550af5b903a6d229e01358b45e17e0d
+&lt;span class=&quot;go&quot;&gt;[preflight] Running pre-flight checks
+  [WARNING IsDockerSystemdCheck]: detected &quot;cgroupfs&quot; as the Docker cgroup driver. The recommended driver is &quot;systemd&quot;. Please follow the guide at https://kubernetes.io/docs/setup/cri/
+  [WARNING SystemVerification]: this Docker version is not on the list of validated versions: 20.10.5. Latest validated version: 19.03
+[preflight] Reading configuration from the cluster...
+[preflight] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -o yaml'
+[kubelet-start] Writing kubelet configuration to file &quot;/var/lib/kubelet/config.yaml&quot;
+[kubelet-start] Writing kubelet environment file with flags to file &quot;/var/lib/kubelet/kubeadm-flags.env&quot;
+[kubelet-start] Starting the kubelet
+[kubelet-start] Waiting for the kubelet to perform the TLS Bootstrap...
+
+This node has joined the cluster:
+* Certificate signing request was sent to apiserver and a response was received.
+* The Kubelet was informed of the new secure connection details.
+
+Run 'kubectl get nodes' on the control-plane to see this node join the cluster.
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;5-kubernetes-cluster-설치-확인&quot;&gt;5. kubernetes cluster 설치 확인&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;master에서 실행합니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;51-전체-nodes-조회&quot;&gt;5.1. 전체 nodes 조회&lt;/h4&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;kubectl get nodes &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; wide
+&lt;span class=&quot;go&quot;&gt;NAME            STATUS   ROLES                  AGE    VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION   CONTAINER-RUNTIME
+&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;ip-10-0-0-104   Ready    &amp;lt;none&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;                 &lt;/span&gt;36s    v1.20.5   10.0.0.12    &amp;lt;none&amp;gt;        Ubuntu 18.04.5 LTS   5.4.0-1041-aws   docker://20.10.5
+&lt;span class=&quot;gp&quot;&gt;ip-10-0-0-162   Ready    control-plane,master   8m8s   v1.20.5   10.0.0.11    &amp;lt;none&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;Ubuntu 18.04.5 LTS   5.4.0-1041-aws   docker://20.10.5
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;52-전체-namespaces의-pod-목록-조회&quot;&gt;5.2. 전체 namespaces의 pod 목록 조회&lt;/h4&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;kubectl get pods &lt;span class=&quot;nt&quot;&gt;--all-namespaces&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;NAMESPACE     NAME                                    READY   STATUS    RESTARTS   AGE
+kube-system   coredns-74ff55c5b-jz6tz                 1/1     Running   0          106m
+kube-system   coredns-74ff55c5b-ksnfl                 1/1     Running   0          106m
+kube-system   etcd-ip-10-0-0-162                      1/1     Running   0          106m
+kube-system   kube-apiserver-ip-10-0-0-162            1/1     Running   0          106m
+kube-system   kube-controller-manager-ip-10-0-0-162   1/1     Running   0          106m
+kube-system   kube-flannel-ds-2kd4z                   1/1     Running   0          99m
+kube-system   kube-flannel-ds-dg45x                   1/1     Running   0          100m
+kube-system   kube-proxy-rjqkc                        1/1     Running   0          106m
+kube-system   kube-proxy-vzdqn                        1/1     Running   0          99m
+kube-system   kube-scheduler-ip-10-0-0-162            1/1     Running   0          106m
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
+&lt;p&gt;ubuntu 환경에 package로 kubernetes cluster 설치를 완료했습니다. &lt;br /&gt;
+kubernetes의 architectures 및 concepts, resources 등을 소개하겠습니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://kubernetes.io/docs/home/&quot; target=&quot;\_blank&quot;&gt;https://kubernetes.io/docs/home/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 02 Nov 2020 00:00:00 +0900</pubDate>
+        <link>https://lindarex.github.io/kubernetes/ubuntu-kubernetes-installation-with-kubeadm/</link>
+        <guid isPermaLink="true">https://lindarex.github.io/kubernetes/ubuntu-kubernetes-installation-with-kubeadm/</guid>
+        
+        <category>kubernetes</category>
+        
+        <category>cluster</category>
+        
+        <category>kubernetes cluster</category>
+        
+        <category>container</category>
+        
+        <category>orchestration</category>
+        
+        <category>container orchestration</category>
+        
+        <category>docker</category>
+        
+        <category>open source software</category>
+        
+        <category>open source</category>
+        
+        <category>kubeadm</category>
+        
+        <category>oss</category>
+        
+        <category>ubuntu</category>
+        
+        
+        <category>kubernetes</category>
         
       </item>
     

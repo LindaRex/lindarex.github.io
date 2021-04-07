@@ -22,14 +22,14 @@
 <meta property="og:url" content="https://lindarex.github.io/kubernetes/ubuntu-kubernetes-installation-with-kubeadm/" />
 <meta property="og:site_name" content="LindaRex" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-11-02T00:00:00+09:00" />
+<meta property="article:published_time" content="2021-04-07T00:00:00+09:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="우분투(Ubuntu) 환경에 Kubeadm으로 Kubernetes 클러스터(cluster) 설치하기" />
 <meta name="twitter:site" content="@" />
 <meta name="twitter:creator" content="@Rex" />
 <meta name="google-site-verification" content="t6VkmqsI15sIx3P1-gh3NYputZtjhDZOTkxhwDaa4Ik" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","headline":"우분투(Ubuntu) 환경에 Kubeadm으로 Kubernetes 클러스터(cluster) 설치하기","dateModified":"2020-11-02T00:00:00+09:00","datePublished":"2020-11-02T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/kubernetes/ubuntu-kubernetes-installation-with-kubeadm/"},"url":"https://lindarex.github.io/kubernetes/ubuntu-kubernetes-installation-with-kubeadm/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"Rex"},"author":{"@type":"Person","name":"Rex"},"description":"Kubernetes(kubernetes)는 컨테이너화된 애플리케이션(application)의 배포(deployment), 확장(scaling) 및 관리(management)를 자동화하는 Apache License 2.0이 적용되는 오픈소스(open source) 컨테이너(container) 오케스트레이션(orchestration) 플랫폼(platform)입니다. kubernetes는 구글(Google)이 container management를 위해 개발한 Borg를 시작으로 container 운영 경험과 커뮤니티의 아이디어가 결합하여 개발되었습니다. kubernetes는 리눅스(linux) container를 실행하는 호스트(host) 그룹을 함께 클러스터링(clustering) 할 수 있으며, 이러한 cluster를 효율적으로 관리할 수 있습니다. 이 포스트에서는 우분투(ubuntu) 환경에서 Kubeadm(kubeadm)을 사용하여 kubernetes cluster를 설치하는 방법을 소개합니다. [WARNING IsDockerSystemdCheck]: detected “cgroupfs” as the Docker cgroup driver. The recommended driver is “systemd”. Please follow the guide at https://kubernetes.io/docs/setup/cri/ [WARNING SystemVerification]: this Docker version is not on the list of validated versions: 20.10.5. Latest validated version: 19.03","@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","headline":"우분투(Ubuntu) 환경에 Kubeadm으로 Kubernetes 클러스터(cluster) 설치하기","dateModified":"2021-04-07T00:00:00+09:00","datePublished":"2021-04-07T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/kubernetes/ubuntu-kubernetes-installation-with-kubeadm/"},"url":"https://lindarex.github.io/kubernetes/ubuntu-kubernetes-installation-with-kubeadm/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"Rex"},"author":{"@type":"Person","name":"Rex"},"description":"Kubernetes(kubernetes)는 컨테이너화된 애플리케이션(application)의 배포(deployment), 확장(scaling) 및 관리(management)를 자동화하는 Apache License 2.0이 적용되는 오픈소스(open source) 컨테이너(container) 오케스트레이션(orchestration) 플랫폼(platform)입니다. kubernetes는 구글(Google)이 container management를 위해 개발한 Borg를 시작으로 container 운영 경험과 커뮤니티의 아이디어가 결합하여 개발되었습니다. kubernetes는 리눅스(linux) container를 실행하는 호스트(host) 그룹을 함께 클러스터링(clustering) 할 수 있으며, 이러한 cluster를 효율적으로 관리할 수 있습니다. 이 포스트에서는 우분투(ubuntu) 환경에서 Kubeadm(kubeadm)을 사용하여 kubernetes cluster를 설치하는 방법을 소개합니다. [WARNING IsDockerSystemdCheck]: detected “cgroupfs” as the Docker cgroup driver. The recommended driver is “systemd”. Please follow the guide at https://kubernetes.io/docs/setup/cri/ [WARNING SystemVerification]: this Docker version is not on the list of validated versions: 20.10.5. Latest validated version: 19.03","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <!-- LINDAREX :: JEKYLL SEO TAG :: END -->
@@ -384,7 +384,7 @@ wcs_do();
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="우분투(Ubuntu) 환경에 Kubeadm으로 Kubernetes 클러스터(cluster) 설치하기">
     <meta itemprop="description" content="Kubernetes(kubernetes)는 컨테이너화된 애플리케이션(application)의 배포(deployment), 확장(scaling) 및 관리(management)를 자동화하는 Apache License 2.0이 적용되는 오픈소스(open source) 컨테이너(container) 오케스트레이션(orchestration) 플랫폼(platform)입니다. kubernetes는 구글(Google)이 container management를 위해 개발한 Borg를 시작으로 container 운영 경험과 커뮤니티의 아이디어가 결합하여 개발되었습니다. kubernetes는 리눅스(linux) container를 실행하는 호스트(host) 그룹을 함께 클러스터링(clustering) 할 수 있으며, 이러한 cluster를 효율적으로 관리할 수 있습니다. 이 포스트에서는 우분투(ubuntu) 환경에서 Kubeadm(kubeadm)을 사용하여 kubernetes cluster를 설치하는 방법을 소개합니다.[WARNING IsDockerSystemdCheck]: detected “cgroupfs” as the Docker cgroup driver. The recommended driver is “systemd”. Please follow the guide at https://kubernetes.io/docs/setup/cri/  [WARNING SystemVerification]: this Docker version is not on the list of validated versions: 20.10.5. Latest validated version: 19.03">
-    <meta itemprop="datePublished" content="2020-11-02T00:00:00+09:00">
+    <meta itemprop="datePublished" content="2021-04-07T00:00:00+09:00">
     
 
     <div class="page__inner-wrap">
@@ -891,7 +891,7 @@ kubernetes의 architectures 및 concepts, resources 등을 소개하겠습니다
 
 
         
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-11-02T00:00:00+09:00">November 2, 2020</time></p>
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2021-04-07T00:00:00+09:00">April 7, 2021</time></p>
         
       </footer>
 
@@ -911,12 +911,11 @@ kubernetes의 architectures 및 concepts, resources 등을 소개하겠습니다
       
   <nav class="pagination">
     
-      <a href="/fail2ban/ubuntu-fail2ban-installation/" class="pagination--pager" title="우분투(Ubuntu) 환경에 패키지(Package)로 Fail2ban 설치하기
+      <a href="/scm-manager/ubuntu-scm-manager-v2-installation/" class="pagination--pager" title="우분투(Ubuntu) 환경에 패키지(Package)로 SCM Manager v2 설치하기
 ">Previous</a>
     
     
-      <a href="/scm-manager/ubuntu-scm-manager-v2-installation/" class="pagination--pager" title="우분투(Ubuntu) 환경에 패키지(Package)로 SCM Manager v2 설치하기
-">Next</a>
+      <a href="#" class="pagination--pager disabled">Next</a>
     
   </nav>
 

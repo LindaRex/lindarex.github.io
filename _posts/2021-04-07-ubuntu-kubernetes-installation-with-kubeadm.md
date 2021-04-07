@@ -18,9 +18,9 @@ tags:
 ---
 
 
-Kubernetes(kubernetes)는 컨테이너화된 애플리케이션(application)의 배포(deployment), 확장(scaling) 및 관리(management)를 자동화하는 Apache License 2.0이 적용되는 오픈소스(open source) 컨테이너(container) 오케스트레이션(orchestration) 플랫폼(platform)입니다. <br />
-kubernetes는 구글(Google)이 container management를 위해 개발한 Borg를 시작으로 container 운영 경험과 커뮤니티의 아이디어가 결합하여 개발되었습니다. <br />
-kubernetes는 리눅스(linux) container를 실행하는 호스트(host) 그룹을 함께 클러스터링(clustering) 할 수 있으며, 이러한 cluster를 효율적으로 관리할 수 있습니다. <br />
+Kubernetes(kubernetes)는 컨테이너화된 애플리케이션(application)의 배포(deployment), 확장(scaling) 및 관리(management)를 자동화하는 Apache License 2.0이 적용되는 오픈소스(open source) 컨테이너(container) 오케스트레이션(orchestration) 플랫폼(platform)입니다. <br /><br />
+kubernetes는 구글(Google)이 container management를 위해 개발한 Borg를 시작으로 container 운영 경험과 커뮤니티의 아이디어가 결합하여 개발되었습니다. <br /><br />
+kubernetes는 리눅스(linux) container를 실행하는 호스트(host) 그룹을 함께 클러스터링(clustering) 할 수 있으며, 이러한 cluster를 효율적으로 관리할 수 있습니다. <br /><br />
 이 포스트에서는 우분투(ubuntu) 환경에서 Kubeadm(kubeadm)을 사용하여 kubernetes cluster를 설치하는 방법을 소개합니다.
 
 > kubernetes의 아키텍처(architectures) 및 개념(concepts), 리소스(resources) 등의 부가 설명은 이 포스트에서 다루지 않으며, 다음 포스트에서 kubernetes에 대한 자세한 설명을 소개하겠습니다.
@@ -370,7 +370,7 @@ kube-system   kube-scheduler-ip-10-0-0-162            1/1     Running   0       
 
 ## 마무리(CONCLUSION)
 ubuntu 환경에 package로 kubernetes cluster 설치를 완료했습니다. <br />
-kubernetes의 architectures 및 concepts, resources 등을 소개하겠습니다.
+다음 포스트에서 kubernetes architectures 및 concepts, resources 등을 소개하겠습니다.
 
 
 ## 참고(REFERENCES)

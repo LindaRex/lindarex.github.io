@@ -30,7 +30,7 @@ kubernetes는 리눅스(linux) container를 실행하는 호스트(host) 그룹�
 - 최소 2개(마스터, 워커 각각 1개)의 ubuntu 환경이 필요합니다.
 - 방화벽 설정이 필요합니다.
 
-> 마스터(master)는 master 노드(node) 또는 API 서버(server)로 불리며, 워커(worker)는 worker node 또는 node로 불립니다.
+> 마스터(master)는 master 노드(node) 또는 컨트롤 플레인(control plane) 또는 API 서버(server)로 불리며, 워커(worker)는 worker node 또는 node로 불립니다.
 
 > ubuntu 설치 방법은 [우분투(Ubuntu) 서버(Server) 18.04 설치하기](https://lindarex.github.io/ubuntu/ubuntu-1804-installation/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
 
@@ -50,8 +50,8 @@ kubernetes는 리눅스(linux) container를 실행하는 호스트(host) 그룹�
     + Ubuntu Server 18.04 LTS (HVM), EBS General Purpose (SSD) Volume Type (64비트 Arm)
     + m5.large (ECU, 2 vCPUs, 3.1 GHz, 8 GiB 메모리, EBS 전용)
 - Ubuntu 18.04.5 LTS (GNU/Linux 5.4.0-1038-aws x86_64)
-- docker 20.10.5
 - kubernetes 1.20.5
+- docker 20.10.5
 
 
 ## 요약(SUMMARY)

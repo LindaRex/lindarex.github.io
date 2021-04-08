@@ -339,6 +339,7 @@ This node has joined the cluster:
 Run 'kubectl get nodes' on the control-plane to see this node join the cluster.
 ```
 
+
 ### 5. kubernetes cluster 설치 확인
 
 > master에서 실행합니다.
@@ -374,4 +375,5 @@ ubuntu 환경에 kubeadm으로 kubernetes cluster 설치를 완료했습니다. 
 
 
 ## 참고(REFERENCES)
-- [https://kubernetes.io/docs/home/](https://kubernetes.io/docs/home/){: target="\_blank"}
+- [https://kubernetes.io/ko/docs/setup/production-environment/tools/kubeadm/install-kubeadm/](https://kubernetes.io/ko/docs/setup/production-environment/tools/kubeadm/install-kubeadm/){: target="\_blank"}
+- [https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/){: target="\_blank"}

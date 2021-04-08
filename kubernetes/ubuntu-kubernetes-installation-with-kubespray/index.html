@@ -1,0 +1,1312 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.18.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- LINDAREX :: JEKYLL SEO TAG :: BIGIN -->
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>우분투(Ubuntu) 환경에 Kubespray로 Kubernetes 클러스터(cluster) 설치하기 | LindaRex</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="우분투(Ubuntu) 환경에 Kubespray로 Kubernetes 클러스터(cluster) 설치하기" />
+<meta name="author" content="Rex" />
+<meta property="og:locale" content="ko_KR" />
+<meta name="description" content="kubernetes cluster를 설치하는 방법은 다양합니다. 이 포스트에서는 우분투(ubuntu) 환경에서 kubespray를 이용하여 kubernetes cluster를 설치하는 방법을 소개합니다." />
+<meta property="og:description" content="kubernetes cluster를 설치하는 방법은 다양합니다. 이 포스트에서는 우분투(ubuntu) 환경에서 kubespray를 이용하여 kubernetes cluster를 설치하는 방법을 소개합니다." />
+<link rel="canonical" href="https://lindarex.github.io/kubernetes/ubuntu-kubernetes-installation-with-kubespray/" />
+<meta property="og:url" content="https://lindarex.github.io/kubernetes/ubuntu-kubernetes-installation-with-kubespray/" />
+<meta property="og:site_name" content="LindaRex" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-04-08T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="우분투(Ubuntu) 환경에 Kubespray로 Kubernetes 클러스터(cluster) 설치하기" />
+<meta name="twitter:site" content="@" />
+<meta name="twitter:creator" content="@Rex" />
+<meta name="google-site-verification" content="t6VkmqsI15sIx3P1-gh3NYputZtjhDZOTkxhwDaa4Ik" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"우분투(Ubuntu) 환경에 Kubespray로 Kubernetes 클러스터(cluster) 설치하기","dateModified":"2021-04-08T00:00:00+09:00","datePublished":"2021-04-08T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/kubernetes/ubuntu-kubernetes-installation-with-kubespray/"},"url":"https://lindarex.github.io/kubernetes/ubuntu-kubernetes-installation-with-kubespray/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"Rex"},"author":{"@type":"Person","name":"Rex"},"description":"kubernetes cluster를 설치하는 방법은 다양합니다. 이 포스트에서는 우분투(ubuntu) 환경에서 kubespray를 이용하여 kubernetes cluster를 설치하는 방법을 소개합니다.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<!-- LINDAREX :: JEKYLL SEO TAG :: END -->
+
+<!-- LINDAREX :: NAVER SITE VERIFICATION :: BIGIN -->
+<meta name="naver-site-verification" content="dc2a3d180320948e3afb3e88f999a6d8a478e024">
+<!-- LINDAREX :: NAVER SITE VERIFICATION :: END -->
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="LindaRex Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- LINDAREX :: FAVICON :: BIGIN -->
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico">
+<!-- LINDAREX :: FAVICON :: END -->
+
+<!-- LINDAREX :: FEED :: BIGIN -->
+<!-- <link rel="alternate" type="application/rss+xml" href="https://lindarex.github.io/feed.xml" title="LindaRex Feed"> -->
+<!-- LINDAREX :: FEED :: END -->
+
+<!-- LINDAREX :: GOOGLE ANALYTICS :: BIGIN -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-157973560-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-157973560-1');
+</script>
+<!-- LINDAREX :: GOOGLE ANALYTICS :: END -->
+
+<!-- LINDAREX :: NAVER ANALYTICS :: BIGIN -->
+<!-- Naver Analytics -->
+<script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
+<script type="text/javascript">
+if(!wcs_add) var wcs_add = {};
+wcs_add["wa"] = "42df78a7dfd6f0";
+wcs_do();
+</script>
+<!-- LINDAREX :: NAVER ANALYTICS :: END -->
+
+<!-- LINDAREX :: GOOGLE ADSENSE :: BIGIN -->
+<script data-ad-client="ca-pub-8367174639781348" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- LINDAREX :: GOOGLE ADSENSE :: END -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/LindaRex_LOGO.jpg" alt="LindaRex logo"></a>
+        
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/year-archive/" >Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/" >Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/" >Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/" >About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">OPEN SOURCE SOFTWARE</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/kubernetes/" class="">KUBERNETES</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/jenkins/" class="">JENKINS</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/sonarqube/" class="">SONARQUBE</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/scm-manager/" class="">SCM MANAGER</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/postgresql/" class="">POSTGRESQL</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/elastic-stack/" class="">ELASTIC STACK</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/bind9/" class="">BIND9</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/fail2ban/" class="">FAIL2BAN</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">CLOUD FOUNDRY</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/bosh/" class="">BOSH</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/cfar/" class="">CFAR</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">CLOUD COMPUTING</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/aws/" class="">AWS</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/azure/" class="">AZURE</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">INTERESTED</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/ubuntu/" class="">UBUNTU</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/concepts/" class="">CONCEPTS</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/vmware-workstation/" class="">VMWARE WORKSTATION</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/travis-ci/" class="">TRAVIS CI</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+  <!-- LINDAREX :: GOOGLE ADSENSE :: LEFT-SIDEBAR :: BIGIN-->
+  <!-- LINDAREX :: GOOGLE ADSENSE :: LEFT-SIDEBAR :: HTML :: BIGIN -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 2020-02-22-ad-left-sidebar -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:200px;height:200px"
+     data-ad-client="ca-pub-8367174639781348"
+     data-ad-slot="5840394475"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<!-- LINDAREX :: GOOGLE ADSENSE :: LEFT-SIDEBAR :: HTML :: END -->
+
+  <!-- LINDAREX :: GOOGLE ADSENSE :: LEFT-SIDEBAR :: END-->
+</nav>
+    
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="우분투(Ubuntu) 환경에 Kubespray로 Kubernetes 클러스터(cluster) 설치하기">
+    <meta itemprop="description" content="kubernetes cluster를 설치하는 방법은 다양합니다.이 포스트에서는 우분투(ubuntu) 환경에서 kubespray를 이용하여 kubernetes cluster를 설치하는 방법을 소개합니다.">
+    <meta itemprop="datePublished" content="2021-04-08T00:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">우분투(Ubuntu) 환경에 Kubespray로 Kubernetes 클러스터(cluster) 설치하기
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+          
+          <!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: BIGIN -->
+          
+            <nav class="toc-custom">
+            <!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: HTML :: BIGIN -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 2020-02-22-ad-right-sidebar -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8367174639781348"
+     data-ad-slot="5781712397"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: HTML :: END -->
+
+            </nav>
+          
+          <!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: END -->
+          </aside>
+        
+        <p>kubernetes cluster를 설치하는 방법은 다양합니다.
+<br /><br />
+이 포스트에서는 우분투(ubuntu) 환경에서 kubespray를 이용하여 kubernetes cluster를 설치하는 방법을 소개합니다.</p>
+
+<blockquote>
+  <p>Kubeadm으로 kubernetes cluster를 설치하는 방법은 <a href="https://lindarex.github.io/kubernetes/ubuntu-kubernetes-installation-with-kubeadm/" target="\_blank">우분투(Ubuntu) 환경에 Kubeadm으로 kubernetes 클러스터(cluster) 설치하기</a> 포스트를 참고하시기 바랍니다.</p>
+</blockquote>
+
+<blockquote>
+  <p>kubernetes의 아키텍처(architectures) 및 개념(concepts), 리소스(resources) 등의 부가 설명은 이 포스트에서 다루지 않으며, 다음 포스트에서 kubernetes에 대한 자세한 설명을 소개하겠습니다.</p>
+</blockquote>
+
+<h2 id="선행조건prerequisite">선행조건(PREREQUISITE)</h2>
+<ul>
+  <li>최소 2개(마스터, 워커 각각 1개)의 ubuntu 환경이 필요합니다.</li>
+  <li>방화벽 설정이 필요합니다.</li>
+</ul>
+
+<blockquote>
+  <p>마스터(master)는 master 노드(node) 또는 컨트롤 플레인(control plane) 또는 API 서버(server)로 불리며, 워커(worker)는 worker node 또는 node로 불립니다.</p>
+</blockquote>
+
+<blockquote>
+  <p>ubuntu 설치 방법은 <a href="https://lindarex.github.io/ubuntu/ubuntu-1804-installation/" target="\_blank">우분투(Ubuntu) 서버(Server) 18.04 설치하기</a> 포스트를 참고하시기 바랍니다.</p>
+</blockquote>
+
+<blockquote>
+  <p>kubernetes 최소 설치 권장 사항은 <a href="https://kubernetes.io/docs/setup/production-environment/tools/kubespray/install-kubespray/#before-you-begin" target="\_blank">https://kubernetes.io/docs/setup/production-environment/tools/kubespray/install-kubespray/#before-you-begin</a> 페이지를 참고하시기 바랍니다.</p>
+</blockquote>
+
+<blockquote>
+  <p>방화벽 설정 방법은 <a href="https://lindarex.github.io/ubuntu/ubuntu-firewalld-installation/" target="\_blank">우분투(Ubuntu) 환경에 방화벽(Firewalld) 설치 및 설정하기</a> 포스트를 참고하시기 바랍니다.</p>
+</blockquote>
+
+<blockquote>
+  <p>kubernetes 실행에 필요한 필수 포트는 <a href="https://kubernetes.io/docs/setup/production-environment/tools/kubespray/install-kubespray/#check-required-ports" target="\_blank">https://kubernetes.io/docs/setup/production-environment/tools/kubespray/install-kubespray/#check-required-ports</a> 페이지를 참고하시기 바랍니다.</p>
+</blockquote>
+
+<h2 id="테스트-환경test-environment">테스트 환경(TEST ENVIRONMENT)</h2>
+<ul>
+  <li>AWS EC2 instance
+    <ul>
+      <li>Ubuntu Server 18.04 LTS (HVM), EBS General Purpose (SSD) Volume Type (64비트 Arm)</li>
+      <li>m5.large (ECU, 2 vCPUs, 3.1 GHz, 8 GiB 메모리, EBS 전용)</li>
+    </ul>
+  </li>
+  <li>Ubuntu 18.04.5 LTS (GNU/Linux 5.4.0-1038-aws x86_64)</li>
+  <li>kubespray 2.15.0</li>
+  <li>kubernetes 1.19.7</li>
+  <li>docker 19.03.14</li>
+</ul>
+
+<h2 id="요약summary">요약(SUMMARY)</h2>
+<ol>
+  <li>SSH Key 생성 및 배포</li>
+  <li>kubespray 내려받기</li>
+  <li>apt 명령어로 python 설치</li>
+  <li>kubespray python package 설치</li>
+  <li>kubespray 설정 구성</li>
+  <li>kubespray 설치</li>
+  <li>kubernetes cluster 설치 확인</li>
+  <li>(선택사항) kubespray 삭제</li>
+</ol>
+
+<h2 id="내용contents">내용(CONTENTS)</h2>
+<h3 id="1-ssh-key-생성-및-배포">1. SSH Key 생성 및 배포</h3>
+
+<ul>
+  <li>SSH key 기반의 인증을 사용할 수 있도록 master node에서 RSA 공개키를 생성한 후, master node를 포함한 모든 node에 복사합니다.</li>
+  <li>kubespray는 Ansible(ansible)를 이용하여 kubernetes cluster를 설치합니다. ansible은 일반적으로 SSH 프로토콜을 통해 원격 시스템과 통신하기 때문에 모든 node에 SSH 구성이 필요합니다.</li>
+</ul>
+
+<h4 id="11-ssh-key-생성">1.1. SSH Key 생성</h4>
+
+<blockquote>
+  <p>master node에서 실행합니다.</p>
+</blockquote>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>ssh-keygen <span class="nt">-t</span> rsa
+</code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">ubuntu@ip-10-0-0-12:~$</span><span class="w"> </span>ssh-keygen <span class="nt">-t</span> rsa
+<span class="go">Generating public/private rsa key pair.
+Enter file in which to save the key (/home/ubuntu/.ssh/id_rsa):
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /home/ubuntu/.ssh/id_rsa.
+Your public key has been saved in /home/ubuntu/.ssh/id_rsa.pub.
+The key fingerprint is:
+SHA256:F15JTayumjfr3urkY0CB74Ap04TDQYgGby6hJRk3VAY ubuntu@ip-10-0-0-12
+The key's randomart image is:
++---[RSA 2048]----+
+|==E=o  .    .+.  |
+|o*+o. . .  . .o  |
+|= ++ o . .. o.   |
+|.*o + . o. o.    |
+|o .o   +S o.     |
+| .      o.  .    |
+|         ...     |
+|         +*.     |
+|        oBB=.    |
++----[SHA256]-----+
+</span></code></pre></div></div>
+
+<h4 id="12-ssh-key를-모든-node에-복사">1.2. SSH Key를 모든 node에 복사</h4>
+
+<blockquote>
+  <p>아래 명령어를 master node에서 실행하여 RSA 공개키를 복사합니다.</p>
+</blockquote>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cat</span> ~/.ssh/id_rsa.pub
+</code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">ubuntu@ip-10-0-0-12:~$</span><span class="w"> </span><span class="nb">cat</span> ~/.ssh/id_rsa.pub
+<span class="go">ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDfCi8yYpfM203r9ZmkftJfaNX+sbF+EmQ4QW8ozOS2GCQhIg/mmQjSRhk5Pi+Ey2/ptzVi82XhKUpUkN334NVf8kdQhmQ4po6Yi4e9Zm/HDIiHmjA0PR5cE3o7ab9QhjsgV1RUGJbrvZdZPCxjSUzlK3suk/49/3PKlRrdNuCogznjPpeIF16oqlK8W1gxYi/lcdhXJ09Fa3cucUU5GnkAXAHsisdC8VyE3f78TlYA6rjb4+eY+mryK0WA+UH1pDYLyVCB2NH/WNiawln//pRSWIYgzSZDvhlR/eJKDXzaz6xGopdzK0qd1toJ3tJ5uDlO1kXVfTTNkgQER/IPNzxX ubuntu@ip-10-0-0-12
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>아래 명령어를 master node와 worker node에서 실행합니다.</p>
+</blockquote>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>vi ~/.ssh/authorized_keys
+</code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">ubuntu@ip-10-0-0-12:~$</span><span class="w"> </span>vi ~/.ssh/authorized_keys
+<span class="go">ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCIU1EZY5t3yMfd5JwQJVPEYOctTT34TEGT8yp0gmaCE/zDXPpZOGUkDlIH3F3HQVSaE7gr/qdMuWf2xdtRzfhQTCFtEK1CjjjMsZriJ2nhDALp5JbujkSoWdX+CkD//egssZa98XPEDDP8fijOmmDjqh36axfiJP54kQ3cSmSFKPONnzsqiqvEBTbilEVwxAWc1tqL0NrZB72MDJ+WyHfzwifVkC8/h9B2h6WtE440CxpGFVfXMJQxxGYrCaJaSjruO7KzQBzJ54NynNH5XzMqCDA+UhztWK+7NlBNSpNWvMYQ5dw7kQ8L6kr4aqpKKyQUH5JoMa0J/+N6qM8ihn5f aws-key
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC2PS9vPKdB9TMlGHaV53bTi60+pyqyguYjPz32xBMtGXmXmbOfkplgxo2xJvsOIUhiw5Jq1VKJP6kBIMv3PxtCZ8LX1eDLgun+3E6vxu8BpIOo9JEW3Rc6tpezBebqfVzqO/PgYY2dxH1MD6tUqWRiJz544wnPoAc5LUjcvkUmmFndUlTMjxBFIFifA52e0tFwH3UxFGQAVocDDggRw23uMv9NHiyAxwpFP88FGksizYq9RDyc7rhjeMh7ruuGu5nOII02XGZhjdzLDUfcra911w1+47kAOpcsrrXnlHyWLUTSXkaGrkfESWbXnLh15wUSym2T5H1Jv9SKf2blenPZ ubuntu@ip-10-0-0-12
+</span></code></pre></div></div>
+
+<ul>
+  <li>위 과정(1.2.)은 ssh-copy-id 명령어로 대체 가능합니다.</li>
+</ul>
+
+<blockquote>
+  <p>ssh-copy-id 명령어에 대한 자세한 사항은 <a href="http://manpages.ubuntu.com/manpages/bionic/en/man1/ssh-copy-id.1.html" target="\_blank">http://manpages.ubuntu.com/manpages/bionic/en/man1/ssh-copy-id.1.html</a> 페이지를 참고하시기 바랍니다.</p>
+</blockquote>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>ssh-copy-id <span class="o">{</span>USER<span class="o">}</span>@<span class="o">{</span>HOST<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">ubuntu@ip-10-0-0-12:~$</span><span class="w"> </span>ssh-copy-id ubuntu@10.0.0.16
+</code></pre></div></div>
+
+<h4 id="13-ssh-keyscan-명령어로-모든-node의-호스트host-등록">1.3. ssh-keyscan 명령어로 모든 node의 호스트(host) 등록</h4>
+
+<blockquote>
+  <p>master node에서 실행합니다.</p>
+</blockquote>
+
+<ul>
+  <li>master node를 포함한 모든 node의 host를 등록합니다.</li>
+  <li>아래 과정을 진행하지 않을 경우, kubespray 설치 과정에서 worker node의 인증 권한 설정에 따라 RSA key fingerprint 확인이 발생할 수 있습니다.</li>
+</ul>
+
+<blockquote>
+  <p>ssh-keyscan 명령어에 대한 자세한 사항은 <a href="http://manpages.ubuntu.com/manpages/bionic/man1/ssh-keyscan.1.html" target="\_blank">http://manpages.ubuntu.com/manpages/bionic/man1/ssh-keyscan.1.html</a> 페이지를 참고하시기 바랍니다.</p>
+</blockquote>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>ssh-keyscan <span class="nt">-t</span> rsa <span class="o">{</span>HOST<span class="o">}</span> <span class="o">&gt;&gt;</span> ~/.ssh/known_hosts
+</code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">ubuntu@ip-10-0-0-12:~$</span><span class="w"> </span>ssh-keyscan <span class="nt">-t</span> rsa 10.0.0.12 <span class="o">&gt;&gt;</span> ~/.ssh/known_hosts
+<span class="gp">#</span><span class="w"> </span>10.0.0.12:22 SSH-2.0-OpenSSH_7.6p1 Ubuntu-4ubuntu0.3
+<span class="go">
+</span><span class="gp">ubuntu@ip-10-0-0-12:~$</span><span class="w"> </span>ssh-keyscan <span class="nt">-t</span> rsa 10.0.0.16 <span class="o">&gt;&gt;</span> ~/.ssh/known_hosts
+<span class="gp">#</span><span class="w"> </span>10.0.0.16:22 SSH-2.0-OpenSSH_7.6p1 Ubuntu-4ubuntu0.3
+</code></pre></div></div>
+
+<ul>
+  <li>등록할 host가 많을 경우, host 목록 파일을 생성하여 아래 명령어로 한 번에 등록할 수 있습니다.</li>
+</ul>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>vi <span class="o">{</span>HOST-LIST-FILE<span class="o">}</span>
+<span class="go">---
+{HOST-1}, {HOST-2}
+</span></code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">ubuntu@ip-10-0-0-12:~$</span><span class="w"> </span>vi lindarex-host-file
+<span class="go">---
+10.0.0.12, 10.0.0.16
+</span></code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>ssh-keyscan <span class="nt">-t</span> rsa <span class="nt">-f</span> <span class="o">{</span>HOST-LIST-FILE<span class="o">}</span> <span class="o">&gt;&gt;</span> ~/.ssh/known_hosts
+</code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">ubuntu@ip-10-0-0-12:~$</span><span class="w"> </span>ssh-keyscan <span class="nt">-t</span> rsa <span class="nt">-f</span> lindarex-host-file <span class="o">&gt;&gt;</span> ~/.ssh/known_hosts
+</code></pre></div></div>
+
+<h4 id="14-ssh-명령어로-worker-node-접속-확인">1.4. ssh 명령어로 worker node 접속 확인</h4>
+
+<blockquote>
+  <p>master node에서 실행합니다.</p>
+</blockquote>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>ssh <span class="o">{</span>USER<span class="o">}</span>@<span class="o">{</span>HOST<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">ubuntu@ip-10-0-0-12:~$</span><span class="w"> </span>ssh ubuntu@10.0.0.16
+</code></pre></div></div>
+
+<h3 id="2-kubespray-내려받기">2. kubespray 내려받기</h3>
+
+<blockquote>
+  <p>master node에서 실행합니다.</p>
+</blockquote>
+
+<h4 id="21-선택사항-workspace-디렉터리-생성">2.1. (선택사항) workspace 디렉터리 생성</h4>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">LINDAREX_WORKSPACE</span><span class="o">=</span><span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/workspace
+<span class="gp">$</span><span class="w"> </span><span class="nb">mkdir</span> <span class="nt">-p</span> <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>
+</code></pre></div></div>
+
+<h4 id="22-git-clone-명령어로-kubespray-내려받기">2.2. git clone 명령어로 kubespray 내려받기</h4>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>git clone https://github.com/kubernetes-sigs/kubespray.git <span class="nt">-b</span> v2.15.0 <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/kubespray
+</code></pre></div></div>
+
+<h3 id="3-apt-명령어로-python-설치">3. apt 명령어로 python 설치</h3>
+
+<blockquote>
+  <p>master node에서 실행합니다.</p>
+</blockquote>
+
+<h4 id="31-package-index-업데이트">3.1. package index 업데이트</h4>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt update
+</code></pre></div></div>
+
+<h4 id="32-python-설치">3.2. python 설치</h4>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt <span class="nb">install</span> <span class="nt">-y</span> python3-pip
+</code></pre></div></div>
+
+<h3 id="4-kubespray-python-package-설치">4. kubespray python package 설치</h3>
+
+<blockquote>
+  <p>master node에서 실행합니다.</p>
+</blockquote>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>pip3 <span class="nb">install</span> <span class="nt">-r</span> <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/kubespray/requirements.txt
+</code></pre></div></div>
+
+<h3 id="5-kubespray-설정-구성">5. kubespray 설정 구성</h3>
+<h4 id="51-inventory-구성">5.1. inventory 구성</h4>
+
+<blockquote>
+  <p>master node에서 실행합니다.</p>
+</blockquote>
+
+<h5 id="511-inventory-파일-생성">5.1.1. inventory 파일 생성</h5>
+
+<ul>
+  <li>sample 디렉터리(directory)를 복사하여 inventory directory를 생성합니다.</li>
+</ul>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cp</span> <span class="nt">-r</span> <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/kubespray/inventory/sample <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/kubespray/inventory/lindarex-cluster
+</code></pre></div></div>
+
+<h5 id="512-inventory-파일-수정">5.1.2. inventory 파일 수정</h5>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>vi <span class="o">{</span>WORKSPACE<span class="o">}</span>/kubespray/inventory/<span class="o">{</span>CLUSTER_NAME<span class="o">}</span>/inventory.ini
+</code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">ubuntu@ip-10-0-0-12:~$</span><span class="w"> </span>vi <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/kubespray/inventory/lindarex-cluster/inventory.ini
+<span class="go">---
+</span><span class="gp">#</span><span class="w"> </span><span class="c">## Configure 'ip' variable to bind kubernetes services on a</span>
+<span class="gp">#</span><span class="w"> </span><span class="c">## different ip than the default iface</span>
+<span class="gp">#</span><span class="w"> </span><span class="c">## We should set etcd_member_name for etcd cluster. The node that is not a etcd member do not need to set the value, or can set the empty string value.</span>
+<span class="go">[all]
+ip-10-0-0-12 ansible_host=10.0.0.12 ip=10.0.0.12 etcd_member_name=etcd1
+ip-10-0-0-16 ansible_host=10.0.0.16 ip=10.0.0.16
+</span><span class="gp">#</span><span class="w"> </span>node3 <span class="nv">ansible_host</span><span class="o">=</span>95.54.0.14  <span class="c"># ip=10.3.0.3 etcd_member_name=etcd3</span>
+<span class="gp">#</span><span class="w"> </span>node4 <span class="nv">ansible_host</span><span class="o">=</span>95.54.0.15  <span class="c"># ip=10.3.0.4 etcd_member_name=etcd4</span>
+<span class="gp">#</span><span class="w"> </span>node5 <span class="nv">ansible_host</span><span class="o">=</span>95.54.0.16  <span class="c"># ip=10.3.0.5 etcd_member_name=etcd5</span>
+<span class="gp">#</span><span class="w"> </span>node6 <span class="nv">ansible_host</span><span class="o">=</span>95.54.0.17  <span class="c"># ip=10.3.0.6 etcd_member_name=etcd6</span>
+<span class="go">
+</span><span class="gp">#</span><span class="w"> </span><span class="c">## configure a bastion host if your nodes are not directly reachable</span>
+<span class="gp">#</span><span class="w"> </span>bastion <span class="nv">ansible_host</span><span class="o">=</span>x.x.x.x <span class="nv">ansible_user</span><span class="o">=</span>some_user
+<span class="go">
+[kube-master]
+ip-10-0-0-12
+</span><span class="gp">#</span><span class="w"> </span>node2
+<span class="gp">#</span><span class="w"> </span>node3
+<span class="go">
+[etcd]
+ip-10-0-0-12
+</span><span class="gp">#</span><span class="w"> </span>node2
+<span class="gp">#</span><span class="w"> </span>node3
+<span class="go">
+[kube-node]
+ip-10-0-0-16
+</span><span class="gp">#</span><span class="w"> </span>node3
+<span class="gp">#</span><span class="w"> </span>node4
+<span class="gp">#</span><span class="w"> </span>node5
+<span class="gp">#</span><span class="w"> </span>node6
+<span class="go">
+[calico-rr]
+
+[k8s-cluster:children]
+kube-master
+kube-node
+calico-rr
+</span></code></pre></div></div>
+
+<h4 id="52-선택사항-호스트명hostname-변경override-설정">5.2. (선택사항) 호스트명(hostname) 변경(override) 설정</h4>
+
+<ul>
+  <li>kubespray의 기본 설정은 모든 node의 hostname을 node1, node2… 형식으로 변경합니다.</li>
+  <li>이 포스트에서는 hostname을 변경하지 않게 설정을 수정하여 설치합니다.</li>
+</ul>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>vi <span class="o">{</span>WORKSPACE<span class="o">}</span>/kubespray/roles/bootstrap-os/defaults/main.yml
+<span class="go">---
+override_system_hostname: false
+</span></code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">ubuntu@ip-10-0-0-12:~$</span><span class="w"> </span><span class="nb">cat</span> <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/kubespray/roles/bootstrap-os/defaults/main.yml
+<span class="go">---
+</span><span class="gp">#</span><span class="c"># CentOS/RHEL specific variables</span>
+<span class="gp">#</span><span class="w"> </span>Use the fastestmirror yum plugin
+<span class="go">centos_fastestmirror_enabled: false
+
+</span><span class="gp">#</span><span class="c"># Flatcar Container Linux specific variables</span>
+<span class="gp">#</span><span class="w"> </span>Disable locksmithd or leave it <span class="k">in </span>its current state
+<span class="go">coreos_locksmithd_disable: false
+
+</span><span class="gp">#</span><span class="c"># Oracle Linux specific variables</span>
+<span class="gp">#</span><span class="w"> </span>Install public repo on Oracle Linux
+<span class="go">use_oracle_public_repo: true
+
+fedora_coreos_packages:
+  - python
+  - python3-libselinux
+</span><span class="gp">  - ethtool                 #</span><span class="w"> </span>required <span class="k">in </span>kubeadm preflight phase <span class="k">for </span>verifying the environment
+<span class="gp">  - ipset                   #</span><span class="w"> </span>required <span class="k">in </span>kubeadm preflight phase <span class="k">for </span>verifying the environment
+<span class="gp">  - conntrack-tools         #</span><span class="w"> </span>required by kube-proxy
+<span class="go">
+</span><span class="gp">#</span><span class="c"># General</span>
+<span class="gp">#</span><span class="w"> </span>Set the <span class="nb">hostname </span>to inventory_hostname
+<span class="go">override_system_hostname: false
+
+is_fedora_coreos: false
+
+skip_http_proxy_on_os_packages: false
+</span></code></pre></div></div>
+
+<h3 id="6-kubespray-설치">6. kubespray 설치</h3>
+
+<blockquote>
+  <p>master node에서 실행합니다.</p>
+</blockquote>
+
+<h4 id="61-inventory-builder로-inventory-생성">6.1. inventory builder로 inventory 생성</h4>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">declare</span> <span class="nt">-a</span> <span class="nv">IPS</span><span class="o">=({</span>MASTER_NODE_IP<span class="o">}</span> <span class="o">{</span>WORKER_NODE_IP1<span class="o">}</span> <span class="o">{</span>WORKER_NODE_IP2<span class="o">}</span> <span class="o">{</span>WORKER_NODE_IP3<span class="o">}</span>...<span class="o">)</span>
+<span class="gp">$</span><span class="w"> </span><span class="nv">CONFIG_FILE</span><span class="o">={</span>WORKSPACE<span class="o">}</span>/kubespray/inventory/<span class="o">{</span>CLUSTER_NAME<span class="o">}</span>/hosts.yaml python3 <span class="o">{</span>WORKSPACE<span class="o">}</span>/kubespray/contrib/inventory_builder/inventory.py <span class="k">${</span><span class="nv">IPS</span><span class="p">[@]</span><span class="k">}</span>
+</code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">ubuntu@ip-10-0-0-12:~$</span><span class="w"> </span><span class="nb">declare</span> <span class="nt">-a</span> <span class="nv">IPS</span><span class="o">=(</span>10.0.0.12 10.0.0.16<span class="o">)</span>
+<span class="gp">ubuntu@ip-10-0-0-12:~$</span><span class="w"> </span><span class="nv">CONFIG_FILE</span><span class="o">=</span><span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/kubespray/inventory/lindarex-cluster/hosts.yaml python3 <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/kubespray/contrib/inventory_builder/inventory.py <span class="k">${</span><span class="nv">IPS</span><span class="p">[@]</span><span class="k">}</span>
+<span class="go">DEBUG: Adding group all
+DEBUG: Adding group kube-master
+DEBUG: Adding group kube-node
+DEBUG: Adding group etcd
+DEBUG: Adding group k8s-cluster
+DEBUG: Adding group calico-rr
+DEBUG: adding host node1 to group all
+DEBUG: adding host node2 to group all
+DEBUG: adding host node1 to group etcd
+DEBUG: adding host node1 to group kube-master
+DEBUG: adding host node2 to group kube-master
+DEBUG: adding host node1 to group kube-node
+DEBUG: adding host node2 to group kube-node
+</span></code></pre></div></div>
+
+<h4 id="62-선택사항-master-node-개수-설정">6.2. (선택사항) master node 개수 설정</h4>
+
+<ul>
+  <li>kubespray의 기본 설정은 master node 개수가 2개입니다.</li>
+  <li>inventory.ini 설정과 상관없이 worker node에도 master role을 부여합니다.</li>
+  <li>아래 hosts.yaml을 수정하여 master node 개수를 1개로 수정할 수 있습니다.</li>
+  <li>이 포스트에서는 master node 개수를 1개 설정하여 설치합니다.</li>
+</ul>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>vi <span class="o">{</span>WORKSPACE<span class="o">}</span>/kubespray/inventory/<span class="o">{</span>CLUSTER_NAME<span class="o">}</span>/hosts.yaml
+<span class="go">---
+~
+  children:
+    kube-master:
+      hosts:
+        node1:
+</span><span class="gp">        node2: #</span><span class="w"> </span>삭제
+<span class="go">    kube-node:
+      hosts:
+        node1:
+        node2:
+~
+</span></code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">ubuntu@ip-10-0-0-12:~$</span><span class="w"> </span>vi <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/kubespray/inventory/lindarex-cluster/hosts.yaml
+<span class="go">---
+all:
+  hosts:
+    node1:
+      ansible_host: 10.0.0.12
+      ip: 10.0.0.12
+      access_ip: 10.0.0.12
+    node2:
+      ansible_host: 10.0.0.16
+      ip: 10.0.0.16
+      access_ip: 10.0.0.16
+  children:
+    kube-master:
+      hosts:
+        node1:
+    kube-node:
+      hosts:
+        node1:
+        node2:
+    etcd:
+      hosts:
+        node1:
+    k8s-cluster:
+      children:
+        kube-master:
+        kube-node:
+    calico-rr:
+      hosts: {}
+</span></code></pre></div></div>
+
+<h4 id="63-선택사항-inventory-설정-확인">6.3. (선택사항) inventory 설정 확인</h4>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cat</span> <span class="o">{</span>WORKSPACE<span class="o">}</span>/kubespray/inventory/<span class="o">{</span>CLUSTER_NAME<span class="o">}</span>/group_vars/all/all.yml
+</code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cat</span> <span class="o">{</span>WORKSPACE<span class="o">}</span>/kubespray/inventory/<span class="o">{</span>CLUSTER_NAME<span class="o">}</span>/group_vars/k8s-cluster/k8s-cluster.yml
+</code></pre></div></div>
+
+<h4 id="64-ansible-playbook-명령어로-kubernetes-cluster-설치">6.4. ansible-playbook 명령어로 kubernetes cluster 설치</h4>
+
+<ul>
+  <li>ansible-playbook 명령어를 root 사용자로 실행하기 위해 ‘–become’ 옵션과 ‘–become-user=root’ 옵션은 필수입니다.</li>
+</ul>
+
+<blockquote>
+  <p>ansible-playbook 명령어 사용 방법은 <a href="https://docs.ansible.com/ansible/latest/user_guide/playbooks.html" target="\_blank">https://docs.ansible.com/ansible/latest/user_guide/playbooks.html</a> 페이지를 참고하시기 바랍니다.</p>
+</blockquote>
+
+<blockquote>
+  <p>ansible playbook에 대한 자세한 설명은 <a href="https://docs.ansible.com/ansible/latest/cli/ansible-playbook.html" target="\_blank">https://docs.ansible.com/ansible/latest/cli/ansible-playbook.html</a> 페이지를 참고하시기 바랍니다.</p>
+</blockquote>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>ansible-playbook <span class="nt">-i</span> <span class="o">{</span>WORKSPACE<span class="o">}</span>/kubespray/inventory/<span class="o">{</span>CLUSTER_NAME<span class="o">}</span>/hosts.yaml <span class="nt">--become</span> <span class="nt">--become-user</span><span class="o">=</span>root <span class="o">{</span>WORKSPACE<span class="o">}</span>/kubespray/cluster.yml
+</code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">ubuntu@ip-10-0-0-12:~$</span><span class="w"> </span>ansible-playbook <span class="nt">-i</span> <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/kubespray/inventory/lindarex-cluster/hosts.yaml <span class="nt">--become</span> <span class="nt">--become-user</span><span class="o">=</span>root <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/kubespray/cluster.yml
+</code></pre></div></div>
+
+<h3 id="7-kubernetes-cluster-설치-확인">7. kubernetes cluster 설치 확인</h3>
+
+<blockquote>
+  <p>master node에서 실행합니다.</p>
+</blockquote>
+
+<h4 id="71-kubectl-설정">7.1. kubectl 설정</h4>
+
+<blockquote>
+  <p>root 사용자</p>
+</blockquote>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span><span class="nb">mkdir</span> <span class="nt">-p</span> <span class="nv">$HOME</span>/.kube
+<span class="gp">#</span><span class="w"> </span><span class="nb">cp</span> <span class="nt">-i</span> /etc/kubernetes/admin.conf <span class="nv">$HOME</span>/.kube/config
+<span class="gp">#</span><span class="w"> </span><span class="nb">chown</span> <span class="si">$(</span><span class="nb">id</span> <span class="nt">-u</span><span class="si">)</span>:<span class="si">$(</span><span class="nb">id</span> <span class="nt">-g</span><span class="si">)</span> <span class="nv">$HOME</span>/.kube/config
+</code></pre></div></div>
+
+<blockquote>
+  <p>일반 사용자</p>
+</blockquote>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">mkdir</span> <span class="nt">-p</span> <span class="nv">$HOME</span>/.kube
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo cp</span> <span class="nt">-i</span> /etc/kubernetes/admin.conf <span class="nv">$HOME</span>/.kube/config
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo chown</span> <span class="si">$(</span><span class="nb">id</span> <span class="nt">-u</span><span class="si">)</span>:<span class="si">$(</span><span class="nb">id</span> <span class="nt">-g</span><span class="si">)</span> <span class="nv">$HOME</span>/.kube/config
+</code></pre></div></div>
+
+<h4 id="72-node-목록-조회">7.2. node 목록 조회</h4>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">ubuntu@ip-10-0-0-12:~$</span><span class="w"> </span>kubectl get nodes <span class="nt">-o</span> wide
+<span class="go">NAME    STATUS   ROLES    AGE     VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION   CONTAINER-RUNTIME
+</span><span class="gp">node1   Ready    master   7m45s   v1.19.7   10.0.0.12    &lt;none&gt;</span><span class="w">        </span>Ubuntu 18.04.5 LTS   5.4.0-1041-aws   docker://19.3.14
+<span class="gp">node2   Ready    &lt;none&gt;</span><span class="w">   </span>7m22s   v1.19.7   10.0.0.16    &lt;none&gt;        Ubuntu 18.04.5 LTS   5.4.0-1041-aws   docker://19.3.14
+</code></pre></div></div>
+
+<h4 id="73-pod-목록-조회">7.3. pod 목록 조회</h4>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>kubectl get pods <span class="nt">-n</span> kube-system
+<span class="gp">ubuntu@ip-10-0-0-12:~$</span><span class="w"> </span>kubectl get pods <span class="nt">--all-namespaces</span>
+<span class="go">NAMESPACE     NAME                                      READY   STATUS    RESTARTS   AGE
+kube-system   calico-kube-controllers-8b5ff5d58-k8j72   1/1     Running   0          8m40s
+kube-system   calico-node-2n868                         1/1     Running   0          8m42s
+kube-system   calico-node-wlqsq                         1/1     Running   0          8m42s
+kube-system   coredns-85967d65-bwv44                    1/1     Running   0          8m20s
+kube-system   coredns-85967d65-lfn9v                    1/1     Running   0          8m24s
+kube-system   dns-autoscaler-5b7b5c9b6f-c7jrh           1/1     Running   0          8m21s
+kube-system   kube-apiserver-node1                      1/1     Running   0          9m54s
+kube-system   kube-apiserver-node2                      1/1     Running   0          9m35s
+kube-system   kube-controller-manager-node1             1/1     Running   0          9m54s
+kube-system   kube-controller-manager-node2             1/1     Running   0          9m34s
+kube-system   kube-proxy-m5jqx                          1/1     Running   0          8m42s
+kube-system   kube-proxy-pdcbl                          1/1     Running   0          8m42s
+kube-system   kube-scheduler-node1                      1/1     Running   0          9m54s
+kube-system   kube-scheduler-node2                      1/1     Running   1          9m34s
+kube-system   nodelocaldns-9m4m9                        1/1     Running   0          8m20s
+kube-system   nodelocaldns-dvj84                        1/1     Running   0          8m20s
+</span></code></pre></div></div>
+
+<h3 id="8-선택사항-kubespray-삭제">8. (선택사항) kubespray 삭제</h3>
+
+<blockquote>
+  <p>master node에서 실행합니다.</p>
+</blockquote>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>ansible-playbook <span class="nt">-i</span> <span class="o">{</span>WORKSPACE<span class="o">}</span>/kubespray/inventory/<span class="o">{</span>CLUSTER_NAME<span class="o">}</span>/hosts.yaml <span class="nt">--become</span> <span class="nt">--become-user</span><span class="o">=</span>root <span class="o">{</span>WORKSPACE<span class="o">}</span>/kubespray/reset.yml
+</code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">ubuntu@ip-10-0-0-12:~$</span><span class="w"> </span>ansible-playbook <span class="nt">-i</span> <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/kubespray/inventory/lindarex-cluster/hosts.yaml <span class="nt">--become</span> <span class="nt">--become-user</span><span class="o">=</span>root <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/kubespray/reset.yml
+</code></pre></div></div>
+
+<h2 id="마무리conclusion">마무리(CONCLUSION)</h2>
+<p>ubuntu 환경에 kubespray로 kubernetes cluster 설치를 완료했습니다. <br />
+다음 포스트에서 kubernetes architectures 및 concepts, resources 등을 소개하겠습니다.</p>
+
+<h2 id="참고references">참고(REFERENCES)</h2>
+<ul>
+  <li><a href="https://github.com/kubernetes-sigs/kubespray" target="\_blank">https://github.com/kubernetes-sigs/kubespray</a></li>
+  <li><a href="https://kubernetes.io/ko/docs/setup/production-environment/tools/kubespray/" target="\_blank">https://kubernetes.io/ko/docs/setup/production-environment/tools/kubespray/</a></li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/cluster" class="page__taxonomy-item" rel="tag">cluster</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/container-orchestration" class="page__taxonomy-item" rel="tag">container orchestration</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/container" class="page__taxonomy-item" rel="tag">container</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/docker" class="page__taxonomy-item" rel="tag">docker</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/kubernetes-cluster" class="page__taxonomy-item" rel="tag">kubernetes cluster</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/kubernetes" class="page__taxonomy-item" rel="tag">kubernetes</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/kubespray" class="page__taxonomy-item" rel="tag">kubespray</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/open-source-software" class="page__taxonomy-item" rel="tag">open source software</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/open-source" class="page__taxonomy-item" rel="tag">open source</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/orchestration" class="page__taxonomy-item" rel="tag">orchestration</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/oss" class="page__taxonomy-item" rel="tag">oss</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/ubuntu" class="page__taxonomy-item" rel="tag">ubuntu</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/kubernetes" class="page__taxonomy-item" rel="tag">kubernetes</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2021-04-08T00:00:00+09:00">April 8, 2021</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%EC%9A%B0%EB%B6%84%ED%88%AC%28Ubuntu%29+%ED%99%98%EA%B2%BD%EC%97%90+Kubespray%EB%A1%9C+Kubernetes+%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0%28cluster%29+%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0%20https%3A%2F%2Flindarex.github.io%2Fkubernetes%2Fubuntu-kubernetes-installation-with-kubespray%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flindarex.github.io%2Fkubernetes%2Fubuntu-kubernetes-installation-with-kubespray%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flindarex.github.io%2Fkubernetes%2Fubuntu-kubernetes-installation-with-kubespray%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/kubernetes/ubuntu-kubernetes-installation-with-kubeadm/" class="pagination--pager" title="우분투(Ubuntu) 환경에 Kubeadm으로 Kubernetes 클러스터(cluster) 설치하기
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Leave a comment</h4>
+      <section id="disqus_thread"></section>
+    
+</div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/kubernetes/ubuntu-kubernetes-installation-with-kubeadm/" rel="permalink">우분투(Ubuntu) 환경에 Kubeadm으로 Kubernetes 클러스터(cluster) 설치하기
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Kubernetes(kubernetes)는 컨테이너화된 애플리케이션(application)의 배포(deployment), 확장(scaling) 및 관리(management)를 자동화하는 Apache License 2.0이 적용되는 오픈소스(open source) 컨테이너(conta...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/scm-manager/ubuntu-scm-manager-v2-installation/" rel="permalink">우분투(Ubuntu) 환경에 패키지(Package)로 SCM Manager v2 설치하기
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">SCM Manager v2(이하 scm manager)는 개별적으로 확장 가능한 가벼운 소스 코드 관리 도구로, MIT 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다.
+
+scm manager는 다양한 플러그인과 Level 3 RESTful Web...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/fail2ban/ubuntu-fail2ban-installation/" rel="permalink">우분투(Ubuntu) 환경에 패키지(Package)로 Fail2ban 설치하기
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Fail2ban(fail2ban)은 침입 차단 소프트웨어 프레임워크(framework)로, 파이썬(python) 언어로 개발되었습니다. 
+로그(log) 파일과 iptables를 이용하여 접속 시도를 확인하고 차단하여 무차별 대입 공격으로부터 시스템을 보호합니다. 
+패킷 제어 시스템...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/ubuntu/ubuntu-nameserver-setting/" rel="permalink">우분투(Ubuntu) 환경에 네임 서버(Name server) 설정하기
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">네임 서버(name server)는 인터넷에서 도메인 네임 서비스(domain name service)를 제공하는 server를 의미합니다.
+
+도메인으로 IP를 조회할 때, 로컬 캐시 조회, ‘/etc/hosts’ 조회, DNS 조회 순으로 진행되며, 이 중 ‘/etc/hosts’...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- LINDAREX :: GOOGLE ADSENSE :: FOOTER :: BIGIN -->
+        <!-- LINDAREX :: GOOGLE ADSENSE :: FOOTER :: HTML ::  BIGIN -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 2020-02-22-ad-footer -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8367174639781348"
+     data-ad-slot="1870387544"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<!-- LINDAREX :: GOOGLE ADSENSE :: FOOTER :: HTML ::  END -->
+        <!-- LINDAREX :: GOOGLE ADSENSE :: FOOTER :: END -->
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://github.com/lindarex/lindarex.github.io" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 LindaRex. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+    <!-- LINDAREX :: BACK TO TOP :: BEGIN -->
+    <!-- <aside class="sidebar__top">
+      <a href="#site-nav"> <i class="fas fa-angle-double-up fa-2x"></i></a>
+    </aside> -->
+    <!-- LINDAREX :: BACK TO TOP :: END -->
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://lindarex.github.io/kubernetes/ubuntu-kubernetes-installation-with-kubespray/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/kubernetes/ubuntu-kubernetes-installation-with-kubespray"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://lindarex-github-io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

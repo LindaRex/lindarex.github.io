@@ -6,8 +6,8 @@
     <description>오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 블로그입니다 | It shares technologies such as open source software, cloud computing, PaaS and container platforms</description>
     <link>https://lindarex.github.io/</link>
     <atom:link href="https://lindarex.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 07 Apr 2021 17:14:41 +0900</pubDate>
-    <lastBuildDate>Wed, 07 Apr 2021 17:14:41 +0900</lastBuildDate>
+    <pubDate>Thu, 08 Apr 2021 15:39:08 +0900</pubDate>
+    <lastBuildDate>Thu, 08 Apr 2021 15:39:08 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
@@ -28,7 +28,7 @@ kubernetes는 리눅스(linux) container를 실행하는 호스트(host) 그룹�
 &lt;/ul&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;마스터(master)는 master 노드(node) 또는 API 서버(server)로 불리며, 워커(worker)는 worker node 또는 node로 불립니다.&lt;/p&gt;
+  &lt;p&gt;마스터(master)는 master 노드(node) 또는 컨트롤 플레인(control plane) 또는 API 서버(server)로 불리며, 워커(worker)는 worker node 또는 node로 불립니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;blockquote&gt;
@@ -64,8 +64,8 @@ kubernetes는 리눅스(linux) container를 실행하는 호스트(host) 그룹�
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;Ubuntu 18.04.5 LTS (GNU/Linux 5.4.0-1038-aws x86_64)&lt;/li&gt;
-  &lt;li&gt;docker 20.10.5&lt;/li&gt;
   &lt;li&gt;kubernetes 1.20.5&lt;/li&gt;
+  &lt;li&gt;docker 20.10.5&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;요약summary&quot;&gt;요약(SUMMARY)&lt;/h2&gt;
@@ -387,7 +387,8 @@ kube-system   kube-scheduler-ip-10-0-0-162            1/1     Running   0       
 
 &lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;
 &lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://kubernetes.io/docs/home/&quot; target=&quot;\_blank&quot;&gt;https://kubernetes.io/docs/home/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://kubernetes.io/ko/docs/setup/production-environment/tools/kubeadm/install-kubeadm/&quot; target=&quot;\_blank&quot;&gt;https://kubernetes.io/ko/docs/setup/production-environment/tools/kubeadm/install-kubeadm/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/&quot; target=&quot;\_blank&quot;&gt;https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         <pubDate>Wed, 07 Apr 2021 00:00:00 +0900</pubDate>

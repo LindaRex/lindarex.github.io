@@ -29,7 +29,7 @@
 <meta name="twitter:creator" content="@Rex" />
 <meta name="google-site-verification" content="t6VkmqsI15sIx3P1-gh3NYputZtjhDZOTkxhwDaa4Ik" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","headline":"우분투(Ubuntu) 환경에 iptables 설정하기","dateModified":"2020-03-02T00:00:00+09:00","datePublished":"2020-03-02T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/ubuntu/ubuntu-iptables-setting/"},"url":"https://lindarex.github.io/ubuntu/ubuntu-iptables-setting/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"Rex"},"author":{"@type":"Person","name":"Rex"},"description":"iptables은 방화벽(firewall) 구성이나 NAT(network address translation)에 사용되는데, 리눅스(linux) 커널(kernel) firewall이 제공하는 테이블(table)과 체인(chain), 규칙(rule)을 시스템 관리자가 구성합니다. 각각 다른 kernel 모듈(module)과 프로그램들은 다른 프로토콜(protocol)을 위해 사용되는데, iptables는 IPv4에, ip6tables는 IPv6에, arptables는 ARP에, ebtables는 이더넷(ethernet) 프레임에 적용됩니다. linux 시스템(system)에서 iptables는 /usr/sbin/iptables에 설치되며, iptables의 후속 버전은 nftables입니다. 이 포스트에서는 ubuntu 환경에서 iptables를 설정하는 방법을 소개합니다.","@context":"https://schema.org"}</script>
+{"headline":"우분투(Ubuntu) 환경에 iptables 설정하기","dateModified":"2020-03-02T00:00:00+09:00","datePublished":"2020-03-02T00:00:00+09:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/ubuntu/ubuntu-iptables-setting/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"Rex"},"url":"https://lindarex.github.io/ubuntu/ubuntu-iptables-setting/","author":{"@type":"Person","name":"Rex"},"description":"iptables은 방화벽(firewall) 구성이나 NAT(network address translation)에 사용되는데, 리눅스(linux) 커널(kernel) firewall이 제공하는 테이블(table)과 체인(chain), 규칙(rule)을 시스템 관리자가 구성합니다. 각각 다른 kernel 모듈(module)과 프로그램들은 다른 프로토콜(protocol)을 위해 사용되는데, iptables는 IPv4에, ip6tables는 IPv6에, arptables는 ARP에, ebtables는 이더넷(ethernet) 프레임에 적용됩니다. linux 시스템(system)에서 iptables는 /usr/sbin/iptables에 설치되며, iptables의 후속 버전은 nftables입니다. 이 포스트에서는 ubuntu 환경에서 iptables를 설정하는 방법을 소개합니다.","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <!-- LINDAREX :: JEKYLL SEO TAG :: END -->
@@ -1215,6 +1215,37 @@ iptables 설정을 통해 서버(server) 보안을 많이 향상할 수 있지�
     
     <h2 class="archive__item-title" itemprop="headline">
       
+        <a href="/haproxy/ubuntu-haproxy-installation/" rel="permalink">우분투(Ubuntu) 환경에 패키지(Package)로 HAProxy 설치하기
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">```
+apt update
+apt install haproxy -y
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
         <a href="/kubernetes/ubuntu-kubernetes-installation-with-kubespray/" rel="permalink">우분투(Ubuntu) 환경에 Kubespray로 Kubernetes 클러스터(cluster) 설치하기
 </a>
       
@@ -1281,35 +1312,6 @@ iptables 설정을 통해 서버(server) 보안을 많이 향상할 수 있지�
     <p class="archive__item-excerpt" itemprop="description">SCM Manager v2(이하 scm manager)는 개별적으로 확장 가능한 가벼운 소스 코드 관리 도구로, MIT 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다.
 
 scm manager는 다양한 플러그인과 Level 3 RESTful Web...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src=
-          
-            "/assets/images/LindaRex_LOGO.jpg"
-          
-          alt="">
-      </div>
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/fail2ban/ubuntu-fail2ban-installation/" rel="permalink">우분투(Ubuntu) 환경에 패키지(Package)로 Fail2ban 설치하기
-</a>
-      
-    </h2>
-    
-    <p class="archive__item-excerpt" itemprop="description">Fail2ban(fail2ban)은 침입 차단 소프트웨어 프레임워크(framework)로, 파이썬(python) 언어로 개발되었습니다. 
-로그(log) 파일과 iptables를 이용하여 접속 시도를 확인하고 차단하여 무차별 대입 공격으로부터 시스템을 보호합니다. 
-패킷 제어 시스템...</p>
   </article>
 </div>
 

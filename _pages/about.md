@@ -199,6 +199,7 @@ author_profile: false
 ##### 3.13. FENEWS.CO.KR homepage
 - Front-end developement using ASP, JQuery, JavaScript, ajax, json
 
+
 ## TECHNICAL SKILLS :: ##
 ---
 - Cloud computing (PaaS)
@@ -211,6 +212,7 @@ author_profile: false
 	    - CFAR (Cloud Foundry Application Runtime, CF)
 	    - CFAR uaac
 	    - CFAR buildpack
+	    - CFAR runtime-config
 	    - CFCR (Cloud Foundry Container Runtime, Kubernetes)
 - Cloud computing (IaaS)
 	+ AWS
@@ -283,6 +285,15 @@ author_profile: false
 	+ Java Quartz
 	+ Java Swift
 - Front-end
+	+ Python
+	    - Django
+	    - Flask
+	+ Go language
+	    - Revel
+	    - Echo
+	    - Gin
+	+ Ruby
+	    - Ruby on Rails
 	+ React
 	    - React.js
 	    - Redux
@@ -309,10 +320,9 @@ author_profile: false
 	+ SCSS
 	+ Thymeleaf
 	+ ASP
-- App Lifecycle
+- Application Lifecycle (Agile, Issue tracker)
 	+ Taiga
 	+ Redmine
-	+ Trello
 - API gateway
 	+ Kong
 	+ WSO2
@@ -344,9 +354,10 @@ author_profile: false
 	    - MariaDB Galera Cluster
 	    - MariaDB Galera MaxScale
 	+ MySQL
-	+ Postgresql
+	+ PostgreSQL
 	+ InfluxDB
 	+ Hbase
+	+ MongoDB
 	+ Oracle
 	+ Cubrid
 	+ Altibase
@@ -372,12 +383,23 @@ author_profile: false
 	+ Github
 	+ Gitlab
 	+ Bitbucket
+	+ Fork (tool)
 	+ Sourcetree
+- Project management
+	+ Slack
+	+ Asana
+	+ Google Workspace (G Suite)
+	+ Notion
+	+ Trello
+	+ Jandi
+	+ Jira
 - Other OSS (open-source software)
 	+ HAProxy
 	+ Grafana
 	+ RabbitMQ
 	+ NextCloud
+	+ Redis
+	+ bind9
 - Other Tool and Services
 	+ VMware Workstation
 	+ Synology NAS
@@ -395,6 +417,8 @@ author_profile: false
 	+ PMD
 	+ CheckStyle
 	+ FindBugs
+	+ Rapid7 InsightVM
+	+ ProxyCap
 
 
 ## CONTACT :: ##

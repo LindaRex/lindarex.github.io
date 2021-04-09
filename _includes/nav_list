@@ -46,9 +46,9 @@
   </ul>
 
   <!-- LINDAREX :: HITS :: LEFT-SIDEBAR :: BEGIN -->
-  <div style="text-align: center;">
+  <div>
     <a href="http://hits.dwyl.com/{{ site.url | remove_first: 'https://' | remove_first: 'http://' }}{{ page.url }}" target="_blank">
-      <img src="http://hits.dwyl.com/{{ site.url | remove_first: 'https://' | remove_first: 'http://' }}{{ page.url }}.svg" />
+      <img src="http://hits.dwyl.com/{{ site.url | remove_first: 'https://' | remove_first: 'http://' }}{{ page.url }}.svg" style="width: 80px; height: 20px; margin: 0 0 1em 0" />
     </a>
   </div>
   <!-- LINDAREX :: HITS :: LEFT-SIDEBAR :: END -->

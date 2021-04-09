@@ -6,334 +6,9 @@
     <description>오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 블로그입니다 | It shares technologies such as open source software, cloud computing, PaaS and container platforms</description>
     <link>https://lindarex.github.io/</link>
     <atom:link href="https://lindarex.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 10 Apr 2021 00:02:50 +0900</pubDate>
-    <lastBuildDate>Sat, 10 Apr 2021 00:02:50 +0900</lastBuildDate>
+    <pubDate>Sat, 10 Apr 2021 00:10:04 +0900</pubDate>
+    <lastBuildDate>Sat, 10 Apr 2021 00:10:04 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
-    
-      <item>
-        <title>우분투(Ubuntu) 환경에 패키지(Package)로 HAProxy 설치하기</title>
-        <description>&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# apt update
-# apt install haproxy -y
-
-root@withrex-inception:/home/rex# haproxy -v
-HA-Proxy version 1.8.8-1ubuntu0.11 2020/06/22
-Copyright 2000-2018 Willy Tarreau &amp;lt;willy@haproxy.org&amp;gt;
-
-
-root@withrex-inception:/home/rex# vi /etc/haproxy/haproxy.cfg
----
-global
-        log /dev/log    local0
-        log /dev/log    local1 notice
-        chroot /var/lib/haproxy
-        stats socket /run/haproxy/admin.sock mode 660 level admin expose-fd listeners
-        stats timeout 30s
-        user haproxy
-        group haproxy
-        daemon
-
-        # Default SSL material locations
-        ca-base /etc/ssl/certs
-        crt-base /etc/ssl/private
-
-        # Default ciphers to use on SSL-enabled listening sockets.
-        # For more information, see ciphers(1SSL). This list is from:
-        #  https://hynek.me/articles/hardening-your-web-servers-ssl-ciphers/
-        # An alternative list with additional directives can be obtained from
-        #  https://mozilla.github.io/server-side-tls/ssl-config-generator/?server=haproxy
-        ssl-default-bind-ciphers ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:RSA+AESGCM:RSA+AES:!aNULL:!MD5:!DSS
-        ssl-default-bind-options no-sslv3
-
-defaults
-        log     global
-        mode    http
-        option  httplog
-        option  dontlognull
-
-        # ADDED
-        option http-server-close
-        option forwardfor       except 127.0.0.0/8
-        option                  redispatch
-        retries                 3
-        timeout http-request    10s
-        timeout queue           1m
-        timeout connect         10s # 5000
-        timeout client          1m  # 50000
-        timeout server          1m  # 50000
-        timeout http-keep-alive 10s
-        timeout check           10s
-        maxconn                 3000
-
-        errorfile 400 /etc/haproxy/errors/400.http
-        errorfile 403 /etc/haproxy/errors/403.http
-        errorfile 408 /etc/haproxy/errors/408.http
-        errorfile 500 /etc/haproxy/errors/500.http
-        errorfile 502 /etc/haproxy/errors/502.http
-        errorfile 503 /etc/haproxy/errors/503.http
-        errorfile 504 /etc/haproxy/errors/504.http
-
-frontend http
-        bind :::80 v4v6   # bind *:80
-        option        http-server-close
- 
-        # acl domain_com hdr(host) -i withrex.com
-        # acl domain_net hdr(host) -i withrex.net
-        # acl domain_fun hdr(host) -i withrex.fun
-        acl domain_space hdr(host) -i withrex.space
- 
-        acl domain_com_scm hdr(host) -i scm.withrex.com
-        acl domain_com_ci hdr(host) -i ci.withrex.com
-        acl domain_com_sonar hdr(host) -i sonar.withrex.com
-
-        acl domain_net_scm hdr(host) -i scm.withrex.net
-        acl domain_net_ci hdr(host) -i ci.withrex.net
-        acl domain_net_sonar hdr(host) -i sonar.withrex.net
-
-        acl domain_fun_scm hdr(host) -i scm.withrex.fun
-        acl domain_fun_ci hdr(host) -i ci.withrex.fun
-        acl domain_fun_sonar hdr(host) -i sonar.withrex.fun
- 
-        # acl is_root path -i /
-        # acl is_domain hdr(host) -i withrex.com
-
-        # use_backend domain_com_app        if domain_com
-        # use_backend domain_net_app        if domain_net
-        # use_backend domain_fun_app        if domain_fun
-
-        use_backend domain_com_app_scm        if domain_com_scm
-        use_backend domain_com_app_ci        if domain_com_ci
-        use_backend domain_com_app_sonar        if domain_com_sonar
-
-        use_backend domain_net_app_scm        if domain_net_scm
-        use_backend domain_net_app_ci        if domain_net_ci
-        use_backend domain_net_app_sonar        if domain_net_sonar
-
-        use_backend domain_fun_app_scm        if domain_fun_scm
-        use_backend domain_fun_app_ci        if domain_fun_ci
-        use_backend domain_fun_app_sonar        if domain_fun_sonar
-
-        http-request redirect code 301 location https://lindarex.synology.me:5111 if domain_space
- 
-# backend domain_com_app
-#         balance roundrobin
-#         server host1 141.164.61.7:8801
-#  
-# backend domain_net_app
-#         balance roundrobin
-#         server host1 141.164.61.7:8802
-#  
-# backend domain_fun_app
-#         balance roundrobin
-#         server host1 141.164.61.7:8803
-
-# COM
-backend domain_com_app_scm
-        balance roundrobin
-        server host1 141.164.61.7:8801
- 
-backend domain_com_app_ci
-        balance roundrobin
-        server host1 141.164.61.7:8802
- 
-backend domain_com_app_sonar
-        balance roundrobin
-        server host1 141.164.61.7:8803
-
-# NET
-backend domain_net_app_scm
-        balance roundrobin
-        server host1 141.164.61.7:8801
- 
-backend domain_net_app_ci
-        balance roundrobin
-        server host1 141.164.61.7:8802
- 
-backend domain_net_app_sonar
-        balance roundrobin
-        server host1 141.164.61.7:8803
-
-# FUN
-backend domain_fun_app_scm
-        balance roundrobin
-        server host1 141.164.61.7:8801
- 
-backend domain_fun_app_ci
-        balance roundrobin
-        server host1 141.164.61.7:8802
- 
-backend domain_fun_app_sonar
-        balance roundrobin
-        server host1 141.164.61.7:8803
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;systemctl status haproxy
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;withrex.fun
-CNAME Record
-www.withrex.fun   lindarex.synology.me
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h1 id=&quot;todo&quot;&gt;TODO&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;haproxy :: http -&amp;gt; https&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;HAProxy(이하 haproxy)는 개별적으로 확장 가능한 가벼운 소스 코드 관리 도구로, MIT 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다.
-&lt;br /&gt;&lt;br /&gt;
-haproxy는 다양한 플러그인과 Level 3 RESTful WebService를 제공하고, Git과 Mercurial, Subversion 저장소(repository)를 지원합니다.
-&lt;br /&gt;&lt;br /&gt;
-haproxy는 웹 서버(web server), 데이터베이스(database) 등의 종속성이 없고, 다양한 환경(Ubuntu, CentOS, Fedora, Windows, MacOS X, Docker, Kubernetes)에 설치할 수 있습니다.
-&lt;br /&gt;&lt;br /&gt;
-이 포스트에서는 우분투(ubuntu) 환경에 package로 haproxy를 설치하는 방법을 소개합니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;선행조건prerequisite&quot;&gt;선행조건(PREREQUISITE)&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;ubuntu 환경이 필요합니다.&lt;/li&gt;
-  &lt;li&gt;방화벽 설정이 필요합니다.
-    &lt;ul&gt;
-      &lt;li&gt;TCP 8080 포트가 개방되어 있어야 합니다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;ubuntu 설치 방법은 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1604-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 서버(Server) 16.04 설치하기&lt;/a&gt; 또는 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1804-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 서버(Server) 18.04 설치하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;방화벽 설정 방법은 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-firewalld-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 환경에 방화벽(Firewalld) 설치 및 설정하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;테스트-환경test-environment&quot;&gt;테스트 환경(TEST ENVIRONMENT)&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;VULTR High Frequency Cloud Compute (256 GB NVMe, 3 CPU, 8192MB Memory, 4000GB Bandwidth)&lt;/li&gt;
-  &lt;li&gt;Ubuntu 18.04.5 LTS (GNU/Linux 4.15.0-136-generic x86_64)&lt;/li&gt;
-  &lt;li&gt;haproxy 2.14.1&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;요약summary&quot;&gt;요약(SUMMARY)&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;haproxy debian packages repository 설정&lt;/li&gt;
-  &lt;li&gt;apt install 명령어로 haproxy 설치&lt;/li&gt;
-  &lt;li&gt;(선택사항) haproxy 설정&lt;/li&gt;
-  &lt;li&gt;systemctl 명령어로 haproxy 관리&lt;/li&gt;
-  &lt;li&gt;웹브라우저로 haproxy 접속&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;내용contents&quot;&gt;내용(CONTENTS)&lt;/h2&gt;
-&lt;h3 id=&quot;1-haproxy-debian-packages-repository-key-추가&quot;&gt;1. haproxy debian packages repository key 추가&lt;/h3&gt;
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-key adv &lt;span class=&quot;nt&quot;&gt;--recv-keys&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--keyserver&lt;/span&gt; hkps://keys.openpgp.org 0x975922F193B07D6E
-&lt;span class=&quot;go&quot;&gt;Executing: /tmp/apt-key-gpghome.mDvF5MxIa1/gpg.1.sh --recv-keys --keyserver hkps://keys.openpgp.org 0x975922F193B07D6E
-&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;gpg: key 975922F193B07D6E: &quot;SCM Packages (signing key for packages.haproxy.org) &amp;lt;scm-team@cloudogu.com&amp;gt;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot; not changed
-&lt;/span&gt;&lt;span class=&quot;go&quot;&gt;gpg: Total number processed: 1
-gpg:              unchanged: 1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;2-haproxy-debian-packages-repository-추가&quot;&gt;2. haproxy debian packages repository 추가&lt;/h3&gt;
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'deb [arch=all] https://packages.haproxy.org/repository/apt-v2-releases/ stable main'&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;sudo tee&lt;/span&gt; /etc/apt/sources.list.d/haproxy.list
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;3-apt-install-명령어로-haproxy-설치&quot;&gt;3. apt install 명령어로 haproxy 설치&lt;/h3&gt;
-&lt;h4 id=&quot;31-package-업데이트&quot;&gt;3.1. package 업데이트&lt;/h4&gt;
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get update
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;32-haproxy-설치&quot;&gt;3.2. haproxy 설치&lt;/h4&gt;
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;scm-server &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;4-선택사항-haproxy-설정&quot;&gt;4. (선택사항) haproxy 설정&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;haproxy UI의 포트를 설정합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;vi /etc/default/scm-server
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;----------------------------------------------------------------------------------------------------&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;PORT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;8080
-&lt;span class=&quot;nt&quot;&gt;----------------------------------------------------------------------------------------------------&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;5-systemctl-명령어로-haproxy-관리&quot;&gt;5. systemctl 명령어로 haproxy 관리&lt;/h3&gt;
-&lt;h4 id=&quot;51-haproxy-설정-반영&quot;&gt;5.1. haproxy 설정 반영&lt;/h4&gt;
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl daemon-reload
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;52-haproxy-시작&quot;&gt;5.2. haproxy 시작&lt;/h4&gt;
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl start scm-server
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;53-haproxy-중지&quot;&gt;5.3. haproxy 중지&lt;/h4&gt;
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl stop scm-server
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;54-haproxy-재시작&quot;&gt;5.4. haproxy 재시작&lt;/h4&gt;
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl restart scm-server
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;55-haproxy-설정-재적용&quot;&gt;5.5. haproxy 설정 재적용&lt;/h4&gt;
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl reload scm-server
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;56-haproxy-상태-조회&quot;&gt;5.6. haproxy 상태 조회&lt;/h4&gt;
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl status scm-server
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;57-haproxy-활성화부팅-시-자동-시작&quot;&gt;5.7. haproxy 활성화(부팅 시 자동 시작)&lt;/h4&gt;
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;scm-server
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;58-haproxy-비활성화&quot;&gt;5.8. haproxy 비활성화&lt;/h4&gt;
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl disable scm-server
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;59-haproxy-및-관련-프로세스-모두-중지&quot;&gt;5.9. haproxy 및 관련 프로세스 모두 중지&lt;/h4&gt;
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl &lt;span class=&quot;nb&quot;&gt;kill &lt;/span&gt;scm-server
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;6-웹브라우저로-haproxy-접속&quot;&gt;6. 웹브라우저로 haproxy 접속&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;http://[MY-IP]:8080/scm&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;haproxy의 기본 계정은 ‘scmadmin’이며, 비밀번호는 ‘scmadmin’ 입니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
-&lt;p&gt;ubuntu 환경에 package로 haproxy 설치를 완료했습니다.
-&lt;br /&gt;&lt;br /&gt;
-haproxy의 자세한 내용은 아래 페이지를 확인해 주시기 바랍니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.haproxy.org/&quot; target=&quot;\_blank&quot;&gt;https://www.haproxy.org/&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Fri, 09 Apr 2021 00:00:00 +0900</pubDate>
-        <link>https://lindarex.github.io/haproxy/ubuntu-haproxy-installation/</link>
-        <guid isPermaLink="true">https://lindarex.github.io/haproxy/ubuntu-haproxy-installation/</guid>
-        
-        <category>haproxy</category>
-        
-        <category>load balancer</category>
-        
-        <category>open source software</category>
-        
-        <category>open source</category>
-        
-        <category>oss</category>
-        
-        <category>ubuntu</category>
-        
-        
-        <category>haproxy</category>
-        
-      </item>
     
       <item>
         <title>우분투(Ubuntu) 환경에 Kubespray로 Kubernetes 클러스터(cluster) 설치하기</title>
@@ -8920,6 +8595,163 @@ JDK 유료화에 따라 개인 사용자를 비롯해 기업 사용자는 OpenJD
         
         
         <category>concepts</category>
+        
+      </item>
+    
+      <item>
+        <title>우분투(Ubuntu) 환경에 패키지(package)로 OpenJDK(Java) 설치하기</title>
+        <description>&lt;p&gt;OpenJDK는 Java 애플리케이션(application) 구축을 위한 오픈소스(open source) 기반의 JDK(Java Development Kit)입니다.
+&lt;br /&gt;&lt;br /&gt;
+JDK는 JVM(Java Virtual Machine), JRE(Java Runtime Environment)와 함께 Java 프로그래밍에 필요한 핵심 기술 패키지(package)입니다. JDK는 2개로 나뉘는데, 하나는 BCL(Oracle Binary Code License)의 Oracle JDK, 하나는 GNU GPL v2(GNU General Public License)의 OpenJDK입니다.
+&lt;br /&gt;&lt;br /&gt;
+이 포스트에서는 우분투(Ubuntu) 환경에서 package로 OpenJDK를 설치하는 방법을 소개합니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Oracle JDK와 OpenJDK에 대한 자세한 정보는 &lt;a href=&quot;https://lindarex.github.io/concepts/difference-between-oraclejdk-openjdk/&quot; target=&quot;\_blank&quot;&gt;Oracle JDK와 OpenJDK의 차이점&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;선행조건prerequisite&quot;&gt;선행조건(PREREQUISITE)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Ubuntu 환경이 필요합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Ubuntu 설치 방법은 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1604-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 서버(Server) 16.04 설치하기&lt;/a&gt; 또는 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1804-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 서버(Server) 18.04 설치하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;테스트-환경test-environment&quot;&gt;테스트 환경(TEST ENVIRONMENT)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;VMware® Workstation 15 Pro (15.5.1 build-15018445)&lt;/li&gt;
+  &lt;li&gt;Ubuntu 16.04.4 LTS (Xenial Xerus) Server (64-bit)&lt;/li&gt;
+  &lt;li&gt;OpenJDK 1.8.0_222&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;요약summary&quot;&gt;요약(SUMMARY)&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;apt 명령어로 OpenJDK 설치&lt;/li&gt;
+  &lt;li&gt;OpenJDK 설치 확인&lt;/li&gt;
+  &lt;li&gt;Ubuntu 환경변수에 OpenJDK Java 경로 설정&lt;/li&gt;
+  &lt;li&gt;(선택사항) apt 명령어로 OpenJDK 삭제&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;내용contents&quot;&gt;내용(CONTENTS)&lt;/h2&gt;
+&lt;h3 id=&quot;1-apt-명령어로-openjdk-설치&quot;&gt;1. apt 명령어로 OpenJDK 설치&lt;/h3&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt update &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;openjdk-8-jdk &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;2-openjdk-설치-확인&quot;&gt;2. OpenJDK 설치 확인&lt;/h3&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;java &lt;span class=&quot;nt&quot;&gt;-version&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;openjdk version &quot;1.8.0_222&quot;
+OpenJDK Runtime Environment (build 1.8.0_222-8u222-b10-1ubuntu1~18.04.1-b10)
+OpenJDK 64-Bit Server VM (build 25.222-b10, mixed mode)
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;3-ubuntu-환경변수에-openjdk-java-경로path-설정&quot;&gt;3. Ubuntu 환경변수에 OpenJDK Java 경로(path) 설정&lt;/h3&gt;
+&lt;h4 id=&quot;31-설치된-java-path-확인&quot;&gt;3.1. 설치된 Java path 확인&lt;/h4&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;which java
+&lt;span class=&quot;go&quot;&gt;/usr/bin/java
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;32-openjdk-java-path-추가&quot;&gt;3.2. OpenJDK Java path 추가&lt;/h4&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;루트(root) 계정&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;vi /etc/profile
+&lt;span class=&quot;go&quot;&gt;또는
+&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;vi &lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt;/.bashrc
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;일반 계정&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;vi &lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt;/.profile
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;root 계정으로 OpenJDK Java path를 추가합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;vi /etc/profile
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;----------------------------------------------------------------------------------------------------&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;JAVA_HOME&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;dirname&lt;/span&gt; &lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;dirname&lt;/span&gt; &lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;update-alternatives &lt;span class=&quot;nt&quot;&gt;--list&lt;/span&gt; javac&lt;span class=&quot;si&quot;&gt;)))&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;JAVA&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;JAVA_HOME&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;/bin
+&lt;span class=&quot;nv&quot;&gt;CLASSPATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;.:&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;JAVA_HOME&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;/lib/tools.jar
+&lt;span class=&quot;nv&quot;&gt;PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PATH&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;:&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;JAVA&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;JAVA_HOME JAVA CLASSPATH PATH
+&lt;span class=&quot;nt&quot;&gt;----------------------------------------------------------------------------------------------------&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;수정 내역 적용을 위해 아래 명령어를 입력합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt; /etc/profile
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;4-선택사항-apt-명령어로-openjdk-삭제&quot;&gt;4. (선택사항) apt 명령어로 OpenJDK 삭제&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;’–auto-remove’ 옵션을 추가하면, 사용하지 않는 관련 package를 모두 삭제합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;41-apt-remove-명령어로-openjdk-삭제&quot;&gt;4.1. apt remove 명령어로 OpenJDK 삭제&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;설정 파일을 유지하며 OpenJDK를 삭제합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt remove openjdk&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
+&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt remove &lt;span class=&quot;nt&quot;&gt;--auto-remove&lt;/span&gt; openjdk&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;42-apt-purge-명령어로-openjdk-삭제&quot;&gt;4.2. apt purge 명령어로 OpenJDK 삭제&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;설정 파일과 함께 OpenJDK를 삭제합니다. (단, 사용자 홈 디렉터리의 설정 파일은 유지됩니다.)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt purge openjdk&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
+&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt purge &lt;span class=&quot;nt&quot;&gt;--auto-remove&lt;/span&gt; openjdk&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
+&lt;p&gt;Ubuntu 환경에 package로 OpenJDK 설치를 완료했습니다.
+&lt;br /&gt;&lt;br /&gt;
+JDK는 Java 프로그래밍에 필수 요소이며, 상당수의 open source 소프트웨어와 국내 SI(system integration) 프로젝트에서 JDK를 요구합니다.
+&lt;br /&gt;&lt;br /&gt;
+정부 발주 프로젝트에 다수를 차지하는 SI 회사가 Java와 스프링 프레임워크(spring framework) 또는 Java와 전자정부표준프레임워크(eGov) 구성을 사용하기 때문에 Java의 인기는 시들지 않고 있습니다.
+&lt;br /&gt;&lt;br /&gt;
+Java는 플랫폼에 독립적이고 수많은 개발자와 레퍼런스를 보유하고 있다는 장점과 속도 문제라는 단점을 가진 언어입니다.
+&lt;br /&gt;&lt;br /&gt;
+국내 현업에서는 Java를 비롯한 여러 가지 언어가 자주 사용되므로, 개발 환경이나 작업 특성에 따라 적합한 언어를 선택할 수 있는 지식과 노하우가 필요합니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://openjdk.java.net/&quot; target=&quot;\_blank&quot;&gt;https://openjdk.java.net/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ko.wikipedia.org/wiki/OpenJDK&quot; target=&quot;\_blank&quot;&gt;https://ko.wikipedia.org/wiki/OpenJDK&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://namu.wiki/w/Java&quot; target=&quot;\_blank&quot;&gt;https://namu.wiki/w/Java&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Wed, 05 Feb 2020 00:00:00 +0900</pubDate>
+        <link>https://lindarex.github.io/ubuntu/ubuntu-openjdk-installation/</link>
+        <guid isPermaLink="true">https://lindarex.github.io/ubuntu/ubuntu-openjdk-installation/</guid>
+        
+        <category>openjdk</category>
+        
+        <category>java</category>
+        
+        <category>open source software</category>
+        
+        <category>open source</category>
+        
+        <category>oss</category>
+        
+        <category>ubuntu</category>
+        
+        
+        <category>ubuntu</category>
         
       </item>
     

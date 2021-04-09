@@ -44,6 +44,15 @@
       </li>
     {% endfor %}
   </ul>
+
+  <!-- LINDAREX :: HITS :: LEFT-SIDEBAR :: BEGIN -->
+  <div style="text-align: center;">
+    <a href="http://hits.dwyl.com/{{ site.url | remove_first: 'https://' | remove_first: 'http://' }}{{ page.url }}" target="_blank">
+      <img src="http://hits.dwyl.com/{{ site.url | remove_first: 'https://' | remove_first: 'http://' }}{{ page.url }}.svg" />
+    </a>
+  </div>
+  <!-- LINDAREX :: HITS :: LEFT-SIDEBAR :: END -->
+
   <!-- LINDAREX :: GOOGLE ADSENSE :: LEFT-SIDEBAR :: BIGIN-->
   {% include google-adsense-left-sidebar.html %}
   <!-- LINDAREX :: GOOGLE ADSENSE :: LEFT-SIDEBAR :: END-->

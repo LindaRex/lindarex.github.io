@@ -173,7 +173,7 @@ $ sudo systemctl restart fail2ban.service
 $ sudo fail2ban-client status
 ```
 
-```console
+```shell
 Status
 |- Number of jail:	1
 `- Jail list:	sshd
@@ -183,7 +183,7 @@ Status
 $ sudo fail2ban-client status sshd
 ```
 
-```console
+```shell
 Status for the jail: sshd
 |- Filter
 |  |- Currently failed:	3
@@ -204,7 +204,7 @@ $ sudo fail2ban-client set ${JAIL_NAME} banip ${차단 IP}
 $ sudo fail2ban-client set sshd banip 192.168.0.11
 ```
 
-```console
+```shell
 192.168.0.11
 ```
 
@@ -217,7 +217,7 @@ $ sudo fail2ban-client set ${JAIL_NAME} unbanip ${차단 해제 IP}
 $ sudo fail2ban-client set sshd unbanip 192.168.0.11
 ```
 
-```console
+```shell
 192.168.0.11
 ```
 
@@ -226,7 +226,7 @@ $ sudo fail2ban-client set sshd unbanip 192.168.0.11
 $ cat /var/log/fail2ban.log
 ```
 
-```console
+```shell
 2020-10-29 05:15:09,537 fail2ban.server         [1588]: INFO    --------------------------------------------------
 2020-10-29 05:15:09,537 fail2ban.server         [1588]: INFO    Starting Fail2ban v0.10.2
 2020-10-29 05:15:09,548 fail2ban.database       [1588]: INFO    Connected to fail2ban persistent database '/var/lib/fail2ban/fail2ban.sqlite3'

@@ -76,7 +76,7 @@ kubernetes cluster를 설치하는 방법은 다양합니다.
 $ ssh-keygen -t rsa
 ```
 
-```console
+```shell
 ubuntu@ip-10-0-0-12:~$ ssh-keygen -t rsa
 Generating public/private rsa key pair.
 Enter file in which to save the key (/home/ubuntu/.ssh/id_rsa):
@@ -108,7 +108,7 @@ The key's randomart image is:
 $ cat ~/.ssh/id_rsa.pub
 ```
 
-```console
+```shell
 ubuntu@ip-10-0-0-12:~$ cat ~/.ssh/id_rsa.pub
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDfCi8yYpfM203r9ZmkftJfaNX+sbF+EmQ4QW8ozOS2GCQhIg/mmQjSRhk5Pi+Ey2/ptzVi82XhKUpUkN334NVf8kdQhmQ4po6Yi4e9Zm/HDIiHmjA0PR5cE3o7ab9QhjsgV1RUGJbrvZdZPCxjSUzlK3suk/49/3PKlRrdNuCogznjPpeIF16oqlK8W1gxYi/lcdhXJ09Fa3cucUU5GnkAXAHsisdC8VyE3f78TlYA6rjb4+eY+mryK0WA+UH1pDYLyVCB2NH/WNiawln//pRSWIYgzSZDvhlR/eJKDXzaz6xGopdzK0qd1toJ3tJ5uDlO1kXVfTTNkgQER/IPNzxX ubuntu@ip-10-0-0-12
 ```
@@ -119,7 +119,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDfCi8yYpfM203r9ZmkftJfaNX+sbF+EmQ4QW8ozOS2
 $ vi ~/.ssh/authorized_keys
 ```
 
-```console
+```shell
 ubuntu@ip-10-0-0-12:~$ vi ~/.ssh/authorized_keys
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCIU1EZY5t3yMfd5JwQJVPEYOctTT34TEGT8yp0gmaCE/zDXPpZOGUkDlIH3F3HQVSaE7gr/qdMuWf2xdtRzfhQTCFtEK1CjjjMsZriJ2nhDALp5JbujkSoWdX+CkD//egssZa98XPEDDP8fijOmmDjqh36axfiJP54kQ3cSmSFKPONnzsqiqvEBTbilEVwxAWc1tqL0NrZB72MDJ+WyHfzwifVkC8/h9B2h6WtE440CxpGFVfXMJQxxGYrCaJaSjruO7KzQBzJ54NynNH5XzMqCDA+UhztWK+7NlBNSpNWvMYQ5dw7kQ8L6kr4aqpKKyQUH5JoMa0J/+N6qM8ihn5f aws-key
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC2PS9vPKdB9TMlGHaV53bTi60+pyqyguYjPz32xBMtGXmXmbOfkplgxo2xJvsOIUhiw5Jq1VKJP6kBIMv3PxtCZ8LX1eDLgun+3E6vxu8BpIOo9JEW3Rc6tpezBebqfVzqO/PgYY2dxH1MD6tUqWRiJz544wnPoAc5LUjcvkUmmFndUlTMjxBFIFifA52e0tFwH3UxFGQAVocDDggRw23uMv9NHiyAxwpFP88FGksizYq9RDyc7rhjeMh7ruuGu5nOII02XGZhjdzLDUfcra911w1+47kAOpcsrrXnlHyWLUTSXkaGrkfESWbXnLh15wUSym2T5H1Jv9SKf2blenPZ ubuntu@ip-10-0-0-12
@@ -133,7 +133,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC2PS9vPKdB9TMlGHaV53bTi60+pyqyguYjPz32xBMt
 $ ssh-copy-id {USER}@{HOST}
 ```
 
-```console
+```shell
 ubuntu@ip-10-0-0-12:~$ ssh-copy-id ubuntu@10.0.0.16
 ```
 
@@ -151,10 +151,10 @@ ubuntu@ip-10-0-0-12:~$ ssh-copy-id ubuntu@10.0.0.16
 $ ssh-keyscan -t rsa {HOST} >> ~/.ssh/known_hosts
 ```
 
-```console
+```shell
 ubuntu@ip-10-0-0-12:~$ ssh-keyscan -t rsa 10.0.0.12 >> ~/.ssh/known_hosts
 # 10.0.0.12:22 SSH-2.0-OpenSSH_7.6p1 Ubuntu-4ubuntu0.3
-
+```shell
 ubuntu@ip-10-0-0-12:~$ ssh-keyscan -t rsa 10.0.0.16 >> ~/.ssh/known_hosts
 # 10.0.0.16:22 SSH-2.0-OpenSSH_7.6p1 Ubuntu-4ubuntu0.3
 ```
@@ -167,7 +167,7 @@ $ vi {HOST-LIST-FILE}
 {HOST-1}, {HOST-2}
 ```
 
-```console
+```shell
 ubuntu@ip-10-0-0-12:~$ vi lindarex-host-file
 ---
 10.0.0.12, 10.0.0.16
@@ -177,7 +177,7 @@ ubuntu@ip-10-0-0-12:~$ vi lindarex-host-file
 $ ssh-keyscan -t rsa -f {HOST-LIST-FILE} >> ~/.ssh/known_hosts
 ```
 
-```console
+```shell
 ubuntu@ip-10-0-0-12:~$ ssh-keyscan -t rsa -f lindarex-host-file >> ~/.ssh/known_hosts
 ```
 
@@ -189,7 +189,7 @@ ubuntu@ip-10-0-0-12:~$ ssh-keyscan -t rsa -f lindarex-host-file >> ~/.ssh/known_
 $ ssh {USER}@{HOST}
 ```
 
-```console
+```shell
 ubuntu@ip-10-0-0-12:~$ ssh ubuntu@10.0.0.16
 ```
 
@@ -252,7 +252,7 @@ $ cp -r ${LINDAREX_WORKSPACE}/kubespray/inventory/sample ${LINDAREX_WORKSPACE}/k
 $ vi {WORKSPACE}/kubespray/inventory/{CLUSTER_NAME}/inventory.ini
 ```
 
-```console
+```shell
 ubuntu@ip-10-0-0-12:~$ vi ${LINDAREX_WORKSPACE}/kubespray/inventory/lindarex-cluster/inventory.ini
 ---
 # ## Configure 'ip' variable to bind kubernetes services on a
@@ -305,7 +305,7 @@ $ vi {WORKSPACE}/kubespray/roles/bootstrap-os/defaults/main.yml
 override_system_hostname: false
 ```
 
-```console
+```shell
 ubuntu@ip-10-0-0-12:~$ cat ${LINDAREX_WORKSPACE}/kubespray/roles/bootstrap-os/defaults/main.yml
 ---
 ## CentOS/RHEL specific variables
@@ -347,8 +347,8 @@ $ declare -a IPS=({MASTER_NODE_IP} {WORKER_NODE_IP1} {WORKER_NODE_IP2} {WORKER_N
 $ CONFIG_FILE={WORKSPACE}/kubespray/inventory/{CLUSTER_NAME}/hosts.yaml python3 {WORKSPACE}/kubespray/contrib/inventory_builder/inventory.py ${IPS[@]}
 ```
 
-```console
-ubuntu@ip-10-0-0-12:~$ declare -a IPS=(10.0.0.12 10.0.0.16)
+```shell
+```shell
 ubuntu@ip-10-0-0-12:~$ CONFIG_FILE=${LINDAREX_WORKSPACE}/kubespray/inventory/lindarex-cluster/hosts.yaml python3 ${LINDAREX_WORKSPACE}/kubespray/contrib/inventory_builder/inventory.py ${IPS[@]}
 DEBUG: Adding group all
 DEBUG: Adding group kube-master
@@ -388,7 +388,7 @@ $ vi {WORKSPACE}/kubespray/inventory/{CLUSTER_NAME}/hosts.yaml
 ~
 ```
 
-```console
+```shell
 ubuntu@ip-10-0-0-12:~$ vi ${LINDAREX_WORKSPACE}/kubespray/inventory/lindarex-cluster/hosts.yaml
 ---
 all:
@@ -441,7 +441,7 @@ $ cat {WORKSPACE}/kubespray/inventory/{CLUSTER_NAME}/group_vars/k8s-cluster/k8s-
 $ ansible-playbook -i {WORKSPACE}/kubespray/inventory/{CLUSTER_NAME}/hosts.yaml --become --become-user=root {WORKSPACE}/kubespray/cluster.yml
 ```
 
-```console
+```shell
 ubuntu@ip-10-0-0-12:~$ ansible-playbook -i ${LINDAREX_WORKSPACE}/kubespray/inventory/lindarex-cluster/hosts.yaml --become --become-user=root ${LINDAREX_WORKSPACE}/kubespray/cluster.yml
 ```
 
@@ -469,7 +469,7 @@ $ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
 #### 7.2. node 목록 조회
-```console
+```shell
 ubuntu@ip-10-0-0-12:~$ kubectl get nodes -o wide
 NAME    STATUS   ROLES    AGE     VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION   CONTAINER-RUNTIME
 node1   Ready    master   7m45s   v1.19.7   10.0.0.12    <none>        Ubuntu 18.04.5 LTS   5.4.0-1041-aws   docker://19.3.14
@@ -478,7 +478,7 @@ node2   Ready    <none>   7m22s   v1.19.7   10.0.0.16    <none>        Ubuntu 18
 
 #### 7.3. pod 목록 조회
 ```console
-$ kubectl get pods -n kube-system
+```shell
 ubuntu@ip-10-0-0-12:~$ kubectl get pods --all-namespaces
 NAMESPACE     NAME                                      READY   STATUS    RESTARTS   AGE
 kube-system   calico-kube-controllers-8b5ff5d58-k8j72   1/1     Running   0          8m40s
@@ -508,7 +508,7 @@ kube-system   nodelocaldns-dvj84                        1/1     Running   0     
 $ ansible-playbook -i {WORKSPACE}/kubespray/inventory/{CLUSTER_NAME}/hosts.yaml --become --become-user=root {WORKSPACE}/kubespray/reset.yml
 ```
 
-```console
+```shell
 ubuntu@ip-10-0-0-12:~$ ansible-playbook -i ${LINDAREX_WORKSPACE}/kubespray/inventory/lindarex-cluster/hosts.yaml --become --become-user=root ${LINDAREX_WORKSPACE}/kubespray/reset.yml
 ```
 

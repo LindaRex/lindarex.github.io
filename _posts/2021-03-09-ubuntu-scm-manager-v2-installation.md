@@ -63,7 +63,7 @@ $ echo 'deb [arch=all] https://packages.scm-manager.org/repository/apt-v2-releas
 ```
 
 ### 3. apt install 명령어로 scm manager 설치
-#### 3.1. package 업데이트 
+#### 3.1. package index 업데이트
 ```console
 $ sudo apt-get update
 ```

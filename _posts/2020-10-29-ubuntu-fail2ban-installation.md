@@ -135,7 +135,7 @@ $ sudo apt purge --auto-remove fail2ban*
 $ sudo vi /etc/fail2ban/jail.conf
 ```
 
-```console
+```shell
 --------------------------------------------------------------------------------
 [DEFAULT]
 # 차단 예외 IPs, 추가 시 스페이스로 구분

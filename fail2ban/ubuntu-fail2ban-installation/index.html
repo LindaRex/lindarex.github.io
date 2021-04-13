@@ -601,24 +601,24 @@ enabled <span class="o">=</span> <span class="nb">true</span>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>fail2ban-client status
 </code></pre></div></div>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">Status
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Status
 |- Number of jail:	1
-`- Jail list:	sshd
-</span></code></pre></div></div>
+<span class="sb">`</span>- Jail list:	sshd
+</code></pre></div></div>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>fail2ban-client status sshd
 </code></pre></div></div>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">Status for the jail: sshd
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Status <span class="k">for </span>the jail: sshd
 |- Filter
 |  |- Currently failed:	3
 |  |- Total failed:	23
-|  `- File list:	/var/log/auth.log
-`- Actions
+|  <span class="sb">`</span>- File list:	/var/log/auth.log
+<span class="sb">`</span>- Actions
    |- Currently banned:	0
    |- Total banned:	0
-   `- Banned IP list:
-</span></code></pre></div></div>
+   <span class="sb">`</span>- Banned IP list:
+</code></pre></div></div>
 
 <h4 id="62-차단-설정">6.2. 차단 설정</h4>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>fail2ban-client <span class="nb">set</span> <span class="k">${</span><span class="nv">JAIL_NAME</span><span class="k">}</span> banip <span class="k">${</span><span class="p">차단 IP</span><span class="k">}</span>
@@ -627,8 +627,8 @@ enabled <span class="o">=</span> <span class="nb">true</span>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>fail2ban-client <span class="nb">set </span>sshd banip 192.168.0.11
 </code></pre></div></div>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">192.168.0.11
-</span></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>192.168.0.11
+</code></pre></div></div>
 
 <h4 id="63-차단-해제">6.3. 차단 해제</h4>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>fail2ban-client <span class="nb">set</span> <span class="k">${</span><span class="nv">JAIL_NAME</span><span class="k">}</span> unbanip <span class="k">${</span><span class="p">차단 해제 IP</span><span class="k">}</span>
@@ -637,54 +637,54 @@ enabled <span class="o">=</span> <span class="nb">true</span>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>fail2ban-client <span class="nb">set </span>sshd unbanip 192.168.0.11
 </code></pre></div></div>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">192.168.0.11
-</span></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>192.168.0.11
+</code></pre></div></div>
 
 <h4 id="64-log-조회">6.4. log 조회</h4>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cat</span> /var/log/fail2ban.log
 </code></pre></div></div>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">2020-10-29 05:15:09,537 fail2ban.server         [1588]: INFO    --------------------------------------------------
-2020-10-29 05:15:09,537 fail2ban.server         [1588]: INFO    Starting Fail2ban v0.10.2
-2020-10-29 05:15:09,548 fail2ban.database       [1588]: INFO    Connected to fail2ban persistent database '/var/lib/fail2ban/fail2ban.sqlite3'
-2020-10-29 05:15:09,552 fail2ban.database       [1588]: WARNING New database created. Version '2'
-2020-10-29 05:15:09,553 fail2ban.jail           [1588]: INFO    Creating new jail 'sshd'
-2020-10-29 05:15:09,584 fail2ban.jail           [1588]: INFO    Jail 'sshd' uses pyinotify {}
-2020-10-29 05:15:09,587 fail2ban.jail           [1588]: INFO    Initiated 'pyinotify' backend
-2020-10-29 05:15:09,588 fail2ban.filter         [1588]: INFO      maxLines: 1
-2020-10-29 05:15:09,614 fail2ban.server         [1588]: INFO    Jail sshd is not a JournalFilter instance
-2020-10-29 05:15:09,615 fail2ban.filter         [1588]: INFO    Added logfile: '/var/log/auth.log' (pos = 0, hash = 25791bcc640f76a6b3ead17d55a5f0e66465461c)
-2020-10-29 05:15:09,619 fail2ban.filter         [1588]: INFO      encoding: UTF-8
-2020-10-29 05:15:09,619 fail2ban.filter         [1588]: INFO      maxRetry: 5
-2020-10-29 05:15:09,619 fail2ban.filter         [1588]: INFO      findtime: 600
-2020-10-29 05:15:09,619 fail2ban.actions        [1588]: INFO      banTime: 600
-2020-10-29 05:15:09,621 fail2ban.jail           [1588]: INFO    Jail 'sshd' started
-2020-10-29 05:15:27,281 fail2ban.filter         [1588]: INFO    [sshd] Found 193.112.23.105 - 2020-10-29 05:10:15
-2020-10-29 05:15:27,281 fail2ban.filter         [1588]: INFO    [sshd] Found 159.89.1.242 - 2020-10-29 05:10:18
-2020-10-29 05:15:27,281 fail2ban.filter         [1588]: INFO    [sshd] Found 51.15.94.14 - 2020-10-29 05:14:53
-2020-10-29 05:15:27,282 fail2ban.filter         [1588]: INFO    [sshd] Found 122.51.238.27 - 2020-10-29 05:15:27
-2020-10-29 05:26:15,805 fail2ban.filter         [1588]: INFO    [sshd] Found 141.98.10.211 - 2020-10-29 05:26:15
-2020-10-29 05:26:19,199 fail2ban.filter         [1588]: INFO    [sshd] Found 141.98.10.212 - 2020-10-29 05:26:19
-2020-10-29 05:26:26,824 fail2ban.filter         [1588]: INFO    [sshd] Found 141.98.10.214 - 2020-10-29 05:26:26
-2020-10-29 05:26:31,431 fail2ban.filter         [1588]: INFO    [sshd] Found 141.98.10.209 - 2020-10-29 05:26:31
-2020-10-29 05:26:35,751 fail2ban.filter         [1588]: INFO    [sshd] Found 141.98.10.210 - 2020-10-29 05:26:35
-2020-10-29 05:26:39,393 fail2ban.filter         [1588]: INFO    [sshd] Found 141.98.10.211 - 2020-10-29 05:26:39
-2020-10-29 05:26:49,698 fail2ban.filter         [1588]: INFO    [sshd] Found 141.98.10.213 - 2020-10-29 05:26:49
-2020-10-29 05:26:55,779 fail2ban.filter         [1588]: INFO    [sshd] Found 141.98.10.214 - 2020-10-29 05:26:55
-2020-10-29 05:26:59,919 fail2ban.filter         [1588]: INFO    [sshd] Found 141.98.10.209 - 2020-10-29 05:26:59
-2020-10-29 05:27:29,170 fail2ban.filter         [1588]: INFO    [sshd] Found 200.73.128.64 - 2020-10-29 05:27:29
-2020-10-29 05:27:49,164 fail2ban.filter         [1588]: INFO    [sshd] Found 137.74.5.81 - 2020-10-29 05:27:49
-2020-10-29 05:35:28,107 fail2ban.filter         [1588]: INFO    [sshd] Found 91.74.129.82 - 2020-10-29 05:35:28
-2020-10-29 05:36:05,060 fail2ban.filter         [1588]: INFO    [sshd] Found 179.184.0.112 - 2020-10-29 05:36:04
-2020-10-29 05:36:49,781 fail2ban.filter         [1588]: INFO    [sshd] Found 161.35.200.233 - 2020-10-29 05:36:49
-2020-10-29 05:41:38,714 fail2ban.filter         [1588]: INFO    [sshd] Found 60.248.199.194 - 2020-10-29 05:41:38
-2020-10-29 05:41:45,894 fail2ban.filter         [1588]: INFO    [sshd] Found 151.80.176.191 - 2020-10-29 05:41:45
-2020-10-29 05:46:13,683 fail2ban.filter         [1588]: INFO    [sshd] Found 122.51.130.21 - 2020-10-29 05:46:13
-2020-10-29 05:52:53,319 fail2ban.filter         [1588]: INFO    [sshd] Found 51.83.41.120 - 2020-10-29 05:52:48
-2020-10-29 05:55:49,062 fail2ban.filter         [1588]: INFO    [sshd] Found 161.35.162.11 - 2020-10-29 05:55:49
-2020-10-29 06:14:12,583 fail2ban.actions        [1588]: NOTICE  [sshd] Ban 192.168.0.11
-2020-10-29 06:15:31,272 fail2ban.actions        [1588]: NOTICE  [sshd] Unban 192.168.0.11
-</span></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2020-10-29 05:15:09,537 fail2ban.server         <span class="o">[</span>1588]: INFO    <span class="nt">--------------------------------------------------</span>
+2020-10-29 05:15:09,537 fail2ban.server         <span class="o">[</span>1588]: INFO    Starting Fail2ban v0.10.2
+2020-10-29 05:15:09,548 fail2ban.database       <span class="o">[</span>1588]: INFO    Connected to fail2ban persistent database <span class="s1">'/var/lib/fail2ban/fail2ban.sqlite3'</span>
+2020-10-29 05:15:09,552 fail2ban.database       <span class="o">[</span>1588]: WARNING New database created. Version <span class="s1">'2'</span>
+2020-10-29 05:15:09,553 fail2ban.jail           <span class="o">[</span>1588]: INFO    Creating new jail <span class="s1">'sshd'</span>
+2020-10-29 05:15:09,584 fail2ban.jail           <span class="o">[</span>1588]: INFO    Jail <span class="s1">'sshd'</span> uses pyinotify <span class="o">{}</span>
+2020-10-29 05:15:09,587 fail2ban.jail           <span class="o">[</span>1588]: INFO    Initiated <span class="s1">'pyinotify'</span> backend
+2020-10-29 05:15:09,588 fail2ban.filter         <span class="o">[</span>1588]: INFO      maxLines: 1
+2020-10-29 05:15:09,614 fail2ban.server         <span class="o">[</span>1588]: INFO    Jail sshd is not a JournalFilter instance
+2020-10-29 05:15:09,615 fail2ban.filter         <span class="o">[</span>1588]: INFO    Added logfile: <span class="s1">'/var/log/auth.log'</span> <span class="o">(</span>pos <span class="o">=</span> 0, <span class="nb">hash</span> <span class="o">=</span> 25791bcc640f76a6b3ead17d55a5f0e66465461c<span class="o">)</span>
+2020-10-29 05:15:09,619 fail2ban.filter         <span class="o">[</span>1588]: INFO      encoding: UTF-8
+2020-10-29 05:15:09,619 fail2ban.filter         <span class="o">[</span>1588]: INFO      maxRetry: 5
+2020-10-29 05:15:09,619 fail2ban.filter         <span class="o">[</span>1588]: INFO      findtime: 600
+2020-10-29 05:15:09,619 fail2ban.actions        <span class="o">[</span>1588]: INFO      banTime: 600
+2020-10-29 05:15:09,621 fail2ban.jail           <span class="o">[</span>1588]: INFO    Jail <span class="s1">'sshd'</span> started
+2020-10-29 05:15:27,281 fail2ban.filter         <span class="o">[</span>1588]: INFO    <span class="o">[</span>sshd] Found 193.112.23.105 - 2020-10-29 05:10:15
+2020-10-29 05:15:27,281 fail2ban.filter         <span class="o">[</span>1588]: INFO    <span class="o">[</span>sshd] Found 159.89.1.242 - 2020-10-29 05:10:18
+2020-10-29 05:15:27,281 fail2ban.filter         <span class="o">[</span>1588]: INFO    <span class="o">[</span>sshd] Found 51.15.94.14 - 2020-10-29 05:14:53
+2020-10-29 05:15:27,282 fail2ban.filter         <span class="o">[</span>1588]: INFO    <span class="o">[</span>sshd] Found 122.51.238.27 - 2020-10-29 05:15:27
+2020-10-29 05:26:15,805 fail2ban.filter         <span class="o">[</span>1588]: INFO    <span class="o">[</span>sshd] Found 141.98.10.211 - 2020-10-29 05:26:15
+2020-10-29 05:26:19,199 fail2ban.filter         <span class="o">[</span>1588]: INFO    <span class="o">[</span>sshd] Found 141.98.10.212 - 2020-10-29 05:26:19
+2020-10-29 05:26:26,824 fail2ban.filter         <span class="o">[</span>1588]: INFO    <span class="o">[</span>sshd] Found 141.98.10.214 - 2020-10-29 05:26:26
+2020-10-29 05:26:31,431 fail2ban.filter         <span class="o">[</span>1588]: INFO    <span class="o">[</span>sshd] Found 141.98.10.209 - 2020-10-29 05:26:31
+2020-10-29 05:26:35,751 fail2ban.filter         <span class="o">[</span>1588]: INFO    <span class="o">[</span>sshd] Found 141.98.10.210 - 2020-10-29 05:26:35
+2020-10-29 05:26:39,393 fail2ban.filter         <span class="o">[</span>1588]: INFO    <span class="o">[</span>sshd] Found 141.98.10.211 - 2020-10-29 05:26:39
+2020-10-29 05:26:49,698 fail2ban.filter         <span class="o">[</span>1588]: INFO    <span class="o">[</span>sshd] Found 141.98.10.213 - 2020-10-29 05:26:49
+2020-10-29 05:26:55,779 fail2ban.filter         <span class="o">[</span>1588]: INFO    <span class="o">[</span>sshd] Found 141.98.10.214 - 2020-10-29 05:26:55
+2020-10-29 05:26:59,919 fail2ban.filter         <span class="o">[</span>1588]: INFO    <span class="o">[</span>sshd] Found 141.98.10.209 - 2020-10-29 05:26:59
+2020-10-29 05:27:29,170 fail2ban.filter         <span class="o">[</span>1588]: INFO    <span class="o">[</span>sshd] Found 200.73.128.64 - 2020-10-29 05:27:29
+2020-10-29 05:27:49,164 fail2ban.filter         <span class="o">[</span>1588]: INFO    <span class="o">[</span>sshd] Found 137.74.5.81 - 2020-10-29 05:27:49
+2020-10-29 05:35:28,107 fail2ban.filter         <span class="o">[</span>1588]: INFO    <span class="o">[</span>sshd] Found 91.74.129.82 - 2020-10-29 05:35:28
+2020-10-29 05:36:05,060 fail2ban.filter         <span class="o">[</span>1588]: INFO    <span class="o">[</span>sshd] Found 179.184.0.112 - 2020-10-29 05:36:04
+2020-10-29 05:36:49,781 fail2ban.filter         <span class="o">[</span>1588]: INFO    <span class="o">[</span>sshd] Found 161.35.200.233 - 2020-10-29 05:36:49
+2020-10-29 05:41:38,714 fail2ban.filter         <span class="o">[</span>1588]: INFO    <span class="o">[</span>sshd] Found 60.248.199.194 - 2020-10-29 05:41:38
+2020-10-29 05:41:45,894 fail2ban.filter         <span class="o">[</span>1588]: INFO    <span class="o">[</span>sshd] Found 151.80.176.191 - 2020-10-29 05:41:45
+2020-10-29 05:46:13,683 fail2ban.filter         <span class="o">[</span>1588]: INFO    <span class="o">[</span>sshd] Found 122.51.130.21 - 2020-10-29 05:46:13
+2020-10-29 05:52:53,319 fail2ban.filter         <span class="o">[</span>1588]: INFO    <span class="o">[</span>sshd] Found 51.83.41.120 - 2020-10-29 05:52:48
+2020-10-29 05:55:49,062 fail2ban.filter         <span class="o">[</span>1588]: INFO    <span class="o">[</span>sshd] Found 161.35.162.11 - 2020-10-29 05:55:49
+2020-10-29 06:14:12,583 fail2ban.actions        <span class="o">[</span>1588]: NOTICE  <span class="o">[</span>sshd] Ban 192.168.0.11
+2020-10-29 06:15:31,272 fail2ban.actions        <span class="o">[</span>1588]: NOTICE  <span class="o">[</span>sshd] Unban 192.168.0.11
+</code></pre></div></div>
 
 <h2 id="마무리conclusion">마무리(CONCLUSION)</h2>
 <p>ubuntu 환경에 package로 fail2ban 설치를 완료했습니다. <br />

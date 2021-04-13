@@ -562,28 +562,28 @@ Licensed under the GNU General Public License v2 (GPL).
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>vi /etc/fail2ban/jail.conf
 </code></pre></div></div>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">--------------------------------------------------------------------------------
-[DEFAULT]
-</span><span class="gp">#</span><span class="w"> </span>차단 예외 IPs, 추가 시 스페이스로 구분
-<span class="go">ignoreip = 127.0.0.1/8
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">--------------------------------------------------------------------------------</span>
+<span class="o">[</span>DEFAULT]
+<span class="c"># 차단 예외 IPs, 추가 시 스페이스로 구분</span>
+ignoreip <span class="o">=</span> 127.0.0.1/8
 
-</span><span class="gp">#</span><span class="w"> </span>접속 차단 시간, 1분 <span class="o">=</span> 60, 아래 예제는 1일, <span class="nt">-1</span> 설정 시 영구 차단
-<span class="go">bantime = 86400
+<span class="c"># 접속 차단 시간, 1분 = 60, 아래 예제는 1일, -1 설정 시 영구 차단</span>
+bantime <span class="o">=</span> 86400
 
-</span><span class="gp">#</span><span class="w"> </span>설정 시간 내 maxretry 설정만큼 접속 실패 시 차단
-<span class="go">findtime = 86400
+<span class="c"># 설정 시간 내 maxretry 설정만큼 접속 실패 시 차단</span>
+findtime <span class="o">=</span> 86400
 
-</span><span class="gp">#</span><span class="w"> </span>최대 허용 횟수
-<span class="go">maxretry = 3
+<span class="c"># 최대 허용 횟수</span>
+maxretry <span class="o">=</span> 3
 
-</span><span class="gp">#</span><span class="w"> </span>차단 방법, firewalld 사용 시 <span class="s1">'firewallcmd-new'</span>, iptables 사용 시 <span class="s1">'iptables-multiport'</span>
-<span class="go">banaction = iptables-multiport
+<span class="c"># 차단 방법, firewalld 사용 시 'firewallcmd-new', iptables 사용 시 'iptables-multiport'</span>
+banaction <span class="o">=</span> iptables-multiport
 
 
-[sshd]
-enabled = true
---------------------------------------------------------------------------------
-</span></code></pre></div></div>
+<span class="o">[</span>sshd]
+enabled <span class="o">=</span> <span class="nb">true</span>
+<span class="nt">--------------------------------------------------------------------------------</span>
+</code></pre></div></div>
 
 <blockquote>
   <p>‘/etc/fail2ban/jail.conf’ 파일은 업데이트 시 초기화되므로, ‘/etc/fail2ban/jail.d/*.conf’ 또는 ‘/etc/fail2ban/jail.local’ 파일 생성 후 설정하는 것을 추천합니다.</p>

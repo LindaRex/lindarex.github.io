@@ -15,6 +15,7 @@ tags:
 
 
 Cloud Foundry BOSH는 소규모 및 대규모 클라우드(cloud) 애플리케이션(application)의 배포와 라이프 사이클 관리, release engineering을 통합하는 오픈소스(open source) 소프트웨어 프로젝트입니다. 
+<br /><br />
 BOSH는 수백 개의 가상머신(VM, virtual machine)에 application을 프로비저닝(provisioning)하고 배포할 수 있으며, 모니터링과 오류 복구, application 업데이트를 수행합니다.
 <br /><br />
 BOSH는 Cloud Foundry PaaS(CFAR) 배포를 위해 개발되었지만, 거의 모든 소프트웨어를 배포하는 데에도 사용할 수 있습니다. 예를 들면, Hadoop 또는 Jenkins 등의 오픈소스 소프트웨어를 BOSH release로 작성하여 배포할 수 있으며 대규모 분산 시스템(system)에 적합합니다.

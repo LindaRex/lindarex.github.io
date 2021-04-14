@@ -11,7 +11,9 @@ tags:
 ---
 
 
-SonarQube는 정적 코드 분석기로, LGPL(lesser gnu general public license)로 오픈소스(open source) 소프트웨어이며, 20개 이상의 프로그래밍 언어의 버그와 code smells, 코드 커버리지, 유닛 테스트, 코딩 표준, 중복 코드, 코드 복잡도, 주석 및 보안 취약점의 보고서를 제공하고, 자동 리뷰를 수행하여 지속적인 코드 품질 검사를 위한 플랫폼입니다.
+SonarQube는 정적 코드 분석기로, LGPL(lesser gnu general public license) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다.
+<br /><br />
+20개 이상의 프로그래밍 언어의 버그와 code smells, 코드 커버리지, 유닛 테스트, 코딩 표준, 중복 코드, 코드 복잡도, 주석 및 보안 취약점의 보고서를 제공하고, 자동 리뷰를 수행하여 지속적인 코드 품질 검사를 위한 플랫폼입니다.
 <br /><br />
 SonarQube는 Maven, Ant, Gradle, MSBuild 및 CI(continuous integration) 도구인 Atlassian Bamboo, Jenkins, Hudson 등과의 연동을 제공합니다.
 <br /><br />

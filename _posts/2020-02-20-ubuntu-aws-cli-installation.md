@@ -10,7 +10,7 @@ tags:
 
 
 AWS CLI(command line interface, 명령줄 인터페이스)는 AWS 서비스(service)를 관리하는 통합 도구입니다.
-<br />
+<br /><br />
 Python 2.6.5 이상이 필요하며, pip을 사용하여 AWS CLI를 설치합니다.
 <br /><br />
 이 포스트에서는 우분투(ubuntu) 환경에서 AWS를 사용하기 위한 AWS CLI를 설치하는 방법을 소개합니다.

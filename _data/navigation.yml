@@ -28,14 +28,14 @@ sidebar:
         url: /categories/bind9/
       - title: "FAIL2BAN"
         url: /categories/fail2ban/
-  - title: "CLOUD FOUNDRY"
+      - title: "HAPROXY"
+        url: /categories/haproxy/
+  - title: "CLOUD COMPUTING"
     children:
       - title: "BOSH"
         url: /categories/bosh/
       - title: "CFAR"
         url: /categories/cfar/
-  - title: "CLOUD COMPUTING"
-    children:
       - title: "AWS"
         url: /categories/aws/
       - title: "AZURE"

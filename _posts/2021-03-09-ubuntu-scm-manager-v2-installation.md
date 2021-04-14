@@ -141,7 +141,7 @@ $ sudo systemctl kill scm-server
 
 ## 마무리(CONCLUSION)
 ubuntu 환경에 package로 scm manager 설치를 완료했습니다.
-<br /><br />
+<br />
 SCM Manager의 자세한 내용은 아래 페이지를 확인해 주시기 바랍니다.
 
 

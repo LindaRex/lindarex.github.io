@@ -12,13 +12,13 @@ tags:
 ---
 
 
-PostgreSQL은 BSD(berkeley software distribution) 또는 MIT 라이선스(license)와 유사한 PostgreSQL license가 적용된 오픈소스(open source) 소프트웨어로 배포(release) 됩니다.
+PostgreSQL(이하 postgresql)은 BSD(berkeley software distribution) 또는 MIT 라이선스(license)와 유사한 postgresql license가 적용된 오픈소스(open source) 소프트웨어로 배포(release) 됩니다.
 <br /><br />
-PostgreSQL은 확장 가능성 및 표준 준수를 강조하는 객체-관계형 데이터베이스 관리 시스템(ORDBMS, object-relational database management system)으로, 트랜잭션(transaction)과 ACID(Atomicity, Consistency, Isolation, Durability)를 지원합니다.
+postgresql은 확장 가능성 및 표준 준수를 강조하는 객체-관계형 데이터베이스 관리 시스템(ORDBMS, object-relational database management system)으로, 트랜잭션(transaction)과 ACID(Atomicity, Consistency, Isolation, Durability)를 지원합니다.
 <br /><br />
-macOS 서버의 경우 PostgreSQL이 기본 데이터베이스(database)이며, MS Windows와 리눅스(linux)에서도 이용할 수 있습니다.
+macOS 서버의 경우 postgresql이 기본 데이터베이스(database)이며, MS Windows와 리눅스(linux)에서도 이용할 수 있습니다.
 <br /><br />
-이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 PostgreSQL을 설치하는 방법을 소개합니다.
+이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 postgresql을 설치하는 방법을 소개합니다.
 
 
 ## 선행조건(PREREQUISITE)
@@ -39,29 +39,29 @@ macOS 서버의 경우 PostgreSQL이 기본 데이터베이스(database)이며, 
 
 
 ## 요약(SUMMARY)
-1. PostgreSQL debian packages repository 설정
-2. apt 명령어로 PostgreSQL 설치
-3. PostgreSQL 설정
-4. systemctl 명령어로 PostgreSQL 실행
+1. postgresql debian packages repository 설정
+2. apt 명령어로 postgresql 설치
+3. postgresql 설정
+4. systemctl 명령어로 postgresql 실행
 
 
 ## 내용(CONTENTS)
-### 1. PostgreSQL debian packages repository 추가
+### 1. postgresql debian packages repository 추가
 ```console
 $ sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
 ```
 
-### 2. PostgreSQL debian packages repository key 추가
+### 2. postgresql debian packages repository key 추가
 ```console
 $ sudo wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | sudo apt-key add -
 ```
 
-### 3. apt install 명령어로 PostgreSQL 설치
+### 3. apt install 명령어로 postgresql 설치
 ```console
 $ sudo apt update && sudo apt install postgresql postgresql-contrib -y
 ```
 
-### 4. PostgreSQL 설정
+### 4. postgresql 설정
 
 > 일반 사용자 계정으로 진행합니다.
 
@@ -97,7 +97,7 @@ $ source /etc/profile
 $ /usr/lib/postgresql/11/bin/initdb
 ```
 
-#### 4.4. PostgreSQL 설정 수정
+#### 4.4. postgresql 설정 수정
 - 아래 설정으로 외부 접속이 가능하게 합니다.
 
 ```console
@@ -123,59 +123,59 @@ host    all             all             0.0.0.0/0               password
 --------------------------------------------------------------------------------
 ```
 
-### 5. systemctl 명령어로 PostgreSQL 서비스(service) 관리
-#### 5.1. PostgreSQL service 설정 반영
+### 5. systemctl 명령어로 postgresql 서비스(service) 관리
+#### 5.1. postgresql service 설정 반영
 ```console
 $ sudo systemctl daemon-reload
 ```
 
-#### 5.2. PostgreSQL service 시작
+#### 5.2. postgresql service 시작
 ```console
 $ sudo systemctl start postgresql.service
 ```
 
-#### 5.3. PostgreSQL service 중지
+#### 5.3. postgresql service 중지
 ```console
 $ sudo systemctl stop postgresql.service
 ```
 
-#### 5.4. PostgreSQL service 재시작
+#### 5.4. postgresql service 재시작
 ```console
 $ sudo systemctl restart postgresql.service
 ```
 
-#### 5.5. PostgreSQL service 설정 재적용
+#### 5.5. postgresql service 설정 재적용
 ```console
 $ sudo systemctl reload postgresql.service
 ```
 
-#### 5.6. PostgreSQL service 상태 조회
+#### 5.6. postgresql service 상태 조회
 ```console
 $ sudo systemctl status postgresql.service
 ```
 
-#### 5.7. PostgreSQL service 활성화(부팅 시 자동 시작)
+#### 5.7. postgresql service 활성화(부팅 시 자동 시작)
 ```console
 $ sudo systemctl enable postgresql.service
 ```
 
-#### 5.8. PostgreSQL service 비활성화
+#### 5.8. postgresql service 비활성화
 ```console
 $ sudo systemctl disable postgresql.service
 ```
 
-#### 5.9. PostgreSQL service 및 관련 프로세스 모두 중지
+#### 5.9. postgresql service 및 관련 프로세스 모두 중지
 ```console
 $ sudo systemctl kill postgresql.service
 ```
 
 
 ## 마무리(CONCLUSION)
-ubuntu 환경에 package로 PostgreSQL 설치를 완료했습니다.
+ubuntu 환경에 package로 postgresql 설치를 완료했습니다.
 <br /><br />
-2020년 3월 기준, open source 소프트웨어인 PostgreSQL은 세계 점유율 4위로, open source 프로젝트 커뮤니티 기반의 database 중에는 1위이며, 대량 Insert 처리와 DW(data warehouse)에 강한 모습을 보이면서 국내에서도 점유율이 증가하는 추세입니다.
+2020년 3월 기준, open source 소프트웨어인 postgresql은 세계 점유율 4위로, open source 프로젝트 커뮤니티 기반의 database 중에는 1위이며, 대량 Insert 처리와 DW(data warehouse)에 강한 모습을 보이면서 국내에서도 점유율이 증가하는 추세입니다.
 <br /><br />
-PostgreSQL은 pgAdmin, psql cli(command line interface, 명령줄 인터페이스) 등으로 PostgreSQL을 관리하며, 실제 기능적인 면에서 Oracle과 유사한 것이 많기 때문에, Oracle 사용자들이 가장 쉽게 테스트하고 적용할 수 있습니다.
+postgresql은 pgAdmin, psql cli(command line interface, 명령줄 인터페이스) 등으로 postgresql을 관리하며, 실제 기능적인 면에서 Oracle과 유사한 것이 많기 때문에, Oracle 사용자들이 가장 쉽게 테스트하고 적용할 수 있습니다.
 <br /><br />
 더 자세한 내용은 아래 참고 페이지를 확인해 주시기 바랍니다.
 
@@ -187,5 +187,5 @@ PostgreSQL은 pgAdmin, psql cli(command line interface, 명령줄 인터페이�
 ## 참고(REFERENCES)
 - [https://www.postgresql.org/](https://www.postgresql.org/){: target="\_blank"}
 - [https://www.postgresql.org/download/linux/ubuntu/](https://www.postgresql.org/download/linux/ubuntu/){: target="\_blank"}
-- [https://ko.wikipedia.org/wiki/PostgreSQL](https://ko.wikipedia.org/wiki/PostgreSQL){: target="\_blank"}
+- [https://ko.wikipedia.org/wiki/postgresql](https://ko.wikipedia.org/wiki/postgresql){: target="\_blank"}
 - [https://d2.naver.com/helloworld/227936](https://d2.naver.com/helloworld/227936){: target="\_blank"}

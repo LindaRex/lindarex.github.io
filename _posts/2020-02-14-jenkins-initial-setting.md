@@ -101,7 +101,7 @@ $ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 
 ## 마무리(CONCLUSION)
 Jenkins 설치 후 초기 설정을 완료했습니다.
-<br /><br />
+<br />
 다음 포스트에서는 [우분투(Ubuntu) 환경에 WAR 파일로 젠킨스(Jenkins) 설치하기](https://lindarex.github.io/jenkins/ubuntu-jenkins-war-installation/){: target="\_blank"}를 소개하겠습니다.
 
 

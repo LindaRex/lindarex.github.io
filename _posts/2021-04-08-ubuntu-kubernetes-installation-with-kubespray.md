@@ -514,7 +514,8 @@ ubuntu@ip-10-0-0-12:~$ ansible-playbook -i ${LINDAREX_WORKSPACE}/kubespray/inven
 
 
 ## 마무리(CONCLUSION)
-ubuntu 환경에 kubespray로 kubernetes cluster 설치를 완료했습니다. <br />
+ubuntu 환경에 kubespray로 kubernetes cluster 설치를 완료했습니다.
+<br />
 다음 포스트에서 kubernetes architectures 및 concepts, resources 등을 소개하겠습니다.
 
 

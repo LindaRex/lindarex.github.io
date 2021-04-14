@@ -274,10 +274,14 @@ $ cat /var/log/fail2ban.log
 
 
 ## 마무리(CONCLUSION)
-ubuntu 환경에 package로 fail2ban 설치를 완료했습니다. <br />
-fail2ban은 설치만으로 데몬(daemon)으로 실행되면서 기본 설정까지 완료됩니다. <br />
-fail2ban은 IPv6 미지원과 분산 무차별 대입 공격에 취약한 단점이 있지만, 기본 설정으로 대부분의 brute force 공격을 막을 수 있습니다. <br />
-기본 설정에는 Apache HTTP Server, Lighttpd, sshd, vsftpd, qmail, Postfix 그리고 Courier 메일 서버를 위한 필터가 제공됩니다. <br />
+ubuntu 환경에 package로 fail2ban 설치를 완료했습니다.
+<br /><br />
+fail2ban은 설치만으로 데몬(daemon)으로 실행되면서 기본 설정까지 완료됩니다.
+<br /><br />
+fail2ban은 IPv6 미지원과 분산 무차별 대입 공격에 취약한 단점이 있지만, 기본 설정으로 대부분의 brute force 공격을 막을 수 있습니다.
+<br /><br />
+기본 설정에는 Apache HTTP Server, Lighttpd, sshd, vsftpd, qmail, Postfix 그리고 Courier 메일 서버를 위한 필터가 제공됩니다.
+<br /><br />
 필터는 python 정규식으로 정의되며, 관리자는 필터를 커스터마이징 하여 더 강력한 보안 설정을 할 수 있습니다.
 
 

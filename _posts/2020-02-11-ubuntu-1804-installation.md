@@ -261,7 +261,7 @@ tags:
 
 ## 마무리(CONCLUSION)
 VMware Workstation에 Ubuntu 18.04.3 LTS (Bionic Beaver) Server 설치를 완료했습니다.
-<br /><br />
+<br />
 다음 포스트에서는 [우분투(Ubuntu) 서버(Server) 초기 설정하기](https://lindarex.github.io/ubuntu/ubuntu-initial-setting/){: target="\_blank"}를 소개하겠습니다.
 
 

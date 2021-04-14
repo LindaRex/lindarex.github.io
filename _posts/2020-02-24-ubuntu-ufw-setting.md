@@ -283,7 +283,7 @@ $ sudo apt purge --auto-remove ufw
 
 ## 마무리(CONCLUSION)
 ubuntu 환경에 ufw 설정을 완료했습니다.
-<br /><br />
+<br />
 다음 포스트에서는 [우분투(Ubuntu) 환경에 iptables 설정하기](https://lindarex.github.io/ubuntu/ubuntu-iptables-setting/){: target="\_blank"}를 소개하겠습니다.
 
 

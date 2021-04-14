@@ -11,13 +11,13 @@ tags:
 ---
 
 
-SonarQube는 정적 코드 분석기로, LGPL(lesser gnu general public license) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다.
+SonarQube(이하 sonarqube)는 정적 코드 분석기로, LGPL(lesser gnu general public license) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다.
 <br /><br />
 20개 이상의 프로그래밍 언어의 버그와 code smells, 코드 커버리지, 유닛 테스트, 코딩 표준, 중복 코드, 코드 복잡도, 주석 및 보안 취약점의 보고서를 제공하고, 자동 리뷰를 수행하여 지속적인 코드 품질 검사를 위한 플랫폼입니다.
 <br /><br />
-SonarQube는 Maven, Ant, Gradle, MSBuild 및 CI(continuous integration) 도구인 Atlassian Bamboo, Jenkins, Hudson 등과의 연동을 제공합니다.
+sonarqube는 Maven, Ant, Gradle, MSBuild 및 CI(continuous integration) 도구인 Atlassian Bamboo, Jenkins, Hudson 등과의 연동을 제공합니다.
 <br /><br />
-이 포스트에서는 우분투(ubuntu) 환경에서 SonarQube를 설치하는 방법을 소개합니다.
+이 포스트에서는 우분투(ubuntu) 환경에서 sonarqube를 설치하는 방법을 소개합니다.
 
 
 ## 선행조건(PREREQUISITE)
@@ -39,11 +39,11 @@ SonarQube는 Maven, Ant, Gradle, MSBuild 및 CI(continuous integration) 도구�
 
 
 ## 요약(SUMMARY)
-1. SonarQube 파일 내려받기
+1. sonarqube 파일 내려받기
 2. PostgreSQL 설정
-3. SonarQube 설정
-4. 스크립트로 SonarQube 서비스 관리
-5. 웹브라우저로 SonarQube 접속
+3. sonarqube 설정
+4. 스크립트로 sonarqube 서비스 관리
+5. 웹브라우저로 sonarqube 접속
 
 
 ## 내용(CONTENTS)
@@ -55,23 +55,26 @@ $ export LINDAREX_WORKSPACE=${HOME}/workspace
 $ mkdir -p ${LINDAREX_WORKSPACE}
 ```
 
-### 1. SonarQube 파일 내려받기
+### 1. sonarqube 파일 내려받기
 ```console
 $ wget -P ${LINDAREX_WORKSPACE} https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.9.1.zip
 ```
+
 
 ### 2. 내려받은 파일 압축 해제
 ```console
 $ unzip -q ${LINDAREX_WORKSPACE}/sonarqube-7.9.1.zip -d ${LINDAREX_WORKSPACE}
 ```
 
+
 ### 3. Symbolic link 설정
 ```console
 $ ln -s ${LINDAREX_WORKSPACE}/sonarqube-7.9.1 ${LINDAREX_WORKSPACE}/sonarqube
 ```
 
+
 ### 4. PostgreSQL 설정
-- SonarQube와 연동 될 사용자 계정과 데이터베이스(Database)를 생성합니다.
+- sonarqube와 연동 될 사용자 계정과 데이터베이스(Database)를 생성합니다.
 
 #### 4.1. postgres 계정 로그인
 ```console
@@ -129,8 +132,9 @@ postgres=# \q
 $ exit
 ```
 
-### 5. SonarQube 설정
-- 위에서 생성한 PostgreSQL 사용자 정보와 Database 정보, SonarQube UI의 포트를 설정합니다.
+
+### 5. sonarqube 설정
+- 위에서 생성한 PostgreSQL 사용자 정보와 Database 정보, sonarqube UI의 포트를 설정합니다.
 
 ```console
 $ vi ${LINDAREX_WORKSPACE}/sonarqube/conf/sonar.properties
@@ -157,6 +161,7 @@ wrapper.java.command=/home/rex/workspace/tool/java11/bin/java
 --------------------------------------------------------------------------------
 ```
 
+
 ### 6. Max map count 설정
 ```console
 $ sudo vi /etc/profile
@@ -168,53 +173,53 @@ sudo sysctl -w vm.max_map_count=262144
 --------------------------------------------------------------------------------
 ```
 
-> SonarQube를 Linux에 설치 시, 아래 사항이 요구됩니다.
+> sonarqube를 Linux에 설치 시, 아래 사항이 요구됩니다.
 - vm.max_map_count :: 262144 이상
 - fs.file-max :: 65536 이상
 - file descriptors :: 65536 이상
 - threads :: 4096 이상
 
-> SonarQube 설치 시 필요 요구사항에 대한 자세한 정보는 [https://docs.sonarqube.org/latest/requirements/requirements/](https://docs.sonarqube.org/latest/requirements/requirements/){: target="\_blank"}를 확인해 주시기 바랍니다.
+> sonarqube 설치 시 필요 요구사항에 대한 자세한 정보는 [https://docs.sonarqube.org/latest/requirements/requirements/](https://docs.sonarqube.org/latest/requirements/requirements/){: target="\_blank"}를 확인해 주시기 바랍니다.
 
 > 수정 내역 적용을 위해 아래 명령어를 입력합니다.
 ```console
 $ sudo source /etc/profile
 ```
 
-### 7. 스크립트로 SonarQube 서비스(service) 관리
-#### 7.1. SonarQube service 시작
+
+### 7. 스크립트로 sonarqube 서비스(service) 관리
+#### 7.1. sonarqube service 시작
 ```console
 $ ${LINDAREX_WORKSPACE}/sonarqube/bin/linux-x86-64/sonar.sh start
 ```
 
-#### 7.2. SonarQube service 중지
+#### 7.2. sonarqube service 중지
 ```console
 $ ${LINDAREX_WORKSPACE}/sonarqube/bin/linux-x86-64/sonar.sh stop
 ```
 
-#### 7.3. SonarQube service 재시작
+#### 7.3. sonarqube service 재시작
 ```console
 $ ${LINDAREX_WORKSPACE}/sonarqube/bin/linux-x86-64/sonar.sh restart
 ```
 
-#### 7.3. SonarQube service 상태 조회
+#### 7.3. sonarqube service 상태 조회
 ```console
 $ ${LINDAREX_WORKSPACE}/sonarqube/bin/linux-x86-64/sonar.sh status
 ```
 
-### 8. 웹브라우저로 SonarQube 접속
+
+### 8. 웹브라우저로 sonarqube 접속
 - http://[MY-IP]:9000
 
 
 ## 마무리(CONCLUSION)
-ubuntu 환경에 SonarQube 설치를 완료했습니다.
+ubuntu 환경에 sonarqube 설치를 완료했습니다.
 <br /><br />
-SonarQube를 활용하기 위해서는 추가적인 설정이 필요합니다.
-<br />
-SonarQube 하나만으로는 아무것도 할 수 없습니다.
-<br />
-Java 프로젝트(project)의 코드 정적 분석을 할 경우, project 설정 파일(build.gradle, pom.xml 등)에 SonarScanner 설정을 추가하고, CI와 연동하거나 로컬 환경에 SonarQube 설정을 해야 합니다.
-<br />
+sonarqube를 활용하기 위해서는 추가적인 설정이 필요합니다.
+<br /><br />
+Java 프로젝트(project)의 코드 정적 분석을 할 경우, project 설정 파일(build.gradle, pom.xml 등)에 SonarScanner 설정을 추가하고, CI와 연동하거나 로컬 환경에 sonarqube 설정을 해야 합니다.
+<br /><br />
 대부분 현업에서는 Jenkins 등의 CI, GitHub 등의 버전 관리(version control) 시스템과 연동하여 SonarScanner를 통해 소스 코드를 분석합니다.
 <br /><br />
 더 자세한 내용은 아래 참고 페이지를 확인해 주시기 바랍니다.

@@ -92,9 +92,9 @@ $ nohup ./scm-server > /dev/null &
 ubuntu 환경에 standalone 방식으로 SCM Manager 설치를 완료했습니다.
 <br /><br />
 SCM Manager 외에도 GitHub, GitLab, Bitbucket, GitStack 등 다양한 private git 호스팅 서비스(service)가 존재합니다.
-<br />
+<br /><br />
 타 service와 비교 시, SCM Manager의 장점은 간단히 설치하여 사용 가능하고, 설정하기 쉽다는 것입니다.
-<br />
+<br /><br />
 또한, git 외에도 svn과 mercurial 서버(server)까지 동시에 사용할 수 있으며, 기존에 사용 중이던 svn server를 그대로 이용할 수 있습니다.
 <br /><br />
 더 자세한 내용은 아래 참고 페이지를 확인해 주시기 바랍니다.

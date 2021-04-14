@@ -446,7 +446,7 @@ $ sudo systemctl kill filebeat.service
 
 ## 마무리(CONCLUSION)
 ubuntu 환경에 package로 elastic stack 설치를 완료했습니다.
-<br /><br />
+<br />
 다음 포스트에서는 elastic stack 사용 방법을 소개하겠습니다.
 
 

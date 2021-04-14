@@ -413,7 +413,8 @@ $ dig -x 10.0.1.32
 ## 마무리(CONCLUSION)
 Ubuntu 환경에 DNS 조회를 위한 name server 설정을 완료했습니다.
 <br /><br />
-내부 네트워크(network)의 name server 설정으로 network 관리가 용이하고 보안을 강화할 수 있습니다. <br />
+내부 네트워크(network)의 name server 설정으로 network 관리가 용이하고 보안을 강화할 수 있습니다.
+<br /><br />
 개발자 입장에서는 name server 설정을 통해 host file 변경 없이 내부 도메인을 사용할 수 있고, IP 변경에 신경 쓰지 않아도 되는 이점이 있습니다.
 <br /><br />
 현업에서는 name server를 주로 보안을 위해 사용하기 때문에, 개발자가 크게 신경 쓸 부분이 아닙니다. 하지만, DNS, name server에 대한 기본 개념은 이해하고 있어야 합니다.

@@ -370,7 +370,8 @@ kube-system   kube-scheduler-ip-10-0-0-162            1/1     Running   0       
 
 
 ## 마무리(CONCLUSION)
-ubuntu 환경에 kubeadm으로 kubernetes cluster 설치를 완료했습니다. <br />
+ubuntu 환경에 kubeadm으로 kubernetes cluster 설치를 완료했습니다.
+<br />
 다음 포스트에서 kubernetes architectures 및 concepts, resources 등을 소개하겠습니다.
 
 

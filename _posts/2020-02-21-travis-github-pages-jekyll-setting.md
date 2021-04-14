@@ -141,7 +141,7 @@ branches:
 
 ## 마무리(CONCLUSION)
 travis로 jekyll을 GitHub Pages에 자동 deploy하는 방법을 완료했습니다.
-<br /><br />
+<br />
 다음 포스트에서는 travis로 다른 언어를 deploy하는 방법을 소개하겠습니다.
 
 

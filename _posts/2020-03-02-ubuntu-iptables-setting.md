@@ -16,7 +16,7 @@ tags:
 iptables은 방화벽(firewall) 구성이나 NAT(network address translation)에 사용되는데, 리눅스(linux) 커널(kernel) firewall이 제공하는 테이블(table)과 체인(chain), 규칙(rule)을 시스템 관리자가 구성합니다.
 <br /><br />
 각각 다른 kernel 모듈(module)과 프로그램들은 다른 프로토콜(protocol)을 위해 사용되는데, iptables는 IPv4에, ip6tables는 IPv6에, arptables는 ARP에, ebtables는 이더넷(ethernet) 프레임에 적용됩니다.
-<br />
+<br /><br />
 linux 시스템(system)에서 iptables는 /usr/sbin/iptables에 설치되며, iptables의 후속 버전은 nftables입니다.
 <br /><br />
 이 포스트에서는 ubuntu 환경에서 iptables를 설정하는 방법을 소개합니다.

@@ -1,0 +1,1014 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.18.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- LINDAREX :: JEKYLL SEO TAG :: BIGIN -->
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>우분투(Ubuntu) 환경에 패키지(Package)로 HAProxy 설치하기 | LindaRex</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="우분투(Ubuntu) 환경에 패키지(Package)로 HAProxy 설치하기" />
+<meta name="author" content="Rex" />
+<meta property="og:locale" content="ko_KR" />
+<meta name="description" content="HAProxy(이하 haproxy)는 TCP 및 HTTP 기반 애플리케이션(application)을 위한 로드 밸런싱(load balancing) 및 프락시(proxy)를 제공하는 GNU General Public License Version 2 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. haproxy는 C 언어로 개발되었으며, 네트워크(network) 스위치(switch)에서 제공하는 L4, L7 기능을 제공합니다. haproxy는 reverse proxy 형태로 동작하며, Keepalived를 사용하여 haproxy를 이중화하여 HA(high availability) 구성을 합니다. 이 포스트에서는 우분투(ubuntu) 환경에 package로 haproxy를 설치하는 방법을 소개합니다." />
+<meta property="og:description" content="HAProxy(이하 haproxy)는 TCP 및 HTTP 기반 애플리케이션(application)을 위한 로드 밸런싱(load balancing) 및 프락시(proxy)를 제공하는 GNU General Public License Version 2 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. haproxy는 C 언어로 개발되었으며, 네트워크(network) 스위치(switch)에서 제공하는 L4, L7 기능을 제공합니다. haproxy는 reverse proxy 형태로 동작하며, Keepalived를 사용하여 haproxy를 이중화하여 HA(high availability) 구성을 합니다. 이 포스트에서는 우분투(ubuntu) 환경에 package로 haproxy를 설치하는 방법을 소개합니다." />
+<link rel="canonical" href="https://lindarex.github.io/haproxy/ubuntu-haproxy-installation/" />
+<meta property="og:url" content="https://lindarex.github.io/haproxy/ubuntu-haproxy-installation/" />
+<meta property="og:site_name" content="LindaRex" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-04-09T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="우분투(Ubuntu) 환경에 패키지(Package)로 HAProxy 설치하기" />
+<meta name="twitter:site" content="@" />
+<meta name="twitter:creator" content="@Rex" />
+<meta name="google-site-verification" content="t6VkmqsI15sIx3P1-gh3NYputZtjhDZOTkxhwDaa4Ik" />
+<script type="application/ld+json">
+{"headline":"우분투(Ubuntu) 환경에 패키지(Package)로 HAProxy 설치하기","dateModified":"2021-04-09T00:00:00+09:00","datePublished":"2021-04-09T00:00:00+09:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/haproxy/ubuntu-haproxy-installation/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"Rex"},"url":"https://lindarex.github.io/haproxy/ubuntu-haproxy-installation/","author":{"@type":"Person","name":"Rex"},"description":"HAProxy(이하 haproxy)는 TCP 및 HTTP 기반 애플리케이션(application)을 위한 로드 밸런싱(load balancing) 및 프락시(proxy)를 제공하는 GNU General Public License Version 2 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. haproxy는 C 언어로 개발되었으며, 네트워크(network) 스위치(switch)에서 제공하는 L4, L7 기능을 제공합니다. haproxy는 reverse proxy 형태로 동작하며, Keepalived를 사용하여 haproxy를 이중화하여 HA(high availability) 구성을 합니다. 이 포스트에서는 우분투(ubuntu) 환경에 package로 haproxy를 설치하는 방법을 소개합니다.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<!-- LINDAREX :: JEKYLL SEO TAG :: END -->
+
+<!-- LINDAREX :: NAVER SITE VERIFICATION :: BIGIN -->
+<meta name="naver-site-verification" content="dc2a3d180320948e3afb3e88f999a6d8a478e024">
+<!-- LINDAREX :: NAVER SITE VERIFICATION :: END -->
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="LindaRex Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- LINDAREX :: FAVICON :: BIGIN -->
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico">
+<!-- LINDAREX :: FAVICON :: END -->
+
+<!-- LINDAREX :: FEED :: BIGIN -->
+<!-- <link rel="alternate" type="application/rss+xml" href="https://lindarex.github.io/feed.xml" title="LindaRex Feed"> -->
+<!-- LINDAREX :: FEED :: END -->
+
+<!-- LINDAREX :: GOOGLE ANALYTICS :: BIGIN -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-157973560-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-157973560-1');
+</script>
+<!-- LINDAREX :: GOOGLE ANALYTICS :: END -->
+
+<!-- LINDAREX :: NAVER ANALYTICS :: BIGIN -->
+<!-- Naver Analytics -->
+<script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
+<script type="text/javascript">
+if(!wcs_add) var wcs_add = {};
+wcs_add["wa"] = "42df78a7dfd6f0";
+wcs_do();
+</script>
+<!-- LINDAREX :: NAVER ANALYTICS :: END -->
+
+<!-- LINDAREX :: GOOGLE ADSENSE :: BIGIN -->
+<script data-ad-client="ca-pub-8367174639781348" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- LINDAREX :: GOOGLE ADSENSE :: END -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/LindaRex_LOGO.jpg" alt="LindaRex logo"></a>
+        
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/year-archive/" >Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/" >Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/" >Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/" >About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">OPEN SOURCE SOFTWARE</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/kubernetes/" class="">KUBERNETES</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/jenkins/" class="">JENKINS</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/sonarqube/" class="">SONARQUBE</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/scm-manager/" class="">SCM MANAGER</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/postgresql/" class="">POSTGRESQL</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/elastic-stack/" class="">ELASTIC STACK</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/bind9/" class="">BIND9</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/fail2ban/" class="">FAIL2BAN</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/haproxy/" class="">HAPROXY</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">CLOUD COMPUTING</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/bosh/" class="">BOSH</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/cfar/" class="">CFAR</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/aws/" class="">AWS</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/azure/" class="">AZURE</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">INTERESTED</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/ubuntu/" class="">UBUNTU</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/concepts/" class="">CONCEPTS</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/vmware-workstation/" class="">VMWARE WORKSTATION</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/categories/travis-ci/" class="">TRAVIS CI</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+
+  <!-- LINDAREX :: HITS :: LEFT-SIDEBAR :: BEGIN -->
+  <!-- https://hits.seeyoufarm.com/ -->
+  <!-- https://github.com/gjbae1212/hit-counter -->
+  <div>
+    <a href="https://hits.seeyoufarm.com">
+      <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Flindarex.github.io&count_bg=%23999999&title_bg=%23000000&icon=&icon_color=%23E7E7E7&title=views&edge_flat=false" style="width: 87px; height: 20px; margin: 0 0 1em 0"/>
+    </a>
+  </div>
+  <!-- LINDAREX :: HITS :: LEFT-SIDEBAR :: END -->
+
+  <!-- LINDAREX :: GOOGLE ADSENSE :: LEFT-SIDEBAR :: BIGIN-->
+  <!-- LINDAREX :: GOOGLE ADSENSE :: LEFT-SIDEBAR :: HTML :: BIGIN -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 2020-02-22-ad-left-sidebar -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:200px;height:200px"
+     data-ad-client="ca-pub-8367174639781348"
+     data-ad-slot="5840394475"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<!-- LINDAREX :: GOOGLE ADSENSE :: LEFT-SIDEBAR :: HTML :: END -->
+
+  <!-- LINDAREX :: GOOGLE ADSENSE :: LEFT-SIDEBAR :: END-->
+</nav>
+    
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="우분투(Ubuntu) 환경에 패키지(Package)로 HAProxy 설치하기">
+    <meta itemprop="description" content="HAProxy(이하 haproxy)는 TCP 및 HTTP 기반 애플리케이션(application)을 위한 로드 밸런싱(load balancing) 및 프락시(proxy)를 제공하는 GNU General Public License Version 2 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다.haproxy는 C 언어로 개발되었으며, 네트워크(network) 스위치(switch)에서 제공하는 L4, L7 기능을 제공합니다.haproxy는 reverse proxy 형태로 동작하며, Keepalived를 사용하여 haproxy를 이중화하여 HA(high availability) 구성을 합니다.이 포스트에서는 우분투(ubuntu) 환경에 package로 haproxy를 설치하는 방법을 소개합니다.">
+    <meta itemprop="datePublished" content="2021-04-09T00:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">우분투(Ubuntu) 환경에 패키지(Package)로 HAProxy 설치하기
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+          
+          <!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: BIGIN -->
+          
+            <nav class="toc-custom">
+            <!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: HTML :: BIGIN -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 2020-02-22-ad-right-sidebar -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8367174639781348"
+     data-ad-slot="5781712397"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: HTML :: END -->
+
+            </nav>
+          
+          <!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: END -->
+          </aside>
+        
+        <p>HAProxy(이하 haproxy)는 TCP 및 HTTP 기반 애플리케이션(application)을 위한 로드 밸런싱(load balancing) 및 프락시(proxy)를 제공하는 GNU General Public License Version 2 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다.
+<br /><br />
+haproxy는 C 언어로 개발되었으며, 네트워크(network) 스위치(switch)에서 제공하는 L4, L7 기능을 제공합니다.
+<br /><br />
+haproxy는 reverse proxy 형태로 동작하며, Keepalived를 사용하여 haproxy를 이중화하여 HA(high availability) 구성을 합니다.
+<br /><br />
+이 포스트에서는 우분투(ubuntu) 환경에 package로 haproxy를 설치하는 방법을 소개합니다.</p>
+
+<blockquote>
+  <p>proxy에 대한 자세한 사항은 <a href="https://ko.wikipedia.org/wiki/%ED%94%84%EB%A1%9D%EC%8B%9C_%EC%84%9C%EB%B2%84" target="\_blank">https://ko.wikipedia.org/wiki/프록시_서버</a> 페이지를 참고하시기 바랍니다.</p>
+</blockquote>
+
+<blockquote>
+  <p>L4, L7은 각각 OSI 모형(Open Systems Interconnection Reference Model, OSI 7 계층)의 전송 계층(Transport layer), 응용 계층(Application layer)을 의미합니다. 자세한 사항은 <a href="https://ko.wikipedia.org/wiki/OSI_%EB%AA%A8%ED%98%95" target="\_blank">https://ko.wikipedia.org/wiki/OSI_모형</a> 페이지를 참고하시기 바랍니다.</p>
+</blockquote>
+
+<blockquote>
+  <p>reverse proxy에 대한 자세한 사항은 <a href="https://ko.wikipedia.org/wiki/%EB%A6%AC%EB%B2%84%EC%8A%A4_%ED%94%84%EB%A1%9D%EC%8B%9C" target="\_blank">https://ko.wikipedia.org/wiki/리버스_프록시</a> 페이지를 참고하시기 바랍니다.</p>
+</blockquote>
+
+<blockquote>
+  <p>Keepalived에 대한 자세한 사항은 <a href="https://www.keepalived.org/" target="\_blank">https://www.keepalived.org/</a> 페이지를 참고하시기 바랍니다.</p>
+</blockquote>
+
+<blockquote>
+  <p>high availability에 대한 자세한 사항은 <a href="https://ko.wikipedia.org/wiki/%EA%B3%A0%EA%B0%80%EC%9A%A9%EC%84%B1" target="\_blank">https://ko.wikipedia.org/wiki/고가용성</a> 페이지를 참고하시기 바랍니다.</p>
+</blockquote>
+
+<h2 id="선행조건prerequisite">선행조건(PREREQUISITE)</h2>
+<ul>
+  <li>ubuntu 환경이 필요합니다.</li>
+  <li>방화벽 설정이 필요합니다.</li>
+</ul>
+
+<blockquote>
+  <p>ubuntu 설치 방법은 <a href="https://lindarex.github.io/ubuntu/ubuntu-1804-installation/" target="\_blank">우분투(Ubuntu) 서버(Server) 18.04 설치하기</a> 포스트를 참고하시기 바랍니다.</p>
+</blockquote>
+
+<blockquote>
+  <p>방화벽 설정 방법은 <a href="https://lindarex.github.io/ubuntu/ubuntu-firewalld-installation/" target="\_blank">우분투(Ubuntu) 환경에 방화벽(Firewalld) 설치 및 설정하기</a> 포스트를 참고하시기 바랍니다.</p>
+</blockquote>
+
+<h2 id="테스트-환경test-environment">테스트 환경(TEST ENVIRONMENT)</h2>
+<ul>
+  <li>AWS EC2 instance
+    <ul>
+      <li>Ubuntu Server 18.04 LTS (HVM), EBS General Purpose (SSD) Volume Type (64비트 Arm)</li>
+      <li>m5.large (ECU, 2 vCPUs, 3.1 GHz, 8 GiB 메모리, EBS 전용)</li>
+    </ul>
+  </li>
+  <li>Ubuntu 18.04.5 LTS (GNU/Linux 5.4.0-1043-aws x86_64)</li>
+  <li>haproxy 1.8.8</li>
+</ul>
+
+<h2 id="요약summary">요약(SUMMARY)</h2>
+<ol>
+  <li>apt install 명령어로 haproxy 설치</li>
+  <li>(선택사항) 특정 버전 haproxy 설치</li>
+  <li>haproxy 설정 확인</li>
+  <li>systemctl 명령어로 haproxy 관리</li>
+</ol>
+
+<h2 id="내용contents">내용(CONTENTS)</h2>
+<h3 id="1-apt-install-명령어로-haproxy-설치">1. apt install 명령어로 haproxy 설치</h3>
+<h4 id="11-package-index-업데이트">1.1. package index 업데이트</h4>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>apt update
+</code></pre></div></div>
+
+<h4 id="12-haproxy-설치">1.2. haproxy 설치</h4>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>apt <span class="nb">install </span>haproxy <span class="nt">-y</span>
+</code></pre></div></div>
+
+<h4 id="13-haproxy-설치-확인">1.3. haproxy 설치 확인</h4>
+
+<blockquote>
+  <p>2021년 4월 13일 기준 1.8.8 버전이 설치됩니다.</p>
+</blockquote>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>haproxy <span class="nt">-v</span>
+<span class="go">HA-Proxy version 1.8.8-1ubuntu0.11 2020/06/22
+</span><span class="gp">Copyright 2000-2018 Willy Tarreau &lt;willy@haproxy.org&gt;</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="2-선택사항-특정-버전-haproxy-설치">2. (선택사항) 특정 버전 haproxy 설치</h3>
+
+<blockquote>
+  <p>2.2 LTS (Long Term Support) 버전을 설치합니다.</p>
+</blockquote>
+
+<h4 id="21-선택사항-권장-package-설치-중지-설정">2.1. (선택사항) 권장 package 설치 중지 설정</h4>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>apt <span class="nb">install</span> <span class="nt">--no-install-recommends</span> software-properties-common
+</code></pre></div></div>
+
+<h4 id="22-dedicated-ppa-활성">2.2. dedicated PPA 활성</h4>
+
+<blockquote>
+  <p>다른 버전의 haproxy PPA 정보는 <a href="https://haproxy.debian.net/" target="\_blank">https://haproxy.debian.net/</a>를 확인해 주시기 바랍니다.</p>
+</blockquote>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>add-apt-repository ppa:vbernat/haproxy-2.2
+<span class="go"> HAProxy is a free, very fast and reliable solution offering high availability, load balancing, and proxying for TCP and HTTP-based applications. It is particularly suited for web sites crawling under very high loads while needing persistence or Layer7 processing. Supporting tens of thousands of connections is clearly realistic with todays hardware. Its mode of operation makes its integration into existing architectures very easy and riskless, while still offering the possibility not to expose fragile web servers to the Net.
+
+This PPA contains packages for HAProxy 2.2.
+ More info: https://launchpad.net/~vbernat/+archive/ubuntu/haproxy-2.2
+Press [ENTER] to continue or Ctrl-c to cancel adding it.
+
+Hit:1 http://ap-northeast-2.ec2.archive.ubuntu.com/ubuntu bionic InRelease
+Hit:2 http://ap-northeast-2.ec2.archive.ubuntu.com/ubuntu bionic-updates InRelease
+Hit:3 http://ap-northeast-2.ec2.archive.ubuntu.com/ubuntu bionic-backports InRelease
+Get:4 http://security.ubuntu.com/ubuntu bionic-security InRelease [88.7 kB]
+Get:5 http://ppa.launchpad.net/vbernat/haproxy-2.2/ubuntu bionic InRelease [20.8 kB]
+Get:6 http://ppa.launchpad.net/vbernat/haproxy-2.2/ubuntu bionic/main amd64 Packages [992 B]
+Get:7 http://ppa.launchpad.net/vbernat/haproxy-2.2/ubuntu bionic/main Translation-en [704 B]
+Fetched 111 kB in 2s (67.2 kB/s)
+Reading package lists... Done
+</span></code></pre></div></div>
+
+<h4 id="23-haproxy-설치">2.3. haproxy 설치</h4>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>apt <span class="nb">install </span><span class="nv">haproxy</span><span class="o">=</span>2.2.<span class="se">\*</span> <span class="nt">-y</span>
+</code></pre></div></div>
+
+<h4 id="24-haproxy-설치-확인">2.4. haproxy 설치 확인</h4>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>haproxy <span class="nt">-v</span>
+<span class="go">HA-Proxy version 2.2.13-1ppa1~bionic 2021/04/02 - https://haproxy.org/
+Status: long-term supported branch - will stop receiving fixes around Q2 2025.
+Known bugs: http://www.haproxy.org/bugs/bugs-2.2.13.html
+</span><span class="gp">Running on: Linux 5.4.0-1043-aws #</span>45~18.04.1-Ubuntu SMP Fri Apr 9 23:32:25 UTC 2021 x86_64
+</code></pre></div></div>
+
+<h3 id="3-haproxy-설정-확인">3. haproxy 설정 확인</h3>
+
+<ul>
+  <li>설정 파일의 기본 위치는 아래와 같으며, 다음 포스트에서 haproxy를 설정하는 방법을 소개하겠습니다.</li>
+</ul>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span><span class="nb">cat</span> /etc/haproxy/haproxy.cfg
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>global
+    log /dev/log    local0
+    log /dev/log    local1 notice
+    <span class="nb">chroot</span> /var/lib/haproxy
+    stats socket /run/haproxy/admin.sock mode 660 level admin expose-fd listeners
+    stats <span class="nb">timeout </span>30s
+    user haproxy
+    group haproxy
+    daemon
+
+    <span class="c"># Default SSL material locations</span>
+    ca-base /etc/ssl/certs
+    crt-base /etc/ssl/private
+
+    <span class="c"># Default ciphers to use on SSL-enabled listening sockets.</span>
+    <span class="c"># For more information, see ciphers(1SSL). This list is from:</span>
+    <span class="c">#  https://hynek.me/articles/hardening-your-web-servers-ssl-ciphers/</span>
+    <span class="c"># An alternative list with additional directives can be obtained from</span>
+    <span class="c">#  https://mozilla.github.io/server-side-tls/ssl-config-generator/?server=haproxy</span>
+    ssl-default-bind-ciphers ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:RSA+AESGCM:RSA+AES:!aNULL:!MD5:!DSS
+    ssl-default-bind-options no-sslv3
+
+defaults
+    log global
+    mode    http
+    option  httplog
+    option  dontlognull
+        <span class="nb">timeout </span>connect 5000
+        <span class="nb">timeout </span>client  50000
+        <span class="nb">timeout </span>server  50000
+    errorfile 400 /etc/haproxy/errors/400.http
+    errorfile 403 /etc/haproxy/errors/403.http
+    errorfile 408 /etc/haproxy/errors/408.http
+    errorfile 500 /etc/haproxy/errors/500.http
+    errorfile 502 /etc/haproxy/errors/502.http
+    errorfile 503 /etc/haproxy/errors/503.http
+    errorfile 504 /etc/haproxy/errors/504.http
+</code></pre></div></div>
+
+<h3 id="4-systemctl-명령어로-haproxy-관리">4. systemctl 명령어로 haproxy 관리</h3>
+<h4 id="41-haproxy-설정-반영">4.1. haproxy 설정 반영</h4>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl daemon-reload
+</code></pre></div></div>
+
+<h4 id="42-haproxy-시작">4.2. haproxy 시작</h4>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl start haproxy
+</code></pre></div></div>
+
+<h4 id="43-haproxy-중지">4.3. haproxy 중지</h4>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl stop haproxy
+</code></pre></div></div>
+
+<h4 id="44-haproxy-재시작">4.4. haproxy 재시작</h4>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl restart haproxy
+</code></pre></div></div>
+
+<h4 id="45-haproxy-설정-재적용">4.5. haproxy 설정 재적용</h4>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl reload haproxy
+</code></pre></div></div>
+
+<h4 id="46-haproxy-상태-조회">4.6. haproxy 상태 조회</h4>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl status haproxy
+</code></pre></div></div>
+
+<h4 id="47-haproxy-활성화부팅-시-자동-시작">4.7. haproxy 활성화(부팅 시 자동 시작)</h4>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl <span class="nb">enable </span>haproxy
+</code></pre></div></div>
+
+<h4 id="48-haproxy-비활성화">4.8. haproxy 비활성화</h4>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl disable haproxy
+</code></pre></div></div>
+
+<h4 id="49-haproxy-및-관련-프로세스-모두-중지">4.9. haproxy 및 관련 프로세스 모두 중지</h4>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl <span class="nb">kill </span>haproxy
+</code></pre></div></div>
+
+<h2 id="마무리conclusion">마무리(CONCLUSION)</h2>
+<p>ubuntu 환경에 package로 haproxy 설치를 완료했습니다.
+<br /><br />
+다음 포스트에서 haproxy 설정 방법을 소개하겠습니다.
+<br /><br />
+haproxy의 자세한 내용은 아래 페이지를 확인해 주시기 바랍니다.</p>
+
+<h2 id="참고references">참고(REFERENCES)</h2>
+<ul>
+  <li><a href="https://www.haproxy.org/" target="\_blank">https://www.haproxy.org/</a></li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/haproxy" class="page__taxonomy-item" rel="tag">haproxy</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/high-availability" class="page__taxonomy-item" rel="tag">high availability</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/load-balancer" class="page__taxonomy-item" rel="tag">load balancer</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/open-source-software" class="page__taxonomy-item" rel="tag">open source software</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/open-source" class="page__taxonomy-item" rel="tag">open source</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/oss" class="page__taxonomy-item" rel="tag">oss</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/proxy" class="page__taxonomy-item" rel="tag">proxy</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/reverse-proxy" class="page__taxonomy-item" rel="tag">reverse proxy</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/ubuntu" class="page__taxonomy-item" rel="tag">ubuntu</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/haproxy" class="page__taxonomy-item" rel="tag">haproxy</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2021-04-09T00:00:00+09:00">April 9, 2021</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%EC%9A%B0%EB%B6%84%ED%88%AC%28Ubuntu%29+%ED%99%98%EA%B2%BD%EC%97%90+%ED%8C%A8%ED%82%A4%EC%A7%80%28Package%29%EB%A1%9C+HAProxy+%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0%20https%3A%2F%2Flindarex.github.io%2Fhaproxy%2Fubuntu-haproxy-installation%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flindarex.github.io%2Fhaproxy%2Fubuntu-haproxy-installation%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flindarex.github.io%2Fhaproxy%2Fubuntu-haproxy-installation%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/kubernetes/ubuntu-kubernetes-installation-with-kubespray/" class="pagination--pager" title="우분투(Ubuntu) 환경에 Kubespray로 Kubernetes 클러스터(cluster) 설치하기
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Leave a comment</h4>
+      <section id="utterances-comments"></section>
+    
+</div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/kubernetes/ubuntu-kubernetes-installation-with-kubespray/" rel="permalink">우분투(Ubuntu) 환경에 Kubespray로 Kubernetes 클러스터(cluster) 설치하기
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">kubernetes cluster를 설치하는 방법은 다양합니다.
+
+이 포스트에서는 우분투(ubuntu) 환경에서 kubespray를 이용하여 kubernetes cluster를 설치하는 방법을 소개합니다.
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/kubernetes/ubuntu-kubernetes-installation-with-kubeadm/" rel="permalink">우분투(Ubuntu) 환경에 Kubeadm으로 Kubernetes 클러스터(cluster) 설치하기
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Kubernetes(kubernetes)는 컨테이너화된 애플리케이션(application)의 배포(deployment), 확장(scaling) 및 관리(management)를 자동화하는 Apache License 2.0이 적용되는 오픈소스(open source) 컨테이너(conta...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/scm-manager/ubuntu-scm-manager-v2-installation/" rel="permalink">우분투(Ubuntu) 환경에 패키지(Package)로 SCM Manager v2 설치하기
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">SCM Manager v2(이하 scm manager)는 개별적으로 확장 가능한 가벼운 소스 코드 관리 도구로, MIT 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다.
+
+scm manager는 다양한 플러그인과 Level 3 RESTful Web...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/fail2ban/ubuntu-fail2ban-installation/" rel="permalink">우분투(Ubuntu) 환경에 패키지(Package)로 Fail2ban 설치하기
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Fail2ban(fail2ban)은 침입 차단 소프트웨어 프레임워크(framework)로, 파이썬(python) 언어로 개발되었습니다.
+
+로그(log) 파일과 iptables를 이용하여 접속 시도를 확인하고 차단하여 무차별 대입 공격으로부터 시스템을 보호합니다.
+
+패킷 제어 시스템...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- LINDAREX :: GOOGLE ADSENSE :: FOOTER :: BIGIN -->
+        <!-- LINDAREX :: GOOGLE ADSENSE :: FOOTER :: HTML ::  BIGIN -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 2020-02-22-ad-footer -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8367174639781348"
+     data-ad-slot="1870387544"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<!-- LINDAREX :: GOOGLE ADSENSE :: FOOTER :: HTML ::  END -->
+        <!-- LINDAREX :: GOOGLE ADSENSE :: FOOTER :: END -->
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://github.com/lindarex/lindarex.github.io" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 LindaRex. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+    <!-- LINDAREX :: BACK TO TOP :: BEGIN -->
+    <!-- <aside class="sidebar__top">
+      <a href="#site-nav"> <i class="fas fa-angle-double-up fa-2x"></i></a>
+    </aside> -->
+    <!-- LINDAREX :: BACK TO TOP :: END -->
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'lindarex/lindarex.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

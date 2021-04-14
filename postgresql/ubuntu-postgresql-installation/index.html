@@ -16,8 +16,8 @@
 <meta property="og:title" content="우분투(Ubuntu) 환경에 패키지(Package)로 PostgreSQL 설치하기" />
 <meta name="author" content="Rex" />
 <meta property="og:locale" content="ko_KR" />
-<meta name="description" content="PostgreSQL은 BSD(berkeley software distribution) 또는 MIT 라이선스(license)와 유사한 PostgreSQL license가 적용된 오픈소스(open source) 소프트웨어로 배포(release) 됩니다. PostgreSQL은 확장 가능성 및 표준 준수를 강조하는 객체-관계형 데이터베이스 관리 시스템(ORDBMS, object-relational database management system)으로, 트랜잭션(transaction)과 ACID(Atomicity, Consistency, Isolation, Durability)를 지원합니다. macOS 서버의 경우 PostgreSQL이 기본 데이터베이스(database)이며, MS Windows와 리눅스(linux)에서도 이용할 수 있습니다. 이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 PostgreSQL을 설치하는 방법을 소개합니다." />
-<meta property="og:description" content="PostgreSQL은 BSD(berkeley software distribution) 또는 MIT 라이선스(license)와 유사한 PostgreSQL license가 적용된 오픈소스(open source) 소프트웨어로 배포(release) 됩니다. PostgreSQL은 확장 가능성 및 표준 준수를 강조하는 객체-관계형 데이터베이스 관리 시스템(ORDBMS, object-relational database management system)으로, 트랜잭션(transaction)과 ACID(Atomicity, Consistency, Isolation, Durability)를 지원합니다. macOS 서버의 경우 PostgreSQL이 기본 데이터베이스(database)이며, MS Windows와 리눅스(linux)에서도 이용할 수 있습니다. 이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 PostgreSQL을 설치하는 방법을 소개합니다." />
+<meta name="description" content="PostgreSQL(이하 postgresql)은 BSD(berkeley software distribution) 또는 MIT 라이선스(license)와 유사한 postgresql license가 적용된 오픈소스(open source) 소프트웨어로 배포(release) 됩니다. postgresql은 확장 가능성 및 표준 준수를 강조하는 객체-관계형 데이터베이스 관리 시스템(ORDBMS, object-relational database management system)으로, 트랜잭션(transaction)과 ACID(Atomicity, Consistency, Isolation, Durability)를 지원합니다. macOS 서버의 경우 postgresql이 기본 데이터베이스(database)이며, MS Windows와 리눅스(linux)에서도 이용할 수 있습니다. 이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 postgresql을 설치하는 방법을 소개합니다." />
+<meta property="og:description" content="PostgreSQL(이하 postgresql)은 BSD(berkeley software distribution) 또는 MIT 라이선스(license)와 유사한 postgresql license가 적용된 오픈소스(open source) 소프트웨어로 배포(release) 됩니다. postgresql은 확장 가능성 및 표준 준수를 강조하는 객체-관계형 데이터베이스 관리 시스템(ORDBMS, object-relational database management system)으로, 트랜잭션(transaction)과 ACID(Atomicity, Consistency, Isolation, Durability)를 지원합니다. macOS 서버의 경우 postgresql이 기본 데이터베이스(database)이며, MS Windows와 리눅스(linux)에서도 이용할 수 있습니다. 이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 postgresql을 설치하는 방법을 소개합니다." />
 <link rel="canonical" href="https://lindarex.github.io/postgresql/ubuntu-postgresql-installation/" />
 <meta property="og:url" content="https://lindarex.github.io/postgresql/ubuntu-postgresql-installation/" />
 <meta property="og:site_name" content="LindaRex" />
@@ -29,7 +29,7 @@
 <meta name="twitter:creator" content="@Rex" />
 <meta name="google-site-verification" content="t6VkmqsI15sIx3P1-gh3NYputZtjhDZOTkxhwDaa4Ik" />
 <script type="application/ld+json">
-{"headline":"우분투(Ubuntu) 환경에 패키지(Package)로 PostgreSQL 설치하기","dateModified":"2020-02-17T00:00:00+09:00","datePublished":"2020-02-17T00:00:00+09:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/postgresql/ubuntu-postgresql-installation/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"Rex"},"url":"https://lindarex.github.io/postgresql/ubuntu-postgresql-installation/","author":{"@type":"Person","name":"Rex"},"description":"PostgreSQL은 BSD(berkeley software distribution) 또는 MIT 라이선스(license)와 유사한 PostgreSQL license가 적용된 오픈소스(open source) 소프트웨어로 배포(release) 됩니다. PostgreSQL은 확장 가능성 및 표준 준수를 강조하는 객체-관계형 데이터베이스 관리 시스템(ORDBMS, object-relational database management system)으로, 트랜잭션(transaction)과 ACID(Atomicity, Consistency, Isolation, Durability)를 지원합니다. macOS 서버의 경우 PostgreSQL이 기본 데이터베이스(database)이며, MS Windows와 리눅스(linux)에서도 이용할 수 있습니다. 이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 PostgreSQL을 설치하는 방법을 소개합니다.","@context":"https://schema.org"}</script>
+{"headline":"우분투(Ubuntu) 환경에 패키지(Package)로 PostgreSQL 설치하기","dateModified":"2020-02-17T00:00:00+09:00","datePublished":"2020-02-17T00:00:00+09:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/postgresql/ubuntu-postgresql-installation/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"Rex"},"url":"https://lindarex.github.io/postgresql/ubuntu-postgresql-installation/","author":{"@type":"Person","name":"Rex"},"description":"PostgreSQL(이하 postgresql)은 BSD(berkeley software distribution) 또는 MIT 라이선스(license)와 유사한 postgresql license가 적용된 오픈소스(open source) 소프트웨어로 배포(release) 됩니다. postgresql은 확장 가능성 및 표준 준수를 강조하는 객체-관계형 데이터베이스 관리 시스템(ORDBMS, object-relational database management system)으로, 트랜잭션(transaction)과 ACID(Atomicity, Consistency, Isolation, Durability)를 지원합니다. macOS 서버의 경우 postgresql이 기본 데이터베이스(database)이며, MS Windows와 리눅스(linux)에서도 이용할 수 있습니다. 이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 postgresql을 설치하는 방법을 소개합니다.","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <!-- LINDAREX :: JEKYLL SEO TAG :: END -->
@@ -390,7 +390,7 @@ wcs_do();
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="우분투(Ubuntu) 환경에 패키지(Package)로 PostgreSQL 설치하기">
-    <meta itemprop="description" content="PostgreSQL은 BSD(berkeley software distribution) 또는 MIT 라이선스(license)와 유사한 PostgreSQL license가 적용된 오픈소스(open source) 소프트웨어로 배포(release) 됩니다.PostgreSQL은 확장 가능성 및 표준 준수를 강조하는 객체-관계형 데이터베이스 관리 시스템(ORDBMS, object-relational database management system)으로, 트랜잭션(transaction)과 ACID(Atomicity, Consistency, Isolation, Durability)를 지원합니다.macOS 서버의 경우 PostgreSQL이 기본 데이터베이스(database)이며, MS Windows와 리눅스(linux)에서도 이용할 수 있습니다.이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 PostgreSQL을 설치하는 방법을 소개합니다.">
+    <meta itemprop="description" content="PostgreSQL(이하 postgresql)은 BSD(berkeley software distribution) 또는 MIT 라이선스(license)와 유사한 postgresql license가 적용된 오픈소스(open source) 소프트웨어로 배포(release) 됩니다.postgresql은 확장 가능성 및 표준 준수를 강조하는 객체-관계형 데이터베이스 관리 시스템(ORDBMS, object-relational database management system)으로, 트랜잭션(transaction)과 ACID(Atomicity, Consistency, Isolation, Durability)를 지원합니다.macOS 서버의 경우 postgresql이 기본 데이터베이스(database)이며, MS Windows와 리눅스(linux)에서도 이용할 수 있습니다.이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 postgresql을 설치하는 방법을 소개합니다.">
     <meta itemprop="datePublished" content="2020-02-17T00:00:00+09:00">
     
 
@@ -429,13 +429,13 @@ wcs_do();
           <!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: END -->
           </aside>
         
-        <p>PostgreSQL은 BSD(berkeley software distribution) 또는 MIT 라이선스(license)와 유사한 PostgreSQL license가 적용된 오픈소스(open source) 소프트웨어로 배포(release) 됩니다.
+        <p>PostgreSQL(이하 postgresql)은 BSD(berkeley software distribution) 또는 MIT 라이선스(license)와 유사한 postgresql license가 적용된 오픈소스(open source) 소프트웨어로 배포(release) 됩니다.
 <br /><br />
-PostgreSQL은 확장 가능성 및 표준 준수를 강조하는 객체-관계형 데이터베이스 관리 시스템(ORDBMS, object-relational database management system)으로, 트랜잭션(transaction)과 ACID(Atomicity, Consistency, Isolation, Durability)를 지원합니다.
+postgresql은 확장 가능성 및 표준 준수를 강조하는 객체-관계형 데이터베이스 관리 시스템(ORDBMS, object-relational database management system)으로, 트랜잭션(transaction)과 ACID(Atomicity, Consistency, Isolation, Durability)를 지원합니다.
 <br /><br />
-macOS 서버의 경우 PostgreSQL이 기본 데이터베이스(database)이며, MS Windows와 리눅스(linux)에서도 이용할 수 있습니다.
+macOS 서버의 경우 postgresql이 기본 데이터베이스(database)이며, MS Windows와 리눅스(linux)에서도 이용할 수 있습니다.
 <br /><br />
-이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 PostgreSQL을 설치하는 방법을 소개합니다.</p>
+이 포스트에서는 우분투(ubuntu) 환경에서 패키지(package)로 postgresql을 설치하는 방법을 소개합니다.</p>
 
 <h2 id="선행조건prerequisite">선행조건(PREREQUISITE)</h2>
 <ul>
@@ -465,26 +465,26 @@ macOS 서버의 경우 PostgreSQL이 기본 데이터베이스(database)이며, 
 
 <h2 id="요약summary">요약(SUMMARY)</h2>
 <ol>
-  <li>PostgreSQL debian packages repository 설정</li>
-  <li>apt 명령어로 PostgreSQL 설치</li>
-  <li>PostgreSQL 설정</li>
-  <li>systemctl 명령어로 PostgreSQL 실행</li>
+  <li>postgresql debian packages repository 설정</li>
+  <li>apt 명령어로 postgresql 설치</li>
+  <li>postgresql 설정</li>
+  <li>systemctl 명령어로 postgresql 실행</li>
 </ol>
 
 <h2 id="내용contents">내용(CONTENTS)</h2>
-<h3 id="1-postgresql-debian-packages-repository-추가">1. PostgreSQL debian packages repository 추가</h3>
+<h3 id="1-postgresql-debian-packages-repository-추가">1. postgresql debian packages repository 추가</h3>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>sh <span class="nt">-c</span> <span class="s1">'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" &gt; /etc/apt/sources.list.d/pgdg.list'</span>
 </code></pre></div></div>
 
-<h3 id="2-postgresql-debian-packages-repository-key-추가">2. PostgreSQL debian packages repository key 추가</h3>
+<h3 id="2-postgresql-debian-packages-repository-key-추가">2. postgresql debian packages repository key 추가</h3>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>wget <span class="nt">-q</span> https://www.postgresql.org/media/keys/ACCC4CF8.asc <span class="nt">-O</span> - | <span class="nb">sudo </span>apt-key add -
 </code></pre></div></div>
 
-<h3 id="3-apt-install-명령어로-postgresql-설치">3. apt install 명령어로 PostgreSQL 설치</h3>
+<h3 id="3-apt-install-명령어로-postgresql-설치">3. apt install 명령어로 postgresql 설치</h3>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt update <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>apt <span class="nb">install </span>postgresql postgresql-contrib <span class="nt">-y</span>
 </code></pre></div></div>
 
-<h3 id="4-postgresql-설정">4. PostgreSQL 설정</h3>
+<h3 id="4-postgresql-설정">4. postgresql 설정</h3>
 
 <blockquote>
   <p>일반 사용자 계정으로 진행합니다.</p>
@@ -523,7 +523,7 @@ macOS 서버의 경우 PostgreSQL이 기본 데이터베이스(database)이며, 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>/usr/lib/postgresql/11/bin/initdb
 </code></pre></div></div>
 
-<h4 id="44-postgresql-설정-수정">4.4. PostgreSQL 설정 수정</h4>
+<h4 id="44-postgresql-설정-수정">4.4. postgresql 설정 수정</h4>
 <ul>
   <li>아래 설정으로 외부 접속이 가능하게 합니다.</li>
 </ul>
@@ -549,49 +549,49 @@ host    all             all             0.0.0.0/0               password
 <span class="nt">--------------------------------------------------------------------------------</span>
 </code></pre></div></div>
 
-<h3 id="5-systemctl-명령어로-postgresql-서비스service-관리">5. systemctl 명령어로 PostgreSQL 서비스(service) 관리</h3>
-<h4 id="51-postgresql-service-설정-반영">5.1. PostgreSQL service 설정 반영</h4>
+<h3 id="5-systemctl-명령어로-postgresql-서비스service-관리">5. systemctl 명령어로 postgresql 서비스(service) 관리</h3>
+<h4 id="51-postgresql-service-설정-반영">5.1. postgresql service 설정 반영</h4>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl daemon-reload
 </code></pre></div></div>
 
-<h4 id="52-postgresql-service-시작">5.2. PostgreSQL service 시작</h4>
+<h4 id="52-postgresql-service-시작">5.2. postgresql service 시작</h4>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl start postgresql.service
 </code></pre></div></div>
 
-<h4 id="53-postgresql-service-중지">5.3. PostgreSQL service 중지</h4>
+<h4 id="53-postgresql-service-중지">5.3. postgresql service 중지</h4>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl stop postgresql.service
 </code></pre></div></div>
 
-<h4 id="54-postgresql-service-재시작">5.4. PostgreSQL service 재시작</h4>
+<h4 id="54-postgresql-service-재시작">5.4. postgresql service 재시작</h4>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl restart postgresql.service
 </code></pre></div></div>
 
-<h4 id="55-postgresql-service-설정-재적용">5.5. PostgreSQL service 설정 재적용</h4>
+<h4 id="55-postgresql-service-설정-재적용">5.5. postgresql service 설정 재적용</h4>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl reload postgresql.service
 </code></pre></div></div>
 
-<h4 id="56-postgresql-service-상태-조회">5.6. PostgreSQL service 상태 조회</h4>
+<h4 id="56-postgresql-service-상태-조회">5.6. postgresql service 상태 조회</h4>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl status postgresql.service
 </code></pre></div></div>
 
-<h4 id="57-postgresql-service-활성화부팅-시-자동-시작">5.7. PostgreSQL service 활성화(부팅 시 자동 시작)</h4>
+<h4 id="57-postgresql-service-활성화부팅-시-자동-시작">5.7. postgresql service 활성화(부팅 시 자동 시작)</h4>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl <span class="nb">enable </span>postgresql.service
 </code></pre></div></div>
 
-<h4 id="58-postgresql-service-비활성화">5.8. PostgreSQL service 비활성화</h4>
+<h4 id="58-postgresql-service-비활성화">5.8. postgresql service 비활성화</h4>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl disable postgresql.service
 </code></pre></div></div>
 
-<h4 id="59-postgresql-service-및-관련-프로세스-모두-중지">5.9. PostgreSQL service 및 관련 프로세스 모두 중지</h4>
+<h4 id="59-postgresql-service-및-관련-프로세스-모두-중지">5.9. postgresql service 및 관련 프로세스 모두 중지</h4>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl <span class="nb">kill </span>postgresql.service
 </code></pre></div></div>
 
 <h2 id="마무리conclusion">마무리(CONCLUSION)</h2>
-<p>ubuntu 환경에 package로 PostgreSQL 설치를 완료했습니다.
+<p>ubuntu 환경에 package로 postgresql 설치를 완료했습니다.
 <br /><br />
-2020년 3월 기준, open source 소프트웨어인 PostgreSQL은 세계 점유율 4위로, open source 프로젝트 커뮤니티 기반의 database 중에는 1위이며, 대량 Insert 처리와 DW(data warehouse)에 강한 모습을 보이면서 국내에서도 점유율이 증가하는 추세입니다.
+2020년 3월 기준, open source 소프트웨어인 postgresql은 세계 점유율 4위로, open source 프로젝트 커뮤니티 기반의 database 중에는 1위이며, 대량 Insert 처리와 DW(data warehouse)에 강한 모습을 보이면서 국내에서도 점유율이 증가하는 추세입니다.
 <br /><br />
-PostgreSQL은 pgAdmin, psql cli(command line interface, 명령줄 인터페이스) 등으로 PostgreSQL을 관리하며, 실제 기능적인 면에서 Oracle과 유사한 것이 많기 때문에, Oracle 사용자들이 가장 쉽게 테스트하고 적용할 수 있습니다.
+postgresql은 pgAdmin, psql cli(command line interface, 명령줄 인터페이스) 등으로 postgresql을 관리하며, 실제 기능적인 면에서 Oracle과 유사한 것이 많기 때문에, Oracle 사용자들이 가장 쉽게 테스트하고 적용할 수 있습니다.
 <br /><br />
 더 자세한 내용은 아래 참고 페이지를 확인해 주시기 바랍니다.</p>
 
@@ -607,7 +607,7 @@ PostgreSQL은 pgAdmin, psql cli(command line interface, 명령줄 인터페이�
 <ul>
   <li><a href="https://www.postgresql.org/" target="\_blank">https://www.postgresql.org/</a></li>
   <li><a href="https://www.postgresql.org/download/linux/ubuntu/" target="\_blank">https://www.postgresql.org/download/linux/ubuntu/</a></li>
-  <li><a href="https://ko.wikipedia.org/wiki/PostgreSQL" target="\_blank">https://ko.wikipedia.org/wiki/PostgreSQL</a></li>
+  <li><a href="https://ko.wikipedia.org/wiki/postgresql" target="\_blank">https://ko.wikipedia.org/wiki/postgresql</a></li>
   <li><a href="https://d2.naver.com/helloworld/227936" target="\_blank">https://d2.naver.com/helloworld/227936</a></li>
 </ul>
 
@@ -749,7 +749,7 @@ PostgreSQL은 pgAdmin, psql cli(command line interface, 명령줄 인터페이�
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">HAProxy(이하 haproxy)는 TCP 및 HTTP 기반 애플리케이션(application)을 위한 로드 밸런싱(load balancing) 및 프락시(proxy)를 제공하는 GNU General Public License Version 2 라이선스(license)가 적용된 ...</p>
+    <p class="archive__item-excerpt" itemprop="description">HAProxy(이하 haproxy)는 TCP 및 HTTP 기반의 애플리케이션(application)을 위한 로드 밸런싱(load balancing) 및 프락시(proxy)를 제공하는 GNU General Public License Version 2 라이선스(license)가 적용된...</p>
   </article>
 </div>
 

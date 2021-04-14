@@ -16,8 +16,8 @@
 <meta property="og:title" content="우분투(Ubuntu) 환경에 SonarQube 설치하기" />
 <meta name="author" content="Rex" />
 <meta property="og:locale" content="ko_KR" />
-<meta name="description" content="SonarQube는 정적 코드 분석기로, LGPL(lesser gnu general public license) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. 20개 이상의 프로그래밍 언어의 버그와 code smells, 코드 커버리지, 유닛 테스트, 코딩 표준, 중복 코드, 코드 복잡도, 주석 및 보안 취약점의 보고서를 제공하고, 자동 리뷰를 수행하여 지속적인 코드 품질 검사를 위한 플랫폼입니다. SonarQube는 Maven, Ant, Gradle, MSBuild 및 CI(continuous integration) 도구인 Atlassian Bamboo, Jenkins, Hudson 등과의 연동을 제공합니다. 이 포스트에서는 우분투(ubuntu) 환경에서 SonarQube를 설치하는 방법을 소개합니다." />
-<meta property="og:description" content="SonarQube는 정적 코드 분석기로, LGPL(lesser gnu general public license) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. 20개 이상의 프로그래밍 언어의 버그와 code smells, 코드 커버리지, 유닛 테스트, 코딩 표준, 중복 코드, 코드 복잡도, 주석 및 보안 취약점의 보고서를 제공하고, 자동 리뷰를 수행하여 지속적인 코드 품질 검사를 위한 플랫폼입니다. SonarQube는 Maven, Ant, Gradle, MSBuild 및 CI(continuous integration) 도구인 Atlassian Bamboo, Jenkins, Hudson 등과의 연동을 제공합니다. 이 포스트에서는 우분투(ubuntu) 환경에서 SonarQube를 설치하는 방법을 소개합니다." />
+<meta name="description" content="SonarQube(이하 sonarqube)는 정적 코드 분석기로, LGPL(lesser gnu general public license) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. 20개 이상의 프로그래밍 언어의 버그와 code smells, 코드 커버리지, 유닛 테스트, 코딩 표준, 중복 코드, 코드 복잡도, 주석 및 보안 취약점의 보고서를 제공하고, 자동 리뷰를 수행하여 지속적인 코드 품질 검사를 위한 플랫폼입니다. sonarqube는 Maven, Ant, Gradle, MSBuild 및 CI(continuous integration) 도구인 Atlassian Bamboo, Jenkins, Hudson 등과의 연동을 제공합니다. 이 포스트에서는 우분투(ubuntu) 환경에서 sonarqube를 설치하는 방법을 소개합니다." />
+<meta property="og:description" content="SonarQube(이하 sonarqube)는 정적 코드 분석기로, LGPL(lesser gnu general public license) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. 20개 이상의 프로그래밍 언어의 버그와 code smells, 코드 커버리지, 유닛 테스트, 코딩 표준, 중복 코드, 코드 복잡도, 주석 및 보안 취약점의 보고서를 제공하고, 자동 리뷰를 수행하여 지속적인 코드 품질 검사를 위한 플랫폼입니다. sonarqube는 Maven, Ant, Gradle, MSBuild 및 CI(continuous integration) 도구인 Atlassian Bamboo, Jenkins, Hudson 등과의 연동을 제공합니다. 이 포스트에서는 우분투(ubuntu) 환경에서 sonarqube를 설치하는 방법을 소개합니다." />
 <link rel="canonical" href="https://lindarex.github.io/sonarqube/ubuntu-sonarqube-installation/" />
 <meta property="og:url" content="https://lindarex.github.io/sonarqube/ubuntu-sonarqube-installation/" />
 <meta property="og:site_name" content="LindaRex" />
@@ -29,7 +29,7 @@
 <meta name="twitter:creator" content="@Rex" />
 <meta name="google-site-verification" content="t6VkmqsI15sIx3P1-gh3NYputZtjhDZOTkxhwDaa4Ik" />
 <script type="application/ld+json">
-{"headline":"우분투(Ubuntu) 환경에 SonarQube 설치하기","dateModified":"2020-02-18T00:00:00+09:00","datePublished":"2020-02-18T00:00:00+09:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/sonarqube/ubuntu-sonarqube-installation/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"Rex"},"url":"https://lindarex.github.io/sonarqube/ubuntu-sonarqube-installation/","author":{"@type":"Person","name":"Rex"},"description":"SonarQube는 정적 코드 분석기로, LGPL(lesser gnu general public license) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. 20개 이상의 프로그래밍 언어의 버그와 code smells, 코드 커버리지, 유닛 테스트, 코딩 표준, 중복 코드, 코드 복잡도, 주석 및 보안 취약점의 보고서를 제공하고, 자동 리뷰를 수행하여 지속적인 코드 품질 검사를 위한 플랫폼입니다. SonarQube는 Maven, Ant, Gradle, MSBuild 및 CI(continuous integration) 도구인 Atlassian Bamboo, Jenkins, Hudson 등과의 연동을 제공합니다. 이 포스트에서는 우분투(ubuntu) 환경에서 SonarQube를 설치하는 방법을 소개합니다.","@context":"https://schema.org"}</script>
+{"headline":"우분투(Ubuntu) 환경에 SonarQube 설치하기","dateModified":"2020-02-18T00:00:00+09:00","datePublished":"2020-02-18T00:00:00+09:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/sonarqube/ubuntu-sonarqube-installation/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"Rex"},"url":"https://lindarex.github.io/sonarqube/ubuntu-sonarqube-installation/","author":{"@type":"Person","name":"Rex"},"description":"SonarQube(이하 sonarqube)는 정적 코드 분석기로, LGPL(lesser gnu general public license) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. 20개 이상의 프로그래밍 언어의 버그와 code smells, 코드 커버리지, 유닛 테스트, 코딩 표준, 중복 코드, 코드 복잡도, 주석 및 보안 취약점의 보고서를 제공하고, 자동 리뷰를 수행하여 지속적인 코드 품질 검사를 위한 플랫폼입니다. sonarqube는 Maven, Ant, Gradle, MSBuild 및 CI(continuous integration) 도구인 Atlassian Bamboo, Jenkins, Hudson 등과의 연동을 제공합니다. 이 포스트에서는 우분투(ubuntu) 환경에서 sonarqube를 설치하는 방법을 소개합니다.","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <!-- LINDAREX :: JEKYLL SEO TAG :: END -->
@@ -390,7 +390,7 @@ wcs_do();
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="우분투(Ubuntu) 환경에 SonarQube 설치하기">
-    <meta itemprop="description" content="SonarQube는 정적 코드 분석기로, LGPL(lesser gnu general public license) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다.20개 이상의 프로그래밍 언어의 버그와 code smells, 코드 커버리지, 유닛 테스트, 코딩 표준, 중복 코드, 코드 복잡도, 주석 및 보안 취약점의 보고서를 제공하고, 자동 리뷰를 수행하여 지속적인 코드 품질 검사를 위한 플랫폼입니다.SonarQube는 Maven, Ant, Gradle, MSBuild 및 CI(continuous integration) 도구인 Atlassian Bamboo, Jenkins, Hudson 등과의 연동을 제공합니다.이 포스트에서는 우분투(ubuntu) 환경에서 SonarQube를 설치하는 방법을 소개합니다.">
+    <meta itemprop="description" content="SonarQube(이하 sonarqube)는 정적 코드 분석기로, LGPL(lesser gnu general public license) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다.20개 이상의 프로그래밍 언어의 버그와 code smells, 코드 커버리지, 유닛 테스트, 코딩 표준, 중복 코드, 코드 복잡도, 주석 및 보안 취약점의 보고서를 제공하고, 자동 리뷰를 수행하여 지속적인 코드 품질 검사를 위한 플랫폼입니다.sonarqube는 Maven, Ant, Gradle, MSBuild 및 CI(continuous integration) 도구인 Atlassian Bamboo, Jenkins, Hudson 등과의 연동을 제공합니다.이 포스트에서는 우분투(ubuntu) 환경에서 sonarqube를 설치하는 방법을 소개합니다.">
     <meta itemprop="datePublished" content="2020-02-18T00:00:00+09:00">
     
 
@@ -429,13 +429,13 @@ wcs_do();
           <!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: END -->
           </aside>
         
-        <p>SonarQube는 정적 코드 분석기로, LGPL(lesser gnu general public license) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다.
+        <p>SonarQube(이하 sonarqube)는 정적 코드 분석기로, LGPL(lesser gnu general public license) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다.
 <br /><br />
 20개 이상의 프로그래밍 언어의 버그와 code smells, 코드 커버리지, 유닛 테스트, 코딩 표준, 중복 코드, 코드 복잡도, 주석 및 보안 취약점의 보고서를 제공하고, 자동 리뷰를 수행하여 지속적인 코드 품질 검사를 위한 플랫폼입니다.
 <br /><br />
-SonarQube는 Maven, Ant, Gradle, MSBuild 및 CI(continuous integration) 도구인 Atlassian Bamboo, Jenkins, Hudson 등과의 연동을 제공합니다.
+sonarqube는 Maven, Ant, Gradle, MSBuild 및 CI(continuous integration) 도구인 Atlassian Bamboo, Jenkins, Hudson 등과의 연동을 제공합니다.
 <br /><br />
-이 포스트에서는 우분투(ubuntu) 환경에서 SonarQube를 설치하는 방법을 소개합니다.</p>
+이 포스트에서는 우분투(ubuntu) 환경에서 sonarqube를 설치하는 방법을 소개합니다.</p>
 
 <h2 id="선행조건prerequisite">선행조건(PREREQUISITE)</h2>
 <ul>
@@ -466,11 +466,11 @@ SonarQube는 Maven, Ant, Gradle, MSBuild 및 CI(continuous integration) 도구�
 
 <h2 id="요약summary">요약(SUMMARY)</h2>
 <ol>
-  <li>SonarQube 파일 내려받기</li>
+  <li>sonarqube 파일 내려받기</li>
   <li>PostgreSQL 설정</li>
-  <li>SonarQube 설정</li>
-  <li>스크립트로 SonarQube 서비스 관리</li>
-  <li>웹브라우저로 SonarQube 접속</li>
+  <li>sonarqube 설정</li>
+  <li>스크립트로 sonarqube 서비스 관리</li>
+  <li>웹브라우저로 sonarqube 접속</li>
 </ol>
 
 <h2 id="내용contents">내용(CONTENTS)</h2>
@@ -483,7 +483,7 @@ SonarQube는 Maven, Ant, Gradle, MSBuild 및 CI(continuous integration) 도구�
 <span class="gp">$</span><span class="w"> </span><span class="nb">mkdir</span> <span class="nt">-p</span> <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>
 </code></pre></div></div>
 
-<h3 id="1-sonarqube-파일-내려받기">1. SonarQube 파일 내려받기</h3>
+<h3 id="1-sonarqube-파일-내려받기">1. sonarqube 파일 내려받기</h3>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>wget <span class="nt">-P</span> <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span> https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.9.1.zip
 </code></pre></div></div>
 
@@ -497,7 +497,7 @@ SonarQube는 Maven, Ant, Gradle, MSBuild 및 CI(continuous integration) 도구�
 
 <h3 id="4-postgresql-설정">4. PostgreSQL 설정</h3>
 <ul>
-  <li>SonarQube와 연동 될 사용자 계정과 데이터베이스(Database)를 생성합니다.</li>
+  <li>sonarqube와 연동 될 사용자 계정과 데이터베이스(Database)를 생성합니다.</li>
 </ul>
 
 <h4 id="41-postgres-계정-로그인">4.1. postgres 계정 로그인</h4>
@@ -549,9 +549,9 @@ SonarQube는 Maven, Ant, Gradle, MSBuild 및 CI(continuous integration) 도구�
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">exit</span>
 </code></pre></div></div>
 
-<h3 id="5-sonarqube-설정">5. SonarQube 설정</h3>
+<h3 id="5-sonarqube-설정">5. sonarqube 설정</h3>
 <ul>
-  <li>위에서 생성한 PostgreSQL 사용자 정보와 Database 정보, SonarQube UI의 포트를 설정합니다.</li>
+  <li>위에서 생성한 PostgreSQL 사용자 정보와 Database 정보, sonarqube UI의 포트를 설정합니다.</li>
 </ul>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>vi <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/sonarqube/conf/sonar.properties
@@ -587,7 +587,7 @@ wrapper.java.command<span class="o">=</span>/home/rex/workspace/tool/java11/bin/
 </code></pre></div></div>
 
 <blockquote>
-  <p>SonarQube를 Linux에 설치 시, 아래 사항이 요구됩니다.</p>
+  <p>sonarqube를 Linux에 설치 시, 아래 사항이 요구됩니다.</p>
   <ul>
     <li>vm.max_map_count :: 262144 이상</li>
     <li>fs.file-max :: 65536 이상</li>
@@ -597,7 +597,7 @@ wrapper.java.command<span class="o">=</span>/home/rex/workspace/tool/java11/bin/
 </blockquote>
 
 <blockquote>
-  <p>SonarQube 설치 시 필요 요구사항에 대한 자세한 정보는 <a href="https://docs.sonarqube.org/latest/requirements/requirements/" target="\_blank">https://docs.sonarqube.org/latest/requirements/requirements/</a>를 확인해 주시기 바랍니다.</p>
+  <p>sonarqube 설치 시 필요 요구사항에 대한 자세한 정보는 <a href="https://docs.sonarqube.org/latest/requirements/requirements/" target="\_blank">https://docs.sonarqube.org/latest/requirements/requirements/</a>를 확인해 주시기 바랍니다.</p>
 </blockquote>
 
 <blockquote>
@@ -606,37 +606,35 @@ wrapper.java.command<span class="o">=</span>/home/rex/workspace/tool/java11/bin/
 </code></pre></div>  </div>
 </blockquote>
 
-<h3 id="7-스크립트로-sonarqube-서비스service-관리">7. 스크립트로 SonarQube 서비스(service) 관리</h3>
-<h4 id="71-sonarqube-service-시작">7.1. SonarQube service 시작</h4>
+<h3 id="7-스크립트로-sonarqube-서비스service-관리">7. 스크립트로 sonarqube 서비스(service) 관리</h3>
+<h4 id="71-sonarqube-service-시작">7.1. sonarqube service 시작</h4>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/sonarqube/bin/linux-x86-64/sonar.sh start
 </code></pre></div></div>
 
-<h4 id="72-sonarqube-service-중지">7.2. SonarQube service 중지</h4>
+<h4 id="72-sonarqube-service-중지">7.2. sonarqube service 중지</h4>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/sonarqube/bin/linux-x86-64/sonar.sh stop
 </code></pre></div></div>
 
-<h4 id="73-sonarqube-service-재시작">7.3. SonarQube service 재시작</h4>
+<h4 id="73-sonarqube-service-재시작">7.3. sonarqube service 재시작</h4>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/sonarqube/bin/linux-x86-64/sonar.sh restart
 </code></pre></div></div>
 
-<h4 id="73-sonarqube-service-상태-조회">7.3. SonarQube service 상태 조회</h4>
+<h4 id="73-sonarqube-service-상태-조회">7.3. sonarqube service 상태 조회</h4>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/sonarqube/bin/linux-x86-64/sonar.sh status
 </code></pre></div></div>
 
-<h3 id="8-웹브라우저로-sonarqube-접속">8. 웹브라우저로 SonarQube 접속</h3>
+<h3 id="8-웹브라우저로-sonarqube-접속">8. 웹브라우저로 sonarqube 접속</h3>
 <ul>
   <li>http://[MY-IP]:9000</li>
 </ul>
 
 <h2 id="마무리conclusion">마무리(CONCLUSION)</h2>
-<p>ubuntu 환경에 SonarQube 설치를 완료했습니다.
+<p>ubuntu 환경에 sonarqube 설치를 완료했습니다.
 <br /><br />
-SonarQube를 활용하기 위해서는 추가적인 설정이 필요합니다.
-<br />
-SonarQube 하나만으로는 아무것도 할 수 없습니다.
-<br />
-Java 프로젝트(project)의 코드 정적 분석을 할 경우, project 설정 파일(build.gradle, pom.xml 등)에 SonarScanner 설정을 추가하고, CI와 연동하거나 로컬 환경에 SonarQube 설정을 해야 합니다.
-<br />
+sonarqube를 활용하기 위해서는 추가적인 설정이 필요합니다.
+<br /><br />
+Java 프로젝트(project)의 코드 정적 분석을 할 경우, project 설정 파일(build.gradle, pom.xml 등)에 SonarScanner 설정을 추가하고, CI와 연동하거나 로컬 환경에 sonarqube 설정을 해야 합니다.
+<br /><br />
 대부분 현업에서는 Jenkins 등의 CI, GitHub 등의 버전 관리(version control) 시스템과 연동하여 SonarScanner를 통해 소스 코드를 분석합니다.
 <br /><br />
 더 자세한 내용은 아래 참고 페이지를 확인해 주시기 바랍니다.</p>
@@ -782,7 +780,7 @@ Java 프로젝트(project)의 코드 정적 분석을 할 경우, project 설정
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">HAProxy(이하 haproxy)는 TCP 및 HTTP 기반 애플리케이션(application)을 위한 로드 밸런싱(load balancing) 및 프락시(proxy)를 제공하는 GNU General Public License Version 2 라이선스(license)가 적용된 ...</p>
+    <p class="archive__item-excerpt" itemprop="description">HAProxy(이하 haproxy)는 TCP 및 HTTP 기반의 애플리케이션(application)을 위한 로드 밸런싱(load balancing) 및 프락시(proxy)를 제공하는 GNU General Public License Version 2 라이선스(license)가 적용된...</p>
   </article>
 </div>
 

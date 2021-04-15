@@ -1,5 +1,5 @@
 ---
-title: "우분투(Ubuntu) 환경에 패키지(Package)로 HAProxy 설치하기"
+title: "우분투(Ubuntu) 환경에 HAProxy 설정하기"
 categories: 
   - haproxy
 tags: 
@@ -15,31 +15,16 @@ tags:
 ---
 
 
-HAProxy(이하 haproxy)는 TCP 및 HTTP 기반의 애플리케이션(application)을 위한 로드 밸런싱(load balancing) 및 프락시(proxy)를 제공하는 GNU General Public License Version 2 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다.
+HAProxy(이하 haproxy)는 로드 밸런싱(load balancing) 및 프락시(proxy) 기능을 제공하는 GPL 2 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다.
 <br /><br />
-haproxy는 C 언어로 개발되었으며, 네트워크(network) 스위치(switch)에서 제공하는 L4, L7 기능을 제공합니다.
-<br /><br />
-haproxy는 reverse proxy 형태로 동작하며, Keepalived를 사용하여 haproxy를 이중화하여 HA(high availability) 구성을 합니다.
-<br /><br />
-이 포스트에서는 우분투(ubuntu) 환경에 package로 haproxy를 설치하는 방법을 소개합니다.
-
-
-> proxy에 대한 자세한 정보는 [https://ko.wikipedia.org/wiki/프록시_서버](https://ko.wikipedia.org/wiki/%ED%94%84%EB%A1%9D%EC%8B%9C_%EC%84%9C%EB%B2%84){: target="\_blank"} 페이지를 참고하시기 바랍니다.
-
-> L4, L7은 각각 OSI 모형(Open Systems Interconnection Reference Model, OSI 7 계층)의 전송 계층(Transport layer), 응용 계층(Application layer)을 의미합니다. 자세한 정보는 [https://ko.wikipedia.org/wiki/OSI_모형](https://ko.wikipedia.org/wiki/OSI_%EB%AA%A8%ED%98%95){: target="\_blank"} 페이지를 참고하시기 바랍니다.
-
-> reverse proxy에 대한 자세한 정보는 [https://ko.wikipedia.org/wiki/리버스_프록시](https://ko.wikipedia.org/wiki/%EB%A6%AC%EB%B2%84%EC%8A%A4_%ED%94%84%EB%A1%9D%EC%8B%9C){: target="\_blank"} 페이지를 참고하시기 바랍니다.
-
-> Keepalived에 대한 자세한 정보는 [https://www.keepalived.org/](https://www.keepalived.org/){: target="\_blank"} 페이지를 참고하시기 바랍니다.
-
-> high availability에 대한 자세한 정보는 [https://ko.wikipedia.org/wiki/고가용성](https://ko.wikipedia.org/wiki/%EA%B3%A0%EA%B0%80%EC%9A%A9%EC%84%B1){: target="\_blank"} 페이지를 참고하시기 바랍니다.
+이 포스트에서는 우분투(ubuntu) 환경에 haproxy를 설정하는 방법을 소개합니다.
 
 
 ## 선행조건(PREREQUISITE)
-- ubuntu 환경이 필요합니다.
+- ubuntu 환경에 haproxy가 설치되어 있어야 합니다.
 - 방화벽 설정이 필요합니다.
 
-> ubuntu 설치 방법은 [우분투(Ubuntu) 서버(Server) 18.04 설치하기](https://lindarex.github.io/ubuntu/ubuntu-1804-installation/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
+> haproxy 설치 방법은 [우분투(Ubuntu) 환경에 패키지(Package)로 HAProxy 설치하기](https://lindarex.github.io/haproxy/ubuntu-haproxy-installation/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
 
 > 방화벽 설정 방법은 [우분투(Ubuntu) 환경에 방화벽(Firewalld) 설치 및 설정하기](https://lindarex.github.io/ubuntu/ubuntu-firewalld-installation/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
 

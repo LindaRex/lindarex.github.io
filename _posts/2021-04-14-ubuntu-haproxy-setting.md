@@ -38,85 +38,22 @@ HAProxy(이하 haproxy)는 로드 밸런싱(load balancing) 및 프락시(proxy)
 
 
 ## 요약(SUMMARY)
+1. haproxy 설정 조회
 1. apt install 명령어로 haproxy 설치
 2. (선택사항) 특정 버전 haproxy 설치
-3. haproxy 설정 확인
 4. systemctl 명령어로 haproxy 관리
 
 
 ## 내용(CONTENTS)
-### 1. apt install 명령어로 haproxy 설치
-#### 1.1. package index 업데이트
-```console
-# apt update
-```
-
-#### 1.2. haproxy 설치
-```console
-# apt install haproxy -y
-```
-
-#### 1.3. haproxy 설치 확인
-
-> 2021년 4월 13일 기준 1.8.8 버전이 설치됩니다.
-
+### 1. haproxy 설정 조회
+#### 1.1. (선택사항) haproxy 설치 확인
 ```console
 # haproxy -v
 HA-Proxy version 1.8.8-1ubuntu0.11 2020/06/22
 Copyright 2000-2018 Willy Tarreau <willy@haproxy.org>
 ```
 
-
-### 2. (선택사항) 특정 버전 haproxy 설치
-
-> 2.2 LTS (Long Term Support) 버전을 설치합니다.
-
-#### 2.1. (선택사항) 권장 package 설치 중지 설정
-```console
-# apt install --no-install-recommends software-properties-common
-```
-
-#### 2.2. dedicated PPA 활성
-
-> 다른 버전의 haproxy PPA 정보는 [https://haproxy.debian.net/](https://haproxy.debian.net/){: target="\_blank"}를 확인해 주시기 바랍니다.
-
-```console
-# add-apt-repository ppa:vbernat/haproxy-2.2
- HAProxy is a free, very fast and reliable solution offering high availability, load balancing, and proxying for TCP and HTTP-based applications. It is particularly suited for web sites crawling under very high loads while needing persistence or Layer7 processing. Supporting tens of thousands of connections is clearly realistic with todays hardware. Its mode of operation makes its integration into existing architectures very easy and riskless, while still offering the possibility not to expose fragile web servers to the Net.
-
-This PPA contains packages for HAProxy 2.2.
- More info: https://launchpad.net/~vbernat/+archive/ubuntu/haproxy-2.2
-Press [ENTER] to continue or Ctrl-c to cancel adding it.
-
-Hit:1 http://ap-northeast-2.ec2.archive.ubuntu.com/ubuntu bionic InRelease
-Hit:2 http://ap-northeast-2.ec2.archive.ubuntu.com/ubuntu bionic-updates InRelease
-Hit:3 http://ap-northeast-2.ec2.archive.ubuntu.com/ubuntu bionic-backports InRelease
-Get:4 http://security.ubuntu.com/ubuntu bionic-security InRelease [88.7 kB]
-Get:5 http://ppa.launchpad.net/vbernat/haproxy-2.2/ubuntu bionic InRelease [20.8 kB]
-Get:6 http://ppa.launchpad.net/vbernat/haproxy-2.2/ubuntu bionic/main amd64 Packages [992 B]
-Get:7 http://ppa.launchpad.net/vbernat/haproxy-2.2/ubuntu bionic/main Translation-en [704 B]
-Fetched 111 kB in 2s (67.2 kB/s)
-Reading package lists... Done
-```
-
-#### 2.3. haproxy 설치
-```console
-# apt install haproxy=2.2.\* -y
-```
-
-#### 2.4. haproxy 설치 확인
-```console
-# haproxy -v
-HA-Proxy version 2.2.13-1ppa1~bionic 2021/04/02 - https://haproxy.org/
-Status: long-term supported branch - will stop receiving fixes around Q2 2025.
-Known bugs: http://www.haproxy.org/bugs/bugs-2.2.13.html
-Running on: Linux 5.4.0-1043-aws #45~18.04.1-Ubuntu SMP Fri Apr 9 23:32:25 UTC 2021 x86_64
-```
-
-
-### 3. haproxy 설정 확인
-
-- 설정 파일의 기본 위치는 아래와 같으며, 다음 포스트에서 haproxy 설정 방법을 소개하겠습니다.
+#### 1.2. haproxy 설정 확인
 
 ```console
 # cat /etc/haproxy/haproxy.cfg
@@ -162,252 +99,163 @@ defaults
     errorfile 504 /etc/haproxy/errors/504.http
 ```
 
+- 위 설정을 설명합니다.
 
-### 4. systemctl 명령어로 haproxy 관리
-#### 4.1. haproxy 설정 반영
-```console
-$ sudo systemctl daemon-reload
-```
+    ```
+    'directory "/var/cache/bind";'
+    // 기본값은 '/var/cache/bind'입니다.
+    // server의 작업 디렉터리(directory)를 정의하며 절대 경로(path)입니다.
+    ```
 
-#### 4.2. haproxy 시작
-```console
-$ sudo systemctl start haproxy
-```
+    ```
+    'global'
+    // 설명
+    ```
 
-#### 4.3. haproxy 중지
-```console
-$ sudo systemctl stop haproxy
-```
+    ```
+    'log /dev/log    local0'
+    // 설명
+    ```
 
-#### 4.4. haproxy 재시작
-```console
-$ sudo systemctl restart haproxy
-```
+    ```
+    'log /dev/log    local1 notice'
+    // 설명
+    ```
 
-#### 4.5. haproxy 설정 재적용
-```console
-$ sudo systemctl reload haproxy
-```
+    ```
+    'chroot /var/lib/haproxy'
+    // 설명
+    ```
 
-#### 4.6. haproxy 상태 조회
-```console
-$ sudo systemctl status haproxy
-```
+    ```
+    'stats socket /run/haproxy/admin.sock mode 660 level admin expose-fd listeners'
+    // 설명
+    ```
 
-#### 4.7. haproxy 활성화(부팅 시 자동 시작)
-```console
-$ sudo systemctl enable haproxy
-```
+    ```
+    'stats timeout 30s'
+    // 설명
+    ```
 
-#### 4.8. haproxy 비활성화
-```console
-$ sudo systemctl disable haproxy
-```
+    ```
+    'user haproxy'
+    // 설명
+    ```
 
-#### 4.9. haproxy 및 관련 프로세스 모두 중지
-```console
-$ sudo systemctl kill haproxy
-```
+    ```
+    'group haproxy'
+    // 설명
+    ```
+
+    ```
+    'daemon'
+    // 설명
+    ```
+
+    ```
+    'ca-base /etc/ssl/certs'
+    // 설명
+    ```
+
+    ```
+    'crt-base /etc/ssl/private'
+    // 설명
+    ```
+
+    ```
+    'ssl-default-bind-ciphers ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:RSA+AESGCM:RSA+AES:!aNULL:!MD5:!DSS'
+    // 설명
+    ```
+
+    ```
+    'ssl-default-bind-options no-sslv3'
+    // 설명
+    ```
+
+    ```
+    'defaults'
+    // 설명
+    ```
+
+    ```
+    'log global'
+    // 설명
+    ```
+
+    ```
+    'mode    http'
+    // 설명
+    ```
+
+    ```
+    'option  httplog'
+    // 설명
+    ```
+
+    ```
+    'option  dontlognull'
+    // 설명
+    ```
+
+    ```
+    'timeout connect 5000'
+    // 설명
+    ```
+
+    ```
+    'timeout client  50000'
+    // 설명
+    ```
+
+    ```
+    'timeout server  50000'
+    // 설명
+    ```
+
+    ```
+    'errorfile 400 /etc/haproxy/errors/400.http'
+    // 설명
+    ```
+
+    ```
+    'errorfile 403 /etc/haproxy/errors/403.http'
+    // 설명
+    ```
+
+    ```
+    'errorfile 408 /etc/haproxy/errors/408.http'
+    // 설명
+    ```
+
+    ```
+    'errorfile 500 /etc/haproxy/errors/500.http'
+    // 설명
+    ```
+
+    ```
+    'errorfile 502 /etc/haproxy/errors/502.http'
+    // 설명
+    ```
+
+    ```
+    'errorfile 503 /etc/haproxy/errors/503.http'
+    // 설명
+    ```
+
+    ```
+    'errorfile 504 /etc/haproxy/errors/504.http'
+    // 설명
+    ```
+
 
 
 ## 마무리(CONCLUSION)
-ubuntu 환경에 package로 haproxy 설치를 완료했습니다.
-<br />
-다음 포스트에서 haproxy 설정 방법을 소개하겠습니다.
+ubuntu 환경에 haproxy 설정을 완료했습니다.
+<br /><br />
+haproxy 설정에 대한 더 자세한 내용은 아래 참고 페이지를 확인해 주시기 바랍니다.
+<br /><br />
+다음 포스트에서는 haproxy를 활용한 서브도메인(subdomain) 설정 방법을 소개하겠습니다.
 
 
 ## 참고(REFERENCES)
 - [https://www.haproxy.org/](https://www.haproxy.org/){: target="\_blank"}
-
-
-
-
-
-```
-# apt update
-# apt install haproxy -y
-```
-
-
-
-```
-You need to enable a dedicated PPA with the following command:
-
-# apt-get install --no-install-recommends software-properties-common
-# add-apt-repository ppa:vbernat/haproxy-2.2
-Then, use the following command:
-
-# apt-get install haproxy=2.2.\*
-```
-
-```
-root@withrex-inception:/home/rex# haproxy -v
-HA-Proxy version 1.8.8-1ubuntu0.11 2020/06/22
-Copyright 2000-2018 Willy Tarreau <willy@haproxy.org>
-
-
-root@withrex-inception:/home/rex# vi /etc/haproxy/haproxy.cfg
----
-global
-        log /dev/log    local0
-        log /dev/log    local1 notice
-        chroot /var/lib/haproxy
-        stats socket /run/haproxy/admin.sock mode 660 level admin expose-fd listeners
-        stats timeout 30s
-        user haproxy
-        group haproxy
-        daemon
-
-        # Default SSL material locations
-        ca-base /etc/ssl/certs
-        crt-base /etc/ssl/private
-
-        # Default ciphers to use on SSL-enabled listening sockets.
-        # For more information, see ciphers(1SSL). This list is from:
-        #  https://hynek.me/articles/hardening-your-web-servers-ssl-ciphers/
-        # An alternative list with additional directives can be obtained from
-        #  https://mozilla.github.io/server-side-tls/ssl-config-generator/?server=haproxy
-        ssl-default-bind-ciphers ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:RSA+AESGCM:RSA+AES:!aNULL:!MD5:!DSS
-        ssl-default-bind-options no-sslv3
-
-defaults
-        log     global
-        mode    http
-        option  httplog
-        option  dontlognull
-
-        # ADDED
-        option http-server-close
-        option forwardfor       except 127.0.0.0/8
-        option                  redispatch
-        retries                 3
-        timeout http-request    10s
-        timeout queue           1m
-        timeout connect         10s # 5000
-        timeout client          1m  # 50000
-        timeout server          1m  # 50000
-        timeout http-keep-alive 10s
-        timeout check           10s
-        maxconn                 3000
-
-        errorfile 400 /etc/haproxy/errors/400.http
-        errorfile 403 /etc/haproxy/errors/403.http
-        errorfile 408 /etc/haproxy/errors/408.http
-        errorfile 500 /etc/haproxy/errors/500.http
-        errorfile 502 /etc/haproxy/errors/502.http
-        errorfile 503 /etc/haproxy/errors/503.http
-        errorfile 504 /etc/haproxy/errors/504.http
-
-frontend http
-        bind :::80 v4v6   # bind *:80
-        option        http-server-close
- 
-        # acl domain_com hdr(host) -i withrex.com
-        # acl domain_net hdr(host) -i withrex.net
-        # acl domain_fun hdr(host) -i withrex.fun
-        acl domain_space hdr(host) -i withrex.space
- 
-        acl domain_com_scm hdr(host) -i scm.withrex.com
-        acl domain_com_ci hdr(host) -i ci.withrex.com
-        acl domain_com_sonar hdr(host) -i sonar.withrex.com
-
-        acl domain_net_scm hdr(host) -i scm.withrex.net
-        acl domain_net_ci hdr(host) -i ci.withrex.net
-        acl domain_net_sonar hdr(host) -i sonar.withrex.net
-
-        acl domain_fun_scm hdr(host) -i scm.withrex.fun
-        acl domain_fun_ci hdr(host) -i ci.withrex.fun
-        acl domain_fun_sonar hdr(host) -i sonar.withrex.fun
- 
-        # acl is_root path -i /
-        # acl is_domain hdr(host) -i withrex.com
-
-        # use_backend domain_com_app        if domain_com
-        # use_backend domain_net_app        if domain_net
-        # use_backend domain_fun_app        if domain_fun
-
-        use_backend domain_com_app_scm        if domain_com_scm
-        use_backend domain_com_app_ci        if domain_com_ci
-        use_backend domain_com_app_sonar        if domain_com_sonar
-
-        use_backend domain_net_app_scm        if domain_net_scm
-        use_backend domain_net_app_ci        if domain_net_ci
-        use_backend domain_net_app_sonar        if domain_net_sonar
-
-        use_backend domain_fun_app_scm        if domain_fun_scm
-        use_backend domain_fun_app_ci        if domain_fun_ci
-        use_backend domain_fun_app_sonar        if domain_fun_sonar
-
-        http-request redirect code 301 location https://lindarex.synology.me:5111 if domain_space
- 
-# backend domain_com_app
-#         balance roundrobin
-#         server host1 141.164.61.7:8801
-#  
-# backend domain_net_app
-#         balance roundrobin
-#         server host1 141.164.61.7:8802
-#  
-# backend domain_fun_app
-#         balance roundrobin
-#         server host1 141.164.61.7:8803
-
-# COM
-backend domain_com_app_scm
-        balance roundrobin
-        server host1 141.164.61.7:8801
- 
-backend domain_com_app_ci
-        balance roundrobin
-        server host1 141.164.61.7:8802
- 
-backend domain_com_app_sonar
-        balance roundrobin
-        server host1 141.164.61.7:8803
-
-# NET
-backend domain_net_app_scm
-        balance roundrobin
-        server host1 141.164.61.7:8801
- 
-backend domain_net_app_ci
-        balance roundrobin
-        server host1 141.164.61.7:8802
- 
-backend domain_net_app_sonar
-        balance roundrobin
-        server host1 141.164.61.7:8803
-
-# FUN
-backend domain_fun_app_scm
-        balance roundrobin
-        server host1 141.164.61.7:8801
- 
-backend domain_fun_app_ci
-        balance roundrobin
-        server host1 141.164.61.7:8802
- 
-backend domain_fun_app_sonar
-        balance roundrobin
-        server host1 141.164.61.7:8803
-
-```
-
-```
-systemctl status haproxy
-```
-
-```
-withrex.fun
-CNAME Record
-www.withrex.fun   lindarex.synology.me
-```
-
-# TODO
-- haproxy :: http -> https
-
-
-```
-
-
-

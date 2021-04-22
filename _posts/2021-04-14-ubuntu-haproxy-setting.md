@@ -102,30 +102,35 @@ defaults
 - 위 설정을 설명합니다.
 
     ```
-    'directory "/var/cache/bind";'
-    // 기본값은 '/var/cache/bind'입니다.
-    // server의 작업 디렉터리(directory)를 정의하며 절대 경로(path)입니다.
-    ```
-
-    ```
     'global'
-    // 설명
+    // global 섹션(section)의 설정은 프로세스 전체에 적용되며, 운영체제(OS)에 따라 다를 수 있습니다.
+    // haproxy는 global section 외에 defaults, listen, frontend, backend 등의 proxy section으로 구성됩니다.
     ```
 
     ```
     'log /dev/log    local0'
-    // 설명
+    'log /dev/log    local1 notice'
+    // global syslog 서버(server)를 설정합니다.
+    // 시작 및 종료에 대한 로그(log)와 "log global"로 구성된 proxy의 모든 log를 수신합니다.
+    // "/dev/log"는 address 설정이며, IPv4, IPv6, 유닉스(unix) 소켓(socket)의 경로(path) 등으로 설정할 수 있습니다.
+    // "local0", "local1"은 facility 설정이며, syslog facility로 설정합니다.
+    // "notice"는 level 설정이며, syslog severity level로 설정합니다.
     ```
 
-    ```
-    'log /dev/log    local1 notice'
-    // 설명
-    ```
+    > syslog에 대한 자세한 사항은 [https://en.wikipedia.org/wiki/Syslog](https://en.wikipedia.org/wiki/Syslog){: target="\_blank"} 페이지를 참고하시기 바랍니다.
 
     ```
     'chroot /var/lib/haproxy'
-    // 설명
+    // "chroot"는 보안 강화를 위한 chroot 설정이며, 슈퍼유저(superuser) 권한으로 시작될 때만 작동합니다.
+    // "/var/lib/haproxy"는 chroot 감옥(jail) 디렉터리(directory) path 또는 샌드박스 path이며, chroot로 만들어진 격리된 공간입니다.
     ```
+
+    > chroot에 대한 자세한 사항은 [https://ko.wikipedia.org/wiki/Chroot](https://ko.wikipedia.org/wiki/Chroot){: target="\_blank"} 페이지를 참고하시기 바랍니다.
+
+
+
+
+
 
     ```
     'stats socket /run/haproxy/admin.sock mode 660 level admin expose-fd listeners'
@@ -258,4 +263,4 @@ haproxy 설정에 대한 더 자세한 내용은 아래 참고 페이지를 확�
 
 
 ## 참고(REFERENCES)
-- [https://www.haproxy.org/](https://www.haproxy.org/){: target="\_blank"}
+- [https://cbonte.github.io/haproxy-dconv/1.8/configuration.html](https://cbonte.github.io/haproxy-dconv/1.8/configuration.html){: target="\_blank"}

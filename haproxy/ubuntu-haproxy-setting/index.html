@@ -11,25 +11,25 @@
 
 <!-- LINDAREX :: JEKYLL SEO TAG :: BIGIN -->
 <!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>우분투(Ubuntu) 환경에 패키지(Package)로 HAProxy 설치하기 | LindaRex</title>
+<title>우분투(Ubuntu) 환경에 HAProxy 설정하기 | LindaRex</title>
 <meta name="generator" content="Jekyll v3.9.0" />
-<meta property="og:title" content="우분투(Ubuntu) 환경에 패키지(Package)로 HAProxy 설치하기" />
+<meta property="og:title" content="우분투(Ubuntu) 환경에 HAProxy 설정하기" />
 <meta name="author" content="Rex" />
 <meta property="og:locale" content="ko_KR" />
-<meta name="description" content="HAProxy(이하 haproxy)는 TCP 및 HTTP 기반의 애플리케이션(application)을 위한 로드 밸런싱(load balancing) 및 프락시(proxy)를 제공하는 GNU General Public License Version 2 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. haproxy는 C 언어로 개발되었으며, 네트워크(network) 스위치(switch)에서 제공하는 L4, L7 기능을 제공합니다. haproxy는 reverse proxy 형태로 동작하며, Keepalived를 사용하여 haproxy를 이중화하여 HA(high availability) 구성을 합니다. 이 포스트에서는 우분투(ubuntu) 환경에 package로 haproxy를 설치하는 방법을 소개합니다." />
-<meta property="og:description" content="HAProxy(이하 haproxy)는 TCP 및 HTTP 기반의 애플리케이션(application)을 위한 로드 밸런싱(load balancing) 및 프락시(proxy)를 제공하는 GNU General Public License Version 2 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. haproxy는 C 언어로 개발되었으며, 네트워크(network) 스위치(switch)에서 제공하는 L4, L7 기능을 제공합니다. haproxy는 reverse proxy 형태로 동작하며, Keepalived를 사용하여 haproxy를 이중화하여 HA(high availability) 구성을 합니다. 이 포스트에서는 우분투(ubuntu) 환경에 package로 haproxy를 설치하는 방법을 소개합니다." />
-<link rel="canonical" href="https://lindarex.github.io/haproxy/ubuntu-haproxy-installation/" />
-<meta property="og:url" content="https://lindarex.github.io/haproxy/ubuntu-haproxy-installation/" />
+<meta name="description" content="HAProxy(이하 haproxy)는 로드 밸런싱(load balancing) 및 프락시(proxy) 기능을 제공하는 GPL 2 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. 이 포스트에서는 우분투(ubuntu) 환경에 haproxy를 설정하는 방법을 소개합니다." />
+<meta property="og:description" content="HAProxy(이하 haproxy)는 로드 밸런싱(load balancing) 및 프락시(proxy) 기능을 제공하는 GPL 2 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. 이 포스트에서는 우분투(ubuntu) 환경에 haproxy를 설정하는 방법을 소개합니다." />
+<link rel="canonical" href="https://lindarex.github.io/haproxy/ubuntu-haproxy-setting/" />
+<meta property="og:url" content="https://lindarex.github.io/haproxy/ubuntu-haproxy-setting/" />
 <meta property="og:site_name" content="LindaRex" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2021-04-09T00:00:00+09:00" />
+<meta property="article:published_time" content="2021-04-14T00:00:00+09:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="우분투(Ubuntu) 환경에 패키지(Package)로 HAProxy 설치하기" />
+<meta property="twitter:title" content="우분투(Ubuntu) 환경에 HAProxy 설정하기" />
 <meta name="twitter:site" content="@" />
 <meta name="twitter:creator" content="@Rex" />
 <meta name="google-site-verification" content="t6VkmqsI15sIx3P1-gh3NYputZtjhDZOTkxhwDaa4Ik" />
 <script type="application/ld+json">
-{"datePublished":"2021-04-09T00:00:00+09:00","description":"HAProxy(이하 haproxy)는 TCP 및 HTTP 기반의 애플리케이션(application)을 위한 로드 밸런싱(load balancing) 및 프락시(proxy)를 제공하는 GNU General Public License Version 2 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. haproxy는 C 언어로 개발되었으며, 네트워크(network) 스위치(switch)에서 제공하는 L4, L7 기능을 제공합니다. haproxy는 reverse proxy 형태로 동작하며, Keepalived를 사용하여 haproxy를 이중화하여 HA(high availability) 구성을 합니다. 이 포스트에서는 우분투(ubuntu) 환경에 package로 haproxy를 설치하는 방법을 소개합니다.","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/haproxy/ubuntu-haproxy-installation/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"Rex"},"url":"https://lindarex.github.io/haproxy/ubuntu-haproxy-installation/","author":{"@type":"Person","name":"Rex"},"headline":"우분투(Ubuntu) 환경에 패키지(Package)로 HAProxy 설치하기","dateModified":"2021-04-09T00:00:00+09:00","@context":"https://schema.org"}</script>
+{"datePublished":"2021-04-14T00:00:00+09:00","description":"HAProxy(이하 haproxy)는 로드 밸런싱(load balancing) 및 프락시(proxy) 기능을 제공하는 GPL 2 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. 이 포스트에서는 우분투(ubuntu) 환경에 haproxy를 설정하는 방법을 소개합니다.","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/haproxy/ubuntu-haproxy-setting/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"Rex"},"url":"https://lindarex.github.io/haproxy/ubuntu-haproxy-setting/","author":{"@type":"Person","name":"Rex"},"headline":"우분투(Ubuntu) 환경에 HAProxy 설정하기","dateModified":"2021-04-14T00:00:00+09:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <!-- LINDAREX :: JEKYLL SEO TAG :: END -->
@@ -389,15 +389,15 @@ wcs_do();
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="우분투(Ubuntu) 환경에 패키지(Package)로 HAProxy 설치하기">
-    <meta itemprop="description" content="HAProxy(이하 haproxy)는 TCP 및 HTTP 기반의 애플리케이션(application)을 위한 로드 밸런싱(load balancing) 및 프락시(proxy)를 제공하는 GNU General Public License Version 2 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다.haproxy는 C 언어로 개발되었으며, 네트워크(network) 스위치(switch)에서 제공하는 L4, L7 기능을 제공합니다.haproxy는 reverse proxy 형태로 동작하며, Keepalived를 사용하여 haproxy를 이중화하여 HA(high availability) 구성을 합니다.이 포스트에서는 우분투(ubuntu) 환경에 package로 haproxy를 설치하는 방법을 소개합니다.">
-    <meta itemprop="datePublished" content="2021-04-09T00:00:00+09:00">
+    <meta itemprop="headline" content="우분투(Ubuntu) 환경에 HAProxy 설정하기">
+    <meta itemprop="description" content="HAProxy(이하 haproxy)는 로드 밸런싱(load balancing) 및 프락시(proxy) 기능을 제공하는 GPL 2 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다.이 포스트에서는 우분투(ubuntu) 환경에 haproxy를 설정하는 방법을 소개합니다.">
+    <meta itemprop="datePublished" content="2021-04-14T00:00:00+09:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">우분투(Ubuntu) 환경에 패키지(Package)로 HAProxy 설치하기
+          <h1 id="page-title" class="page__title" itemprop="headline">우분투(Ubuntu) 환경에 HAProxy 설정하기
 </h1>
           
         </header>
@@ -429,42 +429,18 @@ wcs_do();
           <!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: END -->
           </aside>
         
-        <p>HAProxy(이하 haproxy)는 TCP 및 HTTP 기반의 애플리케이션(application)을 위한 로드 밸런싱(load balancing) 및 프락시(proxy)를 제공하는 GNU General Public License Version 2 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다.
+        <p>HAProxy(이하 haproxy)는 로드 밸런싱(load balancing) 및 프락시(proxy) 기능을 제공하는 GPL 2 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다.
 <br /><br />
-haproxy는 C 언어로 개발되었으며, 네트워크(network) 스위치(switch)에서 제공하는 L4, L7 기능을 제공합니다.
-<br /><br />
-haproxy는 reverse proxy 형태로 동작하며, Keepalived를 사용하여 haproxy를 이중화하여 HA(high availability) 구성을 합니다.
-<br /><br />
-이 포스트에서는 우분투(ubuntu) 환경에 package로 haproxy를 설치하는 방법을 소개합니다.</p>
-
-<blockquote>
-  <p>proxy에 대한 자세한 정보는 <a href="https://ko.wikipedia.org/wiki/%ED%94%84%EB%A1%9D%EC%8B%9C_%EC%84%9C%EB%B2%84" target="\_blank">https://ko.wikipedia.org/wiki/프록시_서버</a> 페이지를 참고하시기 바랍니다.</p>
-</blockquote>
-
-<blockquote>
-  <p>L4, L7은 각각 OSI 모형(Open Systems Interconnection Reference Model, OSI 7 계층)의 전송 계층(Transport layer), 응용 계층(Application layer)을 의미합니다. 자세한 정보는 <a href="https://ko.wikipedia.org/wiki/OSI_%EB%AA%A8%ED%98%95" target="\_blank">https://ko.wikipedia.org/wiki/OSI_모형</a> 페이지를 참고하시기 바랍니다.</p>
-</blockquote>
-
-<blockquote>
-  <p>reverse proxy에 대한 자세한 정보는 <a href="https://ko.wikipedia.org/wiki/%EB%A6%AC%EB%B2%84%EC%8A%A4_%ED%94%84%EB%A1%9D%EC%8B%9C" target="\_blank">https://ko.wikipedia.org/wiki/리버스_프록시</a> 페이지를 참고하시기 바랍니다.</p>
-</blockquote>
-
-<blockquote>
-  <p>Keepalived에 대한 자세한 정보는 <a href="https://www.keepalived.org/" target="\_blank">https://www.keepalived.org/</a> 페이지를 참고하시기 바랍니다.</p>
-</blockquote>
-
-<blockquote>
-  <p>high availability에 대한 자세한 정보는 <a href="https://ko.wikipedia.org/wiki/%EA%B3%A0%EA%B0%80%EC%9A%A9%EC%84%B1" target="\_blank">https://ko.wikipedia.org/wiki/고가용성</a> 페이지를 참고하시기 바랍니다.</p>
-</blockquote>
+이 포스트에서는 우분투(ubuntu) 환경에 haproxy를 설정하는 방법을 소개합니다.</p>
 
 <h2 id="선행조건prerequisite">선행조건(PREREQUISITE)</h2>
 <ul>
-  <li>ubuntu 환경이 필요합니다.</li>
+  <li>ubuntu 환경에 haproxy가 설치되어 있어야 합니다.</li>
   <li>방화벽 설정이 필요합니다.</li>
 </ul>
 
 <blockquote>
-  <p>ubuntu 설치 방법은 <a href="https://lindarex.github.io/ubuntu/ubuntu-1804-installation/" target="\_blank">우분투(Ubuntu) 서버(Server) 18.04 설치하기</a> 포스트를 참고하시기 바랍니다.</p>
+  <p>haproxy 설치 방법은 <a href="https://lindarex.github.io/haproxy/ubuntu-haproxy-installation/" target="\_blank">우분투(Ubuntu) 환경에 패키지(Package)로 HAProxy 설치하기</a> 포스트를 참고하시기 바랍니다.</p>
 </blockquote>
 
 <blockquote>
@@ -485,84 +461,18 @@ haproxy는 reverse proxy 형태로 동작하며, Keepalived를 사용하여 hapr
 
 <h2 id="요약summary">요약(SUMMARY)</h2>
 <ol>
-  <li>apt install 명령어로 haproxy 설치</li>
-  <li>(선택사항) 특정 버전 haproxy 설치</li>
+  <li>(선택사항) haproxy 설치 확인</li>
   <li>haproxy 설정 확인</li>
-  <li>systemctl 명령어로 haproxy 관리</li>
 </ol>
 
 <h2 id="내용contents">내용(CONTENTS)</h2>
-<h3 id="1-apt-install-명령어로-haproxy-설치">1. apt install 명령어로 haproxy 설치</h3>
-<h4 id="11-package-index-업데이트">1.1. package index 업데이트</h4>
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>apt update
-</code></pre></div></div>
-
-<h4 id="12-haproxy-설치">1.2. haproxy 설치</h4>
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>apt <span class="nb">install </span>haproxy <span class="nt">-y</span>
-</code></pre></div></div>
-
-<h4 id="13-haproxy-설치-확인">1.3. haproxy 설치 확인</h4>
-
-<blockquote>
-  <p>2021년 4월 13일 기준 1.8.8 버전이 설치됩니다.</p>
-</blockquote>
-
+<h3 id="1-선택사항-haproxy-설치-확인">1. (선택사항) haproxy 설치 확인</h3>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>haproxy <span class="nt">-v</span>
 <span class="go">HA-Proxy version 1.8.8-1ubuntu0.11 2020/06/22
 </span><span class="gp">Copyright 2000-2018 Willy Tarreau &lt;willy@haproxy.org&gt;</span><span class="w">
 </span></code></pre></div></div>
 
-<h3 id="2-선택사항-특정-버전-haproxy-설치">2. (선택사항) 특정 버전 haproxy 설치</h3>
-
-<blockquote>
-  <p>2.2 LTS (Long Term Support) 버전을 설치합니다.</p>
-</blockquote>
-
-<h4 id="21-선택사항-권장-package-설치-중지-설정">2.1. (선택사항) 권장 package 설치 중지 설정</h4>
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>apt <span class="nb">install</span> <span class="nt">--no-install-recommends</span> software-properties-common
-</code></pre></div></div>
-
-<h4 id="22-dedicated-ppa-활성">2.2. dedicated PPA 활성</h4>
-
-<blockquote>
-  <p>다른 버전의 haproxy PPA 정보는 <a href="https://haproxy.debian.net/" target="\_blank">https://haproxy.debian.net/</a>를 확인해 주시기 바랍니다.</p>
-</blockquote>
-
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>add-apt-repository ppa:vbernat/haproxy-2.2
-<span class="go"> HAProxy is a free, very fast and reliable solution offering high availability, load balancing, and proxying for TCP and HTTP-based applications. It is particularly suited for web sites crawling under very high loads while needing persistence or Layer7 processing. Supporting tens of thousands of connections is clearly realistic with todays hardware. Its mode of operation makes its integration into existing architectures very easy and riskless, while still offering the possibility not to expose fragile web servers to the Net.
-
-This PPA contains packages for HAProxy 2.2.
- More info: https://launchpad.net/~vbernat/+archive/ubuntu/haproxy-2.2
-Press [ENTER] to continue or Ctrl-c to cancel adding it.
-
-Hit:1 http://ap-northeast-2.ec2.archive.ubuntu.com/ubuntu bionic InRelease
-Hit:2 http://ap-northeast-2.ec2.archive.ubuntu.com/ubuntu bionic-updates InRelease
-Hit:3 http://ap-northeast-2.ec2.archive.ubuntu.com/ubuntu bionic-backports InRelease
-Get:4 http://security.ubuntu.com/ubuntu bionic-security InRelease [88.7 kB]
-Get:5 http://ppa.launchpad.net/vbernat/haproxy-2.2/ubuntu bionic InRelease [20.8 kB]
-Get:6 http://ppa.launchpad.net/vbernat/haproxy-2.2/ubuntu bionic/main amd64 Packages [992 B]
-Get:7 http://ppa.launchpad.net/vbernat/haproxy-2.2/ubuntu bionic/main Translation-en [704 B]
-Fetched 111 kB in 2s (67.2 kB/s)
-Reading package lists... Done
-</span></code></pre></div></div>
-
-<h4 id="23-haproxy-설치">2.3. haproxy 설치</h4>
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>apt <span class="nb">install </span><span class="nv">haproxy</span><span class="o">=</span>2.2.<span class="se">\*</span> <span class="nt">-y</span>
-</code></pre></div></div>
-
-<h4 id="24-haproxy-설치-확인">2.4. haproxy 설치 확인</h4>
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>haproxy <span class="nt">-v</span>
-<span class="go">HA-Proxy version 2.2.13-1ppa1~bionic 2021/04/02 - https://haproxy.org/
-Status: long-term supported branch - will stop receiving fixes around Q2 2025.
-Known bugs: http://www.haproxy.org/bugs/bugs-2.2.13.html
-</span><span class="gp">Running on: Linux 5.4.0-1043-aws #</span>45~18.04.1-Ubuntu SMP Fri Apr 9 23:32:25 UTC 2021 x86_64
-</code></pre></div></div>
-
-<h3 id="3-haproxy-설정-확인">3. haproxy 설정 확인</h3>
-
-<ul>
-  <li>설정 파일의 기본 위치는 아래와 같으며, 다음 포스트에서 haproxy 설정 방법을 소개하겠습니다.</li>
-</ul>
+<h3 id="2-haproxy-설정-확인">2. haproxy 설정 확인</h3>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span><span class="nb">cat</span> /etc/haproxy/haproxy.cfg
 </code></pre></div></div>
@@ -606,51 +516,335 @@ defaults
     errorfile 504 /etc/haproxy/errors/504.http
 </code></pre></div></div>
 
-<h3 id="4-systemctl-명령어로-haproxy-관리">4. systemctl 명령어로 haproxy 관리</h3>
-<h4 id="41-haproxy-설정-반영">4.1. haproxy 설정 반영</h4>
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl daemon-reload
+<h4 id="21-global">2.1. ‘global’</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'global'
 </code></pre></div></div>
 
-<h4 id="42-haproxy-시작">4.2. haproxy 시작</h4>
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl start haproxy
+<ul>
+  <li>
+    <p>global 섹션(section)의 설정은 프로세스 전체에 적용되며, 운영체제(OS)에 따라 다를 수 있습니다.</p>
+  </li>
+  <li>
+    <p>haproxy는 global section 외에 defaults, listen, frontend, backend 등의 proxy section으로 구성됩니다.</p>
+  </li>
+</ul>
+
+<h4 id="22-log">2.2. ‘log’</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'log /dev/log    local0'
+'log /dev/log    local1 notice'
 </code></pre></div></div>
 
-<h4 id="43-haproxy-중지">4.3. haproxy 중지</h4>
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl stop haproxy
+<ul>
+  <li>
+    <p>global syslog 서버(server) 설정입니다.</p>
+  </li>
+  <li>
+    <p>시작 및 종료에 대한 로그(log)와 “log global”로 구성된 proxy의 모든 log를 수신합니다.</p>
+  </li>
+  <li>
+    <p>“/dev/log”는 주소(address) 설정이며, IPv4, IPv6, 유닉스(unix) 소켓(socket)의 경로(path) 등으로 설정할 수 있습니다.</p>
+  </li>
+  <li>
+    <p>“local0”, “local1”은 facility 설정이며, syslog facility로 설정합니다.</p>
+  </li>
+  <li>
+    <p>“notice”는 level 설정이며, syslog severity level로 설정합니다.</p>
+  </li>
+</ul>
+
+<blockquote>
+  <p>syslog에 대한 자세한 사항은 <a href="https://en.wikipedia.org/wiki/Syslog" target="\_blank">https://en.wikipedia.org/wiki/Syslog</a> 페이지를 참고하시기 바랍니다.</p>
+</blockquote>
+
+<h4 id="23-chroot">2.3. ‘chroot’</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'chroot /var/lib/haproxy'
 </code></pre></div></div>
 
-<h4 id="44-haproxy-재시작">4.4. haproxy 재시작</h4>
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl restart haproxy
+<ul>
+  <li>
+    <p>보안 강화를 위한 chroot 설정이며, 슈퍼 유저(superuser) 권한으로 시작될 때만 작동합니다.</p>
+  </li>
+  <li>
+    <p>“/var/lib/haproxy”는 chroot 감옥(jail) 디렉터리(directory) path 또는 샌드박스 path이며, chroot로 만들어진 격리된 공간입니다.</p>
+  </li>
+</ul>
+
+<blockquote>
+  <p>chroot에 대한 자세한 사항은 <a href="https://ko.wikipedia.org/wiki/Chroot" target="\_blank">https://ko.wikipedia.org/wiki/Chroot</a> 페이지를 참고하시기 바랍니다.</p>
+</blockquote>
+
+<h4 id="24-stats-socket">2.4. ‘stats socket’</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'stats socket /run/haproxy/admin.sock mode 660 level admin expose-fd listeners'
 </code></pre></div></div>
 
-<h4 id="45-haproxy-설정-재적용">4.5. haproxy 설정 재적용</h4>
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl reload haproxy
+<ul>
+  <li>socket 바인딩(bind) 설정입니다.
+    <ul>
+      <li>unix socket을 “path”에 bind 하거나 TCP v4/v6 address를 “address:port” 형식으로 bind 합니다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>“/run/haproxy/admin.sock”는 “stats socket” 설정의 “path”입니다.</p>
+  </li>
+  <li>“mode 660”는 unix socket 접근(access) 권한 설정입니다.
+    <ul>
+      <li>8진 모드로 설정하며, global section의 “unix-bind”로도 설정할 수 있습니다.</li>
+    </ul>
+  </li>
+  <li>“level admin”은 socket 실행 권한 제한 설정입니다.
+    <ul>
+      <li>“user”, “operator”, “admin” 중 하나로 설정할 수 있으며, 아시다시피 “admin”은 모든 권한을 갖습니다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>“expose-fd listeners”은 Seamless Reload(Zero Downtime Reload)를 위한 설정으로, haproxy 1.8 버전부터 사용할 수 있습니다.</p>
+
+    <ul>
+      <li>위 설정은 리스너(listeners) FD(file descriptor)를 다른 haproxy 프로세스(process)로 전달합니다.</li>
+      <li>이전 process에서 file descriptor를 통해 unix socket을 사용해서 연결(connection)을 유지하고, 이를 이전 process와 새로운 process에 전달해서 connection 유실을 방지할 수 있는 설정입니다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="25-stats-timeout">2.5. ‘stats timeout’</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'stats timeout 30s'
 </code></pre></div></div>
 
-<h4 id="46-haproxy-상태-조회">4.6. haproxy 상태 조회</h4>
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl status haproxy
+<ul>
+  <li>socket timeout 설정입니다.
+    <ul>
+      <li>기본 시간제한은 10초이며, 밀리초(millisecond) 단위 또는 “us”, “ms”, “s”, “m”, “h”, “d” 단위로 설정합니다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="26-user">2.6. ‘user’</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'user haproxy'
 </code></pre></div></div>
 
-<h4 id="47-haproxy-활성화부팅-시-자동-시작">4.7. haproxy 활성화(부팅 시 자동 시작)</h4>
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl <span class="nb">enable </span>haproxy
+<ul>
+  <li>시스템(system) 사용자를 unix socket 소유자로 설정합니다.</li>
+</ul>
+
+<h4 id="27-group">2.7. ‘group’</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'group haproxy'
 </code></pre></div></div>
 
-<h4 id="48-haproxy-비활성화">4.8. haproxy 비활성화</h4>
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl disable haproxy
+<ul>
+  <li>system 그룹을 unix socket 그룹으로 설정합니다.</li>
+</ul>
+
+<h4 id="28-daemon">2.8. ‘daemon’</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'daemon'
 </code></pre></div></div>
 
-<h4 id="49-haproxy-및-관련-프로세스-모두-중지">4.9. haproxy 및 관련 프로세스 모두 중지</h4>
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl <span class="nb">kill </span>haproxy
+<ul>
+  <li>
+    <p>process fork를 백그라운드로 만드는 권장 설정입니다.</p>
+  </li>
+  <li>
+    <p>“-D” 인수(argument)와 동일하며, “-db” argument로 비활성화할 수 있습니다.</p>
+  </li>
+</ul>
+
+<blockquote>
+  <p>fork에 대한 자세한 사항은 <a href="https://ko.wikipedia.org/wiki/%ED%8F%AC%ED%81%AC_(%EC%8B%9C%EC%8A%A4%ED%85%9C_%ED%98%B8%EC%B6%9C)" target="\_blank">https://ko.wikipedia.org/wiki/포크_(시스템_호출)</a> 페이지를 참고하시기 바랍니다.</p>
+</blockquote>
+
+<h4 id="29-ca-base">2.9. ‘ca-base’</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'ca-base /etc/ssl/certs'
 </code></pre></div></div>
+
+<ul>
+  <li>“ca-file” 또는 “crl-file”의 상대 경로(path) 사용 시, SSL CA 인증서(certificates) 및 CRLs의 기본 directory를 설정합니다.</li>
+</ul>
+
+<h4 id="210-crt-base">2.10. ‘crt-base’</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'crt-base /etc/ssl/private'
+</code></pre></div></div>
+
+<ul>
+  <li>“crtfile”의 상대 경로(path) 사용 시, SSL certificates의 기본 directory를 설정합니다.</li>
+</ul>
+
+<h4 id="211-ssl-default-bind-ciphers">2.11. ‘ssl-default-bind-ciphers’</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'ssl-default-bind-ciphers ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:RSA+AESGCM:RSA+AES:!aNULL:!MD5:!DSS'
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>SSL/TLS cipher 설정입니다.</p>
+  </li>
+  <li>
+    <p>TLS v1.2까지 설정할 수 있으며, TLS v1.3 구성은 “ssl-default-bind-ciphersuites” 설정이 필요합니다.</p>
+  </li>
+</ul>
+
+<blockquote>
+  <p>SSL/TLS에 대한 자세한 사항은 <a href="https://ko.wikipedia.org/wiki/%EC%A0%84%EC%86%A1_%EA%B3%84%EC%B8%B5_%EB%B3%B4%EC%95%88" target="\_blank">https://ko.wikipedia.org/wiki/전송_계층_보안</a> 페이지를 참고하시기 바랍니다.</p>
+</blockquote>
+
+<blockquote>
+  <p>cipher에 대한 자세한 사항은 <a href="https://ko.wikipedia.org/wiki/%EC%95%94%ED%98%B8_(%EC%95%94%ED%98%B8%ED%95%99)" target="\_blank">https://ko.wikipedia.org/wiki/암호_(암호학)</a> 페이지를 참고하시기 바랍니다.</p>
+</blockquote>
+
+<blockquote>
+  <p>cipher suite에 대한 자세한 사항은 <a href="https://ko.wikipedia.org/wiki/%EC%95%94%ED%98%B8%ED%99%94_%EC%8A%A4%EC%9C%84%ED%8A%B8" target="\_blank">https://ko.wikipedia.org/wiki/암호화_스위트</a> 페이지와 <a href="https://en.wikipedia.org/wiki/Cipher_suite" target="\_blank">https://en.wikipedia.org/wiki/Cipher_suite</a> 페이지를 참고하시기 바랍니다.</p>
+</blockquote>
+
+<h4 id="212-ssl-default-bind-options">2.12. ‘ssl-default-bind-options’</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'ssl-default-bind-options no-sslv3'
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>기본 SSL 설정입니다.</p>
+  </li>
+  <li>
+    <p>“no-sslv3” 설정은 SSLv3를 제외합니다.</p>
+  </li>
+</ul>
+
+<h4 id="213-defaults">2.13. ‘defaults’</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'defaults'
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>defaults section의 설정은 모든 section에 적용됩니다.</p>
+  </li>
+  <li>
+    <p>section 명은 선택 사항이지만, 설정하는 것을 권장합니다.</p>
+  </li>
+</ul>
+
+<h4 id="214-log-global">2.14. ‘log global’</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'log global'
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>global log 설정입니다.</p>
+  </li>
+  <li>
+    <p>haproxy 인스턴스(instance) 당 하나만 설정할 수 있으며, 매개 변수(parameter)가 없습니다.</p>
+  </li>
+</ul>
+
+<h4 id="215-mode">2.15. ‘mode’</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'mode    http'
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>haproxy 실행 mode 또는 프로토콜(protocol) 설정입니다.</p>
+  </li>
+  <li>
+    <p>tcp, http, health mode로 설정할 수 있으며, 기본값은 tcp mode입니다.</p>
+    <ul>
+      <li>tcp mode는 SSL, SSSH, SMTP 등에 사용합니다.</li>
+      <li>http mode는 RFC를 준수하지 않는 요청은 거부되며, 서버 연결(connection) 전에 분석됩니다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="216-option">2.16. ‘option’</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'option  httplog'
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>HTTP 요청(request), 세션(session) 상태 및 타이머(timer) 등의 로깅(logging)을 활성화하는 설정입니다.</p>
+  </li>
+  <li>
+    <p>backend section에서는 사용할 수 없습니다.</p>
+  </li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'option  dontlognull'
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>null connection logging 설정입니다.</p>
+  </li>
+  <li>
+    <p>이 설정은 데이터(data)가 전송되지 않는 connection을 기록하지 않습니다.</p>
+  </li>
+  <li>
+    <p>“option” 앞에 “no” 키워드 추가로 설정을 비활성화 할 수 있습니다.</p>
+  </li>
+  <li>
+    <p>backend section에서는 사용할 수 없습니다.</p>
+  </li>
+</ul>
+
+<h4 id="217-timeout">2.17. ‘timeout’</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'timeout connect 5000'
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>server의 연결 제한(지연) 시간 설정입니다.</p>
+  </li>
+  <li>
+    <p>millisecond로 설정하며, frontend section에서는 사용할 수 없습니다.</p>
+  </li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'timeout client  50000'
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>클라이언트(client)의 최대 비활성 시간 설정입니다.</p>
+  </li>
+  <li>
+    <p>millisecond로 설정하며, backend section에서는 사용할 수 없습니다.</p>
+  </li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'timeout server  50000'
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>server의 최대 비활성 시간 설정입니다.</p>
+  </li>
+  <li>
+    <p>millisecond로 설정하며, frontend section에서는 사용할 수 없습니다.</p>
+  </li>
+</ul>
+
+<h4 id="218-errorfile">2.18. ‘errorfile’</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'errorfile 400 /etc/haproxy/errors/400.http'
+'errorfile 403 /etc/haproxy/errors/403.http'
+'errorfile 408 /etc/haproxy/errors/408.http'
+'errorfile 500 /etc/haproxy/errors/500.http'
+'errorfile 502 /etc/haproxy/errors/502.http'
+'errorfile 503 /etc/haproxy/errors/503.http'
+'errorfile 504 /etc/haproxy/errors/504.http'
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>haproxy의 오류(error) file 설정입니다.</p>
+  </li>
+  <li>
+    <p>HTTP 상태(status) 코드(code)에 맞춰서 error file을 연결합니다.</p>
+  </li>
+</ul>
 
 <h2 id="마무리conclusion">마무리(CONCLUSION)</h2>
-<p>ubuntu 환경에 package로 haproxy 설치를 완료했습니다.
-<br />
-haproxy 설정 방법은 <a href="https://lindarex.github.io/haproxy/ubuntu-haproxy-setting/" target="\_blank">우분투(Ubuntu) 환경에 HAProxy 설정하기</a> 포스트를 참고하시기 바랍니다.</p>
+<p>ubuntu 환경에 haproxy 설정을 완료했습니다.
+<br /><br />
+haproxy 설정에 대한 더 자세한 내용은 아래 참고 페이지를 확인해 주시기 바랍니다.
+<br /><br />
+다음 포스트에서는 haproxy를 활용한 서브도메인(subdomain) 설정 방법을 소개하겠습니다.</p>
 
 <h2 id="참고references">참고(REFERENCES)</h2>
 <ul>
-  <li><a href="https://www.haproxy.org/" target="\_blank">https://www.haproxy.org/</a></li>
+  <li><a href="https://cbonte.github.io/haproxy-dconv/1.8/configuration.html" target="\_blank">https://cbonte.github.io/haproxy-dconv/1.8/configuration.html</a></li>
 </ul>
 
         
@@ -732,7 +926,7 @@ haproxy 설정 방법은 <a href="https://lindarex.github.io/haproxy/ubuntu-hapr
 
 
         
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2021-04-09T00:00:00+09:00">April 9, 2021</time></p>
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2021-04-14T00:00:00+09:00">April 14, 2021</time></p>
         
       </footer>
 
@@ -741,23 +935,22 @@ haproxy 설정 방법은 <a href="https://lindarex.github.io/haproxy/ubuntu-hapr
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=%EC%9A%B0%EB%B6%84%ED%88%AC%28Ubuntu%29+%ED%99%98%EA%B2%BD%EC%97%90+%ED%8C%A8%ED%82%A4%EC%A7%80%28Package%29%EB%A1%9C+HAProxy+%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0%20https%3A%2F%2Flindarex.github.io%2Fhaproxy%2Fubuntu-haproxy-installation%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=%EC%9A%B0%EB%B6%84%ED%88%AC%28Ubuntu%29+%ED%99%98%EA%B2%BD%EC%97%90+HAProxy+%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0%20https%3A%2F%2Flindarex.github.io%2Fhaproxy%2Fubuntu-haproxy-setting%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flindarex.github.io%2Fhaproxy%2Fubuntu-haproxy-installation%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flindarex.github.io%2Fhaproxy%2Fubuntu-haproxy-setting%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flindarex.github.io%2Fhaproxy%2Fubuntu-haproxy-installation%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flindarex.github.io%2Fhaproxy%2Fubuntu-haproxy-setting%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/kubernetes/ubuntu-kubernetes-installation-with-kubespray/" class="pagination--pager" title="우분투(Ubuntu) 환경에 Kubespray로 Kubernetes 클러스터(cluster) 설치하기
+      <a href="/haproxy/ubuntu-haproxy-installation/" class="pagination--pager" title="우분투(Ubuntu) 환경에 패키지(Package)로 HAProxy 설치하기
 ">Previous</a>
     
     
-      <a href="/haproxy/ubuntu-haproxy-setting/" class="pagination--pager" title="우분투(Ubuntu) 환경에 HAProxy 설정하기
-">Next</a>
+      <a href="#" class="pagination--pager disabled">Next</a>
     
   </nav>
 
@@ -798,14 +991,12 @@ haproxy 설정 방법은 <a href="https://lindarex.github.io/haproxy/ubuntu-hapr
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/haproxy/ubuntu-haproxy-setting/" rel="permalink">우분투(Ubuntu) 환경에 HAProxy 설정하기
+        <a href="/haproxy/ubuntu-haproxy-installation/" rel="permalink">우분투(Ubuntu) 환경에 패키지(Package)로 HAProxy 설치하기
 </a>
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">HAProxy(이하 haproxy)는 로드 밸런싱(load balancing) 및 프락시(proxy) 기능을 제공하는 GPL 2 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다.
-
-이 포스트에서는 우분투(ubuntu) 환경에 haproxy를 설정하...</p>
+    <p class="archive__item-excerpt" itemprop="description">HAProxy(이하 haproxy)는 TCP 및 HTTP 기반의 애플리케이션(application)을 위한 로드 밸런싱(load balancing) 및 프락시(proxy)를 제공하는 GNU General Public License Version 2 라이선스(license)가 적용된...</p>
   </article>
 </div>
 

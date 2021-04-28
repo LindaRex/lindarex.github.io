@@ -6,9 +6,456 @@
     <description>오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 블로그입니다 | It shares technologies such as open source software, cloud computing, PaaS and container platforms</description>
     <link>https://lindarex.github.io/</link>
     <atom:link href="https://lindarex.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 14 Apr 2021 17:29:27 +0900</pubDate>
-    <lastBuildDate>Wed, 14 Apr 2021 17:29:27 +0900</lastBuildDate>
+    <pubDate>Wed, 28 Apr 2021 17:14:28 +0900</pubDate>
+    <lastBuildDate>Wed, 28 Apr 2021 17:14:28 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
+    
+      <item>
+        <title>우분투(Ubuntu) 환경에 HAProxy 설정하기</title>
+        <description>&lt;p&gt;HAProxy(이하 haproxy)는 로드 밸런싱(load balancing) 및 프락시(proxy) 기능을 제공하는 GPL 2 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다.
+&lt;br /&gt;&lt;br /&gt;
+이 포스트에서는 우분투(ubuntu) 환경에 haproxy를 설정하는 방법을 소개합니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;선행조건prerequisite&quot;&gt;선행조건(PREREQUISITE)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;ubuntu 환경에 haproxy가 설치되어 있어야 합니다.&lt;/li&gt;
+  &lt;li&gt;방화벽 설정이 필요합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;haproxy 설치 방법은 &lt;a href=&quot;https://lindarex.github.io/haproxy/ubuntu-haproxy-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 환경에 패키지(Package)로 HAProxy 설치하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;방화벽 설정 방법은 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-firewalld-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 환경에 방화벽(Firewalld) 설치 및 설정하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;테스트-환경test-environment&quot;&gt;테스트 환경(TEST ENVIRONMENT)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;AWS EC2 instance
+    &lt;ul&gt;
+      &lt;li&gt;Ubuntu Server 18.04 LTS (HVM), EBS General Purpose (SSD) Volume Type (64비트 Arm)&lt;/li&gt;
+      &lt;li&gt;m5.large (ECU, 2 vCPUs, 3.1 GHz, 8 GiB 메모리, EBS 전용)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Ubuntu 18.04.5 LTS (GNU/Linux 5.4.0-1043-aws x86_64)&lt;/li&gt;
+  &lt;li&gt;haproxy 1.8.8&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;요약summary&quot;&gt;요약(SUMMARY)&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;(선택사항) haproxy 설치 확인&lt;/li&gt;
+  &lt;li&gt;haproxy 설정 확인&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;내용contents&quot;&gt;내용(CONTENTS)&lt;/h2&gt;
+&lt;h3 id=&quot;1-선택사항-haproxy-설치-확인&quot;&gt;1. (선택사항) haproxy 설치 확인&lt;/h3&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;haproxy &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;HA-Proxy version 1.8.8-1ubuntu0.11 2020/06/22
+&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;Copyright 2000-2018 Willy Tarreau &amp;lt;willy@haproxy.org&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;2-haproxy-설정-확인&quot;&gt;2. haproxy 설정 확인&lt;/h3&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; /etc/haproxy/haproxy.cfg
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;global
+    log /dev/log    local0
+    log /dev/log    local1 notice
+    &lt;span class=&quot;nb&quot;&gt;chroot&lt;/span&gt; /var/lib/haproxy
+    stats socket /run/haproxy/admin.sock mode 660 level admin expose-fd listeners
+    stats &lt;span class=&quot;nb&quot;&gt;timeout &lt;/span&gt;30s
+    user haproxy
+    group haproxy
+    daemon
+
+    &lt;span class=&quot;c&quot;&gt;# Default SSL material locations&lt;/span&gt;
+    ca-base /etc/ssl/certs
+    crt-base /etc/ssl/private
+
+    &lt;span class=&quot;c&quot;&gt;# Default ciphers to use on SSL-enabled listening sockets.&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;# For more information, see ciphers(1SSL). This list is from:&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;#  https://hynek.me/articles/hardening-your-web-servers-ssl-ciphers/&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;# An alternative list with additional directives can be obtained from&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;#  https://mozilla.github.io/server-side-tls/ssl-config-generator/?server=haproxy&lt;/span&gt;
+    ssl-default-bind-ciphers ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:RSA+AESGCM:RSA+AES:!aNULL:!MD5:!DSS
+    ssl-default-bind-options no-sslv3
+
+defaults
+    log global
+    mode    http
+    option  httplog
+    option  dontlognull
+        &lt;span class=&quot;nb&quot;&gt;timeout &lt;/span&gt;connect 5000
+        &lt;span class=&quot;nb&quot;&gt;timeout &lt;/span&gt;client  50000
+        &lt;span class=&quot;nb&quot;&gt;timeout &lt;/span&gt;server  50000
+    errorfile 400 /etc/haproxy/errors/400.http
+    errorfile 403 /etc/haproxy/errors/403.http
+    errorfile 408 /etc/haproxy/errors/408.http
+    errorfile 500 /etc/haproxy/errors/500.http
+    errorfile 502 /etc/haproxy/errors/502.http
+    errorfile 503 /etc/haproxy/errors/503.http
+    errorfile 504 /etc/haproxy/errors/504.http
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;21-global&quot;&gt;2.1. ‘global’&lt;/h4&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'global'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;global 섹션(section)의 설정은 프로세스 전체에 적용되며, 운영체제(OS)에 따라 다를 수 있습니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;haproxy는 global section 외에 defaults, listen, frontend, backend 등의 proxy section으로 구성됩니다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;22-log&quot;&gt;2.2. ‘log’&lt;/h4&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'log /dev/log    local0'
+'log /dev/log    local1 notice'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;global syslog 서버(server) 설정입니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;시작 및 종료에 대한 로그(log)와 “log global”로 구성된 proxy의 모든 log를 수신합니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;“/dev/log”는 주소(address) 설정이며, IPv4, IPv6, 유닉스(unix) 소켓(socket)의 경로(path) 등으로 설정할 수 있습니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;“local0”, “local1”은 facility 설정이며, syslog facility로 설정합니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;“notice”는 level 설정이며, syslog severity level로 설정합니다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;syslog에 대한 자세한 사항은 &lt;a href=&quot;https://en.wikipedia.org/wiki/Syslog&quot; target=&quot;\_blank&quot;&gt;https://en.wikipedia.org/wiki/Syslog&lt;/a&gt; 페이지를 참고하시기 바랍니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;23-chroot&quot;&gt;2.3. ‘chroot’&lt;/h4&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'chroot /var/lib/haproxy'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;보안 강화를 위한 chroot 설정이며, 슈퍼 유저(superuser) 권한으로 시작될 때만 작동합니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;“/var/lib/haproxy”는 chroot 감옥(jail) 디렉터리(directory) path 또는 샌드박스 path이며, chroot로 만들어진 격리된 공간입니다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;chroot에 대한 자세한 사항은 &lt;a href=&quot;https://ko.wikipedia.org/wiki/Chroot&quot; target=&quot;\_blank&quot;&gt;https://ko.wikipedia.org/wiki/Chroot&lt;/a&gt; 페이지를 참고하시기 바랍니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;24-stats-socket&quot;&gt;2.4. ‘stats socket’&lt;/h4&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'stats socket /run/haproxy/admin.sock mode 660 level admin expose-fd listeners'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;socket 바인딩(bind) 설정입니다.
+    &lt;ul&gt;
+      &lt;li&gt;unix socket을 “path”에 bind 하거나 TCP v4/v6 address를 “address:port” 형식으로 bind 합니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;“/run/haproxy/admin.sock”는 “stats socket” 설정의 “path”입니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;“mode 660”는 unix socket 접근(access) 권한 설정입니다.
+    &lt;ul&gt;
+      &lt;li&gt;8진 모드로 설정하며, global section의 “unix-bind”로도 설정할 수 있습니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;“level admin”은 socket 실행 권한 제한 설정입니다.
+    &lt;ul&gt;
+      &lt;li&gt;“user”, “operator”, “admin” 중 하나로 설정할 수 있으며, 아시다시피 “admin”은 모든 권한을 갖습니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;“expose-fd listeners”은 Seamless Reload(Zero Downtime Reload)를 위한 설정으로, haproxy 1.8 버전부터 사용할 수 있습니다.&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;위 설정은 리스너(listeners) FD(file descriptor)를 다른 haproxy 프로세스(process)로 전달합니다.&lt;/li&gt;
+      &lt;li&gt;이전 process에서 file descriptor를 통해 unix socket을 사용해서 연결(connection)을 유지하고, 이를 이전 process와 새로운 process에 전달해서 connection 유실을 방지할 수 있는 설정입니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;25-stats-timeout&quot;&gt;2.5. ‘stats timeout’&lt;/h4&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'stats timeout 30s'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;socket timeout 설정입니다.
+    &lt;ul&gt;
+      &lt;li&gt;기본 시간제한은 10초이며, 밀리초(millisecond) 단위 또는 “us”, “ms”, “s”, “m”, “h”, “d” 단위로 설정합니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;26-user&quot;&gt;2.6. ‘user’&lt;/h4&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'user haproxy'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;시스템(system) 사용자를 unix socket 소유자로 설정합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;27-group&quot;&gt;2.7. ‘group’&lt;/h4&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'group haproxy'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;system 그룹을 unix socket 그룹으로 설정합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;28-daemon&quot;&gt;2.8. ‘daemon’&lt;/h4&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'daemon'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;process fork를 백그라운드로 만드는 권장 설정입니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;“-D” 인수(argument)와 동일하며, “-db” argument로 비활성화할 수 있습니다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;fork에 대한 자세한 사항은 &lt;a href=&quot;https://ko.wikipedia.org/wiki/%ED%8F%AC%ED%81%AC_(%EC%8B%9C%EC%8A%A4%ED%85%9C_%ED%98%B8%EC%B6%9C)&quot; target=&quot;\_blank&quot;&gt;https://ko.wikipedia.org/wiki/포크_(시스템_호출)&lt;/a&gt; 페이지를 참고하시기 바랍니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;29-ca-base&quot;&gt;2.9. ‘ca-base’&lt;/h4&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'ca-base /etc/ssl/certs'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;“ca-file” 또는 “crl-file”의 상대 경로(path) 사용 시, SSL CA 인증서(certificates) 및 CRLs의 기본 directory를 설정합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;210-crt-base&quot;&gt;2.10. ‘crt-base’&lt;/h4&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'crt-base /etc/ssl/private'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;“crtfile”의 상대 경로(path) 사용 시, SSL certificates의 기본 directory를 설정합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;211-ssl-default-bind-ciphers&quot;&gt;2.11. ‘ssl-default-bind-ciphers’&lt;/h4&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'ssl-default-bind-ciphers ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:RSA+AESGCM:RSA+AES:!aNULL:!MD5:!DSS'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;SSL/TLS cipher 설정입니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;TLS v1.2까지 설정할 수 있으며, TLS v1.3 구성은 “ssl-default-bind-ciphersuites” 설정이 필요합니다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;SSL/TLS에 대한 자세한 사항은 &lt;a href=&quot;https://ko.wikipedia.org/wiki/%EC%A0%84%EC%86%A1_%EA%B3%84%EC%B8%B5_%EB%B3%B4%EC%95%88&quot; target=&quot;\_blank&quot;&gt;https://ko.wikipedia.org/wiki/전송_계층_보안&lt;/a&gt; 페이지를 참고하시기 바랍니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;cipher에 대한 자세한 사항은 &lt;a href=&quot;https://ko.wikipedia.org/wiki/%EC%95%94%ED%98%B8_(%EC%95%94%ED%98%B8%ED%95%99)&quot; target=&quot;\_blank&quot;&gt;https://ko.wikipedia.org/wiki/암호_(암호학)&lt;/a&gt; 페이지를 참고하시기 바랍니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;cipher suite에 대한 자세한 사항은 &lt;a href=&quot;https://ko.wikipedia.org/wiki/%EC%95%94%ED%98%B8%ED%99%94_%EC%8A%A4%EC%9C%84%ED%8A%B8&quot; target=&quot;\_blank&quot;&gt;https://ko.wikipedia.org/wiki/암호화_스위트&lt;/a&gt; 페이지와 &lt;a href=&quot;https://en.wikipedia.org/wiki/Cipher_suite&quot; target=&quot;\_blank&quot;&gt;https://en.wikipedia.org/wiki/Cipher_suite&lt;/a&gt; 페이지를 참고하시기 바랍니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;212-ssl-default-bind-options&quot;&gt;2.12. ‘ssl-default-bind-options’&lt;/h4&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'ssl-default-bind-options no-sslv3'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;기본 SSL 설정입니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;“no-sslv3” 설정은 SSLv3를 제외합니다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;213-defaults&quot;&gt;2.13. ‘defaults’&lt;/h4&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'defaults'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;defaults section의 설정은 모든 section에 적용됩니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;section 명은 선택 사항이지만, 설정하는 것을 권장합니다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;214-log-global&quot;&gt;2.14. ‘log global’&lt;/h4&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'log global'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;global log 설정입니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;haproxy 인스턴스(instance) 당 하나만 설정할 수 있으며, 매개 변수(parameter)가 없습니다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;215-mode&quot;&gt;2.15. ‘mode’&lt;/h4&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'mode    http'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;haproxy 실행 mode 또는 프로토콜(protocol) 설정입니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;tcp, http, health mode로 설정할 수 있으며, 기본값은 tcp mode입니다.&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;tcp mode는 SSL, SSSH, SMTP 등에 사용합니다.&lt;/li&gt;
+      &lt;li&gt;http mode는 RFC를 준수하지 않는 요청은 거부되며, 서버 연결(connection) 전에 분석됩니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;216-option&quot;&gt;2.16. ‘option’&lt;/h4&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'option  httplog'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;HTTP 요청(request), 세션(session) 상태 및 타이머(timer) 등의 로깅(logging)을 활성화하는 설정입니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;backend section에서는 사용할 수 없습니다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'option  dontlognull'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;null connection logging 설정입니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;이 설정은 데이터(data)가 전송되지 않는 connection을 기록하지 않습니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;“option” 앞에 “no” 키워드 추가로 설정을 비활성화 할 수 있습니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;backend section에서는 사용할 수 없습니다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;217-timeout&quot;&gt;2.17. ‘timeout’&lt;/h4&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'timeout connect 5000'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;server의 연결 제한(지연) 시간 설정입니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;millisecond로 설정하며, frontend section에서는 사용할 수 없습니다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'timeout client  50000'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;클라이언트(client)의 최대 비활성 시간 설정입니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;millisecond로 설정하며, backend section에서는 사용할 수 없습니다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'timeout server  50000'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;server의 최대 비활성 시간 설정입니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;millisecond로 설정하며, frontend section에서는 사용할 수 없습니다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;218-errorfile&quot;&gt;2.18. ‘errorfile’&lt;/h4&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'errorfile 400 /etc/haproxy/errors/400.http'
+'errorfile 403 /etc/haproxy/errors/403.http'
+'errorfile 408 /etc/haproxy/errors/408.http'
+'errorfile 500 /etc/haproxy/errors/500.http'
+'errorfile 502 /etc/haproxy/errors/502.http'
+'errorfile 503 /etc/haproxy/errors/503.http'
+'errorfile 504 /etc/haproxy/errors/504.http'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;haproxy의 오류(error) file 설정입니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;HTTP 상태(status) 코드(code)에 맞춰서 error file을 연결합니다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
+&lt;p&gt;ubuntu 환경에 haproxy 설정을 완료했습니다.
+&lt;br /&gt;&lt;br /&gt;
+haproxy 설정에 대한 더 자세한 내용은 아래 참고 페이지를 확인해 주시기 바랍니다.
+&lt;br /&gt;&lt;br /&gt;
+다음 포스트에서는 haproxy를 활용한 서브도메인(subdomain) 설정 방법을 소개하겠습니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cbonte.github.io/haproxy-dconv/1.8/configuration.html&quot; target=&quot;\_blank&quot;&gt;https://cbonte.github.io/haproxy-dconv/1.8/configuration.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Wed, 14 Apr 2021 00:00:00 +0900</pubDate>
+        <link>https://lindarex.github.io/haproxy/ubuntu-haproxy-setting/</link>
+        <guid isPermaLink="true">https://lindarex.github.io/haproxy/ubuntu-haproxy-setting/</guid>
+        
+        <category>haproxy</category>
+        
+        <category>load balancer</category>
+        
+        <category>proxy</category>
+        
+        <category>reverse proxy</category>
+        
+        <category>high availability</category>
+        
+        <category>open source software</category>
+        
+        <category>open source</category>
+        
+        <category>oss</category>
+        
+        <category>ubuntu</category>
+        
+        
+        <category>haproxy</category>
+        
+      </item>
     
       <item>
         <title>우분투(Ubuntu) 환경에 패키지(Package)로 HAProxy 설치하기</title>
@@ -229,7 +676,7 @@ defaults
 &lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
 &lt;p&gt;ubuntu 환경에 package로 haproxy 설치를 완료했습니다.
 &lt;br /&gt;
-다음 포스트에서 haproxy 설정 방법을 소개하겠습니다.&lt;/p&gt;
+haproxy 설정 방법은 &lt;a href=&quot;https://lindarex.github.io/haproxy/ubuntu-haproxy-setting/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 환경에 HAProxy 설정하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;
 &lt;ul&gt;
@@ -8803,62 +9250,6 @@ firewalld는 CentOS 7부터 이전의 Iptables를 대체해 새롭게 선보인 
         
         
         <category>ubuntu</category>
-        
-      </item>
-    
-      <item>
-        <title>Oracle JDK와 OpenJDK의 차이점</title>
-        <description>&lt;p&gt;Java 애플리케이션 구축을 위해서는 JDK(Java Development Kit)가 필수입니다.
-&lt;br /&gt;&lt;br /&gt;
-이 포스트에서는 Oracle JDK와 OpenJDK의 차이점을 간단히 소개합니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;내용contents&quot;&gt;내용(CONTENTS)&lt;/h2&gt;
-&lt;h3 id=&quot;oracle-jdk와-openjdk의-차이점&quot;&gt;Oracle JDK와 OpenJDK의 차이점&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Oracle JDK는 상용(유료)이지만, OpenJDK는 오픈소스기반(무료)입니다.&lt;/li&gt;
-  &lt;li&gt;Oracle JDK의 라이선스는 Oracle BCL(Binary Code License) Agreement이지만, OpenJDK의 라이선스는 Oracle GPL v2입니다.&lt;/li&gt;
-  &lt;li&gt;Oracle JDK는 LTS(장기 지원) 업데이트 지원을 받을 수 있지만, OpenJDK는 LTS 없이 6개월마다 새로운 버전이 배포됩니다.&lt;/li&gt;
-  &lt;li&gt;Oracle JDK는 Oracle이 인수한 Sun Microsystems 플러그인을 제공하지만, OpenJDK는 제공하지 않습니다.&lt;/li&gt;
-  &lt;li&gt;Oracle JDK는 OpenJDK 보다 CPU 사용량과 메모리 사용량이 적고, 응답시간이 높습니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Oracle JDK와 OpenJDK의 벤치마킹 결과는 &lt;a href=&quot;https://technology.amis.nl/2018/11/23/comparing-jvm-performance-zulu-openjdk-openjdk-oracle-jdk-graalvm-ce/&quot; target=&quot;\_blank&quot;&gt;Comparing JDK 8 performance&lt;/a&gt; 페이지를 참고하시기 바랍니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
-&lt;p&gt;Oracle은 2019년 1월부터 Java를 상용으로 사용하거나 지속적인 업데이트를 받으려는 기업 사용자에게 유료로 제공하고 있으며, 
-현재 2020년 2월 기준으로 Oracle JDK 8은 개인 또는 개발 용도의 사용은 무료지만, 2021년부터는 유료화로 전환될 것으로 알려져 있습니다.
-&lt;br /&gt;&lt;br /&gt;
-JDK 유료화에 따라 개인 사용자를 비롯해 기업 사용자는 OpenJDK를 적용하기 위해 호환성, 안정성, 성능 등의 검증이 필요합니다. 또한, 배포 버전에 따른 생산성 확인과 보안 이슈 등을 충분히 인지하고 테스트할 필요가 있습니다.
-&lt;br /&gt;&lt;br /&gt;
-더 자세한 내용은 아래 참고 페이지를 확인해 주시기 바랍니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://engineering.linecorp.com/ko/blog/line-open-jdk/&quot; target=&quot;\_blank&quot;&gt;https://engineering.linecorp.com/ko/blog/line-open-jdk/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://c10106.tistory.com/4075&quot; target=&quot;\_blank&quot;&gt;https://c10106.tistory.com/4075&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://jsonobject.tistory.com/395&quot; target=&quot;\_blank&quot;&gt;https://jsonobject.tistory.com/395&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Thu, 06 Feb 2020 00:00:00 +0900</pubDate>
-        <link>https://lindarex.github.io/concepts/difference-between-oraclejdk-openjdk/</link>
-        <guid isPermaLink="true">https://lindarex.github.io/concepts/difference-between-oraclejdk-openjdk/</guid>
-        
-        <category>oraclejdk</category>
-        
-        <category>openjdk</category>
-        
-        <category>open source software</category>
-        
-        <category>open source</category>
-        
-        <category>oss</category>
-        
-        <category>java</category>
-        
-        
-        <category>concepts</category>
         
       </item>
     

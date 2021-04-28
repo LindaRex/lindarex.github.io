@@ -29,7 +29,7 @@
 <meta name="twitter:creator" content="@Rex" />
 <meta name="google-site-verification" content="t6VkmqsI15sIx3P1-gh3NYputZtjhDZOTkxhwDaa4Ik" />
 <script type="application/ld+json">
-{"headline":"AWS EC2 우분투(Ubuntu) 환경에 BOSH director 설치하기","dateModified":"2020-02-20T00:00:00+09:00","datePublished":"2020-02-20T00:00:00+09:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/bosh/ubuntu-bosh-director-installation/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"Rex"},"url":"https://lindarex.github.io/bosh/ubuntu-bosh-director-installation/","author":{"@type":"Person","name":"Rex"},"description":"Cloud Foundry BOSH는 소규모 및 대규모 클라우드(cloud) 애플리케이션(application)의 배포와 라이프 사이클 관리, release engineering을 통합하는 오픈소스(open source) 소프트웨어 프로젝트입니다. BOSH는 수백 개의 가상머신(VM, virtual machine)에 application을 프로비저닝(provisioning)하고 배포할 수 있으며, 모니터링과 오류 복구, application 업데이트를 수행합니다. BOSH는 Cloud Foundry PaaS(CFAR) 배포를 위해 개발되었지만, 거의 모든 소프트웨어를 배포하는 데에도 사용할 수 있습니다. 예를 들면, Hadoop 또는 Jenkins 등의 오픈소스 소프트웨어를 BOSH release로 작성하여 배포할 수 있으며 대규모 분산 시스템(system)에 적합합니다. 또한 BOSH는 Amazon Web Services EC2, Google Cloud Platform, Microsoft Azure, OpenStack, VMware vSphere 및 Alibaba Cloud와 같은 다양한 IaaS(infrastructure as a service) provider를 지원하며, Apache CloudStack, VirtualBox 등의 IaaS provider 지원을 위해 CPI(cloud provider interface)를 제공합니다. 이 포스트에서는 AWS EC2 우분투(ubuntu) 환경에서 BOSH 사용을 위한 BOSH director를 설치하는 방법을 소개합니다.","@context":"https://schema.org"}</script>
+{"datePublished":"2020-02-20T00:00:00+09:00","description":"Cloud Foundry BOSH는 소규모 및 대규모 클라우드(cloud) 애플리케이션(application)의 배포와 라이프 사이클 관리, release engineering을 통합하는 오픈소스(open source) 소프트웨어 프로젝트입니다. BOSH는 수백 개의 가상머신(VM, virtual machine)에 application을 프로비저닝(provisioning)하고 배포할 수 있으며, 모니터링과 오류 복구, application 업데이트를 수행합니다. BOSH는 Cloud Foundry PaaS(CFAR) 배포를 위해 개발되었지만, 거의 모든 소프트웨어를 배포하는 데에도 사용할 수 있습니다. 예를 들면, Hadoop 또는 Jenkins 등의 오픈소스 소프트웨어를 BOSH release로 작성하여 배포할 수 있으며 대규모 분산 시스템(system)에 적합합니다. 또한 BOSH는 Amazon Web Services EC2, Google Cloud Platform, Microsoft Azure, OpenStack, VMware vSphere 및 Alibaba Cloud와 같은 다양한 IaaS(infrastructure as a service) provider를 지원하며, Apache CloudStack, VirtualBox 등의 IaaS provider 지원을 위해 CPI(cloud provider interface)를 제공합니다. 이 포스트에서는 AWS EC2 우분투(ubuntu) 환경에서 BOSH 사용을 위한 BOSH director를 설치하는 방법을 소개합니다.","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/bosh/ubuntu-bosh-director-installation/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"Rex"},"url":"https://lindarex.github.io/bosh/ubuntu-bosh-director-installation/","author":{"@type":"Person","name":"Rex"},"headline":"AWS EC2 우분투(Ubuntu) 환경에 BOSH director 설치하기","dateModified":"2020-02-20T00:00:00+09:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <!-- LINDAREX :: JEKYLL SEO TAG :: END -->
@@ -1113,6 +1113,35 @@ BOSH director 설치는 CFAR 및 CFCR 등 BOSH release 배포를 위한 기반 �
     
     <h2 class="archive__item-title" itemprop="headline">
       
+        <a href="/haproxy/ubuntu-haproxy-setting/" rel="permalink">우분투(Ubuntu) 환경에 HAProxy 설정하기
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">HAProxy(이하 haproxy)는 로드 밸런싱(load balancing) 및 프락시(proxy) 기능을 제공하는 GPL 2 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다.
+
+이 포스트에서는 우분투(ubuntu) 환경에 haproxy를 설정하...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
         <a href="/haproxy/ubuntu-haproxy-installation/" rel="permalink">우분투(Ubuntu) 환경에 패키지(Package)로 HAProxy 설치하기
 </a>
       
@@ -1177,35 +1206,6 @@ BOSH director 설치는 CFAR 및 CFCR 등 BOSH release 배포를 위한 기반 �
     </h2>
     
     <p class="archive__item-excerpt" itemprop="description">Kubernetes(kubernetes)는 컨테이너화된 애플리케이션(application)의 배포(deployment), 확장(scaling) 및 관리(management)를 자동화하는 Apache License 2.0이 적용되는 오픈소스(open source) 컨테이너(conta...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src=
-          
-            "/assets/images/LindaRex_LOGO.jpg"
-          
-          alt="">
-      </div>
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/scm-manager/ubuntu-scm-manager-v2-installation/" rel="permalink">우분투(Ubuntu) 환경에 패키지(Package)로 SCM Manager v2 설치하기
-</a>
-      
-    </h2>
-    
-    <p class="archive__item-excerpt" itemprop="description">SCM Manager v2(이하 scm manager)는 개별적으로 확장 가능한 가벼운 소스 코드 관리 도구로, MIT 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다.
-
-scm manager는 다양한 플러그인과 Level 3 RESTful Web...</p>
   </article>
 </div>
 

@@ -10,8 +10,8 @@ tags:
   - "high availability"
   - "open source software"
   - "open source"
-  - oss
-  - ubuntu
+  - "oss"
+  - "ubuntu"
 ---
 
 
@@ -228,7 +228,7 @@ $ sudo systemctl kill haproxy
 ## 마무리(CONCLUSION)
 ubuntu 환경에 package로 haproxy 설치를 완료했습니다.
 <br />
-다음 포스트에서 haproxy 설정 방법을 소개하겠습니다.
+haproxy 설정 방법은 [우분투(Ubuntu) 환경에 HAProxy 설정하기](https://lindarex.github.io/haproxy/ubuntu-haproxy-setting/){: target="\_blank"} 포스트를 참고하시기 바랍니다.
 
 
 ## 참고(REFERENCES)

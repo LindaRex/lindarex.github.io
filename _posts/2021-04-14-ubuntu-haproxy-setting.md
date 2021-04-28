@@ -142,7 +142,7 @@ defaults
 - socket 바인딩(bind) 설정입니다.
     + unix socket을 "path"에 bind 하거나 TCP v4/v6 address를 "address:port" 형식으로 bind 합니다.
 
-- "/run/haproxy/admin.sock"는 "stats socket" 설정의 "path"입니다.
+- "/run/haproxy/admin.sock"는 "stats socket" 설정의 path입니다.
 
 - "mode 660"는 unix socket 접근(access) 권한 설정입니다.
     + 8진 모드로 설정하며, global section의 "unix-bind"로도 설정할 수 있습니다.
@@ -150,7 +150,7 @@ defaults
 - "level admin"은 socket 실행 권한 제한 설정입니다.
     + "user", "operator", "admin" 중 하나로 설정할 수 있으며, 아시다시피 "admin"은 모든 권한을 갖습니다.
 
-- "expose-fd listeners"은 Seamless Reload(Zero Downtime Reload)를 위한 설정으로, haproxy 1.8 버전부터 사용할 수 있습니다.
+- "expose-fd listeners"은 seamless reload(zero downtime reload)를 위한 설정으로, haproxy 1.8 버전부터 사용할 수 있습니다.
 
     + 위 설정은 리스너(listeners) FD(file descriptor)를 다른 haproxy 프로세스(process)로 전달합니다.
     + 이전 process에서 file descriptor를 통해 unix socket을 사용해서 연결(connection)을 유지하고, 이를 이전 process와 새로운 process에 전달해서 connection 유실을 방지할 수 있는 설정입니다.
@@ -225,7 +225,7 @@ defaults
 
 - 기본 SSL 설정입니다.
 
-- "no-sslv3" 설정은 SSLv3를 제외합니다.
+- "no-sslv3" 설정은 SSLv3 사용을 비활성화합니다.
 
 #### 2.13. 'defaults'
 ```

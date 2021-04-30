@@ -267,20 +267,33 @@ timeout client          1m  # 50000
 timeout server          1m  # 50000
 ```
 
-##### 3.1.1.
+##### 3.1.1. 'option http-server-close'
 ```
 option http-server-close
 ```
 
-- 설명
+- 클라이언트(client)에서 HTTP 연결(connection) 유지(keep-alive) 및 파이프 라이닝 기능을 유지하면서 서버(server)에서 HTTP connection을 닫을 수 있는 설정입니다.
 
-##### 3.1.1.
+- 이 설정은 client에서 가장 낮은 대기 시간(latency)을 제공하고 server에서 가장 빠른 세션(session) 재사용을 제공하여 리소스(resource)를 절약합니다.
+
+- "option" 앞에 "no" 키워드 추가로 설정을 비활성화 할 수 있습니다.
+
+> haproxy는 기본적으로 keep-alive 모드(mode)로 작동합니다.
+
+##### 3.1.2.
 ```
 option forwardfor       except 127.0.0.0/8
 ```
 
-- 설명
+- server로 전송된 요청(request)에 "X-Forwarded-For" 헤더(header) 삽입에 대한 설정입니다.
 
+- "except" 키워드(keyword)를 적용하여 주소(address) 또는 네트워크(network)를 header에 추가하지 않을 수 있습니다.
+
+> haproxy는 리버스(reverse) 프록시(proxy) mode에서 작동하므로 server는 해당(server) IP address를 client address로 간주합니다.
+
+
+
+// todo
 ##### 3.1.1.
 ```
 option                  redispatch

@@ -6,9 +6,550 @@
     <description>오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 블로그입니다 | It shares technologies such as open source software, cloud computing, PaaS and container platforms</description>
     <link>https://lindarex.github.io/</link>
     <atom:link href="https://lindarex.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 28 Apr 2021 17:58:43 +0900</pubDate>
-    <lastBuildDate>Wed, 28 Apr 2021 17:58:43 +0900</lastBuildDate>
+    <pubDate>Tue, 04 May 2021 16:21:53 +0900</pubDate>
+    <lastBuildDate>Tue, 04 May 2021 16:21:53 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
+    
+      <item>
+        <title>우분투(Ubuntu) 환경에 HAProxy로 서브도메인(subdomain) 설정하기</title>
+        <description>&lt;p&gt;이 포스트에서는 우분투(ubuntu) 환경에 HAProxy(haproxy)를 활용한 서브도메인(subdomain) 설정 방법을 소개합니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;선행조건prerequisite&quot;&gt;선행조건(PREREQUISITE)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;ubuntu 환경에 haproxy가 설치되어 있어야 합니다.&lt;/li&gt;
+  &lt;li&gt;방화벽 설정이 필요합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;haproxy 설치 방법은 &lt;a href=&quot;https://lindarex.github.io/haproxy/ubuntu-haproxy-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 환경에 패키지(Package)로 HAProxy 설치하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;방화벽 설정 방법은 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-firewalld-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 환경에 방화벽(Firewalld) 설치 및 설정하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;테스트-환경test-environment&quot;&gt;테스트 환경(TEST ENVIRONMENT)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;AWS EC2 instance
+    &lt;ul&gt;
+      &lt;li&gt;Ubuntu Server 18.04 LTS (HVM), EBS General Purpose (SSD) Volume Type (64비트 Arm)&lt;/li&gt;
+      &lt;li&gt;m5.large (ECU, 2 vCPUs, 3.1 GHz, 8 GiB 메모리, EBS 전용)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Ubuntu 18.04.5 LTS (GNU/Linux 5.4.0-1043-aws x86_64)&lt;/li&gt;
+  &lt;li&gt;haproxy 1.8.8&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;요약summary&quot;&gt;요약(SUMMARY)&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;(선택사항) haproxy 설치 확인&lt;/li&gt;
+  &lt;li&gt;(선택사항) haproxy 설정 확인&lt;/li&gt;
+  &lt;li&gt;haproxy subdomain 설정&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;내용contents&quot;&gt;내용(CONTENTS)&lt;/h2&gt;
+&lt;h3 id=&quot;1-선택사항-haproxy-설치-확인&quot;&gt;1. (선택사항) haproxy 설치 확인&lt;/h3&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;haproxy &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;HA-Proxy version 1.8.8-1ubuntu0.11 2020/06/22
+&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;Copyright 2000-2018 Willy Tarreau &amp;lt;willy@haproxy.org&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;2-선택사항-haproxy-설정-확인&quot;&gt;2. (선택사항) haproxy 설정 확인&lt;/h3&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; /etc/haproxy/haproxy.cfg
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;global
+    log /dev/log    local0
+    log /dev/log    local1 notice
+    &lt;span class=&quot;nb&quot;&gt;chroot&lt;/span&gt; /var/lib/haproxy
+    stats socket /run/haproxy/admin.sock mode 660 level admin expose-fd listeners
+    stats &lt;span class=&quot;nb&quot;&gt;timeout &lt;/span&gt;30s
+    user haproxy
+    group haproxy
+    daemon
+
+    &lt;span class=&quot;c&quot;&gt;# Default SSL material locations&lt;/span&gt;
+    ca-base /etc/ssl/certs
+    crt-base /etc/ssl/private
+
+    &lt;span class=&quot;c&quot;&gt;# Default ciphers to use on SSL-enabled listening sockets.&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;# For more information, see ciphers(1SSL). This list is from:&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;#  https://hynek.me/articles/hardening-your-web-servers-ssl-ciphers/&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;# An alternative list with additional directives can be obtained from&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;#  https://mozilla.github.io/server-side-tls/ssl-config-generator/?server=haproxy&lt;/span&gt;
+    ssl-default-bind-ciphers ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:RSA+AESGCM:RSA+AES:!aNULL:!MD5:!DSS
+    ssl-default-bind-options no-sslv3
+
+defaults
+    log global
+    mode    http
+    option  httplog
+    option  dontlognull
+        &lt;span class=&quot;nb&quot;&gt;timeout &lt;/span&gt;connect 5000
+        &lt;span class=&quot;nb&quot;&gt;timeout &lt;/span&gt;client  50000
+        &lt;span class=&quot;nb&quot;&gt;timeout &lt;/span&gt;server  50000
+    errorfile 400 /etc/haproxy/errors/400.http
+    errorfile 403 /etc/haproxy/errors/403.http
+    errorfile 408 /etc/haproxy/errors/408.http
+    errorfile 500 /etc/haproxy/errors/500.http
+    errorfile 502 /etc/haproxy/errors/502.http
+    errorfile 503 /etc/haproxy/errors/503.http
+    errorfile 504 /etc/haproxy/errors/504.http
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;3-haproxy-subdomain-설정&quot;&gt;3. haproxy subdomain 설정&lt;/h3&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;vi /etc/haproxy/haproxy.cfg
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;global
+        log /dev/log    local0
+        log /dev/log    local1 notice
+        &lt;span class=&quot;nb&quot;&gt;chroot&lt;/span&gt; /var/lib/haproxy
+        stats socket /run/haproxy/admin.sock mode 660 level admin expose-fd listeners
+        stats &lt;span class=&quot;nb&quot;&gt;timeout &lt;/span&gt;30s
+        user haproxy
+        group haproxy
+        daemon
+
+        &lt;span class=&quot;c&quot;&gt;# Default SSL material locations&lt;/span&gt;
+        ca-base /etc/ssl/certs
+        crt-base /etc/ssl/private
+
+        &lt;span class=&quot;c&quot;&gt;# Default ciphers to use on SSL-enabled listening sockets.&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;# For more information, see ciphers(1SSL). This list is from:&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;#  https://hynek.me/articles/hardening-your-web-servers-ssl-ciphers/&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;# An alternative list with additional directives can be obtained from&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;#  https://mozilla.github.io/server-side-tls/ssl-config-generator/?server=haproxy&lt;/span&gt;
+        ssl-default-bind-ciphers ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:RSA+AESGCM:RSA+AES:!aNULL:!MD5:!DSS
+        ssl-default-bind-options no-sslv3
+
+defaults
+        log     global
+        mode    http
+        option  httplog
+        option  dontlognull
+
+        &lt;span class=&quot;c&quot;&gt;# ADDED&lt;/span&gt;
+        option http-server-close
+        option forwardfor       except 127.0.0.0/8
+        option                  redispatch
+        retries                 3
+        &lt;span class=&quot;nb&quot;&gt;timeout &lt;/span&gt;http-request    10s
+        &lt;span class=&quot;nb&quot;&gt;timeout &lt;/span&gt;queue           1m
+        &lt;span class=&quot;nb&quot;&gt;timeout &lt;/span&gt;connect         10s &lt;span class=&quot;c&quot;&gt;# 5000&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;timeout &lt;/span&gt;client          1m  &lt;span class=&quot;c&quot;&gt;# 50000&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;timeout &lt;/span&gt;server          1m  &lt;span class=&quot;c&quot;&gt;# 50000&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;timeout &lt;/span&gt;http-keep-alive 10s
+        &lt;span class=&quot;nb&quot;&gt;timeout &lt;/span&gt;check           10s
+        maxconn                 3000
+
+        errorfile 400 /etc/haproxy/errors/400.http
+        errorfile 403 /etc/haproxy/errors/403.http
+        errorfile 408 /etc/haproxy/errors/408.http
+        errorfile 500 /etc/haproxy/errors/500.http
+        errorfile 502 /etc/haproxy/errors/502.http
+        errorfile 503 /etc/haproxy/errors/503.http
+        errorfile 504 /etc/haproxy/errors/504.http
+
+frontend http-rex
+        &lt;span class=&quot;nb&quot;&gt;bind&lt;/span&gt; :::80 v4v6   &lt;span class=&quot;c&quot;&gt;# bind *:80&lt;/span&gt;
+        option        http-server-close
+ 
+        acl domain_net_scm hdr&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;host&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; scm.rex-domain.net
+        acl domain_net_ci hdr&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;host&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; ci.rex-domain.net
+        acl domain_net_sonar hdr&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;host&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; sonar.rex-domain.net
+
+        use_backend domain_net_app_scm        &lt;span class=&quot;k&quot;&gt;if &lt;/span&gt;domain_net_scm
+        use_backend domain_net_app_ci        &lt;span class=&quot;k&quot;&gt;if &lt;/span&gt;domain_net_ci
+        use_backend domain_net_app_sonar        &lt;span class=&quot;k&quot;&gt;if &lt;/span&gt;domain_net_sonar
+
+backend domain_net_app_scm
+        balance roundrobin
+        server host1 10.0.10.6:8801
+ 
+backend domain_net_app_ci
+        balance roundrobin
+        server host1 10.0.10.6:8802
+ 
+backend domain_net_app_sonar
+        balance roundrobin
+        server host1 10.0.10.6:8803
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;31-global-섹션section&quot;&gt;3.1. global 섹션(section)&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;global section 설정은 &lt;a href=&quot;https://lindarex.github.io/haproxy/ubuntu-haproxy-setting/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 환경에 HAProxy 설정하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;32-defaults-section&quot;&gt;3.2. defaults section&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;아래 항목 외의 defaults section 설정은 &lt;a href=&quot;https://lindarex.github.io/haproxy/ubuntu-haproxy-setting/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 환경에 HAProxy 설정하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# ADDED
+option http-server-close
+option forwardfor       except 127.0.0.0/8
+option                  redispatch
+retries                 3
+timeout http-request    10s
+timeout queue           1m
+timeout http-keep-alive 10s
+timeout check           10s
+maxconn                 3000
+
+# MODIFIED
+timeout connect         10s # 5000
+timeout client          1m  # 50000
+timeout server          1m  # 50000
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;321-option-http-server-close&quot;&gt;3.2.1. ‘option http-server-close’&lt;/h5&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;option http-server-close
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;클라이언트(client)에서 HTTP 연결(connection) 유지(keep-alive) 및 파이프 라이닝 기능을 유지하면서 서버(server)에서 HTTP connection을 닫을 수 있는 설정입니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;이 설정은 client에서 가장 낮은 대기 시간(latency)을 제공하고 server에서 가장 빠른 세션(session) 재사용을 제공하여 리소스(resource)를 절약합니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;“option” 앞에 “no” 키워드 추가로 설정을 비활성화 할 수 있습니다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;haproxy는 기본적으로 keep-alive 모드(mode)로 작동합니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h5 id=&quot;322-option-forwardfor&quot;&gt;3.2.2. ‘option forwardfor’&lt;/h5&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;option forwardfor       except 127.0.0.0/8
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;server로 전송된 요청(request)에 “X-Forwarded-For” 헤더(header) 삽입에 대한 설정입니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;“except” 키워드(keyword)를 적용하여 주소(address) 또는 네트워크(network)를 header에 추가하지 않을 수 있습니다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;haproxy는 리버스(reverse) 프락시(proxy) mode로 작동하므로, haproxy server는 해당(server 자신) IP address를 client address로 간주합니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h5 id=&quot;323-option-redispatch&quot;&gt;3.2.3. ‘option redispatch’&lt;/h5&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;option                  redispatch
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;connection 실패 시, session 재전송(redistribution)에 대한 설정입니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;“option” 앞에 “no” 키워드 추가로 설정을 비활성화 할 수 있습니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;frontend section에서는 사용할 수 없습니다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;324-retries&quot;&gt;3.2.4. ‘retries’&lt;/h5&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;retries                 3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;connection 실패 후, server에서 수행할 재시도 횟수 설정입니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;이 설정은 전체 request가 아닌 connection 시도 횟수에 적용됩니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;frontend section에서는 사용할 수 없습니다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;325-timeout-http-request&quot;&gt;3.2.5. ‘timeout http-request’&lt;/h5&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;timeout http-request    10s
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;전체 HTTP request를 대기할 최대 허용 시간 설정입니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;이 설정을 활성화하면, client 유형(type)과 관계없이 request가 제시간에 완료되지 않으면 request는 중단됩니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;이 설정에서 제한 시간이 만료(expire)되면, client에게 HTTP 408 응답(response)을 전송하고 connection을 닫습니다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;326-timeout-queue&quot;&gt;3.2.6. ‘timeout queue’&lt;/h5&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;timeout queue           1m
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;queue에서 보류(pending) 중인 request의 제한 시간 설정입니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;이 설정을 지정하지 않으면, “timeout connect” 설정과 같은 값을 적용합니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;frontend section에서는 사용할 수 없습니다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;327-timeout-http-keep-alive&quot;&gt;3.2.7. ‘timeout http-keep-alive’&lt;/h5&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;timeout http-keep-alive 10s
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;새로운 HTTP request를 대기할 최대 허용 시간 설정입니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;“keep-alive”의 새 request를 대기 시간은 “timeout http-request”로 설정합니다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;328-timeout-check&quot;&gt;3.2.8. ‘timeout check’&lt;/h5&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;timeout check           10s
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;“timeout check” 설정은 “timeout connect” 설정의 최대 허용 연결 시간을 사용한 후, “timeout check” 설정을 추가로 최대 허용 읽기 시간으로 적용합니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;이 설정을 지정하지 않으면, “timeout connect” 설정으로 적용합니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;frontend section에서는 사용할 수 없습니다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;329-maxconn&quot;&gt;3.2.9. ‘maxconn’&lt;/h5&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;maxconn                 3000
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;frontend의 최대 동시 connection 수를 설정합니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;기본값은 2000이며, global maxconn을 초과하지 않아야 합니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;backend section에서는 사용할 수 없습니다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;3210-timeout&quot;&gt;3.2.10. ‘timeout’&lt;/h5&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;timeout connect         10s # 5000
+timeout client          1m  # 50000
+timeout server          1m  # 50000
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;위 설정은 &lt;a href=&quot;https://lindarex.github.io/haproxy/ubuntu-haproxy-setting/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 환경에 HAProxy 설정하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;33-frontend-section&quot;&gt;3.3. frontend section&lt;/h4&gt;
+&lt;h5 id=&quot;331-frontend&quot;&gt;3.3.1. ‘frontend’&lt;/h5&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;frontend http-rex
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;“frontend section”은 client connection에 대한 IP address와 포트(port)를 설정합니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;“http-rex” frontend 이름(name)입니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;필요에 따라 “frontend section”을 추가 할 수 있으며, “frontend” 키워드 뒤에 name을 설정하여 구분할 수 있습니다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;모든 proxy section name은 대소문자, 숫자, ‘-‘(대시), ‘_‘(밑줄), ‘.’(점), ‘:’(콜론)으로 구성되어야 합니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h5 id=&quot;332-bind&quot;&gt;3.3.2. ‘bind’&lt;/h5&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bind :::80 v4v6   # bind *:80
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;”:::80”은 frontend가 수신할 address 설정이며, 선택 사항입니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;address 값은 호스트 name, IPv4 주소, IPv6 주소, ‘*‘로 설정할 수 있으며, 설정하지 않으면 IPv4 address가 수신됩니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;“v4v6” 설정은 기본 address 사용 시, IPv4 및 IPv6 모두 socket에 바인딩(bind)하며, 리눅스(linux) 커널(kernel) 2.4.21 이상에서 지원합니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;defaults section과 backend section에서는 사용할 수 없습니다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;333-acl&quot;&gt;3.3.3. ‘acl’&lt;/h5&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;acl domain_net_scm hdr(host) -i scm.rex-domain.net
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;“acl”은 액세스 제어 목록(access control lists)을 의미하며. 추출한 샘플(sample)의 패턴(pattern) 일치 여부에 따라 작업을 수행합니다.
+    &lt;ul&gt;
+      &lt;li&gt;request 또는 response, client 또는 server 정보 등에서 데이터(data) sample을 추출합니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;“acl”은 일반적으로 request 차단(block), backend 선택 또는 header 추가로 구성됩니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;“domain_net_scm”은 acl name입니다.
+    &lt;ul&gt;
+      &lt;li&gt;acl name은 대소문자, 숫자, ‘-‘(대시), ‘_‘(밑줄), ‘.’(점), ‘:’(콜론)으로 구성되며, 대소문자를 구분합니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;“hdr(host)”의 “hdr”은 header를 의미하며, “host” header가 포함된 HTTP request를 수락하는 설정입니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;“-i”는 acl flag이며, 대소문자를 무시하는 설정입니다.
+    &lt;ul&gt;
+      &lt;li&gt;acl flag에는 “-f”(파일(file)에서 pattern 매칭(matching)), “-m”(특정 pattern matching), “-n”(DNS 확인 금지) 등이 있습니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;“scm.rex-domain.net”은 acl 값(value)입니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;334-use_backend&quot;&gt;3.3.4. ‘use_backend’&lt;/h5&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;use_backend domain_net_app_scm        if domain_net_scm
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;“use_backend”는 acl 기반 조건(condition)이 일치 시, 특정 backend로 전환하는 설정입니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;“domain_net_app_scm”는 backend name 또는 listen section name입니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;“if domain_net_scm”는 backend의 condition이며 acl name입니다.
+    &lt;ul&gt;
+      &lt;li&gt;condition은 “if” 또는 “unless”를 사용할 수 있습니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;backend section에서는 사용할 수 없습니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;34-backend-section&quot;&gt;3.4. backend section&lt;/h4&gt;
+&lt;h5 id=&quot;341-backend&quot;&gt;3.4.1. ‘backend’&lt;/h5&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;backend domain_net_app_scm
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;“backend backend”는 들어오는 connection 전달을 위해 proxy가 연결할 server에 대한 설정입니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;“domain_net_app_scm”는 backend name입니다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;342-balance&quot;&gt;3.4.2. ‘balance’&lt;/h5&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;balance roundrobin
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;“balance”는 로드 밸런싱(load balancing) 알고리즘(algorithm) 설정입니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;위 설정은 roundrobin algorithm을 지정합니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;사용 가능한 algorithm은 “roundrobin”, static-rr”, “leastconn”, “first” 등이 있습니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;frontend section에서는 사용할 수 없습니다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;343-server&quot;&gt;3.4.3. ‘server’&lt;/h5&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;server host1 10.0.10.6:8801
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;“server”는 backend의 server 설정입니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;“host1”은 내부(internal) name이며, 로그(log) 및 경고(alert)에 표시됩니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;“10.0.10.6:8801”의 “10.0.10.6”은 server의 IPv4 또는 IPv6 address입니다.
+    &lt;ul&gt;
+      &lt;li&gt;“0.0.0.0” 또는 “*” 설정 시, client connection IP address와 동일한 IP address로 전달되며, 이는 투명(transparent) proxy 아키텍처(architecture)에 유용합니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;“10.0.10.6:8801”의 “8801”은 port 정보이며 선택사항입니다.
+    &lt;ul&gt;
+      &lt;li&gt;port 설정 시, 모든 connection은 해당 port로 전송됩니다.&lt;/li&gt;
+      &lt;li&gt;port 미설정 시, client가 연결된 port로 전송됩니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;frontend section에서는 사용할 수 없습니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;transparent proxy란 client가 server에 request 시, transparent proxy가 request를 가로채서 캐싱(caching), 리디렉션(redirection) 및 인증(authentication) 등 다양한 작업을 수행하여 client 모니터링(monitoring) 또는 특정 server에 대한 access block 등을 설정할 수 있는 proxy입니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
+&lt;p&gt;ubuntu 환경에 haproxy를 활용하여 subdomain 설정을 완료했습니다.
+&lt;br /&gt;
+haproxy 설정에 대한 더 자세한 내용은 아래 참고 페이지를 확인해 주시기 바랍니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cbonte.github.io/haproxy-dconv/1.8/configuration.html&quot; target=&quot;\_blank&quot;&gt;https://cbonte.github.io/haproxy-dconv/1.8/configuration.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 03 May 2021 00:00:00 +0900</pubDate>
+        <link>https://lindarex.github.io/haproxy/ubuntu-haproxy-subdomain-setting/</link>
+        <guid isPermaLink="true">https://lindarex.github.io/haproxy/ubuntu-haproxy-subdomain-setting/</guid>
+        
+        <category>haproxy</category>
+        
+        <category>load balancer</category>
+        
+        <category>proxy</category>
+        
+        <category>reverse proxy</category>
+        
+        <category>high availability</category>
+        
+        <category>subdomain</category>
+        
+        <category>open source software</category>
+        
+        <category>open source</category>
+        
+        <category>oss</category>
+        
+        <category>ubuntu</category>
+        
+        
+        <category>haproxy</category>
+        
+      </item>
     
       <item>
         <title>우분투(Ubuntu) 환경에 HAProxy 설정하기</title>
@@ -99,20 +640,21 @@ defaults
     errorfile 504 /etc/haproxy/errors/504.http
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h4 id=&quot;21-global&quot;&gt;2.1. ‘global’&lt;/h4&gt;
+&lt;h4 id=&quot;21-global-섹션section&quot;&gt;2.1. global 섹션(section)&lt;/h4&gt;
+&lt;h5 id=&quot;211-global&quot;&gt;2.1.1. ‘global’&lt;/h5&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'global'
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;global 섹션(section)의 설정은 프로세스 전체에 적용되며, 운영체제(OS)에 따라 다를 수 있습니다.&lt;/p&gt;
+    &lt;p&gt;global section의 설정은 프로세스 전체에 적용되며, 운영체제(OS)에 따라 다를 수 있습니다.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;haproxy는 global section 외에 defaults, listen, frontend, backend 등의 proxy section으로 구성됩니다.&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&quot;22-log&quot;&gt;2.2. ‘log’&lt;/h4&gt;
+&lt;h5 id=&quot;212-log&quot;&gt;2.1.2. ‘log’&lt;/h5&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'log /dev/log    local0'
 'log /dev/log    local1 notice'
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -139,7 +681,7 @@ defaults
   &lt;p&gt;syslog에 대한 자세한 사항은 &lt;a href=&quot;https://en.wikipedia.org/wiki/Syslog&quot; target=&quot;\_blank&quot;&gt;https://en.wikipedia.org/wiki/Syslog&lt;/a&gt; 페이지를 참고하시기 바랍니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h4 id=&quot;23-chroot&quot;&gt;2.3. ‘chroot’&lt;/h4&gt;
+&lt;h5 id=&quot;213-chroot&quot;&gt;2.1.3. ‘chroot’&lt;/h5&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'chroot /var/lib/haproxy'
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -156,7 +698,7 @@ defaults
   &lt;p&gt;chroot에 대한 자세한 사항은 &lt;a href=&quot;https://ko.wikipedia.org/wiki/Chroot&quot; target=&quot;\_blank&quot;&gt;https://ko.wikipedia.org/wiki/Chroot&lt;/a&gt; 페이지를 참고하시기 바랍니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h4 id=&quot;24-stats-socket&quot;&gt;2.4. ‘stats socket’&lt;/h4&gt;
+&lt;h5 id=&quot;214-stats-socket&quot;&gt;2.1.4. ‘stats socket’&lt;/h5&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'stats socket /run/haproxy/admin.sock mode 660 level admin expose-fd listeners'
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -189,7 +731,7 @@ defaults
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&quot;25-stats-timeout&quot;&gt;2.5. ‘stats timeout’&lt;/h4&gt;
+&lt;h5 id=&quot;215-stats-timeout&quot;&gt;2.1.5. ‘stats timeout’&lt;/h5&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'stats timeout 30s'
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -201,7 +743,7 @@ defaults
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&quot;26-user&quot;&gt;2.6. ‘user’&lt;/h4&gt;
+&lt;h5 id=&quot;216-user&quot;&gt;2.1.6. ‘user’&lt;/h5&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'user haproxy'
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -209,7 +751,7 @@ defaults
   &lt;li&gt;시스템(system) 사용자를 unix socket 소유자로 설정합니다.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&quot;27-group&quot;&gt;2.7. ‘group’&lt;/h4&gt;
+&lt;h5 id=&quot;217-group&quot;&gt;2.1.7. ‘group’&lt;/h5&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'group haproxy'
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -217,7 +759,7 @@ defaults
   &lt;li&gt;system 그룹을 unix socket 그룹으로 설정합니다.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&quot;28-daemon&quot;&gt;2.8. ‘daemon’&lt;/h4&gt;
+&lt;h5 id=&quot;218-daemon&quot;&gt;2.1.8. ‘daemon’&lt;/h5&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'daemon'
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -234,7 +776,7 @@ defaults
   &lt;p&gt;fork에 대한 자세한 사항은 &lt;a href=&quot;https://ko.wikipedia.org/wiki/%ED%8F%AC%ED%81%AC_(%EC%8B%9C%EC%8A%A4%ED%85%9C_%ED%98%B8%EC%B6%9C)&quot; target=&quot;\_blank&quot;&gt;https://ko.wikipedia.org/wiki/포크_(시스템_호출)&lt;/a&gt; 페이지를 참고하시기 바랍니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h4 id=&quot;29-ca-base&quot;&gt;2.9. ‘ca-base’&lt;/h4&gt;
+&lt;h5 id=&quot;219-ca-base&quot;&gt;2.1.9. ‘ca-base’&lt;/h5&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'ca-base /etc/ssl/certs'
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -242,7 +784,7 @@ defaults
   &lt;li&gt;“ca-file” 또는 “crl-file”의 상대 경로(path) 사용 시, SSL CA 인증서(certificates) 및 CRLs의 기본 directory를 설정합니다.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&quot;210-crt-base&quot;&gt;2.10. ‘crt-base’&lt;/h4&gt;
+&lt;h5 id=&quot;2110-crt-base&quot;&gt;2.1.10. ‘crt-base’&lt;/h5&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'crt-base /etc/ssl/private'
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -250,7 +792,7 @@ defaults
   &lt;li&gt;“crtfile”의 상대 경로(path) 사용 시, SSL certificates의 기본 directory를 설정합니다.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&quot;211-ssl-default-bind-ciphers&quot;&gt;2.11. ‘ssl-default-bind-ciphers’&lt;/h4&gt;
+&lt;h5 id=&quot;2111-ssl-default-bind-ciphers&quot;&gt;2.1.11. ‘ssl-default-bind-ciphers’&lt;/h5&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'ssl-default-bind-ciphers ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:RSA+AESGCM:RSA+AES:!aNULL:!MD5:!DSS'
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -275,7 +817,7 @@ defaults
   &lt;p&gt;cipher suite에 대한 자세한 사항은 &lt;a href=&quot;https://ko.wikipedia.org/wiki/%EC%95%94%ED%98%B8%ED%99%94_%EC%8A%A4%EC%9C%84%ED%8A%B8&quot; target=&quot;\_blank&quot;&gt;https://ko.wikipedia.org/wiki/암호화_스위트&lt;/a&gt; 페이지와 &lt;a href=&quot;https://en.wikipedia.org/wiki/Cipher_suite&quot; target=&quot;\_blank&quot;&gt;https://en.wikipedia.org/wiki/Cipher_suite&lt;/a&gt; 페이지를 참고하시기 바랍니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h4 id=&quot;212-ssl-default-bind-options&quot;&gt;2.12. ‘ssl-default-bind-options’&lt;/h4&gt;
+&lt;h5 id=&quot;2112-ssl-default-bind-options&quot;&gt;2.1.12. ‘ssl-default-bind-options’&lt;/h5&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'ssl-default-bind-options no-sslv3'
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -288,7 +830,8 @@ defaults
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&quot;213-defaults&quot;&gt;2.13. ‘defaults’&lt;/h4&gt;
+&lt;h4 id=&quot;22-defaults-section&quot;&gt;2.2. defaults section&lt;/h4&gt;
+&lt;h5 id=&quot;221-defaults&quot;&gt;2.2.1. ‘defaults’&lt;/h5&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'defaults'
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -301,7 +844,7 @@ defaults
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&quot;214-log-global&quot;&gt;2.14. ‘log global’&lt;/h4&gt;
+&lt;h5 id=&quot;222-log-global&quot;&gt;2.2.2. ‘log global’&lt;/h5&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'log global'
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -314,7 +857,7 @@ defaults
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&quot;215-mode&quot;&gt;2.15. ‘mode’&lt;/h4&gt;
+&lt;h5 id=&quot;223-mode&quot;&gt;2.2.3. ‘mode’&lt;/h5&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'mode    http'
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -331,7 +874,7 @@ defaults
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&quot;216-option&quot;&gt;2.16. ‘option’&lt;/h4&gt;
+&lt;h5 id=&quot;224-option&quot;&gt;2.2.4. ‘option’&lt;/h5&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'option  httplog'
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -362,7 +905,7 @@ defaults
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&quot;217-timeout&quot;&gt;2.17. ‘timeout’&lt;/h4&gt;
+&lt;h5 id=&quot;225-timeout&quot;&gt;2.2.5. ‘timeout’&lt;/h5&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'timeout connect 5000'
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -399,7 +942,7 @@ defaults
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&quot;218-errorfile&quot;&gt;2.18. ‘errorfile’&lt;/h4&gt;
+&lt;h5 id=&quot;226-errorfile&quot;&gt;2.2.6. ‘errorfile’&lt;/h5&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'errorfile 400 /etc/haproxy/errors/400.http'
 'errorfile 403 /etc/haproxy/errors/403.http'
 'errorfile 408 /etc/haproxy/errors/408.http'
@@ -430,7 +973,7 @@ haproxy 설정에 대한 더 자세한 내용은 아래 참고 페이지를 확�
   &lt;li&gt;&lt;a href=&quot;https://cbonte.github.io/haproxy-dconv/1.8/configuration.html&quot; target=&quot;\_blank&quot;&gt;https://cbonte.github.io/haproxy-dconv/1.8/configuration.html&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>Wed, 14 Apr 2021 00:00:00 +0900</pubDate>
+        <pubDate>Mon, 26 Apr 2021 00:00:00 +0900</pubDate>
         <link>https://lindarex.github.io/haproxy/ubuntu-haproxy-setting/</link>
         <guid isPermaLink="true">https://lindarex.github.io/haproxy/ubuntu-haproxy-setting/</guid>
         
@@ -683,7 +1226,7 @@ haproxy 설정 방법은 &lt;a href=&quot;https://lindarex.github.io/haproxy/ubu
   &lt;li&gt;&lt;a href=&quot;https://www.haproxy.org/&quot; target=&quot;\_blank&quot;&gt;https://www.haproxy.org/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>Fri, 09 Apr 2021 00:00:00 +0900</pubDate>
+        <pubDate>Mon, 19 Apr 2021 00:00:00 +0900</pubDate>
         <link>https://lindarex.github.io/haproxy/ubuntu-haproxy-installation/</link>
         <guid isPermaLink="true">https://lindarex.github.io/haproxy/ubuntu-haproxy-installation/</guid>
         
@@ -1240,7 +1783,7 @@ kube-system   nodelocaldns-dvj84                        1/1     Running   0     
   &lt;li&gt;&lt;a href=&quot;https://kubernetes.io/ko/docs/setup/production-environment/tools/kubespray/&quot; target=&quot;\_blank&quot;&gt;https://kubernetes.io/ko/docs/setup/production-environment/tools/kubespray/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>Thu, 08 Apr 2021 00:00:00 +0900</pubDate>
+        <pubDate>Tue, 13 Apr 2021 00:00:00 +0900</pubDate>
         <link>https://lindarex.github.io/kubernetes/ubuntu-kubernetes-installation-with-kubespray/</link>
         <guid isPermaLink="true">https://lindarex.github.io/kubernetes/ubuntu-kubernetes-installation-with-kubespray/</guid>
         
@@ -9135,118 +9678,6 @@ linux 입문자 또는 오픈소스 소프트웨어에 관심이 있다면, Ubun
         <category>open source</category>
         
         <category>oss</category>
-        
-        
-        <category>ubuntu</category>
-        
-      </item>
-    
-      <item>
-        <title>우분투(Ubuntu) 환경에 방화벽(Firewalld) 설치 및 설정하기</title>
-        <description>&lt;p&gt;방화벽(firewalld)은 IPv4, IPv6, 이더넷 브리지 및 IPSet의 방화벽(firewall) 설정을 지원하는 리눅스(linux) firewall 관리 도구이며, linux 커널 netfilter 프레임워크의 프런트 엔드 역할을 하는 RHEL 7 제품군의 기본 firewall 관리 소프트웨어입니다.
-&lt;br /&gt;&lt;br /&gt;
-우분투(ubuntu)의 기본 firewall 시스템은 UFW(uncomplicated firewall)이지만, firewalld를 설치하여 사용할 수 있습니다.
-&lt;br /&gt;&lt;br /&gt;
-이 포스트에서는 ubuntu 환경에서 패키지로 firewalld를 설치하고 설정하는 방법을 소개합니다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;UFW 설정 방법은 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-ufw-setting/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 환경에 방화벽(UFW) 설정하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;선행조건prerequisite&quot;&gt;선행조건(PREREQUISITE)&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;ubuntu 환경이 필요합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;ubuntu 설치 방법은 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1604-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 서버(Server) 16.04 설치하기&lt;/a&gt; 또는 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-1804-installation/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 서버(Server) 18.04 설치하기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;테스트-환경test-environment&quot;&gt;테스트 환경(TEST ENVIRONMENT)&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;VMware® Workstation 15 Pro (15.5.1 build-15018445)&lt;/li&gt;
-  &lt;li&gt;Ubuntu 16.04.4 LTS (Xenial Xerus) Server (64-bit)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;요약summary&quot;&gt;요약(SUMMARY)&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;apt 명령어로 firewalld 설치&lt;/li&gt;
-  &lt;li&gt;firewalld 설치 확인&lt;/li&gt;
-  &lt;li&gt;firewalld 설정&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;내용contents&quot;&gt;내용(CONTENTS)&lt;/h2&gt;
-&lt;h3 id=&quot;1-apt-명령어로-firewalld-설치&quot;&gt;1. apt 명령어로 firewalld 설치&lt;/h3&gt;
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt update &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;firewalld &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;2-firewalld-설치-확인&quot;&gt;2. firewalld 설치 확인&lt;/h3&gt;
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;firewall-cmd &lt;span class=&quot;nt&quot;&gt;--version&lt;/span&gt;
-&lt;span class=&quot;go&quot;&gt;0.4.4.5
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;3-firewalld-설정&quot;&gt;3. firewalld 설정&lt;/h3&gt;
-&lt;h4 id=&quot;31-firewalld에--rule-추가&quot;&gt;3.1. firewalld에  rule 추가&lt;/h4&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;아래 예제는 영구적으로 public zone에 TCP 8080 포트를 추가하는 명령어입니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;firewall-cmd &lt;span class=&quot;nt&quot;&gt;--permanent&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--zone&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;public &lt;span class=&quot;nt&quot;&gt;--add-port&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;8080/tcp
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;32-firewalld에-rule-적용&quot;&gt;3.2. firewalld에 rule 적용&lt;/h4&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;아래 명령어를 실행하기 전에는 추가한 rule이 적용되지 않습니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;firewall-cmd &lt;span class=&quot;nt&quot;&gt;--reload&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;33-firewalld에-설정된-모든-값-조회&quot;&gt;3.3. firewalld에 설정된 모든 값 조회&lt;/h4&gt;
-&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;firewall-cmd &lt;span class=&quot;nt&quot;&gt;--list-all&lt;/span&gt;
-&lt;span class=&quot;go&quot;&gt;public
-  target: default
-  icmp-block-inversion: no
-  interfaces:
-  sources:
-  services: ssh dhcpv6-client
-  ports: 8080/tcp
-  protocols:
-  masquerade: no
-  forward-ports:
-  source-ports:
-  icmp-blocks:
-  rich rules:
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
-&lt;p&gt;ubuntu 환경에 패키지로 firewalld 설치 및 설정을 완료했습니다.
-&lt;br /&gt;&lt;br /&gt;
-firewalld는 CentOS 7부터 이전의 Iptables를 대체해 새롭게 선보인 패킷 필터링 firewall 프로그램입니다.
-&lt;br /&gt;&lt;br /&gt;
-다음 포스트에서는 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-ufw-setting/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 환경에 방화벽(UFW) 설정하기&lt;/a&gt;를 소개하겠습니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://manpages.ubuntu.com/manpages/bionic/man1/firewall-cmd.1.html&quot; target=&quot;\_blank&quot;&gt;http://manpages.ubuntu.com/manpages/bionic/man1/firewall-cmd.1.html&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://computingforgeeks.com/install-and-use-firewalld-on-ubuntu-18-04-ubuntu-16-04/&quot; target=&quot;\_blank&quot;&gt;https://computingforgeeks.com/install-and-use-firewalld-on-ubuntu-18-04-ubuntu-16-04/&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Fri, 07 Feb 2020 00:00:00 +0900</pubDate>
-        <link>https://lindarex.github.io/ubuntu/ubuntu-firewalld-installation/</link>
-        <guid isPermaLink="true">https://lindarex.github.io/ubuntu/ubuntu-firewalld-installation/</guid>
-        
-        <category>firewalld</category>
-        
-        <category>firewall</category>
-        
-        <category>open source software</category>
-        
-        <category>open source</category>
-        
-        <category>oss</category>
-        
-        <category>ubuntu</category>
         
         
         <category>ubuntu</category>

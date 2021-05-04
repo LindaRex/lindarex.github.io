@@ -11,25 +11,25 @@
 
 <!-- LINDAREX :: JEKYLL SEO TAG :: BIGIN -->
 <!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>우분투(Ubuntu) 환경에 HAProxy 설정하기 | LindaRex</title>
+<title>우분투(Ubuntu) 환경에 HAProxy로 서브도메인(subdomain) 설정하기 | LindaRex</title>
 <meta name="generator" content="Jekyll v3.9.0" />
-<meta property="og:title" content="우분투(Ubuntu) 환경에 HAProxy 설정하기" />
+<meta property="og:title" content="우분투(Ubuntu) 환경에 HAProxy로 서브도메인(subdomain) 설정하기" />
 <meta name="author" content="Rex" />
 <meta property="og:locale" content="ko_KR" />
-<meta name="description" content="HAProxy(이하 haproxy)는 로드 밸런싱(load balancing) 및 프락시(proxy) 기능을 제공하는 GPL 2 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. 이 포스트에서는 우분투(ubuntu) 환경에 haproxy를 설정하는 방법을 소개합니다." />
-<meta property="og:description" content="HAProxy(이하 haproxy)는 로드 밸런싱(load balancing) 및 프락시(proxy) 기능을 제공하는 GPL 2 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. 이 포스트에서는 우분투(ubuntu) 환경에 haproxy를 설정하는 방법을 소개합니다." />
-<link rel="canonical" href="https://lindarex.github.io/haproxy/ubuntu-haproxy-setting/" />
-<meta property="og:url" content="https://lindarex.github.io/haproxy/ubuntu-haproxy-setting/" />
+<meta name="description" content="이 포스트에서는 우분투(ubuntu) 환경에 HAProxy(haproxy)를 활용한 서브도메인(subdomain) 설정 방법을 소개합니다." />
+<meta property="og:description" content="이 포스트에서는 우분투(ubuntu) 환경에 HAProxy(haproxy)를 활용한 서브도메인(subdomain) 설정 방법을 소개합니다." />
+<link rel="canonical" href="https://lindarex.github.io/haproxy/ubuntu-haproxy-subdomain-setting/" />
+<meta property="og:url" content="https://lindarex.github.io/haproxy/ubuntu-haproxy-subdomain-setting/" />
 <meta property="og:site_name" content="LindaRex" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2021-04-26T00:00:00+09:00" />
+<meta property="article:published_time" content="2021-05-03T00:00:00+09:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="우분투(Ubuntu) 환경에 HAProxy 설정하기" />
+<meta property="twitter:title" content="우분투(Ubuntu) 환경에 HAProxy로 서브도메인(subdomain) 설정하기" />
 <meta name="twitter:site" content="@" />
 <meta name="twitter:creator" content="@Rex" />
 <meta name="google-site-verification" content="t6VkmqsI15sIx3P1-gh3NYputZtjhDZOTkxhwDaa4Ik" />
 <script type="application/ld+json">
-{"datePublished":"2021-04-26T00:00:00+09:00","description":"HAProxy(이하 haproxy)는 로드 밸런싱(load balancing) 및 프락시(proxy) 기능을 제공하는 GPL 2 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. 이 포스트에서는 우분투(ubuntu) 환경에 haproxy를 설정하는 방법을 소개합니다.","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/haproxy/ubuntu-haproxy-setting/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"Rex"},"url":"https://lindarex.github.io/haproxy/ubuntu-haproxy-setting/","author":{"@type":"Person","name":"Rex"},"headline":"우분투(Ubuntu) 환경에 HAProxy 설정하기","dateModified":"2021-04-26T00:00:00+09:00","@context":"https://schema.org"}</script>
+{"datePublished":"2021-05-03T00:00:00+09:00","description":"이 포스트에서는 우분투(ubuntu) 환경에 HAProxy(haproxy)를 활용한 서브도메인(subdomain) 설정 방법을 소개합니다.","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/haproxy/ubuntu-haproxy-subdomain-setting/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"Rex"},"url":"https://lindarex.github.io/haproxy/ubuntu-haproxy-subdomain-setting/","author":{"@type":"Person","name":"Rex"},"headline":"우분투(Ubuntu) 환경에 HAProxy로 서브도메인(subdomain) 설정하기","dateModified":"2021-05-03T00:00:00+09:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <!-- LINDAREX :: JEKYLL SEO TAG :: END -->
@@ -389,15 +389,15 @@ wcs_do();
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="우분투(Ubuntu) 환경에 HAProxy 설정하기">
-    <meta itemprop="description" content="HAProxy(이하 haproxy)는 로드 밸런싱(load balancing) 및 프락시(proxy) 기능을 제공하는 GPL 2 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다.이 포스트에서는 우분투(ubuntu) 환경에 haproxy를 설정하는 방법을 소개합니다.">
-    <meta itemprop="datePublished" content="2021-04-26T00:00:00+09:00">
+    <meta itemprop="headline" content="우분투(Ubuntu) 환경에 HAProxy로 서브도메인(subdomain) 설정하기">
+    <meta itemprop="description" content="이 포스트에서는 우분투(ubuntu) 환경에 HAProxy(haproxy)를 활용한 서브도메인(subdomain) 설정 방법을 소개합니다.">
+    <meta itemprop="datePublished" content="2021-05-03T00:00:00+09:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">우분투(Ubuntu) 환경에 HAProxy 설정하기
+          <h1 id="page-title" class="page__title" itemprop="headline">우분투(Ubuntu) 환경에 HAProxy로 서브도메인(subdomain) 설정하기
 </h1>
           
         </header>
@@ -429,9 +429,7 @@ wcs_do();
           <!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: END -->
           </aside>
         
-        <p>HAProxy(이하 haproxy)는 로드 밸런싱(load balancing) 및 프락시(proxy) 기능을 제공하는 GPL 2 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다.
-<br /><br />
-이 포스트에서는 우분투(ubuntu) 환경에 haproxy를 설정하는 방법을 소개합니다.</p>
+        <p>이 포스트에서는 우분투(ubuntu) 환경에 HAProxy(haproxy)를 활용한 서브도메인(subdomain) 설정 방법을 소개합니다.</p>
 
 <h2 id="선행조건prerequisite">선행조건(PREREQUISITE)</h2>
 <ul>
@@ -462,7 +460,8 @@ wcs_do();
 <h2 id="요약summary">요약(SUMMARY)</h2>
 <ol>
   <li>(선택사항) haproxy 설치 확인</li>
-  <li>haproxy 설정 확인</li>
+  <li>(선택사항) haproxy 설정 확인</li>
+  <li>haproxy subdomain 설정</li>
 </ol>
 
 <h2 id="내용contents">내용(CONTENTS)</h2>
@@ -472,7 +471,7 @@ wcs_do();
 </span><span class="gp">Copyright 2000-2018 Willy Tarreau &lt;willy@haproxy.org&gt;</span><span class="w">
 </span></code></pre></div></div>
 
-<h3 id="2-haproxy-설정-확인">2. haproxy 설정 확인</h3>
+<h3 id="2-선택사항-haproxy-설정-확인">2. (선택사항) haproxy 설정 확인</h3>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span><span class="nb">cat</span> /etc/haproxy/haproxy.cfg
 </code></pre></div></div>
@@ -516,333 +515,424 @@ defaults
     errorfile 504 /etc/haproxy/errors/504.http
 </code></pre></div></div>
 
-<h4 id="21-global-섹션section">2.1. global 섹션(section)</h4>
-<h5 id="211-global">2.1.1. ‘global’</h5>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'global'
+<h3 id="3-haproxy-subdomain-설정">3. haproxy subdomain 설정</h3>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>vi /etc/haproxy/haproxy.cfg
 </code></pre></div></div>
 
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>global
+        log /dev/log    local0
+        log /dev/log    local1 notice
+        <span class="nb">chroot</span> /var/lib/haproxy
+        stats socket /run/haproxy/admin.sock mode 660 level admin expose-fd listeners
+        stats <span class="nb">timeout </span>30s
+        user haproxy
+        group haproxy
+        daemon
+
+        <span class="c"># Default SSL material locations</span>
+        ca-base /etc/ssl/certs
+        crt-base /etc/ssl/private
+
+        <span class="c"># Default ciphers to use on SSL-enabled listening sockets.</span>
+        <span class="c"># For more information, see ciphers(1SSL). This list is from:</span>
+        <span class="c">#  https://hynek.me/articles/hardening-your-web-servers-ssl-ciphers/</span>
+        <span class="c"># An alternative list with additional directives can be obtained from</span>
+        <span class="c">#  https://mozilla.github.io/server-side-tls/ssl-config-generator/?server=haproxy</span>
+        ssl-default-bind-ciphers ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:RSA+AESGCM:RSA+AES:!aNULL:!MD5:!DSS
+        ssl-default-bind-options no-sslv3
+
+defaults
+        log     global
+        mode    http
+        option  httplog
+        option  dontlognull
+
+        <span class="c"># ADDED</span>
+        option http-server-close
+        option forwardfor       except 127.0.0.0/8
+        option                  redispatch
+        retries                 3
+        <span class="nb">timeout </span>http-request    10s
+        <span class="nb">timeout </span>queue           1m
+        <span class="nb">timeout </span>connect         10s <span class="c"># 5000</span>
+        <span class="nb">timeout </span>client          1m  <span class="c"># 50000</span>
+        <span class="nb">timeout </span>server          1m  <span class="c"># 50000</span>
+        <span class="nb">timeout </span>http-keep-alive 10s
+        <span class="nb">timeout </span>check           10s
+        maxconn                 3000
+
+        errorfile 400 /etc/haproxy/errors/400.http
+        errorfile 403 /etc/haproxy/errors/403.http
+        errorfile 408 /etc/haproxy/errors/408.http
+        errorfile 500 /etc/haproxy/errors/500.http
+        errorfile 502 /etc/haproxy/errors/502.http
+        errorfile 503 /etc/haproxy/errors/503.http
+        errorfile 504 /etc/haproxy/errors/504.http
+
+frontend http-rex
+        <span class="nb">bind</span> :::80 v4v6   <span class="c"># bind *:80</span>
+        option        http-server-close
+ 
+        acl domain_net_scm hdr<span class="o">(</span>host<span class="o">)</span> <span class="nt">-i</span> scm.rex-domain.net
+        acl domain_net_ci hdr<span class="o">(</span>host<span class="o">)</span> <span class="nt">-i</span> ci.rex-domain.net
+        acl domain_net_sonar hdr<span class="o">(</span>host<span class="o">)</span> <span class="nt">-i</span> sonar.rex-domain.net
+
+        use_backend domain_net_app_scm        <span class="k">if </span>domain_net_scm
+        use_backend domain_net_app_ci        <span class="k">if </span>domain_net_ci
+        use_backend domain_net_app_sonar        <span class="k">if </span>domain_net_sonar
+
+backend domain_net_app_scm
+        balance roundrobin
+        server host1 10.0.10.6:8801
+ 
+backend domain_net_app_ci
+        balance roundrobin
+        server host1 10.0.10.6:8802
+ 
+backend domain_net_app_sonar
+        balance roundrobin
+        server host1 10.0.10.6:8803
+</code></pre></div></div>
+
+<h4 id="31-global-섹션section">3.1. global 섹션(section)</h4>
+
 <ul>
-  <li>
-    <p>global section의 설정은 프로세스 전체에 적용되며, 운영체제(OS)에 따라 다를 수 있습니다.</p>
-  </li>
-  <li>
-    <p>haproxy는 global section 외에 defaults, listen, frontend, backend 등의 proxy section으로 구성됩니다.</p>
-  </li>
+  <li>global section 설정은 <a href="https://lindarex.github.io/haproxy/ubuntu-haproxy-setting/" target="\_blank">우분투(Ubuntu) 환경에 HAProxy 설정하기</a> 포스트를 참고하시기 바랍니다.</li>
 </ul>
 
-<h5 id="212-log">2.1.2. ‘log’</h5>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'log /dev/log    local0'
-'log /dev/log    local1 notice'
-</code></pre></div></div>
-
+<h4 id="32-defaults-section">3.2. defaults section</h4>
 <ul>
-  <li>
-    <p>global syslog 서버(server) 설정입니다.</p>
-  </li>
-  <li>
-    <p>시작 및 종료에 대한 로그(log)와 “log global”로 구성된 proxy의 모든 log를 수신합니다.</p>
-  </li>
-  <li>
-    <p>“/dev/log”는 주소(address) 설정이며, IPv4, IPv6, 유닉스(unix) 소켓(socket)의 경로(path) 등으로 설정할 수 있습니다.</p>
-  </li>
-  <li>
-    <p>“local0”, “local1”은 facility 설정이며, syslog facility로 설정합니다.</p>
-  </li>
-  <li>
-    <p>“notice”는 level 설정이며, syslog severity level로 설정합니다.</p>
-  </li>
+  <li>아래 항목 외의 defaults section 설정은 <a href="https://lindarex.github.io/haproxy/ubuntu-haproxy-setting/" target="\_blank">우분투(Ubuntu) 환경에 HAProxy 설정하기</a> 포스트를 참고하시기 바랍니다.</li>
 </ul>
 
-<blockquote>
-  <p>syslog에 대한 자세한 사항은 <a href="https://en.wikipedia.org/wiki/Syslog" target="\_blank">https://en.wikipedia.org/wiki/Syslog</a> 페이지를 참고하시기 바랍니다.</p>
-</blockquote>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># ADDED
+option http-server-close
+option forwardfor       except 127.0.0.0/8
+option                  redispatch
+retries                 3
+timeout http-request    10s
+timeout queue           1m
+timeout http-keep-alive 10s
+timeout check           10s
+maxconn                 3000
 
-<h5 id="213-chroot">2.1.3. ‘chroot’</h5>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'chroot /var/lib/haproxy'
+# MODIFIED
+timeout connect         10s # 5000
+timeout client          1m  # 50000
+timeout server          1m  # 50000
+</code></pre></div></div>
+
+<h5 id="321-option-http-server-close">3.2.1. ‘option http-server-close’</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>option http-server-close
 </code></pre></div></div>
 
 <ul>
   <li>
-    <p>보안 강화를 위한 chroot 설정이며, 슈퍼 유저(superuser) 권한으로 시작될 때만 작동합니다.</p>
+    <p>클라이언트(client)에서 HTTP 연결(connection) 유지(keep-alive) 및 파이프 라이닝 기능을 유지하면서 서버(server)에서 HTTP connection을 닫을 수 있는 설정입니다.</p>
   </li>
   <li>
-    <p>“/var/lib/haproxy”는 chroot 감옥(jail) 디렉터리(directory) path 또는 샌드박스 path이며, chroot로 만들어진 격리된 공간입니다.</p>
-  </li>
-</ul>
-
-<blockquote>
-  <p>chroot에 대한 자세한 사항은 <a href="https://ko.wikipedia.org/wiki/Chroot" target="\_blank">https://ko.wikipedia.org/wiki/Chroot</a> 페이지를 참고하시기 바랍니다.</p>
-</blockquote>
-
-<h5 id="214-stats-socket">2.1.4. ‘stats socket’</h5>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'stats socket /run/haproxy/admin.sock mode 660 level admin expose-fd listeners'
-</code></pre></div></div>
-
-<ul>
-  <li>socket 바인딩(bind) 설정입니다.
-    <ul>
-      <li>unix socket을 “path”에 bind 하거나 TCP v4/v6 address를 “address:port” 형식으로 bind 합니다.</li>
-    </ul>
+    <p>이 설정은 client에서 가장 낮은 대기 시간(latency)을 제공하고 server에서 가장 빠른 세션(session) 재사용을 제공하여 리소스(resource)를 절약합니다.</p>
   </li>
   <li>
-    <p>“/run/haproxy/admin.sock”는 “stats socket” 설정의 path입니다.</p>
-  </li>
-  <li>“mode 660”는 unix socket 접근(access) 권한 설정입니다.
-    <ul>
-      <li>8진 모드로 설정하며, global section의 “unix-bind”로도 설정할 수 있습니다.</li>
-    </ul>
-  </li>
-  <li>“level admin”은 socket 실행 권한 제한 설정입니다.
-    <ul>
-      <li>“user”, “operator”, “admin” 중 하나로 설정할 수 있으며, 아시다시피 “admin”은 모든 권한을 갖습니다.</li>
-    </ul>
-  </li>
-  <li>
-    <p>“expose-fd listeners”은 seamless reload(zero downtime reload)를 위한 설정으로, haproxy 1.8 버전부터 사용할 수 있습니다.</p>
-
-    <ul>
-      <li>위 설정은 리스너(listeners) FD(file descriptor)를 다른 haproxy 프로세스(process)로 전달합니다.</li>
-      <li>이전 process에서 file descriptor를 통해 unix socket을 사용해서 연결(connection)을 유지하고, 이를 이전 process와 새로운 process에 전달해서 connection 유실을 방지할 수 있는 설정입니다.</li>
-    </ul>
-  </li>
-</ul>
-
-<h5 id="215-stats-timeout">2.1.5. ‘stats timeout’</h5>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'stats timeout 30s'
-</code></pre></div></div>
-
-<ul>
-  <li>socket timeout 설정입니다.
-    <ul>
-      <li>기본 시간제한은 10초이며, 밀리초(millisecond) 단위 또는 “us”, “ms”, “s”, “m”, “h”, “d” 단위로 설정합니다.</li>
-    </ul>
-  </li>
-</ul>
-
-<h5 id="216-user">2.1.6. ‘user’</h5>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'user haproxy'
-</code></pre></div></div>
-
-<ul>
-  <li>시스템(system) 사용자를 unix socket 소유자로 설정합니다.</li>
-</ul>
-
-<h5 id="217-group">2.1.7. ‘group’</h5>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'group haproxy'
-</code></pre></div></div>
-
-<ul>
-  <li>system 그룹을 unix socket 그룹으로 설정합니다.</li>
-</ul>
-
-<h5 id="218-daemon">2.1.8. ‘daemon’</h5>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'daemon'
-</code></pre></div></div>
-
-<ul>
-  <li>
-    <p>process fork를 백그라운드로 만드는 권장 설정입니다.</p>
-  </li>
-  <li>
-    <p>“-D” 인수(argument)와 동일하며, “-db” argument로 비활성화할 수 있습니다.</p>
+    <p>“option” 앞에 “no” 키워드 추가로 설정을 비활성화 할 수 있습니다.</p>
   </li>
 </ul>
 
 <blockquote>
-  <p>fork에 대한 자세한 사항은 <a href="https://ko.wikipedia.org/wiki/%ED%8F%AC%ED%81%AC_(%EC%8B%9C%EC%8A%A4%ED%85%9C_%ED%98%B8%EC%B6%9C)" target="\_blank">https://ko.wikipedia.org/wiki/포크_(시스템_호출)</a> 페이지를 참고하시기 바랍니다.</p>
+  <p>haproxy는 기본적으로 keep-alive 모드(mode)로 작동합니다.</p>
 </blockquote>
 
-<h5 id="219-ca-base">2.1.9. ‘ca-base’</h5>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'ca-base /etc/ssl/certs'
-</code></pre></div></div>
-
-<ul>
-  <li>“ca-file” 또는 “crl-file”의 상대 경로(path) 사용 시, SSL CA 인증서(certificates) 및 CRLs의 기본 directory를 설정합니다.</li>
-</ul>
-
-<h5 id="2110-crt-base">2.1.10. ‘crt-base’</h5>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'crt-base /etc/ssl/private'
-</code></pre></div></div>
-
-<ul>
-  <li>“crtfile”의 상대 경로(path) 사용 시, SSL certificates의 기본 directory를 설정합니다.</li>
-</ul>
-
-<h5 id="2111-ssl-default-bind-ciphers">2.1.11. ‘ssl-default-bind-ciphers’</h5>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'ssl-default-bind-ciphers ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:RSA+AESGCM:RSA+AES:!aNULL:!MD5:!DSS'
+<h5 id="322-option-forwardfor">3.2.2. ‘option forwardfor’</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>option forwardfor       except 127.0.0.0/8
 </code></pre></div></div>
 
 <ul>
   <li>
-    <p>SSL/TLS cipher 설정입니다.</p>
+    <p>server로 전송된 요청(request)에 “X-Forwarded-For” 헤더(header) 삽입에 대한 설정입니다.</p>
   </li>
   <li>
-    <p>TLS v1.2까지 설정할 수 있으며, TLS v1.3 구성은 “ssl-default-bind-ciphersuites” 설정이 필요합니다.</p>
+    <p>“except” 키워드(keyword)를 적용하여 주소(address) 또는 네트워크(network)를 header에 추가하지 않을 수 있습니다.</p>
   </li>
 </ul>
 
 <blockquote>
-  <p>SSL/TLS에 대한 자세한 사항은 <a href="https://ko.wikipedia.org/wiki/%EC%A0%84%EC%86%A1_%EA%B3%84%EC%B8%B5_%EB%B3%B4%EC%95%88" target="\_blank">https://ko.wikipedia.org/wiki/전송_계층_보안</a> 페이지를 참고하시기 바랍니다.</p>
+  <p>haproxy는 리버스(reverse) 프락시(proxy) mode로 작동하므로, haproxy server는 해당(server 자신) IP address를 client address로 간주합니다.</p>
 </blockquote>
 
-<blockquote>
-  <p>cipher에 대한 자세한 사항은 <a href="https://ko.wikipedia.org/wiki/%EC%95%94%ED%98%B8_(%EC%95%94%ED%98%B8%ED%95%99)" target="\_blank">https://ko.wikipedia.org/wiki/암호_(암호학)</a> 페이지를 참고하시기 바랍니다.</p>
-</blockquote>
-
-<blockquote>
-  <p>cipher suite에 대한 자세한 사항은 <a href="https://ko.wikipedia.org/wiki/%EC%95%94%ED%98%B8%ED%99%94_%EC%8A%A4%EC%9C%84%ED%8A%B8" target="\_blank">https://ko.wikipedia.org/wiki/암호화_스위트</a> 페이지와 <a href="https://en.wikipedia.org/wiki/Cipher_suite" target="\_blank">https://en.wikipedia.org/wiki/Cipher_suite</a> 페이지를 참고하시기 바랍니다.</p>
-</blockquote>
-
-<h5 id="2112-ssl-default-bind-options">2.1.12. ‘ssl-default-bind-options’</h5>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'ssl-default-bind-options no-sslv3'
+<h5 id="323-option-redispatch">3.2.3. ‘option redispatch’</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>option                  redispatch
 </code></pre></div></div>
 
 <ul>
   <li>
-    <p>기본 SSL 설정입니다.</p>
-  </li>
-  <li>
-    <p>“no-sslv3” 설정은 SSLv3 사용을 비활성화합니다.</p>
-  </li>
-</ul>
-
-<h4 id="22-defaults-section">2.2. defaults section</h4>
-<h5 id="221-defaults">2.2.1. ‘defaults’</h5>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'defaults'
-</code></pre></div></div>
-
-<ul>
-  <li>
-    <p>defaults section의 설정은 모든 section에 적용됩니다.</p>
-  </li>
-  <li>
-    <p>section 명은 선택 사항이지만, 설정하는 것을 권장합니다.</p>
-  </li>
-</ul>
-
-<h5 id="222-log-global">2.2.2. ‘log global’</h5>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'log global'
-</code></pre></div></div>
-
-<ul>
-  <li>
-    <p>global log 설정입니다.</p>
-  </li>
-  <li>
-    <p>haproxy 인스턴스(instance) 당 하나만 설정할 수 있으며, 매개 변수(parameter)가 없습니다.</p>
-  </li>
-</ul>
-
-<h5 id="223-mode">2.2.3. ‘mode’</h5>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'mode    http'
-</code></pre></div></div>
-
-<ul>
-  <li>
-    <p>haproxy 실행 mode 또는 프로토콜(protocol) 설정입니다.</p>
-  </li>
-  <li>
-    <p>tcp, http, health mode로 설정할 수 있으며, 기본값은 tcp mode입니다.</p>
-    <ul>
-      <li>tcp mode는 SSL, SSSH, SMTP 등에 사용합니다.</li>
-      <li>http mode는 RFC를 준수하지 않는 요청은 거부되며, 서버 연결(connection) 전에 분석됩니다.</li>
-    </ul>
-  </li>
-</ul>
-
-<h5 id="224-option">2.2.4. ‘option’</h5>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'option  httplog'
-</code></pre></div></div>
-
-<ul>
-  <li>
-    <p>HTTP 요청(request), 세션(session) 상태 및 타이머(timer) 등의 로깅(logging)을 활성화하는 설정입니다.</p>
-  </li>
-  <li>
-    <p>backend section에서는 사용할 수 없습니다.</p>
-  </li>
-</ul>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'option  dontlognull'
-</code></pre></div></div>
-
-<ul>
-  <li>
-    <p>null connection logging 설정입니다.</p>
-  </li>
-  <li>
-    <p>이 설정은 데이터(data)가 전송되지 않는 connection을 기록하지 않습니다.</p>
+    <p>connection 실패 시, session 재전송(redistribution)에 대한 설정입니다.</p>
   </li>
   <li>
     <p>“option” 앞에 “no” 키워드 추가로 설정을 비활성화 할 수 있습니다.</p>
   </li>
   <li>
+    <p>frontend section에서는 사용할 수 없습니다.</p>
+  </li>
+</ul>
+
+<h5 id="324-retries">3.2.4. ‘retries’</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>retries                 3
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>connection 실패 후, server에서 수행할 재시도 횟수 설정입니다.</p>
+  </li>
+  <li>
+    <p>이 설정은 전체 request가 아닌 connection 시도 횟수에 적용됩니다.</p>
+  </li>
+  <li>
+    <p>frontend section에서는 사용할 수 없습니다.</p>
+  </li>
+</ul>
+
+<h5 id="325-timeout-http-request">3.2.5. ‘timeout http-request’</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>timeout http-request    10s
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>전체 HTTP request를 대기할 최대 허용 시간 설정입니다.</p>
+  </li>
+  <li>
+    <p>이 설정을 활성화하면, client 유형(type)과 관계없이 request가 제시간에 완료되지 않으면 request는 중단됩니다.</p>
+  </li>
+  <li>
+    <p>이 설정에서 제한 시간이 만료(expire)되면, client에게 HTTP 408 응답(response)을 전송하고 connection을 닫습니다.</p>
+  </li>
+</ul>
+
+<h5 id="326-timeout-queue">3.2.6. ‘timeout queue’</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>timeout queue           1m
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>queue에서 보류(pending) 중인 request의 제한 시간 설정입니다.</p>
+  </li>
+  <li>
+    <p>이 설정을 지정하지 않으면, “timeout connect” 설정과 같은 값을 적용합니다.</p>
+  </li>
+  <li>
+    <p>frontend section에서는 사용할 수 없습니다.</p>
+  </li>
+</ul>
+
+<h5 id="327-timeout-http-keep-alive">3.2.7. ‘timeout http-keep-alive’</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>timeout http-keep-alive 10s
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>새로운 HTTP request를 대기할 최대 허용 시간 설정입니다.</p>
+  </li>
+  <li>
+    <p>“keep-alive”의 새 request를 대기 시간은 “timeout http-request”로 설정합니다.</p>
+  </li>
+</ul>
+
+<h5 id="328-timeout-check">3.2.8. ‘timeout check’</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>timeout check           10s
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>“timeout check” 설정은 “timeout connect” 설정의 최대 허용 연결 시간을 사용한 후, “timeout check” 설정을 추가로 최대 허용 읽기 시간으로 적용합니다.</p>
+  </li>
+  <li>
+    <p>이 설정을 지정하지 않으면, “timeout connect” 설정으로 적용합니다.</p>
+  </li>
+  <li>
+    <p>frontend section에서는 사용할 수 없습니다.</p>
+  </li>
+</ul>
+
+<h5 id="329-maxconn">3.2.9. ‘maxconn’</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>maxconn                 3000
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>frontend의 최대 동시 connection 수를 설정합니다.</p>
+  </li>
+  <li>
+    <p>기본값은 2000이며, global maxconn을 초과하지 않아야 합니다.</p>
+  </li>
+  <li>
     <p>backend section에서는 사용할 수 없습니다.</p>
   </li>
 </ul>
 
-<h5 id="225-timeout">2.2.5. ‘timeout’</h5>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'timeout connect 5000'
+<h5 id="3210-timeout">3.2.10. ‘timeout’</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>timeout connect         10s # 5000
+timeout client          1m  # 50000
+timeout server          1m  # 50000
+</code></pre></div></div>
+
+<ul>
+  <li>위 설정은 <a href="https://lindarex.github.io/haproxy/ubuntu-haproxy-setting/" target="\_blank">우분투(Ubuntu) 환경에 HAProxy 설정하기</a> 포스트를 참고하시기 바랍니다.</li>
+</ul>
+
+<h4 id="33-frontend-section">3.3. frontend section</h4>
+<h5 id="331-frontend">3.3.1. ‘frontend’</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>frontend http-rex
 </code></pre></div></div>
 
 <ul>
   <li>
-    <p>server의 연결 제한(지연) 시간 설정입니다.</p>
+    <p>“frontend section”은 client connection에 대한 IP address와 포트(port)를 설정합니다.</p>
   </li>
   <li>
-    <p>millisecond로 설정하며, frontend section에서는 사용할 수 없습니다.</p>
+    <p>“http-rex” frontend 이름(name)입니다.</p>
+  </li>
+  <li>
+    <p>필요에 따라 “frontend section”을 추가 할 수 있으며, “frontend” 키워드 뒤에 name을 설정하여 구분할 수 있습니다.</p>
   </li>
 </ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'timeout client  50000'
+<blockquote>
+  <p>모든 proxy section name은 대소문자, 숫자, ‘-‘(대시), ‘_‘(밑줄), ‘.’(점), ‘:’(콜론)으로 구성되어야 합니다.</p>
+</blockquote>
+
+<h5 id="332-bind">3.3.2. ‘bind’</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bind :::80 v4v6   # bind *:80
 </code></pre></div></div>
 
 <ul>
   <li>
-    <p>클라이언트(client)의 최대 비활성 시간 설정입니다.</p>
+    <p>”:::80”은 frontend가 수신할 address 설정이며, 선택 사항입니다.</p>
   </li>
   <li>
-    <p>millisecond로 설정하며, backend section에서는 사용할 수 없습니다.</p>
+    <p>address 값은 호스트 name, IPv4 주소, IPv6 주소, ‘*‘로 설정할 수 있으며, 설정하지 않으면 IPv4 address가 수신됩니다.</p>
+  </li>
+  <li>
+    <p>“v4v6” 설정은 기본 address 사용 시, IPv4 및 IPv6 모두 socket에 바인딩(bind)하며, 리눅스(linux) 커널(kernel) 2.4.21 이상에서 지원합니다.</p>
+  </li>
+  <li>
+    <p>defaults section과 backend section에서는 사용할 수 없습니다.</p>
   </li>
 </ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'timeout server  50000'
+<h5 id="333-acl">3.3.3. ‘acl’</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>acl domain_net_scm hdr(host) -i scm.rex-domain.net
+</code></pre></div></div>
+
+<ul>
+  <li>“acl”은 액세스 제어 목록(access control lists)을 의미하며. 추출한 샘플(sample)의 패턴(pattern) 일치 여부에 따라 작업을 수행합니다.
+    <ul>
+      <li>request 또는 response, client 또는 server 정보 등에서 데이터(data) sample을 추출합니다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>“acl”은 일반적으로 request 차단(block), backend 선택 또는 header 추가로 구성됩니다.</p>
+  </li>
+  <li>“domain_net_scm”은 acl name입니다.
+    <ul>
+      <li>acl name은 대소문자, 숫자, ‘-‘(대시), ‘_‘(밑줄), ‘.’(점), ‘:’(콜론)으로 구성되며, 대소문자를 구분합니다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>“hdr(host)”의 “hdr”은 header를 의미하며, “host” header가 포함된 HTTP request를 수락하는 설정입니다.</p>
+  </li>
+  <li>“-i”는 acl flag이며, 대소문자를 무시하는 설정입니다.
+    <ul>
+      <li>acl flag에는 “-f”(파일(file)에서 pattern 매칭(matching)), “-m”(특정 pattern matching), “-n”(DNS 확인 금지) 등이 있습니다.</li>
+    </ul>
+  </li>
+  <li>“scm.rex-domain.net”은 acl 값(value)입니다.</li>
+</ul>
+
+<h5 id="334-use_backend">3.3.4. ‘use_backend’</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>use_backend domain_net_app_scm        if domain_net_scm
 </code></pre></div></div>
 
 <ul>
   <li>
-    <p>server의 최대 비활성 시간 설정입니다.</p>
+    <p>“use_backend”는 acl 기반 조건(condition)이 일치 시, 특정 backend로 전환하는 설정입니다.</p>
   </li>
   <li>
-    <p>millisecond로 설정하며, frontend section에서는 사용할 수 없습니다.</p>
+    <p>“domain_net_app_scm”는 backend name 또는 listen section name입니다.</p>
   </li>
+  <li>“if domain_net_scm”는 backend의 condition이며 acl name입니다.
+    <ul>
+      <li>condition은 “if” 또는 “unless”를 사용할 수 있습니다.</li>
+    </ul>
+  </li>
+  <li>backend section에서는 사용할 수 없습니다.</li>
 </ul>
 
-<h5 id="226-errorfile">2.2.6. ‘errorfile’</h5>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'errorfile 400 /etc/haproxy/errors/400.http'
-'errorfile 403 /etc/haproxy/errors/403.http'
-'errorfile 408 /etc/haproxy/errors/408.http'
-'errorfile 500 /etc/haproxy/errors/500.http'
-'errorfile 502 /etc/haproxy/errors/502.http'
-'errorfile 503 /etc/haproxy/errors/503.http'
-'errorfile 504 /etc/haproxy/errors/504.http'
+<h4 id="34-backend-section">3.4. backend section</h4>
+<h5 id="341-backend">3.4.1. ‘backend’</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>backend domain_net_app_scm
 </code></pre></div></div>
 
 <ul>
   <li>
-    <p>haproxy의 오류(error) file 설정입니다.</p>
+    <p>“backend backend”는 들어오는 connection 전달을 위해 proxy가 연결할 server에 대한 설정입니다.</p>
   </li>
   <li>
-    <p>HTTP 상태(status) 코드(code)에 맞춰서 error file을 연결합니다.</p>
+    <p>“domain_net_app_scm”는 backend name입니다.</p>
   </li>
 </ul>
+
+<h5 id="342-balance">3.4.2. ‘balance’</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>balance roundrobin
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>“balance”는 로드 밸런싱(load balancing) 알고리즘(algorithm) 설정입니다.</p>
+  </li>
+  <li>
+    <p>위 설정은 roundrobin algorithm을 지정합니다.</p>
+  </li>
+  <li>
+    <p>사용 가능한 algorithm은 “roundrobin”, static-rr”, “leastconn”, “first” 등이 있습니다.</p>
+  </li>
+  <li>
+    <p>frontend section에서는 사용할 수 없습니다.</p>
+  </li>
+</ul>
+
+<h5 id="343-server">3.4.3. ‘server’</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server host1 10.0.10.6:8801
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>“server”는 backend의 server 설정입니다.</p>
+  </li>
+  <li>
+    <p>“host1”은 내부(internal) name이며, 로그(log) 및 경고(alert)에 표시됩니다.</p>
+  </li>
+  <li>“10.0.10.6:8801”의 “10.0.10.6”은 server의 IPv4 또는 IPv6 address입니다.
+    <ul>
+      <li>“0.0.0.0” 또는 “*” 설정 시, client connection IP address와 동일한 IP address로 전달되며, 이는 투명(transparent) proxy 아키텍처(architecture)에 유용합니다.</li>
+    </ul>
+  </li>
+  <li>“10.0.10.6:8801”의 “8801”은 port 정보이며 선택사항입니다.
+    <ul>
+      <li>port 설정 시, 모든 connection은 해당 port로 전송됩니다.</li>
+      <li>port 미설정 시, client가 연결된 port로 전송됩니다.</li>
+    </ul>
+  </li>
+  <li>frontend section에서는 사용할 수 없습니다.</li>
+</ul>
+
+<blockquote>
+  <p>transparent proxy란 client가 server에 request 시, transparent proxy가 request를 가로채서 캐싱(caching), 리디렉션(redirection) 및 인증(authentication) 등 다양한 작업을 수행하여 client 모니터링(monitoring) 또는 특정 server에 대한 access block 등을 설정할 수 있는 proxy입니다.</p>
+</blockquote>
 
 <h2 id="마무리conclusion">마무리(CONCLUSION)</h2>
-<p>ubuntu 환경에 haproxy 설정을 완료했습니다.
-<br /><br />
-haproxy 설정에 대한 더 자세한 내용은 아래 참고 페이지를 확인해 주시기 바랍니다.
-<br /><br />
-다음 포스트에서는 haproxy를 활용한 서브도메인(subdomain) 설정 방법을 소개하겠습니다.</p>
+<p>ubuntu 환경에 haproxy를 활용하여 subdomain 설정을 완료했습니다.
+<br />
+haproxy 설정에 대한 더 자세한 내용은 아래 참고 페이지를 확인해 주시기 바랍니다.</p>
 
 <h2 id="참고references">참고(REFERENCES)</h2>
 <ul>
@@ -900,6 +990,10 @@ haproxy 설정에 대한 더 자세한 내용은 아래 참고 페이지를 확�
     
       
       
+      <a href="/tags/subdomain" class="page__taxonomy-item" rel="tag">subdomain</a><span class="sep">, </span>
+    
+      
+      
       <a href="/tags/ubuntu" class="page__taxonomy-item" rel="tag">ubuntu</a>
     
     </span>
@@ -928,7 +1022,7 @@ haproxy 설정에 대한 더 자세한 내용은 아래 참고 페이지를 확�
 
 
         
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2021-04-26T00:00:00+09:00">April 26, 2021</time></p>
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2021-05-03T00:00:00+09:00">May 3, 2021</time></p>
         
       </footer>
 
@@ -937,23 +1031,22 @@ haproxy 설정에 대한 더 자세한 내용은 아래 참고 페이지를 확�
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=%EC%9A%B0%EB%B6%84%ED%88%AC%28Ubuntu%29+%ED%99%98%EA%B2%BD%EC%97%90+HAProxy+%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0%20https%3A%2F%2Flindarex.github.io%2Fhaproxy%2Fubuntu-haproxy-setting%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=%EC%9A%B0%EB%B6%84%ED%88%AC%28Ubuntu%29+%ED%99%98%EA%B2%BD%EC%97%90+HAProxy%EB%A1%9C+%EC%84%9C%EB%B8%8C%EB%8F%84%EB%A9%94%EC%9D%B8%28subdomain%29+%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0%20https%3A%2F%2Flindarex.github.io%2Fhaproxy%2Fubuntu-haproxy-subdomain-setting%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flindarex.github.io%2Fhaproxy%2Fubuntu-haproxy-setting%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flindarex.github.io%2Fhaproxy%2Fubuntu-haproxy-subdomain-setting%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flindarex.github.io%2Fhaproxy%2Fubuntu-haproxy-setting%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flindarex.github.io%2Fhaproxy%2Fubuntu-haproxy-subdomain-setting%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/haproxy/ubuntu-haproxy-installation/" class="pagination--pager" title="우분투(Ubuntu) 환경에 패키지(Package)로 HAProxy 설치하기
+      <a href="/haproxy/ubuntu-haproxy-setting/" class="pagination--pager" title="우분투(Ubuntu) 환경에 HAProxy 설정하기
 ">Previous</a>
     
     
-      <a href="/haproxy/ubuntu-haproxy-subdomain-setting/" class="pagination--pager" title="우분투(Ubuntu) 환경에 HAProxy로 서브도메인(subdomain) 설정하기
-">Next</a>
+      <a href="#" class="pagination--pager disabled">Next</a>
     
   </nav>
 
@@ -994,14 +1087,14 @@ haproxy 설정에 대한 더 자세한 내용은 아래 참고 페이지를 확�
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/haproxy/ubuntu-haproxy-subdomain-setting/" rel="permalink">우분투(Ubuntu) 환경에 HAProxy로 서브도메인(subdomain) 설정하기
+        <a href="/haproxy/ubuntu-haproxy-setting/" rel="permalink">우분투(Ubuntu) 환경에 HAProxy 설정하기
 </a>
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">이 포스트에서는 우분투(ubuntu) 환경에 HAProxy(haproxy)를 활용한 서브도메인(subdomain) 설정 방법을 소개합니다.
+    <p class="archive__item-excerpt" itemprop="description">HAProxy(이하 haproxy)는 로드 밸런싱(load balancing) 및 프락시(proxy) 기능을 제공하는 GPL 2 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다.
 
-</p>
+이 포스트에서는 우분투(ubuntu) 환경에 haproxy를 설정하...</p>
   </article>
 </div>
 

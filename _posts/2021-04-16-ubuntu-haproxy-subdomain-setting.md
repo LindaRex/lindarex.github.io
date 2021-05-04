@@ -16,7 +16,7 @@ tags:
 ---
 
 
-이 포스트에서는 우분투(ubuntu) 환경에 HAProxy(haproxy)로 서브도메인(subdomain)을 설정하는 방법을 소개합니다.
+이 포스트에서는 우분투(ubuntu) 환경에 HAProxy(haproxy)를 활용한 서브도메인(subdomain) 설정 방법을 소개합니다.
 
 
 ## 선행조건(PREREQUISITE)
@@ -40,7 +40,6 @@ tags:
 1. (선택사항) haproxy 설치 확인
 2. (선택사항) haproxy 설정 확인
 3. haproxy subdomain 설정
-4. haproxy subdomain 설정 확인
 
 
 ## 내용(CONTENTS)
@@ -168,15 +167,15 @@ frontend http-rex
 
 backend domain_net_app_scm
         balance roundrobin
-        server host1 10.0.06.6:8801
+        server host1 10.0.10.6:8801
  
 backend domain_net_app_ci
         balance roundrobin
-        server host1 10.0.06.6:8802
+        server host1 10.0.10.6:8802
  
 backend domain_net_app_sonar
         balance roundrobin
-        server host1 10.0.06.6:8803
+        server host1 10.0.10.6:8803
 ```
 
 #### 3.1. global 섹션(section)
@@ -226,7 +225,7 @@ option forwardfor       except 127.0.0.0/8
 
 - "except" 키워드(keyword)를 적용하여 주소(address) 또는 네트워크(network)를 header에 추가하지 않을 수 있습니다.
 
-> haproxy는 리버스(reverse) 프록시(proxy) mode로 작동하므로, haproxy server는 해당(server 자신) IP address를 client address로 간주합니다.
+> haproxy는 리버스(reverse) 프락시(proxy) mode로 작동하므로, haproxy server는 해당(server 자신) IP address를 client address로 간주합니다.
 
 ##### 3.2.3. 'option redispatch'
 ```
@@ -244,7 +243,7 @@ option                  redispatch
 retries                 3
 ```
 
-- connection 실패 후, server에서 수행 할 재시도 횟수 설정입니다.
+- connection 실패 후, server에서 수행할 재시도 횟수 설정입니다.
 
 - 이 설정은 전체 request가 아닌 connection 시도 횟수에 적용됩니다.
 
@@ -257,7 +256,7 @@ timeout http-request    10s
 
 - 전체 HTTP request를 대기할 최대 허용 시간 설정입니다.
 
-- 이 설정을 활성화하면, client 유형(type)에 관계없이 request가 제 시간에 완료되지 않으면 request는 중단됩니다.
+- 이 설정을 활성화하면, client 유형(type)과 관계없이 request가 제시간에 완료되지 않으면 request는 중단됩니다.
 
 - 이 설정에서 제한 시간이 만료(expire)되면, client에게 HTTP 408 응답(response)을 전송하고 connection을 닫습니다.
 
@@ -303,7 +302,6 @@ maxconn                 3000
 
 - backend section에서는 사용할 수 없습니다.
 
-
 ##### 3.2.10. 'timeout'
 ```
 timeout connect         10s # 5000
@@ -321,9 +319,11 @@ frontend http-rex
 
 - "frontend section"은 client connection에 대한 IP address와 포트(port)를 설정합니다.
 
-- 필요에 따라 "frontend section"을 추가 할 수 있으며, "frontend" 키워드 뒤에 이름을 설정하여 구분할 수 있습니다.
+- "http-rex" frontend 이름(name)입니다.
 
-> 모든 proxy section 이름은 대소문자, 숫자, '\-'(대시), '\_'(밑줄), '.'(점), ':'(콜론)으로 구성되어야 합니다.
+- 필요에 따라 "frontend section"을 추가 할 수 있으며, "frontend" 키워드 뒤에 name을 설정하여 구분할 수 있습니다.
+
+> 모든 proxy section name은 대소문자, 숫자, '\-'(대시), '\_'(밑줄), '.'(점), ':'(콜론)으로 구성되어야 합니다.
 
 ##### 3.3.2. 'bind'
 ```
@@ -332,74 +332,95 @@ bind :::80 v4v6   # bind *:80
 
 - ":::80"은 frontend가 수신할 address 설정이며, 선택 사항입니다.
 
-- address 값은 호스트 이름, IPv4 주소, IPv6 주소, '\*'로 설정할 수 있으며, 설정하지 않으면 IPv4 address가 수신됩니다.
+- address 값은 호스트 name, IPv4 주소, IPv6 주소, '\*'로 설정할 수 있으며, 설정하지 않으면 IPv4 address가 수신됩니다.
 
 - "v4v6" 설정은 기본 address 사용 시, IPv4 및 IPv6 모두 socket에 바인딩(bind)하며, 리눅스(linux) 커널(kernel) 2.4.21 이상에서 지원합니다.
 
 - defaults section과 backend section에서는 사용할 수 없습니다.
 
-
-
-// todo
-##### 3.3.1. ''
-```
-option        http-server-close
-```
-
--
-
-
-##### 3.3.1. ''
+##### 3.3.3. 'acl'
 ```
 acl domain_net_scm hdr(host) -i scm.rex-domain.net
-acl domain_net_ci hdr(host) -i ci.rex-domain.net
-acl domain_net_sonar hdr(host) -i sonar.rex-domain.net
 ```
 
--
+- "acl"은 액세스 제어 목록(access control lists)을 의미하며. 추출한 샘플(sample)의 패턴(pattern) 일치 여부에 따라 작업을 수행합니다.
+    + request 또는 response, client 또는 server 정보 등에서 데이터(data) sample을 추출합니다.
 
+- "acl"은 일반적으로 request 차단(block), backend 선택 또는 header 추가로 구성됩니다.
 
-##### 3.3.1. ''
+- "domain_net_scm"은 acl name입니다.
+    + acl name은 대소문자, 숫자, '\-'(대시), '\_'(밑줄), '.'(점), ':'(콜론)으로 구성되며, 대소문자를 구분합니다.
+
+- "hdr(host)"의 "hdr"은 header를 의미하며, "host" header가 포함된 HTTP request를 수락하는 설정입니다.
+
+- "-i"는 acl flag이며, 대소문자를 무시하는 설정입니다.
+    + acl flag에는 "-f"(파일(file)에서 pattern 매칭(matching)), "-m"(특정 pattern matching), "-n"(DNS 확인 금지) 등이 있습니다. 
+
+- "scm.rex-domain.net"은 acl 값(value)입니다.
+
+##### 3.3.4. 'use_backend'
 ```
 use_backend domain_net_app_scm        if domain_net_scm
-use_backend domain_net_app_ci        if domain_net_ci
-use_backend domain_net_app_sonar        if domain_net_sonar
 ```
 
--
+- "use_backend"는 acl 기반 조건(condition)이 일치 시, 특정 backend로 전환하는 설정입니다.
 
+- "domain_net_app_scm"는 backend name 또는 listen section name입니다.
 
-##### 3.3.1. ''
+- "if domain_net_scm"는 backend의 condition이며 acl name입니다.
+    + condition은 "if" 또는 "unless"를 사용할 수 있습니다.
+
+- backend section에서는 사용할 수 없습니다.
+
+#### 3.4. backend section
+##### 3.4.1. 'backend'
 ```
 backend domain_net_app_scm
-        balance roundrobin
-        server host1 10.0.06.6:8801
-```
- 
-```
-backend domain_net_app_ci
-        balance roundrobin
-        server host1 10.0.06.6:8802
-```
- 
-```
-backend domain_net_app_sonar
-        balance roundrobin
-        server host1 10.0.06.6:8803
 ```
 
+- "backend backend"는 들어오는 connection 전달을 위해 proxy가 연결할 server에 대한 설정입니다.
 
+- "domain_net_app_scm"는 backend name입니다.
 
+##### 3.4.2. 'balance'
+```
+balance roundrobin
+```
+
+- "balance"는 로드 밸런싱(load balancing) 알고리즘(algorithm) 설정입니다.
+
+- 위 설정은 roundrobin algorithm을 지정합니다.
+
+- 사용 가능한 algorithm은 "roundrobin", static-rr", "leastconn", "first" 등이 있습니다.       
+
+- frontend section에서는 사용할 수 없습니다.
+
+##### 3.4.3. 'server'
+```
+server host1 10.0.10.6:8801
+```
+
+- "server"는 backend의 server 설정입니다.
+
+- "host1"은 내부(internal) name이며, 로그(log) 및 경고(alert)에 표시됩니다.
+
+- "10.0.10.6:8801"의 "10.0.10.6"은 server의 IPv4 또는 IPv6 address입니다.
+    + "0.0.0.0" 또는 "\*" 설정 시, client connection IP address와 동일한 IP address로 전달되며, 이는 투명(transparent) proxy 아키텍처(architecture)에 유용합니다.
+
+- "10.0.10.6:8801"의 "8801"은 port 정보이며 선택사항입니다.
+    + port 설정 시, 모든 connection은 해당 port로 전송됩니다.
+    + port 미설정 시, client가 연결된 port로 전송됩니다.
+
+- frontend section에서는 사용할 수 없습니다.
+
+> transparent proxy란 client가 server에 request 시, transparent proxy가 request를 가로채서 캐싱(caching), 리디렉션(redirection) 및 인증(authentication) 등 다양한 작업을 수행하여 client 모니터링(monitoring) 또는 특정 server에 대한 access block 등을 설정할 수 있는 proxy입니다.
 
 
 ## 마무리(CONCLUSION)
-ubuntu 환경에 haproxy 설정을 완료했습니다.
-<br /><br />
+ubuntu 환경에 haproxy를 활용하여 subdomain 설정을 완료했습니다.
+<br />
 haproxy 설정에 대한 더 자세한 내용은 아래 참고 페이지를 확인해 주시기 바랍니다.
-<br /><br />
-다음 포스트에서는 haproxy를 활용한 서브도메인(subdomain) 설정 방법을 소개하겠습니다.
 
 
 ## 참고(REFERENCES)
 - [https://cbonte.github.io/haproxy-dconv/1.8/configuration.html](https://cbonte.github.io/haproxy-dconv/1.8/configuration.html){: target="\_blank"}
-

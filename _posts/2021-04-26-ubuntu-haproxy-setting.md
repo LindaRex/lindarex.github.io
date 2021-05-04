@@ -96,16 +96,17 @@ defaults
     errorfile 504 /etc/haproxy/errors/504.http
 ```
 
-#### 2.1. 'global'
+#### 2.1. global 섹션(section)
+##### 2.1.1. 'global'
 ```
 'global'
 ```
 
-- global 섹션(section)의 설정은 프로세스 전체에 적용되며, 운영체제(OS)에 따라 다를 수 있습니다.
+- global section의 설정은 프로세스 전체에 적용되며, 운영체제(OS)에 따라 다를 수 있습니다.
 
 - haproxy는 global section 외에 defaults, listen, frontend, backend 등의 proxy section으로 구성됩니다.
 
-#### 2.2. 'log'
+##### 2.1.2. 'log'
 ```
 'log /dev/log    local0'
 'log /dev/log    local1 notice'
@@ -123,7 +124,7 @@ defaults
 
 > syslog에 대한 자세한 사항은 [https://en.wikipedia.org/wiki/Syslog](https://en.wikipedia.org/wiki/Syslog){: target="\_blank"} 페이지를 참고하시기 바랍니다.
 
-#### 2.3. 'chroot'
+##### 2.1.3. 'chroot'
 ```
 'chroot /var/lib/haproxy'
 ```
@@ -134,7 +135,7 @@ defaults
 
 > chroot에 대한 자세한 사항은 [https://ko.wikipedia.org/wiki/Chroot](https://ko.wikipedia.org/wiki/Chroot){: target="\_blank"} 페이지를 참고하시기 바랍니다.
 
-#### 2.4. 'stats socket'
+##### 2.1.4. 'stats socket'
 ```
 'stats socket /run/haproxy/admin.sock mode 660 level admin expose-fd listeners'
 ```
@@ -155,7 +156,7 @@ defaults
     + 위 설정은 리스너(listeners) FD(file descriptor)를 다른 haproxy 프로세스(process)로 전달합니다.
     + 이전 process에서 file descriptor를 통해 unix socket을 사용해서 연결(connection)을 유지하고, 이를 이전 process와 새로운 process에 전달해서 connection 유실을 방지할 수 있는 설정입니다.
 
-#### 2.5. 'stats timeout'
+##### 2.1.5. 'stats timeout'
 ```
 'stats timeout 30s'
 ```
@@ -163,21 +164,21 @@ defaults
 - socket timeout 설정입니다.
     + 기본 시간제한은 10초이며, 밀리초(millisecond) 단위 또는 "us", "ms", "s", "m", "h", "d" 단위로 설정합니다.
 
-#### 2.6. 'user'
+##### 2.1.6. 'user'
 ```
 'user haproxy'
 ```
 
 - 시스템(system) 사용자를 unix socket 소유자로 설정합니다.
 
-#### 2.7. 'group'
+##### 2.1.7. 'group'
 ```
 'group haproxy'
 ```
 
 - system 그룹을 unix socket 그룹으로 설정합니다.
 
-#### 2.8. 'daemon'
+##### 2.1.8. 'daemon'
 ```
 'daemon'
 ```
@@ -188,21 +189,21 @@ defaults
 
 > fork에 대한 자세한 사항은 [https://ko.wikipedia.org/wiki/포크_(시스템_호출)](https://ko.wikipedia.org/wiki/%ED%8F%AC%ED%81%AC_(%EC%8B%9C%EC%8A%A4%ED%85%9C_%ED%98%B8%EC%B6%9C)){: target="\_blank"} 페이지를 참고하시기 바랍니다.
 
-#### 2.9. 'ca-base'
+##### 2.1.9. 'ca-base'
 ```
 'ca-base /etc/ssl/certs'
 ```
 
 - "ca-file" 또는 "crl-file"의 상대 경로(path) 사용 시, SSL CA 인증서(certificates) 및 CRLs의 기본 directory를 설정합니다.
 
-#### 2.10. 'crt-base'
+##### 2.1.10. 'crt-base'
 ```
 'crt-base /etc/ssl/private'
 ```
 
 - "crtfile"의 상대 경로(path) 사용 시, SSL certificates의 기본 directory를 설정합니다.
 
-#### 2.11. 'ssl-default-bind-ciphers'
+##### 2.1.11. 'ssl-default-bind-ciphers'
 ```
 'ssl-default-bind-ciphers ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:RSA+AESGCM:RSA+AES:!aNULL:!MD5:!DSS'
 ```
@@ -218,7 +219,7 @@ defaults
 > cipher suite에 대한 자세한 사항은 [https://ko.wikipedia.org/wiki/암호화_스위트](https://ko.wikipedia.org/wiki/%EC%95%94%ED%98%B8%ED%99%94_%EC%8A%A4%EC%9C%84%ED%8A%B8){: target="\_blank"} 페이지와 [https://en.wikipedia.org/wiki/Cipher_suite](https://en.wikipedia.org/wiki/Cipher_suite){: target="\_blank"} 페이지를 참고하시기 바랍니다.
 
 
-#### 2.12. 'ssl-default-bind-options'
+##### 2.1.12. 'ssl-default-bind-options'
 ```
 'ssl-default-bind-options no-sslv3'
 ```
@@ -227,7 +228,8 @@ defaults
 
 - "no-sslv3" 설정은 SSLv3 사용을 비활성화합니다.
 
-#### 2.13. 'defaults'
+#### 2.2. defaults section
+##### 2.2.1. 'defaults'
 ```
 'defaults'
 ```
@@ -236,7 +238,7 @@ defaults
 
 - section 명은 선택 사항이지만, 설정하는 것을 권장합니다.
 
-#### 2.14. 'log global'
+##### 2.2.2. 'log global'
 ```
 'log global'
 ```
@@ -245,7 +247,7 @@ defaults
 
 - haproxy 인스턴스(instance) 당 하나만 설정할 수 있으며, 매개 변수(parameter)가 없습니다.
 
-#### 2.15. 'mode'
+##### 2.2.3. 'mode'
 ```
 'mode    http'
 ```
@@ -256,7 +258,7 @@ defaults
     + tcp mode는 SSL, SSSH, SMTP 등에 사용합니다.
     + http mode는 RFC를 준수하지 않는 요청은 거부되며, 서버 연결(connection) 전에 분석됩니다.
 
-#### 2.16. 'option'
+##### 2.2.4. 'option'
 ```
 'option  httplog'
 ```
@@ -277,7 +279,7 @@ defaults
 
 - backend section에서는 사용할 수 없습니다.
 
-#### 2.17. 'timeout'
+##### 2.2.5. 'timeout'
 ```
 'timeout connect 5000'
 ```
@@ -302,7 +304,7 @@ defaults
 
 - millisecond로 설정하며, frontend section에서는 사용할 수 없습니다.
 
-#### 2.18. 'errorfile'
+##### 2.2.6. 'errorfile'
 ```
 'errorfile 400 /etc/haproxy/errors/400.http'
 'errorfile 403 /etc/haproxy/errors/403.http'

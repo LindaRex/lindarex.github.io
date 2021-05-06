@@ -6,12 +6,12 @@
     <description>오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 블로그입니다 | It shares technologies such as open source software, cloud computing, PaaS and container platforms</description>
     <link>https://lindarex.github.io/</link>
     <atom:link href="https://lindarex.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 06 May 2021 10:44:00 +0900</pubDate>
-    <lastBuildDate>Thu, 06 May 2021 10:44:00 +0900</lastBuildDate>
+    <pubDate>Thu, 06 May 2021 11:31:10 +0900</pubDate>
+    <lastBuildDate>Thu, 06 May 2021 11:31:10 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
-        <title>MySQL 개행 문자 처리(Replace newline character)</title>
+        <title>MySQL 개행 문자(newline character) 치환(replace)하기</title>
         <description>&lt;p&gt;개행 문자(newline character)는 텍스트의 한 줄이 끝났음을 나타내는 문자 또는 문자열입니다.
 &lt;br /&gt;&lt;br /&gt;
 일반적으로 운영 체제(operating system, os)에 따라 개행 문자 코드가 다르기 때문에 다른 시스템으로 전송할 때 개행 문자의 치환 작업도 필요합니다.
@@ -21,7 +21,7 @@
 &lt;h2 id=&quot;요약summary&quot;&gt;요약(SUMMARY)&lt;/h2&gt;
 &lt;ol&gt;
   &lt;li&gt;개행 문자 소개&lt;/li&gt;
-  &lt;li&gt;mysql 환경에서 개행 문자 처리&lt;/li&gt;
+  &lt;li&gt;mysql 환경에서 개행 문자 치환&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h2 id=&quot;내용contents&quot;&gt;내용(CONTENTS)&lt;/h2&gt;
@@ -32,13 +32,13 @@
   &lt;li&gt;유닉스 계열(리눅스 또는 맥OS)의 개행 문자는 LF(\n)이고, 16진수로 표현하면 “0a”입니다.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&quot;11-라인피드line-feed-lf-소개&quot;&gt;1.1. 라인피드(line feed, lf) 소개&lt;/h4&gt;
+&lt;h4 id=&quot;11-라인피드line-feed-lf&quot;&gt;1.1. 라인피드(line feed, lf)&lt;/h4&gt;
 &lt;ul&gt;
   &lt;li&gt;line feed는 새로운 행을 추가(new line feed)하는, 커서를 한 칸 아래로 이동하는 것을 의미합니다.&lt;/li&gt;
   &lt;li&gt;“\n”으로 표현하며, 아스키코드(ASCII)는 10번입니다.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&quot;12-캐리지-리턴carrige-return-cr-소개&quot;&gt;1.2. 캐리지 리턴(carrige return, cr) 소개&lt;/h4&gt;
+&lt;h4 id=&quot;12-캐리지-리턴carrige-return-cr&quot;&gt;1.2. 캐리지 리턴(carrige return, cr)&lt;/h4&gt;
 &lt;ul&gt;
   &lt;li&gt;캐리지 리턴은 시작 위치로 복귀(return)하는, 커서를 가장 왼쪽으로 이동하는 것을 의미합니다.&lt;/li&gt;
   &lt;li&gt;“\r”로 표현하며, ASCII는 13번입니다.&lt;/li&gt;
@@ -48,7 +48,7 @@
   &lt;p&gt;ASCII(American Standard Code for Information Interchange)에 대한 자세한 정보는 &lt;a href=&quot;https://ko.wikipedia.org/wiki/ASCII&quot; target=&quot;\_blank&quot;&gt;https://ko.wikipedia.org/wiki/ASCII&lt;/a&gt; 페이지를 참고하시기 바랍니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h3 id=&quot;2-mysql-환경에서-개행-문자-처리&quot;&gt;2. mysql 환경에서 개행 문자 처리&lt;/h3&gt;
+&lt;h3 id=&quot;2-mysql-환경에서-개행-문자-치환&quot;&gt;2. mysql 환경에서 개행 문자 치환&lt;/h3&gt;
 &lt;h4 id=&quot;21-line-feedlf-처리&quot;&gt;2.1. line feed(lf) 처리&lt;/h4&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;SELECT REPLACE(lindarex_column, CHR(10),'') FROM lindarex_table;
 SELECT REPLACE(lindarex_column, '\n', '') FROM lindarex_table;

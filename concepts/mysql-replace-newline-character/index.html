@@ -11,9 +11,9 @@
 
 <!-- LINDAREX :: JEKYLL SEO TAG :: BIGIN -->
 <!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>MySQL 개행 문자 처리(Replace newline character) | LindaRex</title>
+<title>MySQL 개행 문자(newline character) 치환(replace)하기 | LindaRex</title>
 <meta name="generator" content="Jekyll v3.9.0" />
-<meta property="og:title" content="MySQL 개행 문자 처리(Replace newline character)" />
+<meta property="og:title" content="MySQL 개행 문자(newline character) 치환(replace)하기" />
 <meta name="author" content="Rex" />
 <meta property="og:locale" content="ko_KR" />
 <meta name="description" content="개행 문자(newline character)는 텍스트의 한 줄이 끝났음을 나타내는 문자 또는 문자열입니다. 일반적으로 운영 체제(operating system, os)에 따라 개행 문자 코드가 다르기 때문에 다른 시스템으로 전송할 때 개행 문자의 치환 작업도 필요합니다. 이 포스트에서는 MySQL(mysql) 환경에서 개행 문자를 치환하는 방법에 대해 소개합니다." />
@@ -24,12 +24,12 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-05-06T00:00:00+09:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="MySQL 개행 문자 처리(Replace newline character)" />
+<meta property="twitter:title" content="MySQL 개행 문자(newline character) 치환(replace)하기" />
 <meta name="twitter:site" content="@" />
 <meta name="twitter:creator" content="@Rex" />
 <meta name="google-site-verification" content="t6VkmqsI15sIx3P1-gh3NYputZtjhDZOTkxhwDaa4Ik" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/concepts/mysql-replace-newline-character/"},"author":{"@type":"Person","name":"Rex"},"@type":"BlogPosting","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"Rex"},"url":"https://lindarex.github.io/concepts/mysql-replace-newline-character/","headline":"MySQL 개행 문자 처리(Replace newline character)","dateModified":"2021-05-06T00:00:00+09:00","datePublished":"2021-05-06T00:00:00+09:00","description":"개행 문자(newline character)는 텍스트의 한 줄이 끝났음을 나타내는 문자 또는 문자열입니다. 일반적으로 운영 체제(operating system, os)에 따라 개행 문자 코드가 다르기 때문에 다른 시스템으로 전송할 때 개행 문자의 치환 작업도 필요합니다. 이 포스트에서는 MySQL(mysql) 환경에서 개행 문자를 치환하는 방법에 대해 소개합니다.","@context":"https://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/concepts/mysql-replace-newline-character/"},"author":{"@type":"Person","name":"Rex"},"@type":"BlogPosting","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"Rex"},"url":"https://lindarex.github.io/concepts/mysql-replace-newline-character/","headline":"MySQL 개행 문자(newline character) 치환(replace)하기","dateModified":"2021-05-06T00:00:00+09:00","datePublished":"2021-05-06T00:00:00+09:00","description":"개행 문자(newline character)는 텍스트의 한 줄이 끝났음을 나타내는 문자 또는 문자열입니다. 일반적으로 운영 체제(operating system, os)에 따라 개행 문자 코드가 다르기 때문에 다른 시스템으로 전송할 때 개행 문자의 치환 작업도 필요합니다. 이 포스트에서는 MySQL(mysql) 환경에서 개행 문자를 치환하는 방법에 대해 소개합니다.","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <!-- LINDAREX :: JEKYLL SEO TAG :: END -->
@@ -389,7 +389,7 @@ wcs_do();
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="MySQL 개행 문자 처리(Replace newline character)">
+    <meta itemprop="headline" content="MySQL 개행 문자(newline character) 치환(replace)하기">
     <meta itemprop="description" content="개행 문자(newline character)는 텍스트의 한 줄이 끝났음을 나타내는 문자 또는 문자열입니다.일반적으로 운영 체제(operating system, os)에 따라 개행 문자 코드가 다르기 때문에 다른 시스템으로 전송할 때 개행 문자의 치환 작업도 필요합니다.이 포스트에서는 MySQL(mysql) 환경에서 개행 문자를 치환하는 방법에 대해 소개합니다.">
     <meta itemprop="datePublished" content="2021-05-06T00:00:00+09:00">
     
@@ -397,7 +397,7 @@ wcs_do();
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">MySQL 개행 문자 처리(Replace newline character)
+          <h1 id="page-title" class="page__title" itemprop="headline">MySQL 개행 문자(newline character) 치환(replace)하기
 </h1>
           
         </header>
@@ -438,7 +438,7 @@ wcs_do();
 <h2 id="요약summary">요약(SUMMARY)</h2>
 <ol>
   <li>개행 문자 소개</li>
-  <li>mysql 환경에서 개행 문자 처리</li>
+  <li>mysql 환경에서 개행 문자 치환</li>
 </ol>
 
 <h2 id="내용contents">내용(CONTENTS)</h2>
@@ -449,13 +449,13 @@ wcs_do();
   <li>유닉스 계열(리눅스 또는 맥OS)의 개행 문자는 LF(\n)이고, 16진수로 표현하면 “0a”입니다.</li>
 </ul>
 
-<h4 id="11-라인피드line-feed-lf-소개">1.1. 라인피드(line feed, lf) 소개</h4>
+<h4 id="11-라인피드line-feed-lf">1.1. 라인피드(line feed, lf)</h4>
 <ul>
   <li>line feed는 새로운 행을 추가(new line feed)하는, 커서를 한 칸 아래로 이동하는 것을 의미합니다.</li>
   <li>“\n”으로 표현하며, 아스키코드(ASCII)는 10번입니다.</li>
 </ul>
 
-<h4 id="12-캐리지-리턴carrige-return-cr-소개">1.2. 캐리지 리턴(carrige return, cr) 소개</h4>
+<h4 id="12-캐리지-리턴carrige-return-cr">1.2. 캐리지 리턴(carrige return, cr)</h4>
 <ul>
   <li>캐리지 리턴은 시작 위치로 복귀(return)하는, 커서를 가장 왼쪽으로 이동하는 것을 의미합니다.</li>
   <li>“\r”로 표현하며, ASCII는 13번입니다.</li>
@@ -465,7 +465,7 @@ wcs_do();
   <p>ASCII(American Standard Code for Information Interchange)에 대한 자세한 정보는 <a href="https://ko.wikipedia.org/wiki/ASCII" target="\_blank">https://ko.wikipedia.org/wiki/ASCII</a> 페이지를 참고하시기 바랍니다.</p>
 </blockquote>
 
-<h3 id="2-mysql-환경에서-개행-문자-처리">2. mysql 환경에서 개행 문자 처리</h3>
+<h3 id="2-mysql-환경에서-개행-문자-치환">2. mysql 환경에서 개행 문자 치환</h3>
 <h4 id="21-line-feedlf-처리">2.1. line feed(lf) 처리</h4>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT REPLACE(lindarex_column, CHR(10),'') FROM lindarex_table;
 SELECT REPLACE(lindarex_column, '\n', '') FROM lindarex_table;
@@ -592,7 +592,7 @@ SELECT REPLACE(REPLACE(lindarex_column, '\n', ''), '\r', '') FROM lindarex_table
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=MySQL+%EA%B0%9C%ED%96%89+%EB%AC%B8%EC%9E%90+%EC%B2%98%EB%A6%AC%28Replace+newline+character%29%20https%3A%2F%2Flindarex.github.io%2Fconcepts%2Fmysql-replace-newline-character%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=MySQL+%EA%B0%9C%ED%96%89+%EB%AC%B8%EC%9E%90%28newline+character%29+%EC%B9%98%ED%99%98%28replace%29%ED%95%98%EA%B8%B0%20https%3A%2F%2Flindarex.github.io%2Fconcepts%2Fmysql-replace-newline-character%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
   <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flindarex.github.io%2Fconcepts%2Fmysql-replace-newline-character%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 

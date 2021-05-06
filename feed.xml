@@ -6,9 +6,107 @@
     <description>오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 블로그입니다 | It shares technologies such as open source software, cloud computing, PaaS and container platforms</description>
     <link>https://lindarex.github.io/</link>
     <atom:link href="https://lindarex.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 04 May 2021 16:54:35 +0900</pubDate>
-    <lastBuildDate>Tue, 04 May 2021 16:54:35 +0900</lastBuildDate>
+    <pubDate>Thu, 06 May 2021 10:44:00 +0900</pubDate>
+    <lastBuildDate>Thu, 06 May 2021 10:44:00 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
+    
+      <item>
+        <title>MySQL 개행 문자 처리(Replace newline character)</title>
+        <description>&lt;p&gt;개행 문자(newline character)는 텍스트의 한 줄이 끝났음을 나타내는 문자 또는 문자열입니다.
+&lt;br /&gt;&lt;br /&gt;
+일반적으로 운영 체제(operating system, os)에 따라 개행 문자 코드가 다르기 때문에 다른 시스템으로 전송할 때 개행 문자의 치환 작업도 필요합니다.
+&lt;br /&gt;&lt;br /&gt;
+이 포스트에서는 MySQL(mysql) 환경에서 개행 문자를 치환하는 방법에 대해 소개합니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;요약summary&quot;&gt;요약(SUMMARY)&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;개행 문자 소개&lt;/li&gt;
+  &lt;li&gt;mysql 환경에서 개행 문자 처리&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;내용contents&quot;&gt;내용(CONTENTS)&lt;/h2&gt;
+&lt;h3 id=&quot;1-개행-문자-소개&quot;&gt;1. 개행 문자 소개&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;개행 문자는 새줄 문자, 줄바꿈 문자(line break), EOL(end-of-line), line ending과 같은 뜻입니다.&lt;/li&gt;
+  &lt;li&gt;윈도우 계열의 개행 문자는 CRLF(\r\n)이고, 16진수로 표현하면 “0d0a”입니다.&lt;/li&gt;
+  &lt;li&gt;유닉스 계열(리눅스 또는 맥OS)의 개행 문자는 LF(\n)이고, 16진수로 표현하면 “0a”입니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;11-라인피드line-feed-lf-소개&quot;&gt;1.1. 라인피드(line feed, lf) 소개&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;line feed는 새로운 행을 추가(new line feed)하는, 커서를 한 칸 아래로 이동하는 것을 의미합니다.&lt;/li&gt;
+  &lt;li&gt;“\n”으로 표현하며, 아스키코드(ASCII)는 10번입니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;12-캐리지-리턴carrige-return-cr-소개&quot;&gt;1.2. 캐리지 리턴(carrige return, cr) 소개&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;캐리지 리턴은 시작 위치로 복귀(return)하는, 커서를 가장 왼쪽으로 이동하는 것을 의미합니다.&lt;/li&gt;
+  &lt;li&gt;“\r”로 표현하며, ASCII는 13번입니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;ASCII(American Standard Code for Information Interchange)에 대한 자세한 정보는 &lt;a href=&quot;https://ko.wikipedia.org/wiki/ASCII&quot; target=&quot;\_blank&quot;&gt;https://ko.wikipedia.org/wiki/ASCII&lt;/a&gt; 페이지를 참고하시기 바랍니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;2-mysql-환경에서-개행-문자-처리&quot;&gt;2. mysql 환경에서 개행 문자 처리&lt;/h3&gt;
+&lt;h4 id=&quot;21-line-feedlf-처리&quot;&gt;2.1. line feed(lf) 처리&lt;/h4&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;SELECT REPLACE(lindarex_column, CHR(10),'') FROM lindarex_table;
+SELECT REPLACE(lindarex_column, '\n', '') FROM lindarex_table;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;22-carrige-returncr-처리&quot;&gt;2.2. carrige return(cr) 처리&lt;/h4&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;SELECT REPLACE(lindarex_column, CHR(13),'') FROM lindarex_table;
+SELECT REPLACE(lindarex_column, '\r', '') FROM lindarex_table;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;23-crlf-처리&quot;&gt;2.3. crlf 처리&lt;/h4&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;SELECT REPLACE(REPLACE(lindarex_column, CHR(13),''), CHR(10),'') FROM lindarex_table;
+SELECT REPLACE(REPLACE(lindarex_column, '\n', ''), '\r', '') FROM lindarex_table;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
+&lt;p&gt;mysql 환경에 개행 문자를 치환하는 방법에 대해 간단히 소개했습니다.
+&lt;br /&gt;
+개행 문자에 대한 더 자세한 내용은 아래 참고 페이지를 확인해 주시기 바랍니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ko.wikipedia.org/wiki/%EC%83%88%EC%A4%84_%EB%AC%B8%EC%9E%90&quot; target=&quot;\_blank&quot;&gt;https://ko.wikipedia.org/wiki/새줄_문자&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ko.wikipedia.org/wiki/MySQL&quot; target=&quot;\_blank&quot;&gt;https://ko.wikipedia.org/wiki/MySQL&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Thu, 06 May 2021 00:00:00 +0900</pubDate>
+        <link>https://lindarex.github.io/concepts/mysql-replace-newline-character/</link>
+        <guid isPermaLink="true">https://lindarex.github.io/concepts/mysql-replace-newline-character/</guid>
+        
+        <category>mysql</category>
+        
+        <category>newline</category>
+        
+        <category>newline character</category>
+        
+        <category>line break</category>
+        
+        <category>eol</category>
+        
+        <category>end-of-line</category>
+        
+        <category>line ending</category>
+        
+        <category>line feed</category>
+        
+        <category>carrige return</category>
+        
+        <category>open source software</category>
+        
+        <category>open source</category>
+        
+        <category>oss</category>
+        
+        
+        <category>concepts</category>
+        
+      </item>
     
       <item>
         <title>우분투(Ubuntu) 환경에 HAProxy로 서브도메인(subdomain) 설정하기</title>
@@ -9215,478 +9313,6 @@ DHCP에 대한 자세한 정보는 &lt;a href=&quot;https://ko.wikipedia.org/wik
         <category>ubuntu</category>
         
         <category>18.04</category>
-        
-        <category>vmware workstation</category>
-        
-        <category>open source software</category>
-        
-        <category>open source</category>
-        
-        <category>oss</category>
-        
-        
-        <category>ubuntu</category>
-        
-      </item>
-    
-      <item>
-        <title>우분투(Ubuntu) 서버(Server) 16.04 설치하기</title>
-        <description>&lt;p&gt;우분투(ubuntu)는 데비안(debian) 리눅스(linux) 기반으로, debian에 비해 사용자 편의성에 초점을 맞춘 linux 배포판이며 컴퓨터 운영체제(OS, operating system)입니다.
-&lt;br /&gt;&lt;br /&gt;
-새로운 버전은 6개월마다, 장기 지원 버전(LTS, long term support)은 2년에 한 번씩 출시되고, 다양한 언어를 지원하고 낮은 사양의 컴퓨터에서도 작동하도록 설계되어 있습니다.
-&lt;br /&gt;&lt;br /&gt;
-이 포스트에서는 VMware Workstation에 ubuntu server 16.04 LTS를 설치하는 방법을 소개합니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;선행조건prerequisite&quot;&gt;선행조건(PREREQUISITE)&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;VMware Workstation이 설치되어 있어야 합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;테스트-환경test-environment&quot;&gt;테스트 환경(TEST ENVIRONMENT)&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;VMware® Workstation 15 Pro (15.5.1 build-15018445)&lt;/li&gt;
-  &lt;li&gt;Ubuntu 16.04.6 LTS (Xenial Xerus) Server (64-bit)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;ubuntu server 16.04 설치 시 필요한 시스템 요구사항은 &lt;a href=&quot;https://help.ubuntu.com/16.04/serverguide/preparing-to-install.html&quot; target=&quot;\_blank&quot;&gt;https://help.ubuntu.com/16.04/serverguide/preparing-to-install.html&lt;/a&gt;를 확인해 주시기 바랍니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;요약summary&quot;&gt;요약(SUMMARY)&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;ubuntu server 16.04.6 ISO 파일 내려받기&lt;/li&gt;
-  &lt;li&gt;VMware workstation의 VM(virtual machine) 설정&lt;/li&gt;
-  &lt;li&gt;ubuntu server 16.04.6 설치&lt;/li&gt;
-  &lt;li&gt;linux 명령어로 ubuntu VM 상태 확인&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;내용contents&quot;&gt;내용(CONTENTS)&lt;/h2&gt;
-&lt;h3 id=&quot;1-ubuntu-server-16046-iso-파일-내려받기&quot;&gt;1. ubuntu server 16.04.6 ISO 파일 내려받기&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;웹브라우저로 &lt;a href=&quot;http://mirror.kakao.com/ubuntu-releases/&quot; target=&quot;\_blank&quot;&gt;ubuntu Releases 페이지&lt;/a&gt;를 엽니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-001.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-001&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;목록의 ‘16.04.6’를 클릭하여 ubuntu 16.04.6 LTS (Xenial Xerus) 페이지로 이동합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-002.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-002&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Server install image 영역의 ‘64-bit PC (AMD64) server install image’를 클릭하여 ISO 파일을 내려받습니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;a href=&quot;http://mirror.kakao.com/ubuntu-releases/16.04.6/ubuntu-16.04.6-server-amd64.iso&quot; target=&quot;\_blank&quot;&gt;http://mirror.kakao.com/ubuntu-releases/16.04.6/ubuntu-16.04.6-server-amd64.iso&lt;/a&gt;를 통해 바로 내려받을 수 있습니다. &lt;br /&gt;
-ubuntu-16.04.6-server-amd64.iso 파일 사이즈는 약 893 MB입니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-003.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-003&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;2-vmware-workstation의-vmvirtual-machine-설정&quot;&gt;2. VMware workstation의 VM(Virtual Machine) 설정&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;VMware workstation을 실행합니다.&lt;/li&gt;
-  &lt;li&gt;아래 메뉴를 통해 ‘New Virtual Machine Wizard’ 팝업을 엽니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;상단 메뉴 &amp;gt; File &amp;gt; ‘New Virtual Machine…’ 또는 Ctrl + N&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-004.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-004&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;상세 설정을 위해 ‘Custom (advanced)’를 선택하고 ‘Next’를 클릭합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-005.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-005&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;VMware Workstation 버전을 선택하고 ‘Next’를 클릭합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-006.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-006&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;상세 설정을 위해 ‘I will install the operating system later.’를 선택하고 ‘Next’를 클릭합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-007.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-007&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Guest operating system은 ‘Linux’, Version은 ‘ubuntu 64-bit’를 선택하고 ‘Next’를 클릭합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-008.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-008&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Virtual machine name을 입력하고, Location에 vmdk 파일이 저장될 경로를 입력하거나 ‘Browse..’를 클릭해 위치를 선택하고 ‘Next’를 클릭합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;VMDK란 Virtual Machine Disk의 약자이며, 자세한 정보는 &lt;a href=&quot;https://en.wikipedia.org/wiki/VMDK&quot; target=&quot;\_blank&quot;&gt;https://en.wikipedia.org/wiki/VMDK&lt;/a&gt;를 참고하시기 바랍니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-009.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-009&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;processors ‘1’, cores per processor ‘1’을 입력하고 ‘Next’를 클릭합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-010.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-010&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;권장값인 ‘2048’MB를 입력하고 ‘Next’를 클릭합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;권장값은 자신의 PC 메모리(Host memory)에 따라 다를 수 있습니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-011.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-011&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;‘Use network address translation (NAT)’를 선택하고 ‘Next’를 클릭합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Network type에 대한 자세한 정보는 &lt;a href=&quot;https://lindarex.github.io/vmware-workstation/vmware-workstation-virtual-network/&quot; target=&quot;\_blank&quot;&gt;VMware Workstation의 가상 네트워크(Virtual Network) 알아보기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-012.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-012&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;권장값인 ‘LSI Logic (Recommended)’를 선택하고 ‘Next’를 클릭합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-013.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-013&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;권장값인 ‘SCSI Logic (Recommended)’를 선택하고 ‘Next’를 클릭합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-014.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-014&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;‘Create a new virtual disk’를 선택하고 ‘Next’를 클릭합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-015.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-015&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Maximum disk size를 ‘20.0’을 입력하고 ‘Split virtual disk into multiple files’를 선택하고 ‘Next’를 클릭합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-016.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-016&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Disk file 명을 입력하고 ‘Next’를 클릭합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-017.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-017&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;‘Customize Hardware..’를 클릭하여 Hardware 팝업을 엽니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-018.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-018&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;앞에서 설정한 내용을 확인합니다. (Memory, Processors)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-019.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-019&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-020.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-020&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Use ISO image file 항목의 ‘Browse..’를 클릭해 내려받은 ubuntu 16.04.6 LTS (Xenial Xerus) ISO 파일을 선택합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-021.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-021&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;앞에서 설정한 내용을 확인합니다. (Network Adapter, USB Controller, Sound Card, Printer, Display)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-022.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-022&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-023.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-023&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-024.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-024&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-025.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-025&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-026.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-026&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;모든 설정을 확인하고 ‘Finish’를 클릭합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-027.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-027&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;3-ubuntu-server-16046-설치&quot;&gt;3. ubuntu server 16.04.6 설치&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;아래 메뉴를 통해 ubuntu VM을 구동합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;상단 메뉴 &amp;gt; 녹색 플레이 버튼 또는 Ctrl + B&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-028.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-028&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;설치할 때 사용하고자 하는 언어를 선택합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-029.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-029&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;‘Install ubuntu Server’를 선택하여 설치를 시작합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-030.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-030&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;ubuntu Server에 사용하고자 하는 언어를 설정합니다. ‘English’를 선택합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-031.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-031&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Location을 설정합니다. ‘other’를 선택한 후, ‘Asia’의 ‘Korea, Republic of’를 선택합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-032.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-032&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-033.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-033&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-034.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-034&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Locale을 설정합니다. ‘United States’를 선택합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-035.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-035&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Keyboard layout을 설정합니다. ‘No’를 선택한 후, ‘English (US)’를 선택합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-036.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-036&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-037.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-037&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-038.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-038&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;설치가 진행됩니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-039.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-039&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;호스트네임(Hostname)을 입력합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-040.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-040&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;사용자 이름(User name)을 입력합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-041.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-041&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-042.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-042&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;비밀번호(Password)를 입력합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-043.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-043&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-044.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-044&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Home directory의 암호화를 설정합니다. ‘No’를 선택합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-045.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-045&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;설치가 진행됩니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-046.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-046&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;타임존(Time zone)을 설정합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-047.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-047&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Disk partition을 설정합니다. ‘Guided - use entire disk and set up LVM’을 선택합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-048.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-048&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-049.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-049&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-050.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-050&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-051.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-051&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-052.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-052&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;설치가 진행됩니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-053.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-053&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;HTTP proxy를 설정합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-054.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-054&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;설치가 진행됩니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-055.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-055&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Upgrade 주기를 설정합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-056.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-056&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;추가로 설치할 패키지를 선택합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Xshell을 비롯해 SSH 클라이언트 사용을 위해 OpenSSH server 패키지를 추가합니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-057.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-057&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;설치가 진행됩니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-058.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-058&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;GRUB boot loader를 설정합니다. ‘Yes’를 선택합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-059.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-059&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;설치가 진행됩니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-060.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-060&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;설치 과정의 마지막입니다. ‘Continue’를 선택합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-061.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-061&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;재부팅됩니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-062.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-062&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;정상 설치 후 로그인 프롬프트 상태입니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-063.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-063&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;4-linux-명령어command로-ubuntu-vm-상태-확인&quot;&gt;4. linux 명령어(command)로 ubuntu VM 상태 확인&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;사용자 이름과 비밀번호를 입력하여 로그인합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-064.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-064&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;free command로 메모리 상태를 확인합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-065.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-065&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;df command로 디스크 사용량을 확인합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-066.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-066&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;ifconfig command로 네트워크 정보를 확인합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-067.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-067&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;ping command로 네트워크 상태를 확인합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-068.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-068&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;‘apt update’ command로 패키지 인덱스를 업데이트합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;‘apt update’ command는 업그레이드 가능한 패키지 정보를 업데이트하는 것이며, 실제로 패키지를 업데이트하지 않습니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-069.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-069&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;‘apt upgrade’ command로 업그레이드 가능한 모든 패키지를 업데이트합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-070.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-070&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-071.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-071&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-10-ubuntu-1604-installation/lindarex-ubuntu-1604-installation-072.png&quot; alt=&quot;lindarex-ubuntu-1604-installation-072&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
-&lt;p&gt;VMware Workstation에 Ubuntu 16.04.6 LTS (Xenial Xerus) Server 설치를 완료했습니다.
-&lt;br /&gt;&lt;br /&gt;
-2020년 2월 12일 &lt;a href=&quot;https://w3techs.com/technologies/details/os-linux&quot; target=&quot;\_blank&quot;&gt;W3Techs.com 통계&lt;/a&gt;에 따르면, ubuntu 점유율은 linux 배포판을 사용하는 웹사이트 중 1위(38.9%)로, 2위인 debian(18.4%)의 2배 이상 차이가 납니다. 또한 대부분의 오픈소스 소프트웨어는 Ubuntu를 지원하고, 국내외 사용자와 레퍼런스가 많습니다.
-&lt;br /&gt;&lt;br /&gt;
-linux 입문자 또는 오픈소스 소프트웨어에 관심이 있다면, Ubuntu를 사용하며 linux command를 숙지하고 다양한 커뮤니티에서 활동하는 것을 권합니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://ubuntu.com/&quot; target=&quot;\_blank&quot;&gt;https://ubuntu.com/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://mirror.kakao.com/ubuntu-releases/&quot; target=&quot;\_blank&quot;&gt;http://mirror.kakao.com/ubuntu-releases/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://ubuntu.com/tutorials/tutorial-install-ubuntu-server#1-overview&quot; target=&quot;\_blank&quot;&gt;https://ubuntu.com/tutorials/tutorial-install-ubuntu-server#1-overview&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://ko.wikipedia.org/wiki/%EC%9A%B0%EB%B6%84%ED%88%AC_(%EC%9A%B4%EC%98%81_%EC%B2%B4%EC%A0%9C)&quot; target=&quot;\_blank&quot;&gt;https://ko.wikipedia.org/wiki/우분투_(운영_체제)&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-        <pubDate>Mon, 10 Feb 2020 00:00:00 +0900</pubDate>
-        <link>https://lindarex.github.io/ubuntu/ubuntu-1604-installation/</link>
-        <guid isPermaLink="true">https://lindarex.github.io/ubuntu/ubuntu-1604-installation/</guid>
-        
-        <category>ubuntu</category>
-        
-        <category>16.04</category>
         
         <category>vmware workstation</category>
         

@@ -1,5 +1,5 @@
 ---
-title: "MySQL 개행 문자 처리(Replace newline character)"
+title: "MySQL 개행 문자(newline character) 치환(replace)하기"
 categories: 
   - concepts
 tags: 
@@ -27,7 +27,7 @@ tags:
 
 ## 요약(SUMMARY)
 1. 개행 문자 소개
-2. mysql 환경에서 개행 문자 처리
+2. mysql 환경에서 개행 문자 치환
 
 
 ## 내용(CONTENTS)
@@ -36,17 +36,17 @@ tags:
 - 윈도우 계열의 개행 문자는 CRLF(\r\n)이고, 16진수로 표현하면 "0d0a"입니다.
 - 유닉스 계열(리눅스 또는 맥OS)의 개행 문자는 LF(\n)이고, 16진수로 표현하면 "0a"입니다.
 
-#### 1.1. 라인피드(line feed, lf) 소개
+#### 1.1. 라인피드(line feed, lf)
 - line feed는 새로운 행을 추가(new line feed)하는, 커서를 한 칸 아래로 이동하는 것을 의미합니다.
 - "\n"으로 표현하며, 아스키코드(ASCII)는 10번입니다.
 
-#### 1.2. 캐리지 리턴(carrige return, cr) 소개
+#### 1.2. 캐리지 리턴(carrige return, cr)
 - 캐리지 리턴은 시작 위치로 복귀(return)하는, 커서를 가장 왼쪽으로 이동하는 것을 의미합니다.
 - "\r"로 표현하며, ASCII는 13번입니다.
 
 > ASCII(American Standard Code for Information Interchange)에 대한 자세한 정보는 [https://ko.wikipedia.org/wiki/ASCII](https://ko.wikipedia.org/wiki/ASCII){: target="\_blank"} 페이지를 참고하시기 바랍니다.
 
-### 2. mysql 환경에서 개행 문자 처리
+### 2. mysql 환경에서 개행 문자 치환
 #### 2.1. line feed(lf) 처리
 ```
 SELECT REPLACE(lindarex_column, CHR(10),'') FROM lindarex_table;

@@ -11,25 +11,25 @@
 
 <!-- LINDAREX :: JEKYLL SEO TAG :: BIGIN -->
 <!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>우분투(Ubuntu) 환경에 SCM Manager 설치하기 | LindaRex</title>
+<title>JAVA HttpSession(javax.Servlet.Http) 소개 | LindaRex</title>
 <meta name="generator" content="Jekyll v3.9.0" />
-<meta property="og:title" content="우분투(Ubuntu) 환경에 SCM Manager 설치하기" />
+<meta property="og:title" content="JAVA HttpSession(javax.Servlet.Http) 소개" />
 <meta name="author" content="Rex" />
 <meta property="og:locale" content="ko_KR" />
-<meta name="description" content="SCM Manager는 사설 버전 관리 레파지토리(private source code and version control repository)로 BSD(berkeley software distribution) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. SCM Manager는 Git과 Mercurial, Subversion을 지원하고, 다양한 플러그인과 RESTFul API를 제공하며, 설치 방법으로는 Standalone 방식(tar, RPM, DEB package)과 WebApp(war) 방식을 제공합니다. 이 포스트에서는 우분투(ubuntu) 환경에서 standalone 방식으로 SCM Manager를 설치하는 방법을 소개합니다." />
-<meta property="og:description" content="SCM Manager는 사설 버전 관리 레파지토리(private source code and version control repository)로 BSD(berkeley software distribution) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. SCM Manager는 Git과 Mercurial, Subversion을 지원하고, 다양한 플러그인과 RESTFul API를 제공하며, 설치 방법으로는 Standalone 방식(tar, RPM, DEB package)과 WebApp(war) 방식을 제공합니다. 이 포스트에서는 우분투(ubuntu) 환경에서 standalone 방식으로 SCM Manager를 설치하는 방법을 소개합니다." />
-<link rel="canonical" href="https://lindarex.github.io/scm-manager/ubuntu-scm-manager-installation/" />
-<meta property="og:url" content="https://lindarex.github.io/scm-manager/ubuntu-scm-manager-installation/" />
+<meta name="description" content="HttpSession은 Java의 public interface이며, 이를 사용하여 세션(session)을 제어할 수 있습니다. session은 쿠키(cookie)의 트래픽(traffic) 이슈(issue)와 cookie 변경으로 인한 보안 issue를 해결하기 위해 등장했습니다. 이 포스트에서는 HttpSession(session)을 소개합니다." />
+<meta property="og:description" content="HttpSession은 Java의 public interface이며, 이를 사용하여 세션(session)을 제어할 수 있습니다. session은 쿠키(cookie)의 트래픽(traffic) 이슈(issue)와 cookie 변경으로 인한 보안 issue를 해결하기 위해 등장했습니다. 이 포스트에서는 HttpSession(session)을 소개합니다." />
+<link rel="canonical" href="https://lindarex.github.io/concepts/java-httpsession-introduction/" />
+<meta property="og:url" content="https://lindarex.github.io/concepts/java-httpsession-introduction/" />
 <meta property="og:site_name" content="LindaRex" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-02-19T00:00:00+09:00" />
+<meta property="article:published_time" content="2021-05-06T00:00:00+09:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="우분투(Ubuntu) 환경에 SCM Manager 설치하기" />
+<meta property="twitter:title" content="JAVA HttpSession(javax.Servlet.Http) 소개" />
 <meta name="twitter:site" content="@" />
 <meta name="twitter:creator" content="@Rex" />
 <meta name="google-site-verification" content="t6VkmqsI15sIx3P1-gh3NYputZtjhDZOTkxhwDaa4Ik" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/scm-manager/ubuntu-scm-manager-installation/"},"author":{"@type":"Person","name":"Rex"},"@type":"BlogPosting","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"Rex"},"url":"https://lindarex.github.io/scm-manager/ubuntu-scm-manager-installation/","headline":"우분투(Ubuntu) 환경에 SCM Manager 설치하기","dateModified":"2020-02-19T00:00:00+09:00","datePublished":"2020-02-19T00:00:00+09:00","description":"SCM Manager는 사설 버전 관리 레파지토리(private source code and version control repository)로 BSD(berkeley software distribution) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다. SCM Manager는 Git과 Mercurial, Subversion을 지원하고, 다양한 플러그인과 RESTFul API를 제공하며, 설치 방법으로는 Standalone 방식(tar, RPM, DEB package)과 WebApp(war) 방식을 제공합니다. 이 포스트에서는 우분투(ubuntu) 환경에서 standalone 방식으로 SCM Manager를 설치하는 방법을 소개합니다.","@context":"https://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://lindarex.github.io/concepts/java-httpsession-introduction/"},"author":{"@type":"Person","name":"Rex"},"@type":"BlogPosting","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://lindarex.github.io/assets/images/LindaRex_LOGO.jpg"},"name":"Rex"},"url":"https://lindarex.github.io/concepts/java-httpsession-introduction/","headline":"JAVA HttpSession(javax.Servlet.Http) 소개","dateModified":"2021-05-06T00:00:00+09:00","datePublished":"2021-05-06T00:00:00+09:00","description":"HttpSession은 Java의 public interface이며, 이를 사용하여 세션(session)을 제어할 수 있습니다. session은 쿠키(cookie)의 트래픽(traffic) 이슈(issue)와 cookie 변경으로 인한 보안 issue를 해결하기 위해 등장했습니다. 이 포스트에서는 HttpSession(session)을 소개합니다.","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <!-- LINDAREX :: JEKYLL SEO TAG :: END -->
@@ -389,15 +389,15 @@ wcs_do();
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="우분투(Ubuntu) 환경에 SCM Manager 설치하기">
-    <meta itemprop="description" content="SCM Manager는 사설 버전 관리 레파지토리(private source code and version control repository)로 BSD(berkeley software distribution) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다.SCM Manager는 Git과 Mercurial, Subversion을 지원하고, 다양한 플러그인과 RESTFul API를 제공하며, 설치 방법으로는 Standalone 방식(tar, RPM, DEB package)과 WebApp(war) 방식을 제공합니다.이 포스트에서는 우분투(ubuntu) 환경에서 standalone 방식으로 SCM Manager를 설치하는 방법을 소개합니다.">
-    <meta itemprop="datePublished" content="2020-02-19T00:00:00+09:00">
+    <meta itemprop="headline" content="JAVA HttpSession(javax.Servlet.Http) 소개">
+    <meta itemprop="description" content="HttpSession은 Java의 public interface이며, 이를 사용하여 세션(session)을 제어할 수 있습니다.session은 쿠키(cookie)의 트래픽(traffic) 이슈(issue)와 cookie 변경으로 인한 보안 issue를 해결하기 위해 등장했습니다.이 포스트에서는 HttpSession(session)을 소개합니다.">
+    <meta itemprop="datePublished" content="2021-05-06T00:00:00+09:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">우분투(Ubuntu) 환경에 SCM Manager 설치하기
+          <h1 id="page-title" class="page__title" itemprop="headline">JAVA HttpSession(javax.Servlet.Http) 소개
 </h1>
           
         </header>
@@ -429,107 +429,154 @@ wcs_do();
           <!-- LINDAREX :: GOOGLE ADSENSE :: RIGHT-SIDEBAR :: END -->
           </aside>
         
-        <p>SCM Manager는 사설 버전 관리 레파지토리(private source code and version control repository)로 BSD(berkeley software distribution) 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다.
+        <p>HttpSession은 Java의 public interface이며, 이를 사용하여 세션(session)을 제어할 수 있습니다.
 <br /><br />
-SCM Manager는 Git과 Mercurial, Subversion을 지원하고, 다양한 플러그인과 RESTFul API를 제공하며, 설치 방법으로는 Standalone 방식(tar, RPM, DEB package)과 WebApp(war) 방식을 제공합니다.
+session은 쿠키(cookie)의 트래픽(traffic) 이슈(issue)와 cookie 변경으로 인한 보안 issue를 해결하기 위해 등장했습니다.
 <br /><br />
-이 포스트에서는 우분투(ubuntu) 환경에서 standalone 방식으로 SCM Manager를 설치하는 방법을 소개합니다.</p>
+이 포스트에서는 HttpSession(session)을 소개합니다.</p>
 
-<h2 id="선행조건prerequisite">선행조건(PREREQUISITE)</h2>
+<h2 id="요약summary">요약(SUMMARY)</h2>
+<ol>
+  <li>session 소개</li>
+  <li>session 동작 방식(mechanics)</li>
+  <li>HttpSession 소개</li>
+</ol>
+
+<h2 id="내용contents">내용(CONTENTS)</h2>
+<h3 id="1-session-소개">1. session 소개</h3>
+
+<blockquote>
+  <p>이 포스트에서 session은 http session을 의미합니다.</p>
+</blockquote>
+
 <ul>
-  <li>ubuntu 환경에 Java가 설치되어 있어야 합니다.</li>
-  <li>방화벽 설정이 필요합니다.
+  <li>session은 사전적 의미로 서버(server)와 클라이언트(client) 간에 반영구적으로 상호 작용하는 정보 교환입니다.</li>
+  <li>session은 server로 요청(request) 하는 client를 구별하기 위해 server에 저장되는 정보입니다.
     <ul>
-      <li>TCP 8080 포트가 개방되어 있어야 합니다.</li>
+      <li>session은 client에 저장되는 쿠키(cookie)와 다르게 server에 저장되므로 관리가 용이하고 효율적이며 보안에 강합니다.</li>
+    </ul>
+  </li>
+  <li>server는 client request에 session-id를 생성하여 server와 client 브라우저(browser) 메모리(memory)에 cookie로 저장합니다.
+    <ul>
+      <li>위 cookie는 일반적인 cookie가 아닌 session cookie이며, 인 메모리(in-memory) cookie 또는 임시(transient) cookie, 반영구(non-persistent) cookie로 불립니다.</li>
+      <li>session cookie는 server가 종료되거나, 유효기간이 만료하거나, client browser를 종료하면 삭제됩니다.</li>
+    </ul>
+
+    <blockquote>
+      <p>session cookie에 대한 자세한 정보는 <a href="https://en.wikipedia.org/wiki/HTTP_cookie#Session_cookie" target="\_blank">https://en.wikipedia.org/wiki/HTTP_cookie#Session_cookie</a> 페이지를 참고하시기 바랍니다.</p>
+    </blockquote>
+  </li>
+  <li>session의 단점은 server resource를 사용하므로 server에 부담을 줄 수 있으며, 로드 밸런싱(load balancing) 시스템(system)에서 session 처리가 쉽지 않다는 것입니다.</li>
+</ul>
+
+<h3 id="2-session-mechanics">2. session mechanics</h3>
+
+<ol>
+  <li>
+    <p>client가 server에 리소스(resource)를 request 합니다.</p>
+  </li>
+  <li>
+    <p>server는 client가 request 한 request-header의 session cookie를 통해 session-id를 확인합니다.</p>
+  </li>
+  <li>
+    <p>session-id가 존재하면, server는 session-id가 유효한지 확인 후 client의 request를 처리하고 응답(response) 합니다.</p>
+  </li>
+  <li>
+    <p>session-id가 존재하지 않으면, server는 set-cookie를 통해 session-id를 생성한 후 response-header에 추가하여 client에 response 합니다.</p>
+  </li>
+  <li>
+    <p>위 4번 항목 처리 후 client는 server에 request 시, server로부터 response 한 session-id를 request-header에 추가하여 request 합니다.</p>
+  </li>
+</ol>
+
+<ul>
+  <li>session 종료 시기
+    <ol>
+      <li>타임아웃</li>
+      <li>session 객체(object)의 invalidate() 호출</li>
+      <li>애플리케이션 다운</li>
+    </ol>
+  </li>
+  <li>session timeout
+    <ul>
+      <li>DD(Deployment Descriptor :: web.xml)에서 설정하며, 단위는 분입니다.</li>
+      <li>아래 설정은 모든 session object에 setMaxInactiveInterval()를 호출하는 것과 같습니다.</li>
+    </ul>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  &lt;wep-app....&gt;
+    &lt;Servlet&gt;
+     ...
+    &lt;/Servlet&gt;
+    
+    &lt;Session-config&gt;
+      &lt;Session-timeout&gt;15&lt;/Session-timeout&gt; 
+    &lt;/Session-config&gt;
+  &lt;/wep-app&gt;
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="3-httpsession-소개">3. HttpSession 소개</h3>
+
+<blockquote>
+  <p>이 포스트에서 HttpSession은 javax.Servlet.Http 패키지(package)의 인터페이스(interface)인 HttpSession을 의미합니다.</p>
+</blockquote>
+
+<ul>
+  <li>
+    <p>HttpSession은 client request에서 client를 식별하고, 해당 client 정보를 저장하는 방법을 제공하는 JAVA의 public interface입니다.</p>
+  </li>
+  <li>HttpSession interface를 사용하는 서블릿 컨테이너(servlet container)는 server와 client 간의 session을 제어합니다.
+    <ul>
+      <li>servlet container는 웹(web) container라고도 불리며, Tomcat, JBoss(현재 WildFly), Jetty 등이 대표적입니다.</li>
+      <li>servlet container와 servlet은 다릅니다.
+        <ul>
+          <li>servlet container는 server에서 servlet 생명 주기(life cycle) 관리, request에 따른 스레드(thread) 생성, 동적(dynamic) resource(JSP, servlet 등) 생성 등 servlet과 상호 작용하는 web server의 일부입니다.</li>
+          <li>servlet은 javax.servlet package에 정의된 interface이며, JVM(java virtual machine) 내에서 실행되는 web 애플리케이션(application)의 작은 조각입니다.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <blockquote>
+      <p>servlet container에 대한 자세한 정보는 <a href="https://ko.wikipedia.org/wiki/%EC%9B%B9_%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88" target="\_blank">https://ko.wikipedia.org/wiki/웹_컨테이너</a> 페이지를 참고하시기 바랍니다.</p>
+    </blockquote>
+
+    <blockquote>
+      <p>servlet에 대한 자세한 정보는 <a href="https://ko.wikipedia.org/wiki/%EC%9E%90%EB%B0%94_%EC%84%9C%EB%B8%94%EB%A6%BF" target="\_blank">https://ko.wikipedia.org/wiki/자바_서블릿</a> 페이지를 참고하시기 바랍니다.</p>
+    </blockquote>
+
+    <blockquote>
+      <p>JVM에 대한 자세한 정보는 <a href="https://ko.wikipedia.org/wiki/%EC%9E%90%EB%B0%94_%EA%B0%80%EC%83%81_%EB%A8%B8%EC%8B%A0" target="\_blank">https://ko.wikipedia.org/wiki/자바_가상_머신</a> 페이지를 참고하시기 바랍니다.</p>
+    </blockquote>
+  </li>
+  <li>HttpSession object 생성
+    <ul>
+      <li>{HttpServletRequestObject}.getSession() : // 기존 session이 있으면 기존 session object를, 없으면 새로 생성 후 반환</li>
+      <li>{HttpServletRequestObject}.getSession(false) // 기존 session이 있으면 기존 session object를, 없으면 null 반환</li>
+    </ul>
+  </li>
+  <li>HttpSession Method
+    <ul>
+      <li>setAttribute(String, Object)</li>
+      <li>getAttribute(): Object</li>
+      <li>getCreationTime(): long</li>
+      <li>getLastAccessedTime(): long</li>
+      <li>setMaxInactiveInterval(int second) // client가 설정 시간 동안 request가 없으면 session 만료</li>
+      <li>getMaxInactiveInterval(): int</li>
+      <li>invalidate() : // session 종료(session에 속한 속성들도 함께 제거)</li>
+      <li>getId() : String // jSessionId 반환</li>
     </ul>
   </li>
 </ul>
 
-<blockquote>
-  <p>Java 설치 방법은 <a href="https://lindarex.github.io/ubuntu/ubuntu-openjdk-installation/" target="\_blank">우분투(Ubuntu) 환경에 OpenJDK(Java) 설치하기</a> 포스트를 참고하시기 바랍니다.</p>
-</blockquote>
-
-<blockquote>
-  <p>방화벽 설정 방법은 <a href="https://lindarex.github.io/ubuntu/ubuntu-firewalld-installation/" target="\_blank">우분투(Ubuntu) 환경에 방화벽(Firewalld) 설치 및 설정하기</a> 포스트를 참고하시기 바랍니다.</p>
-</blockquote>
-
-<h2 id="테스트-환경test-environment">테스트 환경(TEST ENVIRONMENT)</h2>
-<ul>
-  <li>VMware® Workstation 15 Pro (15.5.1 build-15018445)</li>
-  <li>Ubuntu 18.04.3 LTS (Bionic Beaver) Server (64-bit)</li>
-  <li>SCM Manager 1.6.0</li>
-  <li>OpenJDK 1.8.0_222</li>
-</ul>
-
-<h2 id="요약summary">요약(SUMMARY)</h2>
-<ol>
-  <li>SCM Manager 파일 내려받기</li>
-  <li>SCM Manager 설정</li>
-  <li>스크립트로 SCM Manager 살행</li>
-  <li>웹브라우저로 SCM Manager 접속</li>
-</ol>
-
-<h2 id="내용contents">내용(CONTENTS)</h2>
-
-<blockquote>
-  <p>아래 명령어로 workspace 디렉터리를 생성합니다.</p>
-</blockquote>
-
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">LINDAREX_WORKSPACE</span><span class="o">=</span><span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/workspace
-<span class="gp">$</span><span class="w"> </span><span class="nb">mkdir</span> <span class="nt">-p</span> <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>
-</code></pre></div></div>
-
-<h3 id="1-scm-manager-파일-내려받기">1. SCM Manager 파일 내려받기</h3>
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>wget <span class="nt">-P</span> <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span> https://maven.scm-manager.org/nexus/content/repositories/releases/sonia/scm//scm-server/1.60/scm-server-1.60-app.tar.gz
-</code></pre></div></div>
-
-<h3 id="2-내려받은-파일-압축-해제">2. 내려받은 파일 압축 해제</h3>
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">tar </span>zxf <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/scm-server-1.60-app.tar.gz <span class="nt">-C</span> <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>
-</code></pre></div></div>
-
-<h3 id="3-scm-manager-설정">3. SCM Manager 설정</h3>
-
-<ul>
-  <li>SCM Manager UI의 포트를 설정합니다.</li>
-</ul>
-
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>vi <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/scm-server/conf/server-config.xml
-</code></pre></div></div>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">--------------------------------------------------------------------------------</span>
-&lt;SystemProperty <span class="nv">name</span><span class="o">=</span><span class="s2">"jetty.port"</span> <span class="nv">default</span><span class="o">=</span><span class="s2">"8080"</span> /&gt;
-<span class="nt">--------------------------------------------------------------------------------</span>
-</code></pre></div></div>
-
-<h3 id="4-scm-manager-실행">4. SCM Manager 실행</h3>
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cd</span> <span class="k">${</span><span class="nv">LINDAREX_WORKSPACE</span><span class="k">}</span>/scm-server/bin/
-<span class="gp">$</span><span class="w"> </span><span class="nb">nohup</span> ./scm-server <span class="o">&gt;</span> /dev/null &amp;
-</code></pre></div></div>
-
-<h3 id="5-웹브라우저로-scm-manager-접속">5. 웹브라우저로 SCM Manager 접속</h3>
-<ul>
-  <li>http://[MY-IP]:8080</li>
-</ul>
-
-<blockquote>
-  <p>SCM Manager의 기본 계정은 ‘scmadmin’, 비밀번호도 ‘scmadmin’ 입니다.</p>
-</blockquote>
-
 <h2 id="마무리conclusion">마무리(CONCLUSION)</h2>
-<p>ubuntu 환경에 standalone 방식으로 SCM Manager 설치를 완료했습니다.
-<br /><br />
-SCM Manager 외에도 GitHub, GitLab, Bitbucket, GitStack 등 다양한 private git 호스팅 서비스(service)가 존재합니다.
-<br /><br />
-타 service와 비교 시, SCM Manager의 장점은 간단히 설치하여 사용 가능하고, 설정하기 쉽다는 것입니다.
-<br /><br />
-또한, git 외에도 svn과 mercurial 서버(server)까지 동시에 사용할 수 있으며, 기존에 사용 중이던 svn server를 그대로 이용할 수 있습니다.
-<br /><br />
+<p>session과 HttpSession에 대해 간단히 소개했습니다.
+<br />
 더 자세한 내용은 아래 참고 페이지를 확인해 주시기 바랍니다.</p>
 
 <h2 id="참고references">참고(REFERENCES)</h2>
 <ul>
-  <li><a href="https://www.scm-manager.org/" target="\_blank">https://www.scm-manager.org/</a></li>
-  <li><a href="https://www.scm-manager.org/download/" target="\_blank">https://www.scm-manager.org/download/</a></li>
+  <li><a href="https://javaee.github.io/javaee-spec/javadocs/javax/servlet/http/HttpSession.html" target="\_blank">https://javaee.github.io/javaee-spec/javadocs/javax/servlet/http/HttpSession.html</a></li>
 </ul>
 
         
@@ -551,6 +598,14 @@ SCM Manager 외에도 GitHub, GitLab, Bitbucket, GitStack 등 다양한 private 
     
       
       
+      <a href="/tags/httpsession" class="page__taxonomy-item" rel="tag">httpsession</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/java" class="page__taxonomy-item" rel="tag">java</a><span class="sep">, </span>
+    
+      
+      
       <a href="/tags/open-source-software" class="page__taxonomy-item" rel="tag">open source software</a><span class="sep">, </span>
     
       
@@ -563,15 +618,7 @@ SCM Manager 외에도 GitHub, GitLab, Bitbucket, GitStack 등 다양한 private 
     
       
       
-      <a href="/tags/scm-manager" class="page__taxonomy-item" rel="tag">scm manager</a><span class="sep">, </span>
-    
-      
-      
-      <a href="/tags/ubuntu" class="page__taxonomy-item" rel="tag">ubuntu</a><span class="sep">, </span>
-    
-      
-      
-      <a href="/tags/version-control" class="page__taxonomy-item" rel="tag">version control</a>
+      <a href="/tags/session" class="page__taxonomy-item" rel="tag">session</a>
     
     </span>
   </p>
@@ -592,14 +639,14 @@ SCM Manager 외에도 GitHub, GitLab, Bitbucket, GitStack 등 다양한 private 
     
       
       
-      <a href="/categories/scm-manager" class="page__taxonomy-item" rel="tag">scm-manager</a>
+      <a href="/categories/concepts" class="page__taxonomy-item" rel="tag">concepts</a>
     
     </span>
   </p>
 
 
         
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-02-19T00:00:00+09:00">February 19, 2020</time></p>
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2021-05-06T00:00:00+09:00">May 6, 2021</time></p>
         
       </footer>
 
@@ -608,23 +655,22 @@ SCM Manager 외에도 GitHub, GitLab, Bitbucket, GitStack 등 다양한 private 
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=%EC%9A%B0%EB%B6%84%ED%88%AC%28Ubuntu%29+%ED%99%98%EA%B2%BD%EC%97%90+SCM+Manager+%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0%20https%3A%2F%2Flindarex.github.io%2Fscm-manager%2Fubuntu-scm-manager-installation%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=JAVA+HttpSession%28javax.Servlet.Http%29+%EC%86%8C%EA%B0%9C%20https%3A%2F%2Flindarex.github.io%2Fconcepts%2Fjava-httpsession-introduction%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flindarex.github.io%2Fscm-manager%2Fubuntu-scm-manager-installation%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flindarex.github.io%2Fconcepts%2Fjava-httpsession-introduction%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flindarex.github.io%2Fscm-manager%2Fubuntu-scm-manager-installation%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flindarex.github.io%2Fconcepts%2Fjava-httpsession-introduction%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/sonarqube/ubuntu-sonarqube-installation/" class="pagination--pager" title="우분투(Ubuntu) 환경에 SonarQube 설치하기
+      <a href="/concepts/mysql-replace-newline-character/" class="pagination--pager" title="MySQL 개행 문자(newline character) 치환(replace)하기
 ">Previous</a>
     
     
-      <a href="/aws/ubuntu-aws-cli-installation/" class="pagination--pager" title="우분투(Ubuntu) 환경에 AWS CLI 설치하기
-">Next</a>
+      <a href="#" class="pagination--pager disabled">Next</a>
     
   </nav>
 
@@ -647,35 +693,6 @@ SCM Manager 외에도 GitHub, GitLab, Bitbucket, GitStack 등 다양한 private 
     <div class="page__related">
       <h4 class="page__related-title">You may also enjoy</h4>
       <div class="grid__wrapper">
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src=
-          
-            "/assets/images/LindaRex_LOGO.jpg"
-          
-          alt="">
-      </div>
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/concepts/java-httpsession-introduction/" rel="permalink">JAVA HttpSession(javax.Servlet.Http) 소개
-</a>
-      
-    </h2>
-    
-    <p class="archive__item-excerpt" itemprop="description">HttpSession은 Java의 public interface이며, 이를 사용하여 세션(session)을 제어할 수 있습니다.
-
-session은 쿠키(cookie)의 트래픽(traffic) 이슈(issue)와 cookie 변경으로 인한 보안 issue를 해결하기 위해 등장했습니다...</p>
-  </article>
-</div>
-
         
           
 
@@ -762,6 +779,33 @@ session은 쿠키(cookie)의 트래픽(traffic) 이슈(issue)와 cookie 변경�
     <p class="archive__item-excerpt" itemprop="description">HAProxy(이하 haproxy)는 로드 밸런싱(load balancing) 및 프락시(proxy) 기능을 제공하는 GPL 2 라이선스(license)가 적용된 오픈소스(open source) 소프트웨어입니다.
 
 이 포스트에서는 우분투(ubuntu) 환경에 haproxy를 설정하...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/LindaRex_LOGO.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/haproxy/ubuntu-haproxy-installation/" rel="permalink">우분투(Ubuntu) 환경에 패키지(Package)로 HAProxy 설치하기
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">HAProxy(이하 haproxy)는 TCP 및 HTTP 기반의 애플리케이션(application)을 위한 로드 밸런싱(load balancing) 및 프락시(proxy)를 제공하는 GNU General Public License Version 2 라이선스(license)가 적용된...</p>
   </article>
 </div>
 

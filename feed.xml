@@ -6,9 +6,182 @@
     <description>오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 블로그입니다 | It shares technologies such as open source software, cloud computing, PaaS and container platforms</description>
     <link>https://lindarex.github.io/</link>
     <atom:link href="https://lindarex.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 06 May 2021 17:51:58 +0900</pubDate>
-    <lastBuildDate>Thu, 06 May 2021 17:51:58 +0900</lastBuildDate>
+    <pubDate>Thu, 06 May 2021 17:52:44 +0900</pubDate>
+    <lastBuildDate>Thu, 06 May 2021 17:52:44 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
+    
+      <item>
+        <title>JAVA HttpSession(javax.Servlet.Http) 소개</title>
+        <description>&lt;p&gt;HttpSession은 Java의 public interface이며, 이를 사용하여 세션(session)을 제어할 수 있습니다.
+&lt;br /&gt;&lt;br /&gt;
+session은 쿠키(cookie)의 트래픽(traffic) 이슈(issue)와 cookie 변경으로 인한 보안 issue를 해결하기 위해 등장했습니다.
+&lt;br /&gt;&lt;br /&gt;
+이 포스트에서는 HttpSession(session)을 소개합니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;요약summary&quot;&gt;요약(SUMMARY)&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;session 소개&lt;/li&gt;
+  &lt;li&gt;session 동작 방식(mechanics)&lt;/li&gt;
+  &lt;li&gt;HttpSession 소개&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;내용contents&quot;&gt;내용(CONTENTS)&lt;/h2&gt;
+&lt;h3 id=&quot;1-session-소개&quot;&gt;1. session 소개&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;이 포스트에서 session은 http session을 의미합니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;session은 사전적 의미로 서버(server)와 클라이언트(client) 간에 반영구적으로 상호 작용하는 정보 교환입니다.&lt;/li&gt;
+  &lt;li&gt;session은 server로 요청(request) 하는 client를 구별하기 위해 server에 저장되는 정보입니다.
+    &lt;ul&gt;
+      &lt;li&gt;session은 client에 저장되는 쿠키(cookie)와 다르게 server에 저장되므로 관리가 용이하고 효율적이며 보안에 강합니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;server는 client request에 session-id를 생성하여 server와 client 브라우저(browser) 메모리(memory)에 cookie로 저장합니다.
+    &lt;ul&gt;
+      &lt;li&gt;위 cookie는 일반적인 cookie가 아닌 session cookie이며, 인 메모리(in-memory) cookie 또는 임시(transient) cookie, 반영구(non-persistent) cookie로 불립니다.&lt;/li&gt;
+      &lt;li&gt;session cookie는 server가 종료되거나, 유효기간이 만료하거나, client browser를 종료하면 삭제됩니다.&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;blockquote&gt;
+      &lt;p&gt;session cookie에 대한 자세한 정보는 &lt;a href=&quot;https://en.wikipedia.org/wiki/HTTP_cookie#Session_cookie&quot; target=&quot;\_blank&quot;&gt;https://en.wikipedia.org/wiki/HTTP_cookie#Session_cookie&lt;/a&gt; 페이지를 참고하시기 바랍니다.&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;session의 단점은 server resource를 사용하므로 server에 부담을 줄 수 있으며, 로드 밸런싱(load balancing) 시스템(system)에서 session 처리가 쉽지 않다는 것입니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;2-session-mechanics&quot;&gt;2. session mechanics&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;client가 server에 리소스(resource)를 request 합니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;server는 client가 request 한 request-header의 session cookie를 통해 session-id를 확인합니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;session-id가 존재하면, server는 session-id가 유효한지 확인 후 client의 request를 처리하고 응답(response) 합니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;session-id가 존재하지 않으면, server는 set-cookie를 통해 session-id를 생성한 후 response-header에 추가하여 client에 response 합니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;위 4번 항목 처리 후 client는 server에 request 시, server로부터 response 한 session-id를 request-header에 추가하여 request 합니다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;session 종료 시기
+    &lt;ol&gt;
+      &lt;li&gt;타임아웃&lt;/li&gt;
+      &lt;li&gt;session 객체(object)의 invalidate() 호출&lt;/li&gt;
+      &lt;li&gt;애플리케이션 다운&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;session timeout
+    &lt;ul&gt;
+      &lt;li&gt;DD(Deployment Descriptor :: web.xml)에서 설정하며, 단위는 분입니다.&lt;/li&gt;
+      &lt;li&gt;아래 설정은 모든 session object에 setMaxInactiveInterval()를 호출하는 것과 같습니다.&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &amp;lt;wep-app....&amp;gt;
+    &amp;lt;Servlet&amp;gt;
+     ...
+    &amp;lt;/Servlet&amp;gt;
+    
+    &amp;lt;Session-config&amp;gt;
+      &amp;lt;Session-timeout&amp;gt;15&amp;lt;/Session-timeout&amp;gt; 
+    &amp;lt;/Session-config&amp;gt;
+  &amp;lt;/wep-app&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;3-httpsession-소개&quot;&gt;3. HttpSession 소개&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;이 포스트에서 HttpSession은 javax.Servlet.Http 패키지(package)의 인터페이스(interface)인 HttpSession을 의미합니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;HttpSession은 client request에서 client를 식별하고, 해당 client 정보를 저장하는 방법을 제공하는 JAVA의 public interface입니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;HttpSession interface를 사용하는 서블릿 컨테이너(servlet container)는 server와 client 간의 session을 제어합니다.
+    &lt;ul&gt;
+      &lt;li&gt;servlet container는 웹(web) container라고도 불리며, Tomcat, JBoss(현재 WildFly), Jetty 등이 대표적입니다.&lt;/li&gt;
+      &lt;li&gt;servlet container와 servlet은 다릅니다.
+        &lt;ul&gt;
+          &lt;li&gt;servlet container는 server에서 servlet 생명 주기(life cycle) 관리, request에 따른 스레드(thread) 생성, 동적(dynamic) resource(JSP, servlet 등) 생성 등 servlet과 상호 작용하는 web server의 일부입니다.&lt;/li&gt;
+          &lt;li&gt;servlet은 javax.servlet package에 정의된 interface이며, JVM(java virtual machine) 내에서 실행되는 web 애플리케이션(application)의 작은 조각입니다.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;blockquote&gt;
+      &lt;p&gt;servlet container에 대한 자세한 정보는 &lt;a href=&quot;https://ko.wikipedia.org/wiki/%EC%9B%B9_%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88&quot; target=&quot;\_blank&quot;&gt;https://ko.wikipedia.org/wiki/웹_컨테이너&lt;/a&gt; 페이지를 참고하시기 바랍니다.&lt;/p&gt;
+    &lt;/blockquote&gt;
+
+    &lt;blockquote&gt;
+      &lt;p&gt;servlet에 대한 자세한 정보는 &lt;a href=&quot;https://ko.wikipedia.org/wiki/%EC%9E%90%EB%B0%94_%EC%84%9C%EB%B8%94%EB%A6%BF&quot; target=&quot;\_blank&quot;&gt;https://ko.wikipedia.org/wiki/자바_서블릿&lt;/a&gt; 페이지를 참고하시기 바랍니다.&lt;/p&gt;
+    &lt;/blockquote&gt;
+
+    &lt;blockquote&gt;
+      &lt;p&gt;JVM에 대한 자세한 정보는 &lt;a href=&quot;https://ko.wikipedia.org/wiki/%EC%9E%90%EB%B0%94_%EA%B0%80%EC%83%81_%EB%A8%B8%EC%8B%A0&quot; target=&quot;\_blank&quot;&gt;https://ko.wikipedia.org/wiki/자바_가상_머신&lt;/a&gt; 페이지를 참고하시기 바랍니다.&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;HttpSession object 생성
+    &lt;ul&gt;
+      &lt;li&gt;{HttpServletRequestObject}.getSession() : // 기존 session이 있으면 기존 session object를, 없으면 새로 생성 후 반환&lt;/li&gt;
+      &lt;li&gt;{HttpServletRequestObject}.getSession(false) // 기존 session이 있으면 기존 session object를, 없으면 null 반환&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;HttpSession Method
+    &lt;ul&gt;
+      &lt;li&gt;setAttribute(String, Object)&lt;/li&gt;
+      &lt;li&gt;getAttribute(): Object&lt;/li&gt;
+      &lt;li&gt;getCreationTime(): long&lt;/li&gt;
+      &lt;li&gt;getLastAccessedTime(): long&lt;/li&gt;
+      &lt;li&gt;setMaxInactiveInterval(int second) // client가 설정 시간 동안 request가 없으면 session 만료&lt;/li&gt;
+      &lt;li&gt;getMaxInactiveInterval(): int&lt;/li&gt;
+      &lt;li&gt;invalidate() : // session 종료(session에 속한 속성들도 함께 제거)&lt;/li&gt;
+      &lt;li&gt;getId() : String // jSessionId 반환&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
+&lt;p&gt;session과 HttpSession에 대해 간단히 소개했습니다.
+&lt;br /&gt;
+더 자세한 내용은 아래 참고 페이지를 확인해 주시기 바랍니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://javaee.github.io/javaee-spec/javadocs/javax/servlet/http/HttpSession.html&quot; target=&quot;\_blank&quot;&gt;https://javaee.github.io/javaee-spec/javadocs/javax/servlet/http/HttpSession.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Thu, 06 May 2021 00:00:00 +0900</pubDate>
+        <link>https://lindarex.github.io/concepts/java-httpsession-introduction/</link>
+        <guid isPermaLink="true">https://lindarex.github.io/concepts/java-httpsession-introduction/</guid>
+        
+        <category>httpsession</category>
+        
+        <category>session</category>
+        
+        <category>open source software</category>
+        
+        <category>open source</category>
+        
+        <category>oss</category>
+        
+        <category>java</category>
+        
+        
+        <category>concepts</category>
+        
+      </item>
     
       <item>
         <title>MySQL 개행 문자(newline character) 치환(replace)하기</title>
@@ -75,7 +248,7 @@ SELECT REPLACE(REPLACE(lindarex_column, '\n', ''), '\r', '') FROM lindarex_table
   &lt;li&gt;&lt;a href=&quot;https://ko.wikipedia.org/wiki/MySQL&quot; target=&quot;\_blank&quot;&gt;https://ko.wikipedia.org/wiki/MySQL&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>Thu, 06 May 2021 00:00:00 +0900</pubDate>
+        <pubDate>Tue, 04 May 2021 00:00:00 +0900</pubDate>
         <link>https://lindarex.github.io/concepts/mysql-replace-newline-character/</link>
         <guid isPermaLink="true">https://lindarex.github.io/concepts/mysql-replace-newline-character/</guid>
         
@@ -8931,399 +9104,6 @@ jenkins 초기 설정은 &lt;a href=&quot;https://lindarex.github.io/jenkins/jen
         
         
         <category>vmware-workstation</category>
-        
-      </item>
-    
-      <item>
-        <title>우분투(Ubuntu) 서버(Server) 18.04 설치하기</title>
-        <description>&lt;p&gt;우분투(ubuntu) server 18.04는 ubuntu server 16.04와 비교해 새로운 기능과 개선 사항으로 많은 변화가 있으며, 릴리스의 코드 이름은 ‘Bionic Beaver’입니다.
-&lt;br /&gt;&lt;br /&gt;
-이 포스트에서는 VMware Workstation에 ubuntu server 18.04 LTS를 설치하는 방법을 소개합니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;선행조건prerequisite&quot;&gt;선행조건(PREREQUISITE)&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;VMware Workstation이 설치되어 있어야 합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;테스트-환경test-environment&quot;&gt;테스트 환경(TEST ENVIRONMENT)&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;VMware® Workstation 15 Pro (15.5.1 build-15018445)&lt;/li&gt;
-  &lt;li&gt;Ubuntu 18.04.3 LTS (Bionic Beaver) Server (64-bit)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;ubuntu server 18.04 설치 시 필요한 시스템 요구사항은 &lt;a href=&quot;https://help.ubuntu.com/lts/serverguide/preparing-to-install.html&quot; target=&quot;\_blank&quot;&gt;https://help.ubuntu.com/lts/serverguide/preparing-to-install.html&lt;/a&gt;를 확인해 주시기 바랍니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;요약summary&quot;&gt;요약(SUMMARY)&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;ubuntu server 18.04.3 ISO 파일 내려받기&lt;/li&gt;
-  &lt;li&gt;VMware workstation의 VM(virtual machine) 설정&lt;/li&gt;
-  &lt;li&gt;ubuntu server 18.04.3 설치&lt;/li&gt;
-  &lt;li&gt;리눅스 명령어로 ubuntu VM 상태 확인&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;내용contents&quot;&gt;내용(CONTENTS)&lt;/h2&gt;
-&lt;h3 id=&quot;1-ubuntu-server-18043-iso-파일-내려받기&quot;&gt;1. ubuntu server 18.04.3 ISO 파일 내려받기&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;웹브라우저로 &lt;a href=&quot;http://mirror.kakao.com/ubuntu-releases/&quot; target=&quot;\_blank&quot;&gt;ubuntu Releases 페이지&lt;/a&gt;를 엽니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-001.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-001&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;목록의 ‘18.04.3’을 클릭하여 ubuntu 18.04.3 LTS (Bionic Beaver) 페이지로 이동합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-002.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-002&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Server install image 영역의 ‘64-bit PC (AMD64) server install image’를 클릭하여 ISO 파일을 내려받습니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;a href=&quot;http://mirror.kakao.com/ubuntu-releases/18.04.3/ubuntu-18.04.3-live-server-amd64.iso&quot; target=&quot;\_blank&quot;&gt;http://mirror.kakao.com/ubuntu-releases/18.04.3/ubuntu-18.04.3-live-server-amd64.iso&lt;/a&gt;를 통해 바로 내려받을 수 있습니다. &lt;br /&gt;
-ubuntu-18.04.3-live-server-amd64.iso 파일 사이즈는 약 868 MB입니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-003.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-003&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;2-vmware-workstation의-vmvirtual-machine-설정&quot;&gt;2. VMware workstation의 VM(Virtual Machine) 설정&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;VMware workstation을 실행합니다.&lt;/li&gt;
-  &lt;li&gt;아래 메뉴를 통해 ‘New Virtual Machine Wizard’ 팝업을 엽니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;상단 메뉴 &amp;gt; File &amp;gt; ‘New Virtual Machine…’ 또는 Ctrl + N&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-004.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-004&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;상세 설정을 위해 ‘Custom (advanced)’를 선택하고 ‘Next’를 클릭합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-005.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-005&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;VMware Workstation 버전을 선택하고 ‘Next’를 클릭합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-006.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-006&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;상세 설정을 위해 ‘I will install the operating system later.’를 선택하고 ‘Next’를 클릭합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-007.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-007&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Guest operating system은 ‘Linux’, Version은 ‘ubuntu 64-bit’를 선택하고 ‘Next’를 클릭합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-008.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-008&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Virtual machine name을 입력하고, Location에 vmdk 파일이 저장될 경로를 입력하거나 ‘Browse..’를 클릭해 위치를 선택하고 ‘Next’를 클릭합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;VMDK란 Virtual Machine Disk의 약자이며, 자세한 정보는 &lt;a href=&quot;https://en.wikipedia.org/wiki/VMDK&quot; target=&quot;\_blank&quot;&gt;https://en.wikipedia.org/wiki/VMDK&lt;/a&gt;를 참고하시기 바랍니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-009.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-009&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;processors ‘1’, cores per processor ‘1’을 입력하고 ‘Next’를 클릭합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-010.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-010&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;권장값인 ‘2048’MB를 입력하고 ‘Next’를 클릭합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;권장값은 자신의 PC 메모리(Host memory)에 따라 다를 수 있습니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-011.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-011&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;‘Use network address translation (NAT)’를 선택하고 ‘Next’를 클릭합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Network type에 대한 자세한 정보는 &lt;a href=&quot;https://lindarex.github.io/vmware-workstation/vmware-workstation-virtual-network/&quot; target=&quot;\_blank&quot;&gt;VMware Workstation의 가상 네트워크(Virtual Network) 알아보기&lt;/a&gt; 포스트를 참고하시기 바랍니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-012.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-012&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;권장값인 ‘LSI Logic (Recommended)’를 선택하고 ‘Next’를 클릭합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-013.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-013&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;권장값인 ‘SCSI Logic (Recommended)’를 선택하고 ‘Next’를 클릭합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-014.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-014&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;‘Create a new virtual disk’를 선택하고 ‘Next’를 클릭합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-015.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-015&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Maximum disk size를 ‘20.0’을 입력하고 ‘Split virtual disk into multiple files’를 선택하고 ‘Next’를 클릭합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-016.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-016&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Disk file 명을 입력하고 ‘Next’를 클릭합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-017.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-017&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;‘Customize Hardware..’를 클릭하여 Hardware 팝업을 엽니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-018.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-018&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;앞에서 설정한 내용을 확인합니다. (Memory, Processors)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-019.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-019&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-020.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-020&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Use ISO image file 항목의 ‘Browse..’를 클릭해 내려받은 ubuntu 18.04.3 LTS (Bionic Beaver) ISO 파일을 선택합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-021.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-021&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;앞에서 설정한 내용을 확인합니다. (Network Adapter, USB Controller, Sound Card, Printer, Display)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-022.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-022&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-023.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-023&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-024.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-024&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-025.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-025&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-026.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-026&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;모든 설정을 확인하고 ‘Finish’를 클릭합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-027.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-027&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;3-ubuntu-server-18043-설치&quot;&gt;3. ubuntu server 18.04.3 설치&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;아래 메뉴를 통해 ubuntu VM을 구동합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;상단 메뉴 &amp;gt; 녹색 플레이 버튼 또는 Ctrl + B&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-028.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-028&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;설치가 진행됩니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-029.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-029&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;사용하고자 하는 언어를 선택합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-030.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-030&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Keyboard layout을 설정합니다. ‘English (US)’를 선택합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-031.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-031&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Network를 설정합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;VMware Workstation에 Ubuntu를 설치할 경우, 자동으로 DHCP(Dynamic Host Configuration Protocol)로 설정됩니다. &lt;br /&gt;
-DHCP에 대한 자세한 정보는 &lt;a href=&quot;https://ko.wikipedia.org/wiki/%EB%8F%99%EC%A0%81_%ED%98%B8%EC%8A%A4%ED%8A%B8_%EA%B5%AC%EC%84%B1_%ED%94%84%EB%A1%9C%ED%86%A0%EC%BD%9C&quot; target=&quot;\_blank&quot;&gt;https://ko.wikipedia.org/wiki/동적_호스트_구성_프로토콜&lt;/a&gt;를 참고하시기 바랍니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-032.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-032&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Proxy를 설정합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-033.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-033&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;ubuntu archive mirror address를 설정합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-034.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-034&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Filesystem을 설정합니다. ‘Use An Entire Disk and Set Up LVM’을 선택합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-035.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-035&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-036.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-036&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-037.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-037&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-038.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-038&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;사용자 프로필을 설정합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-039.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-039&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;SSH 설치 여부를 선택합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Xshell을 비롯해 SSH 클라이언트 사용을 위해 OpenSSH server 패키지를 설치합니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-040.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-040&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;추가로 설치할 패키지를 선택합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-041.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-041&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;설치가 진행됩니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-042.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-042&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-043.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-043&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;설치가 완료되었습니다. ‘Reboot’를 선택합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-044.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-044&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;재부팅됩니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-045.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-045&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;정상 설치 후 로그인 프롬프트 상태입니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-046.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-046&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;4-리눅스-명령어command로-ubuntu-vm-상태-확인&quot;&gt;4. 리눅스 명령어(command)로 ubuntu VM 상태 확인&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;사용자 이름과 비밀번호를 입력하여 로그인합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-047.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-047&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;free command로 메모리 상태를 확인합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-048.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-048&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;df command로 디스크 사용량을 확인합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-049.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-049&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;ifconfig command로 네트워크 정보를 확인합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-050.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-050&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;ping command로 네트워크 상태를 확인합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-051.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-051&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;‘apt update’ command로 패키지 인덱스를 업데이트합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;‘apt update’ command는 업그레이드 가능한 패키지 정보를 업데이트하는 것이며, 실제로 패키지를 업데이트하지 않습니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-052.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-052&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;‘apt upgrade’ command로 업그레이드 가능한 모든 패키지를 업데이트합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-053.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-053&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-11-ubuntu-1804-installation/lindarex-ubuntu-1804-installation-054.png&quot; alt=&quot;lindarex-ubuntu-1804-installation-054&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;마무리conclusion&quot;&gt;마무리(CONCLUSION)&lt;/h2&gt;
-&lt;p&gt;VMware Workstation에 Ubuntu 18.04.3 LTS (Bionic Beaver) Server 설치를 완료했습니다.
-&lt;br /&gt;
-다음 포스트에서는 &lt;a href=&quot;https://lindarex.github.io/ubuntu/ubuntu-initial-setting/&quot; target=&quot;\_blank&quot;&gt;우분투(Ubuntu) 서버(Server) 초기 설정하기&lt;/a&gt;를 소개하겠습니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;참고references&quot;&gt;참고(REFERENCES)&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://ubuntu.com/&quot; target=&quot;\_blank&quot;&gt;https://ubuntu.com/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://mirror.kakao.com/ubuntu-releases/&quot; target=&quot;\_blank&quot;&gt;http://mirror.kakao.com/ubuntu-releases/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://ubuntu.com/tutorials/tutorial-install-ubuntu-server#1-overview&quot; target=&quot;\_blank&quot;&gt;https://ubuntu.com/tutorials/tutorial-install-ubuntu-server#1-overview&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://ko.wikipedia.org/wiki/%EC%9A%B0%EB%B6%84%ED%88%AC_(%EC%9A%B4%EC%98%81_%EC%B2%B4%EC%A0%9C)&quot; target=&quot;\_blank&quot;&gt;https://ko.wikipedia.org/wiki/우분투_(운영_체제)&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-        <pubDate>Tue, 11 Feb 2020 00:00:00 +0900</pubDate>
-        <link>https://lindarex.github.io/ubuntu/ubuntu-1804-installation/</link>
-        <guid isPermaLink="true">https://lindarex.github.io/ubuntu/ubuntu-1804-installation/</guid>
-        
-        <category>ubuntu</category>
-        
-        <category>18.04</category>
-        
-        <category>vmware workstation</category>
-        
-        <category>open source software</category>
-        
-        <category>open source</category>
-        
-        <category>oss</category>
-        
-        
-        <category>ubuntu</category>
         
       </item>
     

@@ -1,5 +1,5 @@
 ---
-title: "JAVA HttpSession(javax.Servlet.Http) 소개"
+title: "Java HttpSession(javax.Servlet.Http) 소개"
 categories: 
   - concepts
 tags: 
@@ -12,11 +12,11 @@ tags:
 ---
 
 
-HttpSession은 Java의 public interface이며, 이를 사용하여 세션(session)을 제어할 수 있습니다.
+HttpSession은 Java의 인터페이스(interface)이며, 이를 사용하여 세션(session)을 제어할 수 있습니다.
 <br /><br />
 session은 쿠키(cookie)의 트래픽(traffic) 이슈(issue)와 cookie 변경으로 인한 보안 issue를 해결하기 위해 등장했습니다.
 <br /><br />
-이 포스트에서는 HttpSession(session)을 소개합니다.
+이 포스트에서는 session 및 HttpSession을 소개합니다.
 
 
 ## 요약(SUMMARY)
@@ -36,7 +36,7 @@ session은 쿠키(cookie)의 트래픽(traffic) 이슈(issue)와 cookie 변경�
 
 - server는 client request에 session-id를 생성하여 server와 client 브라우저(browser) 메모리(memory)에 cookie로 저장합니다.
     + 위 cookie는 일반적인 cookie가 아닌 session cookie이며, 인 메모리(in-memory) cookie 또는 임시(transient) cookie, 반영구(non-persistent) cookie로 불립니다.
-    + session cookie는 server가 종료되거나, 유효기간이 만료하거나, client browser를 종료하면 삭제됩니다.
+    + session cookie는 server가 종료되거나, 유효기간이 만료하거나, client browser가 종료되면 삭제됩니다.
 
     > session cookie에 대한 자세한 정보는 [https://en.wikipedia.org/wiki/HTTP_cookie#Session_cookie](https://en.wikipedia.org/wiki/HTTP_cookie#Session_cookie){: target="\_blank"} 페이지를 참고하시기 바랍니다.
 
@@ -55,9 +55,9 @@ session은 쿠키(cookie)의 트래픽(traffic) 이슈(issue)와 cookie 변경�
 5. 위 4번 항목 처리 후 client는 server에 request 시, server로부터 response 한 session-id를 request-header에 추가하여 request 합니다.
 
 - session 종료 시기
-    1. 타임아웃
+    1. 타임아웃(timeout)
     2. session 객체(object)의 invalidate() 호출
-    3. 애플리케이션 다운
+    3. 애플리케이션(application) 또는 server 종료
 
 - session timeout
     + DD(Deployment Descriptor :: web.xml)에서 설정하며, 단위는 분입니다.
@@ -77,15 +77,15 @@ session은 쿠키(cookie)의 트래픽(traffic) 이슈(issue)와 cookie 변경�
 
 ### 3. HttpSession 소개
 
-> 이 포스트에서 HttpSession은 javax.Servlet.Http 패키지(package)의 인터페이스(interface)인 HttpSession을 의미합니다.
+> 이 포스트에서 HttpSession은 javax.Servlet.Http 패키지(package)의 interface인 HttpSession을 의미합니다.
 
-- HttpSession은 client request에서 client를 식별하고, 해당 client 정보를 저장하는 방법을 제공하는 JAVA의 public interface입니다.
+- HttpSession은 client request에서 client를 식별하고, 해당 client 정보를 저장하는 방법을 제공하는 Java의 public interface입니다.
 
 - HttpSession interface를 사용하는 서블릿 컨테이너(servlet container)는 server와 client 간의 session을 제어합니다.
     + servlet container는 웹(web) container라고도 불리며, Tomcat, JBoss(현재 WildFly), Jetty 등이 대표적입니다.
     + servlet container와 servlet은 다릅니다.
         - servlet container는 server에서 servlet 생명 주기(life cycle) 관리, request에 따른 스레드(thread) 생성, 동적(dynamic) resource(JSP, servlet 등) 생성 등 servlet과 상호 작용하는 web server의 일부입니다.
-        - servlet은 javax.servlet package에 정의된 interface이며, JVM(java virtual machine) 내에서 실행되는 web 애플리케이션(application)의 작은 조각입니다.
+        - servlet은 javax.servlet package에 정의된 interface이며, JVM(java virtual machine) 내에서 실행되는 web application의 작은 조각입니다.
 
     > servlet container에 대한 자세한 정보는 [https://ko.wikipedia.org/wiki/웹_컨테이너](https://ko.wikipedia.org/wiki/%EC%9B%B9_%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88){: target="\_blank"} 페이지를 참고하시기 바랍니다.
 

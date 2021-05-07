@@ -6,17 +6,17 @@
     <description>오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 블로그입니다 | It shares technologies such as open source software, cloud computing, PaaS and container platforms</description>
     <link>https://lindarex.github.io/</link>
     <atom:link href="https://lindarex.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 06 May 2021 17:52:44 +0900</pubDate>
-    <lastBuildDate>Thu, 06 May 2021 17:52:44 +0900</lastBuildDate>
+    <pubDate>Fri, 07 May 2021 09:39:01 +0900</pubDate>
+    <lastBuildDate>Fri, 07 May 2021 09:39:01 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
-        <title>JAVA HttpSession(javax.Servlet.Http) 소개</title>
-        <description>&lt;p&gt;HttpSession은 Java의 public interface이며, 이를 사용하여 세션(session)을 제어할 수 있습니다.
+        <title>Java HttpSession(javax.Servlet.Http) 소개</title>
+        <description>&lt;p&gt;HttpSession은 Java의 인터페이스(interface)이며, 이를 사용하여 세션(session)을 제어할 수 있습니다.
 &lt;br /&gt;&lt;br /&gt;
 session은 쿠키(cookie)의 트래픽(traffic) 이슈(issue)와 cookie 변경으로 인한 보안 issue를 해결하기 위해 등장했습니다.
 &lt;br /&gt;&lt;br /&gt;
-이 포스트에서는 HttpSession(session)을 소개합니다.&lt;/p&gt;
+이 포스트에서는 session 및 HttpSession을 소개합니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;요약summary&quot;&gt;요약(SUMMARY)&lt;/h2&gt;
 &lt;ol&gt;
@@ -42,7 +42,7 @@ session은 쿠키(cookie)의 트래픽(traffic) 이슈(issue)와 cookie 변경�
   &lt;li&gt;server는 client request에 session-id를 생성하여 server와 client 브라우저(browser) 메모리(memory)에 cookie로 저장합니다.
     &lt;ul&gt;
       &lt;li&gt;위 cookie는 일반적인 cookie가 아닌 session cookie이며, 인 메모리(in-memory) cookie 또는 임시(transient) cookie, 반영구(non-persistent) cookie로 불립니다.&lt;/li&gt;
-      &lt;li&gt;session cookie는 server가 종료되거나, 유효기간이 만료하거나, client browser를 종료하면 삭제됩니다.&lt;/li&gt;
+      &lt;li&gt;session cookie는 server가 종료되거나, 유효기간이 만료하거나, client browser가 종료되면 삭제됩니다.&lt;/li&gt;
     &lt;/ul&gt;
 
     &lt;blockquote&gt;
@@ -75,9 +75,9 @@ session은 쿠키(cookie)의 트래픽(traffic) 이슈(issue)와 cookie 변경�
 &lt;ul&gt;
   &lt;li&gt;session 종료 시기
     &lt;ol&gt;
-      &lt;li&gt;타임아웃&lt;/li&gt;
+      &lt;li&gt;타임아웃(timeout)&lt;/li&gt;
       &lt;li&gt;session 객체(object)의 invalidate() 호출&lt;/li&gt;
-      &lt;li&gt;애플리케이션 다운&lt;/li&gt;
+      &lt;li&gt;애플리케이션(application) 또는 server 종료&lt;/li&gt;
     &lt;/ol&gt;
   &lt;/li&gt;
   &lt;li&gt;session timeout
@@ -102,12 +102,12 @@ session은 쿠키(cookie)의 트래픽(traffic) 이슈(issue)와 cookie 변경�
 &lt;h3 id=&quot;3-httpsession-소개&quot;&gt;3. HttpSession 소개&lt;/h3&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;이 포스트에서 HttpSession은 javax.Servlet.Http 패키지(package)의 인터페이스(interface)인 HttpSession을 의미합니다.&lt;/p&gt;
+  &lt;p&gt;이 포스트에서 HttpSession은 javax.Servlet.Http 패키지(package)의 interface인 HttpSession을 의미합니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;HttpSession은 client request에서 client를 식별하고, 해당 client 정보를 저장하는 방법을 제공하는 JAVA의 public interface입니다.&lt;/p&gt;
+    &lt;p&gt;HttpSession은 client request에서 client를 식별하고, 해당 client 정보를 저장하는 방법을 제공하는 Java의 public interface입니다.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;HttpSession interface를 사용하는 서블릿 컨테이너(servlet container)는 server와 client 간의 session을 제어합니다.
     &lt;ul&gt;
@@ -115,7 +115,7 @@ session은 쿠키(cookie)의 트래픽(traffic) 이슈(issue)와 cookie 변경�
       &lt;li&gt;servlet container와 servlet은 다릅니다.
         &lt;ul&gt;
           &lt;li&gt;servlet container는 server에서 servlet 생명 주기(life cycle) 관리, request에 따른 스레드(thread) 생성, 동적(dynamic) resource(JSP, servlet 등) 생성 등 servlet과 상호 작용하는 web server의 일부입니다.&lt;/li&gt;
-          &lt;li&gt;servlet은 javax.servlet package에 정의된 interface이며, JVM(java virtual machine) 내에서 실행되는 web 애플리케이션(application)의 작은 조각입니다.&lt;/li&gt;
+          &lt;li&gt;servlet은 javax.servlet package에 정의된 interface이며, JVM(java virtual machine) 내에서 실행되는 web application의 작은 조각입니다.&lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;
     &lt;/ul&gt;

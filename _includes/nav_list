@@ -56,6 +56,6 @@
   <!-- LINDAREX :: HITS :: LEFT-SIDEBAR :: END -->
 
   <!-- LINDAREX :: GOOGLE ADSENSE :: LEFT-SIDEBAR :: BIGIN-->
-  {% include google-adsense-left-sidebar.html %}
+  <!-- {% include google-adsense-left-sidebar.html %}-->
   <!-- LINDAREX :: GOOGLE ADSENSE :: LEFT-SIDEBAR :: END-->
 </nav>

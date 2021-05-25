@@ -6,8 +6,8 @@
     <description>오픈소스 소프트웨어, 클라우드 컴퓨팅, PaaS 플랫폼, 컨테이너 플랫폼 등의 기술을 공유하는 블로그입니다 | It shares technologies such as open source software, cloud computing, PaaS and container platforms</description>
     <link>https://lindarex.github.io/</link>
     <atom:link href="https://lindarex.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 25 May 2021 13:16:48 +0900</pubDate>
-    <lastBuildDate>Tue, 25 May 2021 13:16:48 +0900</lastBuildDate>
+    <pubDate>Tue, 25 May 2021 14:28:31 +0900</pubDate>
+    <lastBuildDate>Tue, 25 May 2021 14:28:31 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
@@ -7549,7 +7549,7 @@ output.logstash:
 &lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-001.png&quot; alt=&quot;lindarex-travis-github-pages-jekyll-setting-001&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;좌측 중간에 Personal access tokens 메뉴를 클릭합니다.&lt;/li&gt;
+  &lt;li&gt;좌측 하단의 Developer settings 메뉴를 클릭한 후, Personal access tokens 메뉴를 클릭합니다.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-21-travis-github-pages-jekyll-setting/lindarex-travis-github-pages-jekyll-setting-002.png&quot; alt=&quot;lindarex-travis-github-pages-jekyll-setting-002&quot; /&gt;&lt;/p&gt;

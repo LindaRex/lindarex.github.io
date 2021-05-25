@@ -37,7 +37,7 @@ tags:
 
 ![lindarex-travis-github-pages-jekyll-setting-001]
 
-- 좌측 중간에 Personal access tokens 메뉴를 클릭합니다.
+- 좌측 하단의 Developer settings 메뉴를 클릭한 후, Personal access tokens 메뉴를 클릭합니다.
 
 ![lindarex-travis-github-pages-jekyll-setting-002]
 
